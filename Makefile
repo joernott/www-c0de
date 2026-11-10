@@ -51,7 +51,7 @@ lint: site/node_modules
 	scripts/check-whitespace.sh
 	@test -z "$$(gofmt -l cmd internal)" || { gofmt -l cmd internal; echo "gofmt: the files above are not formatted"; exit 1; }
 	go vet $(GO_PACKAGES)
-	cd site && npm run lint && npm run typecheck && npx prettier --check ../e2e
+	cd site && npm run lint && npm run typecheck && npx prettier --check --ignore-path ../e2e/.prettierignore ../e2e
 
 # Runs the end-to-end tests against the running container (make run). The system libraries
 # of the browsers are installed by contrib/setup_dev_vm.sh.
