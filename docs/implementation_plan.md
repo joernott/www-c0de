@@ -40,7 +40,7 @@ A task is done when
 |---|---|---|:---:|
 | 0 | Concept and plan | Reviewed concept, implementation plan, development environment plan | ✅ |
 | 1 | Project skeleton | A placeholder page is served by the static binary and the container on the VM; CI builds everything | ✅ |
-| 2 | The ring binder | The theme with rings, pages and two levels of tabs works in desktop browsers, in light and dark mode, in English and German, with placeholder content |  |
+| 2 | The ring binder | The theme with rings, pages and two levels of tabs works in desktop browsers, in light and dark mode, in English and German, with placeholder content || ✅ |
 | 3 | Documentation import | The documentation of c0de and c0de net is on the site, with navigation, code highlighting and search |  |
 | 4 | Home page and site content | Home page, legal pages, metadata for search engines, in English and German |  |
 | 5 | Production and release 0.1.0 | c0de.at is online with certificates from Let's Encrypt |  |
@@ -77,17 +77,17 @@ A task is done when
 
 | Task | Description | Done |
 |---|---|:---:|
-| 2.1 | Design tokens in Tailwind: colors of desk, paper, rings, the c0de tab and the library tabs with their lighter chapter shades, for light and dark mode; fonts (self-hosted), spacing. Logo and favicon from the c0de logo. |  |
-| 2.2 | Layout component: desk, binder spine with rings and punch holes (SVG, hidden from screen readers), page area. |  |
-| 2.3 | Main tabs from a navigation configuration: house tab, c0de tab, one tab per library, each in its color, with text labels. |  |
-| 2.4 | Chapter tabs: the chapter tabs of the selected main tab appear below it and push the following main tabs down; the current chapter tab is drawn in front of the page edge; the c0de chapter tabs show the guide chapters, a gap and the handbooks with a book symbol. |  |
-| 2.5 | Scrolling the tabs: when they don't fit beside the page, the column scrolls with the mouse wheel and with arrow buttons at both ends; the house tab stays on top; the selected tab is scrolled into view. Playwright tests with many tabs and low windows. |  |
-| 2.6 | Page content: typography for headings, paragraphs, lists, tables, images and code blocks; anchors on headings; contents list at the top of a page; previous/next chapter at the bottom. |  |
-| 2.7 | Light and dark mode following the operating system, with CSS only; reduced motion. |  |
-| 2.8 | Languages: language switch to the same page in the other language, all texts of the theme in English and German, `lang` attribute and `hreflang` links. |  |
-| 2.9 | Smaller screens: simple layout without rings, tabs as a menu above the page. |  |
-| 2.10 | 404 page in the ring binder style and in the language of the URL, footer with the links to the legal pages. |  |
-| 2.11 | Accessibility: landmarks, keyboard navigation (including the tab column), focus styles, contrast in both modes; Playwright tests with axe-core and screenshots at several desktop window sizes, light and dark. |  |
+| 2.1 | Design tokens in Tailwind: colors of desk, paper, rings, the c0de tab and the library tabs with their lighter chapter shades, for light and dark mode; fonts (self-hosted), spacing. Logo and favicon from the c0de logo. | ✅ |
+| 2.2 | Layout component: desk, binder spine with rings and punch holes (SVG, hidden from screen readers), page area. | ✅ |
+| 2.3 | Main tabs from a navigation configuration: house tab, c0de tab, one tab per library, each in its color, with text labels. | ✅ |
+| 2.4 | Chapter tabs: the chapter tabs of the selected main tab appear below it and push the following main tabs down; the current chapter tab is drawn in front of the page edge; the c0de chapter tabs show the guide chapters, a gap and the handbooks with a book symbol. | ✅ |
+| 2.5 | Scrolling the tabs: when they don't fit beside the page, the column scrolls with the mouse wheel and with arrow buttons at both ends; the house tab stays on top; the selected tab is scrolled into view. Playwright tests with many tabs and low windows. | ✅ |
+| 2.6 | Page content: typography for headings, paragraphs, lists, tables, images and code blocks; anchors on headings; contents list at the top of a page; previous/next chapter at the bottom. | ✅ |
+| 2.7 | Light and dark mode following the operating system, with CSS only; reduced motion. | ✅ |
+| 2.8 | Languages: language switch to the same page in the other language, all texts of the theme in English and German, `lang` attribute and `hreflang` links. | ✅ |
+| 2.9 | Smaller screens: simple layout without rings, tabs as a menu above the page. | ✅ |
+| 2.10 | 404 page in the ring binder style and in the language of the URL, footer with the links to the legal pages. | ✅ |
+| 2.11 | Accessibility: landmarks, keyboard navigation (including the tab column), focus styles, contrast in both modes; Playwright tests with axe-core and screenshots at several desktop window sizes, light and dark. | ✅ |
 
 ## Sprint 3: Documentation import
 
