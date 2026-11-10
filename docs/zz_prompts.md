@@ -93,3 +93,11 @@ yes, please go ahead
 ## 2026-11-10 – c0de.at is live
 
 yes, please go ahead, the server is live now
+
+## 2026-11-10 – Check after fixing the proxy
+
+I have fixed the issues, please check again
+
+## 2026-11-10 – HSTS header fixed
+
+The header should be fixed now

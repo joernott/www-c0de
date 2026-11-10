@@ -57,11 +57,11 @@ cd e2e && E2E_BASE_URL=https://c0de.at npx playwright test --project chromium &&
 
 and the TLS setup with [SSL Labs](https://www.ssllabs.com/ssltest/) and the headers with [securityheaders.com](https://securityheaders.com). Behind nginx, two end-to-end tests fail by design: nginx redirects HTTP with 301 (Caddy: 308) and sends its own `Server` header.
 
-The first check (2026-11-10, release 0.2.0 behind nginx 1.30.6) found three points for the proxy:
+The first check (2026-11-10, release 0.2.0 behind nginx 1.30.6) found three points in the configuration of nginx, which were fixed the same day; SSL Labs grades A+ since:
 
-- **Two HSTS headers**: the server sends `max-age=31536000`, nginx adds `max-age=31536000; includeSubDomains`. With two headers, browsers ignore HSTS, and SSL Labs grades A- instead of A+. Keep one: remove the `add_header Strict-Transport-Security` of nginx, or keep it and hide the one of the server with `proxy_hide_header Strict-Transport-Security;`.
-- **www isn't redirected**: `https://www.c0de.at/` shows the site instead of redirecting to `https://c0de.at/` (the canonical links keep search engines on c0de.at, but visitors see two addresses).
-- **No HTTP/2**: nginx answers browsers with HTTP/1.1 only (`http2 on;` in the `server` block of nginx 1.25.1 and newer).
+- **One HSTS header**: the server sends `max-age=31536000` on all its answers; nginx must not add a second one (with two, browsers ignore HSTS and SSL Labs grades A-). If nginx should send its own instead, it has to hide the one of the server with `proxy_hide_header Strict-Transport-Security;` and add its own with `always` (also for the not-found page), both in the `location` that proxies to the server: a `location` with `add_header` or `proxy_hide_header` of its own inherits none from the `server` block.
+- **www is redirected** to `https://c0de.at/` by nginx.
+- **HTTP/2** is on (`http2 on;`).
 
 Optional: `server_tokens off;` hides the version of nginx.
 
