@@ -18,6 +18,9 @@ export interface Texts {
   legalNotice: string
   privacy: string
   untranslated: string
+  search: string
+  searchResults: string
+  searchNothing: string
 }
 
 export const texts: Record<Language, Texts> = {
@@ -38,6 +41,9 @@ export const texts: Record<Language, Texts> = {
     legalNotice: 'Legal notice',
     privacy: 'Privacy',
     untranslated: 'This page is not translated yet.',
+    search: 'Search',
+    searchResults: 'Search results',
+    searchNothing: 'Nothing found',
   },
   de: {
     home: 'Start',
@@ -56,5 +62,8 @@ export const texts: Record<Language, Texts> = {
     legalNotice: 'Impressum',
     privacy: 'Datenschutz',
     untranslated: 'Diese Seite ist noch nicht übersetzt. Sie wird auf Englisch angezeigt.',
+    search: 'Suchen',
+    searchResults: 'Suchergebnisse',
+    searchNothing: 'Nichts gefunden',
   },
 }

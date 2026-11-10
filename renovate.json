@@ -1,12 +1,31 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:recommended"],
-  "postUpdateOptions": ["gomodTidy"],
+  "extends": [
+    "config:recommended"
+  ],
+  "postUpdateOptions": [
+    "gomodTidy"
+  ],
   "packageRules": [
     {
       "description": "TypeScript stays below 6.1 until typescript-eslint supports 7.0",
-      "matchPackageNames": ["typescript"],
+      "matchPackageNames": [
+        "typescript"
+      ],
       "allowedVersions": "<6.1"
+    }
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "The release tags of the documentation sources in site/sources.yaml",
+      "managerFilePatterns": [
+        "/(^|/)site/sources\\.yaml$/"
+      ],
+      "matchStrings": [
+        "repository: (?<depName>[\\w.-]+/[\\w.-]+)\\s+tag: (?<currentValue>v[\\w.-]+)"
+      ],
+      "datasourceTemplate": "github-tags"
     }
   ]
 }

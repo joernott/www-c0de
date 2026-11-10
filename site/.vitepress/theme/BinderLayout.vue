@@ -2,6 +2,7 @@
 import { useBinder } from './binder'
 import PageNav from './PageNav.vue'
 import RingSpine from './RingSpine.vue'
+import SiteSearch from './SiteSearch.vue'
 import SmallScreenMenu from './SmallScreenMenu.vue'
 import TabColumn from './TabColumn.vue'
 
@@ -17,6 +18,7 @@ const { t, notFound, source, untranslated, otherLanguage, otherPath, link } = us
       <header class="paper-header">
         <SmallScreenMenu />
         <span v-if="source" class="page-source">{{ source }}</span>
+        <SiteSearch />
         <a
           :href="otherPath"
           class="language-switch"

@@ -1,6 +1,7 @@
 import { existsSync, readFileSync } from 'node:fs'
 import { slug } from 'github-slugger'
 import { defineConfigWithTheme, type HeadConfig } from 'vitepress'
+import { c0deDark, c0deLanguage, c0deLight } from './c0de-highlighting'
 import { languages, pathIn, pathOf } from './theme/language'
 import type { ThemeConfig } from './theme/binder'
 import type { Navigation } from './theme/navigation'
@@ -20,6 +21,8 @@ export default defineConfigWithTheme<ThemeConfig>({
   lang: 'en',
   title: 'c0de',
   description: 'Documentation and tutorials of c0de, the programming language in Minecraft',
+  // The Markdown files of the scripts (test fixtures of the import) are not pages.
+  srcExclude: ['scripts/**'],
   cleanUrls: true,
   lastUpdated: false,
   // Dark mode follows the operating system with CSS only (concept: color scheme), so the
@@ -28,11 +31,14 @@ export default defineConfigWithTheme<ThemeConfig>({
   head: [['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }]],
   // Anchors as on GitHub (TO_JSON is #to_json), so the links of the mods keep working.
   markdown: {
+    languages: [c0deLanguage],
+    theme: { light: c0deLight, dark: c0deDark },
     anchor: { slugify: slug },
     headers: { slugify: slug },
     toc: { slugify: slug },
   },
-  themeConfig: { navigation },
+  // The full-text search builds one index per language; SiteSearch.vue is its field.
+  themeConfig: { navigation, search: { provider: 'local' } },
   locales: {
     root: {
       lang: 'en',

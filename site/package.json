@@ -10,12 +10,13 @@
   "scripts": {
     "content": "node scripts/import/main.ts",
     "dev": "npm run content && vitepress dev",
-    "build": "npm run content && vitepress build && node scripts/keep-dist.mjs",
+    "build": "npm run content && vitepress build && node scripts/keep-dist.mjs && npm run check-links",
     "preview": "vitepress preview",
     "test": "vitest run",
     "lint": "eslint . && prettier --check .",
     "format": "prettier --write .",
-    "typecheck": "vue-tsc --noEmit"
+    "typecheck": "vue-tsc --noEmit",
+    "check-links": "node scripts/check-links.ts"
   },
   "devDependencies": {
     "@eslint/js": "10.0.1",

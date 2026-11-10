@@ -86,8 +86,13 @@ test.describe('desktop', () => {
     await page.getByRole('link', { name: 'Diese Seite auf Deutsch' }).click()
     await expect(page).toHaveURL(/\/de\/c0de\/guide\/getting-started$/)
     await expect(page.locator('html')).toHaveAttribute('lang', 'de')
-    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Erste Schritte')
-    await expect(tabs(page).locator('[aria-current="page"]')).toHaveText('Erste Schritte')
+    // The documentation isn't translated yet: the page says so and is English.
+    await expect(page.getByRole('note')).toHaveText(
+      'Diese Seite ist noch nicht übersetzt. Sie wird auf Englisch angezeigt.',
+    )
+    await expect(page.locator('.content')).toHaveAttribute('lang', 'en')
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Getting Started')
+    await expect(tabs(page).locator('[aria-current="page"]')).toHaveText('Getting Started')
     await page.getByRole('link', { name: 'This page in English' }).click()
     await expect(page).toHaveURL(/\/c0de\/guide\/getting-started$/)
     await expect(page.locator('html')).toHaveAttribute('lang', 'en')
@@ -179,7 +184,8 @@ test.describe('without JavaScript', () => {
     await page.goto('/de/c0de/math/abs')
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('ABS')
     await expect(tabs(page).locator('[aria-current="page"]')).toHaveText('ABS')
-    await expect(page.locator('.table-of-contents')).toContainText('Beschreibung')
+    await expect(page.getByText('Returns the absolute value of a number.')).toBeVisible()
+    await expect(page.getByRole('note')).toContainText('noch nicht übersetzt')
   })
 
   test('the not-found page is rendered in the language of the URL', async ({ page }) => {

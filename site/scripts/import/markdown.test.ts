@@ -1,5 +1,13 @@
 import { describe, expect, it } from 'vitest'
-import { firstParagraph, headings, plainText, rewriteLinks, shiftHeadings } from './markdown.ts'
+import {
+  firstParagraph,
+  headings,
+  plainText,
+  pngSize,
+  rewriteLinks,
+  shiftHeadings,
+  sizeImages,
+} from './markdown.ts'
 
 describe('plainText', () => {
   it.each([
@@ -67,5 +75,33 @@ describe('firstParagraph', () => {
     expect(
       firstParagraph(['# T', '', '![r](r.png)', '', 'The first', 'paragraph.', '', 'Second.']),
     ).toBe('The first paragraph.')
+  })
+})
+
+describe('sizeImages', () => {
+  it('gives images of known size their width and height', () => {
+    const size = (src: string) => (src === '/img/a.png' ? { width: 240, height: 124 } : undefined)
+    expect(
+      sizeImages(
+        ['![A "recipe" & more](/img/a.png) ![B](/img/b.png)', '```', '![C](/img/a.png)', '```'],
+        size,
+      ),
+    ).toEqual([
+      '<img src="/img/a.png" alt="A &quot;recipe&quot; &amp; more" width="240" height="124" loading="lazy"> ![B](/img/b.png)',
+      '```',
+      '![C](/img/a.png)',
+      '```',
+    ])
+  })
+})
+
+describe('pngSize', () => {
+  it('reads the size from the header of a PNG image', () => {
+    const header = new Uint8Array(24)
+    header.set([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a])
+    new DataView(header.buffer).setUint32(16, 240)
+    new DataView(header.buffer).setUint32(20, 124)
+    expect(pngSize(header)).toEqual({ width: 240, height: 124 })
+    expect(pngSize(new TextEncoder().encode('not an image, but long enough'))).toBeUndefined()
   })
 })

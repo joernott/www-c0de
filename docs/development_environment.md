@@ -53,9 +53,10 @@ There is no Docker, Podman or `make` on the workstation. Containers are built an
 | Command | What it does |
 |---|---|
 | `npm run dev` (in `site/`) | VitePress development server with hot reload on `http://localhost:5173` |
-| `npm run content` (in `site/`) | Writes the placeholder pages and `.vitepress/navigation.json` (until the import of sprint 3 replaces it); `dev` and `build` run it first |
-| `npm run import -- --local ../minecraft-c0de --local ../minecraft-c0de-net` (in `site/`) | Imports the documentation from the local working copies instead of the release tags (from sprint 3) |
-| `npm run build` (in `site/`) | Builds the site into `internal/site/dist`, where the Go binary embeds it (from sprint 3 it imports the sources at their tags first) |
+| `npm run content` (in `site/`) | Imports the documentation of the mods at the tags in `site/sources.yaml` (downloaded once into `site/.cache/`) and writes the pages, the images and `.vitepress/navigation.json`; `dev` and `build` run it first |
+| `node scripts/import/main.ts --local c0de=../../minecraft-c0de --local c0de_net=../../minecraft-c0de-net` (in `site/`) | Imports the documentation from the working copies instead, to see changes of the mods before their release |
+| `npm run check-links` (in `site/`) | Checks the built site: every internal link and anchor resolves, nothing is loaded from other sites; `build` runs it last |
+| `npm run build` (in `site/`) | Imports the documentation, builds the site into `internal/site/dist` (where the Go binary embeds it) and checks its links |
 | `npm test`, `npm run lint`, `npm run typecheck` (in `site/`) | Vitest, ESLint and Prettier, vue-tsc |
 | `go test ./cmd/... ./internal/...` | Go tests of the server (`./...` would also find Go code in `site/node_modules`) |
 | `CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -trimpath -o dist/c0de-www ./cmd/c0de-www` | Builds the static Linux binary with the built site |

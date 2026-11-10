@@ -356,8 +356,45 @@ body {
   background: var(--color-code-bg);
 }
 
+.search {
+  @apply relative ml-auto w-64 max-w-full;
+}
+
+.search-field {
+  @apply w-full rounded-md border px-3 py-1.5;
+  border-color: var(--color-rule);
+  background: var(--color-paper);
+}
+
+.search-results {
+  @apply absolute right-0 z-40 mt-1 max-h-[70vh] w-[28rem] max-w-[90vw] list-none overflow-y-auto rounded-md p-1 shadow-lg;
+  background: var(--color-paper);
+  border: 1px solid var(--color-rule);
+}
+
+.search-result {
+  @apply flex cursor-pointer flex-col rounded px-3 py-1.5;
+}
+
+.search-result-active {
+  background: var(--color-code-bg);
+}
+
+.search-result-path {
+  @apply text-xs text-ink-muted;
+}
+
+.search-result-title {
+  @apply font-semibold;
+  color: var(--color-link);
+}
+
+.search-empty {
+  @apply px-3 py-1.5 text-ink-muted;
+}
+
 .language-switch {
-  @apply ml-auto text-ink-muted underline-offset-4 hover:underline;
+  @apply text-ink-muted underline-offset-4 hover:underline;
 }
 
 .menu {
@@ -494,7 +531,7 @@ body {
 }
 
 .content img {
-  @apply my-4 max-w-full;
+  @apply my-4 h-auto max-w-full;
 }
 
 .content table {
@@ -580,10 +617,14 @@ body {
 
 .content .shiki span {
   color: var(--shiki-light);
+  font-weight: var(--shiki-light-font-weight, inherit);
+  font-style: var(--shiki-light-font-style, inherit);
 }
 
 @media (prefers-color-scheme: dark) {
   .content .shiki span {
     color: var(--shiki-dark);
+    font-weight: var(--shiki-dark-font-weight, inherit);
+    font-style: var(--shiki-dark-font-style, inherit);
   }
 }

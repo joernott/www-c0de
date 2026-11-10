@@ -34,6 +34,7 @@ test('a missing German page says so in German', async ({ page }) => {
 })
 
 test('HTTP redirects to HTTPS', async ({ request, baseURL }) => {
+  test.skip(!baseURL?.startsWith('https:'), 'the server runs without HTTPS')
   const http = (baseURL ?? '').replace(/^https:/, 'http:')
   const response = await request.get(`${http}/de/`, { maxRedirects: 0 })
   expect(response.status()).toBe(308)

@@ -119,7 +119,9 @@ The frontend is built with **Vue.js 3** and **Tailwind CSS**, using the static s
   - The ring binder is a custom Vue theme that replaces the default theme of VitePress completely. It is styled with Tailwind CSS.
   - VitePress provides the Markdown pipeline (with Shiki for code highlighting, which gets a grammar for c0de), the languages (locales), the local full-text search and the sitemap.
 
-The import (see [Sources](#sources)) is a Node.js script that runs before the build. It fetches the sources, rewrites them as described in [URL structure](#url-structure) and writes them into the VitePress source folder, where they are not committed.
+The import (see [Sources](#sources)) is a Node.js script (`site/scripts/import/`) that runs before the build. It downloads the GitHub archive of every tag (or reads a local working copy), rewrites the files as described in [URL structure](#url-structure) and writes them into the VitePress source folder, where they are not committed. A link it can't resolve stops the build. Images get their width and height, so pages don't shift while they load. After the build, a link check makes sure that every internal link and anchor resolves and that no page loads anything from another site.
+
+Translations in `docs/<language>/` of the mods must keep the structure of the English files: the same `##` and `###` headings in the same order (their text is translated). The import matches sections by their position, not by their text.
 
 ### Web server
 

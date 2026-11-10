@@ -6,6 +6,7 @@ import { texts } from './texts'
 
 export interface ThemeConfig {
   navigation: Navigation
+  search: { provider: 'local' }
 }
 
 // useBinder gives the components the language, the texts and the position of the current

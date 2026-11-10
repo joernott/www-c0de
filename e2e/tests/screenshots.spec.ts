@@ -9,7 +9,9 @@ const pages = [
   ['c0de-overview', '/c0de/'],
   ['guide-chapter', '/c0de/guide/language'],
   ['handbook-chapter', '/c0de/reference/data'],
+  ['library-overview', '/c0de/strings/'],
   ['library-function', '/c0de/minecraft/teleport'],
+  ['net-chapter', '/c0de_net/http/getting-started'],
   ['german-function', '/de/c0de/strings/mid'],
   ['not-found', '/no/such/page'],
 ] as const

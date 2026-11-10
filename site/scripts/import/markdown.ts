@@ -106,6 +106,36 @@ export function rewriteLinks(
   })
 }
 
+const escapeAttribute = (text: string) =>
+  text.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;')
+
+// sizeImages turns images whose size is known into <img> elements with width and height, so
+// the page doesn't shift when they load (and scrolling to an anchor below them works).
+export function sizeImages(
+  lines: string[],
+  size: (src: string) => { width: number; height: number } | undefined,
+): string[] {
+  const code = codeLines(lines)
+  return lines.map((line, index) =>
+    code[index]
+      ? line
+      : line.replace(/!\[([^\]]*)\]\(([^)\s]+)\)/g, (all, alt: string, src: string) => {
+          const s = size(src)
+          return s
+            ? `<img src="${escapeAttribute(src)}" alt="${escapeAttribute(alt)}" width="${s.width}" height="${s.height}" loading="lazy">`
+            : all
+        }),
+  )
+}
+
+// pngSize returns the size of a PNG image from its header, or undefined for other files.
+export function pngSize(data: Uint8Array): { width: number; height: number } | undefined {
+  const signature = [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]
+  if (data.length < 24 || signature.some((b, i) => data[i] !== b)) return undefined
+  const view = new DataView(data.buffer, data.byteOffset, data.byteLength)
+  return { width: view.getUint32(16), height: view.getUint32(20) }
+}
+
 // firstParagraph returns the plain text of the first paragraph after the first heading.
 export function firstParagraph(lines: string[]): string {
   const code = codeLines(lines)

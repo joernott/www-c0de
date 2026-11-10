@@ -8,10 +8,7 @@
     "skipLibCheck": true,
     "noEmit": true,
     "jsx": "preserve",
-    "types": [
-      "node",
-      "vitepress/client"
-    ],
+    "types": ["node", "vitepress/client"],
     "allowImportingTsExtensions": true,
     "erasableSyntaxOnly": true
   },

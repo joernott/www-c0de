@@ -12,9 +12,11 @@ import type { Chapter, Localized, MainTab, Navigation } from '../../.vitepress/t
 import {
   firstParagraph,
   headings,
+  pngSize,
   rewriteLinks,
   sectionRange,
   shiftHeadings,
+  sizeImages,
   type Heading,
 } from './markdown.ts'
 import { version, type Config, type TabSpec } from './sources.ts'
@@ -400,7 +402,13 @@ function render(
   const rewritten = pages.map((page) => ({
     ...page,
     lines: page.blocks.map((b) =>
-      rewriteLinks(b.lines, (target, image, i) => resolve(b.file, target, image, b.from[i]!)),
+      sizeImages(
+        rewriteLinks(b.lines, (target, image, i) => resolve(b.file, target, image, b.from[i]!)),
+        (src) => {
+          const image = images.get(src.replace(/^\//, ''))
+          return image && pngSize(readFileSync(image.from))
+        },
+      ),
     ),
   }))
   return rewritten.map((page) => {
