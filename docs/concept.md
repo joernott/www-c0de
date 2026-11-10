@@ -6,7 +6,7 @@ This repository contains everything needed to build and run the website:
 
   - the frontend, built with Vue.js and Tailwind CSS,
   - a web server based on Caddy with Let's Encrypt support, built as a single static Go binary for Linux that contains the whole site,
-  - a Docker container that runs this binary.
+  - a container image that runs this binary, run with Podman on the web server.
 
 Proposals added during the [review](concept_review.md) are marked with *(proposal, Qn)*, where Qn is the open question in the review that decides them.
 
@@ -38,12 +38,12 @@ Written in this repository are:
 |---|---|---|
 | `/` | Home page | this repository |
 | `/c0de/` | The c0de language: guide and handbooks, except the library sections of the functions handbook | minecraft-c0de |
-| `/math/`, `/strings/`, `/time/`, `/minecraft/` | The libraries c0de/math, c0de/strings, c0de/time and c0de/minecraft | sections of `docs/reference/functions.md` in minecraft-c0de |
-| `/http/` | The library c0de_net/http, including the installation and settings of c0de net | minecraft-c0de-net |
+| `/c0de/math/`, `/c0de/strings/`, `/c0de/time/`, `/c0de/minecraft/` | The libraries c0de/math, c0de/strings, c0de/time and c0de/minecraft | sections of `docs/reference/functions.md` in minecraft-c0de |
+| `/c0de_net/http/` | The library c0de_net/http, including the installation and settings of c0de net | minecraft-c0de-net |
 | `/tutorials/` | Tutorials (second step) | this repository |
 | `/legal-notice`, `/privacy` | Legal notice and privacy policy | this repository |
 
-The folder of a library is the last part of its name *(proposal, Q1)*. Within a folder, every source file becomes one page. Its URL is the file name without the number prefix and without `.md` (`docs/guide/01-getting-started.md` → `/c0de/guide/getting-started`). URLs are lowercase and have no `.html` extension.
+The folder of a library is its full name, as written after INCLUDE (`c0de/minecraft` → `/c0de/minecraft/`). Libraries of further mods get their folders the same way (e.g. a future `c0de_net/smtp` → `/c0de_net/smtp/`), so adding a mod as source needs no new URL rules. Within a folder, every source file becomes one page. Its URL is the file name without the number prefix and without `.md` (`docs/guide/01-getting-started.md` → `/c0de/guide/getting-started`). URLs are lowercase and have no `.html` extension.
 
 Links between the imported files are rewritten to the URLs of the site. Anchors are kept as they are on GitHub, so `functions.md#mid` keeps working as `#mid`. Links to files that are not imported (e.g. the concept of the mod) point to the file on GitHub at the imported tag. Images are copied with the pages.
 
@@ -70,7 +70,7 @@ A chapter is a tab *(proposal, Q2)*:
 | Data, Statements, Tools, Triggers, Devices | c0de color | One handbook each |
 | Functions | c0de color | Built-in functions, input and output |
 | math, strings, time, minecraft | one color per library | The section of the library in the functions handbook |
-| http | own color | The c0de net handbook |
+| c0de_net/http | own color | The c0de net handbook |
 | Tutorials | own color | Tutorials (second step) |
 
 This makes 13 tabs plus the tutorials, which fit on the right margin of a screen with a height of 800 pixels. On lower screens, the tabs get narrower.
@@ -91,7 +91,7 @@ This makes 13 tabs plus the tutorials, which fit on the right margin of a screen
 
 ### Frontend
 
-The frontend is built with **Vue.js 3** and **Tailwind CSS**, using the static site generator **VitePress** *(proposal, Q3)*:
+The frontend is built with **Vue.js 3** and **Tailwind CSS**, using the static site generator **VitePress**:
 
   - VitePress renders every Markdown page to a static HTML page at build time. The pages can be read without JavaScript, load fast and can be indexed by search engines. Vue then takes over in the browser for navigation between pages and the search.
   - The ring binder is a custom Vue theme that replaces the default theme of VitePress completely. It is styled with Tailwind CSS.
@@ -104,7 +104,7 @@ The import (see [Sources](#sources)) is a Node.js script that runs before the bu
 The web server is **Caddy 2**, used as a Go library:
 
   - The program `c0de-www` is Caddy with its standard modules and a small module of this repository that serves the built site from the binary (`go:embed`). The configuration (Caddyfile) is also embedded.
-  - It is built with `CGO_ENABLED=0` as a static binary for `linux/amd64` *(and `linux/arm64`, Q5)*. The binary is the whole website.
+  - It is built with `CGO_ENABLED=0` as a static binary for `linux/amd64`. The binary is the whole website.
   - Settings are environment variables: the domain (default `c0de.at`), the data folder for certificates, and the TLS mode (`acme` for Let's Encrypt, `internal` for tests with Caddy's local certificate authority).
 
 Caddy provides:
@@ -116,19 +116,25 @@ Caddy provides:
   - caching: files with a hash in the name are cached forever, HTML pages are revalidated,
   - security headers: HSTS, Content-Security-Policy, X-Content-Type-Options, Referrer-Policy,
   - URLs without `.html` and a 404 page in the ring binder style,
-  - an access log without IP addresses *(proposal, Q7)*.
+  - an access log in the volume `/data`, rotated by Caddy and deleted after a fixed retention period *(proposal: 14 days, Q7.1)*. The privacy policy describes it.
 
 ### Container
 
-The Docker image is built in stages: Node.js builds the site, Go builds the binary, and the final image is `scratch` with the binary and the CA certificates (needed to talk to Let's Encrypt).
+The container image (OCI format, `linux/amd64`) is built in stages: Node.js builds the site, Go builds the binary, and the final image is `scratch` with the binary and the CA certificates (needed to talk to Let's Encrypt). It runs with Podman and Docker alike.
 
   - It runs as an unprivileged user and listens on ports 80/tcp, 443/tcp and 443/udp (HTTP/3).
-  - The volume `/data` keeps the certificates and the ACME account. It must survive updates of the container, otherwise every start requests new certificates and hits the rate limits of Let's Encrypt.
-  - The image is published to the GitHub Container Registry as `ghcr.io/joernott/www-c0de`.
+  - The volume `/data` keeps the certificates, the ACME account and the access log. It must survive updates of the container, otherwise every start requests new certificates and hits the rate limits of Let's Encrypt.
+  - The image is published to the GitHub Container Registry as `ghcr.io/joernott/www-c0de`, tagged with its version and `latest`.
 
 ### Versions and releases
 
-The website has its own version (semantic versioning, from Git tags like the mods). A release builds the binary and the image, attaches the binary to the GitHub release and publishes the image. Where and how the container is run is decided in Q5.
+The website has its own version (semantic versioning, from Git tags like the mods). A release builds the binary and the image, attaches the binary to the GitHub release and publishes the image with the tags of its version and `latest`.
+
+### Operation
+
+The site runs on the operator's own Linux web server (amd64). The systemd service `container-c0de` runs the container with Podman; it pulls the image `latest` before it starts the container. A new version is deployed by publishing a release and restarting the service.
+
+Nothing in the image or its configuration depends on that server: the domain, the data folder and the TLS mode are set from outside, so the site can move to another Linux host, container or VM by moving the volume `/data` and the service definition. The repository contains the systemd unit as an example (`contrib/systemd/container-c0de.service`).
 
 ## Tutorials
 
@@ -136,4 +142,4 @@ Tutorials follow in a second step and are shown under `/tutorials/`, with their 
 
 ## Legal pages
 
-A website run from Germany or Austria needs a legal notice (Impressum) and a privacy policy. Both are linked from the bottom of every page. Their content is provided by the operator *(Q7)*.
+A website run from Germany or Austria needs a legal notice (Impressum) and a privacy policy. Both are linked from the bottom of every page. The operator is Jörn Ott; the data of the legal notice is taken from [www.ott-consult.de](https://www.ott-consult.de). The privacy policy describes the access log (what is logged, why and for how long).

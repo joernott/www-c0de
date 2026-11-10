@@ -91,8 +91,8 @@ A task is done when
 |---|---|:---:|
 | 3.1 | `sources.yaml` with repository, tag and files of each source. `scripts/import-docs` fetches each source at its tag (shallow clone into a cache folder) or, for development, reads a local working copy (`--local ../minecraft-c0de`). The output in `site/` is not committed. |  |
 | 3.2 | Page mapping and link rewriting: file → URL (without number prefix and `.md`), links between imported files, anchors, links to files that are not imported (→ GitHub at the tag), images copied with the pages. The import fails on a link it cannot resolve. Vitest with fixtures. |  |
-| 3.3 | Split the functions handbook: built-in functions and input/output under `/c0de/`, the sections c0de/math, c0de/strings, c0de/time and c0de/minecraft as their own pages in their library folders; links into these sections are rewritten. |  |
-| 3.4 | Import the c0de net handbook to `/http/`. |  |
+| 3.3 | Split the functions handbook: built-in functions and input/output under `/c0de/`, the sections c0de/math, c0de/strings, c0de/time and c0de/minecraft as their own pages in the folders named like the libraries (`/c0de/math/` …); links into these sections are rewritten. |  |
+| 3.4 | Import the c0de net handbook to `/c0de_net/http/`. The library folders are derived from the library names in `sources.yaml`, so further mods need no change of the import. |  |
 | 3.5 | Navigation from the import: tabs, page order in a chapter, contents lists, previous/next; front matter with title and description of every page. |  |
 | 3.6 | Shiki grammar and theme for ` ```c0de ` code blocks in the colors of the blocks (taken from the block textures of c0de). |  |
 | 3.7 | Full-text search with the local search of VitePress, styled for the ring binder. |  |
@@ -107,7 +107,7 @@ A task is done when
 | Task | Description | Done |
 |---|---|:---:|
 | 4.1 | Home page (as decided in Q12): what c0de is, screenshot, example program, links to Modrinth and GitHub with the current versions, overview of the chapters. |  |
-| 4.2 | Legal notice and privacy policy with the content provided by the operator (Q7). |  |
+| 4.2 | Legal notice with the operator's data from www.ott-consult.de; privacy policy describing the access log (content, purpose, retention as decided in Q7.1) and the absence of cookies and tracking. |  |
 | 4.3 | Search engines: page titles and descriptions, canonical URLs, `sitemap.xml`, `robots.txt`, Open Graph image. |  |
 | 4.4 | Lighthouse check of performance, accessibility, best practices and SEO in CI, with minimum scores. |  |
 
@@ -117,13 +117,14 @@ A task is done when
 
 | Task | Description | Done |
 |---|---|:---:|
-| 5.1 | Production Caddyfile: redirects (HTTP → HTTPS, `www.c0de.at` → `c0de.at`), precompressed files (created in the site build), cache headers, security headers (HSTS, Content-Security-Policy without `unsafe-inline`, X-Content-Type-Options, Referrer-Policy, Permissions-Policy), access log as decided in Q7. Go tests for every header and redirect. |  |
+| 5.1 | Production Caddyfile: redirects (HTTP → HTTPS, `www.c0de.at` → `c0de.at`), precompressed files (created in the site build), cache headers, security headers (HSTS, Content-Security-Policy without `unsafe-inline`, X-Content-Type-Options, Referrer-Policy, Permissions-Policy), access log in `/data/log`, rotated and deleted after the retention period of Q7.1. Go tests for every header and redirect. |  |
 | 5.2 | ACME test on the VM: Pebble (the test server of Let's Encrypt) in `compose.yaml`; the container gets a certificate from it, keeps it in `/data` across restarts and renews it. |  |
-| 5.3 | Hardening of the container: binding to ports 80/443 as unprivileged user, read-only root file system, health check, memory limit. |  |
-| 5.4 | Release workflow `release.yml`: on a tag `v*`, the binaries (amd64, and arm64 if decided in Q5) with checksums become a GitHub release, the image is pushed to `ghcr.io/joernott/www-c0de`. |  |
-| 5.5 | Production host (as decided in Q5): `compose.yaml` for production, firewall for 80/tcp, 443/tcp and 443/udp, DNS records for `c0de.at` and `www.c0de.at`, deployment by hand or by workflow. |  |
-| 5.6 | Release 0.1.0: tag, deploy, check the certificate, the redirects and the headers from outside (SSL Labs, securityheaders.com) and the pages in the browser. |  |
-| 5.7 | Documentation: README, development environment, `docs/operations.md` (deploying, updating the documentation after a mod release, renewing and backing up `/data`). |  |
+| 5.3 | Hardening of the container: binding to ports 80/443 as unprivileged user (or behind the existing web server, as decided in Q5.1), read-only root file system, health check, memory limit. |  |
+| 5.4 | Release workflow `release.yml`: on a tag `v*`, the `linux/amd64` binary with checksum becomes a GitHub release, the image is pushed to `ghcr.io/joernott/www-c0de` with the tags of the version and `latest`. |  |
+| 5.5 | Systemd unit `contrib/systemd/container-c0de.service`: pulls `ghcr.io/joernott/www-c0de:latest` with Podman, then runs the container with the volume `/data` and the ports. Tested with Podman on the development VM before it goes to the web server. |  |
+| 5.6 | Web server: install the unit as `container-c0de`, firewall for 80/tcp, 443/tcp and 443/udp, DNS records for `c0de.at` and `www.c0de.at` (Q5.2). |  |
+| 5.7 | Release 0.1.0: tag, restart `container-c0de`, check the certificate, the redirects and the headers from outside (SSL Labs, securityheaders.com) and the pages in the browser. |  |
+| 5.8 | Documentation: README, development environment, `docs/operations.md` (deploying by restarting the service, updating the documentation after a mod release, backing up `/data`, moving the site to another host). |  |
 
 ## Sprint 6: Tutorials
 
@@ -142,8 +143,10 @@ A task is done when
 | VitePress inserts inline scripts, which a strict Content-Security-Policy blocks. | The custom theme doesn't use the appearance switch of VitePress; remaining inline scripts are allowed with hashes generated at build time (task 5.1). |
 | The Markdown of the mods uses constructs that look right on GitHub and in Patchouli, but not on the site. | Task 3.10 reviews every page; the import fails on unresolved links (3.2) and the link check runs in CI (3.8). |
 | Thirteen tabs don't fit on low screens. | Narrower tabs on low screens (2.3), the row of tabs on small screens (2.5), screenshot tests at several sizes (2.8). |
-| A lost `/data` volume or repeated tests against the production endpoint hit the rate limits of Let's Encrypt. | ACME is tested against Pebble (5.2); the volume is documented and backed up (5.7). |
-| An unprivileged process can't bind to ports 80 and 443 in a `scratch` image. | Task 5.3: file capability `cap_net_bind_service` set in the build stage, or the ports are mapped by Docker to high ports in the container. |
+| A lost `/data` volume or repeated tests against the production endpoint hit the rate limits of Let's Encrypt. | ACME is tested against Pebble (5.2); the volume is documented and backed up (5.8). |
+| An unprivileged process can't bind to ports 80 and 443 in a `scratch` image, and rootless Podman can't publish them on the host. | Task 5.3: the container listens on high ports that Podman maps to 80/443; for rootless Podman, `net.ipv4.ip_unprivileged_port_start` is lowered on the host (Q5.1). |
+| The web server already serves other sites on ports 80/443. | Q5.1 decides it before sprint 5: Caddy then runs behind the existing web server, which also gets the certificate. |
+| `latest` is pulled on every restart, so a broken release goes live on the next restart of the service. | Releases only after CI and the end-to-end tests on the VM are green; the previous version stays on ghcr.io and can be started by its tag (5.8). |
 | The website shows documentation that doesn't match the version players have installed. | The import uses release tags only (3.1); the version of every mod is shown on its pages. |
 
 ## Decisions
@@ -152,3 +155,7 @@ Answers to the open questions of the [concept review](concept_review.md) are add
 
 | Question | Decision |
 |---|---|
+| Q1 Library URLs | The folder of a library is its full name: `/c0de/minecraft/`, `/c0de_net/http/` (2026-11-10). Libraries of further mods are added the same way. |
+| Q3 Frontend | VitePress with Vue.js and Tailwind CSS (2026-11-10). |
+| Q5 Hosting | The operator's own Linux web server, amd64 only. The systemd service `container-c0de` runs the container with Podman and pulls the latest image before starting it; restarting it deploys a new version. The site must be able to move to another Linux container or VM (2026-11-10). |
+| Q7 Legal notice and logs | Operator Jörn Ott, legal notice data from www.ott-consult.de. Access logs are kept (2026-11-10). |
