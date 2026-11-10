@@ -1,0 +1,12 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "postUpdateOptions": ["gomodTidy"],
+  "packageRules": [
+    {
+      "description": "TypeScript stays below 6.1 until typescript-eslint supports 7.0",
+      "matchPackageNames": ["typescript"],
+      "allowedVersions": "<6.1"
+    }
+  ]
+}

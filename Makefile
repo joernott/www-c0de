@@ -27,8 +27,10 @@ binary: site
 	@go version -m dist/c0de-www | grep -q 'CGO_ENABLED=0' || { echo "dist/c0de-www is not static"; exit 1; }
 	@echo "dist/c0de-www $(VERSION) (static)"
 
+# The build uses the network of the host: on the development VM, Docker's FORWARD policy
+# blocks Podman's bridge, so npm and Go couldn't download anything.
 image:
-	$(CONTAINER) build -f Containerfile --build-arg VERSION=$(VERSION) -t $(IMAGE) .
+	$(CONTAINER) build --network host -f Containerfile --build-arg VERSION=$(VERSION) -t $(IMAGE) .
 
 # Runs the image like on the web server, with certificates from Caddy's local CA.
 run:

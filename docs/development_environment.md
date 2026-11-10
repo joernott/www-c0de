@@ -90,7 +90,7 @@ Ports 80 and 443 are free on the VM (doenerstag uses 8443, mokapi 8080), so the 
 |---|---|
 | `make site binary` | Builds the site and the static binary |
 | `make image` | Builds the image `localhost/www-c0de:dev` with `sudo podman build -f Containerfile` |
-| `make run` | Runs the image with `sudo podman run`, ports 80/443, TLS mode `internal`, volume `www-c0de-data` |
+| `make run`, `make stop` | Runs the image with `sudo podman run`, ports 80/443 published to 8080/8443 in the container, TLS mode `internal`, volume `www-c0de-data` |
 | `make e2e` | Runs the Playwright tests against `https://localhost` (Caddy's local CA is trusted by the tests) |
 | `make test lint` | All unit tests and checks, as in CI |
 
@@ -111,7 +111,7 @@ A container that isn't needed for a test is stopped afterwards; the VM's memory 
 
 The runners build the image with Docker; the VM and the web server run it with Podman. Both use the same `Containerfile`, and the image is a standard OCI image.
 
-Renovate (`renovate.json`) updates npm packages, Go modules, the base images of the `Containerfile`, the GitHub Actions, Node.js (`.nvmrc`) and Go (`go.mod`), and, from sprint 3 on, the tags of the documentation sources in `sources.yaml`.
+Renovate (`renovate.json`) needs the Renovate GitHub App on the repository. It updates npm packages, Go modules, the base images of the `Containerfile`, the GitHub Actions, Node.js (`.nvmrc`) and Go (`go.mod`), and, from sprint 3 on, the tags of the documentation sources in `sources.yaml`. TypeScript is held below 6.1 until typescript-eslint supports 7.0.
 
 ### Releasing a version
 

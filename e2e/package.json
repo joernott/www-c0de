@@ -1,0 +1,17 @@
+{
+  "name": "www-c0de-e2e",
+  "private": true,
+  "type": "module",
+  "description": "End-to-end tests of c0de.at against the running container",
+  "license": "BSD-3-Clause",
+  "engines": {
+    "node": ">=26"
+  },
+  "scripts": {
+    "test": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.65.0",
+    "@types/node": "26.6.6"
+  }
+}
