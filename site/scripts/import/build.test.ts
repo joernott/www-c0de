@@ -42,7 +42,7 @@ describe('pages', () => {
     expect(foo).toContain('\n# FOO\n')
     expect(foo).toContain('title: "FOO"')
     expect(foo).toContain('description: "Does foo."')
-    expect(foo).toContain('source: "mod 1.2.3"')
+    expect(foo).toContain('source: "The Mod 1.2.3"')
   })
 
   it('leaves the library out of the handbook it comes from', () => {
@@ -94,6 +94,20 @@ describe('pages', () => {
     const library = page(output, 'lib/a/index.md')
     expect(library).toContain('The library lib/a and its functions.')
     expect(library).toContain('## Functions\n\n- [FOO](/lib/a/foo): Does foo.')
+  })
+
+  it('names the mods with their versions for the home page', () => {
+    expect(output.navigation.mods).toEqual([
+      {
+        id: 'mod',
+        name: 'The Mod',
+        version: '1.2.3',
+        repository: 'someone/mod',
+        modrinth: 'abc123',
+        description: { en: 'A mod.', de: 'Eine Mod.' },
+        link: '/mod/',
+      },
+    ])
   })
 
   it('writes the navigation with the labels of every language', () => {

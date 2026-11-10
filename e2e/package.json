@@ -8,10 +8,13 @@
     "node": ">=26"
   },
   "scripts": {
-    "test": "playwright test"
+    "test": "playwright test",
+    "images": "node scripts/generate-images.ts",
+    "lighthouse": "lhci autorun"
   },
   "devDependencies": {
     "@axe-core/playwright": "4.14.0",
+    "@lhci/cli": "0.16.0",
     "@playwright/test": "1.65.0",
     "@types/node": "26.6.6"
   }

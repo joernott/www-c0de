@@ -420,7 +420,7 @@ function render(
       '---',
       `title: ${JSON.stringify(page.title)}`,
       `description: ${JSON.stringify(description)}`,
-      `source: ${JSON.stringify(`${p.tab.source.replace('_', ' ')} ${version(source)}`)}`,
+      `source: ${JSON.stringify(`${source.name} ${version(source)}`)}`,
       ...(page.untranslated && language !== 'en' ? ['untranslated: true'] : []),
       '---',
       '',
@@ -500,6 +500,15 @@ function navigation(
   labels: Map<string, Localized>,
 ): Navigation {
   return {
+    mods: Object.entries(config.sources).map(([id, source]) => ({
+      id,
+      name: source.name,
+      version: version(source),
+      repository: source.repository,
+      modrinth: source.modrinth,
+      description: source.description,
+      link: config.tabs.find((t) => t.source === id)?.link ?? '/',
+    })),
     tabs: config.tabs.map((tab): MainTab => ({
       id: tab.id,
       label: { en: tab.label },

@@ -53,10 +53,10 @@ lint: site/node_modules
 	go vet $(GO_PACKAGES)
 	cd site && npm run lint && npm run typecheck && npx prettier --check --ignore-path ../e2e/.prettierignore ../e2e
 
-# Runs the end-to-end tests against the running container (make run). The system libraries
+# Runs the end-to-end tests and Lighthouse against the running container (make run). The system libraries
 # of the browsers are installed by contrib/setup_dev_vm.sh.
 e2e:
-	cd e2e && npm ci && npx playwright install chromium firefox && npm test
+	cd e2e && npm ci && npx playwright install chromium firefox && npm test && npm run lighthouse
 
 clean:
 	rm -rf dist

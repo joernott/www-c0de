@@ -29,3 +29,5 @@ site/de/c0de/
 site/de/c0de_net/
 site/public/img/
 site/.cache/
+e2e/lighthouse/
+e2e/.lighthouseci/

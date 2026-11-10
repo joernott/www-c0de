@@ -7,7 +7,10 @@ import { parse } from 'yaml'
 import type { Localized } from '../../.vitepress/theme/navigation.ts'
 
 export interface Source {
+  name: string
   repository: string // owner/name on GitHub
+  modrinth: string // the Modrinth project
+  description: Localized
   tag: string
   docs: string // the documentation folder in the repository
 }

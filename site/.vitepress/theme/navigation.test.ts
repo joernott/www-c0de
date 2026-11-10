@@ -35,6 +35,7 @@ const navigation: Navigation = {
       ],
     },
   ],
+  mods: [],
 }
 const home = { en: 'Home', de: 'Start' }
 

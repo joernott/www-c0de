@@ -446,6 +446,53 @@ body {
   @apply underline-offset-4 hover:underline;
 }
 
+/* ---------- The home page ---------- */
+
+.content .mods {
+  @apply grid list-none gap-4 pl-0 sm:grid-cols-2;
+}
+
+.content .mod {
+  @apply m-0 rounded-md border px-5 py-4;
+  border-color: var(--color-rule);
+}
+
+.content .mod-name {
+  @apply mt-0;
+}
+
+.mod-version {
+  @apply ml-1 rounded px-2 py-0.5 align-middle font-mono text-sm font-normal;
+  background: var(--color-code-bg);
+}
+
+.content .mod-links {
+  @apply mb-0 flex flex-wrap gap-x-4 gap-y-1;
+}
+
+.content .tab-overview {
+  @apply flex list-none flex-wrap gap-3 pl-0;
+}
+
+.content .tab-overview li {
+  @apply m-0 flex flex-col rounded-r-lg py-2 pr-4 pl-3;
+  background: color-mix(in oklab, var(--tab) 55%, var(--color-paper));
+  border-left: 0.4rem solid var(--tab);
+}
+
+.content .tab-overview a {
+  @apply font-semibold no-underline;
+  color: var(--color-ink);
+}
+
+.tab-overview-count {
+  @apply text-sm text-ink-muted;
+}
+
+.content .screenshot {
+  @apply rounded-md shadow-md;
+}
+
 /* ---------- Turning the pages ---------- */
 
 .page-nav {

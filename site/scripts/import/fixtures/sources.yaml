@@ -1,6 +1,9 @@
 sources:
   mod:
+    name: The Mod
     repository: someone/mod
+    modrinth: abc123
+    description: { en: A mod., de: Eine Mod. }
     tag: v1.2.3
     docs: docs
 tabs:

@@ -115,7 +115,7 @@ A task is done when
 | Task | Description | Done |
 |---|---|:---:|
 | 4.1 | Home page: what c0de is, screenshot, example program, links to Modrinth and GitHub with the current versions of both mods, overview of the chapters. |  |
-| 4.2 | Legal notice with the operator's data from www.ott-consult.de; privacy policy describing the access log (full IP address, time, URL, status, referrer and browser, kept for three months for operation and security) and the absence of cookies and tracking. |  |
+| 4.2 | Legal notice of Jörn Ott (address, phone, c0de@c0de.at); privacy policy describing the access log (full IP address, time, request with its headers, TLS, answer; kept for three months for operation and security) and the absence of cookies and tracking. |  |
 | 4.3 | Search engines: page titles and descriptions, canonical URLs, `hreflang` alternates, `sitemap.xml`, `robots.txt`, Open Graph image. |  |
 | 4.4 | Lighthouse check of performance, accessibility, best practices and SEO in CI, with minimum scores. |  |
 
@@ -126,7 +126,7 @@ A task is done when
 | Task | Description | Done |
 |---|---|:---:|
 | 5.1 | Production Caddyfile: redirects (HTTP → HTTPS, `www.c0de.at` → `c0de.at`), precompressed files (created in the site build), cache headers, security headers (HSTS, Content-Security-Policy without `unsafe-inline`, X-Content-Type-Options, Referrer-Policy, Permissions-Policy). Go tests for every header and redirect. |  |
-| 5.2 | Access log in `/data/log` with the full IP addresses, rotated daily and compressed, files older than three months deleted. If Caddy's log rolling can't rotate by time, the rotation is done by a separate mechanism, documented in the concept. |  |
+| 5.2 | Access log in `/data/log` with exactly the fields the privacy policy names (full IP address and port, time, request and its headers without cookies and passwords, TLS, status, size, duration), rotated daily and compressed, files older than three months deleted. If Caddy's log rolling can't rotate by time, the rotation is done by a separate mechanism, documented in the concept. |  |
 | 5.3 | ACME test on the VM: Pebble (the test server of Let's Encrypt) in `compose.yaml`; the container gets a certificate from it, keeps it in `/data` across restarts and renews it. |  |
 | 5.4 | Hardening of the container: the process runs unprivileged and listens on high ports, which Podman publishes as 80/tcp, 443/tcp and 443/udp; read-only root file system, health check, memory limit. |  |
 | 5.5 | Release workflow `release.yml`: on a tag `v*`, the `linux/amd64` binary with checksum becomes a GitHub release, the image is pushed to `ghcr.io/joernott/www-c0de` with the tags of the version and `latest`. |  |
@@ -178,6 +178,7 @@ Answers to the open questions of the [concept review](concept_review.md) (task 0
 | Q6 License | BSD 3-Clause, like the mods ([LICENSE](../LICENSE)) (2026-11-10). |
 | Q7 Legal notice and logs | Operator Jörn Ott, legal notice data from www.ott-consult.de. Access logs are kept (2026-11-10). |
 | Q7.1 Log retention | Rotated daily, kept for three months, with the full IP addresses (2026-11-10). |
+| Legal notice | Jörn Ott personally, Hauptstr. 2, 53604 Bad Honnef, phone +49 2224 9408-73, e-mail c0de@c0de.at; no tax or VAT numbers (2026-11-10). |
 | Q8 Color scheme | Light and dark mode (2026-11-10). |
 | Q9 Small screens | Desktop browsers first (2026-11-10). |
 | Q10 Languages | English and German at the start; more languages when translated documentation is provided in the mod repositories (2026-11-10). |

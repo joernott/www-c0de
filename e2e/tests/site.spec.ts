@@ -11,7 +11,7 @@ test('the home page is in English and links to German', async ({ page }) => {
 
   await page.getByRole('link', { name: 'Deutsch' }).click()
   await expect(page).toHaveURL(/\/de\/?$/)
-  await expect(page.getByText('Hier entstehen bald')).toBeVisible()
+  await expect(page.getByText('Programmieren in Minecraft, Block für Block.')).toBeVisible()
   expect(failed).toEqual([])
 })
 
@@ -19,7 +19,7 @@ test('the German home page links back to English', async ({ page }) => {
   await page.goto('/de/')
   await expect(page.locator('html')).toHaveAttribute('lang', 'de')
   await page.getByRole('link', { name: 'English' }).click()
-  await expect(page.getByText('will be here soon')).toBeVisible()
+  await expect(page.getByText('Programming in Minecraft, one block at a time.')).toBeVisible()
 })
 
 test('a missing page answers 404 and says so', async ({ page }) => {

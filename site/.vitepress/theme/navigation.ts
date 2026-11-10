@@ -24,8 +24,20 @@ export interface MainTab {
   chapters: Chapter[]
 }
 
+// A mod whose documentation is on the site, for the home page.
+export interface Mod {
+  id: string
+  name: string
+  version: string
+  repository: string // owner/name on GitHub
+  modrinth: string // the Modrinth project
+  description: Localized
+  link: string // the overview page of its first tab
+}
+
 export interface Navigation {
   tabs: MainTab[]
+  mods: Mod[]
 }
 
 // A page in reading order, for the links to the previous and the next page.

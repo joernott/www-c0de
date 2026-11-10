@@ -63,6 +63,8 @@ There is no Docker, Podman or `make` on the workstation. Containers are built an
 | `C0DE_TLS=off C0DE_HTTP_PORT=8089 C0DE_BIND=127.0.0.1 C0DE_DATA=$TEMP/c0de-www go run ./cmd/c0de-www` | Runs the server with the built site on Windows over HTTP (`http://127.0.0.1:8089`) for a quick check of the binary |
 | `scripts/check-whitespace.sh` | Whitespace of all files |
 | `E2E_BASE_URL=http://127.0.0.1:8089 npx playwright test --project chromium` (in `e2e/`) | End-to-end tests against the binary running on Windows (Chromium only; install it once with `npx playwright install chromium`) |
+| `npm run lighthouse` (in `e2e/`) | Lighthouse CI against the same server (`E2E_BASE_URL`), with minimum scores for performance, accessibility, best practices and SEO; reports in `e2e/lighthouse/` |
+| `npm run images` (in `e2e/`) | Generates `site/public/images/screenshot.webp` from the screenshot of the imported c0de repository and the link preview image `site/public/og-image.png` |
 | `npx playwright test screenshots` (in `e2e/`) | Screenshots of the important pages in light and dark mode at several window sizes, saved in `e2e/test-results/`, for reviewing the design |
 
 ## Development VM

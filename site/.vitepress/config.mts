@@ -2,7 +2,7 @@ import { existsSync, readFileSync } from 'node:fs'
 import { slug } from 'github-slugger'
 import { defineConfigWithTheme, type HeadConfig } from 'vitepress'
 import { c0deDark, c0deLanguage, c0deLight } from './c0de-highlighting'
-import { languages, pathIn, pathOf } from './theme/language'
+import { languageOf, languages, pathIn, pathOf } from './theme/language'
 import type { ThemeConfig } from './theme/binder'
 import type { Navigation } from './theme/navigation'
 
@@ -53,19 +53,41 @@ export default defineConfigWithTheme<ThemeConfig>({
       description: 'Dokumentation und Tutorials zu c0de, der Programmiersprache in Minecraft',
     },
   },
-  // Every page names itself and its versions in the other languages for search engines.
-  transformHead({ pageData }): HeadConfig[] {
+  // The sitemap lists every page except the not-found pages.
+  sitemap: {
+    hostname: origin,
+    transformItems: (items) => items.filter((item) => !/(^|\/)not-found$/.test(item.url)),
+  },
+  // Every page names itself and its versions in the other languages for search engines, and
+  // describes itself for link previews (Open Graph).
+  transformHead({ pageData, siteData }): HeadConfig[] {
     if (pageData.isNotFound || pageData.frontmatter.notFound) {
       return [['meta', { name: 'robots', content: 'noindex' }]]
     }
     const path = pathOf(pageData.relativePath)
+    const language = languageOf(path)
+    const title =
+      pageData.frontmatter.titleTemplate === false ? pageData.title : `${pageData.title} | c0de`
+    const description = pageData.description || siteData.description
+    const meta = (property: string, content: string): HeadConfig => ['meta', { property, content }]
     return [
       ['link', { rel: 'canonical', href: origin + path }],
-      ...languages.map((language): HeadConfig => [
+      ...languages.map((l): HeadConfig => [
         'link',
-        { rel: 'alternate', hreflang: language, href: origin + pathIn(path, language) },
+        { rel: 'alternate', hreflang: l, href: origin + pathIn(path, l) },
       ]),
       ['link', { rel: 'alternate', hreflang: 'x-default', href: origin + pathIn(path, 'en') }],
+      meta('og:type', 'website'),
+      meta('og:site_name', 'c0de'),
+      meta('og:title', title),
+      meta('og:description', description),
+      meta('og:url', origin + path),
+      meta('og:image', `${origin}/og-image.png`),
+      meta('og:image:width', '1200'),
+      meta('og:image:height', '630'),
+      meta('og:image:alt', 'c0de – the programming language made of blocks in Minecraft'),
+      meta('og:locale', language === 'de' ? 'de_DE' : 'en_US'),
+      ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
     ]
   },
 })
