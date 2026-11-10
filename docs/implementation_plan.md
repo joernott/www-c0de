@@ -38,7 +38,7 @@ A task is done when
 
 | Sprint | Goal | Result | Done |
 |---|---|---|:---:|
-| 0 | Concept and plan | Reviewed concept, implementation plan, development environment plan |  |
+| 0 | Concept and plan | Reviewed concept, implementation plan, development environment plan | ✅ |
 | 1 | Project skeleton | A placeholder page is served by the static binary and the container on the VM; CI builds everything |  |
 | 2 | The ring binder | The theme with rings, pages and two levels of tabs works in desktop browsers, in light and dark mode, in English and German, with placeholder content |  |
 | 3 | Documentation import | The documentation of c0de and c0de net is on the site, with navigation, code highlighting and search |  |
@@ -53,7 +53,7 @@ A task is done when
 | 0.1 | Review the concept (`docs/concept.md`, `docs/concept_review.md`). | ✅ |
 | 0.2 | Write the implementation plan (this document). | ✅ |
 | 0.3 | Answer the open questions of the review (see [Decisions](#decisions)) and update the concept. Add the license. | ✅ |
-| 0.4 | Write the development environment plan (`docs/development_environment.md`): Windows workstation, development VM, GitHub Actions, versions of Go, Node.js, Caddy and VitePress. |  |
+| 0.4 | Write the development environment plan (`docs/development_environment.md`): Windows workstation, development VM, GitHub Actions, versions of Go, Node.js, Caddy and VitePress. | ✅ |
 
 ## Sprint 1: Project skeleton
 
@@ -61,13 +61,13 @@ A task is done when
 
 | Task | Description | Done |
 |---|---|:---:|
-| 1.1 | Repository layout (`site/` for the frontend, `cmd/c0de-www/` and `internal/` for the server, `contrib/` for containers, systemd and the VM, `scripts/`), README with build instructions, `.editorconfig`, `.gitattributes`, `.gitignore`, `scripts/check-whitespace.sh`. |  |
-| 1.2 | VitePress project in `site/` with TypeScript, Tailwind CSS 4 and an empty custom theme that replaces the default theme; locales `en` (root) and `de` (`/de/`); placeholder home page in both languages; ESLint, Prettier and `vue-tsc`; Vitest. |  |
+| 1.1 | Repository layout (`site/` for the frontend, `cmd/c0de-www/` and `internal/` for the server, `e2e/` for Playwright, `contrib/` for containers, systemd and the VM, `scripts/`), README with build instructions, `.editorconfig`, `.gitattributes`, `.gitignore`, `.nvmrc` (Node.js 26), `scripts/check-whitespace.sh`. |  |
+| 1.2 | VitePress project in `site/` with TypeScript (7.0 if `vue-tsc` supports it, otherwise 6.0), Tailwind CSS 4 through PostCSS and an empty custom theme that replaces the default theme; locales `en` (root) and `de` (`/de/`); placeholder home page in both languages; ESLint, Prettier and `vue-tsc`; Vitest. |  |
 | 1.3 | Go module `github.com/joernott/www-c0de`: `c0de-www` is Caddy with its standard modules plus a module that serves the embedded site (`go:embed` of `site/.vitepress/dist`) as Caddy file system, and the embedded Caddyfile. Settings from environment variables: domain, data folder, TLS mode (`acme`, `internal`), HTTP-only mode for tests. Go tests start the server on free ports and fetch pages. |  |
-| 1.4 | `Makefile`: `site`, `binary` (`CGO_ENABLED=0`, `-trimpath`, version from Git tags in `c0de-www version`), `image`, `test`, `lint`, `clean`. The build checks that the binary is static. |  |
+| 1.4 | `Makefile` for the VM and CI: `site`, `binary` (`CGO_ENABLED=0`, `-trimpath`, version from Git tags in `c0de-www version`), `image`, `run`, `e2e`, `test`, `lint`, `clean`. The build checks that the binary is static. On Windows, the same steps run with npm and Go directly (see the development environment). |  |
 | 1.5 | `Containerfile` (stages Node.js → Go → `scratch` with CA certificates, unprivileged user, ports 80/443/tcp and 443/udp, volume `/data`) and `contrib/compose/compose.yaml` for the VM with TLS mode `internal`. The image is built and run with Podman and Docker. |  |
 | 1.6 | GitHub Actions workflow `build.yml`: whitespace check, lint, Vitest, Go tests (Linux and Windows), site, binary and image (not pushed). Renovate for npm, Go modules, container images and GitHub Actions. |  |
-| 1.7 | Development VM: `contrib/setup_dev_vm.sh` installs Go, Node.js, Podman and the Playwright browsers on the doenerstag VM (Docker is already there); native clone in `~/src/www-c0de`. Run it on the VM. |  |
+| 1.7 | Development VM: `contrib/setup_dev_vm.sh` installs Node.js 26 into `/opt/node-v26` (`contrib/vm-env.sh`), Podman and the Playwright browsers, without changing the Go and Node.js of doenerstag (Go 1.27.3 comes through the `toolchain` line of `go.mod`); clone in `~/src/www-c0de` with `receive.denyCurrentBranch = updateInstead`. Run it on the VM. |  |
 | 1.8 | Playwright setup with a first end-to-end test against the container on the VM (page loads over HTTPS, HTTP redirects to HTTPS); workflow `e2e.yml` runs it in CI. |  |
 
 ## Sprint 2: The ring binder

@@ -4,3 +4,4 @@ The website [c0de.at](https://c0de.at) with the documentation and tutorials of t
 
 - [Concept](docs/concept.md) and its [review](docs/concept_review.md)
 - [Implementation plan](docs/implementation_plan.md)
+- [Development environment](docs/development_environment.md)

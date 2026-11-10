@@ -40,3 +40,7 @@ Q2,1: I'd prefer one tab per function
 Q10.1: Yes, the German translations should be planned in the mods themselves.
 
 Podman does not run rootless.
+
+## 2026-11-10 – Development environment
+
+You can use the Windows workstation and the development VM 192.168.178.101 that we used for the other mods as well, there you have SSH access and passwordless sudo rights. Github actions should be used and the current stable versions of each package. Go 1.27.3 is installed on Windows and I can update it, if needed
