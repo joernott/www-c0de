@@ -7,7 +7,7 @@ This document describes how the website c0de.at is developed, built and tested. 
 | Place | Purpose |
 |---|---|
 | Windows workstation | Writing code and content, the VitePress development server with hot reload, unit tests (Vitest, Go), building the site and the Linux binary |
-| Development VM (`doener@192.168.178.101`, Debian 13, 8 cores, 16 GB) | Container builds with Podman, the container on ports 80/443 as on the web server, end-to-end tests with Playwright, ACME tests with Pebble, the systemd unit |
+| Development VM (`doener@192.168.178.101`, Debian 13, 8 cores, 16 GB) | Container builds and runs with Docker, the container on ports 80/443 as on the web server, end-to-end tests with Playwright, ACME tests with Pebble, the systemd unit |
 | GitHub Actions | Build and test of every push, end-to-end tests, releases (GitHub release and image on ghcr.io) |
 
 ## Versions
@@ -29,7 +29,8 @@ The current stable version of every tool and package is used. Renovate keeps the
 | Prettier | 3.9 | `site/package.json` |
 | Playwright, axe-core for Playwright | 1.65, 4.14 | `e2e/package.json` |
 | Lighthouse CI | 0.16 | `e2e/package.json` |
-| Podman | 5.4 (Debian 13) | on the VM and the web server |
+| Docker | 29.8 | on the VM (installed for doenerstag) |
+| Podman | as on the web server | on the web server only |
 
 Notes on the choices:
 
@@ -70,10 +71,9 @@ The VM is shared with doenerstag, c0de and c0de net. SSH: `ssh -i ~/.ssh/id_ed25
 
   - **Go**: the VM has Go 1.26.10 in `/usr/local/go`, pinned by the setup script of doenerstag. It stays. The `toolchain go1.27.3` line in `go.mod` makes the Go command download and use 1.27.3 for this repository (`GOTOOLCHAIN=auto`, the default).
   - **Node.js**: the VM has Node.js 22 in `/usr/bin/node`, also used by doenerstag. Node.js 26 is installed into `/opt/node-v26` from the official tarball. `contrib/vm-env.sh` puts it first in `PATH`; the scripts of this repository source it.
-  - **Podman** 5.4 from Debian, beside Docker. It runs as root (`sudo podman`), like on the web server.
+  - **Docker** is already installed; the user `doener` is in the group `docker`. The VM uses Docker, not Podman (decision of 2026-11-10); the operator adapts the web server to Podman. Podman 5.4 was installed in sprint 1 and stays unused.
   - **The system libraries of the Playwright browsers** (Chromium and Firefox); `make e2e` installs the browsers themselves.
 
-**Podman beside Docker**: Docker sets the policy of the FORWARD chain to DROP, which also drops the traffic of Podman's bridge `podman0`. Containers on the bridge can't reach the internet, and published ports only answer on the VM itself (traffic from `localhost` doesn't pass the FORWARD chain). So `make image` builds with the network of the host, and the end-to-end tests run on the VM against `https://localhost`. The firewall is not changed. If Pebble (sprint 5) or a test from the workstation needs the bridge, an exception in Docker's chain `DOCKER-USER` would be needed; that is decided then.
 
 ### Repository on the VM
 
@@ -91,8 +91,8 @@ Ports 80 and 443 are free on the VM (doenerstag uses 8443, mokapi 8080), so the 
 | Command (in `~/src/www-c0de`) | What it does |
 |---|---|
 | `make site binary` | Builds the site and the static binary |
-| `make image` | Builds the image `localhost/www-c0de:dev` with `sudo podman build -f Containerfile` |
-| `make run`, `make stop` | Runs the image with `sudo podman run`, ports 80/443 published to 8080/8443 in the container, TLS mode `internal`, volume `www-c0de-data` |
+| `make image` | Builds the image `localhost/www-c0de:dev` with `docker build -f Containerfile` |
+| `make run`, `make stop` | Runs the image with `docker run`, ports 80/443 published to 8080/8443 in the container, TLS mode `internal`, volume `www-c0de-data` |
 | `make e2e` | Runs the Playwright tests against `https://localhost` (Caddy's local CA is trusted by the tests) |
 | `make test lint` | All unit tests and checks, as in CI |
 
@@ -111,7 +111,7 @@ A container that isn't needed for a test is stopped afterwards; the VM's memory 
 | `e2e.yml` | every push and pull request | Builds the image, runs it with TLS mode `internal`, runs Playwright (Chromium and Firefox) with axe-core and, from sprint 4 on, Lighthouse CI. |
 | `release.yml` | tag `v*` | Builds and tests everything, creates the GitHub release with the `linux/amd64` binary and its SHA-256 checksum, pushes the image to `ghcr.io/joernott/www-c0de` with the tags of the version and `latest` (with the `GITHUB_TOKEN`, permission `packages: write`). |
 
-The runners build the image with Docker; the VM and the web server run it with Podman. Both use the same `Containerfile`, and the image is a standard OCI image.
+The runners and the VM build and run the image with Docker; the web server runs it with Podman. Both use the same `Containerfile`, and the image is a standard OCI image.
 
 Renovate (`renovate.json`) needs the Renovate GitHub App on the repository. It updates npm packages, Go modules, the base images of the `Containerfile`, the GitHub Actions, Node.js (`.nvmrc`) and Go (`go.mod`), and, from sprint 3 on, the tags of the documentation sources in `sources.yaml`. TypeScript is held below 6.1 until typescript-eslint supports 7.0.
 

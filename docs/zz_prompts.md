@@ -48,3 +48,9 @@ You can use the Windows workstation and the development VM 192.168.178.101 that 
 ## 2026-11-10 – Sprint 1
 
 yes, please proceed
+
+## 2026-11-10 – Docker on the VM, sprint 2
+
+Please use docker on the VM instead of Podman, I'll handle the server to accomodate podman later.
+
+You can continue with sprint-2 then

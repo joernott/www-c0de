@@ -3,7 +3,7 @@
 
 VERSION ?= $(shell git describe --tags --always --dirty 2>/dev/null || echo dev)
 IMAGE ?= localhost/www-c0de:dev
-CONTAINER ?= sudo podman
+CONTAINER ?= docker
 NAME ?= www-c0de
 
 # Node.js 26 on the development VM, beside the Node.js of the other projects (ignored where
@@ -27,10 +27,8 @@ binary: site
 	@go version -m dist/c0de-www | grep -q 'CGO_ENABLED=0' || { echo "dist/c0de-www is not static"; exit 1; }
 	@echo "dist/c0de-www $(VERSION) (static)"
 
-# The build uses the network of the host: on the development VM, Docker's FORWARD policy
-# blocks Podman's bridge, so npm and Go couldn't download anything.
 image:
-	$(CONTAINER) build --network host -f Containerfile --build-arg VERSION=$(VERSION) -t $(IMAGE) .
+	$(CONTAINER) build -f Containerfile --build-arg VERSION=$(VERSION) -t $(IMAGE) .
 
 # Runs the image like on the web server, with certificates from Caddy's local CA.
 run:
@@ -41,7 +39,7 @@ run:
 		$(IMAGE)
 
 stop:
-	$(CONTAINER) stop --ignore $(NAME)
+	-$(CONTAINER) stop $(NAME)
 
 test: site/node_modules
 	go test ./...

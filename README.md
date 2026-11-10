@@ -25,7 +25,7 @@ The binary contains the site that was built last. On Linux, `make` does the same
 |---|---|
 | `make lint test` | Whitespace, gofmt, go vet, ESLint, Prettier, vue-tsc, Go tests and Vitest |
 | `make binary` | Builds the site and the static binary `dist/c0de-www` |
-| `make image` | Builds the image with Podman (`CONTAINER=docker make image` for Docker) |
+| `make image` | Builds the image with Docker (`CONTAINER=podman make image` for Podman) |
 | `make run`, `make stop` | Runs the image on ports 80/443 with certificates from Caddy's local CA |
 | `make e2e` | Runs the Playwright tests against `https://localhost` |
 

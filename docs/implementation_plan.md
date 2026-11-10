@@ -68,6 +68,7 @@ A task is done when
 | 1.5 | `Containerfile` (stages Node.js → Go → `scratch` with CA certificates, unprivileged user listening on 8080/8443, which are published as 80/443 and 443/udp, volume `/data`) and `make run` for the VM with TLS mode `internal`. The image is built and run with Podman and Docker. | ✅ |
 | 1.6 | GitHub Actions workflow `build.yml`: whitespace check, lint, Vitest, Go tests (Linux and Windows), site, binary and image (not pushed). Renovate for npm, Go modules, container images and GitHub Actions. | ✅ |
 | 1.7 | Development VM: `contrib/setup_dev_vm.sh` installs Node.js 26 into `/opt/node-v26` (`contrib/vm-env.sh`), Podman and the Playwright browsers, without changing the Go and Node.js of doenerstag (Go 1.27.3 comes through the `toolchain` line of `go.mod`); clone in `~/src/www-c0de` with `receive.denyCurrentBranch = updateInstead`. Run it on the VM. | ✅ |
+| 1.7.1 | Use Docker instead of Podman on the VM (decision of 2026-11-10): `make image`, `make run` and the setup script use Docker; the web server keeps Podman. | ✅ |
 | 1.8 | Playwright setup with a first end-to-end test against the container on the VM (page loads over HTTPS, HTTP redirects to HTTPS); workflow `e2e.yml` runs it in CI. | ✅ |
 
 ## Sprint 2: The ring binder
@@ -128,7 +129,7 @@ A task is done when
 | 5.3 | ACME test on the VM: Pebble (the test server of Let's Encrypt) in `compose.yaml`; the container gets a certificate from it, keeps it in `/data` across restarts and renews it. |  |
 | 5.4 | Hardening of the container: the process runs unprivileged and listens on high ports, which Podman publishes as 80/tcp, 443/tcp and 443/udp; read-only root file system, health check, memory limit. |  |
 | 5.5 | Release workflow `release.yml`: on a tag `v*`, the `linux/amd64` binary with checksum becomes a GitHub release, the image is pushed to `ghcr.io/joernott/www-c0de` with the tags of the version and `latest`. |  |
-| 5.6 | Systemd unit `contrib/systemd/container-c0de.service`: pulls `ghcr.io/joernott/www-c0de:latest` with Podman, then runs the container with the volume `/data` and publishes the ports on a configurable IP address. Tested with Podman on the development VM before it goes to the web server. |  |
+| 5.6 | Systemd unit `contrib/systemd/container-c0de.service`: pulls `ghcr.io/joernott/www-c0de:latest` with Podman, then runs the container with the volume `/data` and publishes the ports on a configurable IP address. The container settings are tested with Docker on the development VM; the operator adapts the web server to Podman. |  |
 | 5.7 | Web server: dedicated IPv4 address for c0de.at, unit installed as `container-c0de`, firewall for 80/tcp, 443/tcp and 443/udp on that address, A records for `c0de.at` and `www.c0de.at` (no AAAA). |  |
 | 5.8 | Release 0.1.0: tag, restart `container-c0de`, check the certificate, the redirects and the headers from outside (SSL Labs, securityheaders.com) and the pages in the browser. |  |
 | 5.9 | Documentation: README, development environment, `docs/operations.md` (deploying by restarting the service, going back to an earlier version, updating the documentation after a mod release, backing up `/data`, moving the site to another host). |  |
@@ -171,6 +172,7 @@ Answers to the open questions of the [concept review](concept_review.md) (task 0
 | Q5 Hosting | The operator's own Linux web server, amd64 only. The systemd service `container-c0de` runs the container with Podman and pulls the latest image before starting it; restarting it deploys a new version. The site must be able to move to another Linux container or VM (2026-11-10). |
 | Q5.1 Ports | c0de.at gets a dedicated IP address on the server, on which ports 80 and 443 are free (2026-11-10). |
 | Q5.1a Podman | Podman runs as root on the server, not rootless (2026-11-10). |
+| Containers on the VM | Docker, not Podman; the operator handles Podman on the web server (2026-11-10). |
 | Q5.2 DNS | The operator runs the DNS server; IPv4 only for now (2026-11-10). |
 | Q6 License | BSD 3-Clause, like the mods ([LICENSE](../LICENSE)) (2026-11-10). |
 | Q7 Legal notice and logs | Operator Jörn Ott, legal notice data from www.ott-consult.de. Access logs are kept (2026-11-10). |

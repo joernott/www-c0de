@@ -2,7 +2,7 @@
 # Provisions the development VM for www-c0de, without changing the tools of the other
 # projects on it (doenerstag keeps Go in /usr/local/go and Node.js in /usr/bin):
 #
-#   - Podman from Debian, run as root like on the web server,
+#   - nothing for containers: Docker is already there (the user is in the group docker),
 #   - Node.js 26 in /opt/node-v26 (see contrib/vm-env.sh),
 #   - the clone ~/src/www-c0de, to which the workstation pushes the branch it tests.
 #
@@ -17,12 +17,8 @@ NODE_DIR=/opt/node-v26
 REPO_DIR="$HOME/src/www-c0de"
 REPO_URL=https://github.com/joernott/www-c0de.git
 
-echo "== Podman"
-if ! command -v podman >/dev/null; then
-    sudo apt-get update
-    sudo DEBIAN_FRONTEND=noninteractive apt-get install -y podman
-fi
-podman --version
+echo "== Docker"
+docker version --format 'Docker {{.Server.Version}}'
 
 echo "== Node.js $NODE_VERSION in $NODE_DIR"
 if [ "$("$NODE_DIR/bin/node" --version 2>/dev/null)" != "v$NODE_VERSION" ]; then
