@@ -5,6 +5,7 @@ The website [c0de.at](https://c0de.at) with the documentation and tutorials of t
 - [Concept](docs/concept.md) and its [review](docs/concept_review.md)
 - [Implementation plan](docs/implementation_plan.md)
 - [Development environment](docs/development_environment.md)
+- [Operations](docs/operations.md): running the site on the web server
 
 ## Building
 
@@ -27,7 +28,8 @@ The binary contains the site that was built last. On Linux, `make` does the same
 | `make binary` | Builds the site and the static binary `dist/c0de-www` |
 | `make image` | Builds the image with Docker (`CONTAINER=podman make image` for Podman) |
 | `make run`, `make stop` | Runs the image on ports 80/443 with certificates from Caddy's local CA |
-| `make e2e` | Runs the Playwright tests against `https://localhost` |
+| `make e2e` | Runs the Playwright tests and Lighthouse against `https://localhost` |
+| `make acme-test` | Gets certificates from Pebble, the test server of Let's Encrypt, with the image (Docker Compose) |
 
 ## Running
 
@@ -36,18 +38,20 @@ The binary is configured with environment variables:
 | Variable | Default | Meaning |
 |---|---|---|
 | `C0DE_DOMAIN` | `c0de.at` | The domain the site is served for |
-| `C0DE_DATA` | `/data` | Folder for the certificates and the ACME account |
+| `C0DE_DATA` | `/data` | Folder for the certificates, the ACME account and the access log |
 | `C0DE_TLS` | `acme` | `acme` (Let's Encrypt), `internal` (Caddy's local CA, for tests) or `off` (plain HTTP) |
 | `C0DE_HTTP_PORT` | `80` (`8080` in the image) | Port for HTTP |
 | `C0DE_HTTPS_PORT` | `443` (`8443` in the image) | Port for HTTPS and HTTP/3 |
 | `C0DE_BIND` | all addresses | IP address to listen on |
+| `C0DE_HEALTH_PORT` | `8081` | Port of the health check on 127.0.0.1 (`c0de-www health`) |
+| `C0DE_ACME_CA`, `C0DE_ACME_CA_ROOT` | Let's Encrypt | Another ACME server and its root certificate, for tests |
 
-`c0de-www caddyfile` prints the Caddyfile for the current settings, `c0de-www version` the version.
+`c0de-www caddyfile` prints the Caddyfile for the current settings, `c0de-www health` checks the running server, `c0de-www version` prints the version.
 
 The image runs as an unprivileged user on the ports 8080 and 8443; publish them as 80 and 443. From release 0.1.0 on, it is published on ghcr.io:
 
 ```sh
-podman run -d -p 80:8080 -p 443:8443 -p 443:8443/udp -v www-c0de-data:/data ghcr.io/joernott/www-c0de
+podman run -d --read-only -p 80:8080 -p 443:8443 -p 443:8443/udp -v www-c0de-data:/data ghcr.io/joernott/www-c0de
 ```
 
 ## License

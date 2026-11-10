@@ -1,0 +1,49 @@
+# The website c0de.at in a Podman container (run as root).
+#
+# Install: copy to /etc/systemd/system/container-c0de.service, set C0DE_ADDRESS to the IPv4
+# address of c0de.at, then: systemctl daemon-reload && systemctl enable --now container-c0de
+# Deploy a new version: systemctl restart container-c0de (it pulls the image first).
+# Run a certain version: set C0DE_IMAGE to ghcr.io/joernott/www-c0de:<version>.
+# See docs/operations.md.
+
+[Unit]
+Description=c0de.at (www-c0de in Podman)
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Environment=PODMAN_SYSTEMD_UNIT=%n
+Environment=C0DE_IMAGE=ghcr.io/joernott/www-c0de:latest
+Environment=C0DE_ADDRESS=192.0.2.1
+Restart=on-failure
+TimeoutStartSec=300
+TimeoutStopSec=70
+# A failed pull (e.g. ghcr.io is down) starts the image that is already there.
+ExecStartPre=-/usr/bin/podman pull --quiet ${C0DE_IMAGE}
+ExecStart=/usr/bin/podman run \
+    --cidfile=%t/%n.ctr-id \
+    --cgroups=no-conmon \
+    --sdnotify=conmon \
+    --replace \
+    --rm \
+    -d \
+    --name c0de \
+    --read-only \
+    --cap-drop ALL \
+    --security-opt no-new-privileges \
+    --memory 256m \
+    --health-cmd "/c0de-www health" \
+    --health-interval 30s \
+    --health-start-period 10s \
+    -p ${C0DE_ADDRESS}:80:8080/tcp \
+    -p ${C0DE_ADDRESS}:443:8443/tcp \
+    -p ${C0DE_ADDRESS}:443:8443/udp \
+    -v c0de-data:/data \
+    ${C0DE_IMAGE}
+ExecStop=/usr/bin/podman stop --ignore -t 10 --cidfile=%t/%n.ctr-id
+ExecStopPost=/usr/bin/podman rm -f --ignore -t 10 --cidfile=%t/%n.ctr-id
+Type=notify
+NotifyAccess=all
+
+[Install]
+WantedBy=multi-user.target

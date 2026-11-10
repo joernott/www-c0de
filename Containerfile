@@ -23,6 +23,13 @@ RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 \
     && mkdir -p /out/data
 
 FROM scratch
+ARG VERSION=dev
+LABEL org.opencontainers.image.title="www-c0de" \
+      org.opencontainers.image.description="The website c0de.at: the documentation of the Minecraft mod c0de, served by Caddy" \
+      org.opencontainers.image.source="https://github.com/joernott/www-c0de" \
+      org.opencontainers.image.url="https://c0de.at" \
+      org.opencontainers.image.licenses="BSD-3-Clause" \
+      org.opencontainers.image.version="${VERSION}"
 COPY --from=server /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
 COPY --from=server /out/c0de-www /c0de-www
 COPY --from=server --chown=65532:65532 /out/data /data

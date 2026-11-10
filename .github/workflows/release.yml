@@ -1,0 +1,70 @@
+name: Release
+
+# Pushing a tag vX.Y.Z publishes that version: the image on ghcr.io with the tags X.Y.Z and
+# latest, and a GitHub release with the static binary. Everything is tested first, the
+# image with the end-to-end tests and Lighthouse.
+on:
+  push:
+    tags: ['v*.*.*']
+
+permissions:
+  contents: write
+  packages: write
+
+env:
+  IMAGE: ghcr.io/joernott/www-c0de
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-go@v7
+        with:
+          go-version-file: go.mod
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: |
+            site/package-lock.json
+            e2e/package-lock.json
+      - name: Version
+        run: |
+          [[ "$GITHUB_REF_NAME" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]] || { echo "::error::$GITHUB_REF_NAME is not a version tag vX.Y.Z"; exit 1; }
+          echo "VERSION=${GITHUB_REF_NAME#v}" >>"$GITHUB_ENV"
+      - name: Lint and unit tests
+        run: make lint test
+      - name: Static binary
+        run: |
+          make binary VERSION="$GITHUB_REF_NAME"
+          cp dist/c0de-www "dist/c0de-www-$VERSION-linux-amd64"
+          (cd dist && sha256sum "c0de-www-$VERSION-linux-amd64" >"c0de-www-$VERSION-linux-amd64.sha256")
+      - name: Image
+        run: docker build -f Containerfile --build-arg VERSION="$GITHUB_REF_NAME" -t "$IMAGE:$VERSION" .
+      - name: End-to-end tests and Lighthouse
+        run: |
+          docker run -d --name www-c0de --read-only --cap-drop ALL --security-opt no-new-privileges \
+            -p 80:8080 -p 443:8443 -e C0DE_DOMAIN=localhost -e C0DE_TLS=internal "$IMAGE:$VERSION"
+          for _ in $(seq 30); do curl -fsk -o /dev/null https://localhost/ && break; sleep 1; done
+          cd e2e
+          npm ci
+          npx playwright install --with-deps chromium firefox
+          npm test
+          npm run lighthouse
+      - name: Publish the image
+        run: |
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+          docker tag "$IMAGE:$VERSION" "$IMAGE:latest"
+          docker push "$IMAGE:$VERSION"
+          docker push "$IMAGE:latest"
+      - name: GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" --title "www-c0de $VERSION" --generate-notes \
+            --notes "The website c0de.at $VERSION. Image: \`$IMAGE:$VERSION\` (also \`latest\`)." \
+            "dist/c0de-www-$VERSION-linux-amd64" "dist/c0de-www-$VERSION-linux-amd64.sha256"
