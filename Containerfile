@@ -35,5 +35,7 @@ ENV C0DE_DATA=/data \
     HOME=/data
 VOLUME /data
 EXPOSE 8080/tcp 8443/tcp 8443/udp
+# The binary checks the health check on 127.0.0.1:8081 (scratch has no curl).
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s CMD ["/c0de-www", "health"]
 ENTRYPOINT ["/c0de-www"]
 CMD ["run"]

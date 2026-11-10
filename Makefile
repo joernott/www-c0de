@@ -12,7 +12,7 @@ GO_PACKAGES := ./cmd/... ./internal/...
 # the folder doesn't exist).
 export PATH := /opt/node-v26/bin:$(PATH)
 
-.PHONY: all site binary image run stop test lint e2e clean
+.PHONY: all site binary image run stop test lint e2e acme-test clean
 
 all: lint test binary
 
@@ -57,6 +57,10 @@ lint: site/node_modules
 # of the browsers are installed by contrib/setup_dev_vm.sh.
 e2e:
 	cd e2e && npm ci && npx playwright install chromium firefox && npm test && npm run lighthouse
+
+# Gets certificates from Pebble, the test server of Let's Encrypt (after make image).
+acme-test:
+	IMAGE=$(IMAGE) contrib/pebble/test.sh
 
 clean:
 	rm -rf dist

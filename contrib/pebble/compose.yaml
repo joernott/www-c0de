@@ -1,0 +1,36 @@
+# The ACME test (make acme-test): the image gets its certificates from Pebble, the test
+# server of Let's Encrypt, exactly as it gets them from Let's Encrypt in production.
+# Pebble validates the domains on the ports inside the container (8080 and 8443).
+name: www-c0de-acme
+
+services:
+  pebble:
+    image: ghcr.io/letsencrypt/pebble:2.10.1
+    command: ["-config", "/config/pebble-config.json"]
+    environment:
+      PEBBLE_VA_NOSLEEP: "1"
+    volumes:
+      - ./pebble-config.json:/config/pebble-config.json:ro
+    ports:
+      - 127.0.0.1:15000:15000 # the management interface hands out the root of the certificates
+
+  site:
+    image: ${IMAGE:-localhost/www-c0de:dev}
+    read_only: true
+    environment:
+      C0DE_DOMAIN: c0de.test
+      C0DE_ACME_CA: https://pebble:14000/dir
+      C0DE_ACME_CA_ROOT: /pebble/pebble.minica.pem
+    volumes:
+      - data:/data
+      - ./pebble.minica.pem:/pebble/pebble.minica.pem:ro
+    networks:
+      default:
+        aliases: [c0de.test, www.c0de.test]
+    ports:
+      - 127.0.0.1:18080:8080
+      - 127.0.0.1:18443:8443
+    depends_on: [pebble]
+
+volumes:
+  data:
