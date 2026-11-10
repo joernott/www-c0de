@@ -21,6 +21,9 @@ export default defineConfigWithTheme<ThemeConfig>({
   lang: 'en',
   title: 'c0de',
   description: 'Documentation and tutorials of c0de, the programming language in Minecraft',
+  // Vite would inline small files (like font subsets) as data: URLs, which the
+  // Content-Security-Policy of the server blocks; every asset stays a file of the site.
+  vite: { build: { assetsInlineLimit: 0 } },
   // The Markdown files of the scripts (test fixtures of the import) are not pages.
   srcExclude: ['scripts/**'],
   cleanUrls: true,

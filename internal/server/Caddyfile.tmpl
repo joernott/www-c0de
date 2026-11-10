@@ -14,18 +14,77 @@
 {{- else if eq .TLS "off"}}
 	auto_https off
 {{- end}}
+{{- if .ACMECA}}
+	acme_ca {{.ACMECA}}
+{{- end}}
+{{- if .ACMECARoot}}
+	acme_ca_root {{.ACMECARoot}}
+{{- end}}
+}
+
+# The security headers of every answer, also of the not-found page (Caddy drops the headers
+# of the main route when it handles an error).
+(security) {
+	header {
+		Strict-Transport-Security "max-age=31536000"
+		Content-Security-Policy "{{.CSP}}"
+		X-Content-Type-Options nosniff
+		X-Frame-Options DENY
+		Referrer-Policy strict-origin-when-cross-origin
+		Cross-Origin-Opener-Policy same-origin
+		Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+		-Server
+	}
 }
 
 {{if eq .TLS "off"}}http://:{{.HTTPPort}}{{else}}{{.Domain}}{{end}} {
 	fs site
+	import security
+
+	# Files with a hash in their name never change; everything else is revalidated.
+	@assets path /assets/*
+	header @assets Cache-Control "public, max-age=31536000, immutable"
+	@other not path /assets/*
+	header @other Cache-Control "no-cache"
+
 	try_files {path} {path}.html {path}/index.html
-	file_server
+	file_server {
+		precompressed br zstd gzip
+	}
 
 	# The not-found page in the language of the requested URL, with the status 404.
 	handle_errors 404 {
+		import security
+		header Cache-Control "no-cache"
 		@german path /de /de/*
 		rewrite @german /de/not-found.html
 		rewrite * /not-found.html
-		file_server
+		file_server {
+			precompressed br zstd gzip
+		}
 	}
+
+	# The access log, as the privacy policy describes it: a new file every day, files older
+	# than three months are deleted.
+	log {
+		output file {{.DataDir}}/log/access.log {
+			roll_at 00:00
+			roll_keep 100
+			roll_keep_for 92d
+			roll_compression gzip
+		}
+		format json
+	}
+}
+{{- if ne .TLS "off"}}
+
+www.{{.Domain}} {
+	redir https://{{.Domain}}{uri} permanent
+}
+{{- end}}
+
+# The health check of the container (c0de-www health).
+http://127.0.0.1:{{.HealthPort}} {
+	respond /healthz "ok" 200
+	respond 404
 }

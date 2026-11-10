@@ -1,8 +1,12 @@
 package server
 
 import (
+	"bufio"
+	"crypto/sha256"
 	"crypto/tls"
 	"crypto/x509"
+	"encoding/base64"
+	"encoding/json"
 	"fmt"
 	"io"
 	"io/fs"
@@ -16,11 +20,15 @@ import (
 	"time"
 )
 
+const inlineScriptBody = `window.__VP_SITE_DATA__={"title":"c0de"}`
+
 // testSite replaces the embedded website, so the tests don't depend on a site build.
 var testSite = fstest.MapFS{
-	"index.html":           {Data: []byte("<h1>home</h1>")},
+	"index.html":           {Data: []byte("<h1>home</h1><script>" + inlineScriptBody + "</script><script type=\"module\" src=\"/assets/app.js\"></script>")},
+	"index.html.br":        {Data: []byte("brotli home")},
 	"c0de/guide.html":      {Data: []byte("<h1>guide</h1>")},
 	"c0de/math/index.html": {Data: []byte("<h1>math</h1>")},
+	"assets/app.1a2b.js":   {Data: []byte("console.log('app')")},
 	"not-found.html":       {Data: []byte("<h1>not found</h1>")},
 	"de/not-found.html":    {Data: []byte("<h1>nicht gefunden</h1>")},
 }
@@ -35,7 +43,7 @@ func TestConfigDefaults(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	want := Config{Domain: "c0de.at", DataDir: "/data", TLS: TLSACME, HTTPPort: 80, HTTPSPort: 443}
+	want := Config{Domain: "c0de.at", DataDir: "/data", TLS: TLSACME, HTTPPort: 80, HTTPSPort: 443, HealthPort: 8081}
 	if c != want {
 		t.Errorf("got %+v, want %+v", c, want)
 	}
@@ -43,14 +51,17 @@ func TestConfigDefaults(t *testing.T) {
 
 func TestConfigErrors(t *testing.T) {
 	for name, env := range map[string]map[string]string{
-		"domain with a brace":  {"C0DE_DOMAIN": "c0de.at {"},
-		"domain in capitals":   {"C0DE_DOMAIN": "C0DE.AT"},
-		"unknown TLS mode":     {"C0DE_TLS": "self-signed"},
-		"port not a number":    {"C0DE_HTTP_PORT": "http"},
-		"port out of range":    {"C0DE_HTTPS_PORT": "70000"},
-		"same ports":           {"C0DE_HTTP_PORT": "8080", "C0DE_HTTPS_PORT": "8080"},
-		"data dir with spaces": {"C0DE_DATA": "/my data"},
-		"bind not an address":  {"C0DE_BIND": "localhost"},
+		"domain with a brace":    {"C0DE_DOMAIN": "c0de.at {"},
+		"domain in capitals":     {"C0DE_DOMAIN": "C0DE.AT"},
+		"unknown TLS mode":       {"C0DE_TLS": "self-signed"},
+		"port not a number":      {"C0DE_HTTP_PORT": "http"},
+		"port out of range":      {"C0DE_HTTPS_PORT": "70000"},
+		"same ports":             {"C0DE_HTTP_PORT": "8080", "C0DE_HTTPS_PORT": "8080"},
+		"health on the web port": {"C0DE_HEALTH_PORT": "80"},
+		"data dir with spaces":   {"C0DE_DATA": "/my data"},
+		"bind not an address":    {"C0DE_BIND": "localhost"},
+		"ACME server over http":  {"C0DE_ACME_CA": "http://pebble:14000/dir"},
+		"ACME root with a brace": {"C0DE_ACME_CA_ROOT": "/certs/{root}.pem"},
 	} {
 		t.Run(name, func(t *testing.T) {
 			if _, err := ConfigFromEnv(func(k string) string { return env[k] }); err == nil {
@@ -61,9 +72,9 @@ func TestConfigErrors(t *testing.T) {
 }
 
 func TestCaddyfileTLSModes(t *testing.T) {
-	base := Config{Domain: "c0de.at", DataDir: "/data", HTTPPort: 80, HTTPSPort: 443}
+	base := Config{Domain: "c0de.at", DataDir: "/data", HTTPPort: 80, HTTPSPort: 443, HealthPort: 8081}
 	for mode, want := range map[string][]string{
-		TLSACME:     {"\nc0de.at {"},
+		TLSACME:     {"\nc0de.at {", "\nwww.c0de.at {"},
 		TLSInternal: {"local_certs", "skip_install_trust", "\nc0de.at {"},
 		TLSOff:      {"auto_https off", "\nhttp://:80 {"},
 	} {
@@ -81,6 +92,39 @@ func TestCaddyfileTLSModes(t *testing.T) {
 		if mode == TLSACME && strings.Contains(string(file), "local_certs") {
 			t.Errorf("acme: the Caddyfile uses the local CA:\n%s", file)
 		}
+		if mode == TLSOff && strings.Contains(string(file), "www.") {
+			t.Errorf("off: the Caddyfile redirects www:\n%s", file)
+		}
+	}
+}
+
+func TestCaddyfileACMEServer(t *testing.T) {
+	c := Config{Domain: "c0de.test", DataDir: "/data", TLS: TLSACME, HTTPPort: 80, HTTPSPort: 443, HealthPort: 8081,
+		ACMECA: "https://pebble:14000/dir", ACMECARoot: "/pebble/root.pem"}
+	file, err := Caddyfile(c)
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, w := range []string{"acme_ca https://pebble:14000/dir", "acme_ca_root /pebble/root.pem"} {
+		if !strings.Contains(string(file), w) {
+			t.Errorf("the Caddyfile doesn't contain %q", w)
+		}
+	}
+}
+
+func TestContentSecurityPolicy(t *testing.T) {
+	csp, err := contentSecurityPolicy(testSite)
+	if err != nil {
+		t.Fatal(err)
+	}
+	sum := sha256.Sum256([]byte(inlineScriptBody))
+	hash := "'sha256-" + base64.StdEncoding.EncodeToString(sum[:]) + "'"
+	if !strings.Contains(csp, "script-src 'self' "+hash+";") {
+		t.Errorf("the policy doesn't allow the inline script %s: %s", hash, csp)
+	}
+	scripts := strings.Split(strings.Split(csp, "script-src")[1], ";")[0]
+	if strings.Contains(scripts, "unsafe") {
+		t.Errorf("the policy allows unsafe scripts: %s", csp)
 	}
 }
 
@@ -97,6 +141,18 @@ func start(t *testing.T, c Config) {
 	})
 }
 
+// dataDir returns a folder for the data of the server. On Windows, Caddy may still hold
+// the access log open when the test ends, so the folder is removed as far as possible.
+func dataDir(t *testing.T) string {
+	t.Helper()
+	dir, err := os.MkdirTemp("", "c0de-www-test-")
+	if err != nil {
+		t.Fatal(err)
+	}
+	t.Cleanup(func() { _ = os.RemoveAll(dir) })
+	return dir
+}
+
 func freePorts(t *testing.T, n int) []int {
 	t.Helper()
 	var ports []int
@@ -111,9 +167,22 @@ func freePorts(t *testing.T, n int) []int {
 	return ports
 }
 
-func get(t *testing.T, client *http.Client, url string) (int, string) {
+func testConfig(t *testing.T, mode string) Config {
+	ports := freePorts(t, 3)
+	return Config{Domain: "localhost", DataDir: dataDir(t), TLS: mode, HTTPPort: ports[0], HTTPSPort: ports[1],
+		HealthPort: ports[2], Bind: "127.0.0.1"}
+}
+
+func get(t *testing.T, client *http.Client, url string, header ...string) (*http.Response, string) {
 	t.Helper()
-	resp, err := client.Get(url)
+	req, err := http.NewRequest(http.MethodGet, url, nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	for i := 0; i+1 < len(header); i += 2 {
+		req.Header.Set(header[i], header[i+1])
+	}
+	resp, err := client.Do(req)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -122,13 +191,16 @@ func get(t *testing.T, client *http.Client, url string) (int, string) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	return resp.StatusCode, string(body)
+	return resp, string(body)
 }
 
+// The transport doesn't decompress, so the tests see what the server sends.
+var plainClient = &http.Client{Transport: &http.Transport{DisableCompression: true}}
+
 func TestServeHTTP(t *testing.T) {
-	ports := freePorts(t, 2)
-	start(t, Config{Domain: "localhost", DataDir: t.TempDir(), TLS: TLSOff, HTTPPort: ports[0], HTTPSPort: ports[1], Bind: "127.0.0.1"})
-	base := fmt.Sprintf("http://127.0.0.1:%d", ports[0])
+	c := testConfig(t, TLSOff)
+	start(t, c)
+	base := fmt.Sprintf("http://127.0.0.1:%d", c.HTTPPort)
 	for _, tc := range []struct {
 		path   string
 		status int
@@ -142,20 +214,131 @@ func TestServeHTTP(t *testing.T) {
 		{"/de/missing", http.StatusNotFound, "nicht gefunden"},
 		{"/design", http.StatusNotFound, "not found"},
 	} {
-		status, body := get(t, http.DefaultClient, base+tc.path)
-		if status != tc.status || !strings.Contains(body, tc.body) {
-			t.Errorf("%s: got %d %q, want %d with %q", tc.path, status, body, tc.status, tc.body)
+		resp, body := get(t, plainClient, base+tc.path)
+		if resp.StatusCode != tc.status || !strings.Contains(body, tc.body) {
+			t.Errorf("%s: got %d %q, want %d with %q", tc.path, resp.StatusCode, body, tc.status, tc.body)
+		}
+	}
+}
+
+func TestHeaders(t *testing.T) {
+	c := testConfig(t, TLSOff)
+	start(t, c)
+	base := fmt.Sprintf("http://127.0.0.1:%d", c.HTTPPort)
+
+	page, _ := get(t, plainClient, base+"/c0de/guide")
+	for header, want := range map[string]string{
+		"Strict-Transport-Security":  "max-age=31536000",
+		"X-Content-Type-Options":     "nosniff",
+		"X-Frame-Options":            "DENY",
+		"Referrer-Policy":            "strict-origin-when-cross-origin",
+		"Cross-Origin-Opener-Policy": "same-origin",
+		"Cache-Control":              "no-cache",
+		"Server":                     "",
+	} {
+		if got := page.Header.Get(header); got != want {
+			t.Errorf("%s: got %q, want %q", header, got, want)
+		}
+	}
+	if csp := page.Header.Get("Content-Security-Policy"); !strings.Contains(csp, "default-src 'self'") {
+		t.Errorf("Content-Security-Policy: %q", csp)
+	}
+
+	asset, _ := get(t, plainClient, base+"/assets/app.1a2b.js")
+	if got := asset.Header.Get("Cache-Control"); got != "public, max-age=31536000, immutable" {
+		t.Errorf("Cache-Control of an asset: %q", got)
+	}
+
+	missing, _ := get(t, plainClient, base+"/missing")
+	if missing.Header.Get("Content-Security-Policy") == "" {
+		t.Error("the not-found page has no Content-Security-Policy")
+	}
+}
+
+func TestRevalidation(t *testing.T) {
+	c := testConfig(t, TLSOff)
+	start(t, c)
+	url := fmt.Sprintf("http://127.0.0.1:%d/c0de/guide", c.HTTPPort)
+	first, _ := get(t, plainClient, url)
+	etag := first.Header.Get("ETag")
+	if etag == "" {
+		t.Fatal("no ETag")
+	}
+	second, _ := get(t, plainClient, url, "If-None-Match", etag)
+	if second.StatusCode != http.StatusNotModified {
+		t.Errorf("revalidation: got %d, want 304", second.StatusCode)
+	}
+}
+
+func TestPrecompressed(t *testing.T) {
+	c := testConfig(t, TLSOff)
+	start(t, c)
+	resp, body := get(t, plainClient, fmt.Sprintf("http://127.0.0.1:%d/", c.HTTPPort), "Accept-Encoding", "br, gzip")
+	if resp.Header.Get("Content-Encoding") != "br" || body != "brotli home" {
+		t.Errorf("got %q encoded as %q", body, resp.Header.Get("Content-Encoding"))
+	}
+}
+
+func TestHealth(t *testing.T) {
+	c := testConfig(t, TLSOff)
+	if err := Health(c); err == nil {
+		t.Error("healthy without a server")
+	}
+	start(t, c)
+	if err := Health(c); err != nil {
+		t.Error(err)
+	}
+}
+
+func TestAccessLog(t *testing.T) {
+	c := testConfig(t, TLSOff)
+	start(t, c)
+	get(t, plainClient, fmt.Sprintf("http://127.0.0.1:%d/c0de/guide", c.HTTPPort),
+		"Cookie", "secret=1", "User-Agent", "test-browser", "Referer", "https://example.com/")
+
+	// The log is written asynchronously.
+	var entry map[string]any
+	for deadline := time.Now().Add(5 * time.Second); entry == nil; time.Sleep(100 * time.Millisecond) {
+		if time.Now().After(deadline) {
+			t.Fatal("no access log entry")
+		}
+		f, err := os.Open(filepath.Join(c.DataDir, "log", "access.log"))
+		if err != nil {
+			continue
+		}
+		scanner := bufio.NewScanner(f)
+		for scanner.Scan() {
+			var e map[string]any
+			if json.Unmarshal(scanner.Bytes(), &e) == nil && e["request"] != nil {
+				entry = e
+			}
+		}
+		f.Close()
+	}
+	request := entry["request"].(map[string]any)
+	headers := request["headers"].(map[string]any)
+	if request["remote_ip"] != "127.0.0.1" || request["remote_port"] == "" || request["uri"] != "/c0de/guide" {
+		t.Errorf("request: %v", request)
+	}
+	if fmt.Sprint(headers["User-Agent"]) != "[test-browser]" || fmt.Sprint(headers["Referer"]) != "[https://example.com/]" {
+		t.Errorf("headers: %v", headers)
+	}
+	if fmt.Sprint(headers["Cookie"]) != "[REDACTED]" {
+		t.Errorf("the cookie is logged: %v", headers["Cookie"])
+	}
+	for _, field := range []string{"ts", "status", "size", "duration"} {
+		if _, ok := entry[field]; !ok {
+			t.Errorf("the entry has no %s: %v", field, entry)
 		}
 	}
 }
 
 func TestServeHTTPSWithInternalCA(t *testing.T) {
-	ports := freePorts(t, 2)
-	data := t.TempDir()
-	start(t, Config{Domain: "localhost", DataDir: data, TLS: TLSInternal, HTTPPort: ports[0], HTTPSPort: ports[1], Bind: "127.0.0.1"})
+	c := testConfig(t, TLSInternal)
+	start(t, c)
 
 	// The root certificate of the local CA is created when the server starts.
-	root, err := os.ReadFile(filepath.Join(data, "caddy", "pki", "authorities", "local", "root.crt"))
+	root, err := os.ReadFile(filepath.Join(c.DataDir, "caddy", "pki", "authorities", "local", "root.crt"))
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -172,7 +355,7 @@ func TestServeHTTPSWithInternalCA(t *testing.T) {
 	}
 
 	// Caddy creates the certificate in the background after starting.
-	url := fmt.Sprintf("https://localhost:%d/", ports[1])
+	url := fmt.Sprintf("https://localhost:%d/", c.HTTPSPort)
 	for deadline := time.Now().Add(10 * time.Second); ; time.Sleep(100 * time.Millisecond) {
 		resp, err := client.Get(url)
 		if err == nil {
@@ -183,20 +366,16 @@ func TestServeHTTPSWithInternalCA(t *testing.T) {
 			t.Fatal(err)
 		}
 	}
-	status, body := get(t, client, url)
-	if status != http.StatusOK || !strings.Contains(body, "home") {
-		t.Errorf("HTTPS: got %d %q", status, body)
+	resp, body := get(t, client, url)
+	if resp.StatusCode != http.StatusOK || !strings.Contains(body, "home") {
+		t.Errorf("HTTPS: got %d %q", resp.StatusCode, body)
 	}
 
-	resp, err := client.Get(fmt.Sprintf("http://localhost:%d/c0de/guide", ports[0]))
-	if err != nil {
-		t.Fatal(err)
-	}
-	resp.Body.Close()
 	// Caddy treats its HTTPS port as internal (the container maps 443 to it), so the
 	// redirect leads to the standard port.
-	want := "https://localhost/c0de/guide"
-	if resp.StatusCode != http.StatusPermanentRedirect || resp.Header.Get("Location") != want {
-		t.Errorf("HTTP: got %d to %q, want a redirect to %q", resp.StatusCode, resp.Header.Get("Location"), want)
+	from := fmt.Sprintf("http://localhost:%d/c0de/guide", c.HTTPPort)
+	redirect, _ := get(t, client, from)
+	if redirect.StatusCode != http.StatusPermanentRedirect || redirect.Header.Get("Location") != "https://localhost/c0de/guide" {
+		t.Errorf("%s: got %d to %q", from, redirect.StatusCode, redirect.Header.Get("Location"))
 	}
 }

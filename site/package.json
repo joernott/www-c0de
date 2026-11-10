@@ -10,7 +10,7 @@
   "scripts": {
     "content": "node scripts/import/main.ts",
     "dev": "npm run content && vitepress dev",
-    "build": "npm run content && vitepress build && node scripts/keep-dist.mjs && npm run check-links",
+    "build": "npm run content && vitepress build && node scripts/keep-dist.mjs && npm run check-links && node scripts/compress.ts",
     "preview": "vitepress preview",
     "test": "vitest run",
     "lint": "eslint . && prettier --check .",

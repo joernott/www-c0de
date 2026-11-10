@@ -3,6 +3,7 @@ package server
 import (
 	"fmt"
 	"net/netip"
+	"net/url"
 	"regexp"
 	"strconv"
 )
@@ -20,9 +21,11 @@ const (
 // Config holds the settings of the server. They are read from environment variables, so
 // that nothing in the image depends on the host it runs on.
 type Config struct {
-	// Domain is the domain the site is served for (C0DE_DOMAIN, default c0de.at).
+	// Domain is the domain the site is served for (C0DE_DOMAIN, default c0de.at). In the
+	// TLS modes acme and internal, www.<domain> redirects to it.
 	Domain string
-	// DataDir keeps the certificates and the ACME account (C0DE_DATA, default /data).
+	// DataDir keeps the certificates, the ACME account and the access log (C0DE_DATA,
+	// default /data).
 	DataDir string
 	// TLS is one of TLSACME, TLSInternal or TLSOff (C0DE_TLS, default acme).
 	TLS string
@@ -30,26 +33,43 @@ type Config struct {
 	HTTPPort int
 	// HTTPSPort is the port for HTTPS and HTTP/3 (C0DE_HTTPS_PORT, default 443).
 	HTTPSPort int
+	// HealthPort is the port of the health check on 127.0.0.1 (C0DE_HEALTH_PORT, default
+	// 8081).
+	HealthPort int
 	// Bind is the IP address to listen on (C0DE_BIND, default all addresses).
 	Bind string
+	// ACMECA is the directory URL of another ACME server than Let's Encrypt, e.g. Pebble
+	// for tests (C0DE_ACME_CA).
+	ACMECA string
+	// ACMECARoot is the root certificate (PEM file) of that ACME server (C0DE_ACME_CA_ROOT).
+	ACMECARoot string
 }
 
-var domainPattern = regexp.MustCompile(`^[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$`)
+var (
+	domainPattern = regexp.MustCompile(`^[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$`)
+	// Characters that a path can't contain in the Caddyfile.
+	unsafePath = regexp.MustCompile(`[\s{}"#]`)
+)
 
 // ConfigFromEnv reads the configuration with the function getenv (usually os.Getenv) and
 // checks it.
 func ConfigFromEnv(getenv func(string) string) (Config, error) {
 	c := Config{
-		Domain:  valueOr(getenv("C0DE_DOMAIN"), "c0de.at"),
-		DataDir: valueOr(getenv("C0DE_DATA"), "/data"),
-		TLS:     valueOr(getenv("C0DE_TLS"), TLSACME),
-		Bind:    getenv("C0DE_BIND"),
+		Domain:     valueOr(getenv("C0DE_DOMAIN"), "c0de.at"),
+		DataDir:    valueOr(getenv("C0DE_DATA"), "/data"),
+		TLS:        valueOr(getenv("C0DE_TLS"), TLSACME),
+		Bind:       getenv("C0DE_BIND"),
+		ACMECA:     getenv("C0DE_ACME_CA"),
+		ACMECARoot: getenv("C0DE_ACME_CA_ROOT"),
 	}
 	var err error
 	if c.HTTPPort, err = port("C0DE_HTTP_PORT", valueOr(getenv("C0DE_HTTP_PORT"), "80")); err != nil {
 		return c, err
 	}
 	if c.HTTPSPort, err = port("C0DE_HTTPS_PORT", valueOr(getenv("C0DE_HTTPS_PORT"), "443")); err != nil {
+		return c, err
+	}
+	if c.HealthPort, err = port("C0DE_HEALTH_PORT", valueOr(getenv("C0DE_HEALTH_PORT"), "8081")); err != nil {
 		return c, err
 	}
 	return c, c.Validate()
@@ -66,7 +86,7 @@ func (c Config) Validate() error {
 	default:
 		return fmt.Errorf("C0DE_TLS: %q is not one of %s, %s or %s", c.TLS, TLSACME, TLSInternal, TLSOff)
 	}
-	if c.DataDir == "" || regexp.MustCompile(`[\s{}"#]`).MatchString(c.DataDir) {
+	if c.DataDir == "" || unsafePath.MatchString(c.DataDir) {
 		return fmt.Errorf("C0DE_DATA: %q is not a usable folder name", c.DataDir)
 	}
 	if c.Bind != "" {
@@ -74,8 +94,16 @@ func (c Config) Validate() error {
 			return fmt.Errorf("C0DE_BIND: %q is not an IP address", c.Bind)
 		}
 	}
-	if c.HTTPPort == c.HTTPSPort {
-		return fmt.Errorf("C0DE_HTTP_PORT and C0DE_HTTPS_PORT are both %d", c.HTTPPort)
+	if c.HTTPPort == c.HTTPSPort || c.HealthPort == c.HTTPPort || c.HealthPort == c.HTTPSPort {
+		return fmt.Errorf("C0DE_HTTP_PORT, C0DE_HTTPS_PORT and C0DE_HEALTH_PORT must differ")
+	}
+	if c.ACMECA != "" {
+		if u, err := url.Parse(c.ACMECA); err != nil || u.Scheme != "https" || u.Host == "" || unsafePath.MatchString(c.ACMECA) {
+			return fmt.Errorf("C0DE_ACME_CA: %q is not an https URL", c.ACMECA)
+		}
+	}
+	if unsafePath.MatchString(c.ACMECARoot) {
+		return fmt.Errorf("C0DE_ACME_CA_ROOT: %q is not a usable file name", c.ACMECARoot)
 	}
 	return nil
 }

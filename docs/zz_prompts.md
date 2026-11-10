@@ -64,3 +64,8 @@ please continue with sprint 3
 please continue with sprint 4
 
 Answers to the questions about the legal notice: the operator is Jörn Ott personally (Hauptstr. 2, 53604 Bad Honnef); contact: phone +49 2224 9408-73, e-mail c0de@c0de.at; no tax or VAT numbers.
+
+## 2026-11-10 – Sprint 5
+
+The legal documents are fine. I am hosting the servers myself. The email address is already working, I've tested it.
+Please start with sprint 5
