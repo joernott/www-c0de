@@ -77,3 +77,7 @@ please go ahead with step 1
 ## 2026-11-10 – Package visibility
 
 the package already has already been set as public
+
+## 2026-11-10 – Data folder on the server
+
+I will use a slightly different way of deployment on the backend server to better fit my needs. A part of this is that I am using the local folder /data/c0de/data to store the data. What UID/GID should own that folder?
