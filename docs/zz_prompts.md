@@ -73,3 +73,7 @@ Please start with sprint 5
 ## 2026-11-10 – Release 0.1.0
 
 please go ahead with step 1
+
+## 2026-11-10 – Package visibility
+
+the package already has already been set as public
