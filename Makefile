@@ -32,9 +32,11 @@ binary: site
 image:
 	$(CONTAINER) build -f Containerfile --build-arg VERSION=$(VERSION) -t $(IMAGE) .
 
-# Runs the image like on the web server, with certificates from Caddy's local CA.
+# Runs the image like on the web server, with certificates from Caddy's local CA: read-only,
+# without capabilities and with a memory limit.
 run:
 	$(CONTAINER) run -d --rm --name $(NAME) \
+		--read-only --cap-drop ALL --security-opt no-new-privileges --memory 256m \
 		-p 80:8080 -p 443:8443 -p 443:8443/udp \
 		-v $(NAME)-data:/data \
 		-e C0DE_DOMAIN=localhost -e C0DE_TLS=internal \

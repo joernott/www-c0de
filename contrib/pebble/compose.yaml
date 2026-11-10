@@ -17,6 +17,9 @@ services:
   site:
     image: ${IMAGE:-localhost/www-c0de:dev}
     read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges]
+    mem_limit: 256m
     environment:
       C0DE_DOMAIN: c0de.test
       C0DE_ACME_CA: https://pebble:14000/dir
