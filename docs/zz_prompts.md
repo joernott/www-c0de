@@ -85,3 +85,7 @@ I will use a slightly different way of deployment on the backend server to bette
 ## 2026-11-10 – HTTP only behind a reverse proxy
 
 As I need to run the web server behind an existing reverse proxy that does the ssl offloading, I need a way to serve http, ideally with a commandline flag --httponly.
+
+## 2026-11-10 – Release 0.2.0
+
+yes, please go ahead
