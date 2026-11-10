@@ -71,7 +71,9 @@ The VM is shared with doenerstag, c0de and c0de net. SSH: `ssh -i ~/.ssh/id_ed25
   - **Go**: the VM has Go 1.26.10 in `/usr/local/go`, pinned by the setup script of doenerstag. It stays. The `toolchain go1.27.3` line in `go.mod` makes the Go command download and use 1.27.3 for this repository (`GOTOOLCHAIN=auto`, the default).
   - **Node.js**: the VM has Node.js 22 in `/usr/bin/node`, also used by doenerstag. Node.js 26 is installed into `/opt/node-v26` from the official tarball. `contrib/vm-env.sh` puts it first in `PATH`; the scripts of this repository source it.
   - **Podman** 5.4 from Debian, beside Docker. It runs as root (`sudo podman`), like on the web server.
-  - **Playwright browsers** (Chromium and Firefox) and their system libraries: `npx playwright install --with-deps chromium firefox` in `e2e/`.
+  - **The system libraries of the Playwright browsers** (Chromium and Firefox); `make e2e` installs the browsers themselves.
+
+**Podman beside Docker**: Docker sets the policy of the FORWARD chain to DROP, which also drops the traffic of Podman's bridge `podman0`. Containers on the bridge can't reach the internet, and published ports only answer on the VM itself (traffic from `localhost` doesn't pass the FORWARD chain). So `make image` builds with the network of the host, and the end-to-end tests run on the VM against `https://localhost`. The firewall is not changed. If Pebble (sprint 5) or a test from the workstation needs the bridge, an exception in Docker's chain `DOCKER-USER` would be needed; that is decided then.
 
 ### Repository on the VM
 

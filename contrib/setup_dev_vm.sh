@@ -7,7 +7,7 @@
 #   - the clone ~/src/www-c0de, to which the workstation pushes the branch it tests.
 #
 # Go 1.27 needs no installation: the toolchain line of go.mod makes the installed Go
-# download it. The Playwright browsers are installed by "make e2e" (e2e/).
+# download it. The Playwright browsers themselves are installed by "make e2e".
 #
 # Usage: contrib/setup_dev_vm.sh   (as the user doener, which has passwordless sudo)
 set -euo pipefail
@@ -37,6 +37,9 @@ if [ "$("$NODE_DIR/bin/node" --version 2>/dev/null)" != "v$NODE_VERSION" ]; then
     sudo tar -xJf "$tmp/$archive" -C "$NODE_DIR" --strip-components=1
 fi
 "$NODE_DIR/bin/node" --version
+
+echo "== System libraries of the Playwright browsers"
+sudo env PATH="$NODE_DIR/bin:$PATH" npx --yes playwright@1.65.0 install-deps chromium firefox
 
 echo "== Repository in $REPO_DIR"
 if [ ! -d "$REPO_DIR/.git" ]; then

@@ -53,8 +53,10 @@ lint: site/node_modules
 	go vet ./...
 	cd site && npm run lint && npm run typecheck
 
+# Runs the end-to-end tests against the running container (make run). The system libraries
+# of the browsers are installed by contrib/setup_dev_vm.sh.
 e2e:
-	cd e2e && npm ci && npm test
+	cd e2e && npm ci && npx playwright install chromium firefox && npm test
 
 clean:
 	rm -rf dist
