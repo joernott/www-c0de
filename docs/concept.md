@@ -137,8 +137,8 @@ Caddy provides:
   - redirects from HTTP to HTTPS and from `www.c0de.at` to `c0de.at`,
   - HTTP/2 and HTTP/3,
   - compressed files (Brotli, Zstandard and gzip are created at build time),
-  - caching: files with a hash in the name are cached forever, HTML pages are revalidated,
-  - security headers: HSTS, Content-Security-Policy, X-Content-Type-Options, Referrer-Policy,
+  - caching: files with a hash in the name are cached forever, HTML pages are revalidated (the embedded files get the start time of the server as their modification time, so Caddy sends ETags),
+  - security headers: HSTS, Content-Security-Policy, X-Content-Type-Options, X-Frame-Options, Referrer-Policy, Cross-Origin-Opener-Policy, Permissions-Policy. The Content-Security-Policy only allows resources of the site itself; the few inline scripts of VitePress are allowed by their hashes, which the server computes from the embedded pages at startup. Styles need `'unsafe-inline'`, because the colors of the code and of the tabs are style attributes,
   - URLs without `.html` and a 404 page in the ring binder style, in the language of the requested URL (the pre-rendered pages `/not-found` and `/de/not-found`, served with the status 404),
   - an access log in the volume `/data` with the full IP addresses, rotated daily and kept for three months. The privacy policy describes it.
 

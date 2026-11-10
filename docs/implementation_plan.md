@@ -125,15 +125,15 @@ A task is done when
 
 | Task | Description | Done |
 |---|---|:---:|
-| 5.1 | Production Caddyfile: redirects (HTTP → HTTPS, `www.c0de.at` → `c0de.at`), precompressed files (created in the site build), cache headers, security headers (HSTS, Content-Security-Policy without `unsafe-inline`, X-Content-Type-Options, Referrer-Policy, Permissions-Policy). Go tests for every header and redirect. |  |
-| 5.2 | Access log in `/data/log` with exactly the fields the privacy policy names (full IP address and port, time, request and its headers without cookies and passwords, TLS, status, size, duration), rotated daily and compressed, files older than three months deleted. If Caddy's log rolling can't rotate by time, the rotation is done by a separate mechanism, documented in the concept. |  |
-| 5.3 | ACME test on the VM: Pebble (the test server of Let's Encrypt) in `compose.yaml`; the container gets a certificate from it, keeps it in `/data` across restarts and renews it. |  |
-| 5.4 | Hardening of the container: the process runs unprivileged and listens on high ports, which Podman publishes as 80/tcp, 443/tcp and 443/udp; read-only root file system, health check, memory limit. |  |
-| 5.5 | Release workflow `release.yml`: on a tag `v*`, the `linux/amd64` binary with checksum becomes a GitHub release, the image is pushed to `ghcr.io/joernott/www-c0de` with the tags of the version and `latest`. |  |
-| 5.6 | Systemd unit `contrib/systemd/container-c0de.service`: pulls `ghcr.io/joernott/www-c0de:latest` with Podman, then runs the container with the volume `/data` and publishes the ports on a configurable IP address. The container settings are tested with Docker on the development VM; the operator adapts the web server to Podman. |  |
+| 5.1 | Production Caddyfile: redirects (HTTP → HTTPS, `www.c0de.at` → `c0de.at`), precompressed files (created in the site build), cache headers, security headers (HSTS, Content-Security-Policy without `unsafe-inline`, X-Content-Type-Options, Referrer-Policy, Permissions-Policy). Go tests for every header and redirect. | ✅ |
+| 5.2 | Access log in `/data/log` with exactly the fields the privacy policy names (full IP address and port, time, request and its headers without cookies and passwords, TLS, status, size, duration), rotated daily and compressed, files older than three months deleted. If Caddy's log rolling can't rotate by time, the rotation is done by a separate mechanism, documented in the concept. | ✅ |
+| 5.3 | ACME test on the VM: Pebble (the test server of Let's Encrypt) in `compose.yaml`; the container gets a certificate from it, keeps it in `/data` across restarts and renews it. | ✅ |
+| 5.4 | Hardening of the container: the process runs unprivileged and listens on high ports, which Podman publishes as 80/tcp, 443/tcp and 443/udp; read-only root file system, health check, memory limit. | ✅ |
+| 5.5 | Release workflow `release.yml`: on a tag `v*`, the `linux/amd64` binary with checksum becomes a GitHub release, the image is pushed to `ghcr.io/joernott/www-c0de` with the tags of the version and `latest`. | ✅ |
+| 5.6 | Systemd unit `contrib/systemd/container-c0de.service`: pulls `ghcr.io/joernott/www-c0de:latest` with Podman, then runs the container with the volume `/data` and publishes the ports on a configurable IP address. The container settings are tested with Docker on the development VM; the operator adapts the web server to Podman. | ✅ |
 | 5.7 | Web server: dedicated IPv4 address for c0de.at, unit installed as `container-c0de`, firewall for 80/tcp, 443/tcp and 443/udp on that address, A records for `c0de.at` and `www.c0de.at` (no AAAA). |  |
 | 5.8 | Release 0.1.0: tag, restart `container-c0de`, check the certificate, the redirects and the headers from outside (SSL Labs, securityheaders.com) and the pages in the browser. |  |
-| 5.9 | Documentation: README, development environment, `docs/operations.md` (deploying by restarting the service, going back to an earlier version, updating the documentation after a mod release, backing up `/data`, moving the site to another host). |  |
+| 5.9 | Documentation: README, development environment, `docs/operations.md` (deploying by restarting the service, going back to an earlier version, updating the documentation after a mod release, backing up `/data`, moving the site to another host). | ✅ |
 
 ## Sprint 6: Tutorials
 
