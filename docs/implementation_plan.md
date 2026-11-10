@@ -41,7 +41,7 @@ A task is done when
 | 0 | Concept and plan | Reviewed concept, implementation plan, development environment plan | ✅ |
 | 1 | Project skeleton | A placeholder page is served by the static binary and the container on the VM; CI builds everything | ✅ |
 | 2 | The ring binder | The theme with rings, pages and two levels of tabs works in desktop browsers, in light and dark mode, in English and German, with placeholder content | ✅ |
-| 3 | Documentation import | The documentation of c0de and c0de net is on the site, with navigation, code highlighting and search |  |
+| 3 | Documentation import | The documentation of c0de and c0de net is on the site, with navigation, code highlighting and search  ✅ |
 | 4 | Home page and site content | Home page, legal pages, metadata for search engines, in English and German |  |
 | 5 | Production and release 0.1.0 | c0de.at is online with certificates from Let's Encrypt |  |
 | 6 | Tutorials | Concept and first tutorials (planned when the step starts) |  |
@@ -95,18 +95,18 @@ A task is done when
 
 | Task | Description | Done |
 |---|---|:---:|
-| 3.1 | `sources.yaml` with repository, tag, files and libraries of each source. `scripts/import-docs` fetches each source at its tag (shallow clone into a cache folder) or, for development, reads a local working copy (`--local ../minecraft-c0de`). The output in `site/` is not committed. |  |
-| 3.2 | Page mapping and link rewriting: file, `##` or `###` section → chapter page and URL, links between imported files within a language, anchors, links to files that are not imported (→ GitHub at the tag), images copied with the pages. The import fails on a link it cannot resolve. Vitest with fixtures. |  |
-| 3.2.1 | Images get their width and height from the PNG header, so a page doesn't shift while they load and the browser scrolls to the right anchor after a click. |  |
-| 3.3 | Split the functions handbook: built-in functions and input/output stay one chapter under `/c0de/`; the sections c0de/math, c0de/strings, c0de/time and c0de/minecraft become the folders of the libraries (`/c0de/math/` …) with an overview page from the introduction of the section and one page per function (`/c0de/math/abs`); links to a function (`functions.md#abs`) are rewritten to its page. |  |
-| 3.4 | Import the c0de net handbook to `/c0de_net/http/`: overview page, then the chapters Getting started, one per function and type, Errors and Examples. The library folders are derived from the library names in `sources.yaml`, so further mods need no change of the import. |  |
-| 3.5 | Navigation from the import: main tabs, chapter tabs and their order, contents lists, previous/next; front matter with title, description and mod version of every page. |  |
-| 3.6 | Translations: the import reads the translated documentation of every source (`docs/<language>/…`, or the layout the mods choose); a page without translation is published in English under the translated URL with a note. Tested with a fixture that has a partial German translation. |  |
-| 3.7 | Shiki grammar and theme for ` ```c0de ` code blocks in the colors of the blocks (taken from the block textures of c0de), for light and dark mode. |  |
-| 3.8 | Full-text search with the local search of VitePress, one index per language, styled for the ring binder. |  |
-| 3.9 | Link check of the built site in CI (all internal links and anchors resolve in every language, no external resources are loaded). |  |
-| 3.10 | Updating the sources: Renovate opens a pull request with the new tag when c0de or c0de net is released. |  |
-| 3.11 | Review of all imported pages in the browser; defects in the Markdown are fixed in the mod repositories, defects of the import or theme here. |  |
+| 3.1 | `sources.yaml` with repository, tag, files and libraries of each source. `scripts/import-docs` fetches each source at its tag (shallow clone into a cache folder) or, for development, reads a local working copy (`--local ../minecraft-c0de`). The output in `site/` is not committed. | ✅ |
+| 3.2 | Page mapping and link rewriting: file, `##` or `###` section → chapter page and URL, links between imported files within a language, anchors, links to files that are not imported (→ GitHub at the tag), images copied with the pages. The import fails on a link it cannot resolve. Vitest with fixtures. | ✅ |
+| 3.2.1 | Images get their width and height from the PNG header, so a page doesn't shift while they load and the browser scrolls to the right anchor after a click. | ✅ |
+| 3.3 | Split the functions handbook: built-in functions and input/output stay one chapter under `/c0de/`; the sections c0de/math, c0de/strings, c0de/time and c0de/minecraft become the folders of the libraries (`/c0de/math/` …) with an overview page from the introduction of the section and one page per function (`/c0de/math/abs`); links to a function (`functions.md#abs`) are rewritten to its page. | ✅ |
+| 3.4 | Import the c0de net handbook to `/c0de_net/http/`: overview page, then the chapters Getting started, one per function and type, Errors and Examples. The library folders are derived from the library names in `sources.yaml`, so further mods need no change of the import. | ✅ |
+| 3.5 | Navigation from the import: main tabs, chapter tabs and their order, contents lists, previous/next; front matter with title, description and mod version of every page. | ✅ |
+| 3.6 | Translations: the import reads the translated documentation of every source (`docs/<language>/…`, or the layout the mods choose); a page without translation is published in English under the translated URL with a note. Tested with a fixture that has a partial German translation. | ✅ |
+| 3.7 | Shiki grammar and theme for ` ```c0de ` code blocks in the colors of the blocks (taken from the block textures of c0de), for light and dark mode. | ✅ |
+| 3.8 | Full-text search with the local search of VitePress, one index per language, styled for the ring binder. | ✅ |
+| 3.9 | Link check of the built site in CI (all internal links and anchors resolve in every language, no external resources are loaded). | ✅ |
+| 3.10 | Updating the sources: Renovate opens a pull request with the new tag when c0de or c0de net is released. | ✅ |
+| 3.11 | Review of all imported pages in the browser; defects in the Markdown are fixed in the mod repositories, defects of the import or theme here. | ✅ |
 
 ## Sprint 4: Home page and site content
 
