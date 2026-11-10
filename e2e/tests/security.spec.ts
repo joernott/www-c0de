@@ -52,10 +52,5 @@ test('assets are cached for good and sent compressed', async ({ page, request })
   expect(response.headers()['content-encoding']).toBe('br')
 })
 
-test('www redirects to the domain', async ({ request, baseURL }) => {
-  test.skip(!baseURL?.startsWith('https:'), 'the server runs without HTTPS')
-  const www = baseURL!.replace('://', '://www.')
-  const response = await request.get(`${www}/c0de/`, { maxRedirects: 0, failOnStatusCode: false })
-  expect(response.status()).toBe(301)
-  expect(response.headers()['location']).toBe(`${baseURL}/c0de/`)
-})
+// The redirect of www is tested by the Go tests and the ACME test (contrib/pebble), which
+// have names for it; www.localhost doesn't resolve everywhere.

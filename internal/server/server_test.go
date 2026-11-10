@@ -378,4 +378,20 @@ func TestServeHTTPSWithInternalCA(t *testing.T) {
 	if redirect.StatusCode != http.StatusPermanentRedirect || redirect.Header.Get("Location") != "https://localhost/c0de/guide" {
 		t.Errorf("%s: got %d to %q", from, redirect.StatusCode, redirect.Header.Get("Location"))
 	}
+
+	// www.localhost doesn't resolve everywhere, so the request goes to localhost with the
+	// host name www.localhost.
+	req, err := http.NewRequest(http.MethodGet, fmt.Sprintf("https://localhost:%d/c0de/", c.HTTPSPort), nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	req.Host = "www.localhost"
+	www, err := client.Do(req)
+	if err != nil {
+		t.Fatal(err)
+	}
+	www.Body.Close()
+	if www.StatusCode != http.StatusMovedPermanently || www.Header.Get("Location") != "https://localhost/c0de/" {
+		t.Errorf("www: got %d to %q", www.StatusCode, www.Header.Get("Location"))
+	}
 }
