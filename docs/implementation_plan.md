@@ -42,7 +42,7 @@ A task is done when
 | 1 | Project skeleton | A placeholder page is served by the static binary and the container on the VM; CI builds everything | ✅ |
 | 2 | The ring binder | The theme with rings, pages and two levels of tabs works in desktop browsers, in light and dark mode, in English and German, with placeholder content | ✅ |
 | 3 | Documentation import | The documentation of c0de and c0de net is on the site, with navigation, code highlighting and search | ✅ |
-| 4 | Home page and site content | Home page, legal pages, metadata for search engines, in English and German |  |
+| 4 | Home page and site content | Home page, legal pages, metadata for search engines, in English and German | ✅ |
 | 5 | Production and release 0.1.0 | c0de.at is online with certificates from Let's Encrypt |  |
 | 6 | Tutorials | Concept and first tutorials (planned when the step starts) |  |
 
@@ -114,10 +114,10 @@ A task is done when
 
 | Task | Description | Done |
 |---|---|:---:|
-| 4.1 | Home page: what c0de is, screenshot, example program, links to Modrinth and GitHub with the current versions of both mods, overview of the chapters. |  |
-| 4.2 | Legal notice of Jörn Ott (address, phone, c0de@c0de.at); privacy policy describing the access log (full IP address, time, request with its headers, TLS, answer; kept for three months for operation and security) and the absence of cookies and tracking. |  |
-| 4.3 | Search engines: page titles and descriptions, canonical URLs, `hreflang` alternates, `sitemap.xml`, `robots.txt`, Open Graph image. |  |
-| 4.4 | Lighthouse check of performance, accessibility, best practices and SEO in CI, with minimum scores. |  |
+| 4.1 | Home page: what c0de is, screenshot, example program, links to Modrinth and GitHub with the current versions of both mods, overview of the chapters. | ✅ |
+| 4.2 | Legal notice of Jörn Ott (address, phone, c0de@c0de.at); privacy policy describing the access log (full IP address, time, request with its headers, TLS, answer; kept for three months for operation and security) and the absence of cookies and tracking. | ✅ |
+| 4.3 | Search engines: page titles and descriptions, canonical URLs, `hreflang` alternates, `sitemap.xml`, `robots.txt`, Open Graph image. | ✅ |
+| 4.4 | Lighthouse check of performance, accessibility, best practices and SEO in CI, with minimum scores. | ✅ |
 
 ## Sprint 5: Production and release 0.1.0
 
