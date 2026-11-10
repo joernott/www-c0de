@@ -33,3 +33,10 @@ Q9: Focus is "Desktop browser first"
 Q10: Initially, English and German, Support for multiple languages can be added if someone provides those translated versions in the respective mods.
 Q11: The suggested colors are fine
 Q12: The proposal is fine
+
+## 2026-11-10 – Answers to the last open questions
+
+Q2,1: I'd prefer one tab per function
+Q10.1: Yes, the German translations should be planned in the mods themselves.
+
+Podman does not run rootless.

@@ -8,7 +8,7 @@ This repository contains everything needed to build and run the website:
   - a web server based on Caddy with Let's Encrypt support, built as a single static Go binary for Linux that contains the whole site,
   - a container image that runs this binary, run with Podman on the web server.
 
-Proposals added during the [review](concept_review.md) are marked with *(proposal, Qn)*, where Qn is the open question in the review that decides them.
+The decisions taken during the [review](concept_review.md) are listed in the [implementation plan](implementation_plan.md#decisions).
 
 ## Content
 
@@ -38,12 +38,12 @@ Written in this repository, in all languages of the site, are:
 The site starts in **English and German**. More languages are added when someone provides the translated documentation in the mod repositories; the site then only needs the translations of its own pages.
 
   - English is the default language and has no prefix. Every other language has its code as prefix: `/c0de/math/` and `/de/c0de/math/`.
-  - Translations in the mod repositories are kept in a folder per language with the same file names as the English originals: `docs/de/guide/01-getting-started.md`, `docs/de/reference/functions.md` *(proposal, Q10.1)*. The import takes every language it finds at the tag.
-  - A page that isn't translated yet is shown in English under its translated URL, with a note that the translation is missing *(proposal, Q10.1)*. So every language has the complete navigation.
+  - The German translations of the documentation are planned and written in the mod repositories themselves, not here. They are kept in a folder per language with the same file names as the English originals: `docs/de/guide/01-getting-started.md`, `docs/de/reference/functions.md`. If the mods decide on a different layout, the import follows it. The import takes every language it finds at the tag.
+  - A page that isn't translated yet is shown in English under its translated URL, with a note that the translation is missing. So every language has the complete navigation.
   - A language switch at the top of every page leads to the same page in the other language. The site doesn't redirect by the language of the browser.
   - The search only searches the pages of the current language.
 
-At the start, the German site has German pages of its own (home page, legal pages, theme), but the documentation of the mods is still English (Q10.1).
+Until the mods are translated, the German site has German pages of its own (home page, legal pages, theme), but the documentation of the mods in English.
 
 ### URL structure
 
@@ -57,9 +57,9 @@ At the start, the German site has German pages of its own (home page, legal page
 | `/legal-notice`, `/privacy` | Legal notice and privacy policy | this repository |
 | `/de/…` | The same pages in German | |
 
-The folder of a library is its full name, as written after INCLUDE (`c0de/minecraft` → `/c0de/minecraft/`). Libraries of further mods get their folders the same way (e.g. a future `c0de_net/smtp` → `/c0de_net/smtp/`), so adding a mod as source needs no new URL rules. Every chapter (see [Tabs](#tabs)) is one page. Its URL is derived from the file name without the number prefix and without `.md` (`docs/guide/01-getting-started.md` → `/c0de/guide/getting-started`) or, for a chapter that is a section of a file, from its heading. URLs are lowercase and have no `.html` extension.
+The folder of a library is its full name, as written after INCLUDE (`c0de/minecraft` → `/c0de/minecraft/`). Libraries of further mods get their folders the same way (e.g. a future `c0de_net/smtp` → `/c0de_net/smtp/`), so adding a mod as source needs no new URL rules. Every chapter (see [Tabs](#tabs)) is one page. Its URL is derived from the file name without the number prefix and without `.md` (`docs/guide/01-getting-started.md` → `/c0de/guide/getting-started`) or, for a chapter that is a section of a file, from its heading like a GitHub anchor (`### MID` → `/c0de/strings/mid`, `### HTTP_GET` → `/c0de_net/http/http_get`). A library's overview page is its folder (`/c0de/strings/`). URLs are lowercase and have no `.html` extension.
 
-Links between the imported files are rewritten to the URLs of the site, within the same language. Anchors are kept as they are on GitHub, so `functions.md#mid` keeps working as `#mid`. Links to files that are not imported (e.g. the concept of the mod) point to the file on GitHub at the imported tag. Images are copied with the pages.
+Links between the imported files are rewritten to the URLs of the site, within the same language. A link to a section that became a page of its own leads to that page (`functions.md#mid` → `/c0de/strings/mid`); other anchors are kept as they are on GitHub. Links to files that are not imported (e.g. the concept of the mod) point to the file on GitHub at the imported tag. Images are copied with the pages.
 
 ## Design: the ring binder
 
@@ -89,7 +89,9 @@ There are two levels of tabs.
 |---|---|
 | Home | none |
 | c0de | the six chapters of the guide (Getting started, Language, Running programs, Tools, Libraries, Examples), then, after a gap and marked with a book symbol, the handbooks (Data, Statements, Tools, Triggers, Devices, Functions) |
-| a library | one per `##` section of its source *(proposal, Q2.1)*. A library with a single section, like the c0de libraries from the functions handbook, is one page without chapter tabs. c0de_net/http has four: Getting started, Functions, Errors, Examples. |
+| a library | one per function (every `###` section of the library's section), in the order of the source. Further `##` sections of the source that aren't the library itself become chapter tabs too, in the order of the source: c0de_net/http has Getting started, its nine functions and types (HTTP_CONNECTION … HTTP_PUT), Errors and Examples. |
+
+Selecting a library's main tab shows its overview page: the introduction of the library and a list of its functions with links. The c0de libraries have between 12 (c0de/time) and 22 (c0de/minecraft) functions. The "Functions" handbook of the c0de tab (built-in functions, input and output) stays one chapter.
 
 The number of tabs depends on the selected tab and grows with every library. When the tabs don't fit beside the page, the column of tabs scrolls: with the mouse wheel over the tabs, and with arrow buttons that appear at its top and bottom end. The house tab stays at the top, and the selected tab is always scrolled into view.
 
@@ -154,7 +156,7 @@ The website has its own version (semantic versioning, from Git tags like the mod
 
 The site runs on the operator's own Linux web server (amd64). The server has several IP addresses; c0de.at gets a dedicated IPv4 address, on which ports 80 and 443 are free. There is no IPv6 address for now.
 
-  - The systemd service `container-c0de` runs the container with Podman. It pulls the image `latest` before it starts the container and publishes the ports 80/tcp, 443/tcp and 443/udp on the dedicated address only. A new version is deployed by publishing a release and restarting the service.
+  - The systemd service `container-c0de` runs the container with Podman as root (not rootless), so it can publish the ports 80 and 443. It pulls the image `latest` before it starts the container and publishes the ports 80/tcp, 443/tcp and 443/udp on the dedicated address only. A new version is deployed by publishing a release and restarting the service.
   - The operator runs the DNS server: `c0de.at` and `www.c0de.at` get A records pointing to the dedicated address, no AAAA records.
 
 Nothing in the image or its configuration depends on that server: the domain, the data folder and the TLS mode are set from outside, and the address is a setting of the service. The site can move to another Linux host, container or VM by moving the volume `/data` and the service definition. The repository contains the systemd unit as an example (`contrib/systemd/container-c0de.service`).

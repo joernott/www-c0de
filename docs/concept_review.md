@@ -41,7 +41,7 @@ Answered questions are kept with their answer; the decisions are recorded in the
 
 1. ✅ **Library URLs**: *answered*: the full library name, `/c0de/minecraft/`, `/c0de_net/http/`. This makes it easy to add the libraries of further mods.
 2. ✅ **Tabs**: *answered*: a tab for home, one for the language and one for each library are always visible. The chapter tabs of the selected tab appear below it. The number of tabs has no limit, so the tabs can be scrolled.
-   1. **Chapters of a library**: the c0de libraries are one `##` section each in the functions handbook, with one `###` section per function (c0de/strings has about 25). The c0de net handbook has four `##` sections. Proposal: the chapters of a library are the `##` sections of its source, so the c0de libraries are one page each (with a contents list of their functions) and have no chapter tabs, while c0de_net/http has four. The alternative, one chapter tab per function, gives the c0de libraries up to 25 chapter tabs.
+   1. ✅ **Chapters of a library**: *answered*: one chapter tab per function. A library's main tab shows its overview page; further sections of the source (Getting started, Errors, Examples of c0de_net/http) are chapter tabs too.
 3. ✅ **VitePress**: *answered*: VitePress is used.
 4. ✅ **Documentation version**: *answered*: the latest release of each mod. Renovate proposes the new tag in a pull request when a mod is released.
 5. ✅ **Hosting**: *answered*: the operator's own Linux web server (amd64). The systemd service `container-c0de` runs the container with Podman and pulls the latest image before starting it; a restart deploys a new version. The site may move to another Linux container or VM later.
@@ -53,6 +53,6 @@ Answered questions are kept with their answer; the decisions are recorded in the
 8. ✅ **Dark mode**: *answered*: light and dark mode, following the setting of the operating system.
 9. ✅ **Small screens**: *answered*: desktop browsers first.
 10. ✅ **Language**: *answered*: English and German at the start. More languages follow when the translated documentation is provided in the mod repositories.
-    1. **Translations in the mod repositories**: proposal: a folder per language with the same file names as the English originals (`docs/de/guide/…`, `docs/de/reference/…`), and untranslated pages shown in English with a note. Today the mods have no German documentation, so the German site starts with German home and legal pages but English documentation. Should the German translation of the c0de and c0de net documentation be planned in those repositories (which could also give German Patchouli books in the game)?
+    1. ✅ **Translations in the mod repositories**: *answered*: the German translations of the documentation are planned in the mod repositories themselves. The site imports them from `docs/<language>/…` unless the mods choose another layout; untranslated pages are shown in English with a note.
 11. ✅ **Colors**: *answered*: as proposed.
 12. ✅ **Home page**: *answered*: as proposed.

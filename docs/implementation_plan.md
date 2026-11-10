@@ -52,7 +52,7 @@ A task is done when
 |---|---|:---:|
 | 0.1 | Review the concept (`docs/concept.md`, `docs/concept_review.md`). | ✅ |
 | 0.2 | Write the implementation plan (this document). | ✅ |
-| 0.3 | Answer the open questions of the review (see [Decisions](#decisions)) and update the concept. Add the license. |  |
+| 0.3 | Answer the open questions of the review (see [Decisions](#decisions)) and update the concept. Add the license. | ✅ |
 | 0.4 | Write the development environment plan (`docs/development_environment.md`): Windows workstation, development VM, GitHub Actions, versions of Go, Node.js, Caddy and VitePress. |  |
 
 ## Sprint 1: Project skeleton
@@ -95,11 +95,11 @@ A task is done when
 | Task | Description | Done |
 |---|---|:---:|
 | 3.1 | `sources.yaml` with repository, tag, files and libraries of each source. `scripts/import-docs` fetches each source at its tag (shallow clone into a cache folder) or, for development, reads a local working copy (`--local ../minecraft-c0de`). The output in `site/` is not committed. |  |
-| 3.2 | Page mapping and link rewriting: file or `##` section → chapter page and URL, links between imported files within a language, anchors, links to files that are not imported (→ GitHub at the tag), images copied with the pages. The import fails on a link it cannot resolve. Vitest with fixtures. |  |
-| 3.3 | Split the functions handbook: built-in functions and input/output under `/c0de/`, the sections c0de/math, c0de/strings, c0de/time and c0de/minecraft as pages in the folders named like the libraries (`/c0de/math/` …); links into these sections are rewritten. |  |
-| 3.4 | Import the c0de net handbook to `/c0de_net/http/`, with its chapters as decided in Q2.1. The library folders are derived from the library names in `sources.yaml`, so further mods need no change of the import. |  |
+| 3.2 | Page mapping and link rewriting: file, `##` or `###` section → chapter page and URL, links between imported files within a language, anchors, links to files that are not imported (→ GitHub at the tag), images copied with the pages. The import fails on a link it cannot resolve. Vitest with fixtures. |  |
+| 3.3 | Split the functions handbook: built-in functions and input/output stay one chapter under `/c0de/`; the sections c0de/math, c0de/strings, c0de/time and c0de/minecraft become the folders of the libraries (`/c0de/math/` …) with an overview page from the introduction of the section and one page per function (`/c0de/math/abs`); links to a function (`functions.md#abs`) are rewritten to its page. |  |
+| 3.4 | Import the c0de net handbook to `/c0de_net/http/`: overview page, then the chapters Getting started, one per function and type, Errors and Examples. The library folders are derived from the library names in `sources.yaml`, so further mods need no change of the import. |  |
 | 3.5 | Navigation from the import: main tabs, chapter tabs and their order, contents lists, previous/next; front matter with title, description and mod version of every page. |  |
-| 3.6 | Translations: the import reads the translated documentation of every source (layout as decided in Q10.1); a page without translation is published in English under the translated URL with a note. Tested with a fixture that has a partial German translation. |  |
+| 3.6 | Translations: the import reads the translated documentation of every source (`docs/<language>/…`, or the layout the mods choose); a page without translation is published in English under the translated URL with a note. Tested with a fixture that has a partial German translation. |  |
 | 3.7 | Shiki grammar and theme for ` ```c0de ` code blocks in the colors of the blocks (taken from the block textures of c0de), for light and dark mode. |  |
 | 3.8 | Full-text search with the local search of VitePress, one index per language, styled for the ring binder. |  |
 | 3.9 | Link check of the built site in CI (all internal links and anchors resolve in every language, no external resources are loaded). |  |
@@ -149,10 +149,10 @@ A task is done when
 | The Caddy API for file system modules changes between versions. | The module is small and covered by Go tests; Renovate updates of Caddy run the whole test suite. |
 | VitePress inserts inline scripts, which a strict Content-Security-Policy blocks. | The custom theme doesn't use the appearance switch of VitePress (dark mode is CSS only); remaining inline scripts are allowed with hashes generated at build time (task 5.1). |
 | The Markdown of the mods uses constructs that look right on GitHub and in Patchouli, but not on the site. | Task 3.11 reviews every page; the import fails on unresolved links (3.2) and the link check runs in CI (3.9). |
-| The dynamic tab column becomes hard to use with many libraries and chapters. | Only the chapters of the selected main tab are shown (2.4), the column scrolls (2.5), Playwright tests with many tabs and low windows (2.5, 2.11). |
-| The German site shows mostly English documentation until the mods are translated. | Every untranslated page says so (3.6); Q10.1 decides whether translations are planned in the mod repositories. |
+| The dynamic tab column becomes hard to use with many libraries and chapters (c0de/minecraft alone has 22 function tabs). | Only the chapters of the selected main tab are shown (2.4), the column scrolls (2.5), Playwright tests with many tabs and low windows (2.5, 2.11). |
+| The German site shows mostly English documentation until the mods are translated. | Every untranslated page says so (3.6). The German translations are planned in the mod repositories. |
 | A lost `/data` volume or repeated tests against the production endpoint hit the rate limits of Let's Encrypt. | ACME is tested against Pebble (5.3); the volume is documented and backed up (5.9). |
-| An unprivileged process can't bind to ports 80 and 443 in a `scratch` image. | The process listens on high ports, which Podman publishes as 80 and 443 (5.4). If Podman runs rootless on the server, `net.ipv4.ip_unprivileged_port_start` is lowered there. |
+| An unprivileged process can't bind to ports 80 and 443 in a `scratch` image. | The process listens on high ports, which Podman (running as root on the server) publishes as 80 and 443 (5.4). |
 | `latest` is pulled on every restart, so a broken release goes live on the next restart of the service. | Releases only after CI and the end-to-end tests on the VM are green; the previous version stays on ghcr.io and can be started by its tag (5.9). |
 | Three months of access logs with full IP addresses fill the volume. | The logs are compressed when rotated and deleted after three months (5.2). |
 | The website shows documentation that doesn't match the version players have installed. | The import uses release tags only (3.1); the version of every mod is shown on its pages. |
@@ -165,10 +165,12 @@ Answers to the open questions of the [concept review](concept_review.md) (task 0
 |---|---|
 | Q1 Library URLs | The folder of a library is its full name: `/c0de/minecraft/`, `/c0de_net/http/` (2026-11-10). Libraries of further mods are added the same way. |
 | Q2 Tabs | Main tabs for home, the language and every library are always visible. The chapter tabs of the selected main tab appear below it. There is no limit to the number of tabs; the tab column scrolls (2026-11-10). |
+| Q2.1 Chapters of a library | One chapter tab per function, plus the other sections of the source (e.g. Getting started, Errors, Examples); the main tab shows the library's overview page (2026-11-10). |
 | Q3 Frontend | VitePress with Vue.js and Tailwind CSS (2026-11-10). |
 | Q4 Documentation version | The latest release of each mod (2026-11-10). Renovate proposes the new tag. |
 | Q5 Hosting | The operator's own Linux web server, amd64 only. The systemd service `container-c0de` runs the container with Podman and pulls the latest image before starting it; restarting it deploys a new version. The site must be able to move to another Linux container or VM (2026-11-10). |
 | Q5.1 Ports | c0de.at gets a dedicated IP address on the server, on which ports 80 and 443 are free (2026-11-10). |
+| Q5.1a Podman | Podman runs as root on the server, not rootless (2026-11-10). |
 | Q5.2 DNS | The operator runs the DNS server; IPv4 only for now (2026-11-10). |
 | Q6 License | BSD 3-Clause, like the mods ([LICENSE](../LICENSE)) (2026-11-10). |
 | Q7 Legal notice and logs | Operator Jörn Ott, legal notice data from www.ott-consult.de. Access logs are kept (2026-11-10). |
@@ -176,5 +178,6 @@ Answers to the open questions of the [concept review](concept_review.md) (task 0
 | Q8 Color scheme | Light and dark mode (2026-11-10). |
 | Q9 Small screens | Desktop browsers first (2026-11-10). |
 | Q10 Languages | English and German at the start; more languages when translated documentation is provided in the mod repositories (2026-11-10). |
+| Q10.1 Translations | The German translations of the documentation are planned in the mod repositories themselves; the site imports them (2026-11-10). |
 | Q11 Colors | As proposed: the c0de tab in the green of the greenbar paper, distinct colors for the libraries with enough contrast in both modes (2026-11-10). |
 | Q12 Home page | As proposed: what c0de is, a screenshot, an example program, links to Modrinth and GitHub with the current versions, an overview of the chapters (2026-11-10). |
