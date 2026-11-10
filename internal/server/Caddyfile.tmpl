@@ -20,6 +20,16 @@
 {{- if .ACMECARoot}}
 	acme_ca_root {{.ACMECARoot}}
 {{- end}}
+{{- if .TrustedProxies}}
+	# The reverse proxies in front of the server: the address of the client comes from
+	# X-Forwarded-For and is logged as client_ip. Strict means from the right: the first
+	# address that isn't a trusted proxy, so a client can't fake it by sending the header.
+	servers {
+		trusted_proxies static {{.TrustedProxies}}
+		trusted_proxies_strict
+		client_ip_headers X-Forwarded-For
+	}
+{{- end}}
 }
 
 # The security headers of every answer, also of the not-found page (Caddy drops the headers

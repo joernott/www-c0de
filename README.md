@@ -43,10 +43,13 @@ The binary is configured with environment variables:
 | `C0DE_HTTP_PORT` | `80` (`8080` in the image) | Port for HTTP |
 | `C0DE_HTTPS_PORT` | `443` (`8443` in the image) | Port for HTTPS and HTTP/3 |
 | `C0DE_BIND` | all addresses | IP address to listen on |
+| `C0DE_TRUSTED_PROXIES` | none | Reverse proxies in front of the server (IP addresses or ranges, or `private_ranges`); the client address is taken from their `X-Forwarded-For` |
 | `C0DE_HEALTH_PORT` | `8081` | Port of the health check on 127.0.0.1 (`c0de-www health`) |
 | `C0DE_ACME_CA`, `C0DE_ACME_CA_ROOT` | Let's Encrypt | Another ACME server and its root certificate, for tests |
 
-`c0de-www caddyfile` prints the Caddyfile for the current settings, `c0de-www health` checks the running server, `c0de-www version` prints the version.
+Behind a reverse proxy that does the TLS, run `c0de-www run --httponly --trusted-proxies <address of the proxy>`: the flags are the same as `C0DE_TLS=off` and `C0DE_TRUSTED_PROXIES`, see [operations](docs/operations.md#behind-a-reverse-proxy).
+
+`c0de-www caddyfile` prints the Caddyfile for the current settings (and the same flags), `c0de-www health` checks the running server, `c0de-www version` prints the version.
 
 The image runs as an unprivileged user on the ports 8080 and 8443; publish them as 80 and 443. From release 0.1.0 on, it is published on ghcr.io:
 

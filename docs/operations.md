@@ -28,6 +28,25 @@ How c0de.at runs on the web server, how new versions get there, and what to do w
 
 The container runs read-only, without capabilities, with `no-new-privileges` and 256 MB of memory. Inside, the server runs as an unprivileged user on the ports 8080, 8443 and 8081 (health check); Podman publishes 8080 and 8443 as 80 and 443.
 
+## Behind a reverse proxy
+
+If a reverse proxy in front of the server does the TLS (SSL offloading), the container serves plain HTTP only:
+
+```sh
+podman run -d --name c0de --read-only --cap-drop ALL --security-opt no-new-privileges --memory 256m     -p <address the proxy reaches>:8080:8080 -v /data/c0de/data:/data:U     ghcr.io/joernott/www-c0de:latest run --httponly --trusted-proxies <address of the proxy>
+```
+
+- `--httponly` (or `C0DE_TLS=off`): no certificates, no redirects; only port 8080 (and the health check on 8081 inside the container).
+- `--trusted-proxies` (or `C0DE_TRUSTED_PROXIES`): the addresses or ranges of the proxy. Only from them the client address is taken from `X-Forwarded-For` and logged as `client_ip`, read from the right, so a client can't fake it. Without it, the log only has the address of the proxy.
+- The data folder must belong to the user of the container, UID and GID 65532 (or let Podman set the owner with `:U`; with SELinux add `Z`). It then only holds the access logs.
+
+The proxy has to:
+
+- get the certificates for `c0de.at` and `www.c0de.at`,
+- redirect HTTP to HTTPS and `www.c0de.at` to `c0de.at` (the server doesn't in this mode),
+- pass on the host name and set or append `X-Forwarded-For`,
+- pass the headers of the answers unchanged: the server sends HSTS, the Content-Security-Policy and the other security headers itself.
+
 ## Deploying a new version
 
 1. Push the tag `vX.Y.Z` on the commit of `main`. The release workflow tests everything and publishes the image (`X.Y.Z` and `latest`) and the GitHub release.

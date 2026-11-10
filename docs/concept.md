@@ -161,6 +161,8 @@ The site runs on the operator's own Linux web server (amd64). The server has sev
   - The systemd service `container-c0de` runs the container with Podman as root (not rootless), so it can publish the ports 80 and 443. It pulls the image `latest` before it starts the container and publishes the ports 80/tcp, 443/tcp and 443/udp on the dedicated address only. A new version is deployed by publishing a release and restarting the service.
   - The operator runs the DNS server: `c0de.at` and `www.c0de.at` get A records pointing to the dedicated address, no AAAA records.
 
+The server can also run behind an existing reverse proxy that does the TLS: with `--httponly` it serves plain HTTP only and leaves certificates and redirects to the proxy; `--trusted-proxies` names the proxy, so the access log has the address of the client (from `X-Forwarded-For`), not that of the proxy.
+
 Nothing in the image or its configuration depends on that server: the domain, the data folder and the TLS mode are set from outside, and the address is a setting of the service. The site can move to another Linux host, container or VM by moving the volume `/data` and the service definition. The repository contains the systemd unit as an example (`contrib/systemd/container-c0de.service`).
 
 ## Tutorials

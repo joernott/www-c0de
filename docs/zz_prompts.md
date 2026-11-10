@@ -81,3 +81,7 @@ the package already has already been set as public
 ## 2026-11-10 – Data folder on the server
 
 I will use a slightly different way of deployment on the backend server to better fit my needs. A part of this is that I am using the local folder /data/c0de/data to store the data. What UID/GID should own that folder?
+
+## 2026-11-10 – HTTP only behind a reverse proxy
+
+As I need to run the web server behind an existing reverse proxy that does the ssl offloading, I need a way to serve http, ideally with a commandline flag --httponly.

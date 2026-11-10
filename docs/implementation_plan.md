@@ -132,6 +132,7 @@ A task is done when
 | 5.5 | Release workflow `release.yml`: on a tag `v*`, the `linux/amd64` binary with checksum becomes a GitHub release, the image is pushed to `ghcr.io/joernott/www-c0de` with the tags of the version and `latest`. | ✅ |
 | 5.6 | Systemd unit `contrib/systemd/container-c0de.service`: pulls `ghcr.io/joernott/www-c0de:latest` with Podman, then runs the container with the volume `/data` and publishes the ports on a configurable IP address. The container settings are tested with Docker on the development VM; the operator adapts the web server to Podman. | ✅ |
 | 5.7 | Web server: dedicated IPv4 address for c0de.at, unit installed as `container-c0de`, firewall for 80/tcp, 443/tcp and 443/udp on that address, A records for `c0de.at` and `www.c0de.at` (no AAAA). |  |
+| 5.7.1 | Plain HTTP behind the reverse proxy of the web server, which does the TLS: flags `--httponly` (`C0DE_TLS=off`) and `--trusted-proxies` (`C0DE_TRUSTED_PROXIES`); the access log takes the client address from `X-Forwarded-For` of the trusted proxies, read from the right. | ✅ |
 | 5.8 | Release 0.1.0: tag, restart `container-c0de`, check the certificate, the redirects and the headers from outside (SSL Labs, securityheaders.com) and the pages in the browser. |  |
 | 5.9 | Documentation: README, development environment, `docs/operations.md` (deploying by restarting the service, going back to an earlier version, updating the documentation after a mod release, backing up `/data`, moving the site to another host). | ✅ |
 
@@ -173,6 +174,7 @@ Answers to the open questions of the [concept review](concept_review.md) (task 0
 | Q5 Hosting | The operator's own Linux web server, amd64 only. The systemd service `container-c0de` runs the container with Podman and pulls the latest image before starting it; restarting it deploys a new version. The site must be able to move to another Linux container or VM (2026-11-10). |
 | Q5.1 Ports | c0de.at gets a dedicated IP address on the server, on which ports 80 and 443 are free (2026-11-10). |
 | Q5.1a Podman | Podman runs as root on the server, not rootless (2026-11-10). |
+| Reverse proxy | c0de.at runs behind the existing reverse proxy of the web server, which does the TLS; the server serves plain HTTP (`--httponly`) and stores its data in /data/c0de/data (2026-11-10). |
 | Containers on the VM | Docker, not Podman; the operator handles Podman on the web server (2026-11-10). |
 | Q5.2 DNS | The operator runs the DNS server; IPv4 only for now (2026-11-10). |
 | Q6 License | BSD 3-Clause, like the mods ([LICENSE](../LICENSE)) (2026-11-10). |

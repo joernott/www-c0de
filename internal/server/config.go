@@ -6,6 +6,7 @@ import (
 	"net/url"
 	"regexp"
 	"strconv"
+	"strings"
 )
 
 // TLS modes of the server.
@@ -14,7 +15,8 @@ const (
 	TLSACME = "acme"
 	// TLSInternal uses the local certificate authority of Caddy, for tests.
 	TLSInternal = "internal"
-	// TLSOff serves plain HTTP on the HTTP port only, for quick checks on a workstation.
+	// TLSOff serves plain HTTP on the HTTP port only: behind a reverse proxy that does the
+	// TLS (c0de-www run --httponly), or for quick checks on a workstation.
 	TLSOff = "off"
 )
 
@@ -43,6 +45,11 @@ type Config struct {
 	ACMECA string
 	// ACMECARoot is the root certificate (PEM file) of that ACME server (C0DE_ACME_CA_ROOT).
 	ACMECARoot string
+	// TrustedProxies are the reverse proxies in front of the server, as IP addresses or
+	// ranges (CIDR) separated by spaces or commas, or "private_ranges"
+	// (C0DE_TRUSTED_PROXIES). The address of the client is then taken from the header
+	// X-Forwarded-For of their requests and logged as client_ip.
+	TrustedProxies string
 }
 
 var (
@@ -62,6 +69,7 @@ func ConfigFromEnv(getenv func(string) string) (Config, error) {
 		ACMECA:     getenv("C0DE_ACME_CA"),
 		ACMECARoot: getenv("C0DE_ACME_CA_ROOT"),
 	}
+	c.TrustedProxies = normalizeList(getenv("C0DE_TRUSTED_PROXIES"))
 	var err error
 	if c.HTTPPort, err = port("C0DE_HTTP_PORT", valueOr(getenv("C0DE_HTTP_PORT"), "80")); err != nil {
 		return c, err
@@ -105,7 +113,22 @@ func (c Config) Validate() error {
 	if unsafePath.MatchString(c.ACMECARoot) {
 		return fmt.Errorf("C0DE_ACME_CA_ROOT: %q is not a usable file name", c.ACMECARoot)
 	}
+	for _, proxy := range strings.Fields(c.TrustedProxies) {
+		if proxy == "private_ranges" {
+			continue
+		}
+		if _, err := netip.ParsePrefix(proxy); err != nil {
+			if _, err := netip.ParseAddr(proxy); err != nil {
+				return fmt.Errorf("C0DE_TRUSTED_PROXIES: %q is not an IP address, a range or private_ranges", proxy)
+			}
+		}
+	}
 	return nil
+}
+
+// normalizeList turns a list separated by commas or spaces into one separated by spaces.
+func normalizeList(list string) string {
+	return strings.Join(strings.Fields(strings.ReplaceAll(list, ",", " ")), " ")
 }
 
 func valueOr(value, fallback string) string {

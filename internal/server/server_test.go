@@ -62,12 +62,32 @@ func TestConfigErrors(t *testing.T) {
 		"bind not an address":    {"C0DE_BIND": "localhost"},
 		"ACME server over http":  {"C0DE_ACME_CA": "http://pebble:14000/dir"},
 		"ACME root with a brace": {"C0DE_ACME_CA_ROOT": "/certs/{root}.pem"},
+		"proxy not an address":   {"C0DE_TRUSTED_PROXIES": "10.0.0.0/8 proxy.local"},
 	} {
 		t.Run(name, func(t *testing.T) {
 			if _, err := ConfigFromEnv(func(k string) string { return env[k] }); err == nil {
 				t.Error("no error")
 			}
 		})
+	}
+}
+
+func TestConfigTrustedProxies(t *testing.T) {
+	c, err := ConfigFromEnv(func(k string) string {
+		return map[string]string{"C0DE_TRUSTED_PROXIES": " 10.0.0.0/8,192.0.2.1  private_ranges "}[k]
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if c.TrustedProxies != "10.0.0.0/8 192.0.2.1 private_ranges" {
+		t.Errorf("got %q", c.TrustedProxies)
+	}
+	file, err := Caddyfile(c)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !strings.Contains(string(file), "trusted_proxies static 10.0.0.0/8 192.0.2.1 private_ranges") {
+		t.Errorf("the Caddyfile doesn't trust the proxies:\n%s", file)
 	}
 }
 
@@ -393,5 +413,56 @@ func TestServeHTTPSWithInternalCA(t *testing.T) {
 	www.Body.Close()
 	if www.StatusCode != http.StatusMovedPermanently || www.Header.Get("Location") != "https://localhost/c0de/" {
 		t.Errorf("www: got %d to %q", www.StatusCode, www.Header.Get("Location"))
+	}
+}
+
+// logEntry returns the last request in the access log, waiting until it is written.
+func logEntry(t *testing.T, c Config, uri string) map[string]any {
+	t.Helper()
+	for deadline := time.Now().Add(5 * time.Second); ; time.Sleep(100 * time.Millisecond) {
+		if time.Now().After(deadline) {
+			t.Fatalf("no access log entry for %s", uri)
+		}
+		f, err := os.Open(filepath.Join(c.DataDir, "log", "access.log"))
+		if err != nil {
+			continue
+		}
+		var found map[string]any
+		scanner := bufio.NewScanner(f)
+		for scanner.Scan() {
+			var e map[string]any
+			if json.Unmarshal(scanner.Bytes(), &e) == nil {
+				if r, ok := e["request"].(map[string]any); ok && r["uri"] == uri {
+					found = e
+				}
+			}
+		}
+		f.Close()
+		if found != nil {
+			return found
+		}
+	}
+}
+
+func TestBehindAReverseProxy(t *testing.T) {
+	for name, tc := range map[string]struct {
+		proxies string
+		client  string
+	}{
+		"trusted proxy":   {"127.0.0.1/32", "203.0.113.7"},
+		"untrusted proxy": {"", "127.0.0.1"},
+	} {
+		t.Run(name, func(t *testing.T) {
+			c := testConfig(t, TLSOff)
+			c.TrustedProxies = tc.proxies
+			start(t, c)
+			uri := "/c0de/guide?" + strings.ReplaceAll(name, " ", "-")
+			// The client sent a faked address; the proxy appended the real one.
+			get(t, plainClient, fmt.Sprintf("http://127.0.0.1:%d%s", c.HTTPPort, uri), "X-Forwarded-For", "198.51.100.66, 203.0.113.7")
+			request := logEntry(t, c, uri)["request"].(map[string]any)
+			if request["client_ip"] != tc.client || request["remote_ip"] != "127.0.0.1" {
+				t.Errorf("client_ip %v, remote_ip %v; want client_ip %s", request["client_ip"], request["remote_ip"], tc.client)
+			}
+		})
 	}
 }
