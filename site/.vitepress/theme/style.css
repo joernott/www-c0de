@@ -1,0 +1,26 @@
+@import 'tailwindcss';
+
+@source '../../**/*.md';
+
+/* The colors of the ring binder are refined in sprint 2. */
+@theme {
+  --color-desk: #c8b89a;
+  --color-paper: #fdfcf7;
+  --color-ink: #1f2933;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-desk: #1e1b17;
+    --color-paper: #2b2b2b;
+    --color-ink: #e6e2d8;
+  }
+}
+
+.content h1 {
+  @apply mb-4 text-3xl font-bold;
+}
+
+.content p {
+  @apply mb-4;
+}

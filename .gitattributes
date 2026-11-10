@@ -1,0 +1,8 @@
+# Text files use LF everywhere, so that builds on Windows, Linux and in CI see the same content
+* text=auto eol=lf
+
+# Binary files
+*.png binary
+*.jpg binary
+*.ico binary
+*.woff2 binary

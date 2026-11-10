@@ -1,0 +1,41 @@
+{
+  "name": "www-c0de-site",
+  "private": true,
+  "type": "module",
+  "description": "The website c0de.at, built with VitePress, Vue.js and Tailwind CSS",
+  "license": "BSD-3-Clause",
+  "engines": {
+    "node": ">=26"
+  },
+  "scripts": {
+    "dev": "vitepress dev",
+    "build": "vitepress build && node scripts/keep-dist.mjs",
+    "preview": "vitepress preview",
+    "test": "vitest run",
+    "lint": "eslint . && prettier --check .",
+    "format": "prettier --write .",
+    "typecheck": "vue-tsc --noEmit"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@tailwindcss/postcss": "4.3.5",
+    "@types/node": "26.6.6",
+    "eslint": "10.14.0",
+    "eslint-config-prettier": "10.1.8",
+    "eslint-plugin-vue": "10.12.1",
+    "globals": "17.14.0",
+    "postcss": "8.5.32",
+    "prettier": "3.9.10",
+    "tailwindcss": "4.3.5",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.72.2",
+    "vitepress": "1.6.4",
+    "vitest": "5.1.0",
+    "vue": "3.5.45",
+    "vue-tsc": "3.3.14"
+  },
+  "allowScripts": {
+    "esbuild@0.28.2": true,
+    "esbuild@0.21.5": true
+  }
+}

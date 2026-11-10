@@ -1,0 +1,28 @@
+{
+	admin off
+	persist_config off
+	http_port {{.HTTPPort}}
+	https_port {{.HTTPSPort}}
+	storage file_system {{.DataDir}}/caddy
+	filesystem site embedded
+{{- if .Bind}}
+	default_bind {{.Bind}}
+{{- end}}
+{{- if eq .TLS "internal"}}
+	local_certs
+	skip_install_trust
+{{- else if eq .TLS "off"}}
+	auto_https off
+{{- end}}
+}
+
+{{if eq .TLS "off"}}http://:{{.HTTPPort}}{{else}}{{.Domain}}{{end}} {
+	fs site
+	try_files {path} {path}.html {path}/index.html
+	file_server
+
+	handle_errors 404 {
+		rewrite * /404.html
+		file_server
+	}
+}

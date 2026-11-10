@@ -1,0 +1,22 @@
+# Node.js
+node_modules/
+
+# VitePress
+site/.vitepress/cache/
+site/.vitepress/.temp/
+
+# The built site, embedded into the binary
+internal/site/dist/*
+!internal/site/dist/.gitkeep
+
+# Go and container builds
+/dist/
+
+# Playwright
+e2e/test-results/
+e2e/playwright-report/
+
+# Editors and systems
+.vscode/
+.idea/
+*.DS_Store

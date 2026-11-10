@@ -22,7 +22,7 @@ The current stable version of every tool and package is used. Renovate keeps the
 | VitePress | 1.6.4 | `site/package.json` |
 | Vue.js | 3.5 | `site/package.json` |
 | Tailwind CSS | 4.3 (with `@tailwindcss/postcss`) | `site/package.json` |
-| TypeScript | 7.0, or 6.0 if `vue-tsc` doesn't support 7.0 yet (checked in task 1.2) | `site/package.json` |
+| TypeScript | 6.0 (typescript-eslint 8.72 supports TypeScript below 6.1 only; 7.0 follows when it does) | `site/package.json` |
 | vue-tsc | 3.3 | `site/package.json` |
 | Vitest | 5.1 | `site/package.json` |
 | ESLint, typescript-eslint, eslint-plugin-vue | 10.14, 8.72, 10.12 | `site/package.json` |
@@ -53,11 +53,11 @@ There is no Docker, Podman or `make` on the workstation. Containers are built an
 |---|---|
 | `npm run dev` (in `site/`) | VitePress development server with hot reload on `http://localhost:5173` |
 | `npm run import -- --local ../minecraft-c0de --local ../minecraft-c0de-net` (in `site/`) | Imports the documentation from the local working copies instead of the release tags (from sprint 3) |
-| `npm run build` (in `site/`) | Imports the sources at their tags and builds the site into `site/.vitepress/dist` |
+| `npm run build` (in `site/`) | Builds the site into `internal/site/dist`, where the Go binary embeds it (from sprint 3 it imports the sources at their tags first) |
 | `npm test`, `npm run lint`, `npm run typecheck` (in `site/`) | Vitest, ESLint and Prettier, vue-tsc |
 | `go test ./...` | Go tests of the server |
 | `CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -trimpath -o dist/c0de-www ./cmd/c0de-www` | Builds the static Linux binary with the built site |
-| `go run ./cmd/c0de-www run` with `C0DE_TLS=off`, `C0DE_HTTP_PORT=8080` | Runs the server on Windows over HTTP for a quick check of the binary |
+| `C0DE_TLS=off C0DE_HTTP_PORT=8089 C0DE_BIND=127.0.0.1 C0DE_DATA=$TEMP/c0de-www go run ./cmd/c0de-www` | Runs the server with the built site on Windows over HTTP (`http://127.0.0.1:8089`) for a quick check of the binary |
 | `scripts/check-whitespace.sh` | Whitespace of all files |
 
 ## Development VM
