@@ -40,7 +40,7 @@ A task is done when
 |---|---|---|:---:|
 | 0 | Concept and plan | Reviewed concept, implementation plan, development environment plan | ✅ |
 | 1 | Project skeleton | A placeholder page is served by the static binary and the container on the VM; CI builds everything | ✅ |
-| 2 | The ring binder | The theme with rings, pages and two levels of tabs works in desktop browsers, in light and dark mode, in English and German, with placeholder content || ✅ |
+| 2 | The ring binder | The theme with rings, pages and two levels of tabs works in desktop browsers, in light and dark mode, in English and German, with placeholder content | ✅ |
 | 3 | Documentation import | The documentation of c0de and c0de net is on the site, with navigation, code highlighting and search |  |
 | 4 | Home page and site content | Home page, legal pages, metadata for search engines, in English and German |  |
 | 5 | Production and release 0.1.0 | c0de.at is online with certificates from Let's Encrypt |  |
