@@ -47,6 +47,24 @@ The proxy has to:
 - pass on the host name and set or append `X-Forwarded-For`,
 - pass the headers of the answers unchanged: the server sends HSTS, the Content-Security-Policy and the other security headers itself.
 
+### Checks after going live
+
+After a change of the proxy or the server, check from outside:
+
+```sh
+cd e2e && E2E_BASE_URL=https://c0de.at npx playwright test --project chromium && E2E_BASE_URL=https://c0de.at npm run lighthouse
+```
+
+and the TLS setup with [SSL Labs](https://www.ssllabs.com/ssltest/) and the headers with [securityheaders.com](https://securityheaders.com). Behind nginx, two end-to-end tests fail by design: nginx redirects HTTP with 301 (Caddy: 308) and sends its own `Server` header.
+
+The first check (2026-11-10, release 0.2.0 behind nginx 1.30.6) found three points for the proxy:
+
+- **Two HSTS headers**: the server sends `max-age=31536000`, nginx adds `max-age=31536000; includeSubDomains`. With two headers, browsers ignore HSTS, and SSL Labs grades A- instead of A+. Keep one: remove the `add_header Strict-Transport-Security` of nginx, or keep it and hide the one of the server with `proxy_hide_header Strict-Transport-Security;`.
+- **www isn't redirected**: `https://www.c0de.at/` shows the site instead of redirecting to `https://c0de.at/` (the canonical links keep search engines on c0de.at, but visitors see two addresses).
+- **No HTTP/2**: nginx answers browsers with HTTP/1.1 only (`http2 on;` in the `server` block of nginx 1.25.1 and newer).
+
+Optional: `server_tokens off;` hides the version of nginx.
+
 ## Deploying a new version
 
 1. Push the tag `vX.Y.Z` on the commit of `main`. The release workflow tests everything and publishes the image (`X.Y.Z` and `latest`) and the GitHub release.

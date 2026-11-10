@@ -89,3 +89,7 @@ As I need to run the web server behind an existing reverse proxy that does the s
 ## 2026-11-10 – Release 0.2.0
 
 yes, please go ahead
+
+## 2026-11-10 – c0de.at is live
+
+yes, please go ahead, the server is live now

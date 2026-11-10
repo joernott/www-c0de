@@ -43,7 +43,7 @@ A task is done when
 | 2 | The ring binder | The theme with rings, pages and two levels of tabs works in desktop browsers, in light and dark mode, in English and German, with placeholder content | ✅ |
 | 3 | Documentation import | The documentation of c0de and c0de net is on the site, with navigation, code highlighting and search | ✅ |
 | 4 | Home page and site content | Home page, legal pages, metadata for search engines, in English and German | ✅ |
-| 5 | Production and release 0.1.0 | c0de.at is online with certificates from Let's Encrypt |  |
+| 5 | Production and release 0.1.0 | c0de.at is online with certificates from Let's Encrypt | ✅ |
 | 6 | Tutorials | Concept and first tutorials (planned when the step starts) |  |
 
 ## Sprint 0: Concept and plan
@@ -131,9 +131,9 @@ A task is done when
 | 5.4 | Hardening of the container: the process runs unprivileged and listens on high ports, which Podman publishes as 80/tcp, 443/tcp and 443/udp; read-only root file system, health check, memory limit. | ✅ |
 | 5.5 | Release workflow `release.yml`: on a tag `v*`, the `linux/amd64` binary with checksum becomes a GitHub release, the image is pushed to `ghcr.io/joernott/www-c0de` with the tags of the version and `latest`. | ✅ |
 | 5.6 | Systemd unit `contrib/systemd/container-c0de.service`: pulls `ghcr.io/joernott/www-c0de:latest` with Podman, then runs the container with the volume `/data` and publishes the ports on a configurable IP address. The container settings are tested with Docker on the development VM; the operator adapts the web server to Podman. | ✅ |
-| 5.7 | Web server: dedicated IPv4 address for c0de.at, unit installed as `container-c0de`, firewall for 80/tcp, 443/tcp and 443/udp on that address, A records for `c0de.at` and `www.c0de.at` (no AAAA). |  |
+| 5.7 | Web server: dedicated IPv4 address for c0de.at, unit installed as `container-c0de`, firewall for 80/tcp, 443/tcp and 443/udp on that address, A records for `c0de.at` and `www.c0de.at` (no AAAA). (Done differently, 2026-11-10: the site runs behind the existing nginx reverse proxy of the web server, which has the certificates; see 5.7.1.) | ✅ |
 | 5.7.1 | Plain HTTP behind the reverse proxy of the web server, which does the TLS: flags `--httponly` (`C0DE_TLS=off`) and `--trusted-proxies` (`C0DE_TRUSTED_PROXIES`); the access log takes the client address from `X-Forwarded-For` of the trusted proxies, read from the right. | ✅ |
-| 5.8 | Release 0.1.0: tag, restart `container-c0de`, check the certificate, the redirects and the headers from outside (SSL Labs, securityheaders.com) and the pages in the browser. |  |
+| 5.8 | Release 0.1.0: tag, restart `container-c0de`, check the certificate, the redirects and the headers from outside (SSL Labs, securityheaders.com) and the pages in the browser. (Released 0.1.0 and 0.2.0; checked 2026-11-10: Let\'s Encrypt certificate for both names, TLS 1.2/1.3 only, all headers of the server, Lighthouse 100 everywhere, 45 of 47 end-to-end tests (the other two are the 301 and the Server header of nginx). Open on the proxy: see docs/operations.md, "Checks after going live".) | ✅ |
 | 5.9 | Documentation: README, development environment, `docs/operations.md` (deploying by restarting the service, going back to an earlier version, updating the documentation after a mod release, backing up `/data`, moving the site to another host). | ✅ |
 
 ## Sprint 6: Tutorials
