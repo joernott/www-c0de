@@ -53,13 +53,16 @@ There is no Docker, Podman or `make` on the workstation. Containers are built an
 | Command | What it does |
 |---|---|
 | `npm run dev` (in `site/`) | VitePress development server with hot reload on `http://localhost:5173` |
+| `npm run content` (in `site/`) | Writes the placeholder pages and `.vitepress/navigation.json` (until the import of sprint 3 replaces it); `dev` and `build` run it first |
 | `npm run import -- --local ../minecraft-c0de --local ../minecraft-c0de-net` (in `site/`) | Imports the documentation from the local working copies instead of the release tags (from sprint 3) |
 | `npm run build` (in `site/`) | Builds the site into `internal/site/dist`, where the Go binary embeds it (from sprint 3 it imports the sources at their tags first) |
 | `npm test`, `npm run lint`, `npm run typecheck` (in `site/`) | Vitest, ESLint and Prettier, vue-tsc |
-| `go test ./...` | Go tests of the server |
+| `go test ./cmd/... ./internal/...` | Go tests of the server (`./...` would also find Go code in `site/node_modules`) |
 | `CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -trimpath -o dist/c0de-www ./cmd/c0de-www` | Builds the static Linux binary with the built site |
 | `C0DE_TLS=off C0DE_HTTP_PORT=8089 C0DE_BIND=127.0.0.1 C0DE_DATA=$TEMP/c0de-www go run ./cmd/c0de-www` | Runs the server with the built site on Windows over HTTP (`http://127.0.0.1:8089`) for a quick check of the binary |
 | `scripts/check-whitespace.sh` | Whitespace of all files |
+| `E2E_BASE_URL=http://127.0.0.1:8089 npx playwright test --project chromium` (in `e2e/`) | End-to-end tests against the binary running on Windows (Chromium only; install it once with `npx playwright install chromium`) |
+| `npx playwright test screenshots` (in `e2e/`) | Screenshots of the important pages in light and dark mode at several window sizes, saved in `e2e/test-results/`, for reviewing the design |
 
 ## Development VM
 

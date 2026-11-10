@@ -12,6 +12,12 @@ export function languageOf(path: string): Language {
   return languages.find((l) => l !== defaultLanguage && l === first) ?? defaultLanguage
 }
 
+// pathOf returns the path of a page from its source file, relative to the site folder
+// (c0de/math/abs.md is /c0de/math/abs, de/c0de/math/index.md is /de/c0de/math/).
+export function pathOf(relativePath: string): string {
+  return '/' + relativePath.replace(/\.md$/, '').replace(/(^|\/)index$/, '$1')
+}
+
 // pathIn returns the path of the same page in another language.
 export function pathIn(path: string, language: Language): string {
   const current = languageOf(path)

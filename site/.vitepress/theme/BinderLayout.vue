@@ -1,33 +1,46 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useData, useRoute, withBase } from 'vitepress'
-import { languageOf, pathIn } from './language'
+import { useBinder } from './binder'
+import PageNav from './PageNav.vue'
+import RingSpine from './RingSpine.vue'
+import SmallScreenMenu from './SmallScreenMenu.vue'
+import TabColumn from './TabColumn.vue'
 
-// A placeholder layout until the ring binder is built in sprint 2.
-const { page } = useData()
-const route = useRoute()
-
-const language = computed(() => languageOf(route.path))
-const other = computed(() =>
-  language.value === 'de'
-    ? { href: pathIn(route.path, 'en'), label: 'English', lang: 'en' }
-    : { href: pathIn(route.path, 'de'), label: 'Deutsch', lang: 'de' },
-)
-const notFound = computed(() =>
-  language.value === 'de' ? 'Diese Seite gibt es nicht.' : 'This page does not exist.',
-)
+// The open ring binder: the spine with the rings on the left, the page in the middle and
+// the tabs at its right edge. Smaller screens get the page with a menu above it.
+const { t, notFound, otherLanguage, otherPath, link } = useBinder()
 </script>
 
 <template>
-  <div class="min-h-screen bg-desk text-ink">
-    <main class="mx-auto max-w-3xl bg-paper px-8 py-10 shadow-lg">
-      <nav class="mb-6 text-right text-sm">
-        <a :href="withBase(other.href)" :hreflang="other.lang" :lang="other.lang" class="underline">
-          {{ other.label }}
+  <div class="binder">
+    <RingSpine />
+    <div class="paper">
+      <header class="paper-header">
+        <SmallScreenMenu />
+        <a
+          :href="otherPath"
+          class="language-switch"
+          :hreflang="otherLanguage"
+          :lang="otherLanguage"
+        >
+          {{ t.otherLanguage }}
         </a>
-      </nav>
-      <p v-if="page.isNotFound" class="text-lg">{{ notFound }}</p>
-      <Content v-else class="content" />
-    </main>
+      </header>
+      <main class="paper-content">
+        <div v-if="notFound" class="content">
+          <h1>{{ t.notFoundTitle }}</h1>
+          <p>{{ t.notFound }}</p>
+          <p>
+            <a :href="link('/')">{{ t.backHome }}</a>
+          </p>
+        </div>
+        <Content v-else class="content" />
+      </main>
+      <PageNav v-if="!notFound" />
+      <footer class="paper-footer">
+        <a :href="link('/legal-notice')">{{ t.legalNotice }}</a>
+        <a :href="link('/privacy')">{{ t.privacy }}</a>
+      </footer>
+    </div>
+    <TabColumn />
   </div>
 </template>

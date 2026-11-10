@@ -137,7 +137,7 @@ Caddy provides:
   - compressed files (Brotli, Zstandard and gzip are created at build time),
   - caching: files with a hash in the name are cached forever, HTML pages are revalidated,
   - security headers: HSTS, Content-Security-Policy, X-Content-Type-Options, Referrer-Policy,
-  - URLs without `.html` and a 404 page in the ring binder style, in the language of the requested URL,
+  - URLs without `.html` and a 404 page in the ring binder style, in the language of the requested URL (the pre-rendered pages `/not-found` and `/de/not-found`, served with the status 404),
   - an access log in the volume `/data` with the full IP addresses, rotated daily and kept for three months. The privacy policy describes it.
 
 ### Container

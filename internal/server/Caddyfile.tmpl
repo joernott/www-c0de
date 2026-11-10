@@ -21,8 +21,11 @@
 	try_files {path} {path}.html {path}/index.html
 	file_server
 
+	# The not-found page in the language of the requested URL, with the status 404.
 	handle_errors 404 {
-		rewrite * /404.html
+		@german path /de /de/*
+		rewrite @german /de/not-found.html
+		rewrite * /not-found.html
 		file_server
 	}
 }

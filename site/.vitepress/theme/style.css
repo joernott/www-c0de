@@ -1,26 +1,578 @@
 @import 'tailwindcss';
+@import '@fontsource-variable/source-sans-3';
+@import '@fontsource-variable/jetbrains-mono';
 
 @source '../../**/*.md';
 
-/* The colors of the ring binder are refined in sprint 2. */
-@theme {
-  --color-desk: #c8b89a;
-  --color-paper: #fdfcf7;
-  --color-ink: #1f2933;
+/* Design tokens of the ring binder. Dark mode follows the operating system. They are static,
+   because most of them are used in plain CSS and SVG, not in Tailwind classes. */
+@theme static {
+  --font-sans: 'Source Sans 3 Variable', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, monospace;
+
+  --color-desk: #d6cfbf;
+  --color-cover: #1f4a32;
+  --color-cover-inside: #2a5a3f;
+  --color-paper: #fffef8;
+  --color-paper-edge: #e9e5d8;
+  --color-ink: #1d232a;
+  --color-ink-muted: #59626d;
+  --color-margin-line: rgb(214 92 92 / 0.35);
+  --color-link: #1d5f8a;
+  --color-rule: #ddd8ca;
+  --color-code-bg: #f3f1e8;
+  --color-metal-light: #f4f5f7;
+  --color-metal: #b9bec6;
+  --color-metal-dark: #7d838c;
+  --color-focus: #1d5f8a;
+
+  --tab-text: #1d232a;
+  --tab-home: #e7e0cd;
+  --tab-c0de: #a6d7a9;
+  --tab-lib1: #a9cdee;
+  --tab-lib2: #f3c28e;
+  --tab-lib3: #cfbcef;
+  --tab-lib4: #bcd98d;
+  --tab-lib5: #8fd5cd;
+  --tab-lib6: #f0a8b6;
+  --tab-lib7: #e5d47c;
+  --tab-lib8: #cfcfcf;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-desk: #1e1b17;
-    --color-paper: #2b2b2b;
-    --color-ink: #e6e2d8;
+    --color-desk: #141412;
+    --color-cover: #133021;
+    --color-cover-inside: #1b3f2c;
+    --color-paper: #25252a;
+    --color-paper-edge: #1c1c20;
+    --color-ink: #e8e4da;
+    --color-ink-muted: #a7a297;
+    --color-margin-line: rgb(214 92 92 / 0.3);
+    --color-link: #8cc4ec;
+    --color-rule: #3a3a40;
+    --color-code-bg: #1d1d22;
+    --color-metal-light: #c9cdd3;
+    --color-metal: #8b9099;
+    --color-metal-dark: #555a62;
+    --color-focus: #8cc4ec;
+
+    --tab-text: #f2efe8;
+    --tab-home: #4a463d;
+    --tab-c0de: #2d6941;
+    --tab-lib1: #2b5885;
+    --tab-lib2: #87511f;
+    --tab-lib3: #594393;
+    --tab-lib4: #4c6b20;
+    --tab-lib5: #1e6b64;
+    --tab-lib6: #873246;
+    --tab-lib7: #75661b;
+    --tab-lib8: #55555a;
   }
 }
 
-.content h1 {
-  @apply mb-4 text-3xl font-bold;
+/* Sizes of the binder on large screens. */
+:root {
+  --spine-width: 3.5rem; /* the visible inside of the cover */
+  --ring-reach: 3.5rem; /* how far the rings reach onto the paper */
+  --tabs-width: 11rem;
+  --tabs-edge: 0.75rem; /* the edge of the page that the tabs come out from under */
+  --paper-max: 58rem;
 }
 
-.content p {
+html {
+  color-scheme: light dark;
+  scroll-padding-top: 1rem;
+}
+
+body {
+  @apply bg-desk font-sans text-ink antialiased;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+}
+
+/* ---------- The binder ---------- */
+
+.binder {
+  @apply flex min-h-screen items-start;
+}
+
+.paper {
+  @apply relative flex min-h-screen min-w-0 flex-1 flex-col bg-paper;
+  max-width: var(--paper-max);
+  padding: 0 1.25rem;
+}
+
+.spine,
+.tabs {
+  display: none;
+}
+
+@media (min-width: 64rem) {
+  .binder {
+    padding-left: var(--spine-width);
+  }
+
+  .paper {
+    padding-left: calc(var(--ring-reach) + 2.5rem);
+    padding-right: 3rem;
+    box-shadow: 0 0 0 1px var(--color-paper-edge);
+  }
+
+  /* The red margin line of the paper, right of the punched holes. */
+  .paper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: calc(var(--ring-reach) + 1rem);
+    width: 1px;
+    background: var(--color-margin-line);
+  }
+
+  .spine {
+    display: block;
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    left: 0;
+    width: calc(var(--spine-width) + var(--ring-reach));
+    height: 100vh;
+    pointer-events: none;
+  }
+
+  .tabs {
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: var(--tabs-width);
+    flex: none;
+    margin-left: calc(-1 * var(--tabs-edge));
+    padding: 1rem 0;
+  }
+}
+
+.spine-cover {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: var(--spine-width);
+  background: linear-gradient(to right, var(--color-cover), var(--color-cover-inside));
+  box-shadow: inset -6px 0 8px -6px rgb(0 0 0 / 0.5);
+}
+
+.spine-mechanism {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0.6rem;
+  width: 1.4rem;
+  border-radius: 0.4rem;
+  background: linear-gradient(
+    to right,
+    var(--color-metal-dark),
+    var(--color-metal-light) 40%,
+    var(--color-metal) 70%,
+    var(--color-metal-dark)
+  );
+  box-shadow: 2px 0 4px rgb(0 0 0 / 0.35);
+}
+
+.spine-ring {
+  position: absolute;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+.spine-hole {
+  fill: var(--color-desk);
+  stroke: var(--color-paper-edge);
+  stroke-width: 1;
+}
+
+.spine-shadow {
+  fill: rgb(0 0 0 / 0.18);
+  filter: blur(2px);
+}
+
+.spine-ring-end {
+  fill: var(--color-metal-dark);
+}
+
+/* ---------- The tabs ---------- */
+
+/* The edge of the page continues in the tab column: tabs behind it look like they come out
+   from under the page, the current tab is drawn in front of it. */
+.tabs-edge {
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: var(--tabs-edge);
+  background: var(--color-paper);
+  box-shadow: 1px 0 0 var(--color-paper-edge);
+}
+
+.tabs-scroll-wrap {
+  @apply flex min-h-0 flex-1 flex-col;
+}
+
+.tabs-scroller {
+  @apply relative min-h-0 flex-1;
+  overflow-y: auto;
+  scrollbar-width: none;
+  padding: 0.25rem 0;
+}
+
+.tabs-scroller::-webkit-scrollbar {
+  display: none;
+}
+
+.tabs-list,
+.tabs-chapters {
+  @apply m-0 list-none p-0;
+}
+
+.tab {
+  @apply relative flex items-center gap-1.5 no-underline;
+  z-index: 0;
+  color: var(--tab-text);
+  background: var(--tab);
+  border-radius: 0 0.5rem 0.5rem 0;
+  padding-left: calc(var(--tabs-edge) + 0.5rem);
+  padding-right: 0.6rem;
+  margin-bottom: 0.25rem;
+  box-shadow: 1px 1px 2px rgb(0 0 0 / 0.2);
+  transition: transform 120ms ease-out;
+}
+
+.tab span {
+  @apply truncate;
+}
+
+.tab:hover {
+  transform: translateX(0.2rem);
+}
+
+.tab-main {
+  height: 2.4rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.tab-chapter {
+  height: 1.85rem;
+  font-size: 0.85rem;
+  margin-right: 1rem;
+  background: color-mix(in oklab, var(--tab) 55%, var(--color-paper));
+}
+
+.tab-selected {
+  font-weight: 700;
+}
+
+.tab-current {
+  z-index: 20;
+  font-weight: 700;
+  background: var(--tab);
+  box-shadow: 2px 1px 3px rgb(0 0 0 / 0.25);
+}
+
+.tab-current::before {
+  /* covers the edge of the page, so the tab and the page look like one piece */
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: var(--tabs-edge);
+  background: inherit;
+}
+
+.tab-home {
+  @apply flex-none;
+  margin-bottom: 0.6rem;
+}
+
+.tab-house,
+.tab-book {
+  width: 1.05rem;
+  height: 1.05rem;
+  flex: none;
+  fill: currentColor;
+}
+
+.tab-book {
+  width: 0.85rem;
+  height: 0.85rem;
+  opacity: 0.75;
+}
+
+.tabs-group-start {
+  margin-top: 0.6rem;
+}
+
+.tabs-scroll {
+  flex: none;
+  margin: 0.15rem 1.5rem 0.25rem calc(var(--tabs-edge) + 0.25rem);
+  height: 1.4rem;
+  border: 0;
+  border-radius: 0.4rem;
+  font-size: 0.7rem;
+  color: var(--color-ink);
+  background: color-mix(in oklab, var(--color-desk) 80%, transparent);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.25);
+  cursor: pointer;
+}
+
+/* ---------- Header, menu and footer of the page ---------- */
+
+.paper-header {
+  @apply flex items-center justify-between gap-4 py-4 text-sm;
+}
+
+.language-switch {
+  @apply ml-auto text-ink-muted underline-offset-4 hover:underline;
+}
+
+.menu {
+  @apply relative;
+}
+
+@media (min-width: 64rem) {
+  .menu {
+    display: none;
+  }
+}
+
+.menu-button {
+  @apply cursor-pointer rounded-md px-3 py-1.5 font-semibold;
+  background: var(--color-code-bg);
+}
+
+.menu-panel {
+  @apply absolute z-40 mt-2 max-h-[75vh] w-72 overflow-y-auto rounded-md p-2 shadow-lg;
+  background: var(--color-paper);
+  border: 1px solid var(--color-rule);
+}
+
+.menu-panel ul {
+  @apply m-0 list-none p-0;
+}
+
+.menu-main {
+  @apply my-1 block rounded px-3 py-1.5 font-semibold no-underline;
+  color: var(--tab-text);
+  background: var(--tab);
+}
+
+.menu-chapters a {
+  @apply block px-5 py-1 text-sm no-underline;
+  color: var(--color-ink);
+}
+
+.menu-panel [aria-current='page'] {
+  @apply underline;
+}
+
+.paper-footer {
+  @apply mt-auto flex gap-6 border-t py-6 text-sm text-ink-muted;
+  border-color: var(--color-rule);
+}
+
+.paper-footer a {
+  @apply underline-offset-4 hover:underline;
+}
+
+/* ---------- Turning the pages ---------- */
+
+.page-nav {
+  @apply my-10 grid grid-cols-2 gap-4;
+}
+
+.page-nav-link {
+  @apply flex flex-col rounded-md border px-4 py-3 no-underline;
+  border-color: var(--color-rule);
+}
+
+.page-nav-link:hover {
+  border-color: var(--color-link);
+}
+
+.page-nav-next {
+  @apply text-right;
+}
+
+.page-nav-hint {
+  @apply text-sm text-ink-muted;
+}
+
+.page-nav-title {
+  @apply font-semibold;
+  color: var(--color-link);
+}
+
+/* ---------- The content of a page ---------- */
+
+.paper-content {
+  @apply pb-4;
+}
+
+.content {
+  max-width: 46rem;
+}
+
+.content h1 {
+  @apply mt-2 mb-6 text-4xl leading-tight font-bold;
+}
+
+.content h2 {
+  @apply mt-10 mb-4 border-b pb-1 text-2xl font-bold;
+  border-color: var(--color-rule);
+}
+
+.content h3 {
+  @apply mt-8 mb-3 text-xl font-semibold;
+}
+
+.content h4 {
+  @apply mt-6 mb-2 font-semibold;
+}
+
+.content p,
+.content ul,
+.content ol,
+.content table,
+.content div[class*='language-'] {
   @apply mb-4;
+}
+
+.content ul {
+  @apply list-disc pl-6;
+}
+
+.content ol {
+  @apply list-decimal pl-6;
+}
+
+.content li + li {
+  @apply mt-1;
+}
+
+.content a {
+  color: var(--color-link);
+  @apply underline underline-offset-2;
+}
+
+.content strong {
+  @apply font-semibold;
+}
+
+.content img {
+  @apply my-4 max-w-full;
+}
+
+.content table {
+  @apply block w-full overflow-x-auto border-collapse text-[0.95rem];
+}
+
+.content th,
+.content td {
+  @apply border px-3 py-1.5 text-left align-top;
+  border-color: var(--color-rule);
+}
+
+.content th {
+  @apply font-semibold;
+  background: var(--color-code-bg);
+}
+
+.content :not(pre) > code {
+  @apply rounded px-1 py-0.5 font-mono text-[0.88em];
+  background: var(--color-code-bg);
+}
+
+/* Anchors on headings: VitePress adds a link, shown as # when the heading is hovered. */
+.content .header-anchor {
+  @apply ml-2 font-normal no-underline opacity-0;
+  color: var(--color-ink-muted);
+}
+
+.content .header-anchor::before {
+  content: '#';
+}
+
+.content :is(h1, h2, h3, h4):hover .header-anchor,
+.content .header-anchor:focus {
+  @apply opacity-100;
+}
+
+/* The contents list at the top of a page ([[toc]]). */
+.content .table-of-contents {
+  @apply mb-8 rounded-md border px-5 py-4 text-[0.95rem];
+  border-color: var(--color-rule);
+}
+
+.content .table-of-contents::before {
+  content: 'Contents';
+  @apply mb-2 block font-semibold;
+}
+
+:lang(de) .content .table-of-contents::before {
+  content: 'Inhalt';
+}
+
+.content .table-of-contents ul {
+  @apply mb-0 list-none pl-0;
+}
+
+.content .table-of-contents ul ul {
+  @apply pl-5;
+}
+
+.content .table-of-contents a {
+  @apply no-underline hover:underline;
+}
+
+/* Code blocks highlighted by Shiki in a light and a dark theme. */
+.content div[class*='language-'] {
+  @apply relative rounded-md;
+  background: var(--color-code-bg);
+}
+
+.content div[class*='language-'] > .lang {
+  @apply absolute top-1 right-3 font-mono text-xs;
+  color: var(--color-ink-muted);
+}
+
+.content div[class*='language-'] > .copy {
+  display: none;
+}
+
+.content pre {
+  @apply overflow-x-auto px-4 py-3 font-mono text-[0.88rem] leading-relaxed;
+}
+
+.content .shiki span {
+  color: var(--shiki-light);
+}
+
+@media (prefers-color-scheme: dark) {
+  .content .shiki span {
+    color: var(--shiki-dark);
+  }
 }

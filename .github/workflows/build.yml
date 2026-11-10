@@ -54,7 +54,7 @@ jobs:
           cache: npm
           cache-dependency-path: site/package-lock.json
       - name: Go tests
-        run: go test ./...
+        run: go test ./cmd/... ./internal/...
       - name: Vitest
         working-directory: site
         run: npm ci && npm test

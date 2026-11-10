@@ -21,7 +21,8 @@ var testSite = fstest.MapFS{
 	"index.html":           {Data: []byte("<h1>home</h1>")},
 	"c0de/guide.html":      {Data: []byte("<h1>guide</h1>")},
 	"c0de/math/index.html": {Data: []byte("<h1>math</h1>")},
-	"404.html":             {Data: []byte("<h1>not found</h1>")},
+	"not-found.html":       {Data: []byte("<h1>not found</h1>")},
+	"de/not-found.html":    {Data: []byte("<h1>nicht gefunden</h1>")},
 }
 
 func TestMain(m *testing.M) {
@@ -138,6 +139,8 @@ func TestServeHTTP(t *testing.T) {
 		{"/c0de/guide.html", http.StatusOK, "guide"},
 		{"/c0de/math/", http.StatusOK, "math"},
 		{"/missing", http.StatusNotFound, "not found"},
+		{"/de/missing", http.StatusNotFound, "nicht gefunden"},
+		{"/design", http.StatusNotFound, "not found"},
 	} {
 		status, body := get(t, http.DefaultClient, base+tc.path)
 		if status != tc.status || !strings.Contains(body, tc.body) {

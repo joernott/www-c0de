@@ -5,6 +5,8 @@ VERSION ?= $(shell git describe --tags --always --dirty 2>/dev/null || echo dev)
 IMAGE ?= localhost/www-c0de:dev
 CONTAINER ?= docker
 NAME ?= www-c0de
+# The Go packages; ./... would also find Go code inside site/node_modules.
+GO_PACKAGES := ./cmd/... ./internal/...
 
 # Node.js 26 on the development VM, beside the Node.js of the other projects (ignored where
 # the folder doesn't exist).
@@ -42,14 +44,14 @@ stop:
 	-$(CONTAINER) stop $(NAME)
 
 test: site/node_modules
-	go test ./...
+	go test $(GO_PACKAGES)
 	cd site && npm test
 
 lint: site/node_modules
 	scripts/check-whitespace.sh
-	@test -z "$$(gofmt -l .)" || { gofmt -l .; echo "gofmt: the files above are not formatted"; exit 1; }
-	go vet ./...
-	cd site && npm run lint && npm run typecheck
+	@test -z "$$(gofmt -l cmd internal)" || { gofmt -l cmd internal; echo "gofmt: the files above are not formatted"; exit 1; }
+	go vet $(GO_PACKAGES)
+	cd site && npm run lint && npm run typecheck && npx prettier --check ../e2e
 
 # Runs the end-to-end tests against the running container (make run). The system libraries
 # of the browsers are installed by contrib/setup_dev_vm.sh.
