@@ -69,3 +69,7 @@ Answers to the questions about the legal notice: the operator is Jörn Ott perso
 
 The legal documents are fine. I am hosting the servers myself. The email address is already working, I've tested it.
 Please start with sprint 5
+
+## 2026-11-10 – Release 0.1.0
+
+please go ahead with step 1
