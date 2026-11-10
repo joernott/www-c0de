@@ -39,7 +39,7 @@ A task is done when
 | Sprint | Goal | Result | Done |
 |---|---|---|:---:|
 | 0 | Concept and plan | Reviewed concept, implementation plan, development environment plan | ✅ |
-| 1 | Project skeleton | A placeholder page is served by the static binary and the container on the VM; CI builds everything |  |
+| 1 | Project skeleton | A placeholder page is served by the static binary and the container on the VM; CI builds everything | ✅ |
 | 2 | The ring binder | The theme with rings, pages and two levels of tabs works in desktop browsers, in light and dark mode, in English and German, with placeholder content |  |
 | 3 | Documentation import | The documentation of c0de and c0de net is on the site, with navigation, code highlighting and search |  |
 | 4 | Home page and site content | Home page, legal pages, metadata for search engines, in English and German |  |
@@ -66,9 +66,9 @@ A task is done when
 | 1.3 | Go module `github.com/joernott/www-c0de`: `c0de-www` is Caddy with its standard modules plus the module `caddy.fs.embedded` that serves the embedded site (`go:embed` of `internal/site/dist`, where VitePress builds it) as Caddy file system, and the embedded Caddyfile template. Settings from environment variables: domain, data folder, TLS mode (`acme`, `internal`, `off`), ports, bind address. Go tests start the server on free ports and fetch pages over HTTP and HTTPS. | ✅ |
 | 1.4 | `Makefile` for the VM and CI: `site`, `binary` (`CGO_ENABLED=0`, `-trimpath`, version from Git tags in `c0de-www version`), `image`, `run`, `e2e`, `test`, `lint`, `clean`. The build checks that the binary is static. On Windows, the same steps run with npm and Go directly (see the development environment). | ✅ |
 | 1.5 | `Containerfile` (stages Node.js → Go → `scratch` with CA certificates, unprivileged user listening on 8080/8443, which are published as 80/443 and 443/udp, volume `/data`) and `make run` for the VM with TLS mode `internal`. The image is built and run with Podman and Docker. | ✅ |
-| 1.6 | GitHub Actions workflow `build.yml`: whitespace check, lint, Vitest, Go tests (Linux and Windows), site, binary and image (not pushed). Renovate for npm, Go modules, container images and GitHub Actions. |  |
+| 1.6 | GitHub Actions workflow `build.yml`: whitespace check, lint, Vitest, Go tests (Linux and Windows), site, binary and image (not pushed). Renovate for npm, Go modules, container images and GitHub Actions. | ✅ |
 | 1.7 | Development VM: `contrib/setup_dev_vm.sh` installs Node.js 26 into `/opt/node-v26` (`contrib/vm-env.sh`), Podman and the Playwright browsers, without changing the Go and Node.js of doenerstag (Go 1.27.3 comes through the `toolchain` line of `go.mod`); clone in `~/src/www-c0de` with `receive.denyCurrentBranch = updateInstead`. Run it on the VM. | ✅ |
-| 1.8 | Playwright setup with a first end-to-end test against the container on the VM (page loads over HTTPS, HTTP redirects to HTTPS); workflow `e2e.yml` runs it in CI. |  |
+| 1.8 | Playwright setup with a first end-to-end test against the container on the VM (page loads over HTTPS, HTTP redirects to HTTPS); workflow `e2e.yml` runs it in CI. | ✅ |
 
 ## Sprint 2: The ring binder
 
