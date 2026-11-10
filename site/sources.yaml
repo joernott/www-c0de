@@ -1,0 +1,100 @@
+# The documentation imported into the site (npm run content, scripts/import/main.ts).
+#
+# sources: the repositories, each at a release tag. The documentation is in "docs";
+#   translations are in docs/<language>/ with the same file names and the same structure
+#   of ## and ### headings as the English files. Renovate proposes new tags.
+# tabs: the main tabs in their order. Every chapter is one page; its link is derived from
+#   the link of the tab and the file name (without number prefix) or the heading:
+#   - file: the whole file is one page (without the ## sections listed in "without"),
+#   - section: a ## section of a file is one page,
+#   - functions: every ### section of the library's ## section is one page.
+#   The overview page of a tab shows its label, "text", the introduction of the library
+#   section, the list of its chapters and "include" (a file whose headings are moved one
+#   level down). "list" limits the list of chapters to some groups (guide, handbook,
+#   functions, chapters).
+
+sources:
+  c0de:
+    repository: joernott/minecraft-c0de
+    tag: v0.3.0
+    docs: docs
+  c0de_net:
+    repository: joernott/minecraft-c0de-net
+    tag: v0.1.0
+    docs: docs
+
+tabs:
+  - id: c0de
+    label: c0de
+    color: c0de
+    link: /c0de/
+    source: c0de
+    overview:
+      text:
+        en: c0de is a small programming language inside Minecraft. You write programs by placing colorful blocks in a row, one row per line, and run them with trigger blocks. The guide explains the language step by step; the handbooks describe every block, item and function.
+        de: c0de ist eine kleine Programmiersprache in Minecraft. Programme entstehen aus bunten Blöcken, die in Reihen gelegt werden, eine Reihe pro Zeile, und Auslöser-Blöcke starten sie. Die Anleitung erklärt die Sprache Schritt für Schritt; die Handbücher beschreiben jeden Block, jeden Gegenstand und jede Funktion.
+      include: reference/index.md
+      list: [guide]
+    chapters:
+      - { file: guide/01-getting-started.md, group: guide }
+      - { file: guide/02-language.md, group: guide }
+      - { file: guide/03-running-programs.md, group: guide }
+      - { file: guide/04-tools.md, group: guide }
+      - { file: guide/05-libraries.md, group: guide }
+      - { file: guide/06-examples.md, group: guide }
+      - { file: reference/data.md, group: handbook }
+      - { file: reference/statements.md, group: handbook }
+      - { file: reference/tools.md, group: handbook }
+      - { file: reference/triggers.md, group: handbook }
+      - { file: reference/devices.md, group: handbook }
+      - file: reference/functions.md
+        group: handbook
+        without: [c0de/math, c0de/strings, c0de/time, c0de/minecraft]
+
+  - id: c0de/math
+    label: c0de/math
+    color: lib1
+    link: /c0de/math/
+    source: c0de
+    library: { file: reference/functions.md, section: c0de/math }
+    chapters:
+      - functions: true
+
+  - id: c0de/strings
+    label: c0de/strings
+    color: lib2
+    link: /c0de/strings/
+    source: c0de
+    library: { file: reference/functions.md, section: c0de/strings }
+    chapters:
+      - functions: true
+
+  - id: c0de/time
+    label: c0de/time
+    color: lib3
+    link: /c0de/time/
+    source: c0de
+    library: { file: reference/functions.md, section: c0de/time }
+    chapters:
+      - functions: true
+
+  - id: c0de/minecraft
+    label: c0de/minecraft
+    color: lib4
+    link: /c0de/minecraft/
+    source: c0de
+    library: { file: reference/functions.md, section: c0de/minecraft }
+    chapters:
+      - functions: true
+
+  - id: c0de_net/http
+    label: c0de_net/http
+    color: lib5
+    link: /c0de_net/http/
+    source: c0de_net
+    library: { file: reference/net.md, section: c0de_net/http }
+    chapters:
+      - { file: reference/net.md, section: Getting started }
+      - functions: true
+      - { file: reference/net.md, section: Errors }
+      - { file: reference/net.md, section: Examples }

@@ -7,3 +7,5 @@ c0de_net/
 de/c0de/
 de/c0de_net/
 .vitepress/navigation.json
+public/img/
+.cache/

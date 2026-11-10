@@ -21,9 +21,11 @@ e2e/playwright-report/
 .idea/
 *.DS_Store
 
-# Generated content (placeholders until sprint 3, then the import)
+# The imported documentation (npm run content) and the downloaded sources
 site/.vitepress/navigation.json
 site/c0de/
 site/c0de_net/
 site/de/c0de/
 site/de/c0de_net/
+site/public/img/
+site/.cache/

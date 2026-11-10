@@ -5,7 +5,7 @@ import globals from 'globals'
 import tseslint from 'typescript-eslint'
 
 export default tseslint.config(
-  { ignores: ['.vitepress/cache/', '.vitepress/.temp/', 'node_modules/'] },
+  { ignores: ['.vitepress/cache/', '.vitepress/.temp/', 'node_modules/', '.cache/', 'public/img/'] },
   js.configs.recommended,
   ...tseslint.configs.recommended,
   ...pluginVue.configs['flat/recommended'],

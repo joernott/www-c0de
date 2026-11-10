@@ -29,6 +29,10 @@ export function useBinder() {
   const link = (path: string) => pathIn(path, language.value)
   const label = (text: Localized) => localize(text, language.value)
 
+  // The imported pages name the mod and its version, and whether they are translated.
+  const source = computed(() => frontmatter.value.source as string | undefined)
+  const untranslated = computed(() => !!frontmatter.value.untranslated)
+
   return {
     route,
     language,
@@ -38,6 +42,8 @@ export function useBinder() {
     chapter,
     notFound,
     atHome,
+    source,
+    untranslated,
     otherLanguage,
     otherPath,
     link,

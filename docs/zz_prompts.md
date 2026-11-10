@@ -54,3 +54,7 @@ yes, please proceed
 Please use docker on the VM instead of Podman, I'll handle the server to accomodate podman later.
 
 You can continue with sprint-2 then
+
+## 2026-11-10 – Sprint 3
+
+please continue with sprint 3

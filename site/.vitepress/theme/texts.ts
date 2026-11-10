@@ -17,6 +17,7 @@ export interface Texts {
   backHome: string
   legalNotice: string
   privacy: string
+  untranslated: string
 }
 
 export const texts: Record<Language, Texts> = {
@@ -36,6 +37,7 @@ export const texts: Record<Language, Texts> = {
     backHome: 'Back to the home page',
     legalNotice: 'Legal notice',
     privacy: 'Privacy',
+    untranslated: 'This page is not translated yet.',
   },
   de: {
     home: 'Start',
@@ -53,5 +55,6 @@ export const texts: Record<Language, Texts> = {
     backHome: 'Zurück zur Startseite',
     legalNotice: 'Impressum',
     privacy: 'Datenschutz',
+    untranslated: 'Diese Seite ist noch nicht übersetzt. Sie wird auf Englisch angezeigt.',
   },
 }

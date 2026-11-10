@@ -1,4 +1,5 @@
 import { existsSync, readFileSync } from 'node:fs'
+import { slug } from 'github-slugger'
 import { defineConfigWithTheme, type HeadConfig } from 'vitepress'
 import { languages, pathIn, pathOf } from './theme/language'
 import type { ThemeConfig } from './theme/binder'
@@ -6,10 +7,10 @@ import type { Navigation } from './theme/navigation'
 
 const origin = 'https://c0de.at'
 
-// The navigation is generated with the content (npm run content, the import in sprint 3).
+// The navigation is written by the import of the documentation (npm run content).
 const navigationFile = new URL('./navigation.json', import.meta.url)
 if (!existsSync(navigationFile)) {
-  throw new Error('.vitepress/navigation.json is missing: run "npm run content" first')
+  throw new Error('.vitepress/navigation.json is missing: run "npm run content" (the import) first')
 }
 const navigation: Navigation = JSON.parse(readFileSync(navigationFile, 'utf-8'))
 
@@ -25,6 +26,12 @@ export default defineConfigWithTheme<ThemeConfig>({
   // script of VitePress' appearance switch isn't needed.
   appearance: false,
   head: [['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }]],
+  // Anchors as on GitHub (TO_JSON is #to_json), so the links of the mods keep working.
+  markdown: {
+    anchor: { slugify: slug },
+    headers: { slugify: slug },
+    toc: { slugify: slug },
+  },
   themeConfig: { navigation },
   locales: {
     root: {

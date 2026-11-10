@@ -1,0 +1,24 @@
+sources:
+  mod:
+    repository: someone/mod
+    tag: v1.2.3
+    docs: docs
+tabs:
+  - id: mod
+    label: mod
+    color: c0de
+    link: /mod/
+    source: mod
+    overview:
+      text: { en: The mod., de: Die Mod. }
+    chapters:
+      - { file: guide/01-start.md, group: guide }
+      - { file: reference/functions.md, group: handbook, without: [lib/a] }
+  - id: lib/a
+    label: lib/a
+    color: lib1
+    link: /lib/a/
+    source: mod
+    library: { file: reference/functions.md, section: lib/a }
+    chapters:
+      - functions: true

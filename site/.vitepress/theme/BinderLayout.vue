@@ -7,7 +7,7 @@ import TabColumn from './TabColumn.vue'
 
 // The open ring binder: the spine with the rings on the left, the page in the middle and
 // the tabs at its right edge. Smaller screens get the page with a menu above it.
-const { t, notFound, otherLanguage, otherPath, link } = useBinder()
+const { t, notFound, source, untranslated, otherLanguage, otherPath, link } = useBinder()
 </script>
 
 <template>
@@ -16,6 +16,7 @@ const { t, notFound, otherLanguage, otherPath, link } = useBinder()
     <div class="paper">
       <header class="paper-header">
         <SmallScreenMenu />
+        <span v-if="source" class="page-source">{{ source }}</span>
         <a
           :href="otherPath"
           class="language-switch"
@@ -33,7 +34,10 @@ const { t, notFound, otherLanguage, otherPath, link } = useBinder()
             <a :href="link('/')">{{ t.backHome }}</a>
           </p>
         </div>
-        <Content v-else class="content" />
+        <template v-else>
+          <p v-if="untranslated" class="untranslated" role="note">{{ t.untranslated }}</p>
+          <Content class="content" :lang="untranslated ? 'en' : undefined" />
+        </template>
       </main>
       <PageNav v-if="!notFound" />
       <footer class="paper-footer">
