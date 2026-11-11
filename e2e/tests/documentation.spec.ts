@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test'
+import { version } from './sources'
 
 // The imported documentation: links between the handbooks, the c0de highlighting and the
 // search.
@@ -10,7 +11,7 @@ test('the handbook overview links to the pages of the library functions', async 
   await page.getByRole('link', { name: 'GET_PRESSURE_PLATE', exact: true }).click()
   await expect(page).toHaveURL(/\/c0de\/minecraft\/get_pressure_plate$/)
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('GET_PRESSURE_PLATE')
-  await expect(page.locator('.page-source')).toHaveText('c0de 0.3.0')
+  await expect(page.locator('.page-source')).toHaveText(`c0de ${version('c0de')}`)
 })
 
 test('links to sections of a handbook lead to their anchors', async ({ page }) => {
@@ -41,7 +42,7 @@ test('c0de programs are highlighted in the colors of the blocks', async ({ page 
 
 test('the c0de net handbook is a library tab with its own chapters', async ({ page }) => {
   await page.goto('/c0de_net/http/')
-  await expect(page.locator('.page-source')).toHaveText('c0de net 0.1.0')
+  await expect(page.locator('.page-source')).toHaveText(`c0de net ${version('c0de_net')}`)
   const chapters = page.locator('nav.tabs .tab-chapter')
   await expect(chapters.first()).toHaveText('Getting started')
   await expect(chapters.last()).toHaveText('Examples')

@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test'
+import { version } from './sources'
 
 // The pages of the site itself: home page, legal notice, privacy policy, and what search
 // engines and link previews get.
@@ -9,8 +10,9 @@ test('the home page shows both mods with their versions and links', async ({ pag
   await page.goto('/')
   const mods = page.locator('.mod')
   await expect(mods).toHaveCount(2)
-  await expect(mods.nth(0).getByRole('heading')).toHaveText(/^c0de\s+0\.3\.0$/)
-  await expect(mods.nth(1).getByRole('heading')).toHaveText(/^c0de net\s+0\.1\.0$/)
+  // toHaveText with a string compares the whole text with normalized whitespace
+  await expect(mods.nth(0).getByRole('heading')).toHaveText(`c0de ${version('c0de')}`)
+  await expect(mods.nth(1).getByRole('heading')).toHaveText(`c0de net ${version('c0de_net')}`)
   await expect(mods.nth(0).getByRole('link', { name: 'Download on Modrinth' })).toHaveAttribute(
     'href',
     'https://modrinth.com/mod/T9RufCc0',
@@ -31,7 +33,8 @@ test('the home page shows the screenshot, an example and the tabs', async ({ pag
     .toBe(1280)
   await expect(page.locator('.shiki').first()).toContainText('FUNCTION greet')
   const tabs = page.locator('.tab-overview li')
-  await expect(tabs).toHaveCount(6)
+  // the tabs of c0de, the five libraries and the tutorials
+  await expect(tabs).toHaveCount(7)
   await expect(tabs.first()).toContainText('12 Kapitel')
   await expect(
     page.locator('.mod').first().getByRole('link', { name: 'Dokumentation' }),
