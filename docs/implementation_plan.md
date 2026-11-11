@@ -44,7 +44,7 @@ A task is done when
 | 3 | Documentation import | The documentation of c0de and c0de net is on the site, with navigation, code highlighting and search | ✅ |
 | 4 | Home page and site content | Home page, legal pages, metadata for search engines, in English and German | ✅ |
 | 5 | Production and release 0.1.0 | c0de.at is online with certificates from Let's Encrypt | ✅ |
-| 6 | Tutorials: pages and the path for programmers | The tutorials have their own tab, tested programs, and the path "c0de for programmers" |  |
+| 6 | Tutorials: pages and the path for programmers | The tutorials have their own tab, tested programs, and the path "c0de for programmers" | ✅ |
 | 7 | Tutorials: learning to program | The path for beginners, with screenshots |  |
 | 8 | Programs in 3D | Example programs can be turned and zoomed as 3D models, built from the block models of c0de |  |
 | 9 | Tutorials: libraries in practice | The API for the tutorials and the version check, and the recipes of all libraries |  |
@@ -157,7 +157,7 @@ A task is done when
 | 6.7 | Path 2, lessons 2.5–2.8: functions and libraries, collections and structs, errors, programs in the world. English and German. | ✅ |
 | 6.8 | Path 2, lessons 2.9–2.11: screens and I/O, data and the network, the cheat sheet. English and German. | ✅ |
 | 6.8.1 | `sources.yaml` imports c0de net v0.2.0 with its German handbook and its runner library, so the whole German site is translated and the c0de_net programs of the tutorials are tested too. The end-to-end test of an untranslated page is gone with the last untranslated page; the import's unit tests still cover them. | ✅ |
-| 6.9 | Review of the path in the binary and the container (Playwright, Lighthouse, link check), and the gaps found in the mod as tasks in its plan (T7). Release. |  |
+| 6.9 | Review of the path in the binary and the container (Playwright, Lighthouse, link check), and the gaps found in the mod as tasks in its plan (T7). Release 0.3.0 on 2026-11-11, live on c0de.at (live end-to-end tests: 56 of 58, the 2 known differences of nginx). | ✅ |
 
 ## Sprint 7: Tutorials: learning to program
 
