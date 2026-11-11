@@ -10,7 +10,7 @@ This document plans the tutorials of c0de.at in detail. It builds on the section
 
 The paths don't depend on each other: a beginner reads the first path and then the third, a programmer the second and then the third. Lessons link to the guide and the handbooks for details instead of repeating them; the tutorials explain *why* and *how to combine*, the handbooks list *what exists*.
 
-The open questions at the end are decided before the tasks of sprint 6 are planned (task 6.2).
+The [decisions](#decisions) at the end answer the open questions of this plan (2026-11-11). The tasks are in the [implementation plan](implementation_plan.md), sprints 6 to 9.
 
 ## Common format
 
@@ -21,7 +21,7 @@ Every lesson is one page and has the same parts:
 1. **What you'll learn**: two or three sentences, and for the beginner path the new words (program, variable, loop …).
 2. **What you need**: the blocks, devices and items to craft or take from the creative inventory, and whether the lesson needs a world where you are an operator.
 3. **The idea**: the concept, explained without c0de first in the beginner path, in comparison with other languages in the programmer path, and with the problem it solves in the library path.
-4. **The program**: a complete program in a ` ```c0de ` block, written in the text notation of the guide ("Reading the examples"). Every program in a tutorial is complete and runs as it is; there are no fragments that can't be built.
+4. **The program**: a complete program in a ` ```c0de ` block, written in the text notation of the guide ("Reading the examples"). Every program in a tutorial is complete and runs as it is; there are no fragments that can't be built. Each program is a file in `site/tutorials/programs/`, which the page includes and the tests run. Beside the text, the reader can switch to a 3D model of the program as it lies on the sheet (from sprint 8 on).
 5. **Building and running it**: how to set up the trigger block or the device, which variable items to put in, what to watch (the cursor, the screen, the world).
 6. **How it works**: the program explained line by line (beginner path) or by its interesting parts (other paths).
 7. **Try it yourself**: one to three exercises that change the program. Each has a solution, folded away (`<details>`, which needs no JavaScript).
@@ -32,6 +32,14 @@ Lessons of the beginner path are short (one new idea per lesson). Lessons of the
 ### A running thread
 
 The beginner path follows one story: the reader builds the **computer of their base**. It starts as a sign that greets visitors and grows, lesson by lesson, into a guarded door with a visitor counter, a notice board and a game. So every new idea solves a problem the reader can see in the game, and the last lessons combine the earlier ones.
+
+### The world of the tutorials
+
+The tutorials assume a **single-player world in creative mode with cheats on**, so the reader has every block at hand and is an operator. This is said explicitly on the overview page `/tutorials/` and in lesson 1.0 "Before you start". Lessons and recipes that need the operator (world-changing functions of c0de/minecraft, teleporting players) are marked; they also explain what the server's `config/c0de.properties` must allow on a multiplayer server, and show the alternative for everyone where there is one.
+
+### Pictures
+
+Example programs are shown as text and, from sprint 8 on, as 3D models: c0de exports every block as a glTF model with its release, the site builds a scene of the sheet from the text of the program and shows it with `<model-viewer>`, which the reader turns and zooms. Screenshots remain the fallback (no WebGL, no JavaScript, the poster while the model loads) and show what can't be built from a program: screens, the chat, the world around a program. Path 1 shows every program and its result; paths 2 and 3 only where the world matters.
 
 ### Languages
 
@@ -138,10 +146,13 @@ Recipes marked **(op)** change the world with functions that need an operator or
 | 3.26 | Checking a service | HTTP_HEAD, HTTP_OPTIONS, HTTP_TRACE | A status lamp that shows if a web site is up, and what a server allows |
 | 3.27 | When the network fails | the errors of c0de net, SLEEP | Retrying a request with a growing wait; friendly messages for every error code |
 | 3.28 | Home automation | HTTP_PUT, constant items | A lever in the game switches a lamp at home; the token stays in a constant item |
+| 3.29 | Is my c0de up to date? | HTTP_GET, FROM_JSON | Asks `c0de.at/api/version` for the latest released versions of c0de and c0de net and compares them with the installed ones on a display |
+
+The services of these recipes: the weather comes from a free public API without a key (Open-Meteo); echo, to-do list and version check are a small API of c0de.at itself (`/api/tutorial/echo`, `/api/tutorial/todo`, in memory and emptied daily, and `/api/version`, read from the GitHub releases). Recipe 3.28 uses a placeholder address, because every home automation is different. The requests come from the computer of the player who runs the program.
 
 ### Coverage
 
-Every library function and the recipes that use it. A function that gets added to a library must get a recipe too; the check in the open question T3 can test this list.
+Every library function and the recipes that use it. A function that gets added to a library must get a recipe too; the build checks this list (task 9.7).
 
 | Library | Function → recipe |
 |---|---|
@@ -149,7 +160,7 @@ Every library function and the recipes that use it. A function that gets added t
 | c0de/strings | LEFT 3.7 · RIGHT 3.7 · MID 3.8 · REPLACE 3.8 · INSTR 3.8 · UCASE 3.7 · LCASE 3.7 · SPACE 3.7 · FILL 3.7 · ASC 3.9 · CHR 3.9 · STR 3.8, 3.10 · FORMAT 3.10, 3.12 · VAL 3.8 · HEX 3.10 · OCT 3.10 · TO_JSON 3.11, 3.25 · TO_YAML 3.11 · FROM_JSON 3.11, 3.24 · FROM_YAML 3.11 |
 | c0de/time | NOW 3.12 · MILLISECOND 3.14 · SECOND 3.12 · MINUTE 3.12 · HOUR 3.12 · DAY 3.13 · MONTH 3.13 · YEAR 3.13 · WEEKDAY 3.13 · WEEK 3.13 · TIMER 3.14 · SLEEP 3.15, 3.27 |
 | c0de/minecraft | TICKS 3.15 · BEEP 3.16 · SOUND 3.16 · SAY 3.16 · GET_BLOCK 3.19 · GET_INVENTORY 3.20 · GET_LEVER 3.17 · SET_LEVER 3.17 · GET_BUTTON 3.17 · PRESS_BUTTON 3.17 · GET_PRESSURE_PLATE 3.18 · GET_OPEN 3.18 · SET_OPEN 3.18 · MOVE_ITEMS 3.20 · DELETE_ITEMS 3.20 · PLACE_BLOCK 3.4, 3.21 · REMOVE_BLOCK 3.21 · MINE_BLOCK 3.22 · SPAWN_ITEM 3.23 · SPAWN_ENTITY 3.23 · FIND_ENTITIES 3.19 · TELEPORT 3.23 |
-| c0de_net/http | HTTP_CONNECTION 3.24 · HTTP_GET 3.24 · HTTP_HEAD 3.26 · HTTP_OPTIONS 3.26 · HTTP_TRACE 3.26 · HTTP_DELETE 3.25 · HTTP_PATCH 3.25 · HTTP_POST 3.25 · HTTP_PUT 3.25, 3.28 |
+| c0de_net/http | HTTP_CONNECTION 3.24 · HTTP_GET 3.24, 3.29 · HTTP_HEAD 3.26 · HTTP_OPTIONS 3.26 · HTTP_TRACE 3.26 · HTTP_DELETE 3.25 · HTTP_PATCH 3.25 · HTTP_POST 3.25 · HTTP_PUT 3.25, 3.28 |
 
 The built-in functions (LEN, HAS_KEY, REMOVE, INSERT, CLEAR, SWAP, RAISE, and the input and output functions) belong to the language and are taught in paths 1 and 2.
 
@@ -159,22 +170,27 @@ The built-in functions (LEN, HAS_KEY, REMOVE, INSERT, CLEAR, SWAP, RAISE, and th
 |---|---|---|
 | Learning to program | 18 | 30 |
 | c0de for programmers | 11 | 20 |
-| Libraries in practice | 28 and one overview per library | 40 |
+| Libraries in practice | 29 and one overview per library | 40 |
 
-That is about 60 pages per language, too much for one sprint. The proposed order:
+That is about 60 pages per language. They are written in this order:
 
 1. Sprint 6: the pages and navigation of the tutorials, the tests of their programs, and path 2 (the shortest, and it makes the gaps of the guide visible).
-2. Sprint 7: path 1.
-3. Sprint 8: path 3; recipes of a library can be released one library at a time.
+2. Sprint 7: path 1, with screenshots.
+3. Sprint 8: the 3D models of the programs, once c0de releases its block models.
+4. Sprint 9: the API of c0de.at and path 3.
 
-## Open questions
+The mods prepare their part in a sprint "Documentation" each (c0de sprint 14, c0de net sprint 6): the program runner for the tests, the 3D models of the blocks, and the German translation of their documentation.
 
-| # | Question | Proposal |
+## Decisions
+
+The open questions of this plan, answered on 2026-11-11 (also in the [Decisions](implementation_plan.md#decisions) of the implementation plan).
+
+| # | Question | Decision |
 |---|---|---|
-| T1 | **Navigation.** Chapter tabs are one per page elsewhere, but 60 tabs under one main tab are too many. | The main tab "Tutorials" leads to an overview of the three paths. Its chapter tabs are the three paths (and, for path 3, one per library). A path's first page lists its lessons; lessons are turned with the previous and next links at the bottom, and the tab of their path stays selected. |
-| T2 | **Names of the paths** in English and German. | "Learning to program" / "Programmieren lernen", "c0de for programmers" / "c0de für Programmierer", "Libraries in practice" / "Bibliotheken in der Praxis". |
-| T3 | **Testing the programs against new versions of c0de.** The guide's examples come from the mod's test suite; the tutorials are in this repository. | Every program of a tutorial is also a file in `site/tutorials/programs/`, and the page includes it from there. The mod gets a way to run a program file and compare its results (a test runner or a game test that takes a folder); the CI of this repository runs it with the mod at the tag of `sources.yaml`, so a Renovate update of the tag fails if a tutorial breaks. This needs a task in minecraft-c0de. |
-| T4 | **Screenshots.** Beginners need to see blocks on the sheet and the devices; the text notation is abstract. | Path 1 gets a screenshot of every program on its sheet and of the result (display, laptop, chat); paths 2 and 3 only where the world matters (3.4, 3.17–3.23). They are taken in the game by hand, as WebP, with the same resource pack and window size, and listed in a file so they can be retaken after visual changes of the mod. |
-| T5 | **Servers for c0de net.** The recipes 3.24–3.28 need real web services. The requests come from the player's computer. | Use a free public API without a key for the weather (for example Open-Meteo), and for the REST recipes a small echo and to-do service that the site itself serves (e.g. `c0de.at/api/tutorial/…`, in memory, reset daily). Recipe 3.28 stays an example with a placeholder address. |
-| T6 | **Worlds and permissions.** Several recipes need an operator. | The tutorials assume a single-player creative world with cheats on (the player is an operator) and mark the recipes that need it, as above. |
-| T7 | **Gaps in the mod.** Some recipes need functions that may not exist (e.g. the name of an item in an inventory slot for 3.20, a lamp state for 3.26). | Each recipe is checked against the handbook when it is written; a missing function becomes a task in the mod's plan, and the recipe waits or changes. |
+| T1 | **Navigation.** Chapter tabs are one per page elsewhere, but 60 tabs under one main tab are too many. | As proposed: the main tab "Tutorials" leads to an overview of the three paths. Its chapter tabs are the three paths (and, for path 3, one per library). A path's first page lists its lessons; lessons are turned with the previous and next links at the bottom, and the tab of their path stays selected. |
+| T2 | **Names of the paths** in English and German. | As proposed: "Learning to program" / "Programmieren lernen", "c0de for programmers" / "c0de für Programmierer", "Libraries in practice" / "Bibliotheken in der Praxis". |
+| T3 | **Testing the programs against new versions of c0de.** The guide's examples come from the mod's test suite; the tutorials are in this repository. | As proposed: every program of a tutorial is a file in `site/tutorials/programs/` with its expected results, and the page includes it from there. c0de gets a program runner that its releases attach (c0de task 14.1), c0de net a library for it (c0de net task 6.1); the CI of this repository runs the programs with the runner of the tag in `sources.yaml`, so a Renovate update of the tag fails if a tutorial breaks. Both mods get a sprint "Documentation" for this, which also translates their documentation into German. |
+| T4 | **Screenshots.** Beginners need to see blocks on the sheet and the devices; the text notation is abstract. | c0de exports every block as a 3D model (glTF) with its releases (c0de tasks 14.7, 14.8), and the site shows example programs as 3D models with `<model-viewer>` (sprint 8). Screenshots remain the fallback and show outputs: path 1 every program and its result, paths 2 and 3 where the world matters. They are taken in the game by hand, as WebP, and listed in a file so they can be retaken. |
+| T5 | **Servers for c0de net.** The recipes 3.24–3.28 need real web services. The requests come from the player's computer. | As proposed: Open-Meteo for the weather, a small API of c0de.at for echo and to-do list, recipe 3.28 with a placeholder address. In addition, c0de.at answers the latest released versions of c0de and c0de net, read from their GitHub releases (`/api/version`, task 9.2), which recipe 3.29 uses. |
+| T6 | **Worlds and permissions.** Several recipes need an operator. | As proposed, and said explicitly on the overview page and in lesson 1.0 (see [The world of the tutorials](#the-world-of-the-tutorials)). |
+| T7 | **Gaps in the mod.** Some recipes need functions that may not exist (e.g. the name of an item in an inventory slot for 3.20, a lamp state for 3.26). | As proposed: each recipe is checked against the handbook when it is written; a missing function becomes a task in the mod's plan, and the recipe waits or changes. |

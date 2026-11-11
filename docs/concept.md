@@ -175,6 +175,8 @@ The second part targets people with development experience. They already know, h
 
 The third part explains the usage of the various library functions with practical examples.
 
+The tutorials assume a single-player world in creative mode with cheats on; the overview page says so, and lessons that need an operator are marked. Every program of a tutorial is a file that CI runs with the program runner of the c0de release in `sources.yaml`. Example programs are shown as text and as 3D models of the sheet (built from the block models that c0de attaches to its releases, shown with `<model-viewer>`); screenshots are the fallback and show outputs. For the recipes of c0de net, the server provides a small API: an echo, a to-do list kept in memory for a day, and the latest released versions of c0de and c0de net, read from their GitHub releases. Details and the decisions are in [Tutorials](tutorials.md).
+
 ## Legal pages
 
 A website run from Germany or Austria needs a legal notice (Impressum) and a privacy policy, in both languages of the site. Both are linked from the bottom of every page. The operator is Jörn Ott personally (Hauptstr. 2, 53604 Bad Honnef), reachable by phone and at c0de@c0de.at; the legal notice has no tax or VAT numbers. The privacy policy describes the access log: for every request the full IP address and port, the time, the requested address, the request headers of the browser (without cookies and passwords), the TLS version and cipher, and the status, size and duration of the answer, kept for three months for the operation and security of the server. The log of the server (task 5.2) must write exactly these fields; if it changes, the privacy policy changes with it.

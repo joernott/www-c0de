@@ -6,7 +6,7 @@ This plan implements the [concept](concept.md) of the website c0de.at in sprints
 
   - **The binary is the website.** From sprint 1 on, every result is shown in the static binary and in the container, not only in the development server of VitePress.
   - **The mods' documentation is the single source.** Nothing imported is edited by hand. If a page looks wrong because of its Markdown, the fix goes to the mod repository; if it looks wrong because of the import or the theme, the fix goes here.
-  - **Thin server.** Caddy does the work. The own Go code is limited to embedding the site and the configuration.
+  - **Thin server.** Caddy does the work. The own Go code is limited to embedding the site and the configuration, and from sprint 9 on to the small API for the tutorials and the version check.
   - **No external resources.** Fonts, scripts, images and the search index are part of the site from the first page on.
   - **Desktop first, two languages from the start.** Every feature is built for desktop browsers and in English and German.
   - **Every sprint ends with a working website.** CI is green, and the result of the sprint can be shown in the browser.
@@ -44,7 +44,10 @@ A task is done when
 | 3 | Documentation import | The documentation of c0de and c0de net is on the site, with navigation, code highlighting and search | ✅ |
 | 4 | Home page and site content | Home page, legal pages, metadata for search engines, in English and German | ✅ |
 | 5 | Production and release 0.1.0 | c0de.at is online with certificates from Let's Encrypt | ✅ |
-| 6 | Tutorials | Concept and first tutorials (planned when the step starts) |  |
+| 6 | Tutorials: pages and the path for programmers | The tutorials have their own tab, tested programs, and the path "c0de for programmers" |  |
+| 7 | Tutorials: learning to program | The path for beginners, with screenshots |  |
+| 8 | Programs in 3D | Example programs can be turned and zoomed as 3D models, built from the block models of c0de |  |
+| 9 | Tutorials: libraries in practice | The API for the tutorials and the version check, and the recipes of all libraries |  |
 
 ## Sprint 0: Concept and plan
 
@@ -136,15 +139,64 @@ A task is done when
 | 5.8 | Release 0.1.0: tag, restart `container-c0de`, check the certificate, the redirects and the headers from outside (SSL Labs, securityheaders.com) and the pages in the browser. (Released 0.1.0 and 0.2.0; checked 2026-11-10: Let\'s Encrypt certificate for both names, TLS 1.2/1.3 only, all headers of the server, Lighthouse 100 everywhere, 45 of 47 end-to-end tests (the other two are the 301 and the Server header of nginx). Open on the proxy: see docs/operations.md, "Checks after going live".) | ✅ |
 | 5.9 | Documentation: README, development environment, `docs/operations.md` (deploying by restarting the service, going back to an earlier version, updating the documentation after a mod release, backing up `/data`, moving the site to another host). | ✅ |
 
-## Sprint 6: Tutorials
+## Sprint 6: Tutorials: pages and the path for programmers
 
-**Goal:** the first tutorials are on the site under `/tutorials/`. The tasks are planned when the concept of the tutorials is written.
+**Goal:** the tutorials have their own main tab under `/tutorials/`, every program of a tutorial is tested against the c0de version of `sources.yaml`, and the path "c0de for programmers" is complete in English and German. The lessons are planned in [Tutorials](tutorials.md).
 
 | Task | Description | Done |
 |---|---|:---:|
-| 6.1 | Write the concept of the tutorials: audience, structure, format of the pages, languages, use of screenshots and example programs, how tutorials are tested against new versions of c0de. |  |
+| 6.1 | Write the concept of the tutorials: audience, structure, format of the pages, languages, use of screenshots and example programs, how tutorials are tested against new versions of c0de. | ✅ |
 | 6.1.1 | Plan the lessons of the three paths (learning to program, c0de for programmers, libraries in practice) in `docs/tutorials.md`, with the format of a lesson, the coverage of every library function and the open questions T1–T7. | ✅ |
-| 6.2 | Plan the remaining tasks of this sprint. |  |
+| 6.1.2 | Answers to T1–T7 (2026-11-11, see [Decisions](#decisions)): the documentation sprints of the mods (c0de sprint 14, c0de net sprint 6) are added to their plans; the 3D views become sprint 8 here, the API and the version check sprint 9. | ✅ |
+| 6.2 | Plan the remaining tasks of this sprint and the sprints 7 to 9. | ✅ |
+| 6.3 | The main tab "Tutorials" in its own color with the overview page `/tutorials/` (the three paths, who they are for, and the world they assume: single player, creative, cheats on); its chapter tabs are the three paths, and for "Libraries in practice" one tab per library. Lessons are pages of their path: the tab of the path stays selected, and the previous and next links turn the lessons. English and German. Vitest for the navigation, Playwright. |  |
+| 6.4 | The parts of a lesson: a box "What you need" (with a mark for lessons that need an operator), exercises with folded solutions (`<details>`), "Read more". Programs are files in `site/tutorials/programs/` and are included into the pages, so page and test use the same text. |  |
+| 6.5 | Test of the tutorial programs: a script runs every program of `site/tutorials/programs/` with the runner of c0de (c0de task 14.1) at the tag of `sources.yaml` and compares its results with the `.expected.yaml` beside it; programs with c0de/minecraft are validated only. Runs in CI. Until the runner is released, the programs are checked by hand in the game. |  |
+| 6.6 | Path 2, lessons 2.1–2.4: c0de in ten minutes, types and values, expressions and statements, control flow. English and German. |  |
+| 6.7 | Path 2, lessons 2.5–2.8: functions and libraries, collections and structs, errors, programs in the world. English and German. |  |
+| 6.8 | Path 2, lessons 2.9–2.11: screens and I/O, data and the network, the cheat sheet. English and German. |  |
+| 6.9 | Review of the path in the binary and the container (Playwright, Lighthouse, link check), and the gaps found in the mod as tasks in its plan (T7). Release. |  |
+
+## Sprint 7: Tutorials: learning to program
+
+**Goal:** the path "Learning to program" is complete in English and German, with screenshots of the programs and their results.
+
+| Task | Description | Done |
+|---|---|:---:|
+| 7.1 | Screenshots: conventions (window size, resource pack, WebP, width and height), the list `site/tutorials/screenshots.yaml` of every screenshot with the world and the position it shows, so they can be taken again after visual changes of the mod. |  |
+| 7.2 | Lessons 1.0–1.6: before you start (with the world the tutorials assume), the first program, colors, variables, calculating, parameters and results, asking the player. English and German, with screenshots. |  |
+| 7.3 | Lessons 1.7–1.10: decisions, counting loops, loops with a condition, functions. |  |
+| 7.4 | Lessons 1.11–1.14: lists, tables and own types, errors, libraries. |  |
+| 7.5 | Lessons 1.15–1.17: the projects "Guess the number" and "The guarded door", where to go next. |  |
+| 7.6 | Review with somebody who hasn't programmed before, if possible; Playwright, Lighthouse, link check. Release. |  |
+
+## Sprint 8: Programs in 3D
+
+**Goal:** example programs can be seen as they look on the sheet in the game, as 3D models that the reader turns and zooms. Needs the block models of c0de (c0de tasks 14.7 and 14.8).
+
+| Task | Description | Done |
+|---|---|:---:|
+| 8.1 | `<model-viewer>` (npm package, hosted on the site): loaded only on pages with a model, allowed by the Content-Security-Policy without `unsafe-eval`, works with the keyboard, respects "reduce motion", light and dark mode. |  |
+| 8.2 | The import downloads `c0de-models-<version>.zip` of the tag in `sources.yaml` (or reads it from a local build). |  |
+| 8.3 | A build step turns a program in the text notation into a scene: the sheet with its floor, the cursor rail and the line numbers, and every block at its place, as one GLB file per program. The texts of LABEL, LITERAL, OPERATOR and COMMENT blocks are shown as labels when the reader points at a block. Vitest. |  |
+| 8.4 | A switch "3D / text" at every program of the tutorials; the screenshot of 7.1 is the fallback without WebGL or JavaScript and the poster while the model loads. Outputs (screens, chat) stay screenshots. |  |
+| 8.5 | The same views for the complete programs of the imported guide and handbooks. |  |
+| 8.6 | Size and speed: models compressed, loaded lazily; Lighthouse stays at 100. Release. |  |
+
+## Sprint 9: Tutorials: libraries in practice
+
+**Goal:** the recipes of all libraries are on the site, and the recipes of c0de net talk to real services: a public weather API and a small API of c0de.at itself, which also tells programs the latest version of c0de.
+
+| Task | Description | Done |
+|---|---|:---:|
+| 9.1 | API for the tutorials, a Caddy module of this repository: `/api/tutorial/echo` answers every method (also HEAD, OPTIONS and TRACE) with the request it got; `/api/tutorial/todo` is a shared to-do list (GET, POST, PUT, PATCH, DELETE) in memory, limited in size and number of requests, emptied every day. Go tests. |  |
+| 9.2 | Version check: `/api/version` answers the latest released versions of c0de and c0de net as JSON, read from the GitHub releases of minecraft-c0de and minecraft-c0de-net and cached for an hour; when GitHub can't be reached, it answers the last known versions. Go tests. |  |
+| 9.3 | The privacy policy describes the API (the requests come from the computers of the players and are logged like every request; the to-do list keeps what players send for at most one day). English and German. |  |
+| 9.4 | Recipes 3.1–3.6 (c0de/math) and 3.7–3.11 (c0de/strings). English and German. |  |
+| 9.5 | Recipes 3.12–3.15 (c0de/time) and 3.16–3.23 (c0de/minecraft). |  |
+| 9.6 | Recipes 3.24–3.29 (c0de_net/http), against Open-Meteo and the API of 9.1 and 9.2. |  |
+| 9.7 | Coverage check: the build fails if a function of a library handbook has no recipe in the coverage table of the tutorials; the handbook page of every function links to its recipes ("Used in the tutorials"). |  |
+| 9.8 | Review, Playwright, Lighthouse, link check. Release. |  |
 
 ## Risks
 
@@ -160,6 +212,9 @@ A task is done when
 | `latest` is pulled on every restart, so a broken release goes live on the next restart of the service. | Releases only after CI and the end-to-end tests on the VM are green; the previous version stays on ghcr.io and can be started by its tag (5.9). |
 | Three months of access logs with full IP addresses fill the volume. | The logs are compressed when rotated and deleted after three months (5.2). |
 | The website shows documentation that doesn't match the version players have installed. | The import uses release tags only (3.1); the version of every mod is shown on its pages. |
+| A new release of c0de breaks programs of the tutorials. | Every tutorial program runs with the runner of the release in `sources.yaml` (6.5), so the Renovate pull request of the new tag fails. |
+| `<model-viewer>` needs more than the Content-Security-Policy allows (e.g. `blob:` URLs for textures). | Task 8.1 tests it with the policy of the server first; only the needed sources are added, for the pages with models. |
+| The public API of the tutorials is abused or fills the memory. | Limits on size and requests, no data kept longer than a day, nothing but the to-do list stored (9.1). |
 
 ## Decisions
 
@@ -188,3 +243,10 @@ Answers to the open questions of the [concept review](concept_review.md) (task 0
 | Q10.1 Translations | The German translations of the documentation are planned in the mod repositories themselves; the site imports them (2026-11-10). |
 | Q11 Colors | As proposed: the c0de tab in the green of the greenbar paper, distinct colors for the libraries with enough contrast in both modes (2026-11-10). |
 | Q12 Home page | As proposed: what c0de is, a screenshot, an example program, links to Modrinth and GitHub with the current versions, an overview of the chapters (2026-11-10). |
+| T1 Navigation of the tutorials | The main tab "Tutorials" leads to an overview; its chapter tabs are the three paths (and one per library in "Libraries in practice"); lessons are turned with the previous and next links (2026-11-11). |
+| T2 Names of the paths | "Learning to program" / "Programmieren lernen", "c0de for programmers" / "c0de für Programmierer", "Libraries in practice" / "Bibliotheken in der Praxis" (2026-11-11). |
+| T3 Testing the tutorials | The programs are files tested with a runner that c0de and c0de net attach to their releases; both mods get a sprint "Documentation" for it, which also translates their documentation into German (2026-11-11). |
+| T4 Screenshots and 3D | c0de exports every block as a 3D model; the site shows example programs as 3D models with `<model-viewer>`. Screenshots stay as the fallback and for outputs (2026-11-11). |
+| T5 Services for c0de net | A public weather API without a key and a small API of c0de.at for the REST recipes; c0de.at also answers the latest version of c0de from its GitHub releases (2026-11-11). |
+| T6 World of the tutorials | Single player, creative, cheats on; stated on the overview of the tutorials and in "Before you start", and lessons that need an operator are marked (2026-11-11). |
+| T7 Gaps in the mod | Every recipe is checked against the handbook; a missing function becomes a task in the mod's plan (2026-11-11). |
