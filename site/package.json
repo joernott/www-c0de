@@ -13,11 +13,12 @@
     "build": "npm run content && vitepress build && node scripts/keep-dist.mjs && npm run check-links && node scripts/compress.ts",
     "preview": "vitepress preview",
     "test": "vitest run",
-    "lint": "eslint . && prettier --check .",
+    "lint": "eslint . && prettier --check . && node scripts/screenshots.ts --check",
     "format": "prettier --write .",
     "typecheck": "vue-tsc --noEmit",
     "check-links": "node scripts/check-links.ts",
-    "test-programs": "node scripts/test-programs.ts"
+    "test-programs": "node scripts/test-programs.ts",
+    "screenshots": "node scripts/screenshots.ts"
   },
   "devDependencies": {
     "@eslint/js": "10.0.1",

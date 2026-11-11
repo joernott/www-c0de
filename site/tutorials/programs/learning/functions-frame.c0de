@@ -1,0 +1,54 @@
+PROGRAM frame
+NOOP
+CONSTANT BASE STRING "Oak Hill"
+NOOP
+FUNCTION framed
+    PARAMETER text STRING
+    PARAMETER row INTEGER 0
+    PARAMETER column INTEGER 0
+    RESULT width INTEGER
+BEGIN
+    VARIABLE border STRING
+    IF text = "" ;
+    BEGIN
+        RETURN
+    END IF
+    CALL LEN
+        PARAMETER value text ;
+        RESULT result width
+    ASSIGN width width + 4 ;
+    FOR i INTEGER 1 ; width ;
+    BEGIN
+        ASSIGN border border ⊕ "*" ;
+    END FOR
+    CALL LOCATE
+        PARAMETER row row ;
+        PARAMETER column column ;
+    CALL PRINT
+        PARAMETER value border ;
+    CALL LOCATE
+        PARAMETER row row + 1 ;
+        PARAMETER column column ;
+    CALL PRINT
+        PARAMETER value "* " ⊕ text ⊕ " *" ;
+    CALL LOCATE
+        PARAMETER row row + 2 ;
+        PARAMETER column column ;
+    CALL PRINT
+        PARAMETER value border ;
+END FUNCTION
+NOOP
+FUNCTION welcome
+BEGIN
+    VARIABLE used INTEGER
+    CALL CLS
+    CALL framed
+        PARAMETER text "Welcome" ;
+        RESULT width used
+    CALL framed
+        PARAMETER text BASE ;
+        PARAMETER column used + 1 ;
+    CALL framed
+        PARAMETER text "Mind the creepers!" ;
+        PARAMETER row 4 ;
+END FUNCTION

@@ -1,0 +1,9 @@
+state: FINISHED
+screen:
+  - 'Type a number:'
+  - You can halve 8 3 times.
+  - Another number? (yes/no)
+  - 'Type a number:'
+  - You can halve 1000 10 times.
+  - Another number? (yes/no)
+  - Bye!

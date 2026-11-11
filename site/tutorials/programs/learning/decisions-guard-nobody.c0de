@@ -1,0 +1,32 @@
+PROGRAM guard
+NOOP
+CONSTANT BASE STRING "Oak Hill"
+NOOP
+FUNCTION check
+BEGIN
+    VARIABLE visitor STRING
+    VARIABLE isOwner BOOLEAN
+    ASSIGN visitor PID.activator ;
+    ASSIGN isOwner visitor = SHEET.owner ;
+    CALL CLS
+    IF visitor = "" ;
+    BEGIN
+        CALL PRINT
+            PARAMETER value "Nobody there." ;
+    END
+    ELSE
+    BEGIN
+        IF isOwner ;
+        BEGIN
+            CALL PRINT
+                PARAMETER value "Welcome home, " ⊕ visitor ⊕ "!" ;
+        END
+        ELSE
+        BEGIN
+            CALL PRINT
+                PARAMETER value "Hello, " ⊕ visitor ⊕ "!" ;
+            CALL PRINT
+                PARAMETER value BASE ⊕ " is closed." ;
+        END IF
+    END IF
+END FUNCTION

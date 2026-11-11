@@ -1,0 +1,25 @@
+PROGRAM sign
+NOOP
+NOOP
+FUNCTION welcome
+BEGIN
+    CALL CLS
+    CALL COLOR
+        PARAMETER foreground COLOR_GOLD ;
+    CALL PRINT
+        PARAMETER value "================================" ;
+    CALL LOCATE
+        PARAMETER row 3 ;
+        PARAMETER column 6 ;
+    CALL COLOR
+        PARAMETER foreground COLOR_YELLOW ;
+        PARAMETER background COLOR_DARK_BLUE ;
+    CALL PRINT
+        PARAMETER value "Welcome to my base!" ;
+    CALL COLOR
+        PARAMETER foreground COLOR_GOLD ;
+    CALL LOCATE
+        PARAMETER row 6 ;
+    CALL PRINT
+        PARAMETER value "================================" ;
+END FUNCTION

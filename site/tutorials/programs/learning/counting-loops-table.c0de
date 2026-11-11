@@ -1,0 +1,16 @@
+PROGRAM countdown
+NOOP
+NOOP
+FUNCTION launch
+BEGIN
+    VARIABLE numbers STRING
+    FOR i INTEGER 1 ; 10 ;
+    BEGIN
+        ASSIGN numbers numbers ⊕ i * 7 ⊕ " " ;
+    END FOR
+    CALL CLS
+    CALL PRINT
+        PARAMETER value "The 7 times table:" ;
+    CALL PRINT
+        PARAMETER value numbers ;
+END FUNCTION

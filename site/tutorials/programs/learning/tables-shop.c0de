@@ -1,0 +1,37 @@
+PROGRAM shop
+NOOP
+STRUCT offer
+BEGIN
+    item STRING
+    price INTEGER
+    stock INTEGER
+END STRUCT
+NOOP
+FUNCTION prices
+BEGIN
+    VARIABLE price HASH INTEGER
+    BEGIN
+        bread 2
+        torch 1
+        saddle 12
+        diamond 50
+    END VARIABLE
+    VARIABLE today STRUCT offer
+    BEGIN
+        item "golden apple"
+        price 20
+        stock 3
+    END VARIABLE
+    VARIABLE wanted STRING
+    CALL CLS
+    CALL PRINT
+        PARAMETER value "Offer: " ⊕ today.item ⊕ " for " ⊕ today.price ⊕ " emeralds" ;
+    CALL PRINT
+        PARAMETER value "Only " ⊕ today.stock ⊕ " left!" ;
+    CALL PRINT
+        PARAMETER value "What do you want to buy?" ;
+    CALL INPUT
+        PARAMETER variable wanted ;
+    CALL PRINT
+        PARAMETER value wanted ⊕ " costs " ⊕ price[wanted] ⊕ " emeralds." ;
+END FUNCTION

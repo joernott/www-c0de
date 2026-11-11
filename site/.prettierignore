@@ -9,3 +9,5 @@ de/c0de_net/
 .vitepress/navigation.json
 public/img/
 .cache/
+# written by scripts/screenshots.ts
+tutorials/screenshots.yaml

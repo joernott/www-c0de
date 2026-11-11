@@ -1,0 +1,4 @@
+function: calculate
+parameters:
+  items: 100
+  size: 16

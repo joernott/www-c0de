@@ -1,0 +1,26 @@
+PROGRAM stacks
+NOOP
+INCLUDE c0de/math
+NOOP
+FUNCTION calculate
+BEGIN
+    VARIABLE items INTEGER
+    VARIABLE size INTEGER
+    VARIABLE stacks INTEGER
+    VARIABLE rest INTEGER
+    CALL PRINT
+        PARAMETER value "How many items?" ;
+    CALL INPUT
+        PARAMETER variable items ;
+    CALL PRINT
+        PARAMETER value "How many fit into one stack?" ;
+    CALL INPUT
+        PARAMETER variable size ;
+    CALL c0de/math/DIV
+        PARAMETER dividend items ;
+        PARAMETER divisor size ;
+        RESULT result stacks
+    ASSIGN rest items \ size ;
+    CALL PRINT
+        PARAMETER value items ⊕ " items are " ⊕ stacks ⊕ " stacks and " ⊕ rest ⊕ " items." ;
+END FUNCTION

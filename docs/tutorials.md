@@ -43,6 +43,19 @@ The tutorials assume a **single-player world in creative mode with cheats on**, 
 
 Example programs are shown as text and, from sprint 8 on, as 3D models: c0de exports every block as a glTF model with its release, the site builds a scene of the sheet from the text of the program and shows it with `<model-viewer>`, which the reader turns and zooms. Screenshots remain the fallback (no WebGL, no JavaScript, the poster while the model loads) and show what can't be built from a program: screens, the chat, the world around a program. Path 1 shows every program and its result; paths 2 and 3 only where the world matters.
 
+### Screenshots
+
+A lesson marks a screenshot with a comment on a line of its own, in both languages at the same place: `<!-- screenshot: <id> | <what it shows> -->`. As soon as `site/public/tutorials/screenshots/<id>.webp` exists, the page shows the image there, with its width and height and the description as alternative text; until then the mark is invisible. `npm run screenshots` writes the list of all marks with their pages and whether the file exists to `site/tutorials/screenshots.yaml`; the lint fails if the list is out of date.
+
+The screenshots are taken in the game by hand, all the same way, so they can be taken again after visual changes of the mod:
+
+- Minecraft 1.21.1 with the newest c0de and c0de net, Fabric, no other mods or resource packs (the default textures), in the tutorial world (creative, cheats on).
+- Window 1920 × 1080, GUI scale 2, field of view 70, brightness "Moody", daylight.
+- The HUD hidden with F1, unless the screenshot is of a dialog or the chat.
+- Programs on their sheet: seen from the south, about 6 blocks behind and 4 blocks above the last line, looking down at the sheet, so all lines and the line numbers are in the picture.
+- Devices (display walls, laptops) and dialogs: straight in front, the device or dialog filling most of the picture.
+- Cropped to the interesting part at 16:9 or 4:3, scaled to 1280 pixels wide, saved as WebP with quality 85 (e.g. `cwebp -q 85 -resize 1280 0`).
+
 ### Languages
 
 Every lesson is written in English and German in this repository (`site/tutorials/…` and `site/de/tutorials/…`). Names in programs (labels, texts in literals) stay English in both languages, so the programs are the same and are tested once; the comments (`//`) and the explanations are translated.

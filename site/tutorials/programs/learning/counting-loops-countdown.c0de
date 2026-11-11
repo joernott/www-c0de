@@ -1,0 +1,16 @@
+PROGRAM countdown
+NOOP
+NOOP
+FUNCTION launch
+BEGIN
+    VARIABLE numbers STRING
+    FOR i INTEGER 10 ; 0 ; -1 ;
+    BEGIN
+        ASSIGN numbers numbers ⊕ i ⊕ " " ;
+    END FOR
+    CALL CLS
+    CALL PRINT
+        PARAMETER value numbers ;
+    CALL PRINT
+        PARAMETER value "Lift-off!" ;
+END FUNCTION

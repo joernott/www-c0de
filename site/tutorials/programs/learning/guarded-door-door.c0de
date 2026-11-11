@@ -1,0 +1,86 @@
+PROGRAM door
+NOOP
+INCLUDE c0de/minecraft
+CONSTANT BASE STRING "Oak Hill"
+VARIABLE friends ARRAY STRING
+BEGIN
+    "Alex" "Kai"
+END VARIABLE
+VARIABLE plate STRUCT c0de/minecraft/POSITION
+BEGIN
+    x 100
+    y 64
+    z 198
+END VARIABLE
+VARIABLE door STRUCT c0de/minecraft/POSITION
+BEGIN
+    x 100
+    y 64
+    z 200
+END VARIABLE
+NOOP
+FUNCTION isFriend
+    PARAMETER name STRING
+    RESULT friend BOOLEAN
+BEGIN
+    IF name = SHEET.owner ;
+    BEGIN
+        ASSIGN friend TRUE ;
+    END IF
+    EACH someone friends
+    BEGIN
+        IF someone = name ;
+        BEGIN
+            ASSIGN friend TRUE ;
+        END IF
+    END EACH
+END FUNCTION
+NOOP
+FUNCTION watch
+BEGIN
+    VARIABLE visitors ARRAY STRUCT c0de/minecraft/ENTITY
+    VARIABLE count INTEGER
+    VARIABLE strength INTEGER
+    VARIABLE known BOOLEAN
+    VARIABLE letIn BOOLEAN
+    CALL c0de/minecraft/FIND_ENTITIES
+        PARAMETER position door ;
+        PARAMETER radius 5 ;
+        PARAMETER type "minecraft:player" ;
+        RESULT result visitors
+    CALL LEN
+        PARAMETER value visitors ;
+        RESULT result count
+    CALL CLS
+    CALL COLOR
+        PARAMETER foreground COLOR_YELLOW ;
+    CALL PRINT
+        PARAMETER value "Welcome to " ⊕ BASE ⊕ "!" ;
+    CALL COLOR
+        PARAMETER foreground COLOR_WHITE ;
+    CALL PRINT
+        PARAMETER value "Visitors at the door: " ⊕ count ;
+    CALL c0de/minecraft/GET_PRESSURE_PLATE
+        PARAMETER position plate ;
+        RESULT result strength
+    IF strength = 0 ;
+    BEGIN
+        RETURN
+    END IF
+    EACH visitor visitors
+    BEGIN
+        IF visitor.position.x = plate.x AND visitor.position.y = plate.y AND visitor.position.z = plate.z ;
+        BEGIN
+            CALL isFriend
+                PARAMETER name visitor.name ;
+                RESULT friend known
+            IF known ;
+            BEGIN
+                ASSIGN letIn TRUE ;
+            END IF
+        END IF
+    END EACH
+    CALL c0de/minecraft/SET_OPEN
+        PARAMETER position door ;
+        PARAMETER open letIn ;
+END FUNCTION

@@ -1,0 +1,6 @@
+valid: false
+problems:
+  - line: 11
+    code: SYNTAX_ERROR_EXPRESSION
+    message: The expression doesn't end with ;
+run: false

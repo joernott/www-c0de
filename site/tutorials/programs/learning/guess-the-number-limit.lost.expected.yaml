@@ -1,0 +1,11 @@
+state: FINISHED
+screen:
+  - I am thinking of a number from 1 to 100.
+  - 1 is too low. Go higher!
+  - 2 is too low. Go higher!
+  - 3 is too low. Go higher!
+  - 4 is too low. Go higher!
+  - 5 is too low. Go higher!
+  - 6 is too low. Go higher!
+  - 7 is too low. Go higher!
+  - No tries left. It was 89.

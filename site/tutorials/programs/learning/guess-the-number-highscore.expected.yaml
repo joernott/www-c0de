@@ -1,0 +1,17 @@
+state: FINISHED
+screen:
+  - I am thinking of a number from 1 to 100.
+  - 50 is too low. Go higher!
+  - 75 is too low. Go higher!
+  - 90 is too high. Go lower!
+  - 85 is too low. Go higher!
+  - Right! You needed 5 tries.
+  - 'High score: 5 tries'
+  - Play again? Type yes or no.
+  - I am thinking of a number from 1 to 100.
+  - 50 is too high. Go lower!
+  - 25 is too low. Go higher!
+  - 37 is too low. Go higher!
+  - Right! You needed 4 tries.
+  - 'High score: 4 tries'
+  - Play again? Type yes or no.

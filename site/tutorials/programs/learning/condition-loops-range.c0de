@@ -1,0 +1,35 @@
+PROGRAM halving
+NOOP
+NOOP
+FUNCTION halve
+BEGIN
+    VARIABLE number INTEGER
+    VARIABLE half FLOAT
+    VARIABLE steps INTEGER
+    VARIABLE again STRING
+    REPEAT
+    BEGIN
+        REPEAT
+        BEGIN
+            CALL PRINT
+                PARAMETER value "Type a number from 1 to 10:" ;
+            CALL INPUT
+                PARAMETER variable number ;
+        END REPEAT number < 1 OR number > 10 ;
+        ASSIGN half number ;
+        ASSIGN steps 0 ;
+        WHILE half > 1 ;
+        BEGIN
+            ASSIGN half half / 2 ;
+            ASSIGN steps steps + 1 ;
+        END WHILE
+        CALL PRINT
+            PARAMETER value "You can halve " ⊕ number ⊕ " " ⊕ steps ⊕ " times." ;
+        CALL PRINT
+            PARAMETER value "Another number? (yes/no)" ;
+        CALL INPUT
+            PARAMETER variable again ;
+    END REPEAT again = "yes" ;
+    CALL PRINT
+        PARAMETER value "Bye!" ;
+END FUNCTION

@@ -12,6 +12,25 @@ tab:
 chapters:
   - link: /tutorials/learning/
     label: { en: Learning to program, de: Programmieren lernen }
+    lessons:
+      - before-you-start
+      - first-program
+      - colors
+      - variables
+      - calculating
+      - parameters
+      - asking
+      - decisions
+      - counting-loops
+      - condition-loops
+      - functions
+      - lists
+      - tables
+      - errors
+      - libraries
+      - guess-the-number
+      - guarded-door
+      - next-steps
 
   - link: /tutorials/programmers/
     label: { en: c0de for programmers, de: c0de für Programmierer }

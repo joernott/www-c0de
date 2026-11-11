@@ -1,0 +1,8 @@
+state: FINISHED
+screen:
+  - I am thinking of a number from 1 to 100.
+  - 50 is too low. Go higher!
+  - 75 is too low. Go higher!
+  - 90 is too high. Go lower!
+  - 85 is too low. Go higher!
+  - Right! You needed 5 tries.

@@ -1,0 +1,45 @@
+PROGRAM notes
+NOOP
+NOOP
+FUNCTION board
+BEGIN
+    VARIABLE notes ARRAY STRING
+    BEGIN
+        "Feed the cats"
+    END VARIABLE
+    VARIABLE note STRING
+    VARIABLE count INTEGER
+    VARIABLE number INTEGER
+    REPEAT
+    BEGIN
+        CALL LEN
+            PARAMETER value notes ;
+            RESULT result count
+        CALL CLS
+        FOR i INTEGER 0 ; count - 1 ;
+        BEGIN
+            CALL PRINT
+                PARAMETER value i ⊕ ": " ⊕ notes[i] ;
+        END FOR
+        CALL INPUT
+            PARAMETER variable note ;
+        BREAK note = "end" ;
+        IF note = "delete" ;
+        BEGIN
+            CALL INPUT
+                PARAMETER variable number ;
+            CALL REMOVE
+                PARAMETER container notes ;
+                PARAMETER index number ;
+                RESULT result notes
+        END
+        ELSE
+        BEGIN
+            CALL INSERT
+                PARAMETER array notes ;
+                PARAMETER index count ;
+                PARAMETER value note ;
+                RESULT result notes
+        END IF
+    END REPEAT TRUE ;
+END FUNCTION

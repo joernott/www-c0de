@@ -99,7 +99,8 @@ async function main(selected: string[]) {
   }
 
   const runs = plan(programsFolder).filter(
-    (run) => selected.length === 0 || selected.some((s) => run.program.includes(s)),
+    (run) =>
+      selected.length === 0 || selected.some((s) => run.program.replaceAll('\\', '/').includes(s)),
   )
   let failed = 0
   let skipped = 0

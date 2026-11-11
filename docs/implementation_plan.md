@@ -165,11 +165,12 @@ A task is done when
 
 | Task | Description | Done |
 |---|---|:---:|
-| 7.1 | Screenshots: conventions (window size, resource pack, WebP, width and height), the list `site/tutorials/screenshots.yaml` of every screenshot with the world and the position it shows, so they can be taken again after visual changes of the mod. |  |
-| 7.2 | Lessons 1.0–1.6: before you start (with the world the tutorials assume), the first program, colors, variables, calculating, parameters and results, asking the player. English and German, with screenshots. |  |
-| 7.3 | Lessons 1.7–1.10: decisions, counting loops, loops with a condition, functions. |  |
-| 7.4 | Lessons 1.11–1.14: lists, tables and own types, errors, libraries. |  |
-| 7.5 | Lessons 1.15–1.17: the projects "Guess the number" and "The guarded door", where to go next. |  |
+| 7.1 | Screenshots: conventions (window size, resource pack, WebP, width and height), the list `site/tutorials/screenshots.yaml` of every screenshot with the world and the position it shows, so they can be taken again after visual changes of the mod. | ✅ |
+| 7.1.1 | The screenshots, taken in the game as `docs/tutorials.md` ("Screenshots") describes: the lessons mark 37 places (`<!-- screenshot: id | … -->`), `npm run screenshots` lists them in `site/tutorials/screenshots.yaml`, and a file `site/public/tutorials/screenshots/<id>.webp` makes the page show it. Taken by the operator. |  |
+| 7.2 | Lessons 1.0–1.6: before you start (with the world the tutorials assume), the first program, colors, variables, calculating, parameters and results, asking the player. English and German, with screenshots. | ✅ |
+| 7.3 | Lessons 1.7–1.10: decisions, counting loops, loops with a condition, functions. | ✅ |
+| 7.4 | Lessons 1.11–1.14: lists, tables and own types, errors, libraries. | ✅ |
+| 7.5 | Lessons 1.15–1.17: the projects "Guess the number" and "The guarded door", where to go next. | ✅ |
 | 7.6 | Review with somebody who hasn't programmed before, if possible; Playwright, Lighthouse, link check. Release. |  |
 
 ## Sprint 8: Programs in 3D

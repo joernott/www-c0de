@@ -1,0 +1,42 @@
+PROGRAM repair
+NOOP
+NOOP
+FUNCTION share
+    PARAMETER rows INTEGER
+    PARAMETER length INTEGER
+    PARAMETER players INTEGER
+    RESULT wheat INTEGER
+    RESULT each FLOAT
+BEGIN
+    ASSIGN wheat rows * length ;
+    ASSIGN each wheat / players ;
+END FUNCTION
+NOOP
+FUNCTION harvest
+    PARAMETER rows INTEGER
+    PARAMETER length INTEGER
+    PARAMETER players INTEGER
+BEGIN
+    VARIABLE problem ERROR
+    VARIABLE wheat INTEGER
+    VARIABLE each FLOAT
+    CALL share problem
+        PARAMETER rows rows ;
+        PARAMETER length length ;
+        PARAMETER players players ;
+        RESULT wheat wheat
+        RESULT each each
+    CALL CLS
+    CALL PRINT
+        PARAMETER value "Harvest: " ⊕ wheat ⊕ " wheat" ;
+    IF problem.code = 0 ;
+    BEGIN
+        CALL PRINT
+            PARAMETER value "Each player gets " ⊕ each ;
+    END
+    ELSE
+    BEGIN
+        CALL PRINT
+            PARAMETER value "Nobody to share with!" ;
+    END IF
+END FUNCTION

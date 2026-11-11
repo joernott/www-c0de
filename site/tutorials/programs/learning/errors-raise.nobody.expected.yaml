@@ -1,0 +1,7 @@
+state: CRASHED
+exit_code: 15
+error:
+  code: 1001
+  message: Nobody to share with
+  context: share
+  line: 13

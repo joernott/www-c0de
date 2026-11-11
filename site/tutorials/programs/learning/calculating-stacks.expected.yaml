@@ -1,0 +1,5 @@
+screen:
+  - 1000 items
+  - = 15.625 stacks
+  - = 15 stacks + 40 items
+  - 'Check: 1000'

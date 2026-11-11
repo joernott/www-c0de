@@ -1,0 +1,16 @@
+PROGRAM stacks
+NOOP
+INCLUDE c0de/math
+NOOP
+FUNCTION calculate
+    PARAMETER items INTEGER
+    PARAMETER size INTEGER 64
+    RESULT stacks INTEGER
+    RESULT rest INTEGER
+BEGIN
+    CALL c0de/math/DIV
+        PARAMETER dividend items ;
+        PARAMETER divisor size ;
+        RESULT result stacks
+    ASSIGN rest items \ size ;
+END FUNCTION

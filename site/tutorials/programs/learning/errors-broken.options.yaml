@@ -1,0 +1,5 @@
+function: share
+parameters:
+  rows: 3
+  length: 10
+  players: 2

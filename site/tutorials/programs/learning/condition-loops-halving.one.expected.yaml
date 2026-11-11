@@ -1,0 +1,6 @@
+state: FINISHED
+screen:
+  - 'Type a number:'
+  - You can halve 1 0 times.
+  - Another number? (yes/no)
+  - Bye!

@@ -1,0 +1,5 @@
+screen:
+  - 100 items
+  - = 6.25 stacks
+  - = 6 stacks + 4 items
+  - 'Check: 100'

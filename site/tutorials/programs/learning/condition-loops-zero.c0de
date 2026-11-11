@@ -1,0 +1,28 @@
+PROGRAM halving
+NOOP
+NOOP
+FUNCTION halve
+BEGIN
+    VARIABLE number INTEGER
+    VARIABLE half FLOAT
+    VARIABLE steps INTEGER
+    REPEAT
+    BEGIN
+        CALL PRINT
+            PARAMETER value "Type a number (0 ends):" ;
+        CALL INPUT
+            PARAMETER variable number ;
+        BREAK number = 0 ;
+        ASSIGN half number ;
+        ASSIGN steps 0 ;
+        WHILE half > 1 ;
+        BEGIN
+            ASSIGN half half / 2 ;
+            ASSIGN steps steps + 1 ;
+        END WHILE
+        CALL PRINT
+            PARAMETER value "You can halve " ⊕ number ⊕ " " ⊕ steps ⊕ " times." ;
+    END REPEAT TRUE ;
+    CALL PRINT
+        PARAMETER value "Bye!" ;
+END FUNCTION

@@ -1,0 +1,4 @@
+state: CRASHED
+error:
+  name: UNKNOWN_KEY
+  line: 34

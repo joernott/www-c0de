@@ -131,3 +131,7 @@ yes, please do (VM review and release 0.3.0 of the website, release 0.2.0 of c0d
 ## 2026-11-11 – Release 0.3.0
 
 v0.3.0 has been pushed and the container is deployed
+
+## 2026-11-11 – Sprint 7
+
+please continue

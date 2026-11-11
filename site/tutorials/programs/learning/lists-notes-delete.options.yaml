@@ -1,0 +1,4 @@
+function: board
+input: [Get more torches, Plant wheat, delete, 0, end]
+columns: 32
+rows: 8

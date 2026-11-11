@@ -1,0 +1,9 @@
+PROGRAM sign
+NOOP
+NOOP
+FUNCTION welcome
+BEGIN
+    CALL CLS
+    CALL PRINT
+        PARAMETER value "Welcome to my base!" ;
+END FUNCTION

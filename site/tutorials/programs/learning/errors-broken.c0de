@@ -1,0 +1,13 @@
+PROGRAM repair
+NOOP
+NOOP
+FUNCTION share
+    PARAMETER rows INTEGER
+    PARAMETER length INTEGER
+    PARAMETER players INTEGER
+    RESULT wheat INTEGER
+    RESULT each FLOAT
+BEGIN
+    ASSIGN wheat rows + length ;
+    ASSIGN each wheat / players
+END FUNCTION

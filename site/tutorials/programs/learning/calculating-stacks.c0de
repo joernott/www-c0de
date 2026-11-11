@@ -1,0 +1,25 @@
+PROGRAM stacks
+NOOP
+INCLUDE c0de/math
+NOOP
+FUNCTION calculate
+BEGIN
+    VARIABLE items INTEGER 1000
+    VARIABLE size INTEGER 64
+    VARIABLE stacks INTEGER
+    VARIABLE rest INTEGER
+    CALL c0de/math/DIV
+        PARAMETER dividend items ;
+        PARAMETER divisor size ;
+        RESULT result stacks
+    ASSIGN rest items \ size ;
+    CALL CLS
+    CALL PRINT
+        PARAMETER value items ⊕ " items" ;
+    CALL PRINT
+        PARAMETER value "= " ⊕ items / size ⊕ " stacks" ;
+    CALL PRINT
+        PARAMETER value "= " ⊕ stacks ⊕ " stacks + " ⊕ rest ⊕ " items" ;
+    CALL PRINT
+        PARAMETER value "Check: " ⊕ stacks * size + rest ;
+END FUNCTION

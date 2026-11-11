@@ -1,0 +1,2 @@
+function: halve
+input: [1000, 0, 10, 'no']

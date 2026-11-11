@@ -1,0 +1,32 @@
+PROGRAM notes
+NOOP
+NOOP
+FUNCTION board
+BEGIN
+    VARIABLE notes ARRAY STRING
+    BEGIN
+        "Feed the cats"
+    END VARIABLE
+    VARIABLE note STRING
+    VARIABLE count INTEGER
+    REPEAT
+    BEGIN
+        CALL CLS
+        EACH line notes
+        BEGIN
+            CALL PRINT
+                PARAMETER value line ;
+        END EACH
+        CALL INPUT
+            PARAMETER variable note ;
+        BREAK note = "end" ;
+        CALL LEN
+            PARAMETER value notes ;
+            RESULT result count
+        CALL INSERT
+            PARAMETER array notes ;
+            PARAMETER index count ;
+            PARAMETER value note ;
+            RESULT result notes
+    END REPEAT TRUE ;
+END FUNCTION

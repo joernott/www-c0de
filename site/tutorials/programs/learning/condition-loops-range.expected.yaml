@@ -1,0 +1,8 @@
+state: FINISHED
+screen:
+  - 'Type a number from 1 to 10:'
+  - 'Type a number from 1 to 10:'
+  - 'Type a number from 1 to 10:'
+  - You can halve 10 4 times.
+  - Another number? (yes/no)
+  - Bye!

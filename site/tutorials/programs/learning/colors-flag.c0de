@@ -1,0 +1,28 @@
+PROGRAM sign
+NOOP
+NOOP
+FUNCTION welcome
+BEGIN
+    CALL CLS
+    CALL COLOR
+        PARAMETER foreground COLOR_RED ;
+        PARAMETER background COLOR_RED ;
+    CALL PRINT
+        PARAMETER value "                                " ;
+    CALL PRINT
+        PARAMETER value "                                " ;
+    CALL COLOR
+        PARAMETER foreground COLOR_WHITE ;
+        PARAMETER background COLOR_WHITE ;
+    CALL PRINT
+        PARAMETER value "                                " ;
+    CALL PRINT
+        PARAMETER value "                                " ;
+    CALL COLOR
+        PARAMETER foreground COLOR_RED ;
+        PARAMETER background COLOR_RED ;
+    CALL PRINT
+        PARAMETER value "                                " ;
+    CALL PRINT
+        PARAMETER value "                                " ;
+END FUNCTION

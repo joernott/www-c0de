@@ -1,7 +1,9 @@
 import { existsSync, readFileSync } from 'node:fs'
+import { fileURLToPath } from 'node:url'
 import { slug } from 'github-slugger'
 import { defineConfigWithTheme, type HeadConfig } from 'vitepress'
 import { c0deDark, c0deLanguage, c0deLight } from './c0de-highlighting'
+import { screenshotHtml } from './screenshots'
 import { languageOf, languages, pathIn, pathOf } from './theme/language'
 import type { ThemeConfig } from './theme/binder'
 import type { Navigation } from './theme/navigation'
@@ -39,6 +41,15 @@ export default defineConfigWithTheme<ThemeConfig>({
     anchor: { slugify: slug },
     headers: { slugify: slug },
     toc: { slugify: slug },
+    // The screenshot marks of the tutorials become images once their files exist (task 7.1).
+    config: (md) => {
+      const render = md.renderer.rules.html_block!
+      const publicFolder = fileURLToPath(new URL('../public', import.meta.url))
+      md.renderer.rules.html_block = (tokens, index, options, env, self) => {
+        const html = render(tokens, index, options, env, self)
+        return screenshotHtml(html, publicFolder)
+      }
+    },
   },
   // The full-text search builds one index per language; SiteSearch.vue is its field.
   themeConfig: { navigation, search: { provider: 'local' } },
