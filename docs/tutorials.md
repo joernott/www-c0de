@@ -146,7 +146,7 @@ Recipes marked **(op)** change the world with functions that need an operator or
 | 3.26 | Checking a service | HTTP_HEAD, HTTP_OPTIONS, HTTP_TRACE | A status lamp that shows if a web site is up, and what a server allows |
 | 3.27 | When the network fails | the errors of c0de net, SLEEP | Retrying a request with a growing wait; friendly messages for every error code |
 | 3.28 | Home automation | HTTP_PUT, constant items | A lever in the game switches a lamp at home; the token stays in a constant item |
-| 3.29 | Is my c0de up to date? | HTTP_GET, FROM_JSON | Asks `c0de.at/api/version` for the latest released versions of c0de and c0de net and compares them with the installed ones on a display |
+| 3.29 | Is my c0de up to date? | HTTP_GET, FROM_JSON | Asks `c0de.at/api/version` for the latest released versions of c0de and c0de net and compares them with the installed ones (the constants C0DE_VERSION and C0DE_NET_VERSION, c0de task 14.9 and c0de net task 6.5) on a display |
 
 The services of these recipes: the weather comes from a free public API without a key (Open-Meteo); echo, to-do list and version check are a small API of c0de.at itself (`/api/tutorial/echo`, `/api/tutorial/todo`, in memory and emptied daily, and `/api/version`, read from the GitHub releases). Recipe 3.28 uses a placeholder address, because every home automation is different. The requests come from the computer of the player who runs the program.
 
