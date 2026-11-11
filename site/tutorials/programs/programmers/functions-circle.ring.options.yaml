@@ -1,0 +1,4 @@
+function: ring
+parameters:
+  outer: 2.0
+  inner: 1.0

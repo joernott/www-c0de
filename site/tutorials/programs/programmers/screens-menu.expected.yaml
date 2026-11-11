@@ -1,0 +1,7 @@
+results:
+  count: 3
+screen:
+  - == Counter ==
+  - + add one, - take one, q quit
+  - 'Count: 3'
+  - Bye!

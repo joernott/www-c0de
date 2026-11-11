@@ -1,0 +1,51 @@
+PROGRAM fibonacci
+NOOP
+NOOP
+FUNCTION fibRecursive
+    PARAMETER n INTEGER
+    RESULT result INTEGER
+BEGIN
+    IF n < 2 ;
+    BEGIN
+        ASSIGN result n ;
+        RETURN
+    END IF
+    VARIABLE a INTEGER
+    VARIABLE b INTEGER
+    CALL fibRecursive
+        PARAMETER n n - 1 ;
+        RESULT result a
+    CALL fibRecursive
+        PARAMETER n n - 2 ;
+        RESULT result b
+    ASSIGN result a + b ;
+END FUNCTION
+NOOP
+FUNCTION fibLoop
+    PARAMETER n INTEGER
+    RESULT result INTEGER
+BEGIN
+    VARIABLE next INTEGER 1
+    FOR i INTEGER 1 ; n ;
+    BEGIN
+        CALL SWAP
+            PARAMETER a result ;
+            PARAMETER b next ;
+            RESULT a result
+            RESULT b next
+        ASSIGN next next + result ;
+    END FOR
+END FUNCTION
+NOOP
+FUNCTION compare
+    PARAMETER n INTEGER 10
+    RESULT recursive INTEGER
+    RESULT iterative INTEGER
+BEGIN
+    CALL fibLoop
+        PARAMETER n n ;
+        RESULT result iterative
+    CALL fibRecursive
+        PARAMETER n n ;
+        RESULT result recursive
+END FUNCTION

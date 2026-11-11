@@ -1,0 +1,4 @@
+exit_code: 1
+results:
+  message: 'Error 309: Not a number: abc (c0de/strings/VAL, line 13)'
+  age: 0

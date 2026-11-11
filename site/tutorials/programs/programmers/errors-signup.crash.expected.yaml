@@ -1,0 +1,7 @@
+state: CRASHED
+exit_code: 15
+error:
+  code: 1002
+  message: 'out of range: 200'
+  context: parseAge
+  line: 28

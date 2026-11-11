@@ -1,0 +1,5 @@
+results:
+  title: Steve's base
+  delay: 60
+  friends: 2
+  json: '{"title":"Steve''s base","color":14,"entrance":{"close_after":60,"friends":["Alex","Kai"]},"prices":{"apple":1,"diamond":5}}'

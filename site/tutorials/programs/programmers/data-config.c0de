@@ -1,0 +1,46 @@
+PROGRAM settings
+NOOP
+INCLUDE c0de/strings
+NOOP
+STRUCT door
+BEGIN
+    delay INTEGER TAG(json: "close_after")
+    friends ARRAY STRING
+END STRUCT
+STRUCT config
+BEGIN
+    title STRING
+    color INTEGER
+    entrance STRUCT door
+    prices HASH INTEGER
+    secret STRING TAG(json: "-")
+END STRUCT
+NOOP
+FUNCTION load
+    PARAMETER source STRING
+    RESULT title STRING
+    RESULT delay INTEGER
+    RESULT friends INTEGER
+    RESULT yaml STRING
+BEGIN
+    VARIABLE c STRUCT config
+    BEGIN
+        title "My base"
+        color 14
+        entrance
+        BEGIN
+            delay 100
+        END
+    END VARIABLE
+    CALL c0de/strings/FROM_JSON
+        PARAMETER source source ;
+        PARAMETER destination c ;
+    ASSIGN title c.title ;
+    ASSIGN delay c.entrance.delay ;
+    CALL LEN
+        PARAMETER value c.entrance.friends ;
+        RESULT result friends
+    CALL c0de/strings/TO_YAML
+        PARAMETER value c ;
+        RESULT result yaml
+END FUNCTION

@@ -1,0 +1,5 @@
+function: describe
+parameters:
+  item: cobblestone
+  stacks: 3
+  rest: 8

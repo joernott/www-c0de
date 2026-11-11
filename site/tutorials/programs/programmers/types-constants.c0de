@@ -1,0 +1,18 @@
+PROGRAM typeconstants
+NOOP
+NOOP
+FUNCTION where
+    RESULT sheet INTEGER
+    RESULT starter STRING
+    RESULT line INTEGER
+    RESULT depth INTEGER
+    RESULT red INTEGER
+    RESULT failure INTEGER
+BEGIN
+    ASSIGN sheet SHEET.number ;
+    ASSIGN starter PID.activator ;
+    ASSIGN line CURSOR.line ;
+    ASSIGN depth CURSOR.depth ;
+    ASSIGN red COLOR_RED ;
+    ASSIGN failure DIVISION_BY_ZERO ;
+END FUNCTION

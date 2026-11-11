@@ -1,0 +1,25 @@
+PROGRAM weather
+NOOP
+INCLUDE c0de/strings
+INCLUDE c0de_net/http
+NOOP
+FUNCTION vienna
+    RESULT temperature FLOAT
+BEGIN
+    VARIABLE api STRUCT c0de_net/http/HTTP_CONNECTION
+    VARIABLE answer STRING
+    VARIABLE current FLOAT TAG(json: "current.temperature_2m")
+    ASSIGN api.use_ssl TRUE ;
+    ASSIGN api.server "api.open-meteo.com" ;
+    ASSIGN api.timeout 10 ;
+    CALL c0de_net/http/HTTP_GET
+        PARAMETER connection api ;
+        PARAMETER endpoint "/v1/forecast?latitude=48.21&longitude=16.37&current=temperature_2m" ;
+        RESULT result answer
+    CALL c0de/strings/FROM_JSON
+        PARAMETER source answer ;
+        PARAMETER destination current ;
+    ASSIGN temperature current ;
+    CALL PRINT
+        PARAMETER value "Vienna: " ⊕ temperature ⊕ " °C" ;
+END FUNCTION

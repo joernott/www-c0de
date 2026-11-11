@@ -1,0 +1,18 @@
+results:
+  flag: true
+  count: 1728
+  ratio: 3.5
+  letter: é
+  moment: 2026-10-19T12:05:09.250Z
+  name: Steve
+  list: [2, 3, 5, 7]
+  stock:
+    diamond: 3
+    gold: 12
+  spot:
+    x: 100
+    y: 0
+    z: -250
+  problem:
+    code: 1000
+    message: Just a value

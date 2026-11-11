@@ -1,0 +1,6 @@
+results:
+  path:
+    from: { x: 0, y: 64, z: 0 }
+    to: { x: 3, y: 68, z: 12 }
+  distance: 13.0
+  above: { x: 0, y: 74, z: 0 }

@@ -1,0 +1,3 @@
+function: load
+parameters:
+  source: '{"title": "Steve''s base", "color": "yellow"}'

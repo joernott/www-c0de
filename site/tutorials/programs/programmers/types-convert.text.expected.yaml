@@ -1,0 +1,6 @@
+state: CRASHED
+exit_code: 15
+error:
+  name: INVALID_ARGUMENT
+  context: c0de/strings/VAL
+  line: 15

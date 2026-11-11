@@ -1,0 +1,44 @@
+PROGRAM settings
+NOOP
+INCLUDE c0de/strings
+NOOP
+STRUCT door
+BEGIN
+    delay INTEGER TAG(json: "close_after")
+    friends ARRAY STRING
+END STRUCT
+STRUCT config
+BEGIN
+    title STRING
+    color INTEGER
+    entrance STRUCT door
+    prices HASH INTEGER
+    secret STRING TAG(json: "-")
+END STRUCT
+NOOP
+FUNCTION load
+    PARAMETER source STRING
+    RESULT title STRING
+    RESULT code INTEGER
+BEGIN
+    VARIABLE c STRUCT config
+    BEGIN
+        title "My base"
+        color 14
+        entrance
+        BEGIN
+            delay 100
+        END
+    END VARIABLE
+    VARIABLE problem ERROR
+    CALL c0de/strings/FROM_JSON problem
+        PARAMETER source source ;
+        PARAMETER destination c ;
+    ASSIGN title c.title ;
+    ASSIGN code problem.code ;
+    IF code ≠ 0 ;
+    BEGIN
+        CALL PRINT
+            PARAMETER value "Bad configuration: " ⊕ problem.message ;
+    END IF
+END FUNCTION

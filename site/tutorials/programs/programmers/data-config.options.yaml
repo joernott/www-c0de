@@ -1,0 +1,3 @@
+function: load
+parameters:
+  source: '{"title": "Steve''s base", "entrance": {"close_after": 60, "friends": ["Alex", "Kai"]}, "prices": {"diamond": 5, "apple": 1}, "secret": "x", "owner": "Steve"}'

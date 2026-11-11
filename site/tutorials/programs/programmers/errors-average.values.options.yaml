@@ -1,0 +1,4 @@
+function: report
+parameters:
+  total: 7
+  count: 2

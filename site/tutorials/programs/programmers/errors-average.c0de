@@ -1,0 +1,31 @@
+PROGRAM averages
+NOOP
+NOOP
+FUNCTION average
+    PARAMETER total INTEGER
+    PARAMETER count INTEGER
+    RESULT result FLOAT
+BEGIN
+    ASSIGN result total / count ;
+END FUNCTION
+NOOP
+FUNCTION report
+    PARAMETER total INTEGER
+    PARAMETER count INTEGER
+    RESULT text STRING
+BEGIN
+    VARIABLE problem ERROR
+    VARIABLE mean FLOAT
+    CALL average problem
+        PARAMETER total total ;
+        PARAMETER count count ;
+        RESULT result mean
+    IF problem.code = DIVISION_BY_ZERO ;
+    BEGIN
+        ASSIGN text "no values yet" ;
+    END
+    ELSE
+    BEGIN
+        ASSIGN text "average: " ⊕ mean ;
+    END IF
+END FUNCTION

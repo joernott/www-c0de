@@ -1,0 +1,52 @@
+PROGRAM signup
+NOOP
+INCLUDE c0de/math
+INCLUDE c0de/strings
+CONSTANT AGE_NOT_WHOLE INTEGER 1001
+CONSTANT AGE_OUT_OF_RANGE INTEGER 1002
+NOOP
+FUNCTION parseAge
+    PARAMETER text STRING
+    RESULT age INTEGER
+BEGIN
+    VARIABLE number FLOAT
+    VARIABLE whole BOOLEAN
+    CALL c0de/strings/VAL
+        PARAMETER text text ;
+        RESULT value number
+        RESULT isInteger whole
+    IF NOT whole ;
+    BEGIN
+        CALL RAISE
+            PARAMETER code AGE_NOT_WHOLE ;
+            PARAMETER message "not a whole number: " ⊕ text ;
+    END IF
+    CALL c0de/math/FIX
+        PARAMETER value number ;
+        RESULT result age
+    IF age < 0 OR age > 150 ;
+    BEGIN
+        VARIABLE problem ERROR
+        ASSIGN problem.code AGE_OUT_OF_RANGE ;
+        ASSIGN problem.message "out of range: " ⊕ age ;
+        RETURN problem
+    END IF
+END FUNCTION
+NOOP
+FUNCTION signup
+    PARAMETER input STRING
+    RESULT message STRING
+    RESULT age INTEGER
+BEGIN
+    VARIABLE problem ERROR
+    CALL parseAge problem
+        PARAMETER text input ;
+        RESULT age age
+    IF problem.code = 0 ;
+    BEGIN
+        ASSIGN message "Welcome!" ;
+        RETURN
+    END IF
+    ASSIGN message "Error " ⊕ problem.code ⊕ ": " ⊕ problem.message ⊕ " (" ⊕ problem.context ⊕ ", line " ⊕ problem.line ⊕ ")" ;
+    EXIT 1 ;
+END FUNCTION

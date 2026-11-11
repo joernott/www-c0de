@@ -1,0 +1,21 @@
+PROGRAM stocklist
+NOOP
+NOOP
+FUNCTION stock
+    RESULT report STRING
+BEGIN
+    VARIABLE chest HASH INTEGER
+    BEGIN
+        torch 64
+        Diamond 3
+        apple 12
+        coal 0
+    END VARIABLE
+    EACH item chest
+    BEGIN
+        IF chest[item] > 0 ;
+        BEGIN
+            ASSIGN report report ⊕ item ⊕ "=" ⊕ chest[item] ⊕ " " ;
+        END IF
+    END EACH
+END FUNCTION

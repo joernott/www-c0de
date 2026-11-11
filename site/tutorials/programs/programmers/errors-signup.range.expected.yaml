@@ -1,0 +1,4 @@
+exit_code: 1
+results:
+  message: 'Error 1002: out of range: 200 (parseAge, line 28)'
+  age: 200

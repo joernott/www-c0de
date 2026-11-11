@@ -1,0 +1,12 @@
+results:
+  remainder: -1
+  power: 512
+  half: 0.5
+  order: 7
+  joined: 'Total: 5'
+  same: true
+  before: true
+  flags: 24
+  inverted: -1
+  safe: false
+  total: 15

@@ -1,0 +1,44 @@
+PROGRAM counter
+NOOP
+NOOP
+FUNCTION menu
+    RESULT count INTEGER
+BEGIN
+    VARIABLE key STRING
+    VARIABLE row INTEGER
+    CALL CLS
+    CALL COLOR
+        PARAMETER foreground COLOR_YELLOW ;
+    CALL PRINT
+        PARAMETER value "== Counter ==" ;
+    CALL COLOR
+        PARAMETER foreground COLOR_WHITE ;
+    CALL PRINT
+        PARAMETER value "+ add one, - take one, q quit" ;
+    CALL CSRLIN
+        RESULT result row
+    REPEAT
+    BEGIN
+        IF key = "+" ;
+        BEGIN
+            ASSIGN count count + 1 ;
+        END IF
+        IF key = "-" ;
+        BEGIN
+            ASSIGN count count - 1 ;
+        END IF
+        CALL LOCATE
+            PARAMETER row row ;
+        CALL PRINT
+            PARAMETER value "Count: " ⊕ count ⊕ "   " ;
+        REPEAT
+        BEGIN
+            CALL INKEY
+                RESULT result key
+        END REPEAT key = "" ;
+    END REPEAT key ≠ "q" ;
+    CALL COLOR
+        PARAMETER foreground COLOR_GRAY ;
+    CALL PRINT
+        PARAMETER value "Bye!" ;
+END FUNCTION

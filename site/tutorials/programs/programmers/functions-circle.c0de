@@ -1,0 +1,29 @@
+PROGRAM circles
+NOOP
+INCLUDE c0de/math
+NOOP
+FUNCTION circle
+    PARAMETER radius FLOAT
+    RESULT diameter FLOAT
+    RESULT circumference FLOAT
+    RESULT area FLOAT
+BEGIN
+    ASSIGN diameter 2 * radius ;
+    ASSIGN circumference diameter * c0de/math/PI ;
+    ASSIGN area c0de/math/PI * radius ^ 2 ;
+END FUNCTION
+NOOP
+FUNCTION ring
+    PARAMETER outer FLOAT
+    PARAMETER inner FLOAT 0.0
+    RESULT area FLOAT
+BEGIN
+    VARIABLE hole FLOAT
+    CALL circle
+        PARAMETER radius outer ;
+        RESULT area area
+    CALL circle
+        PARAMETER radius inner ;
+        RESULT area hole
+    ASSIGN area area - hole ;
+END FUNCTION

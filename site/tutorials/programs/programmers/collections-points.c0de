@@ -1,0 +1,46 @@
+PROGRAM points
+NOOP
+INCLUDE c0de/math
+NOOP
+STRUCT point
+BEGIN
+    x INTEGER
+    y INTEGER
+    z INTEGER
+END STRUCT
+STRUCT line
+BEGIN
+    from STRUCT point
+    to STRUCT point
+END STRUCT
+NOOP
+FUNCTION length
+    PARAMETER path STRUCT line
+    RESULT result FLOAT
+BEGIN
+    VARIABLE dx INTEGER
+    VARIABLE dy INTEGER
+    VARIABLE dz INTEGER
+    ASSIGN dx path.to.x - path.from.x ;
+    ASSIGN dy path.to.y - path.from.y ;
+    ASSIGN dz path.to.z - path.from.z ;
+    CALL c0de/math/SQR
+        PARAMETER value dx * dx + dy * dy + dz * dz ;
+        RESULT result result
+END FUNCTION
+NOOP
+FUNCTION measure
+    PARAMETER a STRUCT point
+    PARAMETER b STRUCT point
+    RESULT path STRUCT line
+    RESULT distance FLOAT
+    RESULT above STRUCT point
+BEGIN
+    ASSIGN path.from a ;
+    ASSIGN path.to b ;
+    ASSIGN above a ;
+    ASSIGN above.y above.y + 10 ;
+    CALL length
+        PARAMETER path path ;
+        RESULT result distance
+END FUNCTION

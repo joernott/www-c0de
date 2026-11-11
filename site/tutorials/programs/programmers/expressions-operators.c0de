@@ -1,0 +1,30 @@
+PROGRAM operators
+NOOP
+NOOP
+FUNCTION operators
+    RESULT remainder INTEGER
+    RESULT power INTEGER
+    RESULT half FLOAT
+    RESULT order INTEGER
+    RESULT joined STRING
+    RESULT same BOOLEAN
+    RESULT before BOOLEAN
+    RESULT flags INTEGER
+    RESULT inverted INTEGER
+    RESULT safe BOOLEAN
+    RESULT total INTEGER
+BEGIN
+    VARIABLE zero INTEGER 0
+    ASSIGN remainder -7 \ 2 ;
+    ASSIGN power 2 ^ 3 ^ 2 ;
+    ASSIGN half 2 ^ -1 ;
+    ASSIGN order 7 \ 4 * 2 ;
+    ASSIGN joined "Total: " ⊕ 2 + 3 ;
+    ASSIGN same "a" ⊕ 1 = "a1" ;
+    ASSIGN before "Z" < "a" ;
+    ASSIGN flags 1 ← 4 | 12 & 10 ;
+    ASSIGN inverted ¬ 0 ;
+    ASSIGN safe zero ≠ 0 AND 10 / zero > 1 ;
+    ASSIGN total 1 + 2 + 3
+        + 4 + 5 ;
+END FUNCTION

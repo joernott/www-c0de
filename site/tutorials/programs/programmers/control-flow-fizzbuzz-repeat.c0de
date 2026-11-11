@@ -1,0 +1,27 @@
+PROGRAM fizzbuzzrepeat
+NOOP
+NOOP
+FUNCTION fizzbuzz
+    PARAMETER n INTEGER 15
+    RESULT output STRING
+BEGIN
+    VARIABLE i INTEGER 1
+    REPEAT
+    BEGIN
+        VARIABLE word STRING
+        IF i \ 3 = 0 ;
+        BEGIN
+            ASSIGN word "Fizz" ;
+        END IF
+        IF i \ 5 = 0 ;
+        BEGIN
+            ASSIGN word word ⊕ "Buzz" ;
+        END IF
+        IF word = "" ;
+        BEGIN
+            ASSIGN word "" ⊕ i ;
+        END IF
+        ASSIGN output output ⊕ word ⊕ " " ;
+        ASSIGN i i + 1 ;
+    END REPEAT i ≤ n ;
+END FUNCTION

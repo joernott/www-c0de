@@ -1,0 +1,3 @@
+function: primes
+parameters:
+  limit: 100

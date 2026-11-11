@@ -1,0 +1,3 @@
+function: countWords
+parameters:
+  text: 'The creeper saw the  pig and the creeper ran'

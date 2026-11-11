@@ -1,0 +1,19 @@
+PROGRAM recursion
+NOOP
+NOOP
+FUNCTION sum
+    PARAMETER n INTEGER
+    RESULT result INTEGER
+    RESULT used INTEGER
+BEGIN
+    IF n = 0 ;
+    BEGIN
+        ASSIGN used CURSOR.stack_used ;
+        RETURN
+    END IF
+    CALL sum
+        PARAMETER n n - 1 ;
+        RESULT result result
+        RESULT used used
+    ASSIGN result result + n ;
+END FUNCTION

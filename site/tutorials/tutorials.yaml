@@ -15,7 +15,18 @@ chapters:
 
   - link: /tutorials/programmers/
     label: { en: c0de for programmers, de: c0de für Programmierer }
-    lessons: [ten-minutes]
+    lessons:
+      - ten-minutes
+      - types
+      - expressions
+      - control-flow
+      - functions
+      - collections
+      - errors
+      - world
+      - screens
+      - data
+      - cheat-sheet
 
   - link: /tutorials/libraries/
     label: { en: Libraries in practice, de: Bibliotheken in der Praxis }

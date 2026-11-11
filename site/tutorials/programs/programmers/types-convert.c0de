@@ -1,0 +1,33 @@
+PROGRAM typeconvert
+NOOP
+INCLUDE c0de/math
+INCLUDE c0de/strings
+NOOP
+FUNCTION convert
+    PARAMETER input STRING "-12.85"
+    RESULT number FLOAT
+    RESULT whole BOOLEAN
+    RESULT down INTEGER
+    RESULT cut INTEGER
+    RESULT back FLOAT
+    RESULT shown STRING
+    RESULT joined STRING
+BEGIN
+    CALL c0de/strings/VAL
+        PARAMETER text input ;
+        RESULT value number
+        RESULT isInteger whole
+    CALL c0de/math/INT
+        PARAMETER value number ;
+        RESULT result down
+    CALL c0de/math/FIX
+        PARAMETER value number ;
+        RESULT result cut
+    CALL c0de/math/TO_FLOAT
+        PARAMETER value cut ;
+        RESULT result back
+    CALL c0de/strings/STR
+        PARAMETER value back ;
+        RESULT result shown
+    ASSIGN joined "cut " ⊕ cut ⊕ ", whole " ⊕ whole ;
+END FUNCTION

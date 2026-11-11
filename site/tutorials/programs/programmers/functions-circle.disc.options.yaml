@@ -1,0 +1,3 @@
+function: ring
+parameters:
+  outer: 2.0

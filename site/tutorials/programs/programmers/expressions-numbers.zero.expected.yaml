@@ -1,0 +1,5 @@
+state: CRASHED
+error:
+  name: DIVISION_BY_ZERO
+  context: divide
+  line: 14

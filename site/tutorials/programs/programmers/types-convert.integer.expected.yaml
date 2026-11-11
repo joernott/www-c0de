@@ -1,0 +1,8 @@
+results:
+  number: 42.0
+  whole: true
+  down: 42
+  cut: 42
+  back: 42.0
+  shown: '42.0'
+  joined: cut 42, whole true

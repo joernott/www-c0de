@@ -153,9 +153,9 @@ A task is done when
 | 6.4 | The parts of a lesson: a box "What you need" (with a mark for lessons that need an operator), exercises with folded solutions (`<details>`), "Read more". Programs are files in `site/tutorials/programs/` and are included into the pages, so page and test use the same text. | ✅ |
 | 6.5 | Test of the tutorial programs: a script runs every program of `site/tutorials/programs/` with the runner of c0de (c0de task 14.1) at the tag of `sources.yaml` and compares its results with the `.expected.yaml` beside it; programs with c0de/minecraft are validated only. Runs in CI. Until the runner is released, the programs are checked by hand in the game. | ✅ |
 | 6.5.1 | `sources.yaml` imports c0de v0.4.0, the first release with the program runner; it also brings the German translation of the c0de documentation, so the German pages of c0de are no longer marked as untranslated (end-to-end tests adjusted). | ✅ |
-| 6.6 | Path 2, lessons 2.1–2.4: c0de in ten minutes, types and values, expressions and statements, control flow. English and German. |  |
-| 6.7 | Path 2, lessons 2.5–2.8: functions and libraries, collections and structs, errors, programs in the world. English and German. |  |
-| 6.8 | Path 2, lessons 2.9–2.11: screens and I/O, data and the network, the cheat sheet. English and German. |  |
+| 6.6 | Path 2, lessons 2.1–2.4: c0de in ten minutes, types and values, expressions and statements, control flow. English and German. | ✅ |
+| 6.7 | Path 2, lessons 2.5–2.8: functions and libraries, collections and structs, errors, programs in the world. English and German. | ✅ |
+| 6.8 | Path 2, lessons 2.9–2.11: screens and I/O, data and the network, the cheat sheet. English and German. | ✅ |
 | 6.9 | Review of the path in the binary and the container (Playwright, Lighthouse, link check), and the gaps found in the mod as tasks in its plan (T7). Release. |  |
 
 ## Sprint 7: Tutorials: learning to program

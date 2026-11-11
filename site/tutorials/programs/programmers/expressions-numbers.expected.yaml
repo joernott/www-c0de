@@ -1,0 +1,7 @@
+results:
+  quotient: 3.5
+  whole: 3
+  floor: 3
+  rest: 1
+  check: true
+  exact: false

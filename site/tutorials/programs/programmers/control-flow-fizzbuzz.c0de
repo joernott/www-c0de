@@ -1,0 +1,33 @@
+PROGRAM fizzbuzz
+NOOP
+NOOP
+FUNCTION fizzbuzz
+    PARAMETER n INTEGER 15
+    RESULT output STRING
+BEGIN
+    FOR i INTEGER 1 ; n ;
+    BEGIN
+        IF i \ 15 = 0 ;
+        BEGIN
+            ASSIGN output output ⊕ "FizzBuzz " ;
+        END
+        ELSE
+        BEGIN
+            IF i \ 3 = 0 ;
+            BEGIN
+                ASSIGN output output ⊕ "Fizz " ;
+            END
+            ELSE
+            BEGIN
+                IF i \ 5 = 0 ;
+                BEGIN
+                    ASSIGN output output ⊕ "Buzz " ;
+                END
+                ELSE
+                BEGIN
+                    ASSIGN output output ⊕ i ⊕ " " ;
+                END IF
+            END IF
+        END IF
+    END FOR
+END FUNCTION

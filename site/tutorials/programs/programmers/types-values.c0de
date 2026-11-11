@@ -1,0 +1,48 @@
+PROGRAM typetour
+NOOP
+NOOP
+STRUCT point
+BEGIN
+    x INTEGER
+    y INTEGER
+    z INTEGER
+END STRUCT
+NOOP
+FUNCTION values
+    RESULT flag BOOLEAN
+    RESULT count INTEGER
+    RESULT ratio FLOAT
+    RESULT letter CHAR
+    RESULT moment TIME
+    RESULT name STRING 16
+    RESULT list ARRAY INTEGER
+    RESULT stock HASH INTEGER
+    RESULT spot STRUCT point
+    RESULT problem ERROR
+BEGIN
+    VARIABLE primes ARRAY INTEGER
+    BEGIN
+        2 3 5 7
+    END VARIABLE
+    VARIABLE chest HASH INTEGER
+    BEGIN
+        gold 12
+        diamond 3
+    END VARIABLE
+    VARIABLE home STRUCT point
+    BEGIN
+        x 100
+        z -250
+    END VARIABLE
+    ASSIGN flag 3 > 2 ;
+    ASSIGN count 64 * 27 ;
+    ASSIGN ratio 7 / 2 ;
+    ASSIGN letter 'é' ;
+    ASSIGN moment @2026-10-19T12:05:09Z + 250 ;
+    ASSIGN name "Steve" ;
+    ASSIGN list primes ;
+    ASSIGN stock chest ;
+    ASSIGN spot home ;
+    ASSIGN problem.code 1000 ;
+    ASSIGN problem.message "Just a value" ;
+END FUNCTION

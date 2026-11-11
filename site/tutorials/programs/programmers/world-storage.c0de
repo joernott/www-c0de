@@ -1,0 +1,24 @@
+PROGRAM storage
+NOOP
+INCLUDE c0de/math
+NOOP
+FUNCTION pack
+    PARAMETER count INTEGER
+    RESULT stacks INTEGER
+    RESULT rest INTEGER
+BEGIN
+    CALL c0de/math/DIV
+        PARAMETER dividend count ;
+        PARAMETER divisor 64 ;
+        RESULT result stacks
+    ASSIGN rest count \ 64 ;
+END FUNCTION
+NOOP
+FUNCTION describe
+    PARAMETER item STRING
+    PARAMETER stacks INTEGER
+    PARAMETER rest INTEGER
+    RESULT text STRING
+BEGIN
+    ASSIGN text item ⊕ ": " ⊕ stacks ⊕ " stacks and " ⊕ rest ;
+END FUNCTION

@@ -1,0 +1,35 @@
+PROGRAM sorting
+NOOP
+NOOP
+FUNCTION bubbleSort
+    PARAMETER numbers ARRAY INTEGER
+    RESULT sorted ARRAY INTEGER
+    RESULT swaps INTEGER
+BEGIN
+    VARIABLE last INTEGER
+    VARIABLE next INTEGER
+    VARIABLE swapped BOOLEAN TRUE
+    ASSIGN sorted numbers ;
+    CALL LEN
+        PARAMETER value sorted ;
+        RESULT result last
+    WHILE swapped ;
+    BEGIN
+        ASSIGN swapped FALSE ;
+        ASSIGN last last - 1 ;
+        FOR i INTEGER 0 ; last - 1 ;
+        BEGIN
+            ASSIGN next i + 1 ;
+            IF sorted[i] > sorted[next] ;
+            BEGIN
+                CALL SWAP
+                    PARAMETER a sorted[i] ;
+                    PARAMETER b sorted[next] ;
+                    RESULT a sorted[i]
+                    RESULT b sorted[next]
+                ASSIGN swapped TRUE ;
+                ASSIGN swaps swaps + 1 ;
+            END IF
+        END FOR
+    END WHILE
+END FUNCTION

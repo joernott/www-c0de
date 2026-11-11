@@ -9,7 +9,7 @@
 // validated, because that library needs the game. Programs that include c0de_net need the
 // runner library of c0de net; if its release has none, they are skipped.
 //
-// Usage: node scripts/test-programs.ts [<program>...]   (needs Java 21 or newer)
+// Usage: node scripts/test-programs.ts [<part of a file name>...]   (needs Java 21 or newer)
 import { spawnSync } from 'node:child_process'
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { dirname, join, relative, sep } from 'node:path'
@@ -99,7 +99,7 @@ async function main(selected: string[]) {
   }
 
   const runs = plan(programsFolder).filter(
-    (run) => selected.length === 0 || selected.some((s) => run.program.endsWith(s)),
+    (run) => selected.length === 0 || selected.some((s) => run.program.includes(s)),
   )
   let failed = 0
   let skipped = 0

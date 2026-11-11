@@ -1,0 +1,10 @@
+PROGRAM modulo
+NOOP
+NOOP
+FUNCTION modulo
+    PARAMETER a INTEGER
+    PARAMETER b INTEGER
+    RESULT rest INTEGER
+BEGIN
+    ASSIGN rest ( a \ b + b ) \ b ;
+END FUNCTION

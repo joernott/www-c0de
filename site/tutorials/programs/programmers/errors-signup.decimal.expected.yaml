@@ -1,0 +1,4 @@
+exit_code: 1
+results:
+  message: 'Error 1001: not a whole number: 4.5 (parseAge, line 19)'
+  age: 0

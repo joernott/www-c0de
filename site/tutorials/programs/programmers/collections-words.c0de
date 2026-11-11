@@ -1,0 +1,43 @@
+PROGRAM words
+NOOP
+INCLUDE c0de/strings
+NOOP
+FUNCTION countWords
+    PARAMETER text STRING
+    RESULT counts HASH INTEGER
+    RESULT words INTEGER
+BEGIN
+    VARIABLE length INTEGER
+    VARIABLE word STRING
+    VARIABLE known BOOLEAN
+    CALL c0de/strings/LCASE
+        PARAMETER text text ⊕ " " ;
+        RESULT result text
+    CALL LEN
+        PARAMETER value text ;
+        RESULT result length
+    FOR i INTEGER 0 ; length - 1 ;
+    BEGIN
+        IF text[i] ≠ ' ' ;
+        BEGIN
+            ASSIGN word word ⊕ text[i] ;
+        END
+        ELSE
+        BEGIN
+            IF word ≠ "" ;
+            BEGIN
+                CALL HAS_KEY
+                    PARAMETER hash counts ;
+                    PARAMETER key word ;
+                    RESULT result known
+                IF NOT known ;
+                BEGIN
+                    ASSIGN counts[word] 0 ;
+                END IF
+                ASSIGN counts[word] counts[word] + 1 ;
+                ASSIGN words words + 1 ;
+                ASSIGN word "" ;
+            END IF
+        END IF
+    END FOR
+END FUNCTION

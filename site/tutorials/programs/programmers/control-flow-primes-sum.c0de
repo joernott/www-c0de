@@ -1,0 +1,34 @@
+PROGRAM primesum
+NOOP
+NOOP
+FUNCTION primes
+    PARAMETER limit INTEGER 20
+    RESULT found ARRAY INTEGER
+    RESULT count INTEGER
+    RESULT sum INTEGER
+BEGIN
+    IF limit < 2 ;
+    BEGIN
+        EXIT 1 ;
+    END IF
+    FOR candidate INTEGER 2 ; limit ;
+    BEGIN
+        VARIABLE prime BOOLEAN TRUE
+        VARIABLE divisor INTEGER 2
+        WHILE divisor * divisor ≤ candidate ;
+        BEGIN
+            ASSIGN prime candidate \ divisor ≠ 0 ;
+            BREAK NOT prime ;
+            ASSIGN divisor divisor + 1 ;
+        END WHILE
+        IF prime ;
+        BEGIN
+            ASSIGN found[count] candidate ;
+            ASSIGN count count + 1 ;
+        END IF
+    END FOR
+    EACH p found
+    BEGIN
+        ASSIGN sum sum + p ;
+    END EACH
+END FUNCTION
