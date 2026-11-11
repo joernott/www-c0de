@@ -19,6 +19,7 @@ The current stable version of every tool and package is used. Renovate keeps the
 | Go | 1.27.3 | `go.mod` (`go` and `toolchain` lines) |
 | Caddy | 2.11.9 | `go.mod` |
 | Node.js | 26 (LTS "Lithium", 26.13.0) | `.nvmrc`, `package.json` (`engines`) |
+| Java | 21 or newer | for `make test-programs`: the program runner of c0de (task 6.5); in CI `actions/setup-java` |
 | VitePress | 1.6.4 | `site/package.json` |
 | Vue.js | 3.5 | `site/package.json` |
 | Tailwind CSS | 4.3 (with `@tailwindcss/postcss`) | `site/package.json` |
@@ -101,6 +102,7 @@ Ports 80 and 443 are free on the VM (doenerstag uses 8443, mokapi 8080), so the 
 | `make run`, `make stop` | Runs the image with `docker run`, ports 80/443 published to 8080/8443 in the container, TLS mode `internal`, volume `www-c0de-data` |
 | `make e2e` | Runs the Playwright tests against `https://localhost` (Caddy's local CA is trusted by the tests) |
 | `make test lint` | All unit tests and checks, as in CI |
+| `make test-programs` | Runs the programs of the tutorials with the program runner of the c0de release in `site/sources.yaml` (downloaded into `site/.cache/runner`) |
 
 From sprint 5 on, the VM also runs:
 

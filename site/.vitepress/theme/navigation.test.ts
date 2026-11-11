@@ -34,6 +34,32 @@ const navigation: Navigation = {
         { label: { en: 'SGN' }, link: '/c0de/math/sgn' },
       ],
     },
+    {
+      id: 'tutorials',
+      label: { en: 'Tutorials' },
+      color: 'tutorials',
+      link: '/tutorials/',
+      chapters: [
+        {
+          label: { en: 'c0de for programmers' },
+          link: '/tutorials/programmers/',
+          pages: [
+            { label: { en: 'c0de in ten minutes' }, link: '/tutorials/programmers/ten-minutes' },
+            { label: { en: 'Types' }, link: '/tutorials/programmers/types' },
+          ],
+        },
+        {
+          label: { en: 'Libraries in practice' },
+          link: '/tutorials/libraries/',
+          pages: [{ label: { en: 'Before' }, link: '/tutorials/libraries/before' }],
+        },
+        {
+          label: { en: 'c0de/math' },
+          link: '/tutorials/libraries/c0de/math/',
+          pages: [{ label: { en: 'Dice' }, link: '/tutorials/libraries/c0de/math/dice' }],
+        },
+      ],
+    },
   ],
   mods: [],
 }
@@ -88,7 +114,8 @@ describe('neighbours', () => {
     const { previous, next } = neighbours(navigation, home, '/c0de/reference/data')
     expect(previous?.link).toBe('/c0de/guide/getting-started')
     expect(next?.link).toBe('/c0de/math/')
-    expect(neighbours(navigation, home, '/c0de/math/sgn').next).toBeUndefined()
+    expect(neighbours(navigation, home, '/c0de/math/sgn').next?.link).toBe('/tutorials/')
+    expect(neighbours(navigation, home, '/tutorials/libraries/c0de/math/dice').next).toBeUndefined()
   })
 
   it('has no neighbours for pages outside the navigation', () => {
@@ -100,5 +127,33 @@ describe('localize', () => {
   it('falls back to English', () => {
     expect(localize({ en: 'ABS' }, 'de')).toBe('ABS')
     expect(localize({ en: 'Data', de: 'Daten' }, 'de')).toBe('Daten')
+  })
+})
+
+describe('chapters with pages', () => {
+  const tutorials = navigation.tabs[2]
+
+  it.each([
+    ['/tutorials/programmers/', '/tutorials/programmers/'],
+    ['/tutorials/programmers/types', '/tutorials/programmers/'],
+    ['/de/tutorials/programmers/ten-minutes', '/tutorials/programmers/'],
+    ['/tutorials/libraries/before', '/tutorials/libraries/'],
+    ['/tutorials/libraries/c0de/math/dice', '/tutorials/libraries/c0de/math/'],
+    ['/tutorials/programmers/unknown', undefined],
+  ])('%s belongs to %s', (path, expected) => {
+    expect(activeChapter(tutorials, path)?.link).toBe(expected)
+  })
+
+  it('reads the pages after their chapter', () => {
+    expect(neighbours(navigation, home, '/tutorials/programmers/').next?.link).toBe(
+      '/tutorials/programmers/ten-minutes',
+    )
+    expect(neighbours(navigation, home, '/tutorials/programmers/types')).toEqual({
+      previous: {
+        label: { en: 'c0de in ten minutes' },
+        link: '/tutorials/programmers/ten-minutes',
+      },
+      next: { label: { en: 'Libraries in practice' }, link: '/tutorials/libraries/' },
+    })
   })
 })

@@ -21,11 +21,13 @@ Every lesson is one page and has the same parts:
 1. **What you'll learn**: two or three sentences, and for the beginner path the new words (program, variable, loop …).
 2. **What you need**: the blocks, devices and items to craft or take from the creative inventory, and whether the lesson needs a world where you are an operator.
 3. **The idea**: the concept, explained without c0de first in the beginner path, in comparison with other languages in the programmer path, and with the problem it solves in the library path.
-4. **The program**: a complete program in a ` ```c0de ` block, written in the text notation of the guide ("Reading the examples"). Every program in a tutorial is complete and runs as it is; there are no fragments that can't be built. Each program is a file in `site/tutorials/programs/`, which the page includes and the tests run. Beside the text, the reader can switch to a 3D model of the program as it lies on the sheet (from sprint 8 on).
+4. **The program**: a complete program in a ` ```c0de ` block, written in the text notation of the guide ("Reading the examples"). Every program in a tutorial is complete and runs as it is; there are no fragments that can't be built. Each program is a file in `site/tutorials/programs/` (`<<< @/tutorials/programs/<path>/<name>.c0de`), which the page includes and the tests run: `<name>.options.yaml` beside it sets the function, the parameters and the input of the test, `<name>.expected.yaml` the results, screen output or error it must produce; further cases are `<name>.<case>.options.yaml` with `<name>.<case>.expected.yaml` (`npm run test-programs`, task 6.5). Beside the text, the reader can switch to a 3D model of the program as it lies on the sheet (from sprint 8 on).
 5. **Building and running it**: how to set up the trigger block or the device, which variable items to put in, what to watch (the cursor, the screen, the world).
 6. **How it works**: the program explained line by line (beginner path) or by its interesting parts (other paths).
 7. **Try it yourself**: one to three exercises that change the program. Each has a solution, folded away (`<details>`, which needs no JavaScript).
 8. **Read more**: links to the chapters of the guide and the handbooks that the lesson used.
+
+The pages of the tutorials and the order of the lessons are listed in `site/tutorials/tutorials.yaml`; the overview page of a path shows its lessons (`<LessonList />`). The boxes are the containers of VitePress: `::: info What you need`, `::: warning Needs an operator`, `::: details Solution`.
 
 Lessons of the beginner path are short (one new idea per lesson). Lessons of the programmer path cover more ground and are dense. Recipes of the library path start with what they build ("A clock on the wall") and list the library functions they use at the top.
 

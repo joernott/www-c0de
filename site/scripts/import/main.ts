@@ -11,6 +11,7 @@ import { fileURLToPath } from 'node:url'
 import { languages } from '../../.vitepress/theme/language.ts'
 import { build, ImportError } from './build.ts'
 import { fetchSource, readConfig } from './sources.ts'
+import { tutorialsTab } from './tutorials.ts'
 
 const site = join(dirname(fileURLToPath(import.meta.url)), '..', '..')
 
@@ -39,6 +40,8 @@ async function main(args: string[]) {
   }
 
   const output = build(config, folders, [...languages])
+  // The tutorials are written in this repository; their tab comes after the tabs of the mods.
+  output.navigation.tabs.push(tutorialsTab(site, [...languages]))
 
   for (const folder of generated) {
     rmSync(join(site, folder), { recursive: true, force: true })

@@ -25,6 +25,7 @@ export interface Texts {
   sourceCode: string
   documentation: string
   chapterCount: (n: number) => string
+  noLessons: string
 }
 
 export const texts: Record<Language, Texts> = {
@@ -52,6 +53,7 @@ export const texts: Record<Language, Texts> = {
     sourceCode: 'Source code on GitHub',
     documentation: 'Documentation',
     chapterCount: (n) => (n === 1 ? '1 chapter' : `${n} chapters`),
+    noLessons: 'The lessons of this path are being written.',
   },
   de: {
     home: 'Start',
@@ -77,5 +79,6 @@ export const texts: Record<Language, Texts> = {
     sourceCode: 'Quellcode bei GitHub',
     documentation: 'Dokumentation',
     chapterCount: (n) => (n === 1 ? '1 Kapitel' : `${n} Kapitel`),
+    noLessons: 'Die Lektionen dieses Pfads werden gerade geschrieben.',
   },
 }

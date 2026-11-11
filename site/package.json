@@ -16,7 +16,8 @@
     "lint": "eslint . && prettier --check .",
     "format": "prettier --write .",
     "typecheck": "vue-tsc --noEmit",
-    "check-links": "node scripts/check-links.ts"
+    "check-links": "node scripts/check-links.ts",
+    "test-programs": "node scripts/test-programs.ts"
   },
   "devDependencies": {
     "@eslint/js": "10.0.1",

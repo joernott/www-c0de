@@ -1,0 +1,4 @@
+function: greet
+parameters:
+  name: c0de
+  mark: '?'

@@ -10,6 +10,7 @@ const mainTabs = [
   'c0de/time',
   'c0de/minecraft',
   'c0de_net/http',
+  'Tutorials',
 ]
 
 // The tab column (its label is in the language of the page).
@@ -86,16 +87,22 @@ test.describe('desktop', () => {
     await page.getByRole('link', { name: 'Diese Seite auf Deutsch' }).click()
     await expect(page).toHaveURL(/\/de\/c0de\/guide\/getting-started$/)
     await expect(page.locator('html')).toHaveAttribute('lang', 'de')
-    // The documentation isn't translated yet: the page says so and is English.
+    // c0de has a German translation of its documentation since 0.4.0
+    await expect(page.getByRole('note')).toHaveCount(0)
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Erste Schritte')
+    await expect(tabs(page).locator('[aria-current="page"]')).toHaveText('Erste Schritte')
+    await page.getByRole('link', { name: 'This page in English' }).click()
+    await expect(page).toHaveURL(/\/c0de\/guide\/getting-started$/)
+    await expect(page.locator('html')).toHaveAttribute('lang', 'en')
+  })
+
+  test('an untranslated page says so and is shown in English', async ({ page }) => {
+    // c0de net has no German translation in the release the site imports
+    await page.goto('/de/c0de_net/http/http_get')
     await expect(page.getByRole('note')).toHaveText(
       'Diese Seite ist noch nicht übersetzt. Sie wird auf Englisch angezeigt.',
     )
     await expect(page.locator('.content')).toHaveAttribute('lang', 'en')
-    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Getting Started')
-    await expect(tabs(page).locator('[aria-current="page"]')).toHaveText('Getting Started')
-    await page.getByRole('link', { name: 'This page in English' }).click()
-    await expect(page).toHaveURL(/\/c0de\/guide\/getting-started$/)
-    await expect(page.locator('html')).toHaveAttribute('lang', 'en')
   })
 
   test('every page names its versions in all languages', async ({ page }) => {
@@ -184,8 +191,7 @@ test.describe('without JavaScript', () => {
     await page.goto('/de/c0de/math/abs')
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('ABS')
     await expect(tabs(page).locator('[aria-current="page"]')).toHaveText('ABS')
-    await expect(page.getByText('Returns the absolute value of a number.')).toBeVisible()
-    await expect(page.getByRole('note')).toContainText('noch nicht übersetzt')
+    await expect(page.getByText('Gibt den Betrag einer Zahl zurück.')).toBeVisible()
   })
 
   test('the not-found page is rendered in the language of the URL', async ({ page }) => {

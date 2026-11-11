@@ -119,3 +119,7 @@ T7: The proposal makes sense
 ## 2026-11-11 – Version constants
 
 Add a task to the sprints on c0de and c0de-net to provide a constant C0DE_VERSION respective C0DE_NET_VERSION that will always contain the mod version. That should close the gap. After that, please push the three branches
+
+## 2026-11-11 – Sprint 6
+
+can you start with sprint 6 of www-c0de in the meantime, the workflow is still queued, so it may take some time

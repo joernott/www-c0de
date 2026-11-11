@@ -37,6 +37,7 @@
   --tab-lib6: #f0a8b6;
   --tab-lib7: #e5d47c;
   --tab-lib8: #cfcfcf;
+  --tab-tutorials: #f2b0a0;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -68,6 +69,7 @@
     --tab-lib6: #873246;
     --tab-lib7: #75661b;
     --tab-lib8: #55555a;
+    --tab-tutorials: #8a3d30;
   }
 }
 
@@ -674,4 +676,37 @@ body {
     font-weight: var(--shiki-dark-font-weight, inherit);
     font-style: var(--shiki-dark-font-style, inherit);
   }
+}
+
+/* The boxes of the tutorials (task 6.4), from the custom containers of the Markdown of
+   VitePress: "What you need" (info), the operator mark (warning), tips and the folded
+   solutions of the exercises (details). */
+.content .custom-block {
+  @apply my-5 rounded-md border-l-4 px-4 py-2;
+  border-color: var(--tab-tutorials);
+  background: var(--color-code-bg);
+}
+
+.content .custom-block.warning {
+  border-color: #c98a1a;
+}
+
+.content .custom-block.tip {
+  border-color: var(--tab-c0de);
+}
+
+.content .custom-block-title {
+  @apply my-1 font-semibold;
+}
+
+.content .custom-block > :last-child {
+  @apply mb-1;
+}
+
+.content details.custom-block summary {
+  @apply cursor-pointer py-1 font-semibold;
+}
+
+.content .lessons {
+  @apply list-decimal pl-6;
 }

@@ -1,0 +1,9 @@
+PROGRAM hello
+NOOP
+NOOP
+FUNCTION greet
+    PARAMETER name STRING "World"
+    RESULT greeting STRING
+BEGIN
+    ASSIGN greeting "Hello, " ⊕ name ⊕ "!" ;
+END FUNCTION

@@ -12,6 +12,9 @@ export interface Chapter {
   link: string
   // The c0de tab separates the chapters of the guide from the handbooks.
   group?: 'guide' | 'handbook'
+  // The pages of a chapter that has more than one (the lessons of a tutorial path): their
+  // links start with the link of the chapter, which stays selected while they are read.
+  pages?: Page[]
 }
 
 export interface MainTab {
@@ -71,17 +74,35 @@ export function activeTab(navigation: Navigation, path: string): MainTab | undef
   return best
 }
 
+// activeChapter returns the chapter a page belongs to: the chapter itself, or the chapter with
+// pages whose link is the longest one that the page starts with.
 export function activeChapter(tab: MainTab | undefined, path: string): Chapter | undefined {
   const page = normalize(path)
-  return tab?.chapters.find((c) => c.link === page)
+  const exact = tab?.chapters.find((c) => c.link === page)
+  if (exact) {
+    return exact
+  }
+  let best: Chapter | undefined
+  for (const chapter of tab?.chapters ?? []) {
+    if (
+      chapter.pages?.some((p) => p.link === page) &&
+      (!best || chapter.link.length > best.link.length)
+    ) {
+      best = chapter
+    }
+  }
+  return best
 }
 
 // pages returns all pages of the navigation in reading order: the home page, then every
-// main tab with its overview page and its chapters.
+// main tab with its overview page and its chapters, each followed by its own pages.
 export function pages(navigation: Navigation, home: Localized): Page[] {
   const result: Page[] = [{ label: home, link: '/' }]
   for (const tab of navigation.tabs) {
-    result.push({ label: tab.label, link: tab.link }, ...tab.chapters)
+    result.push({ label: tab.label, link: tab.link })
+    for (const chapter of tab.chapters) {
+      result.push({ label: chapter.label, link: chapter.link }, ...(chapter.pages ?? []))
+    }
   }
   return result
 }

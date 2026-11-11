@@ -12,7 +12,7 @@ GO_PACKAGES := ./cmd/... ./internal/...
 # the folder doesn't exist).
 export PATH := /opt/node-v26/bin:$(PATH)
 
-.PHONY: all site binary image run stop test lint e2e acme-test clean
+.PHONY: all site binary image run stop test test-programs lint e2e acme-test clean
 
 all: lint test binary
 
@@ -48,6 +48,10 @@ stop:
 test: site/node_modules
 	go test $(GO_PACKAGES)
 	cd site && npm test
+
+# Runs the programs of the tutorials with the program runner of c0de (needs Java 21 or newer).
+test-programs: site/node_modules
+	cd site && npm run test-programs
 
 lint: site/node_modules
 	scripts/check-whitespace.sh
