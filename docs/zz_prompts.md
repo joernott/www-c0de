@@ -101,3 +101,7 @@ I have fixed the issues, please check again
 ## 2026-11-10 – HSTS header fixed
 
 The header should be fixed now
+
+## 2026-11-11 – Lesson plan of the tutorials
+
+I have expanded the description of the tutorials in docs/concept.md (line 172 to 176). Please use that as a base to come up with a more detailed plan of lessions/examples for each of the paths.

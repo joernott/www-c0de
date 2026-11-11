@@ -143,6 +143,7 @@ A task is done when
 | Task | Description | Done |
 |---|---|:---:|
 | 6.1 | Write the concept of the tutorials: audience, structure, format of the pages, languages, use of screenshots and example programs, how tutorials are tested against new versions of c0de. |  |
+| 6.1.1 | Plan the lessons of the three paths (learning to program, c0de for programmers, libraries in practice) in `docs/tutorials.md`, with the format of a lesson, the coverage of every library function and the open questions T1–T7. | ✅ |
 | 6.2 | Plan the remaining tasks of this sprint. |  |
 
 ## Risks

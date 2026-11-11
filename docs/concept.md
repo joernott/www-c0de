@@ -167,7 +167,13 @@ Nothing in the image or its configuration depends on that server: the domain, th
 
 ## Tutorials
 
-Tutorials follow in a second step and are shown under `/tutorials/`, with their own main tab. They are written in this repository as Markdown, in English and German, so they can use the same layout and code highlighting. Their concept is written when that step starts.
+Tutorials follow in a second step and are shown under `/tutorials/`, with their own main tab. They are written in this repository as Markdown, in English and German, so they can use the same layout and code highlighting. The lessons of each path are planned in [Tutorials](tutorials.md).
+
+There are three different types of tutorials. The "Beginner" part targets people who are novices at programming. It introduces the basic concepts of programming together with the implementation in c0de.
+
+The second part targets people with development experience. They already know, how to program and just need an overview of the concepts and language elements of c0de.
+
+The third part explains the usage of the various library functions with practical examples.
 
 ## Legal pages
 
