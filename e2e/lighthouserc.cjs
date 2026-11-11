@@ -13,6 +13,9 @@ const pages = [
   '/c0de/reference/data',
   '/c0de/minecraft/teleport',
   '/privacy',
+  '/tutorials/',
+  '/tutorials/programmers/collections',
+  '/de/tutorials/programmers/errors',
 ]
 
 module.exports = {
