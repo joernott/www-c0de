@@ -156,6 +156,7 @@ A task is done when
 | 6.6 | Path 2, lessons 2.1–2.4: c0de in ten minutes, types and values, expressions and statements, control flow. English and German. | ✅ |
 | 6.7 | Path 2, lessons 2.5–2.8: functions and libraries, collections and structs, errors, programs in the world. English and German. | ✅ |
 | 6.8 | Path 2, lessons 2.9–2.11: screens and I/O, data and the network, the cheat sheet. English and German. | ✅ |
+| 6.8.1 | `sources.yaml` imports c0de net v0.2.0 with its German handbook and its runner library, so the whole German site is translated and the c0de_net programs of the tutorials are tested too. The end-to-end test of an untranslated page is gone with the last untranslated page; the import's unit tests still cover them. | ✅ |
 | 6.9 | Review of the path in the binary and the container (Playwright, Lighthouse, link check), and the gaps found in the mod as tasks in its plan (T7). Release. |  |
 
 ## Sprint 7: Tutorials: learning to program
@@ -207,7 +208,7 @@ A task is done when
 | VitePress inserts inline scripts, which a strict Content-Security-Policy blocks. | The custom theme doesn't use the appearance switch of VitePress (dark mode is CSS only); remaining inline scripts are allowed with hashes generated at build time (task 5.1). |
 | The Markdown of the mods uses constructs that look right on GitHub and in Patchouli, but not on the site. | Task 3.11 reviews every page; the import fails on unresolved links (3.2) and the link check runs in CI (3.9). |
 | The dynamic tab column becomes hard to use with many libraries and chapters (c0de/minecraft alone has 22 function tabs). | Only the chapters of the selected main tab are shown (2.4), the column scrolls (2.5), Playwright tests with many tabs and low windows (2.5, 2.11). |
-| The German site shows mostly English documentation until the mods are translated. | Every untranslated page says so (3.6). The German translations are planned in the mod repositories. |
+| The German site shows English documentation where a mod isn't translated. | Every untranslated page says so (3.6). Since c0de 0.4.0 and c0de net 0.2.0, their documentation is translated into German. |
 | A lost `/data` volume or repeated tests against the production endpoint hit the rate limits of Let's Encrypt. | ACME is tested against Pebble (5.3); the volume is documented and backed up (5.9). |
 | An unprivileged process can't bind to ports 80 and 443 in a `scratch` image. | The process listens on high ports, which Podman (running as root on the server) publishes as 80 and 443 (5.4). |
 | `latest` is pulled on every restart, so a broken release goes live on the next restart of the service. | Releases only after CI and the end-to-end tests on the VM are green; the previous version stays on ghcr.io and can be started by its tag (5.9). |

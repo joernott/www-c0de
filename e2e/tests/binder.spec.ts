@@ -96,15 +96,6 @@ test.describe('desktop', () => {
     await expect(page.locator('html')).toHaveAttribute('lang', 'en')
   })
 
-  test('an untranslated page says so and is shown in English', async ({ page }) => {
-    // c0de net has no German translation in the release the site imports
-    await page.goto('/de/c0de_net/http/http_get')
-    await expect(page.getByRole('note')).toHaveText(
-      'Diese Seite ist noch nicht übersetzt. Sie wird auf Englisch angezeigt.',
-    )
-    await expect(page.locator('.content')).toHaveAttribute('lang', 'en')
-  })
-
   test('every page names its versions in all languages', async ({ page }) => {
     await page.goto('/de/c0de/math/abs')
     const alternates = await page

@@ -43,7 +43,7 @@ The site starts in **English and German**. More languages are added when someone
   - A language switch at the top of every page leads to the same page in the other language. The site doesn't redirect by the language of the browser.
   - The search only searches the pages of the current language.
 
-Until the mods are translated, the German site has German pages of its own (home page, legal pages, theme), but the documentation of the mods in English.
+Since c0de 0.4.0 and c0de net 0.2.0, the documentation of both mods is translated into German; a page that a future mod doesn't translate is still shown in English with the note.
 
 ### URL structure
 
