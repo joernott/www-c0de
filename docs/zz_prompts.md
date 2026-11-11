@@ -123,3 +123,7 @@ Add a task to the sprints on c0de and c0de-net to provide a constant C0DE_VERSIO
 ## 2026-11-11 – Sprint 6
 
 can you start with sprint 6 of www-c0de in the meantime, the workflow is still queued, so it may take some time
+
+## 2026-11-11 – Releases
+
+yes, please do (VM review and release 0.3.0 of the website, release 0.2.0 of c0de net)
