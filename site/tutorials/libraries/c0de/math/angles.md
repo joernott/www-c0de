@@ -6,7 +6,7 @@ description: How high does a ramp of 10 blocks at 30 degrees go, and how steep i
 
 A ramp up to your castle, a slide down a mountain, a roof: you know how long it should be and how steep it should look, but how many blocks high does it go? And the other way round: how steep is the hill behind your house? Two functions answer it, TAN and its opposite ATN.
 
-**Functions:** [TAN](/c0de/math/tan) and [ATN](/c0de/math/atn), with [ROUND](/c0de/math/round) and the constant `c0de/math/PI`
+**Functions:** [TAN](/c0de/math/tan) and [ATN](/c0de/math/atn), with [ROUND](/c0de/math/round) and the constant [PI](/c0de/math/pi)
 
 ::: info What you need
 A trigger block with a button and a **display block**. For `height`, the **variable items** `length` of type INTEGER and `degrees` of type FLOAT (optional: the defaults are 10 blocks and 30 degrees) and two uninitialized items; for `slope`, the variable items `run` and `rise` of type INTEGER and one uninitialized item.
@@ -61,5 +61,5 @@ A huge number: TAN of 90 degrees is infinite in theory, but `90 * PI / 180` is a
 ## Read more
 
 - The handbook pages of [TAN](/c0de/math/tan), [ATN](/c0de/math/atn) and [ROUND](/c0de/math/round)
-- [Libraries: c0de/math](/c0de/guide/libraries#c0demath): the constant `c0de/math/PI`
+- The handbook page of the constant [PI](/c0de/math/pi)
 - [Drawing a circle](/tutorials/libraries/c0de/math/circle): SIN and COS, the other functions with angles

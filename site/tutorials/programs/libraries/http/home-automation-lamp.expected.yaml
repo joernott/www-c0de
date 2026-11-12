@@ -1,6 +1,6 @@
-valid: false
-problems:
-  - line: 33
-    code: UNKNOWN_STRUCT_ENTITY
-    message: The struct c0de/minecraft/POSITION has not been declared
-run: false
+valid: true
+state: CRASHED
+error:
+  code: 1003
+  context: c0de_net/http/HTTP_PUT
+  line: 24

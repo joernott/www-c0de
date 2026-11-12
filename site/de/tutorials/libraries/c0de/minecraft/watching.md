@@ -21,7 +21,7 @@ Zwei Programme, die nur schauen: ein Feldwächter, der auf einer Anzeigewand zei
 
 GET_BLOCK liest einen Block: seine ID, etwa `minecraft:wheat`, seine **Blockzustände**, die Redstone-Energie, die er bekommt, und ob er ein Inventar hat. Blockzustände sind das, was F3 rechts anzeigt, wenn du einen Block anschaust: Eine Weizenpflanze hat den Zustand `age`, von 0 (gerade gepflanzt) bis 7 (reif). GET_BLOCK gibt sie als HASH STRING, also ist `states["age"]` bei einer reifen Pflanze der Text `"7"`.
 
-FIND_ENTITIES schaut andersherum: nicht auf einen Ort, sondern nach allem, was sich um eine Position herum bewegt – Tiere, Monster, Spieler und Gegenstände, die auf dem Boden liegen. Jedes kommt als ENTITY-Struktur mit seiner `uuid`, seinem `type`, seinem `name` und seiner `position`.
+FIND_ENTITIES schaut andersherum: nicht auf einen Ort, sondern nach allem, was sich um eine Position herum bewegt – Tiere, Monster, Spieler und Gegenstände, die auf dem Boden liegen. Jedes kommt als [ENTITY](/de/c0de/minecraft/position-entity-and-item_stack)-Struktur mit seiner `uuid`, seinem `type`, seinem `name` und seiner `position`.
 
 ## Der Feldwächter
 

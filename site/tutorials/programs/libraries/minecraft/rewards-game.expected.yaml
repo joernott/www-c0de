@@ -1,2 +1,4 @@
-valid: false
-run: false
+valid: true
+state: STOPPED
+screen:
+  - I am thinking of a number from 1 to 100.

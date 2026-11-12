@@ -5,8 +5,9 @@
 // function, its parameters and the input, <name>.expected.yaml the parts of the report that
 // the run must produce (see docs/runner.md of minecraft-c0de). Without expected values, the
 // program must be valid and run to its end. Further runs of the same program are cases:
-// <name>.<case>.options.yaml with <name>.<case>.expected.yaml. Programs that include c0de/minecraft are only
-// validated, because that library needs the game. Programs that include c0de_net need the
+// <name>.<case>.options.yaml with <name>.<case>.expected.yaml. Programs that include c0de/minecraft run until
+// they call a function of that library, which needs the game: they expect INVALID_ARGUMENT
+// there (since c0de 0.5.0, the runner validates them completely). Programs that include c0de_net need the
 // runner library of c0de net; if its release has none, they are skipped. Programs that talk to
 // the API of c0de.at run against a test service (test-service.ts), which needs Go.
 //

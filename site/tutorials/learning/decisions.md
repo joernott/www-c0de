@@ -95,7 +95,7 @@ You can also join questions:
 - **OR**: one is enough. `visitor = "Alex" OR visitor = "Kai"` is true for Alex and for Kai.
 - **NOT**: turns the answer around. `NOT isOwner` is true for everybody but the owner.
 
-Don't print a BOOLEAN directly. c0de 0.4.0 prints it as `true` or `false`, but the handbook says `TRUE` and `FALSE`, so this will change. Use it in an IF instead, and print a text of your own.
+PRINT shows a BOOLEAN as `TRUE` or `FALSE`, like the handbook (up to c0de 0.4.0 it was `true` or `false`). For players, a text of your own usually says more: use the BOOLEAN in an IF and print what it means.
 
 ## Try it yourself
 

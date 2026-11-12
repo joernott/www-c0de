@@ -6,7 +6,7 @@ description: A ring of blocks of any radius around the trigger block – COS and
 
 A round tower, a fountain, a ring of torches around the spawn: Minecraft is made of squares, but a program can draw a circle of blocks of any radius around the trigger block. It walks once around the circle in small steps, turns each angle into a point with COS and SIN, and places a block on every point.
 
-**Functions:** [SIN](/c0de/math/sin), [COS](/c0de/math/cos), [ROUND](/c0de/math/round) and the constant `c0de/math/PI`, with [PLACE_BLOCK](/c0de/minecraft/place_block) and [SAY](/c0de/minecraft/say) of c0de/minecraft
+**Functions:** [SIN](/c0de/math/sin), [COS](/c0de/math/cos), [ROUND](/c0de/math/round) and the constant [PI](/c0de/math/pi), with [PLACE_BLOCK](/c0de/minecraft/place_block) and [SAY](/c0de/minecraft/say) of c0de/minecraft
 
 ::: warning Needs an operator
 PLACE_BLOCK without `inventory` puts blocks into the world out of nothing, so the owner of the trigger block must be an operator. In the world of the tutorials, you are one. On a server, the administrator can allow it for everybody with `allowBlockChanges=true` in `config/c0de.properties`; without that right, the program crashes with PERMISSION_DENIED. The alternative for everyone is PLACE_BLOCK with `inventory`: it takes the blocks from a chest, like a player – see the first exercise.
@@ -74,7 +74,7 @@ The circle is about 6.3 × r blocks long, so 4 × r steps are about 1.6 blocks a
 
 ## Read more
 
-- The handbook pages of [SIN](/c0de/math/sin), [COS](/c0de/math/cos) and [ROUND](/c0de/math/round), and the constant `c0de/math/PI` in [Libraries](/c0de/guide/libraries#c0demath)
+- The handbook pages of [SIN](/c0de/math/sin), [COS](/c0de/math/cos) and [ROUND](/c0de/math/round), and of the constant [PI](/c0de/math/pi)
 - [PLACE_BLOCK](/c0de/minecraft/place_block), [Changing the world](/c0de/guide/libraries#changing-the-world) and [Owner and permissions](/c0de/guide/libraries#owner-and-permissions)
 - [Errors](/c0de/guide/language#errors): catching an error with an ERROR variable
 - [Programs in the world](/tutorials/programmers/world): who may change the world

@@ -46,8 +46,9 @@ A task is done when
 | 5 | Production and release 0.1.0 | c0de.at is online with certificates from Let's Encrypt | ✅ |
 | 6 | Tutorials: pages and the path for programmers | The tutorials have their own tab, tested programs, and the path "c0de for programmers" | ✅ |
 | 7 | Tutorials: learning to program | The path for beginners, with screenshots |  |
-| 8 | Programs in 3D | Example programs can be turned and zoomed as 3D models, built from the block models of c0de |  |
-| 9 | Tutorials: libraries in practice | The API for the tutorials and the version check, and the recipes of all libraries |  |
+| 8 | Programs in 3D | Example programs can be turned and zoomed as 3D models, built from the block models of c0de | ✅ |
+| 9 | Tutorials: libraries in practice | The API for the tutorials and the version check, and the recipes of all libraries | ✅ |
+| 10 | c0de 0.5.0 | The site shows the documentation of c0de 0.5.0, and the programs of the tutorials are tested with its runner |  |
 
 ## Sprint 0: Concept and plan
 
@@ -204,6 +205,17 @@ A task is done when
 | 9.6.1 | The tests of the recipes run against a test service instead of the site that is online, so they neither depend on it nor change its data (the plan of c0de net 6.1 expects it): `make test-programs` starts the server of this repository with the internal certificate authority of Caddy for c0de.at and a fake GitHub, and the runner sends its HTTPS requests through a proxy that connects c0de.at to it (`site/scripts/test-service.ts`). The API answers JSON without a line break at the end, which programs would print as an empty line. | ✅ |
 | 9.7 | Coverage check: the build fails if a function of a library handbook has no recipe in the coverage table of the tutorials; the handbook page of every function links to its recipes ("Used in the tutorials").  (The import reads the links of the recipes to the handbook pages: `addRecipes` in `scripts/import/tutorials.ts`.) | ✅ |
 | 9.8 | Review, Playwright, Lighthouse, link check. Release. (Reviewed on 2026-11-12 on the VM: 125 end-to-end tests passed, 8 skipped (3D in Firefox, the API in Firefox), Lighthouse 100 on 11 pages, link check 343 pages without errors, 261 program runs; the gaps found in the mods are c0de tasks 15.8 to 15.10 and c0de net sprint 7. Released as 0.5.0 on 2026-11-12; live checks: 65 end-to-end tests passed, the 2 that fail behind nginx by design failed, Lighthouse assertions passed on 11 pages, the API answers.) | ✅ |
+
+## Sprint 10: c0de 0.5.0
+
+**Goal:** the site shows c0de 0.5.0, the release that fixed what the recipes of sprint 9 found in c0de (c0de sprint 15), and its program runner tests the programs of the tutorials, including those that use c0de/minecraft.
+
+| Task | Description | Done |
+|---|---|:---:|
+| 10.1 | `sources.yaml` imports c0de at `v0.5.0`: its documentation and the block models of the release. The new handbook pages of 0.5.0, the constant PI and the types POSITION, ENTITY and ITEM_STACK of c0de/minecraft, are linked from the recipes that use them (Drawing a circle and Ramps and angles, Watching and Sorting), so the coverage check of 9.7 passes. | ✅ |
+| 10.2 | The runner of 0.5.0 validates programs that use c0de/minecraft completely and runs them until they call a function of the library. Their expected files say so: `valid: true`, and where they stop with INVALID_ARGUMENT (34 programs). Two programs stop earlier: the reward games wait for INPUT, and the home automation recipe can't reach its hub. | ✅ |
+| 10.3 | The texts of the tutorials follow 0.5.0: PRINT shows a BOOLEAN as `TRUE` or `FALSE` (Making decisions), and the examples of the version check show 0.5.0 (Staying up to date, Network errors, Types). English and German. | ✅ |
+| 10.4 | Review on the VM: Playwright, Lighthouse, link check, program runs. Release. |  |
 
 ## Risks
 

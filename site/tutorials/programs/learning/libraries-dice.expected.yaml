@@ -1,2 +1,6 @@
 valid: true
-run: false
+state: CRASHED
+error:
+  name: INVALID_ARGUMENT
+  context: c0de/minecraft/SOUND
+  line: 14

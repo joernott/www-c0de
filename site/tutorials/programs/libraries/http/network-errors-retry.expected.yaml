@@ -1,4 +1,4 @@
 exit_code: 0
 results:
-  answer: '{"c0de":"0.4.0","c0de_net":"0.2.0"}'
+  answer: '{"c0de":"0.5.0","c0de_net":"0.2.0"}'
   tries: 1

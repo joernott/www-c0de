@@ -35,7 +35,7 @@ Trying again only helps when the problem may go away by itself. And trying again
 ## Building and running it
 
 1. Bind the laptop to `netretry` / `fetch`.
-2. Set the trigger block to `netretry` / `fetch`, put two uninitialized variable items into it, and press the button. The laptop shows the answer, `{"c0de":"0.4.0","c0de_net":"0.2.0"}`, and the result `tries` is 1.
+2. Set the trigger block to `netretry` / `fetch`, put two uninitialized variable items into it, and press the button. The laptop shows the answer, `{"c0de":"0.5.0","c0de_net":"0.2.0"}`, and the result `tries` is 1.
 3. Put a variable item `server` with `nothing.invalid` in it, a name that never exists, and press again. Now the laptop shows:
 
 ```

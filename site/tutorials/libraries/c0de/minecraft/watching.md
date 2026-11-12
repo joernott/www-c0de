@@ -21,7 +21,7 @@ Two programs that only look: a farm monitor that shows on a display wall how muc
 
 GET_BLOCK reads one block: its ID, like `minecraft:wheat`, its **block states**, its redstone power and whether it has an inventory. Block states are what F3 shows on the right when you look at a block: a wheat plant has the state `age`, from 0 (just planted) to 7 (ripe). GET_BLOCK gives them as a HASH STRING, so `states["age"]` is the text `"7"` for a ripe plant.
 
-FIND_ENTITIES looks the other way round: not at one place, but for everything that moves around a position – animals, monsters, players and items lying on the ground. Each one comes as an ENTITY struct with its `uuid`, `type`, `name` and `position`.
+FIND_ENTITIES looks the other way round: not at one place, but for everything that moves around a position – animals, monsters, players and items lying on the ground. Each one comes as an [ENTITY](/c0de/minecraft/position-entity-and-item_stack) struct with its `uuid`, `type`, `name` and `position`.
 
 ## The farm monitor
 

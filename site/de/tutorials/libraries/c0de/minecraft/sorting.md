@@ -22,7 +22,7 @@ MOVE_ITEMS und DELETE_ITEMS bewegen Gegenstände ohne einen Spieler, darum funkt
 
 ## Die Idee
 
-GET_INVENTORY gibt den Inhalt einer Truhe als Array von ITEM_STACK-Strukturen, eine pro Platz: Jede hat eine `id`, etwa `minecraft:bread`, und eine Anzahl `count`. Ein leerer Platz hat die ID `""` und die Anzahl 0.
+GET_INVENTORY gibt den Inhalt einer Truhe als Array von [ITEM_STACK](/de/c0de/minecraft/position-entity-and-item_stack)-Strukturen, eine pro Platz: Jede hat eine `id`, etwa `minecraft:bread`, und eine Anzahl `count`. Ein leerer Platz hat die ID `""` und die Anzahl 0.
 
 MOVE_ITEMS verschiebt bis zu `count` Gegenstände mit einer `id` von einem Inventar in ein anderes und sagt, wie viele es verschoben hat – weniger, wenn das Ziel voll ist. DELETE_ITEMS entfernt Gegenstände für immer.
 

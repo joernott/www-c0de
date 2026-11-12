@@ -6,7 +6,7 @@ description: Ein Ring aus Blöcken mit beliebigem Radius um den Auslöserblock �
 
 Ein runder Turm, ein Brunnen, ein Ring aus Fackeln um den Spawn: Minecraft besteht aus Quadraten, aber ein Programm kann einen Kreis aus Blöcken mit beliebigem Radius um den Auslöserblock zeichnen. Es geht in kleinen Schritten einmal um den Kreis, macht mit COS und SIN aus jedem Winkel einen Punkt und setzt auf jeden Punkt einen Block.
 
-**Funktionen:** [SIN](/de/c0de/math/sin), [COS](/de/c0de/math/cos), [ROUND](/de/c0de/math/round) und die Konstante `c0de/math/PI`, mit [PLACE_BLOCK](/de/c0de/minecraft/place_block) und [SAY](/de/c0de/minecraft/say) aus c0de/minecraft
+**Funktionen:** [SIN](/de/c0de/math/sin), [COS](/de/c0de/math/cos), [ROUND](/de/c0de/math/round) und die Konstante [PI](/de/c0de/math/pi), mit [PLACE_BLOCK](/de/c0de/minecraft/place_block) und [SAY](/de/c0de/minecraft/say) aus c0de/minecraft
 
 ::: warning Braucht einen Operator
 PLACE_BLOCK ohne `inventory` setzt Blöcke aus dem Nichts in die Welt, darum muss der Besitzer des Auslöserblocks ein Operator sein. In der Welt der Tutorials bist du einer. Auf einem Server kann der Administrator es mit `allowBlockChanges=true` in `config/c0de.properties` für alle erlauben; ohne dieses Recht stürzt das Programm mit PERMISSION_DENIED ab. Die Alternative für alle ist PLACE_BLOCK mit `inventory`: Es nimmt die Blöcke aus einer Truhe, wie ein Spieler – siehe die erste Übung.
@@ -74,7 +74,7 @@ Der Kreis ist etwa 6,3 × r Blöcke lang, also liegen 4 × r Schritte etwa 1,6 B
 
 ## Mehr dazu
 
-- Die Handbuchseiten von [SIN](/de/c0de/math/sin), [COS](/de/c0de/math/cos) und [ROUND](/de/c0de/math/round), und die Konstante `c0de/math/PI` in [Bibliotheken](/de/c0de/guide/libraries#c0demath)
+- Die Handbuchseiten von [SIN](/de/c0de/math/sin), [COS](/de/c0de/math/cos) und [ROUND](/de/c0de/math/round), und der Konstante [PI](/de/c0de/math/pi)
 - [PLACE_BLOCK](/de/c0de/minecraft/place_block), [Die Welt verändern](/de/c0de/guide/libraries#die-welt-verändern) und [Besitzer und Berechtigungen](/de/c0de/guide/libraries#besitzer-und-berechtigungen)
 - [Fehler](/de/c0de/guide/language#fehler): einen Fehler mit einer ERROR-Variable abfangen
 - [Programme in der Welt](/de/tutorials/programmers/world): wer die Welt verändern darf

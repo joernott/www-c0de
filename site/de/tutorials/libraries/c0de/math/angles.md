@@ -6,7 +6,7 @@ description: Wie hoch kommt eine Rampe von 10 Blöcken bei 30 Grad, und wie stei
 
 Eine Rampe hinauf zu deiner Burg, eine Rutsche einen Berg hinab, ein Dach: Du weißt, wie lang es sein und wie steil es aussehen soll, aber wie viele Blöcke hoch geht es? Und umgekehrt: Wie steil ist der Hügel hinter deinem Haus? Zwei Funktionen beantworten das, TAN und ihr Gegenstück ATN.
 
-**Funktionen:** [TAN](/de/c0de/math/tan) und [ATN](/de/c0de/math/atn), mit [ROUND](/de/c0de/math/round) und der Konstante `c0de/math/PI`
+**Funktionen:** [TAN](/de/c0de/math/tan) und [ATN](/de/c0de/math/atn), mit [ROUND](/de/c0de/math/round) und der Konstante [PI](/de/c0de/math/pi)
 
 ::: info Was du brauchst
 Einen Auslöserblock mit einem Knopf und einen **Anzeigeblock**. Für `height` die **Variablenkarten** `length` vom Typ INTEGER und `degrees` vom Typ FLOAT (wahlweise: Die Vorgabewerte sind 10 Blöcke und 30 Grad) und zwei nicht initialisierte Karten; für `slope` die Variablenkarten `run` und `rise` vom Typ INTEGER und eine nicht initialisierte Karte.
@@ -61,5 +61,5 @@ Eine riesige Zahl: TAN von 90 Grad ist in der Theorie unendlich, aber `90 * PI /
 ## Mehr dazu
 
 - Die Handbuchseiten von [TAN](/de/c0de/math/tan), [ATN](/de/c0de/math/atn) und [ROUND](/de/c0de/math/round)
-- [Bibliotheken: c0de/math](/de/c0de/guide/libraries#c0demath): die Konstante `c0de/math/PI`
+- Die Handbuchseite der Konstante [PI](/de/c0de/math/pi)
 - [Einen Kreis zeichnen](/de/tutorials/libraries/c0de/math/circle): SIN und COS, die anderen Funktionen mit Winkeln

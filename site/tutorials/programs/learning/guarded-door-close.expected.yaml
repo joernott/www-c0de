@@ -1,2 +1,6 @@
-valid: false
-run: false
+valid: true
+state: CRASHED
+error:
+  name: INVALID_ARGUMENT
+  context: c0de/minecraft/FIND_ENTITIES
+  line: 46

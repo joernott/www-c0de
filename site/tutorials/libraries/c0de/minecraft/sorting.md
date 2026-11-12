@@ -22,7 +22,7 @@ MOVE_ITEMS and DELETE_ITEMS move items without a player, so they only work if th
 
 ## The idea
 
-GET_INVENTORY gives the content of a chest as an array of ITEM_STACK structs, one per slot: each has an `id`, like `minecraft:bread`, and a `count`. An empty slot has the id `""` and the count 0.
+GET_INVENTORY gives the content of a chest as an array of [ITEM_STACK](/c0de/minecraft/position-entity-and-item_stack) structs, one per slot: each has an `id`, like `minecraft:bread`, and a `count`. An empty slot has the id `""` and the count 0.
 
 MOVE_ITEMS moves up to `count` items with an `id` from one inventory to another and says how many it moved – fewer if the target is full. DELETE_ITEMS removes items for good.
 

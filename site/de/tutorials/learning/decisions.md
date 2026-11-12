@@ -95,7 +95,7 @@ Du kannst Fragen auch verbinden:
 - **OR**: Eins genügt. `visitor = "Alex" OR visitor = "Kai"` ist für Alex und für Kai wahr.
 - **NOT**: dreht die Antwort um. `NOT isOwner` ist für alle außer dem Besitzer wahr.
 
-Gib ein BOOLEAN nicht direkt aus. c0de 0.4.0 schreibt es als `true` oder `false`, das Handbuch sagt aber `TRUE` und `FALSE`, also wird sich das ändern. Verwende es lieber in einem IF und gib einen eigenen Text aus.
+PRINT schreibt ein BOOLEAN als `TRUE` oder `FALSE`, so wie das Handbuch (bis c0de 0.4.0 war es `true` oder `false`). Für die Spieler sagt ein eigener Text meist mehr: Verwende das BOOLEAN in einem IF und gib aus, was es bedeutet.
 
 ## Probier es selbst
 

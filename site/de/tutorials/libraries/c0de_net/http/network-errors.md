@@ -35,7 +35,7 @@ Ein neuer Versuch hilft nur, wenn das Problem von selbst verschwinden kann. Und 
 ## Aufbauen und starten
 
 1. Binde den Laptop an `netretry` / `fetch`.
-2. Stelle den Auslöserblock auf `netretry` / `fetch`, leg zwei nicht initialisierte Variablenkarten hinein und drück den Knopf. Der Laptop zeigt die Antwort, `{"c0de":"0.4.0","c0de_net":"0.2.0"}`, und das Ergebnis `tries` ist 1.
+2. Stelle den Auslöserblock auf `netretry` / `fetch`, leg zwei nicht initialisierte Variablenkarten hinein und drück den Knopf. Der Laptop zeigt die Antwort, `{"c0de":"0.5.0","c0de_net":"0.2.0"}`, und das Ergebnis `tries` ist 1.
 3. Leg eine Variablenkarte `server` mit `nothing.invalid` hinein, einem Namen, den es nie gibt, und drück noch einmal. Jetzt zeigt der Laptop:
 
 ```

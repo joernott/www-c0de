@@ -95,7 +95,7 @@ Every program knows these constants without an INCLUDE:
 | `SHEET`                               | STRUCT SHEET_INFO  | the sheet of the program: `number`, `program`, `owner`, `x`, `y`, `z`                                                                                    |
 | `PID`                                 | STRUCT PID_INFO    | the process: `pid`, `program`, `function`, `owner`, `activator` (who started it), `x`, `y`, `z` and `dimension` of the trigger block, `debug`, `started` |
 | `CURSOR`                              | STRUCT CURSOR_INFO | the cursor right now: `line`, `function`, `depth`, `stack_used`, `stack_size`                                                                            |
-| `C0DE_VERSION`                        | STRING             | the version of c0de, e.g. `"0.4.0"`                                                                                                                      |
+| `C0DE_VERSION`                        | STRING             | the version of c0de, e.g. `"0.5.0"`                                                                                                                      |
 | `COLOR_BLACK` … `COLOR_WHITE`         | INTEGER            | the 16 colors 0 to 15 of COLOR                                                                                                                           |
 | `DIVISION_BY_ZERO`, `TYPE_MISMATCH` … | INTEGER            | the codes of the errors of the language                                                                                                                  |
 

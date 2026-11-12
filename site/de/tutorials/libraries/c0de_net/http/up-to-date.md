@@ -14,12 +14,12 @@ Die Mod **c0de net** in deinem Spiel, einen Auslöserblock mit Knopf, eine **Anz
 
 ## Die Idee
 
-Jedes Programm kennt die Versionen, auf denen es läuft: Die Konstante `C0DE_VERSION` enthält die Version von c0de als Text, etwa `"0.4.0"`, und c0de net fügt `C0DE_NET_VERSION` hinzu, etwa `"0.2.0"`. Sie brauchen kein INCLUDE.
+Jedes Programm kennt die Versionen, auf denen es läuft: Die Konstante `C0DE_VERSION` enthält die Version von c0de als Text, etwa `"0.5.0"`, und c0de net fügt `C0DE_NET_VERSION` hinzu, etwa `"0.2.0"`. Sie brauchen kein INCLUDE.
 
 Die neuesten veröffentlichten Versionen stehen im Web. c0de.at liest sie aus den Releases auf GitHub und beantwortet `https://c0de.at/api/version` mit einem kleinen JSON-Objekt:
 
 ```json
-{ "c0de": "0.4.0", "c0de_net": "0.2.0" }
+{ "c0de": "0.5.0", "c0de_net": "0.2.0" }
 ```
 
 Das Programm braucht also ein GET, ein FROM_JSON und zwei Vergleiche. Die Anfrage kommt vom Computer des Spielers, der den Knopf drückt, und jeder Spieler kann Anfragen für seinen eigenen Computer abschalten. Die installierten Versionen sind dagegen die des Servers: Die Konstanten sagen, worauf das Blatt läuft.
@@ -36,11 +36,11 @@ Das Programm braucht also ein GET, ein FROM_JSON und zwei Vergleiche. Die Anfrag
 Ist alles aktuell, zeigt die Wand zwei grüne Zeilen, und das Ergebnis `current` ist `TRUE`:
 
 ```
-c0de 0.4.0: up to date
+c0de 0.5.0: up to date
 c0de net 0.2.0: up to date
 ```
 
-<!-- screenshot: up-to-date-wall | The display wall with the two green lines c0de 0.4.0: up to date and c0de net 0.2.0: up to date -->
+<!-- screenshot: up-to-date-wall | The display wall with the two green lines c0de 0.5.0: up to date and c0de net 0.2.0: up to date -->
 
 Ist eine neue Version erschienen, ist ihre Zeile rot, etwa `c0de 0.3.1: 0.4.0 is out`, und `current` ist `FALSE`.
 
