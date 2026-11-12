@@ -26,7 +26,18 @@ export default defineConfigWithTheme<ThemeConfig>({
   description: 'Documentation and tutorials of c0de, the programming language in Minecraft',
   // Vite would inline small files (like font subsets) as data: URLs, which the
   // Content-Security-Policy of the server blocks; every asset stays a file of the site.
-  vite: { build: { assetsInlineLimit: 0 } },
+  // The meshopt decoder of three.js is replaced by a stub (see meshopt-stub.ts).
+  vite: {
+    build: { assetsInlineLimit: 0 },
+    resolve: {
+      alias: [
+        {
+          find: /^three\/examples\/jsm\/libs\/meshopt_decoder\.module\.js$/,
+          replacement: fileURLToPath(new URL('./meshopt-stub.ts', import.meta.url)),
+        },
+      ],
+    },
+  },
   // <model-viewer> of the 3D views of the programs is a web component.
   vue: { template: { compilerOptions: { isCustomElement: (tag) => tag === 'model-viewer' } } },
   // The Markdown files of the scripts (test fixtures of the import) are not pages.
