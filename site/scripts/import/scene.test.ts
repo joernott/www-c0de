@@ -1,8 +1,11 @@
 import { describe, expect, it } from 'vitest'
 import {
+  blockText,
   buildScene,
   digitsPng,
   floorBlock,
+  glyphs,
+  glyphsPng,
   lineColor,
   type Layout,
   type ModelIndex,
@@ -256,7 +259,7 @@ describe('buildScene', () => {
       ['operator_add', [7, 0, 10]],
       ['laptop', [9, 0, 10]],
     ])
-    expect(json.meshes).toHaveLength(4 + 2) // the models, the floor and the line numbers
+    expect(json.meshes).toHaveLength(4 + 3) // the models, the floor, the texts, the line numbers
   })
 
   it('turns blocks around their center', () => {
@@ -292,6 +295,7 @@ describe('buildScene', () => {
   it('shares textures and keeps them as files next to the scenes', () => {
     expect(json.images).toContainEqual({ uri: '../textures/c0de/block/program.png' })
     expect(json.images).toContainEqual({ uri: '../textures/digits.png' })
+    expect(json.images).toContainEqual({ uri: '../textures/glyphs.png' })
     expect(new Set(json.images.map((i) => i.uri)).size).toBe(json.images.length)
   })
 
@@ -304,6 +308,64 @@ describe('buildScene', () => {
       (p) => json.materials[p.material]!.pbrMetallicRoughness.baseColorFactor,
     )
     expect(colors[0]).toEqual([0, 0.402, 0, 1])
+  })
+})
+
+describe('the texts on the blocks', () => {
+  const texts = (json: Json) => json.meshes[json.nodes.find((node) => node.name === 'texts')!.mesh]!
+
+  it('are drawn on the top of the label, centered and readable from the south', () => {
+    const json = read(buildScene(layout, models).glb)
+    const [primitive, ...others] = texts(json).primitives
+    expect(others).toEqual([]) // black: the label sum
+    expect(json.materials[primitive!.material]!.pbrMetallicRoughness.baseColorFactor).toEqual([
+      0, 0, 0, 1,
+    ])
+    const position = json.accessors[primitive!.attributes.POSITION!]!
+    expect(position.count).toBe(3 * 4) // a quad per character
+    // 3 glyphs of 8 pixels, 0.45 / 16 blocks per pixel: 0.675 wide, 0.45 high, around (6.5, 0.5)
+    expect(position.min![0]).toBeCloseTo(6.1625)
+    expect(position.max![0]).toBeCloseTo(6.8375)
+    expect(position.min![1]).toBeCloseTo(0.502)
+    expect(position.min![2]).toBeCloseTo(0.275)
+    expect(position.max![2]).toBeCloseTo(0.725)
+  })
+
+  it('are the texts the game shows', () => {
+    expect(blockText('c0de:label_block', 'c0de/math/DIV')).toEqual({
+      text: 'DIV',
+      color: '#000000',
+    })
+    expect(blockText('c0de:label_block', 'names["a/b"]')?.text).toBe('names["a/b"]')
+    expect(blockText('c0de:literal_block', '" °C"')?.text).toBe('" °C"')
+    expect(blockText('c0de:tag_block', 'TAG(json: "close_after")')).toEqual({
+      text: 'json',
+      color: '#ffffff',
+    })
+    expect(blockText('c0de:operator_block', '+')).toBeUndefined()
+    expect(blockText('c0de:comment_block', 'a comment')).toBeUndefined()
+    expect(blockText('c0de:literal_block', '')).toBeUndefined()
+  })
+
+  it('come from a texture of the glyphs of Unifont', () => {
+    const all = glyphs()
+    expect(all.get(0x41)?.width).toBe(8)
+    expect(all.has(0xb0) && all.has(0x2295) && all.has(0xfffd)).toBe(true)
+    const png = glyphsPng()
+    expect([png.readUInt32BE(16), png.readUInt32BE(20)]).toEqual([
+      32 * 16,
+      Math.ceil(all.size / 32) * 16,
+    ])
+  })
+
+  it('show characters missing from the part of Unifont as the replacement character', () => {
+    const block = { x: 6, block: 'c0de:label_block', text: '\u{1F600}' }
+    const scene = buildScene(
+      { program: 'p', lines: [{ z: 0, state: 'valid', blocks: [block] }] },
+      models,
+    )
+    const json = read(scene.glb)
+    expect(json.accessors[texts(json).primitives[0]!.attributes.POSITION!]!.count).toBe(4)
   })
 })
 

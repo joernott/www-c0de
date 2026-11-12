@@ -9,7 +9,7 @@ import {
   programView,
   type ModelsManifest,
 } from '../../.vitepress/programs.ts'
-import { collect, fences } from './scenes.ts'
+import { collect, fences, parseLayout } from './scenes.ts'
 
 const program = 'PROGRAM sign\nNOOP\n'
 
@@ -55,6 +55,38 @@ describe('fences', () => {
       '```',
     ].join('\n')
     expect(fences(markdown)).toEqual(['PROGRAM a\n', 'PROGRAM b\n    CALL x\n'])
+  })
+})
+
+describe('parseLayout', () => {
+  it('keeps the texts as the runner wrote them', () => {
+    const layout = parseLayout(
+      [
+        'program: flags',
+        'lines:',
+        '- z: 3',
+        '  state: valid',
+        '  blocks:',
+        '  - x: 8',
+        '    block: c0de:literal_block',
+        '    text: TRUE',
+        '  - x: 9',
+        '    block: c0de:literal_block',
+        "    text: '1.50'",
+        '- z: 4',
+        '  state: neutral',
+        '  blocks: []',
+      ].join('\n'),
+    )
+    expect(layout.lines[0]).toEqual({
+      z: 3,
+      state: 'valid',
+      blocks: [
+        { x: 8, block: 'c0de:literal_block', text: 'TRUE' },
+        { x: 9, block: 'c0de:literal_block', text: '1.50' },
+      ],
+    })
+    expect(layout.lines[1]!.blocks).toEqual([])
   })
 })
 

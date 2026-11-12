@@ -12,6 +12,7 @@
 // each of them once for all programs and the Content-Security-Policy needs no blob: URLs.
 import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { deflateSync, crc32 } from 'node:zlib'
 
 // The layout of a program, as `c0de-runner --layout` prints it.
@@ -127,17 +128,20 @@ export const DIGITS_TEXTURE = 'digits.png'
 
 // digitsPng draws the texture of the digits: white on transparent.
 export function digitsPng(): Buffer {
-  const width = CELL_WIDTH * DIGITS.length
+  return png(CELL_WIDTH * DIGITS.length, CELL_HEIGHT, (x, y) => {
+    const digit = DIGITS[Math.floor(x / CELL_WIDTH)]!
+    return digit.split(' ')[y]?.[x % CELL_WIDTH] === '1'
+  })
+}
+
+// png encodes an image that is white where set returns true and transparent elsewhere.
+function png(width: number, height: number, set: (x: number, y: number) => boolean): Buffer {
   const rows: Buffer[] = []
-  for (let y = 0; y < CELL_HEIGHT; y++) {
+  for (let y = 0; y < height; y++) {
     const row = Buffer.alloc(1 + width * 4) // filter byte 0, then RGBA
-    DIGITS.forEach((digit, d) => {
-      const bits = digit.split(' ')[y] ?? ''
-      for (let x = 0; x < bits.length; x++) {
-        if (bits[x] === '1')
-          row.fill(255, 1 + (d * CELL_WIDTH + x) * 4, 1 + (d * CELL_WIDTH + x + 1) * 4)
-      }
-    })
+    for (let x = 0; x < width; x++) {
+      if (set(x, y)) row.fill(255, 1 + x * 4, 1 + (x + 1) * 4)
+    }
     rows.push(row)
   }
   const chunk = (type: string, data: Buffer) => {
@@ -150,7 +154,7 @@ export function digitsPng(): Buffer {
   }
   const header = Buffer.alloc(13)
   header.writeUInt32BE(width, 0)
-  header.writeUInt32BE(CELL_HEIGHT, 4)
+  header.writeUInt32BE(height, 4)
   header[8] = 8 // bit depth
   header[9] = 6 // RGBA
   return Buffer.concat([
@@ -160,6 +164,85 @@ export function digitsPng(): Buffer {
     chunk('IEND', Buffer.alloc(0)),
   ])
 }
+
+// The texts on the tops of blocks (task 9.0): the game draws them with its own font, which can't
+// be published, so the scenes use GNU Unifont (unifont/README.md), which Minecraft uses for the
+// characters its font doesn't have. Every glyph is 16 pixels high and 8 or 16 wide; they lie in
+// cells of 16 x 16 pixels, GLYPH_COLUMNS in a row, in one texture for all scenes (glyphs.png).
+export const GLYPHS_TEXTURE = 'glyphs.png'
+const GLYPH_SIZE = 16
+const GLYPH_COLUMNS = 32
+const REPLACEMENT = 0xfffd
+
+interface Glyph {
+  cell: number
+  width: number
+  bits: string // GLYPH_SIZE rows of width bits
+}
+
+let glyphCache: Map<number, Glyph> | undefined
+
+// glyphs reads unifont.hex: lines of `code point:glyph` with the rows of the glyph in hex.
+export function glyphs(): Map<number, Glyph> {
+  if (glyphCache) return glyphCache
+  const file = fileURLToPath(new URL('./unifont/unifont.hex', import.meta.url))
+  const all = new Map<number, Glyph>()
+  for (const line of readFileSync(file, 'ascii').split('\n')) {
+    const [code, hex] = line.split(':')
+    if (!code || !hex) continue
+    const bits = [...hex].map((digit) => parseInt(digit, 16).toString(2).padStart(4, '0')).join('')
+    all.set(parseInt(code, 16), { cell: all.size, width: bits.length / GLYPH_SIZE, bits })
+  }
+  return (glyphCache = all)
+}
+
+// glyph returns the glyph of a character, or the replacement character if the part of Unifont
+// has none.
+function glyph(character: string): Glyph {
+  const all = glyphs()
+  return all.get(character.codePointAt(0)!) ?? all.get(REPLACEMENT)!
+}
+
+// glyphsPng draws the texture of the glyphs: white on transparent.
+export function glyphsPng(): Buffer {
+  const all = [...glyphs().values()]
+  const rows = Math.ceil(all.length / GLYPH_COLUMNS)
+  return png(GLYPH_COLUMNS * GLYPH_SIZE, rows * GLYPH_SIZE, (x, y) => {
+    const g = all[Math.floor(y / GLYPH_SIZE) * GLYPH_COLUMNS + Math.floor(x / GLYPH_SIZE)]
+    const gx = x % GLYPH_SIZE
+    return g !== undefined && gx < g.width && g.bits[(y % GLYPH_SIZE) * g.width + gx] === '1'
+  })
+}
+
+// blockText returns the text that the game shows on the top of a block, and its color: the name
+// of a LABEL (without its library, with its index), the value of a LITERAL and the language of a
+// TAG. OPERATOR blocks show their symbol as model, COMMENT blocks their text only while the
+// player looks at them (the labels of the scene show it).
+export function blockText(
+  block: string,
+  text: string,
+): { text: string; color: string } | undefined {
+  let shown: string | undefined
+  let color = '#000000'
+  if (block === 'c0de:label_block') {
+    const index = text.indexOf('[')
+    const name = index < 0 ? text : text.slice(0, index)
+    shown = name.slice(name.lastIndexOf('/') + 1) + (index < 0 ? '' : text.slice(index))
+  } else if (block === 'c0de:literal_block') {
+    shown = text
+  } else if (block === 'c0de:tag_block') {
+    shown = /^TAG\(\s*([^:)\s]*)/.exec(text)?.[1]
+    color = '#ffffff'
+  }
+  return shown ? { text: shown, color } : undefined
+}
+
+// The text covers at most this part of the top of a block, and its line is at most as high as
+// a line of the game's font (9 pixels of 0.05 blocks), like PropertiesRenderer of c0de.
+const MAX_TEXT_SIZE = 0.8
+const MAX_TEXT_SCALE = (9 * 0.05) / GLYPH_SIZE
+// just above the top of the slab of a block with a text
+const TEXT_Y = 0.5 + 0.002
 
 // linear converts a color #RRGGBB of sRGB into the linear RGBA of glTF.
 function linear(hex: string): number[] {
@@ -600,6 +683,70 @@ export function buildScene(layout: Layout, models: Models): { glb: Buffer; label
       for (const mesh of writer.meshes(m.path)) writer.node({ mesh, ...transform })
       labels.blocks.push([block.x, line.z, block.text])
     }
+  }
+
+  // The texts on the blocks: one quad per character, centered on the top of the block and readable
+  // from the south whichever way the block is turned; one primitive per color.
+  const glyphTexture = writer.texture(`../textures/${GLYPHS_TEXTURE}`, {
+    magFilter: 9728,
+    minFilter: 9728,
+    wrapS: 33071,
+    wrapT: 33071,
+  })
+  const atlasWidth = GLYPH_COLUMNS * GLYPH_SIZE
+  const atlasHeight = Math.ceil(glyphs().size / GLYPH_COLUMNS) * GLYPH_SIZE
+  const texts = new Map<string, Quads>()
+  for (const line of layout.lines) {
+    for (const block of line.blocks) {
+      const shown = blockText(block.block, block.text)
+      if (!shown) continue
+      let q = texts.get(shown.color)
+      if (!q) texts.set(shown.color, (q = { position: [], normal: [], uv: [], indices: [] }))
+      const characters = [...shown.text].map(glyph)
+      const pixels = characters.reduce((sum, g) => sum + g.width, 0)
+      const scale = Math.min(MAX_TEXT_SCALE, MAX_TEXT_SIZE / Math.max(pixels, GLYPH_SIZE))
+      let left = block.x + 0.5 - (pixels * scale) / 2
+      const top = line.z + 0.5 - (GLYPH_SIZE * scale) / 2
+      const bottom = top + GLYPH_SIZE * scale
+      for (const g of characters) {
+        const right = left + g.width * scale
+        const u0 = ((g.cell % GLYPH_COLUMNS) * GLYPH_SIZE) / atlasWidth
+        const u1 = u0 + g.width / atlasWidth
+        const v0 = (Math.floor(g.cell / GLYPH_COLUMNS) * GLYPH_SIZE) / atlasHeight
+        const v1 = v0 + GLYPH_SIZE / atlasHeight
+        quad(
+          q,
+          [0, 1, 0],
+          [left, TEXT_Y, top],
+          [left, TEXT_Y, bottom],
+          [right, TEXT_Y, bottom],
+          [right, TEXT_Y, top],
+          [u0, v0, u0, v1, u1, v1, u1, v0],
+        )
+        left = right
+      }
+    }
+  }
+  if (texts.size > 0) {
+    const primitives = [...texts].map(([color, q]) =>
+      primitive(
+        writer,
+        q,
+        writer.material({
+          name: `text ${color}`,
+          pbrMetallicRoughness: {
+            baseColorTexture: { index: glyphTexture },
+            baseColorFactor: linear(color),
+            metallicFactor: 0,
+            roughnessFactor: 1,
+          },
+          alphaMode: 'MASK',
+          alphaCutoff: 0.5,
+        }),
+      ),
+    )
+    writer.json.meshes.push({ primitives })
+    writer.node({ mesh: writer.json.meshes.length - 1, name: 'texts' })
   }
 
   // The line numbers: one quad per digit, lying on the floor at x 2, readable from the south;

@@ -194,6 +194,7 @@ A task is done when
 
 | Task | Description | Done |
 |---|---|:---:|
+| 9.0 | The 3D views show the texts on the blocks like the game: the names of LABEL blocks, the values of LITERAL blocks (black) and the languages of TAG blocks (white), on the top of the block, readable from the south, at most 80 % of its width. The game's font can't be published; the glyphs come from GNU Unifont (OFL 1.1), which Minecraft uses for the characters its own font doesn't have. Vitest. (Found by the operator in 0.4.0.) | ✅ |
 | 9.1 | API for the tutorials, a Caddy module of this repository: `/api/tutorial/echo` answers every method (also HEAD, OPTIONS and TRACE) with the request it got; `/api/tutorial/todo` is a shared to-do list (GET, POST, PUT, PATCH, DELETE) in memory, limited in size and number of requests, emptied every day. Go tests. |  |
 | 9.2 | Version check: `/api/version` answers the latest released versions of c0de and c0de net as JSON, read from the GitHub releases of minecraft-c0de and minecraft-c0de-net (the list `/releases`, not `/releases/latest`, which skips the pre-releases that all versions are so far) and cached for an hour; when GitHub can't be reached, it answers the last known versions. Go tests. |  |
 | 9.3 | The privacy policy describes the API (the requests come from the computers of the players and are logged like every request; the to-do list keeps what players send for at most one day). English and German. |  |

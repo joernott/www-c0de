@@ -28,6 +28,8 @@ import {
   buildScene,
   digitsPng,
   DIGITS_TEXTURE,
+  glyphsPng,
+  GLYPHS_TEXTURE,
   models as readModels,
   type Layout,
 } from './scene.ts'
@@ -106,6 +108,18 @@ export async function modelsFolder(
   return folder
 }
 
+// parseLayout reads the YAML of a layout. Its texts stay as the runner wrote them: the literal
+// TRUE is no boolean and 1.50 no number (the failsafe schema reads every value as a string);
+// only the places are numbers.
+export function parseLayout(yaml: string): Layout {
+  const layout = parse(yaml, { schema: 'failsafe' }) as Layout
+  for (const line of layout.lines ?? []) {
+    line.z = Number(line.z)
+    for (const block of line.blocks ?? []) block.x = Number(block.x)
+  }
+  return layout
+}
+
 // layout runs `c0de-runner --layout` on a program; layouts are cached by the program and the
 // jars of the runner.
 async function layout(program: string, runner: Runner, cache: string): Promise<Layout> {
@@ -114,7 +128,7 @@ async function layout(program: string, runner: Runner, cache: string): Promise<L
     .update([program, runner.jar, ...libraries.map((l) => runner.libraries[l] ?? '')].join('\0'))
     .digest('hex')
   const cached = join(cache, `${key}.yaml`)
-  if (existsSync(cached)) return parse(readFileSync(cached, 'utf-8')) as Layout
+  if (existsSync(cached)) return parseLayout(readFileSync(cached, 'utf-8'))
   const folder = mkdtempSync(join(tmpdir(), 'c0de-layout-'))
   try {
     const file = join(folder, 'program.c0de')
@@ -137,7 +151,7 @@ async function layout(program: string, runner: Runner, cache: string): Promise<L
     })
     mkdirSync(cache, { recursive: true })
     writeFileSync(cached, output)
-    return parse(output) as Layout
+    return parseLayout(output)
   } finally {
     rmSync(folder, { recursive: true, force: true })
   }
@@ -164,6 +178,7 @@ export async function scenes(site: string, config: Config, local: Map<string, st
   rmSync(join(site, 'public', 'models'), { recursive: true, force: true })
   cpSync(join(folder, 'textures'), join(output, 'textures'), { recursive: true })
   writeFileSync(join(output, 'textures', DIGITS_TEXTURE), digitsPng())
+  writeFileSync(join(output, 'textures', GLYPHS_TEXTURE), glyphsPng())
   mkdirSync(join(output, 'programs'), { recursive: true })
 
   const programs = [...collect(site)]

@@ -147,3 +147,7 @@ let's release now, taking screenshots will need some time
 ## 2026-11-12 – Release 0.4.0 is live
 
 The release is live at c0de.at, please go ahead with your tasks
+
+## 2026-11-12 – Sprint 9
+
+I have found a small bug in the 3d display: Blocks, that have text on them, e.g. literals, names etc., don't show those texts in the 3d models. Please add a task to sprint 9 to fix that, then continue with implementing sprint 9
