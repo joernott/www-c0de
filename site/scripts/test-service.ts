@@ -7,6 +7,8 @@
 // own): the proxy connects c0de.at to the test server and every other host to the real one.
 // Java trusts the certificate authority of the test server besides its usual ones. The
 // versions that /api/version answers come from a fake GitHub with the tags of sources.yaml.
+// The pages of the test server are those of the last build of the site, in CI none: tests
+// use the API, not the pages.
 import { spawn, spawnSync, type ChildProcess } from 'node:child_process'
 import { chmodSync, copyFileSync, existsSync, mkdtempSync, readFileSync, rmSync } from 'node:fs'
 import { createServer as createHttpServer, type Server } from 'node:http'

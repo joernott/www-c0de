@@ -1,1 +1,4 @@
 function: check
+# The test service has the API, not the pages of the site: /api/version answers 200 like /.
+parameters:
+  endpoint: /api/version
