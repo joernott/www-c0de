@@ -1,5 +1,5 @@
 // Package api is the small API of c0de.at for the recipes of c0de net (task 9.1): an echo of
-// every request and a shared to-do list. It is a Caddy HTTP handler, used in the Caddyfile
+// every request, a shared to-do list and the latest versions of the mods (task 9.2). It is a Caddy HTTP handler, used in the Caddyfile
 // with the directive c0de_api for the paths /api/*.
 package api
 
@@ -37,9 +37,10 @@ func init() {
 // API is the Caddy module http.handlers.c0de_api. It answers every request itself: the
 // paths it doesn't know with 404.
 type API struct {
-	now     func() time.Time
-	limiter limiter
-	todos   todos
+	now      func() time.Time
+	limiter  limiter
+	todos    todos
+	versions versions
 }
 
 // CaddyModule returns the Caddy module information.
@@ -78,6 +79,8 @@ func (a *API) ServeHTTP(w http.ResponseWriter, r *http.Request, _ caddyhttp.Hand
 		echo(w, r)
 	case path == "/api/tutorial/todo" || strings.HasPrefix(path, "/api/tutorial/todo/"):
 		a.todos.serve(w, r, strings.TrimPrefix(path, "/api/tutorial/todo"), a.now())
+	case path == "/api/version":
+		a.versions.serve(w, r, a.now())
 	default:
 		writeError(w, http.StatusNotFound, "no such endpoint")
 	}

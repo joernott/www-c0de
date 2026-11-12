@@ -48,3 +48,11 @@ test('unknown paths of the API answer in JSON', async ({ request }) => {
   expect(answer.status()).toBe(404)
   expect(await answer.json()).toHaveProperty('error')
 })
+
+test('the version check answers the latest versions of the mods', async ({ request }) => {
+  const answer = await request.get('/api/version')
+  expect(answer.status()).toBe(200)
+  const versions = await answer.json()
+  expect(versions.c0de).toMatch(/^\d+\.\d+\.\d+/)
+  expect(versions.c0de_net).toMatch(/^\d+\.\d+\.\d+/)
+})

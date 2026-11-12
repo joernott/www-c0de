@@ -90,11 +90,12 @@ Remove the override again (`systemctl revert container-c0de`) when a fixed versi
 
 ## The API
 
-The server answers the API of the recipes of c0de net itself (`internal/api`, task 9.1): `/api/tutorial/echo` sends every request back as JSON, `/api/tutorial/todo` is a to-do list that all players share. The list lives in the memory of the server, holds at most 100 entries and is emptied every day at 00:00 UTC and on every restart. Every client may send 60 requests a minute to the API; more get `429 Too Many Requests`.
+The server answers the API of the recipes of c0de net itself (`internal/api`, task 9.1): `/api/tutorial/echo` sends every request back as JSON, `/api/tutorial/todo` is a to-do list that all players share, and `/api/version` answers the latest released versions of c0de and c0de net (task 9.2). The list lives in the memory of the server, holds at most 100 entries and is emptied every day at 00:00 UTC and on every restart. Every client may send 60 requests a minute to the API; more get `429 Too Many Requests`.
 
 - The rate limit counts by the address of the client, so behind a reverse proxy it needs `--trusted-proxies`: without it, all players share the limit of the proxy's address.
 - nginx refuses TRACE itself with `405 Not Allowed` and never passes it on, so TRACE on c0de.at shows that (recipe 3.26 explains it); the echo answers TRACE when it is reached directly.
 - The answers of the API are never cached (`Cache-Control: no-store`).
+- `/api/version` reads the releases from the GitHub API (`api.github.com`, without a token: 60 requests an hour per address, the server needs 2 an hour) and keeps them for an hour. If GitHub can't be reached, it answers the last known versions and asks again after 5 minutes; after a restart without GitHub it answers `503` until GitHub is back. The server needs outgoing HTTPS for it.
 
 ## Logs
 
