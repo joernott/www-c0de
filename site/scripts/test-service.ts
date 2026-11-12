@@ -8,7 +8,7 @@
 // Java trusts the certificate authority of the test server besides its usual ones. The
 // versions that /api/version answers come from a fake GitHub with the tags of sources.yaml.
 import { spawn, spawnSync, type ChildProcess } from 'node:child_process'
-import { copyFileSync, existsSync, mkdtempSync, readFileSync, rmSync } from 'node:fs'
+import { chmodSync, copyFileSync, existsSync, mkdtempSync, readFileSync, rmSync } from 'node:fs'
 import { createServer as createHttpServer, type Server } from 'node:http'
 import { connect, createServer as createNetServer, type AddressInfo, type Socket } from 'node:net'
 import { tmpdir } from 'node:os'
@@ -95,6 +95,7 @@ export async function startTestService(
     const trustStore = join(folder, 'trust.p12')
     const javaHome = javaProperty('java.home')
     copyFileSync(join(javaHome, 'lib', 'security', 'cacerts'), trustStore)
+    chmodSync(trustStore, 0o600) // cacerts may be read-only, and so is its copy
     const keytool = spawnSync(
       join(javaHome, 'bin', 'keytool'),
       [
