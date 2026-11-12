@@ -88,6 +88,14 @@ Remove the override again (`systemctl revert container-c0de`) when a fixed versi
 2. CI imports the documentation at the new tag. If a link of the new documentation can't be resolved, or a translation doesn't match the structure of the English files, the import stops with the file and line; fix it in the mod.
 3. Merge the pull request, release a new version of the site and deploy it.
 
+## The API
+
+The server answers the API of the recipes of c0de net itself (`internal/api`, task 9.1): `/api/tutorial/echo` sends every request back as JSON, `/api/tutorial/todo` is a to-do list that all players share. The list lives in the memory of the server, holds at most 100 entries and is emptied every day at 00:00 UTC and on every restart. Every client may send 60 requests a minute to the API; more get `429 Too Many Requests`.
+
+- The rate limit counts by the address of the client, so behind a reverse proxy it needs `--trusted-proxies`: without it, all players share the limit of the proxy's address.
+- nginx refuses TRACE itself with `405 Not Allowed` and never passes it on, so TRACE on c0de.at shows that (recipe 3.26 explains it); the echo answers TRACE when it is reached directly.
+- The answers of the API are never cached (`Cache-Control: no-store`).
+
 ## Logs
 
 - **Access log**: `log/access.log` in the volume (JSON, one request per line); `podman volume inspect c0de-data` shows the folder on the server. A new file starts every day at 00:00 UTC; the old ones are compressed and deleted after 92 days, as the [privacy policy](../site/privacy.md) says. If the fields of the log change, the privacy policy has to change with them.

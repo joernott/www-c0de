@@ -466,3 +466,50 @@ func TestBehindAReverseProxy(t *testing.T) {
 		})
 	}
 }
+
+func TestAPI(t *testing.T) {
+	c := testConfig(t, TLSOff)
+	start(t, c)
+	base := fmt.Sprintf("http://127.0.0.1:%d", c.HTTPPort)
+
+	req, err := http.NewRequest(http.MethodTrace, base+"/api/tutorial/echo?a=1", nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	req.Header.Set("X-Lamp", "attic")
+	resp, err := plainClient.Do(req)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer resp.Body.Close()
+	var echoed struct {
+		Method  string            `json:"method"`
+		Query   string            `json:"query"`
+		Headers map[string]string `json:"headers"`
+	}
+	if err := json.NewDecoder(resp.Body).Decode(&echoed); err != nil {
+		t.Fatal(err)
+	}
+	if resp.StatusCode != http.StatusOK || echoed.Method != http.MethodTrace || echoed.Query != "a=1" || echoed.Headers["x-lamp"] != "attic" {
+		t.Errorf("echo: %d %+v", resp.StatusCode, echoed)
+	}
+	for header, want := range map[string]string{
+		"Cache-Control":          "no-store",
+		"X-Content-Type-Options": "nosniff",
+		"Content-Type":           "application/json; charset=utf-8",
+	} {
+		if got := resp.Header.Get(header); got != want {
+			t.Errorf("%s: got %q, want %q", header, got, want)
+		}
+	}
+
+	// Unknown paths of the API answer in JSON, not with the not-found page.
+	missing, body := get(t, plainClient, base+"/api/missing")
+	if missing.StatusCode != http.StatusNotFound || !strings.Contains(body, `"error"`) {
+		t.Errorf("/api/missing: %d %q", missing.StatusCode, body)
+	}
+	// The pages are still served.
+	if page, body := get(t, plainClient, base+"/c0de/guide"); page.StatusCode != http.StatusOK || !strings.Contains(body, "guide") {
+		t.Errorf("/c0de/guide: %d %q", page.StatusCode, body)
+	}
+}

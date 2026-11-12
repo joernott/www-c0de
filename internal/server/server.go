@@ -15,6 +15,9 @@ import (
 	// The Caddyfile adapter and the standard modules of Caddy.
 	_ "github.com/caddyserver/caddy/v2/caddyconfig/caddyfile"
 	_ "github.com/caddyserver/caddy/v2/modules/standard"
+
+	// The API of the site.
+	_ "github.com/joernott/www-c0de/internal/api"
 )
 
 //go:embed Caddyfile.tmpl

@@ -57,9 +57,16 @@
 	@other not path /assets/*
 	header @other Cache-Control "no-cache"
 
-	try_files {path} {path}.html {path}/index.html
-	file_server {
-		precompressed br zstd gzip
+	# The API for the recipes of c0de net (internal/api); it answers every path below /api/.
+	handle /api/* {
+		c0de_api
+	}
+
+	handle {
+		try_files {path} {path}.html {path}/index.html
+		file_server {
+			precompressed br zstd gzip
+		}
 	}
 
 	# The not-found page in the language of the requested URL, with the status 404.
