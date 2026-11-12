@@ -71,6 +71,6 @@ test('the search stays in the language of the page', async ({ page }) => {
 
 test('the search says when it finds nothing', async ({ page }) => {
   await page.goto('/')
-  await page.getByRole('combobox', { name: 'Search' }).fill('xyzzyqq')
+  await page.getByRole('combobox', { name: 'Search' }).fill('qjxvkwqjxvkw')
   await expect(page.getByText('Nothing found')).toBeVisible()
 })

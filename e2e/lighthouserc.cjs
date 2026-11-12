@@ -18,6 +18,8 @@ const pages = [
   '/de/tutorials/programmers/errors',
   // a lesson with programs in 3D (sprint 8)
   '/tutorials/learning/first-program',
+  // a recipe with screenshots and programs in 3D (sprint 9)
+  '/de/tutorials/libraries/c0de/minecraft/building',
 ]
 
 module.exports = {
