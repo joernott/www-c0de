@@ -117,7 +117,15 @@ async function main(selected: string[]) {
       }
       const jvm = api.has(run) ? service!.jvm : []
       // not spawnSync: the proxy of the test service runs in this process
-      const result = await java(javaArgs(runner, run.needs, args(run), jvm))
+      let result = await java(javaArgs(runner, run.needs, args(run), jvm))
+      // A public service (the weather of Open-Meteo) sometimes doesn't answer in time: such a
+      // run (REQUEST_TIMEOUT, 1004) gets two more tries.
+      for (let retry = 1; retry <= 2 && result.status !== 0; retry++) {
+        if (!/^\s*code: 1004$/m.test(result.stdout)) break
+        console.log(`retry ${name}: no answer in time`)
+        await new Promise((resolve) => setTimeout(resolve, 5000 * retry))
+        result = await java(javaArgs(runner, run.needs, args(run), jvm))
+      }
       if (result.status === 0) {
         console.log(`ok    ${name}`)
       } else {
