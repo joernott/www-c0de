@@ -172,6 +172,7 @@ A task is done when
 | 7.4 | Lessons 1.11–1.14: lists, tables and own types, errors, libraries. | ✅ |
 | 7.5 | Lessons 1.15–1.17: the projects "Guess the number" and "The guarded door", where to go next. | ✅ |
 | 7.6 | Review with somebody who hasn't programmed before, if possible; Playwright, Lighthouse, link check. Release. |  |
+| 7.6.1 | The review with somebody who hasn't programmed before, after the screenshots (7.1.1): the path was released without both, together with sprint 8 as 0.4.0, the pages work without the screenshots. |  |
 
 ## Sprint 8: Programs in 3D
 

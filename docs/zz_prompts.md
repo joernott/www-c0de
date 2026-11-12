@@ -139,3 +139,7 @@ please continue
 ## 2026-11-12 – Sprint 8
 
 please start with the website sprint 8
+
+## 2026-11-12 – Release 0.4.0
+
+let's release now, taking screenshots will need some time
