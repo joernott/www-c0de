@@ -34,7 +34,8 @@ test.describe('desktop', () => {
 
   test('a library shows its chapter tabs below its main tab', async ({ page }) => {
     await page.goto('/c0de/math/sgn')
-    await expect(page.locator('.tab-chapter')).toHaveCount(16)
+    // the functions of c0de/math and, since c0de 0.5.0, the constant PI
+    await expect(page.locator('.tab-chapter')).toHaveCount(17)
     const current = tabs(page).locator('[aria-current="page"]')
     await expect(current).toHaveText('SGN')
     // the chapter tabs are between c0de/math and c0de/strings
