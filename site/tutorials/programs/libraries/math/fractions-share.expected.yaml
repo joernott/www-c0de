@@ -1,0 +1,5 @@
+results:
+  each: 33
+  rest: 1
+screen:
+  - 3 players get 33 each, 1 left

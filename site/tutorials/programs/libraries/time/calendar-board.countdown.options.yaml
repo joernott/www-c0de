@@ -1,0 +1,4 @@
+function: countdown
+parameters:
+  from: 2026-12-18T20:30:00Z
+  to: 2026-12-19T18:00:00Z

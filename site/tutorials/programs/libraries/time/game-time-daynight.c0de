@@ -1,0 +1,76 @@
+PROGRAM daynight
+NOOP
+INCLUDE c0de/minecraft
+INCLUDE c0de/math
+INCLUDE c0de/strings
+NOOP
+FUNCTION phase
+    PARAMETER ticks INTEGER
+    RESULT day INTEGER
+    RESULT clock STRING
+    RESULT text STRING
+BEGIN
+    VARIABLE time INTEGER
+    VARIABLE hour INTEGER
+    VARIABLE minute INTEGER
+    VARIABLE digits STRING
+    CALL c0de/math/DIV
+        PARAMETER dividend ticks ;
+        PARAMETER divisor 24000 ;
+        RESULT result day
+    ASSIGN day day + 1 ;
+    ASSIGN time ticks \ 24000 ;
+    CALL c0de/math/DIV
+        PARAMETER dividend time ;
+        PARAMETER divisor 1000 ;
+        RESULT result hour
+    ASSIGN hour (hour + 6) \ 24 ;
+    CALL c0de/math/DIV
+        PARAMETER dividend (time \ 1000) * 60 ;
+        PARAMETER divisor 1000 ;
+        RESULT result minute
+    CALL c0de/strings/FORMAT
+        PARAMETER value hour ;
+        PARAMETER format "%02d" ;
+        RESULT result clock
+    CALL c0de/strings/FORMAT
+        PARAMETER value minute ;
+        PARAMETER format ":%02d" ;
+        RESULT result digits
+    ASSIGN clock clock ⊕ digits ;
+    ASSIGN text "Day" ;
+    IF time ≥ 12000 ;
+    BEGIN
+        ASSIGN text "Sunset" ;
+    END IF
+    IF time ≥ 13000 ;
+    BEGIN
+        ASSIGN text "Night" ;
+    END IF
+    IF time ≥ 23000 ;
+    BEGIN
+        ASSIGN text "Sunrise" ;
+    END IF
+END FUNCTION
+NOOP
+FUNCTION show
+BEGIN
+    VARIABLE ticks INTEGER
+    VARIABLE day INTEGER
+    VARIABLE clock STRING
+    VARIABLE text STRING
+    CALL c0de/minecraft/TICKS
+        RESULT result ticks
+    CALL phase
+        PARAMETER ticks ticks ;
+        RESULT day day
+        RESULT clock clock
+        RESULT text text
+    CALL CLS
+    CALL PRINT
+        PARAMETER value "Day " ⊕ day ;
+    CALL PRINT
+        PARAMETER value clock ;
+    CALL PRINT
+        PARAMETER value text ;
+END FUNCTION

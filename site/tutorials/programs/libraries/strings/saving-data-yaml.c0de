@@ -1,0 +1,25 @@
+PROGRAM highscoresyaml
+NOOP
+INCLUDE c0de/strings
+NOOP
+STRUCT entry
+BEGIN
+    name STRING
+    points INTEGER
+END STRUCT
+NOOP
+FUNCTION load
+    PARAMETER list STRING
+BEGIN
+    VARIABLE table ARRAY STRUCT entry
+    VARIABLE scores STRING
+    CALL c0de/strings/FROM_YAML
+        PARAMETER source list ;
+        PARAMETER destination table ;
+    CALL c0de/strings/TO_JSON
+        PARAMETER value table ;
+        RESULT result scores
+    CALL WRITE
+        PARAMETER value scores ;
+        PARAMETER name "scores" ;
+END FUNCTION

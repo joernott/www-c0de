@@ -1,0 +1,88 @@
+PROGRAM calendar
+NOOP
+INCLUDE c0de/time
+INCLUDE c0de/math
+CONSTANT EVENT_NAME STRING "Winter party"
+CONSTANT EVENT TIME @2026-12-19T18:00:00Z
+VARIABLE weekdays ARRAY STRING
+BEGIN
+    "" "Monday" "Tuesday" "Wednesday" "Thursday" "Friday" "Saturday" "Sunday"
+END VARIABLE
+VARIABLE months ARRAY STRING
+BEGIN
+    "" "January" "February" "March" "April" "May" "June"
+    "July" "August" "September" "October" "November" "December"
+END VARIABLE
+NOOP
+FUNCTION describe
+    PARAMETER time TIME
+    RESULT text STRING
+BEGIN
+    VARIABLE weekday INTEGER
+    VARIABLE day INTEGER
+    VARIABLE month INTEGER
+    VARIABLE year INTEGER
+    VARIABLE week INTEGER
+    CALL c0de/time/WEEKDAY
+        PARAMETER time time ;
+        RESULT result weekday
+    CALL c0de/time/DAY
+        PARAMETER time time ;
+        RESULT result day
+    CALL c0de/time/MONTH
+        PARAMETER time time ;
+        RESULT result month
+    CALL c0de/time/YEAR
+        PARAMETER time time ;
+        RESULT result year
+    CALL c0de/time/WEEK
+        PARAMETER time time ;
+        RESULT result week
+    ASSIGN text weekdays[weekday] ⊕ ", " ⊕ day ⊕ " " ⊕ months[month] ⊕ " " ⊕ year ⊕ " (week " ⊕ week ⊕ ")" ;
+END FUNCTION
+NOOP
+FUNCTION countdown
+    PARAMETER from TIME
+    PARAMETER to TIME
+    RESULT days INTEGER
+    RESULT hours INTEGER
+BEGIN
+    CALL c0de/math/DIV
+        PARAMETER dividend to - from ;
+        PARAMETER divisor 86400000 ;
+        RESULT result days
+    CALL c0de/math/DIV
+        PARAMETER dividend (to - from) \ 86400000 ;
+        PARAMETER divisor 3600000 ;
+        RESULT result hours
+END FUNCTION
+NOOP
+FUNCTION board
+BEGIN
+    VARIABLE now TIME
+    VARIABLE text STRING
+    VARIABLE days INTEGER
+    VARIABLE hours INTEGER
+    CALL c0de/time/NOW
+        RESULT result now
+    CALL describe
+        PARAMETER time now ;
+        RESULT text text
+    CALL CLS
+    CALL PRINT
+        PARAMETER value "Today is " ⊕ text ;
+    CALL describe
+        PARAMETER time EVENT ;
+        RESULT text text
+    CALL PRINT
+        PARAMETER value EVENT_NAME ⊕ ":" ;
+    CALL PRINT
+        PARAMETER value text ;
+    CALL countdown
+        PARAMETER from now ;
+        PARAMETER to EVENT ;
+        RESULT days days
+        RESULT hours hours
+    CALL PRINT
+        PARAMETER value days ⊕ " days and " ⊕ hours ⊕ " hours to go" ;
+END FUNCTION

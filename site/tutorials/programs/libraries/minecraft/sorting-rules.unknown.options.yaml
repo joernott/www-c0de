@@ -1,0 +1,3 @@
+function: chestFor
+parameters:
+  id: minecraft:diamond

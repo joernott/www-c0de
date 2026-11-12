@@ -1,0 +1,115 @@
+PROGRAM netretry
+NOOP
+INCLUDE c0de/time
+INCLUDE c0de_net/http
+NOOP
+FUNCTION explain
+    PARAMETER code INTEGER
+    PARAMETER status INTEGER 0
+    RESULT text STRING
+BEGIN
+    ASSIGN text "Unexpected error " ⊕ code ;
+    IF code = INVALID_ARGUMENT ;
+    BEGIN
+        ASSIGN text "The connection settings are wrong" ;
+    END IF
+    IF code = 1000 ;
+    BEGIN
+        ASSIGN text "The server refused with status " ⊕ status ;
+        IF status = 404 ;
+        BEGIN
+            ASSIGN text "There is nothing at this address" ;
+        END IF
+        IF status = 429 ;
+        BEGIN
+            ASSIGN text "Too many requests, try again later" ;
+        END IF
+        IF status ≥ 500 ;
+        BEGIN
+            ASSIGN text "The server has a problem" ;
+        END IF
+    END IF
+    IF code = 1001 ;
+    BEGIN
+        ASSIGN text "Nobody with c0de net is online" ;
+    END IF
+    IF code = 1002 ;
+    BEGIN
+        ASSIGN text "Requests are switched off" ;
+    END IF
+    IF code = 1003 ;
+    BEGIN
+        ASSIGN text "The server can't be reached" ;
+    END IF
+    IF code = 1004 ;
+    BEGIN
+        ASSIGN text "The server is too slow" ;
+    END IF
+    IF code = 1005 ;
+    BEGIN
+        ASSIGN text "The answer is too large" ;
+    END IF
+END FUNCTION
+NOOP
+FUNCTION worthRetrying
+    PARAMETER code INTEGER
+    PARAMETER status INTEGER
+    RESULT result BOOLEAN
+BEGIN
+    ASSIGN result code = 1003 OR code = 1004 OR ( code = 1000 AND ( status = 429 OR status ≥ 500 ) ) ;
+END FUNCTION
+NOOP
+FUNCTION fetch
+    PARAMETER server STRING "c0de.at"
+    PARAMETER endpoint STRING "/api/version"
+    RESULT answer STRING
+    RESULT tries INTEGER
+BEGIN
+    VARIABLE api STRUCT c0de_net/http/HTTP_CONNECTION
+    VARIABLE problem ERROR
+    VARIABLE status INTEGER
+    VARIABLE again BOOLEAN TRUE
+    VARIABLE wait INTEGER 20
+    VARIABLE text STRING
+    ASSIGN api.use_ssl TRUE ;
+    ASSIGN api.server server ;
+    ASSIGN api.timeout 10 ;
+    CALL CLS
+    WHILE again ;
+    BEGIN
+        ASSIGN tries tries + 1 ;
+        CALL c0de_net/http/HTTP_GET problem
+            PARAMETER connection api ;
+            PARAMETER endpoint endpoint ;
+            RESULT result answer
+            RESULT status status
+        CALL worthRetrying
+            PARAMETER code problem.code ;
+            PARAMETER status status ;
+            RESULT result again
+        IF again AND tries < 4 ;
+        BEGIN
+            CALL PRINT
+                PARAMETER value "Try " ⊕ tries ⊕ " failed, waiting " ⊕ wait ⊕ " ticks" ;
+            CALL c0de/time/SLEEP
+                PARAMETER ticks wait ;
+            ASSIGN wait wait * 2 ;
+        END
+        ELSE
+        BEGIN
+            ASSIGN again FALSE ;
+        END IF
+    END WHILE
+    IF problem.code ≠ 0 ;
+    BEGIN
+        CALL explain
+            PARAMETER code problem.code ;
+            PARAMETER status status ;
+            RESULT text text
+        CALL PRINT
+            PARAMETER value text ;
+        EXIT 1 ;
+    END IF
+    CALL PRINT
+        PARAMETER value answer ;
+END FUNCTION

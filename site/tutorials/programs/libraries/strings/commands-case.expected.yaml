@@ -1,0 +1,6 @@
+state: FINISHED
+screen:
+  - 'Commands: say <text>, sum <a> <b>, quit'
+  - Hello
+  - 3 + 4 = 7
+  - Bye!

@@ -1,0 +1,5 @@
+function: show
+parameters:
+  city: Xyzzyqx
+columns: 32
+rows: 8

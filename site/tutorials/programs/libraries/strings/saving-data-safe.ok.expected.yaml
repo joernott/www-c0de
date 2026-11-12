@@ -1,0 +1,8 @@
+state: FINISHED
+screen:
+  - Name?
+  - Points?
+  - Alex 300
+  - Kai 150
+written:
+  - scores: '[{"name":"Alex","points":300},{"name":"Kai","points":150}]'

@@ -176,7 +176,7 @@ The services of these recipes: the weather comes from a free public API without 
 
 ### Coverage
 
-Every library function and the recipes that use it. A function that gets added to a library must get a recipe too; the build checks this list (task 9.7).
+Every library function and the recipes that use it. A function that gets added to a library must get a recipe too. The import checks it (task 9.7): a recipe links to the handbook page of every function it uses, the page of every function lists the recipes that link to it ("Used in the tutorials"), and `npm run content` fails if a function has no recipe. This table is the plan; the links of the recipes are what counts.
 
 | Library | Function → recipe |
 |---|---|

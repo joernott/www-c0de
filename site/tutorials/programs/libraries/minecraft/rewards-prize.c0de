@@ -1,0 +1,19 @@
+PROGRAM prizes
+NOOP
+FUNCTION prizeFor
+    PARAMETER tries INTEGER
+    RESULT prize INTEGER
+BEGIN
+    IF tries ≤ 10 ;
+    BEGIN
+        ASSIGN prize 1 ;
+    END IF
+    IF tries ≤ 7 ;
+    BEGIN
+        ASSIGN prize 3 ;
+    END IF
+    IF tries ≤ 5 ;
+    BEGIN
+        ASSIGN prize 5 ;
+    END IF
+END FUNCTION

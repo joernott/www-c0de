@@ -1,0 +1,59 @@
+PROGRAM stopwatch
+NOOP
+INCLUDE c0de/time
+INCLUDE c0de/strings
+NOOP
+FUNCTION stamp
+    PARAMETER time TIME
+    RESULT text STRING
+BEGIN
+    VARIABLE millis INTEGER
+    VARIABLE digits STRING
+    CALL c0de/strings/FORMAT
+        PARAMETER value time ;
+        PARAMETER format "%tT" ;
+        RESULT result text
+    CALL c0de/time/MILLISECOND
+        PARAMETER time time ;
+        RESULT result millis
+    CALL c0de/strings/FORMAT
+        PARAMETER value millis ;
+        PARAMETER format ".%03d" ;
+        RESULT result digits
+    ASSIGN text text ⊕ digits ;
+END FUNCTION
+NOOP
+FUNCTION start
+    RESULT started TIME
+BEGIN
+    CALL c0de/time/NOW
+        RESULT result started
+END FUNCTION
+NOOP
+FUNCTION stop
+    PARAMETER started TIME
+    RESULT seconds FLOAT
+BEGIN
+    VARIABLE now TIME
+    VARIABLE text STRING
+    CALL c0de/time/NOW
+        RESULT result now
+    ASSIGN seconds (now - started) / 1000 ;
+    CALL CLS
+    CALL stamp
+        PARAMETER time started ;
+        RESULT text text
+    CALL PRINT
+        PARAMETER value "Start " ⊕ text ;
+    CALL stamp
+        PARAMETER time now ;
+        RESULT text text
+    CALL PRINT
+        PARAMETER value "Stop  " ⊕ text ;
+    CALL c0de/strings/FORMAT
+        PARAMETER value seconds ;
+        PARAMETER format "%.3f" ;
+        RESULT result text
+    CALL PRINT
+        PARAMETER value "Time  " ⊕ text ⊕ " s" ;
+END FUNCTION

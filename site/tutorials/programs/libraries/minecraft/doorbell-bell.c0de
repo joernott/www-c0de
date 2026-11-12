@@ -1,0 +1,15 @@
+PROGRAM doorbell
+NOOP
+INCLUDE c0de/minecraft
+NOOP
+FUNCTION ring
+BEGIN
+    VARIABLE visitor STRING "Someone"
+    IF PID.activator ≠ "" ;
+    BEGIN
+        ASSIGN visitor PID.activator ;
+    END IF
+    CALL c0de/minecraft/BEEP
+    CALL c0de/minecraft/SAY
+        PARAMETER message visitor ⊕ " is at the front door." ;
+END FUNCTION

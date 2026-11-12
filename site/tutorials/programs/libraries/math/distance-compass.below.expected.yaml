@@ -1,0 +1,7 @@
+results:
+  distance: 5.0
+  walk: 5.0
+  stepX: 0
+  stepY: -1
+  stepZ: 0
+  direction: above or below

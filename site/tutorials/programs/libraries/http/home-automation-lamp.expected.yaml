@@ -1,0 +1,6 @@
+valid: false
+problems:
+  - line: 33
+    code: UNKNOWN_STRUCT_ENTITY
+    message: The struct c0de/minecraft/POSITION has not been declared
+run: false

@@ -1,0 +1,110 @@
+PROGRAM playerfinder
+NOOP
+INCLUDE c0de/math
+INCLUDE c0de/minecraft
+NOOP
+FUNCTION measure
+    PARAMETER dx FLOAT
+    PARAMETER dy FLOAT
+    PARAMETER dz FLOAT
+    RESULT distance FLOAT
+    RESULT walk FLOAT
+    RESULT stepX INTEGER
+    RESULT stepY INTEGER
+    RESULT stepZ INTEGER
+    RESULT direction STRING
+BEGIN
+    VARIABLE size FLOAT
+    CALL c0de/math/SQR
+        PARAMETER value dx ^ 2 + dy ^ 2 + dz ^ 2 ;
+        RESULT result distance
+    CALL c0de/math/ABS
+        PARAMETER value dx ;
+        RESULT result size
+    ASSIGN walk size ;
+    CALL c0de/math/ABS
+        PARAMETER value dy ;
+        RESULT result size
+    ASSIGN walk walk + size ;
+    CALL c0de/math/ABS
+        PARAMETER value dz ;
+        RESULT result size
+    ASSIGN walk walk + size ;
+    CALL c0de/math/SGN
+        PARAMETER value dx ;
+        RESULT result stepX
+    CALL c0de/math/SGN
+        PARAMETER value dy ;
+        RESULT result stepY
+    CALL c0de/math/SGN
+        PARAMETER value dz ;
+        RESULT result stepZ
+    IF stepZ = -1 ;
+    BEGIN
+        ASSIGN direction "north" ;
+    END IF
+    IF stepZ = 1 ;
+    BEGIN
+        ASSIGN direction "south" ;
+    END IF
+    IF stepX ≠ 0 AND stepZ ≠ 0 ;
+    BEGIN
+        ASSIGN direction direction ⊕ "-" ;
+    END IF
+    IF stepX = 1 ;
+    BEGIN
+        ASSIGN direction direction ⊕ "east" ;
+    END IF
+    IF stepX = -1 ;
+    BEGIN
+        ASSIGN direction direction ⊕ "west" ;
+    END IF
+    IF direction = "" ;
+    BEGIN
+        ASSIGN direction "above or below" ;
+    END IF
+END FUNCTION
+NOOP
+FUNCTION find
+    PARAMETER radius INTEGER 32
+BEGIN
+    VARIABLE here STRUCT c0de/minecraft/POSITION
+    VARIABLE players ARRAY STRUCT c0de/minecraft/ENTITY
+    VARIABLE distance FLOAT
+    VARIABLE blocks INTEGER
+    VARIABLE stepY INTEGER
+    VARIABLE direction STRING
+    VARIABLE height STRING
+    ASSIGN here.x PID.x ;
+    ASSIGN here.y PID.y ;
+    ASSIGN here.z PID.z ;
+    CALL c0de/minecraft/FIND_ENTITIES
+        PARAMETER position here ;
+        PARAMETER radius radius ;
+        PARAMETER type "minecraft:player" ;
+        RESULT result players
+    EACH player players
+    BEGIN
+        CALL measure
+            PARAMETER dx player.position.x - here.x ;
+            PARAMETER dy player.position.y - here.y ;
+            PARAMETER dz player.position.z - here.z ;
+            RESULT distance distance
+            RESULT stepY stepY
+            RESULT direction direction
+        CALL c0de/math/ROUND
+            PARAMETER value distance ;
+            RESULT result blocks
+        ASSIGN height "" ;
+        IF stepY = 1 ;
+        BEGIN
+            ASSIGN height ", higher up" ;
+        END IF
+        IF stepY = -1 ;
+        BEGIN
+            ASSIGN height ", further down" ;
+        END IF
+        CALL c0de/minecraft/SAY
+            PARAMETER message player.name ⊕ " is " ⊕ blocks ⊕ " blocks away, " ⊕ direction ⊕ height ;
+    END EACH
+END FUNCTION

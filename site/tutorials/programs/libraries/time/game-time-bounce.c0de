@@ -1,0 +1,33 @@
+PROGRAM bouncer
+NOOP
+INCLUDE c0de/time
+NOOP
+FUNCTION bounce
+    PARAMETER rounds INTEGER 3
+    PARAMETER delay INTEGER 2
+BEGIN
+    CALL CLS
+    FOR round INTEGER 1 ; rounds ;
+    BEGIN
+        FOR column INTEGER 0 ; 14 ;
+        BEGIN
+            CALL LOCATE
+                PARAMETER row 3 ;
+                PARAMETER column column ;
+            CALL PRINT
+                PARAMETER value " o" ;
+            CALL c0de/time/SLEEP
+                PARAMETER ticks delay ;
+        END FOR
+        FOR column INTEGER 14 ; 0 ; -1 ;
+        BEGIN
+            CALL LOCATE
+                PARAMETER row 3 ;
+                PARAMETER column column ;
+            CALL PRINT
+                PARAMETER value "o " ;
+            CALL c0de/time/SLEEP
+                PARAMETER ticks delay ;
+        END FOR
+    END FOR
+END FUNCTION

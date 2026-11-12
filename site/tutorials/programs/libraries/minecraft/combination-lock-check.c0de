@@ -1,0 +1,20 @@
+PROGRAM combocheck
+NOOP
+VARIABLE secret ARRAY BOOLEAN
+BEGIN
+    TRUE FALSE TRUE TRUE
+END VARIABLE
+NOOP
+FUNCTION matches
+    PARAMETER levers ARRAY BOOLEAN
+    RESULT result BOOLEAN
+BEGIN
+    ASSIGN result TRUE ;
+    FOR i INTEGER 0 ; 3 ;
+    BEGIN
+        IF levers[i] ≠ secret[i] ;
+        BEGIN
+            ASSIGN result FALSE ;
+        END IF
+    END FOR
+END FUNCTION

@@ -1,0 +1,111 @@
+PROGRAM weatherwall
+NOOP
+INCLUDE c0de/strings
+INCLUDE c0de_net/http
+NOOP
+STRUCT place
+BEGIN
+    name STRING
+    country STRING
+    latitude FLOAT
+    longitude FLOAT
+END STRUCT
+NOOP
+STRUCT search
+BEGIN
+    results ARRAY STRUCT place
+END STRUCT
+NOOP
+STRUCT weather
+BEGIN
+    temperature FLOAT TAG(json: "temperature_2m")
+    wind FLOAT TAG(json: "wind_speed_10m")
+    code INTEGER TAG(json: "weather_code")
+END STRUCT
+NOOP
+FUNCTION sky
+    PARAMETER code INTEGER
+    RESULT result STRING
+BEGIN
+    ASSIGN result "Clear" ;
+    IF code ≥ 1 ;
+    BEGIN
+        ASSIGN result "Cloudy" ;
+    END IF
+    IF code ≥ 45 ;
+    BEGIN
+        ASSIGN result "Fog" ;
+    END IF
+    IF code ≥ 51 ;
+    BEGIN
+        ASSIGN result "Rain" ;
+    END IF
+    IF code ≥ 71 ;
+    BEGIN
+        ASSIGN result "Snow" ;
+    END IF
+    IF code ≥ 80 ;
+    BEGIN
+        ASSIGN result "Showers" ;
+    END IF
+    IF code ≥ 95 ;
+    BEGIN
+        ASSIGN result "Thunderstorm" ;
+    END IF
+END FUNCTION
+NOOP
+FUNCTION show
+    PARAMETER city STRING "Vienna"
+    RESULT found BOOLEAN
+BEGIN
+    VARIABLE api STRUCT c0de_net/http/HTTP_CONNECTION
+    VARIABLE answer STRING
+    VARIABLE places STRUCT search
+    VARIABLE town STRUCT place
+    VARIABLE now STRUCT weather TAG(json: "current")
+    VARIABLE count INTEGER
+    VARIABLE text STRING
+    ASSIGN api.use_ssl TRUE ;
+    ASSIGN api.server "geocoding-api.open-meteo.com" ;
+    ASSIGN api.timeout 10 ;
+    CALL c0de_net/http/HTTP_GET
+        PARAMETER connection api ;
+        PARAMETER endpoint "/v1/search?count=1&name=" ⊕ city ;
+        RESULT result answer
+    CALL c0de/strings/FROM_JSON
+        PARAMETER source answer ;
+        PARAMETER destination places ;
+    CALL LEN
+        PARAMETER value places.results ;
+        RESULT result count
+    CALL CLS
+    IF count = 0 ;
+    BEGIN
+        CALL PRINT
+            PARAMETER value "No city called " ⊕ city ;
+        RETURN
+    END IF
+    ASSIGN found TRUE ;
+    ASSIGN town places.results[0] ;
+    ASSIGN api.server "api.open-meteo.com" ;
+    CALL c0de_net/http/HTTP_GET
+        PARAMETER connection api ;
+        PARAMETER endpoint "/v1/forecast?latitude=" ⊕ town.latitude ⊕ "&longitude=" ⊕ town.longitude ⊕ "&current=temperature_2m,wind_speed_10m,weather_code" ;
+        RESULT result answer
+    CALL c0de/strings/FROM_JSON
+        PARAMETER source answer ;
+        PARAMETER destination now ;
+    CALL sky
+        PARAMETER code now.code ;
+        RESULT result text
+    CALL PRINT
+        PARAMETER value town.name ⊕ ", " ⊕ town.country ;
+    CALL PRINT
+        PARAMETER value "" ;
+    CALL PRINT
+        PARAMETER value text ;
+    CALL PRINT
+        PARAMETER value now.temperature ⊕ " °C" ;
+    CALL PRINT
+        PARAMETER value "Wind " ⊕ now.wind ⊕ " km/h" ;
+END FUNCTION

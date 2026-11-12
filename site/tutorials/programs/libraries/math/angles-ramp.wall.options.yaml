@@ -1,0 +1,4 @@
+function: slope
+parameters:
+  run: 0
+  rise: 5

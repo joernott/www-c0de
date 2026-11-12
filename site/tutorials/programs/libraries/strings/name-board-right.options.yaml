@@ -1,0 +1,5 @@
+function: show
+parameters:
+  name: Alex
+columns: 32
+rows: 8

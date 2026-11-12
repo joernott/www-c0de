@@ -1,0 +1,5 @@
+exit_code: 1
+screen:
+  - c0de.at/api/nothing
+  - Status 404
+  - application/json; charset=utf-8

@@ -1,0 +1,62 @@
+PROGRAM towerbuilder
+NOOP
+INCLUDE c0de/minecraft
+NOOP
+CONSTANT MATERIAL STRING "minecraft:cobblestone"
+NOOP
+FUNCTION build
+    PARAMETER height INTEGER 6
+BEGIN
+    VARIABLE chest STRUCT c0de/minecraft/POSITION
+    VARIABLE spot STRUCT c0de/minecraft/POSITION
+    ASSIGN chest.x PID.x - 2 ;
+    ASSIGN chest.y PID.y ;
+    ASSIGN chest.z PID.z ;
+    FOR level INTEGER 0 ; height - 1 ;
+    BEGIN
+        FOR dx INTEGER 0 ; 2 ;
+        BEGIN
+            FOR dz INTEGER 0 ; 2 ;
+            BEGIN
+                IF dx ≠ 1 OR dz ≠ 1 ;
+                BEGIN
+                    ASSIGN spot.x PID.x + 2 + dx ;
+                    ASSIGN spot.y PID.y + level ;
+                    ASSIGN spot.z PID.z - 1 + dz ;
+                    CALL c0de/minecraft/PLACE_BLOCK
+                        PARAMETER position spot ;
+                        PARAMETER id MATERIAL ;
+                        PARAMETER inventory chest ;
+                END IF
+            END FOR
+        END FOR
+    END FOR
+END FUNCTION
+NOOP
+FUNCTION pullDown
+    PARAMETER height INTEGER 6
+BEGIN
+    VARIABLE spot STRUCT c0de/minecraft/POSITION
+    VARIABLE id STRING
+    FOR level INTEGER height - 1 ; 0 ; -1 ;
+    BEGIN
+        FOR dx INTEGER 0 ; 2 ;
+        BEGIN
+            FOR dz INTEGER 0 ; 2 ;
+            BEGIN
+                ASSIGN spot.x PID.x + 2 + dx ;
+                ASSIGN spot.y PID.y + level ;
+                ASSIGN spot.z PID.z - 1 + dz ;
+                CALL c0de/minecraft/GET_BLOCK
+                    PARAMETER position spot ;
+                    RESULT id id
+                IF id = MATERIAL ;
+                BEGIN
+                    CALL c0de/minecraft/REMOVE_BLOCK
+                        PARAMETER position spot ;
+                        PARAMETER drop TRUE ;
+                END IF
+            END FOR
+        END FOR
+    END FOR
+END FUNCTION

@@ -1,0 +1,19 @@
+PROGRAM combohint
+NOOP
+VARIABLE secret ARRAY BOOLEAN
+BEGIN
+    TRUE FALSE TRUE TRUE
+END VARIABLE
+NOOP
+FUNCTION rightLevers
+    PARAMETER levers ARRAY BOOLEAN
+    RESULT result INTEGER
+BEGIN
+    FOR i INTEGER 0 ; 3 ;
+    BEGIN
+        IF levers[i] = secret[i] ;
+        BEGIN
+            ASSIGN result result + 1 ;
+        END IF
+    END FOR
+END FUNCTION

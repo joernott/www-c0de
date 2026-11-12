@@ -1,0 +1,25 @@
+PROGRAM guardzone
+NOOP
+INCLUDE c0de/math
+NOOP
+FUNCTION inside
+    PARAMETER dx FLOAT
+    PARAMETER dy FLOAT
+    PARAMETER dz FLOAT
+    PARAMETER size INTEGER 10
+    RESULT inside BOOLEAN
+BEGIN
+    VARIABLE ax FLOAT
+    VARIABLE ay FLOAT
+    VARIABLE az FLOAT
+    CALL c0de/math/ABS
+        PARAMETER value dx ;
+        RESULT result ax
+    CALL c0de/math/ABS
+        PARAMETER value dy ;
+        RESULT result ay
+    CALL c0de/math/ABS
+        PARAMETER value dz ;
+        RESULT result az
+    ASSIGN inside ax ≤ size AND ay ≤ size AND az ≤ size ;
+END FUNCTION

@@ -1,0 +1,3 @@
+function: rightLevers
+parameters:
+  levers: [false, false, true, false]

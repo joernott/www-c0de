@@ -1,0 +1,6 @@
+state: FINISHED
+screen:
+  - PUT /api/tutorial/echo/lamps/kitchen
+  - 'Authorization: Bearer test'
+  - 'Content-Type: application/json'
+  - '{"on":false}'

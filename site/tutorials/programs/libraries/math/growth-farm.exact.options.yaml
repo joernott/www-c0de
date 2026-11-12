@@ -1,0 +1,3 @@
+function: daysUntil
+parameters:
+  goal: 1024

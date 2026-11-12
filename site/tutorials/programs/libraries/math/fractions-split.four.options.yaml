@@ -1,0 +1,4 @@
+function: split
+parameters:
+  items: 30
+  players: 4

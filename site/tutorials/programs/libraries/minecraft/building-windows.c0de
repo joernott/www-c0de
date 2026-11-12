@@ -1,0 +1,38 @@
+PROGRAM windowwall
+NOOP
+INCLUDE c0de/minecraft
+NOOP
+FUNCTION wall
+    PARAMETER length INTEGER 8
+    PARAMETER height INTEGER 3
+    PARAMETER material STRING "minecraft:stone_bricks"
+BEGIN
+    VARIABLE chest STRUCT c0de/minecraft/POSITION
+    VARIABLE spot STRUCT c0de/minecraft/POSITION
+    VARIABLE problem ERROR
+    ASSIGN chest.x PID.x - 2 ;
+    ASSIGN chest.y PID.y ;
+    ASSIGN chest.z PID.z ;
+    ASSIGN spot.z PID.z ;
+    FOR row INTEGER 0 ; height - 1 ;
+    BEGIN
+        FOR i INTEGER 0 ; length - 1 ;
+        BEGIN
+            IF row ≠ 1 OR i \ 3 ≠ 1 ;
+            BEGIN
+                ASSIGN spot.x PID.x + 2 + i ;
+                ASSIGN spot.y PID.y + row ;
+                CALL c0de/minecraft/PLACE_BLOCK problem
+                    PARAMETER position spot ;
+                    PARAMETER id material ;
+                    PARAMETER inventory chest ;
+                IF problem.code ≠ 0 ;
+                BEGIN
+                    CALL c0de/minecraft/SAY
+                        PARAMETER message "The wall stops here: " ⊕ problem.message ;
+                    RETURN
+                END IF
+            END IF
+        END FOR
+    END FOR
+END FUNCTION

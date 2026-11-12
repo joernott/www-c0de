@@ -1,0 +1,5 @@
+function: roll
+parameters:
+  sides: 20
+  count: 3
+  seed: 42

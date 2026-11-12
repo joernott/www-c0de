@@ -1,0 +1,34 @@
+PROGRAM animalspawner
+NOOP
+INCLUDE c0de/minecraft
+NOOP
+FUNCTION spawn
+    PARAMETER animal STRING "minecraft:sheep"
+    PARAMETER most INTEGER 8
+BEGIN
+    VARIABLE pen STRUCT c0de/minecraft/POSITION
+    VARIABLE found ARRAY STRUCT c0de/minecraft/ENTITY
+    VARIABLE count INTEGER
+    ASSIGN pen.x PID.x ;
+    ASSIGN pen.y PID.y ;
+    ASSIGN pen.z PID.z + 5 ;
+    CALL c0de/minecraft/FIND_ENTITIES
+        PARAMETER position pen ;
+        PARAMETER radius 4 ;
+        PARAMETER type animal ;
+        RESULT result found
+    CALL LEN
+        PARAMETER value found ;
+        RESULT result count
+    IF count ≥ most ;
+    BEGIN
+        CALL c0de/minecraft/SAY
+            PARAMETER message "The pen is full: " ⊕ count ⊕ " animals." ;
+        RETURN
+    END IF
+    CALL c0de/minecraft/SPAWN_ENTITY
+        PARAMETER position pen ;
+        PARAMETER type animal ;
+    CALL c0de/minecraft/SAY
+        PARAMETER message "Animal number " ⊕ ( count + 1 ) ⊕ " is in the pen." ;
+END FUNCTION

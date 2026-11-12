@@ -1,0 +1,58 @@
+PROGRAM doorreport
+NOOP
+INCLUDE c0de/minecraft
+NOOP
+VARIABLE names ARRAY STRING
+BEGIN
+    "front door" "garden gate" "cellar trapdoor"
+END VARIABLE
+VARIABLE dx ARRAY INTEGER
+BEGIN
+    0 8 3
+END VARIABLE
+VARIABLE dy ARRAY INTEGER
+BEGIN
+    0 0 -1
+END VARIABLE
+VARIABLE dz ARRAY INTEGER
+BEGIN
+    -4 -4 -8
+END VARIABLE
+NOOP
+FUNCTION report
+BEGIN
+    VARIABLE spot STRUCT c0de/minecraft/POSITION
+    VARIABLE count INTEGER
+    VARIABLE isOpen BOOLEAN
+    VARIABLE openDoors STRING
+    CALL LEN
+        PARAMETER value names ;
+        RESULT result count
+    FOR i INTEGER 0 ; count - 1 ;
+    BEGIN
+        ASSIGN spot.x PID.x + dx[i] ;
+        ASSIGN spot.y PID.y + dy[i] ;
+        ASSIGN spot.z PID.z + dz[i] ;
+        CALL c0de/minecraft/GET_OPEN
+            PARAMETER position spot ;
+            RESULT result isOpen
+        IF isOpen ;
+        BEGIN
+            IF openDoors ≠ "" ;
+            BEGIN
+                ASSIGN openDoors openDoors ⊕ ", " ;
+            END IF
+            ASSIGN openDoors openDoors ⊕ names[i] ;
+        END IF
+    END FOR
+    IF openDoors = "" ;
+    BEGIN
+        CALL c0de/minecraft/SAY
+            PARAMETER message "All doors are closed." ;
+    END
+    ELSE
+    BEGIN
+        CALL c0de/minecraft/SAY
+            PARAMETER message "Open: " ⊕ openDoors ;
+    END IF
+END FUNCTION

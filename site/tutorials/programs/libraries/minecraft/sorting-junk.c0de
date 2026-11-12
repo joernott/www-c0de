@@ -1,0 +1,87 @@
+PROGRAM junksorter
+NOOP
+INCLUDE c0de/minecraft
+NOOP
+VARIABLE blocks ARRAY STRING
+BEGIN
+    "minecraft:cobblestone" "minecraft:dirt" "minecraft:sand" "minecraft:gravel"
+END VARIABLE
+VARIABLE food ARRAY STRING
+BEGIN
+    "minecraft:bread" "minecraft:apple" "minecraft:carrot" "minecraft:potato"
+END VARIABLE
+VARIABLE junk ARRAY STRING
+BEGIN
+    "minecraft:rotten_flesh" "minecraft:poisonous_potato"
+END VARIABLE
+NOOP
+FUNCTION chestFor
+    PARAMETER id STRING
+    RESULT chest INTEGER
+BEGIN
+    EACH name blocks
+    BEGIN
+        IF name = id ;
+        BEGIN
+            ASSIGN chest 1 ;
+        END IF
+    END EACH
+    EACH name food
+    BEGIN
+        IF name = id ;
+        BEGIN
+            ASSIGN chest 2 ;
+        END IF
+    END EACH
+    EACH name junk
+    BEGIN
+        IF name = id ;
+        BEGIN
+            ASSIGN chest -1 ;
+        END IF
+    END EACH
+END FUNCTION
+NOOP
+FUNCTION sort
+BEGIN
+    VARIABLE input STRUCT c0de/minecraft/POSITION
+    VARIABLE target STRUCT c0de/minecraft/POSITION
+    VARIABLE slots ARRAY STRUCT c0de/minecraft/ITEM_STACK
+    VARIABLE chest INTEGER
+    VARIABLE moved INTEGER
+    ASSIGN input.x PID.x + 2 ;
+    ASSIGN input.y PID.y ;
+    ASSIGN input.z PID.z ;
+    ASSIGN target input ;
+    CALL c0de/minecraft/GET_INVENTORY
+        PARAMETER position input ;
+        RESULT result slots
+    EACH slot slots
+    BEGIN
+        CALL chestFor
+            PARAMETER id slot.id ;
+            RESULT chest chest
+        IF slot.count > 0 AND chest = -1 ;
+        BEGIN
+            CALL c0de/minecraft/DELETE_ITEMS
+                PARAMETER position input ;
+                PARAMETER id slot.id ;
+                PARAMETER count slot.count ;
+        END IF
+        IF slot.count > 0 AND chest > 0 ;
+        BEGIN
+            ASSIGN target.x input.x + 2 * chest ;
+            CALL c0de/minecraft/MOVE_ITEMS
+                PARAMETER from input ;
+                PARAMETER to target ;
+                PARAMETER id slot.id ;
+                PARAMETER count slot.count ;
+                RESULT result moved
+            IF moved < slot.count ;
+            BEGIN
+                CALL c0de/minecraft/SAY
+                    PARAMETER message "Chest " ⊕ chest ⊕ " is full." ;
+            END IF
+        END IF
+    END EACH
+END FUNCTION

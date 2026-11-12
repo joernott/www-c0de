@@ -1,0 +1,5 @@
+function: bounce
+parameters:
+  delay: 0
+columns: 16
+rows: 8

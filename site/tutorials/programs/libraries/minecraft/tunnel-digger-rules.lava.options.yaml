@@ -1,0 +1,3 @@
+function: decide
+parameters:
+  id: minecraft:lava

@@ -1,0 +1,31 @@
+PROGRAM weathertomorrow
+NOOP
+INCLUDE c0de/strings
+INCLUDE c0de_net/http
+NOOP
+FUNCTION tomorrow
+    RESULT low FLOAT
+    RESULT high FLOAT
+BEGIN
+    VARIABLE api STRUCT c0de_net/http/HTTP_CONNECTION
+    VARIABLE answer STRING
+    VARIABLE lows ARRAY FLOAT TAG(json: "daily.temperature_2m_min")
+    VARIABLE highs ARRAY FLOAT TAG(json: "daily.temperature_2m_max")
+    ASSIGN api.use_ssl TRUE ;
+    ASSIGN api.server "api.open-meteo.com" ;
+    ASSIGN api.timeout 10 ;
+    CALL c0de_net/http/HTTP_GET
+        PARAMETER connection api ;
+        PARAMETER endpoint "/v1/forecast?latitude=48.21&longitude=16.37&daily=temperature_2m_min,temperature_2m_max&forecast_days=2" ;
+        RESULT result answer
+    CALL c0de/strings/FROM_JSON
+        PARAMETER source answer ;
+        PARAMETER destination lows ;
+    CALL c0de/strings/FROM_JSON
+        PARAMETER source answer ;
+        PARAMETER destination highs ;
+    ASSIGN low lows[1] ;
+    ASSIGN high highs[1] ;
+    CALL PRINT
+        PARAMETER value "Tomorrow: " ⊕ low ⊕ " to " ⊕ high ⊕ " °C" ;
+END FUNCTION

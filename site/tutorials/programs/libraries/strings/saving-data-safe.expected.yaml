@@ -1,0 +1,8 @@
+state: FINISHED
+screen:
+  - '? Unreadable scores, new table'
+  - Name?
+  - Points?
+  - Kai 150
+written:
+  - scores: '[{"name":"Kai","points":150}]'

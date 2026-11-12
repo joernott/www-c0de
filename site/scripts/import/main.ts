@@ -12,7 +12,7 @@ import { languages } from '../../.vitepress/theme/language.ts'
 import { build, ImportError } from './build.ts'
 import { scenes } from './scenes.ts'
 import { fetchSource, readConfig } from './sources.ts'
-import { tutorialsTab } from './tutorials.ts'
+import { addRecipes, tutorialsTab } from './tutorials.ts'
 
 const site = join(dirname(fileURLToPath(import.meta.url)), '..', '..')
 
@@ -50,6 +50,8 @@ async function main(args: string[]) {
   const output = build(config, folders, [...languages])
   // The tutorials are written in this repository; their tab comes after the tabs of the mods.
   output.navigation.tabs.push(tutorialsTab(site, [...languages]))
+  // Every function of a library is used in a recipe; its page links to them (task 9.7).
+  addRecipes(site, [...languages], output.pages)
 
   for (const folder of generated) {
     rmSync(join(site, folder), { recursive: true, force: true })

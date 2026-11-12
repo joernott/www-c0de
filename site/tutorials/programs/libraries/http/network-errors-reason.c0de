@@ -1,0 +1,36 @@
+PROGRAM netreason
+NOOP
+INCLUDE c0de/strings
+INCLUDE c0de_net/http
+NOOP
+FUNCTION why
+    PARAMETER endpoint STRING "/api/tutorial/todo/99"
+    RESULT text STRING
+BEGIN
+    VARIABLE api STRUCT c0de_net/http/HTTP_CONNECTION
+    VARIABLE problem ERROR
+    VARIABLE unreadable ERROR
+    VARIABLE answer STRING
+    VARIABLE reason STRING TAG(json: "error")
+    ASSIGN api.use_ssl TRUE ;
+    ASSIGN api.server "c0de.at" ;
+    ASSIGN api.timeout 10 ;
+    CALL c0de_net/http/HTTP_GET problem
+        PARAMETER connection api ;
+        PARAMETER endpoint endpoint ;
+        RESULT result answer
+    ASSIGN text "OK" ;
+    IF problem.code = 1000 ;
+    BEGIN
+        ASSIGN text problem.message ;
+        CALL c0de/strings/FROM_JSON unreadable
+            PARAMETER source answer ;
+            PARAMETER destination reason ;
+        IF unreadable.code = 0 ;
+        BEGIN
+            ASSIGN text text ⊕ ": " ⊕ reason ;
+        END IF
+    END IF
+    CALL PRINT
+        PARAMETER value text ;
+END FUNCTION

@@ -1,0 +1,131 @@
+PROGRAM commands
+NOOP
+INCLUDE c0de/strings
+INCLUDE c0de/math
+NOOP
+FUNCTION split
+    PARAMETER line STRING
+    RESULT word STRING
+    RESULT rest STRING
+BEGIN
+    VARIABLE space INTEGER
+    CALL c0de/strings/INSTR
+        PARAMETER text line ;
+        PARAMETER search " " ;
+        RESULT result space
+    IF space < 0 ;
+    BEGIN
+        ASSIGN word line ;
+        RETURN
+    END IF
+    CALL c0de/strings/MID
+        PARAMETER text line ;
+        PARAMETER start 0 ;
+        PARAMETER length space ;
+        RESULT result word
+    CALL c0de/strings/MID
+        PARAMETER text line ;
+        PARAMETER start space + 1 ;
+        RESULT result rest
+END FUNCTION
+NOOP
+FUNCTION say
+    PARAMETER text STRING
+BEGIN
+    VARIABLE found INTEGER
+    CALL c0de/strings/INSTR
+        PARAMETER text text ;
+        PARAMETER search "creeper" ;
+        RESULT result found
+    WHILE found ≥ 0 ;
+    BEGIN
+        CALL c0de/strings/REPLACE
+            PARAMETER text text ;
+            PARAMETER start found ;
+            PARAMETER insert "*******" ;
+            RESULT result text
+        CALL c0de/strings/INSTR
+            PARAMETER text text ;
+            PARAMETER search "creeper" ;
+            PARAMETER start found ;
+            RESULT result found
+    END WHILE
+    CALL PRINT
+        PARAMETER value text ;
+END FUNCTION
+NOOP
+FUNCTION sum
+    PARAMETER numbers STRING
+BEGIN
+    VARIABLE first STRING
+    VARIABLE second STRING
+    VARIABLE a FLOAT
+    VARIABLE b FLOAT
+    VARIABLE wholeA BOOLEAN
+    VARIABLE wholeB BOOLEAN
+    VARIABLE total INTEGER
+    VARIABLE answer STRING
+    VARIABLE problem ERROR
+    CALL split
+        PARAMETER line numbers ;
+        RESULT word first
+        RESULT rest second
+    CALL c0de/strings/VAL problem
+        PARAMETER text first ;
+        RESULT value a
+        RESULT isInteger wholeA
+    CALL c0de/strings/VAL problem
+        PARAMETER text second ;
+        RESULT value b
+        RESULT isInteger wholeB
+    IF problem.code ≠ 0 OR NOT ( wholeA AND wholeB ) ;
+    BEGIN
+        CALL PRINT
+            PARAMETER value "? sum needs two whole numbers" ;
+        RETURN
+    END IF
+    CALL c0de/math/FIX
+        PARAMETER value a + b ;
+        RESULT result total
+    CALL c0de/strings/STR
+        PARAMETER value total ;
+        RESULT result answer
+    CALL PRINT
+        PARAMETER value first ⊕ " + " ⊕ second ⊕ " = " ⊕ answer ;
+END FUNCTION
+NOOP
+FUNCTION terminal
+BEGIN
+    VARIABLE line STRING
+    VARIABLE word STRING
+    VARIABLE rest STRING
+    CALL CLS
+    CALL PRINT
+        PARAMETER value "Commands: say <text>, sum <a> <b>, quit" ;
+    REPEAT
+    BEGIN
+        CALL INPUT
+            PARAMETER variable line ;
+        CALL split
+            PARAMETER line line ;
+            RESULT word word
+            RESULT rest rest
+        IF word = "say" ;
+        BEGIN
+            CALL say
+                PARAMETER text rest ;
+        END IF
+        IF word = "sum" ;
+        BEGIN
+            CALL sum
+                PARAMETER numbers rest ;
+        END IF
+        IF word ≠ "say" AND word ≠ "sum" AND word ≠ "quit" ;
+        BEGIN
+            CALL PRINT
+                PARAMETER value "? unknown command: " ⊕ word ;
+        END IF
+    END REPEAT word ≠ "quit" ;
+    CALL PRINT
+        PARAMETER value "Bye!" ;
+END FUNCTION

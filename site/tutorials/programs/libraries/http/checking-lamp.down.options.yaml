@@ -1,0 +1,3 @@
+function: check
+parameters:
+  server: nothing.invalid

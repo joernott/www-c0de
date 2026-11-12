@@ -1,0 +1,3 @@
+state: FINISHED
+written:
+  - scores: '[{"name":"Alex","points":300},{"name":"Steve","points":200}]'

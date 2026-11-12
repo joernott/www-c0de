@@ -1,0 +1,61 @@
+PROGRAM doorcloser
+NOOP
+INCLUDE c0de/minecraft
+NOOP
+VARIABLE names ARRAY STRING
+BEGIN
+    "front door" "garden gate" "cellar trapdoor"
+END VARIABLE
+VARIABLE dx ARRAY INTEGER
+BEGIN
+    0 8 3
+END VARIABLE
+VARIABLE dy ARRAY INTEGER
+BEGIN
+    0 0 -1
+END VARIABLE
+VARIABLE dz ARRAY INTEGER
+BEGIN
+    -4 -4 -8
+END VARIABLE
+NOOP
+FUNCTION closeAll
+BEGIN
+    VARIABLE spot STRUCT c0de/minecraft/POSITION
+    VARIABLE count INTEGER
+    VARIABLE isOpen BOOLEAN
+    VARIABLE closed STRING
+    CALL LEN
+        PARAMETER value names ;
+        RESULT result count
+    FOR i INTEGER 0 ; count - 1 ;
+    BEGIN
+        ASSIGN spot.x PID.x + dx[i] ;
+        ASSIGN spot.y PID.y + dy[i] ;
+        ASSIGN spot.z PID.z + dz[i] ;
+        CALL c0de/minecraft/GET_OPEN
+            PARAMETER position spot ;
+            RESULT result isOpen
+        IF isOpen ;
+        BEGIN
+            CALL c0de/minecraft/SET_OPEN
+                PARAMETER position spot ;
+                PARAMETER open FALSE ;
+            IF closed ≠ "" ;
+            BEGIN
+                ASSIGN closed closed ⊕ ", " ;
+            END IF
+            ASSIGN closed closed ⊕ names[i] ;
+        END IF
+    END FOR
+    IF closed = "" ;
+    BEGIN
+        CALL c0de/minecraft/SAY
+            PARAMETER message "All doors were closed." ;
+    END
+    ELSE
+    BEGIN
+        CALL c0de/minecraft/SAY
+            PARAMETER message "Closed: " ⊕ closed ;
+    END IF
+END FUNCTION

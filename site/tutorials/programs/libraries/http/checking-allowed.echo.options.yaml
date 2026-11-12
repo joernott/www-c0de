@@ -1,0 +1,3 @@
+function: ask
+parameters:
+  endpoint: /api/tutorial/echo

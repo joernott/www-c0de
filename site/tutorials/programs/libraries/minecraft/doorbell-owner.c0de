@@ -1,0 +1,22 @@
+PROGRAM ownerbell
+NOOP
+INCLUDE c0de/minecraft
+NOOP
+FUNCTION ring
+BEGIN
+    VARIABLE visitor STRING "Someone"
+    VARIABLE problem ERROR
+    IF PID.activator ≠ "" ;
+    BEGIN
+        ASSIGN visitor PID.activator ;
+    END IF
+    CALL c0de/minecraft/BEEP
+    CALL c0de/minecraft/SAY problem
+        PARAMETER message visitor ⊕ " is at the front door." ;
+        PARAMETER player PID.owner ;
+    IF problem.code ≠ 0 ;
+    BEGIN
+        CALL c0de/minecraft/SAY
+            PARAMETER message "Nobody is at home." ;
+    END IF
+END FUNCTION

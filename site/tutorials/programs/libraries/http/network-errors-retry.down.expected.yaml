@@ -1,0 +1,8 @@
+exit_code: 1
+results:
+  tries: 4
+screen:
+  - Try 1 failed, waiting 20 ticks
+  - Try 2 failed, waiting 40 ticks
+  - Try 3 failed, waiting 80 ticks
+  - The server can't be reached

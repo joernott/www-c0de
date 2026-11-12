@@ -1,0 +1,4 @@
+function: share
+parameters:
+  items: 100
+  players: 3

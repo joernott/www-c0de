@@ -1,0 +1,11 @@
+state: FINISHED
+results:
+  yaml: |
+    - name: Kai
+      points: 150
+screen:
+  - Name?
+  - Points?
+  - Kai 150
+written:
+  - scores: '[{"name":"Kai","points":150}]'

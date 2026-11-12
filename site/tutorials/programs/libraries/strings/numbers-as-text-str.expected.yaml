@@ -1,0 +1,9 @@
+state: FINISHED
+screen:
+  - Stock on Thursday, 2026-11-12 at 18:30
+  - Item          Count  Stacks   Hex    Oct
+  - cobblestone    1234    19.3   4D2   2322
+  - diamond           7     0.1     7      7
+  - oak_log          96     1.5    60    140
+  - torch           320     5.0   140    500
+  - Total         1,657

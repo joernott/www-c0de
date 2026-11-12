@@ -1,0 +1,3 @@
+results:
+  methods: GET, HEAD, POST, PUT, PATCH, DELETE, OPTIONS, TRACE
+  traced: 200

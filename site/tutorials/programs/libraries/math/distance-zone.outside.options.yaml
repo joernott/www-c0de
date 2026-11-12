@@ -1,0 +1,5 @@
+function: inside
+parameters:
+  dx: 2
+  dy: 0
+  dz: -11

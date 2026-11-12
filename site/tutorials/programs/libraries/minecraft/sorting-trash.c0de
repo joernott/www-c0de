@@ -1,0 +1,34 @@
+PROGRAM trashcan
+NOOP
+INCLUDE c0de/minecraft
+NOOP
+FUNCTION empty
+BEGIN
+    VARIABLE trash STRUCT c0de/minecraft/POSITION
+    VARIABLE slots ARRAY STRUCT c0de/minecraft/ITEM_STACK
+    VARIABLE removed INTEGER
+    VARIABLE total INTEGER
+    ASSIGN trash.x PID.x + 2 ;
+    ASSIGN trash.y PID.y ;
+    ASSIGN trash.z PID.z ;
+    CALL c0de/minecraft/GET_INVENTORY
+        PARAMETER position trash ;
+        RESULT result slots
+    EACH slot slots
+    BEGIN
+        IF slot.count > 0 ;
+        BEGIN
+            CALL c0de/minecraft/DELETE_ITEMS
+                PARAMETER position trash ;
+                PARAMETER id slot.id ;
+                PARAMETER count slot.count ;
+                RESULT result removed
+            ASSIGN total total + removed ;
+        END IF
+    END EACH
+    IF total > 0 ;
+    BEGIN
+        CALL c0de/minecraft/SAY
+            PARAMETER message "The trash can ate " ⊕ total ⊕ " items." ;
+    END IF
+END FUNCTION

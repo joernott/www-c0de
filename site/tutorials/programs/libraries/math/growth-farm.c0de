@@ -1,0 +1,78 @@
+PROGRAM farm
+NOOP
+INCLUDE c0de/math
+NOOP
+FUNCTION grow
+    PARAMETER start INTEGER 1
+    PARAMETER factor FLOAT 2.0
+    PARAMETER days INTEGER 7
+    RESULT count INTEGER
+BEGIN
+    VARIABLE rate FLOAT
+    VARIABLE growth FLOAT
+    CALL c0de/math/LOG
+        PARAMETER value factor ;
+        RESULT result rate
+    CALL CLS
+    FOR day INTEGER 0 ; days ;
+    BEGIN
+        CALL c0de/math/EXP
+            PARAMETER value day * rate ;
+            RESULT result growth
+        CALL c0de/math/ROUND
+            PARAMETER value start * growth ;
+            RESULT result count
+        CALL PRINT
+            PARAMETER value "Day " ⊕ day ⊕ ": " ⊕ count ;
+    END FOR
+END FUNCTION
+NOOP
+FUNCTION daysUntil
+    PARAMETER start INTEGER 1
+    PARAMETER factor FLOAT 2.0
+    PARAMETER goal INTEGER 1000
+    RESULT days INTEGER
+BEGIN
+    VARIABLE ratio FLOAT
+    VARIABLE rate FLOAT
+    IF goal ≤ start ;
+    BEGIN
+        RETURN
+    END IF
+    CALL c0de/math/LOG
+        PARAMETER value goal / start ;
+        RESULT result ratio
+    CALL c0de/math/LOG
+        PARAMETER value factor ;
+        RESULT result rate
+    CALL c0de/math/INT
+        PARAMETER value 0 - ratio / rate ;
+        RESULT result days
+    ASSIGN days 0 - days ;
+    IF start * factor ^ ( days - 1 ) ≥ goal ;
+    BEGIN
+        ASSIGN days days - 1 ;
+    END IF
+END FUNCTION
+NOOP
+FUNCTION digits
+    PARAMETER number INTEGER
+    RESULT digits INTEGER
+BEGIN
+    VARIABLE logarithm FLOAT
+    VARIABLE ten FLOAT
+    CALL c0de/math/LOG
+        PARAMETER value number ;
+        RESULT result logarithm
+    CALL c0de/math/LOG
+        PARAMETER value 10 ;
+        RESULT result ten
+    CALL c0de/math/INT
+        PARAMETER value logarithm / ten ;
+        RESULT result digits
+    ASSIGN digits digits + 1 ;
+    IF 10 ^ digits ≤ number ;
+    BEGIN
+        ASSIGN digits digits + 1 ;
+    END IF
+END FUNCTION

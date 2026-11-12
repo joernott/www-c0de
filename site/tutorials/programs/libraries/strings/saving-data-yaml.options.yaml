@@ -1,0 +1,3 @@
+function: load
+parameters:
+  list: '[{name: Alex, points: 300}, {name: Steve, points: 200}]'

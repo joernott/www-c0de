@@ -1,0 +1,4 @@
+exit_code: 0
+screen:
+  - 'c0de.at: up'
+  - 'api.open-meteo.com: up'

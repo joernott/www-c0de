@@ -1,0 +1,5 @@
+function: measure
+parameters:
+  dx: 0
+  dy: -5
+  dz: 0

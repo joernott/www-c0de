@@ -1,0 +1,32 @@
+PROGRAM serverspeed
+NOOP
+INCLUDE c0de/minecraft
+INCLUDE c0de/time
+INCLUDE c0de/strings
+NOOP
+FUNCTION measure
+    RESULT speed FLOAT
+BEGIN
+    VARIABLE firstTick INTEGER
+    VARIABLE lastTick INTEGER
+    VARIABLE firstTime TIME
+    VARIABLE lastTime TIME
+    VARIABLE text STRING
+    CALL c0de/minecraft/TICKS
+        RESULT result firstTick
+    CALL c0de/time/NOW
+        RESULT result firstTime
+    CALL c0de/time/SLEEP
+        PARAMETER ticks 200 ;
+    CALL c0de/minecraft/TICKS
+        RESULT result lastTick
+    CALL c0de/time/NOW
+        RESULT result lastTime
+    ASSIGN speed (lastTick - firstTick) / ((lastTime - firstTime) / 1000) ;
+    CALL c0de/strings/FORMAT
+        PARAMETER value speed ;
+        PARAMETER format "%.1f" ;
+        RESULT result text
+    CALL PRINT
+        PARAMETER value "Ticks per second: " ⊕ text ;
+END FUNCTION

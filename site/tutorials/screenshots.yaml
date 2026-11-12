@@ -1,7 +1,7 @@
 # The screenshots of the tutorials, written by scripts/screenshots.ts from the marks
 # <!-- screenshot: <id> | <description> --> of the pages. Take them as described in
 # docs/tutorials.md ("Screenshots") and save them as the file; the page shows them then.
-# 37 screenshots, 37 missing.
+# 63 screenshots, 63 missing.
 - id: asking-input
   description: 'the open terminal of the laptop while INPUT waits: "How many
     items?" on the screen and the input line "INPUT items (INTEGER):" with 1000
@@ -19,6 +19,15 @@
     - tutorials/learning/asking.md
     - de/tutorials/learning/asking.md
   file: public/tutorials/screenshots/asking-laptop.webp
+  size: missing
+- id: automatic-doors-door
+  description: the open wooden door seen from outside, the player on the outside
+    plate two blocks in front of it, the inside plate visible through the
+    doorway and the timer block in the foreground
+  pages:
+    - tutorials/libraries/c0de/minecraft/automatic-doors.md
+    - de/tutorials/libraries/c0de/minecraft/automatic-doors.md
+  file: public/tutorials/screenshots/automatic-doors-door.webp
   size: missing
 - id: before-you-start-creative-tab
   description: the creative inventory with the c0de tab open, showing the trigger
@@ -45,6 +54,24 @@
     - de/tutorials/learning/before-you-start.md
   file: public/tutorials/screenshots/before-you-start-sheet.webp
   size: missing
+- id: building-tower
+  description: the hollow cobblestone tower, 6 blocks high, half pulled down from
+    the top, cobblestone items lying around it, the trigger block and the chest
+    in front of it
+  pages:
+    - tutorials/libraries/c0de/minecraft/building.md
+    - de/tutorials/libraries/c0de/minecraft/building.md
+  file: public/tutorials/screenshots/building-tower.webp
+  size: missing
+- id: building-wall
+  description: the finished wall of stone bricks, 8 blocks long and 3 high, with
+    the trigger block and its button in front of its west end and the chest 2
+    blocks west of it
+  pages:
+    - tutorials/libraries/c0de/minecraft/building.md
+    - de/tutorials/libraries/c0de/minecraft/building.md
+  file: public/tutorials/screenshots/building-wall.webp
+  size: missing
 - id: calculating-result
   description: the second display wall next to the storage chests showing the four
     lines of the stack calculator
@@ -61,6 +88,30 @@
     - de/tutorials/learning/calculating.md
   file: public/tutorials/screenshots/calculating-stacks.webp
   size: missing
+- id: checking-lamp
+  description: The timer block with comparator and a dark redstone lamp, the
+    display wall showing c0de.at/ and Status 200
+  pages:
+    - tutorials/libraries/c0de_net/http/checking.md
+    - de/tutorials/libraries/c0de_net/http/checking.md
+  file: public/tutorials/screenshots/checking-lamp.webp
+  size: missing
+- id: circle-ring
+  description: a ring of stone bricks with the radius 5 on flat grass around a
+    trigger block with a button, seen from above at an angle
+  pages:
+    - tutorials/libraries/c0de/math/circle.md
+    - de/tutorials/libraries/c0de/math/circle.md
+  file: public/tutorials/screenshots/circle-ring.webp
+  size: missing
+- id: clock-wall
+  description: a display wall of 2 × 1 display blocks showing the time 09:05:03 in
+    the middle, the timer block in front of it
+  pages:
+    - tutorials/libraries/c0de/time/clock.md
+    - de/tutorials/libraries/c0de/time/clock.md
+  file: public/tutorials/screenshots/clock-wall.webp
+  size: missing
 - id: colors-result
   description: the display wall at the entrance showing the welcome text in yellow
     on dark blue between two gold lines of equal signs
@@ -76,6 +127,23 @@
     - tutorials/learning/colors.md
     - de/tutorials/learning/colors.md
   file: public/tutorials/screenshots/colors-sign.webp
+  size: missing
+- id: combination-lock-levers
+  description: the four levers on the ground in front of the base, two of them on,
+    the stone button at the end of the row, the timer block on the left and the
+    closed iron door behind them
+  pages:
+    - tutorials/libraries/c0de/minecraft/combination-lock.md
+    - de/tutorials/libraries/c0de/minecraft/combination-lock.md
+  file: public/tutorials/screenshots/combination-lock-levers.webp
+  size: missing
+- id: commands-laptop
+  description: "the terminal of the laptop after the run: the typed commands say,
+    sum and dance with their answers, and Bye! at the end"
+  pages:
+    - tutorials/libraries/c0de/strings/commands.md
+    - de/tutorials/libraries/c0de/strings/commands.md
+  file: public/tutorials/screenshots/commands-laptop.webp
   size: missing
 - id: condition-loops-halving-laptop
   description: 'the laptop terminal after two numbers: "Type a number:", 8, "You
@@ -127,6 +195,22 @@
     - tutorials/learning/decisions.md
     - de/tutorials/learning/decisions.md
   file: public/tutorials/screenshots/decisions-guard-wall.webp
+  size: missing
+- id: dice-display
+  description: 'a display block next to a trigger block with a button, showing
+    "D20: 15", "D20: 4", "D20: 6" and "Total: 25"'
+  pages:
+    - tutorials/libraries/c0de/math/dice.md
+    - de/tutorials/libraries/c0de/math/dice.md
+  file: public/tutorials/screenshots/dice-display.webp
+  size: missing
+- id: doorbell-door
+  description: the front door of the base from outside with the trigger block and
+    its button beside it, and the chat line with "Steve is at the front door."
+  pages:
+    - tutorials/libraries/c0de/minecraft/doorbell.md
+    - de/tutorials/libraries/c0de/minecraft/doorbell.md
+  file: public/tutorials/screenshots/doorbell-door.webp
   size: missing
 - id: errors-broken-sheet
   description: the program repair with its three bugs on its sheet, seen from the
@@ -189,6 +273,21 @@
     - de/tutorials/learning/functions.md
   file: public/tutorials/screenshots/functions-frame-wall.webp
   size: missing
+- id: game-time-bounce
+  description: a display block with the ball "o" in the middle of row 3, the
+    trigger block with its button in front of it
+  pages:
+    - tutorials/libraries/c0de/time/game-time.md
+    - de/tutorials/libraries/c0de/time/game-time.md
+  file: public/tutorials/screenshots/game-time-bounce.webp
+  size: missing
+- id: growth-display
+  description: 'a display block showing the lines "Day 0: 1" to "Day 7: 128"'
+  pages:
+    - tutorials/libraries/c0de/math/growth.md
+    - de/tutorials/libraries/c0de/math/growth.md
+  file: public/tutorials/screenshots/growth-display.webp
+  size: missing
 - id: guarded-door-entrance
   description: 'the entrance of the base from outside: the iron door open, the
     player on the pressure plate one block in front of it, the display wall next
@@ -226,6 +325,14 @@
     - de/tutorials/learning/guess-the-number.md
   file: public/tutorials/screenshots/guess-the-number-sheet.webp
   size: missing
+- id: home-automation-lever
+  description: The trigger block with the lever on top, switched on, and the PID
+    block of the running process on the sheet
+  pages:
+    - tutorials/libraries/c0de_net/http/home-automation.md
+    - de/tutorials/libraries/c0de_net/http/home-automation.md
+  file: public/tutorials/screenshots/home-automation-lever.webp
+  size: missing
 - id: libraries-dice-chat
   description: the player in the base pressing the button on the trigger block,
     the chat showing three lines like "[dice/0] You rolled a 4"
@@ -260,6 +367,14 @@
     - de/tutorials/learning/lists.md
   file: public/tutorials/screenshots/lists-notes-wall.webp
   size: missing
+- id: name-board-wall
+  description: the display wall of 2 × 1 blocks with the frame of = signs, the
+    greeting WELCOME TO THE BASE OF and the name Steve
+  pages:
+    - tutorials/libraries/c0de/strings/name-board.md
+    - de/tutorials/libraries/c0de/strings/name-board.md
+  file: public/tutorials/screenshots/name-board-wall.webp
+  size: missing
 - id: next-steps-handbook
   description: the handbook Functions open in the game as a red Patchouli book,
     showing the page of SAY with its parameters and its example
@@ -267,6 +382,14 @@
     - tutorials/learning/next-steps.md
     - de/tutorials/learning/next-steps.md
   file: public/tutorials/screenshots/next-steps-handbook.webp
+  size: missing
+- id: numbers-as-text-laptop
+  description: the terminal of the laptop with the date, the stock table in
+    aligned columns and the total
+  pages:
+    - tutorials/libraries/c0de/strings/numbers-as-text.md
+    - de/tutorials/libraries/c0de/strings/numbers-as-text.md
+  file: public/tutorials/screenshots/numbers-as-text-laptop.webp
   size: missing
 - id: parameters-stacks
   description: the program "stacks" on its sheet, seen from above, with the
@@ -283,6 +406,57 @@
     - tutorials/learning/parameters.md
     - de/tutorials/learning/parameters.md
   file: public/tutorials/screenshots/parameters-trigger.webp
+  size: missing
+- id: rewards-hub
+  description: 'the teleporter hub: three pressure plates in a row with signs
+    "Farm", "Mine" and "Tower" behind them, the timer block at the west end'
+  pages:
+    - tutorials/libraries/c0de/minecraft/rewards.md
+    - de/tutorials/libraries/c0de/minecraft/rewards.md
+  file: public/tutorials/screenshots/rewards-hub.webp
+  size: missing
+- id: rewards-pen
+  description: the fenced pen with several sheep, one of them just appeared in the
+    middle, the trigger block with its button north of the pen and the chat line
+    "Animal number 4 is in the pen."
+  pages:
+    - tutorials/libraries/c0de/minecraft/rewards.md
+    - de/tutorials/libraries/c0de/minecraft/rewards.md
+  file: public/tutorials/screenshots/rewards-pen.webp
+  size: missing
+- id: saving-data-io-block
+  description: the dialog of the I/O block after the run, with the variable item
+    scores in its output
+  pages:
+    - tutorials/libraries/c0de/strings/saving-data.md
+    - de/tutorials/libraries/c0de/strings/saving-data.md
+  file: public/tutorials/screenshots/saving-data-io-block.webp
+  size: missing
+- id: secret-messages-laptop
+  description: "the terminal of the laptop after the run: the typed message and
+    key, the secret text and the decoded message"
+  pages:
+    - tutorials/libraries/c0de/strings/secret-messages.md
+    - de/tutorials/libraries/c0de/strings/secret-messages.md
+  file: public/tutorials/screenshots/secret-messages-laptop.webp
+  size: missing
+- id: sorting-chests
+  description: the row of chests seen from the side, the hopper on the input
+    chest, the timer block to the west, and the open food chest with bread and
+    apples
+  pages:
+    - tutorials/libraries/c0de/minecraft/sorting.md
+    - de/tutorials/libraries/c0de/minecraft/sorting.md
+  file: public/tutorials/screenshots/sorting-chests.webp
+  size: missing
+- id: stopwatch-buttons
+  description: the two trigger blocks with buttons side by side, the hopper and
+    chest under the second one, and the display wall showing the start, stop and
+    elapsed time
+  pages:
+    - tutorials/libraries/c0de/time/stopwatch.md
+    - de/tutorials/libraries/c0de/time/stopwatch.md
+  file: public/tutorials/screenshots/stopwatch-buttons.webp
   size: missing
 - id: tables-shop-laptop
   description: the laptop terminal showing the offer of the day, the question, the
@@ -301,6 +475,23 @@
     - de/tutorials/learning/tables.md
   file: public/tutorials/screenshots/tables-shop-sheet.webp
   size: missing
+- id: tunnel-digger-tunnel
+  description: the entrance of the tunnel in the side of a hill, two blocks high,
+    the trigger block in front of it, the tools chest on the left and the open
+    drops chest on the right with cobblestone and coal
+  pages:
+    - tutorials/libraries/c0de/minecraft/tunnel-digger.md
+    - de/tutorials/libraries/c0de/minecraft/tunnel-digger.md
+  file: public/tutorials/screenshots/tunnel-digger-tunnel.webp
+  size: missing
+- id: up-to-date-wall
+  description: "The display wall with the two green lines c0de 0.4.0: up to date
+    and c0de net 0.2.0: up to date"
+  pages:
+    - tutorials/libraries/c0de_net/http/up-to-date.md
+    - de/tutorials/libraries/c0de_net/http/up-to-date.md
+  file: public/tutorials/screenshots/up-to-date-wall.webp
+  size: missing
 - id: variables-result
   description: the display wall at the entrance showing "Welcome to Oak Hill!" in
     yellow on blue and "Founded in 2026" in white, between the gold lines
@@ -316,4 +507,28 @@
     - tutorials/learning/variables.md
     - de/tutorials/learning/variables.md
   file: public/tutorials/screenshots/variables-sign.webp
+  size: missing
+- id: watching-farm
+  description: 'the wheat field of 4 × 4 plants, partly ripe, with the timer block
+    beside it and the display wall showing "Wheat: 16 plants" and "Ripe: 5"'
+  pages:
+    - tutorials/libraries/c0de/minecraft/watching.md
+    - de/tutorials/libraries/c0de/minecraft/watching.md
+  file: public/tutorials/screenshots/watching-farm.webp
+  size: missing
+- id: watching-pen
+  description: 'the fenced pen with sheep, cows and pigs, the timer block north of
+    it, and the display wall listing the animals and "Animals: 9"'
+  pages:
+    - tutorials/libraries/c0de/minecraft/watching.md
+    - de/tutorials/libraries/c0de/minecraft/watching.md
+  file: public/tutorials/screenshots/watching-pen.webp
+  size: missing
+- id: weather-wall
+  description: The display wall showing Vienna, Austria, the sky, the temperature
+    and the wind
+  pages:
+    - tutorials/libraries/c0de_net/http/weather.md
+    - de/tutorials/libraries/c0de_net/http/weather.md
+  file: public/tutorials/screenshots/weather-wall.webp
   size: missing

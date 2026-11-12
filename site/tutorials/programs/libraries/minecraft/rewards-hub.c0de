@@ -1,0 +1,68 @@
+PROGRAM teleporterhub
+NOOP
+INCLUDE c0de/minecraft
+NOOP
+VARIABLE farm STRUCT c0de/minecraft/POSITION
+BEGIN
+    x 120
+    y 64
+    z 240
+END VARIABLE
+VARIABLE mine STRUCT c0de/minecraft/POSITION
+BEGIN
+    x -80
+    y 12
+    z 150
+END VARIABLE
+VARIABLE tower STRUCT c0de/minecraft/POSITION
+BEGIN
+    x 100
+    y 90
+    z 180
+END VARIABLE
+NOOP
+FUNCTION send
+    PARAMETER dx INTEGER
+    PARAMETER place STRUCT c0de/minecraft/POSITION
+BEGIN
+    VARIABLE plate STRUCT c0de/minecraft/POSITION
+    VARIABLE strength INTEGER
+    VARIABLE players ARRAY STRUCT c0de/minecraft/ENTITY
+    ASSIGN plate.x PID.x + dx ;
+    ASSIGN plate.y PID.y ;
+    ASSIGN plate.z PID.z ;
+    CALL c0de/minecraft/GET_PRESSURE_PLATE
+        PARAMETER position plate ;
+        RESULT result strength
+    IF strength = 0 ;
+    BEGIN
+        RETURN
+    END IF
+    CALL c0de/minecraft/FIND_ENTITIES
+        PARAMETER position plate ;
+        PARAMETER radius 1 ;
+        PARAMETER type "minecraft:player" ;
+        RESULT result players
+    EACH player players
+    BEGIN
+        IF player.position.x = plate.x AND player.position.y = plate.y AND player.position.z = plate.z ;
+        BEGIN
+            CALL c0de/minecraft/TELEPORT
+                PARAMETER uuid player.uuid ;
+                PARAMETER position place ;
+        END IF
+    END EACH
+END FUNCTION
+NOOP
+FUNCTION hub
+BEGIN
+    CALL send
+        PARAMETER dx 2 ;
+        PARAMETER place farm ;
+    CALL send
+        PARAMETER dx 4 ;
+        PARAMETER place mine ;
+    CALL send
+        PARAMETER dx 6 ;
+        PARAMETER place tower ;
+END FUNCTION

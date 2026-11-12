@@ -1,0 +1,6 @@
+function: show
+parameters:
+  name: alex
+  edge: '*'
+columns: 32
+rows: 8

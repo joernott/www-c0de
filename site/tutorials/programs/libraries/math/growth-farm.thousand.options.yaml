@@ -1,0 +1,3 @@
+function: digits
+parameters:
+  number: 1000

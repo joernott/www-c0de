@@ -1,0 +1,87 @@
+PROGRAM ring
+NOOP
+INCLUDE c0de/math
+INCLUDE c0de/minecraft
+STRUCT offset
+BEGIN
+    x INTEGER
+    z INTEGER
+END STRUCT
+NOOP
+FUNCTION points
+    PARAMETER radius INTEGER 3
+    RESULT spots ARRAY STRUCT offset
+BEGIN
+    VARIABLE steps INTEGER
+    VARIABLE angle FLOAT
+    VARIABLE cosine FLOAT
+    VARIABLE sine FLOAT
+    VARIABLE spot STRUCT offset
+    VARIABLE count INTEGER
+    VARIABLE last INTEGER
+    ASSIGN steps 8 * radius ;
+    FOR i INTEGER 0 ; steps - 1 ;
+    BEGIN
+        ASSIGN angle 2 * c0de/math/PI * i / steps ;
+        CALL c0de/math/COS
+            PARAMETER value angle ;
+            RESULT result cosine
+        CALL c0de/math/SIN
+            PARAMETER value angle ;
+            RESULT result sine
+        CALL c0de/math/ROUND
+            PARAMETER value radius * cosine ;
+            RESULT result spot.x
+        CALL c0de/math/ROUND
+            PARAMETER value radius * sine ;
+            RESULT result spot.z
+        CALL LEN
+            PARAMETER value spots ;
+            RESULT result count
+        IF count = 0 ;
+        BEGIN
+            ASSIGN spots[0] spot ;
+        END
+        ELSE
+        BEGIN
+            ASSIGN last count - 1 ;
+            IF spot ≠ spots[last] AND spot ≠ spots[0] ;
+            BEGIN
+                ASSIGN spots[count] spot ;
+            END IF
+        END IF
+    END FOR
+END FUNCTION
+NOOP
+FUNCTION draw
+    PARAMETER radius INTEGER 5
+    PARAMETER block STRING "minecraft:stone_bricks"
+BEGIN
+    VARIABLE spots ARRAY STRUCT offset
+    VARIABLE here STRUCT c0de/minecraft/POSITION
+    VARIABLE problem ERROR
+    VARIABLE placed INTEGER
+    VARIABLE skipped INTEGER
+    CALL points
+        PARAMETER radius radius ;
+        RESULT spots spots
+    ASSIGN here.y PID.y ;
+    EACH spot spots
+    BEGIN
+        ASSIGN here.x PID.x + spot.x ;
+        ASSIGN here.z PID.z + spot.z ;
+        CALL c0de/minecraft/PLACE_BLOCK problem
+            PARAMETER position here ;
+            PARAMETER id block ;
+        IF problem.code = 0 ;
+        BEGIN
+            ASSIGN placed placed + 1 ;
+        END
+        ELSE
+        BEGIN
+            ASSIGN skipped skipped + 1 ;
+        END IF
+    END EACH
+    CALL c0de/minecraft/SAY
+        PARAMETER message placed ⊕ " blocks placed, " ⊕ skipped ⊕ " spots were taken" ;
+END FUNCTION

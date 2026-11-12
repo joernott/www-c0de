@@ -1,0 +1,66 @@
+PROGRAM versioncheck
+NOOP
+INCLUDE c0de/strings
+INCLUDE c0de_net/http
+NOOP
+STRUCT releases
+BEGIN
+    c0de STRING
+    net STRING TAG(json: "c0de_net")
+END STRUCT
+NOOP
+FUNCTION compare
+    PARAMETER name STRING
+    PARAMETER installed STRING
+    PARAMETER latest STRING
+    RESULT current BOOLEAN
+BEGIN
+    ASSIGN current installed = latest ;
+    IF current ;
+    BEGIN
+        CALL COLOR
+            PARAMETER foreground COLOR_GREEN ;
+        CALL PRINT
+            PARAMETER value name ⊕ " " ⊕ installed ⊕ ": up to date" ;
+    END
+    ELSE
+    BEGIN
+        CALL COLOR
+            PARAMETER foreground COLOR_RED ;
+        CALL PRINT
+            PARAMETER value name ⊕ " " ⊕ installed ⊕ ": " ⊕ latest ⊕ " is out" ;
+    END IF
+    CALL COLOR
+        PARAMETER foreground COLOR_WHITE ;
+END FUNCTION
+NOOP
+FUNCTION check
+    RESULT current BOOLEAN
+BEGIN
+    VARIABLE api STRUCT c0de_net/http/HTTP_CONNECTION
+    VARIABLE answer STRING
+    VARIABLE latest STRUCT releases
+    VARIABLE netCurrent BOOLEAN
+    ASSIGN api.use_ssl TRUE ;
+    ASSIGN api.server "c0de.at" ;
+    ASSIGN api.timeout 10 ;
+    CALL c0de_net/http/HTTP_GET
+        PARAMETER connection api ;
+        PARAMETER endpoint "/api/version" ;
+        RESULT result answer
+    CALL c0de/strings/FROM_JSON
+        PARAMETER source answer ;
+        PARAMETER destination latest ;
+    CALL CLS
+    CALL compare
+        PARAMETER name "c0de" ;
+        PARAMETER installed C0DE_VERSION ;
+        PARAMETER latest latest.c0de ;
+        RESULT current current
+    CALL compare
+        PARAMETER name "c0de net" ;
+        PARAMETER installed C0DE_NET_VERSION ;
+        PARAMETER latest latest.net ;
+        RESULT current netCurrent
+    ASSIGN current current AND netCurrent ;
+END FUNCTION

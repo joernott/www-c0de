@@ -1,0 +1,4 @@
+function: height
+parameters:
+  length: 8
+  degrees: 45

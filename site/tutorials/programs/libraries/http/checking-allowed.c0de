@@ -1,0 +1,58 @@
+PROGRAM methodcheck
+NOOP
+INCLUDE c0de/strings
+INCLUDE c0de_net/http
+NOOP
+STRUCT request
+BEGIN
+    method STRING
+    path STRING
+END STRUCT
+NOOP
+FUNCTION ask
+    PARAMETER endpoint STRING "/api/tutorial/todo"
+    RESULT methods STRING
+    RESULT traced INTEGER
+BEGIN
+    VARIABLE api STRUCT c0de_net/http/HTTP_CONNECTION
+    VARIABLE problem ERROR
+    VARIABLE headers HASH STRING
+    VARIABLE answer STRING
+    VARIABLE seen STRUCT request
+    VARIABLE known BOOLEAN
+    ASSIGN api.use_ssl TRUE ;
+    ASSIGN api.server "c0de.at" ;
+    ASSIGN api.timeout 10 ;
+    CALL c0de_net/http/HTTP_OPTIONS
+        PARAMETER connection api ;
+        PARAMETER endpoint endpoint ;
+        RESULT headers headers
+    CALL HAS_KEY
+        PARAMETER hash headers ;
+        PARAMETER key "allow" ;
+        RESULT result known
+    ASSIGN methods "unknown" ;
+    IF known ;
+    BEGIN
+        ASSIGN methods headers["allow"] ;
+    END IF
+    CALL CLS
+    CALL PRINT
+        PARAMETER value "Allowed: " ⊕ methods ;
+    CALL c0de_net/http/HTTP_TRACE problem
+        PARAMETER connection api ;
+        PARAMETER endpoint endpoint ;
+        RESULT result answer
+        RESULT status traced
+    IF problem.code = 1000 ;
+    BEGIN
+        CALL PRINT
+            PARAMETER value "TRACE refused: " ⊕ problem.message ;
+        RETURN
+    END IF
+    CALL c0de/strings/FROM_JSON
+        PARAMETER source answer ;
+        PARAMETER destination seen ;
+    CALL PRINT
+        PARAMETER value "TRACE arrived as " ⊕ seen.method ⊕ " " ⊕ seen.path ;
+END FUNCTION

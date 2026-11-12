@@ -1,0 +1,41 @@
+PROGRAM wallclock
+NOOP
+INCLUDE c0de/time
+INCLUDE c0de/strings
+NOOP
+FUNCTION tick
+BEGIN
+    VARIABLE now TIME
+    VARIABLE part INTEGER
+    VARIABLE text STRING
+    VARIABLE digits STRING
+    CALL c0de/time/NOW
+        RESULT result now
+    CALL c0de/time/HOUR
+        PARAMETER time now ;
+        RESULT result part
+    CALL c0de/strings/FORMAT
+        PARAMETER value part ;
+        PARAMETER format "%02d" ;
+        RESULT result text
+    CALL c0de/time/MINUTE
+        PARAMETER time now ;
+        RESULT result part
+    CALL c0de/strings/FORMAT
+        PARAMETER value part ;
+        PARAMETER format ":%02d" ;
+        RESULT result digits
+    ASSIGN text text ⊕ digits ;
+    CALL c0de/time/SECOND
+        PARAMETER time now ;
+        RESULT result part
+    CALL c0de/strings/FORMAT
+        PARAMETER value part ;
+        PARAMETER format ":%02d" ;
+        RESULT result digits
+    CALL LOCATE
+        PARAMETER row 3 ;
+        PARAMETER column 12 ;
+    CALL PRINT
+        PARAMETER value text ⊕ digits ;
+END FUNCTION

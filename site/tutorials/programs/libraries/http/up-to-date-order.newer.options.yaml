@@ -1,0 +1,4 @@
+function: outdated
+parameters:
+  installed: '0.10.0'
+  latest: '0.9.0'

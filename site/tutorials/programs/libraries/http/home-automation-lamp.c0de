@@ -1,0 +1,53 @@
+PROGRAM homelamp
+NOOP
+INCLUDE c0de/minecraft
+INCLUDE c0de/strings
+INCLUDE c0de/time
+INCLUDE c0de_net/http
+NOOP
+FUNCTION send
+    PARAMETER token STRING
+    PARAMETER on BOOLEAN
+BEGIN
+    VARIABLE hub STRUCT c0de_net/http/HTTP_CONNECTION
+    VARIABLE state BOOLEAN TAG(json: "on")
+    VARIABLE data STRING
+    ASSIGN hub.server "homehub.local" ;
+    ASSIGN hub.port 8080 ;
+    ASSIGN hub.base_endpoint "/api" ;
+    ASSIGN hub.headers["Authorization"] "Bearer " ⊕ token ;
+    ASSIGN hub.headers["Content-Type"] "application/json" ;
+    ASSIGN hub.timeout 5 ;
+    ASSIGN state on ;
+    CALL c0de/strings/TO_JSON
+        PARAMETER value state ;
+        RESULT result data
+    CALL c0de_net/http/HTTP_PUT
+        PARAMETER connection hub ;
+        PARAMETER endpoint "/lamps/kitchen" ;
+        PARAMETER data data ;
+END FUNCTION
+NOOP
+FUNCTION switch
+    PARAMETER token STRING
+BEGIN
+    VARIABLE lever STRUCT c0de/minecraft/POSITION
+    VARIABLE on BOOLEAN TRUE
+    ASSIGN lever.x PID.x ;
+    ASSIGN lever.y PID.y + 1 ;
+    ASSIGN lever.z PID.z ;
+    CALL send
+        PARAMETER token token ;
+        PARAMETER on TRUE ;
+    WHILE on ;
+    BEGIN
+        CALL c0de/time/SLEEP
+            PARAMETER ticks 10 ;
+        CALL c0de/minecraft/GET_LEVER
+            PARAMETER position lever ;
+            RESULT result on
+    END WHILE
+    CALL send
+        PARAMETER token token ;
+        PARAMETER on FALSE ;
+END FUNCTION

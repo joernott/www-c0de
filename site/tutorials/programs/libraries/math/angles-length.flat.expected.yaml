@@ -1,0 +1,3 @@
+state: CRASHED
+error:
+  name: DIVISION_BY_ZERO

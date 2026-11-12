@@ -1,0 +1,74 @@
+PROGRAM itemtablestr
+NOOP
+INCLUDE c0de/strings
+INCLUDE c0de/time
+NOOP
+FUNCTION show
+BEGIN
+    VARIABLE stock HASH INTEGER
+    BEGIN
+        cobblestone 1234
+        diamond 7
+        oak_log 96
+        torch 320
+    END VARIABLE
+    VARIABLE today TIME
+    VARIABLE total INTEGER
+    VARIABLE line STRING
+    VARIABLE part STRING
+    CALL c0de/time/NOW
+        RESULT result today
+    CALL c0de/strings/FORMAT
+        PARAMETER value today ;
+        PARAMETER format "Stock on %tA, %tF at %tR" ;
+        RESULT result line
+    CALL CLS
+    CALL PRINT
+        PARAMETER value line ;
+    CALL PRINT
+        PARAMETER value "Item          Count  Stacks   Hex    Oct" ;
+    EACH item stock
+    BEGIN
+        CALL c0de/strings/FORMAT
+            PARAMETER value item ;
+            PARAMETER format "%-12s" ;
+            RESULT result line
+        CALL c0de/strings/STR
+            PARAMETER value stock[item] ;
+            RESULT result part
+        CALL c0de/strings/RIGHT
+            PARAMETER text "       " ⊕ part ;
+            PARAMETER length 7 ;
+            RESULT result part
+        ASSIGN line line ⊕ part ;
+        CALL c0de/strings/FORMAT
+            PARAMETER value stock[item] / 64 ;
+            PARAMETER format "%8.1f" ;
+            RESULT result part
+        ASSIGN line line ⊕ part ;
+        CALL c0de/strings/HEX
+            PARAMETER value stock[item] ;
+            RESULT result part
+        CALL c0de/strings/FORMAT
+            PARAMETER value part ;
+            PARAMETER format "%6s" ;
+            RESULT result part
+        ASSIGN line line ⊕ part ;
+        CALL c0de/strings/OCT
+            PARAMETER value stock[item] ;
+            RESULT result part
+        CALL c0de/strings/FORMAT
+            PARAMETER value part ;
+            PARAMETER format "%7s" ;
+            RESULT result part
+        CALL PRINT
+            PARAMETER value line ⊕ part ;
+        ASSIGN total total + stock[item] ;
+    END EACH
+    CALL c0de/strings/FORMAT
+        PARAMETER value total ;
+        PARAMETER format "Total %,13d" ;
+        RESULT result line
+    CALL PRINT
+        PARAMETER value line ;
+END FUNCTION

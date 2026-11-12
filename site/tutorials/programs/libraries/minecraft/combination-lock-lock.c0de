@@ -1,0 +1,98 @@
+PROGRAM combolock
+NOOP
+INCLUDE c0de/minecraft
+INCLUDE c0de/time
+NOOP
+VARIABLE secret ARRAY BOOLEAN
+BEGIN
+    TRUE FALSE TRUE TRUE
+END VARIABLE
+NOOP
+FUNCTION near
+    PARAMETER dx INTEGER
+    PARAMETER dy INTEGER
+    PARAMETER dz INTEGER
+    RESULT spot STRUCT c0de/minecraft/POSITION
+BEGIN
+    ASSIGN spot.x PID.x + dx ;
+    ASSIGN spot.y PID.y + dy ;
+    ASSIGN spot.z PID.z + dz ;
+END FUNCTION
+NOOP
+FUNCTION matches
+    PARAMETER levers ARRAY BOOLEAN
+    RESULT result BOOLEAN
+BEGIN
+    ASSIGN result TRUE ;
+    FOR i INTEGER 0 ; 3 ;
+    BEGIN
+        IF levers[i] ≠ secret[i] ;
+        BEGIN
+            ASSIGN result FALSE ;
+        END IF
+    END FOR
+END FUNCTION
+NOOP
+FUNCTION watch
+BEGIN
+    VARIABLE enter STRUCT c0de/minecraft/POSITION
+    VARIABLE lever STRUCT c0de/minecraft/POSITION
+    VARIABLE doorButton STRUCT c0de/minecraft/POSITION
+    VARIABLE pressed BOOLEAN
+    VARIABLE isOn BOOLEAN
+    VARIABLE levers ARRAY BOOLEAN
+    VARIABLE right BOOLEAN
+    CALL near
+        PARAMETER dx 7 ;
+        PARAMETER dy 0 ;
+        PARAMETER dz 0 ;
+        RESULT spot enter
+    CALL c0de/minecraft/GET_BUTTON
+        PARAMETER position enter ;
+        RESULT result pressed
+    IF NOT pressed ;
+    BEGIN
+        RETURN
+    END IF
+    FOR i INTEGER 0 ; 3 ;
+    BEGIN
+        CALL near
+            PARAMETER dx 2 + i ;
+            PARAMETER dy 0 ;
+            PARAMETER dz 0 ;
+            RESULT spot lever
+        CALL c0de/minecraft/GET_LEVER
+            PARAMETER position lever ;
+            RESULT result isOn
+        ASSIGN levers[i] isOn ;
+        CALL c0de/minecraft/SET_LEVER
+            PARAMETER position lever ;
+            PARAMETER on FALSE ;
+    END FOR
+    CALL matches
+        PARAMETER levers levers ;
+        RESULT result right
+    IF right ;
+    BEGIN
+        CALL near
+            PARAMETER dx 3 ;
+            PARAMETER dy 1 ;
+            PARAMETER dz -4 ;
+            RESULT spot doorButton
+        CALL c0de/minecraft/PRESS_BUTTON
+            PARAMETER position doorButton ;
+    END
+    ELSE
+    BEGIN
+        CALL c0de/minecraft/SAY
+            PARAMETER message "Wrong combination." ;
+    END IF
+    WHILE pressed ;
+    BEGIN
+        CALL c0de/time/SLEEP
+            PARAMETER ticks 5 ;
+        CALL c0de/minecraft/GET_BUTTON
+            PARAMETER position enter ;
+            RESULT result pressed
+    END WHILE
+END FUNCTION

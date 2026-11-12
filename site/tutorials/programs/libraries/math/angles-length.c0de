@@ -1,0 +1,17 @@
+PROGRAM ramplength
+NOOP
+INCLUDE c0de/math
+NOOP
+FUNCTION length
+    PARAMETER height INTEGER
+    PARAMETER degrees FLOAT 30.0
+    RESULT blocks INTEGER
+BEGIN
+    VARIABLE tangent FLOAT
+    CALL c0de/math/TAN
+        PARAMETER value degrees * c0de/math/PI / 180 ;
+        RESULT result tangent
+    CALL c0de/math/ROUND
+        PARAMETER value height / tangent ;
+        RESULT result blocks
+END FUNCTION

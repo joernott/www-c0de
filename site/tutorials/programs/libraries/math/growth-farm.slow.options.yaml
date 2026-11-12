@@ -1,0 +1,5 @@
+function: daysUntil
+parameters:
+  start: 10
+  factor: 1.5
+  goal: 100

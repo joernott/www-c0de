@@ -1,0 +1,36 @@
+PROGRAM pencount
+NOOP
+INCLUDE c0de/minecraft
+NOOP
+VARIABLE animals ARRAY STRING
+BEGIN
+    "sheep" "cow" "pig" "chicken"
+END VARIABLE
+NOOP
+FUNCTION count
+BEGIN
+    VARIABLE pen STRUCT c0de/minecraft/POSITION
+    VARIABLE found ARRAY STRUCT c0de/minecraft/ENTITY
+    VARIABLE number INTEGER
+    VARIABLE total INTEGER
+    ASSIGN pen.x PID.x ;
+    ASSIGN pen.y PID.y ;
+    ASSIGN pen.z PID.z + 5 ;
+    CALL CLS
+    EACH animal animals
+    BEGIN
+        CALL c0de/minecraft/FIND_ENTITIES
+            PARAMETER position pen ;
+            PARAMETER radius 4 ;
+            PARAMETER type "minecraft:" ⊕ animal ;
+            RESULT result found
+        CALL LEN
+            PARAMETER value found ;
+            RESULT result number
+        ASSIGN total total + number ;
+        CALL PRINT
+            PARAMETER value animal ⊕ ": " ⊕ number ;
+    END EACH
+    CALL PRINT
+        PARAMETER value "Animals: " ⊕ total ;
+END FUNCTION

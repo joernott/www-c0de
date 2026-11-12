@@ -1,0 +1,37 @@
+PROGRAM penguard
+NOOP
+INCLUDE c0de/minecraft
+NOOP
+VARIABLE animals ARRAY STRING
+BEGIN
+    "sheep" "cow" "pig" "chicken"
+END VARIABLE
+NOOP
+FUNCTION guard
+    PARAMETER expected INTEGER 12
+BEGIN
+    VARIABLE pen STRUCT c0de/minecraft/POSITION
+    VARIABLE found ARRAY STRUCT c0de/minecraft/ENTITY
+    VARIABLE number INTEGER
+    VARIABLE total INTEGER
+    ASSIGN pen.x PID.x ;
+    ASSIGN pen.y PID.y ;
+    ASSIGN pen.z PID.z + 5 ;
+    EACH animal animals
+    BEGIN
+        CALL c0de/minecraft/FIND_ENTITIES
+            PARAMETER position pen ;
+            PARAMETER radius 4 ;
+            PARAMETER type "minecraft:" ⊕ animal ;
+            RESULT result found
+        CALL LEN
+            PARAMETER value found ;
+            RESULT result number
+        ASSIGN total total + number ;
+    END EACH
+    IF total < expected ;
+    BEGIN
+        CALL c0de/minecraft/SAY
+            PARAMETER message ( expected - total ) ⊕ " animals have escaped from the pen!" ;
+    END IF
+END FUNCTION

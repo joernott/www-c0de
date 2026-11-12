@@ -1,0 +1,79 @@
+PROGRAM highscoressafe
+NOOP
+INCLUDE c0de/strings
+NOOP
+STRUCT entry
+BEGIN
+    name STRING
+    points INTEGER
+END STRUCT
+NOOP
+CONSTANT PLACES INTEGER 5
+NOOP
+FUNCTION add
+    PARAMETER scores STRING "[]"
+    RESULT yaml STRING
+BEGIN
+    VARIABLE table ARRAY STRUCT entry
+    VARIABLE player STRING
+    VARIABLE points INTEGER
+    VARIABLE newcomer STRUCT entry
+    VARIABLE place INTEGER
+    VARIABLE count INTEGER
+    VARIABLE problem ERROR
+    CALL CLS
+    CALL c0de/strings/FROM_JSON problem
+        PARAMETER source scores ;
+        PARAMETER destination table ;
+    IF problem.code ≠ 0 ;
+    BEGIN
+        CALL PRINT
+            PARAMETER value "? Unreadable scores, new table" ;
+    END IF
+    CALL PRINT
+        PARAMETER value "Name?" ;
+    CALL INPUT
+        PARAMETER variable player ;
+    CALL PRINT
+        PARAMETER value "Points?" ;
+    CALL INPUT
+        PARAMETER variable points ;
+    ASSIGN newcomer.name player ;
+    ASSIGN newcomer.points points ;
+    EACH e table
+    BEGIN
+        IF e.points ≥ points ;
+        BEGIN
+            ASSIGN place place + 1 ;
+        END IF
+    END EACH
+    CALL INSERT
+        PARAMETER array table ;
+        PARAMETER index place ;
+        PARAMETER value newcomer ;
+        RESULT result table
+    CALL LEN
+        PARAMETER value table ;
+        RESULT result count
+    IF count > PLACES ;
+    BEGIN
+        CALL REMOVE
+            PARAMETER container table ;
+            PARAMETER index PLACES ;
+            RESULT result table
+    END IF
+    CALL c0de/strings/TO_JSON
+        PARAMETER value table ;
+        RESULT result scores
+    CALL WRITE
+        PARAMETER value scores ;
+        PARAMETER name "scores" ;
+    CALL c0de/strings/TO_YAML
+        PARAMETER value table ;
+        RESULT result yaml
+    EACH e table
+    BEGIN
+        CALL PRINT
+            PARAMETER value e.name ⊕ " " ⊕ e.points ;
+    END EACH
+END FUNCTION

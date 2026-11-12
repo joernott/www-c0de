@@ -1,0 +1,11 @@
+state: FINISHED
+screen:
+  - Name?
+  - Points?
+  - Alex 300
+  - Steve 200
+  - Mia 200
+  - Kai 150
+  - Zoe 90
+written:
+  - scores: '[{"name":"Alex","points":300},{"name":"Steve","points":200},{"name":"Mia","points":200},{"name":"Kai","points":150},{"name":"Zoe","points":90}]'

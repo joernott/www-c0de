@@ -8,7 +8,7 @@ import { join } from 'node:path'
 import { parse } from 'yaml'
 import type { Language } from '../../.vitepress/theme/language.ts'
 import type { Chapter, Localized, MainTab, Page } from '../../.vitepress/theme/navigation.ts'
-import { ImportError } from './build.ts'
+import { ImportError, type Page as ImportedPage } from './build.ts'
 
 export interface TutorialsSpec {
   tab: { id: string; label: Localized; color: string; link: string }
@@ -69,5 +69,71 @@ export function tutorialsTab(site: string, languages: Language[]): MainTab {
       }))
       return { label: chapter.label, link: chapter.link, ...(pages.length > 0 && { pages }) }
     }),
+  }
+}
+
+// The recipes of "Libraries in practice" are the lessons below this link.
+const RECIPES = '/tutorials/libraries/'
+
+const usedIn: Localized = { en: 'Used in the tutorials', de: 'In den Tutorials' }
+
+// recipesOf reads the recipes of the tutorials and returns, for every page they link to (by its
+// link without the language), the recipes that link to it, in the order of the tutorials.
+export function recipesOf(
+  site: string,
+  languages: Language[],
+): Map<string, { link: string; titles: Localized }[]> {
+  const spec = parse(
+    readFileSync(join(site, 'tutorials', 'tutorials.yaml'), 'utf-8'),
+  ) as TutorialsSpec
+  const base = languages[0]!
+  const result = new Map<string, { link: string; titles: Localized }[]>()
+  for (const chapter of spec.chapters.filter((c) => c.link.startsWith(RECIPES))) {
+    for (const lesson of chapter.lessons ?? []) {
+      const link = chapter.link + lesson
+      const titles: Partial<Record<Language, string>> = {}
+      const targets = new Set<string>()
+      for (const language of languages) {
+        const file = pageFile(site, link, language, base)
+        if (!existsSync(file)) continue
+        titles[language] = title(file)
+        for (const match of readFileSync(file, 'utf-8').matchAll(/\]\((\/[^)\s#]*)/g)) {
+          const target = match[1]!.replace(/\/$/, '')
+          const prefix = languages.find((l) => l !== base && target.startsWith(`/${l}/`))
+          targets.add(prefix ? target.slice(prefix.length + 1) : target)
+        }
+      }
+      for (const target of targets) {
+        const list = result.get(target) ?? []
+        list.push({ link, titles: titles as Localized })
+        result.set(target, list)
+      }
+    }
+  }
+  return result
+}
+
+// addRecipes lists on the page of every library function the recipes that use it (task 9.7),
+// and fails if a function has none: every function of every library must appear in a recipe.
+export function addRecipes(site: string, languages: Language[], pages: ImportedPage[]) {
+  const recipes = recipesOf(site, languages)
+  const base = languages[0]!
+  const missing = new Set<string>()
+  for (const page of pages) {
+    if (!page.function || !page.link) continue
+    const used = recipes.get(page.link)
+    if (!used) {
+      missing.add(page.link)
+      continue
+    }
+    const language = languages.find((l) => l !== base && page.file.startsWith(`${l}/`)) ?? base
+    const prefix = language === base ? '' : `/${language}`
+    const items = used.map((r) => `- [${r.titles[language] ?? r.titles[base]}](${prefix}${r.link})`)
+    page.content = `${page.content.trimEnd()}\n\n## ${usedIn[language]}\n\n${items.join('\n')}\n`
+  }
+  if (missing.size > 0) {
+    throw new ImportError(
+      `these functions appear in no recipe of the tutorials (${RECIPES}): ${[...missing].sort().join(', ')}`,
+    )
   }
 }

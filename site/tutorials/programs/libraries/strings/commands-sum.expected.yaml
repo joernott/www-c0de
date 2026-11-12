@@ -1,0 +1,7 @@
+state: FINISHED
+screen:
+  - 'Commands: say <text>, sum <numbers>, quit'
+  - = 10
+  - = 5
+  - '? not a whole number: x'
+  - Bye!

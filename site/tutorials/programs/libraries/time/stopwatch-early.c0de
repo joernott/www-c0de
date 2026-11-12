@@ -1,0 +1,84 @@
+PROGRAM reaction
+NOOP
+INCLUDE c0de/time
+INCLUDE c0de/strings
+INCLUDE c0de/math
+NOOP
+FUNCTION rate
+    PARAMETER seconds FLOAT
+    RESULT verdict STRING
+BEGIN
+    ASSIGN verdict "Wake up!" ;
+    IF seconds < 0.5 ;
+    BEGIN
+        ASSIGN verdict "Good" ;
+    END IF
+    IF seconds < 0.3 ;
+    BEGIN
+        ASSIGN verdict "Lightning fast!" ;
+    END IF
+END FUNCTION
+NOOP
+FUNCTION react
+BEGIN
+    VARIABLE chance FLOAT
+    VARIABLE wait INTEGER
+    VARIABLE key STRING
+    VARIABLE start FLOAT
+    VARIABLE stop FLOAT
+    VARIABLE seconds FLOAT
+    VARIABLE text STRING
+    VARIABLE verdict STRING
+    CALL CLS
+    CALL PRINT
+        PARAMETER value "Press a key to start" ;
+    REPEAT
+    BEGIN
+        CALL INKEY
+            RESULT result key
+    END REPEAT key = "" ;
+    CALL PRINT
+        PARAMETER value "Wait for GO!" ;
+    CALL c0de/math/RANDOM
+        RESULT result chance
+    CALL c0de/math/INT
+        PARAMETER value 40 + chance * 60 ;
+        RESULT result wait
+    CALL c0de/time/SLEEP
+        PARAMETER ticks wait ;
+    CALL INKEY
+        RESULT result key
+    IF key ≠ "" ;
+    BEGIN
+        CALL PRINT
+            PARAMETER value "Too early!" ;
+        RETURN
+    END IF
+    CALL PRINT
+        PARAMETER value "GO!" ;
+    CALL c0de/time/TIMER
+        RESULT result start
+    REPEAT
+    BEGIN
+        CALL INKEY
+            RESULT result key
+    END REPEAT key = "" ;
+    CALL c0de/time/TIMER
+        RESULT result stop
+    IF stop < start ;
+    BEGIN
+        ASSIGN stop stop + 86400 ;
+    END IF
+    ASSIGN seconds stop - start ;
+    CALL c0de/strings/FORMAT
+        PARAMETER value seconds ;
+        PARAMETER format "%.3f" ;
+        RESULT result text
+    CALL rate
+        PARAMETER seconds seconds ;
+        RESULT verdict verdict
+    CALL PRINT
+        PARAMETER value "Your time: " ⊕ text ⊕ " s" ;
+    CALL PRINT
+        PARAMETER value verdict ;
+END FUNCTION

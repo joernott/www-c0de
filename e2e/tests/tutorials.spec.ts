@@ -56,3 +56,13 @@ test('the pages of the tutorials are accessible', async ({ page }) => {
     expect(results.violations, path).toEqual([])
   }
 })
+
+test('the page of a library function links to the recipes that use it', async ({ page }) => {
+  await page.goto('/c0de/math/random')
+  const used = page.getByRole('heading', { name: 'Used in the tutorials' })
+  await expect(used).toBeVisible()
+  await page.locator('.content a[href="/tutorials/libraries/c0de/math/dice"]').click()
+  await expect(page).toHaveURL(/\/tutorials\/libraries\/c0de\/math\/dice$/)
+  await page.goto('/de/c0de/math/random')
+  await expect(page.getByRole('heading', { name: 'In den Tutorials' })).toBeVisible()
+})

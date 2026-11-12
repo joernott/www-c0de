@@ -1,0 +1,36 @@
+PROGRAM statusboard
+NOOP
+INCLUDE c0de_net/http
+NOOP
+VARIABLE servers ARRAY STRING
+BEGIN
+    "c0de.at" "api.open-meteo.com"
+END VARIABLE
+NOOP
+FUNCTION checkAll
+BEGIN
+    VARIABLE down INTEGER
+    VARIABLE api STRUCT c0de_net/http/HTTP_CONNECTION
+    VARIABLE problem ERROR
+    ASSIGN api.use_ssl TRUE ;
+    ASSIGN api.timeout 5 ;
+    CALL CLS
+    EACH server servers
+    BEGIN
+        ASSIGN api.server server ;
+        CALL c0de_net/http/HTTP_HEAD problem
+            PARAMETER connection api ;
+        IF problem.code = 0 OR problem.code = 1000 ;
+        BEGIN
+            CALL PRINT
+                PARAMETER value server ⊕ ": up" ;
+        END
+        ELSE
+        BEGIN
+            CALL PRINT
+                PARAMETER value server ⊕ ": DOWN" ;
+            ASSIGN down down + 1 ;
+        END IF
+    END EACH
+    EXIT down ;
+END FUNCTION

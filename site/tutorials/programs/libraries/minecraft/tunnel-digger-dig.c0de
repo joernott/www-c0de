@@ -1,0 +1,70 @@
+PROGRAM tunneldigger
+NOOP
+INCLUDE c0de/minecraft
+NOOP
+FUNCTION decide
+    PARAMETER id STRING
+    RESULT action STRING
+BEGIN
+    ASSIGN action "mine" ;
+    IF id = "minecraft:air" OR id = "minecraft:cave_air" ;
+    BEGIN
+        ASSIGN action "skip" ;
+    END IF
+    IF id = "minecraft:water" OR id = "minecraft:lava" OR id = "minecraft:bedrock" ;
+    BEGIN
+        ASSIGN action "stop" ;
+    END IF
+END FUNCTION
+NOOP
+FUNCTION dig
+    PARAMETER length INTEGER 10
+BEGIN
+    VARIABLE tools STRUCT c0de/minecraft/POSITION
+    VARIABLE drops STRUCT c0de/minecraft/POSITION
+    VARIABLE spot STRUCT c0de/minecraft/POSITION
+    VARIABLE id STRING
+    VARIABLE action STRING
+    VARIABLE problem ERROR
+    ASSIGN tools.x PID.x ;
+    ASSIGN tools.y PID.y ;
+    ASSIGN tools.z PID.z - 2 ;
+    ASSIGN drops tools ;
+    ASSIGN drops.z PID.z + 2 ;
+    ASSIGN spot.z PID.z ;
+    FOR i INTEGER 1 ; length ;
+    BEGIN
+        FOR dy INTEGER 0 ; 1 ;
+        BEGIN
+            ASSIGN spot.x PID.x + 1 + i ;
+            ASSIGN spot.y PID.y + dy ;
+            CALL c0de/minecraft/GET_BLOCK
+                PARAMETER position spot ;
+                RESULT id id
+            CALL decide
+                PARAMETER id id ;
+                RESULT action action
+            IF action = "stop" ;
+            BEGIN
+                CALL c0de/minecraft/SAY
+                    PARAMETER message "Stopped after " ⊕ ( i - 1 ) ⊕ " blocks: " ⊕ id ;
+                RETURN
+            END IF
+            IF action = "mine" ;
+            BEGIN
+                CALL c0de/minecraft/MINE_BLOCK problem
+                    PARAMETER position spot ;
+                    PARAMETER tool_inventory tools ;
+                    PARAMETER output_inventory drops ;
+                IF problem.code ≠ 0 ;
+                BEGIN
+                    CALL c0de/minecraft/SAY
+                        PARAMETER message "Stopped after " ⊕ ( i - 1 ) ⊕ " blocks: " ⊕ problem.message ;
+                    RETURN
+                END IF
+            END IF
+        END FOR
+    END FOR
+    CALL c0de/minecraft/SAY
+        PARAMETER message "The tunnel is " ⊕ length ⊕ " blocks long." ;
+END FUNCTION

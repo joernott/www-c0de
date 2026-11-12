@@ -1,0 +1,3 @@
+function: check
+parameters:
+  endpoint: /api/nothing

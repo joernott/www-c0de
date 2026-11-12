@@ -1,0 +1,39 @@
+PROGRAM todocleanup
+NOOP
+INCLUDE c0de/strings
+INCLUDE c0de_net/http
+NOOP
+STRUCT todo
+BEGIN
+    id INTEGER
+    title STRING
+    done BOOLEAN
+END STRUCT
+NOOP
+FUNCTION cleanup
+    RESULT removed INTEGER
+BEGIN
+    VARIABLE api STRUCT c0de_net/http/HTTP_CONNECTION
+    VARIABLE answer STRING
+    VARIABLE list ARRAY STRUCT todo
+    ASSIGN api.use_ssl TRUE ;
+    ASSIGN api.server "c0de.at" ;
+    ASSIGN api.base_endpoint "/api/tutorial/todo" ;
+    ASSIGN api.timeout 10 ;
+    CALL c0de_net/http/HTTP_GET
+        PARAMETER connection api ;
+        RESULT result answer
+    CALL c0de/strings/FROM_JSON
+        PARAMETER source answer ;
+        PARAMETER destination list ;
+    EACH entry list
+    BEGIN
+        IF entry.done ;
+        BEGIN
+            CALL c0de_net/http/HTTP_DELETE
+                PARAMETER connection api ;
+                PARAMETER endpoint "/" ⊕ entry.id ;
+            ASSIGN removed removed + 1 ;
+        END IF
+    END EACH
+END FUNCTION

@@ -1,0 +1,6 @@
+results:
+  methods: GET, HEAD, POST, OPTIONS
+  traced: 405
+screen:
+  - 'Allowed: GET, HEAD, POST, OPTIONS'
+  - 'TRACE refused: 405 Method Not Allowed'

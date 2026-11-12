@@ -1,0 +1,3 @@
+results:
+  withInt: [46, 27, 47]
+  withFix: [0, 73, 47]

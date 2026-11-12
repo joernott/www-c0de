@@ -1,0 +1,103 @@
+PROGRAM nameboardborder
+NOOP
+INCLUDE c0de/strings
+INCLUDE c0de/math
+NOOP
+CONSTANT WIDTH INTEGER 32
+NOOP
+FUNCTION center
+    PARAMETER text STRING
+    RESULT result STRING
+BEGIN
+    VARIABLE inner INTEGER
+    VARIABLE length INTEGER
+    VARIABLE before INTEGER
+    VARIABLE left STRING
+    VARIABLE right STRING
+    ASSIGN inner WIDTH - 2 ;
+    CALL LEN
+        PARAMETER value text ;
+        RESULT result length
+    IF length > inner ;
+    BEGIN
+        CALL c0de/strings/LEFT
+            PARAMETER text text ;
+            PARAMETER length inner - 3 ;
+            RESULT result text
+        ASSIGN text text ⊕ "..." ;
+        ASSIGN length inner ;
+    END IF
+    CALL c0de/math/DIV
+        PARAMETER dividend inner - length ;
+        PARAMETER divisor 2 ;
+        RESULT result before
+    CALL c0de/strings/SPACE
+        PARAMETER count before ;
+        RESULT result left
+    CALL c0de/strings/SPACE
+        PARAMETER count inner - length - before ;
+        RESULT result right
+    ASSIGN result "|" ⊕ left ⊕ text ⊕ right ⊕ "|" ;
+END FUNCTION
+NOOP
+FUNCTION show
+    PARAMETER name STRING
+    PARAMETER title STRING "Welcome to the base of"
+    PARAMETER edge CHAR '='
+BEGIN
+    VARIABLE border STRING
+    VARIABLE line STRING
+    VARIABLE first STRING
+    VARIABLE rest STRING
+    VARIABLE length INTEGER
+    CALL c0de/strings/FILL
+        PARAMETER count WIDTH - 2 ;
+        PARAMETER char edge ;
+        RESULT result border
+    ASSIGN border "+" ⊕ border ⊕ "+" ;
+    CALL c0de/strings/UCASE
+        PARAMETER text title ;
+        RESULT result title
+    CALL LEN
+        PARAMETER value name ;
+        RESULT result length
+    CALL c0de/strings/LEFT
+        PARAMETER text name ;
+        PARAMETER length 1 ;
+        RESULT result first
+    CALL c0de/strings/UCASE
+        PARAMETER text first ;
+        RESULT result first
+    CALL c0de/strings/RIGHT
+        PARAMETER text name ;
+        PARAMETER length length - 1 ;
+        RESULT result rest
+    CALL c0de/strings/LCASE
+        PARAMETER text rest ;
+        RESULT result rest
+    CALL CLS
+    CALL PRINT
+        PARAMETER value border ;
+    CALL center
+        PARAMETER text "" ;
+        RESULT result line
+    CALL PRINT
+        PARAMETER value line ;
+    CALL center
+        PARAMETER text title ;
+        RESULT result line
+    CALL PRINT
+        PARAMETER value line ;
+    CALL center
+        PARAMETER text first ⊕ rest ;
+        RESULT result line
+    CALL PRINT
+        PARAMETER value line ;
+    CALL center
+        PARAMETER text "" ;
+        RESULT result line
+    CALL PRINT
+        PARAMETER value line ;
+    CALL PRINT
+        PARAMETER value border ;
+END FUNCTION

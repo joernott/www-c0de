@@ -1,0 +1,30 @@
+PROGRAM sortrules
+NOOP
+VARIABLE blocks ARRAY STRING
+BEGIN
+    "minecraft:cobblestone" "minecraft:dirt" "minecraft:sand" "minecraft:gravel"
+END VARIABLE
+VARIABLE food ARRAY STRING
+BEGIN
+    "minecraft:bread" "minecraft:apple" "minecraft:carrot" "minecraft:potato"
+END VARIABLE
+NOOP
+FUNCTION chestFor
+    PARAMETER id STRING
+    RESULT chest INTEGER
+BEGIN
+    EACH name blocks
+    BEGIN
+        IF name = id ;
+        BEGIN
+            ASSIGN chest 1 ;
+        END IF
+    END EACH
+    EACH name food
+    BEGIN
+        IF name = id ;
+        BEGIN
+            ASSIGN chest 2 ;
+        END IF
+    END EACH
+END FUNCTION

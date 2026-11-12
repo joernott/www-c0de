@@ -1,0 +1,5 @@
+function: terminal
+input:
+  - SAY Hello
+  - Sum 3 4
+  - QUIT

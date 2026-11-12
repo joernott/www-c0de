@@ -1,0 +1,16 @@
+PROGRAM tunnelrules
+NOOP
+FUNCTION decide
+    PARAMETER id STRING
+    RESULT action STRING
+BEGIN
+    ASSIGN action "mine" ;
+    IF id = "minecraft:air" OR id = "minecraft:cave_air" ;
+    BEGIN
+        ASSIGN action "skip" ;
+    END IF
+    IF id = "minecraft:water" OR id = "minecraft:lava" OR id = "minecraft:bedrock" ;
+    BEGIN
+        ASSIGN action "stop" ;
+    END IF
+END FUNCTION

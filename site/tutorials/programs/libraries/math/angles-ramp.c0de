@@ -1,0 +1,42 @@
+PROGRAM ramps
+NOOP
+INCLUDE c0de/math
+NOOP
+FUNCTION height
+    PARAMETER length INTEGER 10
+    PARAMETER degrees FLOAT 30.0
+    RESULT rise FLOAT
+    RESULT blocks INTEGER
+BEGIN
+    VARIABLE tangent FLOAT
+    CALL c0de/math/TAN
+        PARAMETER value degrees * c0de/math/PI / 180 ;
+        RESULT result tangent
+    ASSIGN rise length * tangent ;
+    CALL c0de/math/ROUND
+        PARAMETER value rise ;
+        RESULT result blocks
+    CALL PRINT
+        PARAMETER value length ⊕ " long at " ⊕ degrees ⊕ "°: " ⊕ blocks ⊕ " blocks high" ;
+END FUNCTION
+NOOP
+FUNCTION slope
+    PARAMETER run INTEGER
+    PARAMETER rise INTEGER
+    RESULT degrees INTEGER
+BEGIN
+    VARIABLE angle FLOAT
+    IF run = 0 ;
+    BEGIN
+        ASSIGN degrees 90 ;
+        RETURN
+    END IF
+    CALL c0de/math/ATN
+        PARAMETER value rise / run ;
+        RESULT result angle
+    CALL c0de/math/ROUND
+        PARAMETER value angle * 180 / c0de/math/PI ;
+        RESULT result degrees
+    CALL PRINT
+        PARAMETER value rise ⊕ " up over " ⊕ run ⊕ ": " ⊕ degrees ⊕ "°" ;
+END FUNCTION

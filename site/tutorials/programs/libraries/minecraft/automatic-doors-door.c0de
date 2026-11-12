@@ -1,0 +1,76 @@
+PROGRAM autodoor
+NOOP
+INCLUDE c0de/minecraft
+INCLUDE c0de/time
+NOOP
+FUNCTION near
+    PARAMETER dx INTEGER
+    PARAMETER dy INTEGER
+    PARAMETER dz INTEGER
+    RESULT spot STRUCT c0de/minecraft/POSITION
+BEGIN
+    ASSIGN spot.x PID.x + dx ;
+    ASSIGN spot.y PID.y + dy ;
+    ASSIGN spot.z PID.z + dz ;
+END FUNCTION
+NOOP
+FUNCTION someone
+    RESULT result BOOLEAN
+BEGIN
+    VARIABLE plate STRUCT c0de/minecraft/POSITION
+    VARIABLE outside INTEGER
+    VARIABLE inside INTEGER
+    CALL near
+        PARAMETER dx 0 ;
+        PARAMETER dy 0 ;
+        PARAMETER dz -2 ;
+        RESULT spot plate
+    CALL c0de/minecraft/GET_PRESSURE_PLATE
+        PARAMETER position plate ;
+        RESULT result outside
+    CALL near
+        PARAMETER dx 0 ;
+        PARAMETER dy 0 ;
+        PARAMETER dz -6 ;
+        RESULT spot plate
+    CALL c0de/minecraft/GET_PRESSURE_PLATE
+        PARAMETER position plate ;
+        RESULT result inside
+    ASSIGN result outside > 0 OR inside > 0 ;
+END FUNCTION
+NOOP
+FUNCTION watch
+BEGIN
+    VARIABLE door STRUCT c0de/minecraft/POSITION
+    VARIABLE isOpen BOOLEAN
+    VARIABLE waiting BOOLEAN
+    CALL near
+        PARAMETER dx 0 ;
+        PARAMETER dy 0 ;
+        PARAMETER dz -4 ;
+        RESULT spot door
+    CALL c0de/minecraft/GET_OPEN
+        PARAMETER position door ;
+        RESULT result isOpen
+    CALL someone
+        RESULT result waiting
+    IF waiting AND NOT isOpen ;
+    BEGIN
+        CALL c0de/minecraft/SET_OPEN
+            PARAMETER position door ;
+            PARAMETER open TRUE ;
+    END IF
+    IF isOpen AND NOT waiting ;
+    BEGIN
+        CALL c0de/time/SLEEP
+            PARAMETER ticks 40 ;
+        CALL someone
+            RESULT result waiting
+        IF NOT waiting ;
+        BEGIN
+            CALL c0de/minecraft/SET_OPEN
+                PARAMETER position door ;
+                PARAMETER open FALSE ;
+        END IF
+    END IF
+END FUNCTION

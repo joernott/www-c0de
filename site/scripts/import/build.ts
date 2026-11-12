@@ -24,6 +24,8 @@ import { version, type Config, type TabSpec } from './sources.ts'
 export interface Page {
   file: string // relative to the site folder, e.g. de/c0de/math/abs.md
   content: string
+  link?: string // the link of the page without the language, e.g. /c0de/math/abs
+  function?: true // the page of a library function
 }
 
 export interface Image {
@@ -102,13 +104,19 @@ export function build(
 ): Output {
   const english = new Files(config, folders, 'en')
   const planned = plan(config, english)
+  const functions = new Set(planned.filter((p) => p.function).map((p) => p.link))
   const pages: Page[] = []
   const images = new Map<string, Image>()
   const labels = new Map<string, Localized>()
   for (const language of languages) {
     const files = language === 'en' ? english : new Files(config, folders, language)
     for (const page of render(config, planned, files, language, images)) {
-      pages.push({ file: fileOf(pathIn(page.link, language)), content: page.content })
+      pages.push({
+        file: fileOf(pathIn(page.link, language)),
+        content: page.content,
+        link: page.link,
+        ...(functions.has(page.link) && { function: true as const }),
+      })
       const label = labels.get(page.link) ?? { en: page.title }
       label[language] = page.title
       labels.set(page.link, label)

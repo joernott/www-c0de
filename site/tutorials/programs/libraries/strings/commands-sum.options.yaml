@@ -1,0 +1,6 @@
+function: terminal
+input:
+  - sum 1 2 3 4
+  - sum 5
+  - sum 1 x 3
+  - quit

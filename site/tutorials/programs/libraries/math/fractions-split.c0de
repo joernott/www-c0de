@@ -1,0 +1,25 @@
+PROGRAM fairsplit
+NOOP
+INCLUDE c0de/math
+NOOP
+FUNCTION split
+    PARAMETER items INTEGER
+    PARAMETER players INTEGER
+    RESULT shares ARRAY INTEGER
+BEGIN
+    VARIABLE each INTEGER
+    VARIABLE rest INTEGER
+    CALL c0de/math/DIV
+        PARAMETER dividend items ;
+        PARAMETER divisor players ;
+        RESULT result each
+    ASSIGN rest items \ players ;
+    FOR i INTEGER 0 ; players - 1 ;
+    BEGIN
+        ASSIGN shares[i] each ;
+        IF i < rest ;
+        BEGIN
+            ASSIGN shares[i] each + 1 ;
+        END IF
+    END FOR
+END FUNCTION

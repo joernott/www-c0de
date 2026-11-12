@@ -1,0 +1,3 @@
+function: why
+parameters:
+  endpoint: /api/version

@@ -1,0 +1,51 @@
+PROGRAM statuslamp
+NOOP
+INCLUDE c0de/strings
+INCLUDE c0de_net/http
+NOOP
+STRUCT page
+BEGIN
+    type STRING TAG(json: "content-type")
+    changed STRING TAG(json: "last-modified")
+END STRUCT
+NOOP
+FUNCTION check
+    PARAMETER server STRING "c0de.at"
+    PARAMETER endpoint STRING "/"
+BEGIN
+    VARIABLE status INTEGER
+    VARIABLE api STRUCT c0de_net/http/HTTP_CONNECTION
+    VARIABLE problem ERROR
+    VARIABLE answer STRING
+    VARIABLE info STRUCT page
+    ASSIGN api.use_ssl TRUE ;
+    ASSIGN api.server server ;
+    ASSIGN api.timeout 5 ;
+    CALL c0de_net/http/HTTP_HEAD problem
+        PARAMETER connection api ;
+        PARAMETER endpoint endpoint ;
+        RESULT result answer
+        RESULT status status
+    CALL CLS
+    CALL PRINT
+        PARAMETER value server ⊕ endpoint ;
+    IF problem.code ≠ 0 AND problem.code ≠ 1000 ;
+    BEGIN
+        CALL PRINT
+            PARAMETER value "DOWN: " ⊕ problem.message ;
+        EXIT 2 ;
+    END IF
+    CALL c0de/strings/FROM_JSON
+        PARAMETER source answer ;
+        PARAMETER destination info ;
+    CALL PRINT
+        PARAMETER value "Status " ⊕ status ;
+    CALL PRINT
+        PARAMETER value info.type ;
+    CALL PRINT
+        PARAMETER value info.changed ;
+    IF problem.code = 1000 ;
+    BEGIN
+        EXIT 1 ;
+    END IF
+END FUNCTION

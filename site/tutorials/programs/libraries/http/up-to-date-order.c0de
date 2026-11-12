@@ -1,0 +1,50 @@
+PROGRAM versionorder
+NOOP
+INCLUDE c0de/strings
+NOOP
+FUNCTION number
+    PARAMETER version STRING
+    RESULT result FLOAT
+BEGIN
+    VARIABLE rest STRING
+    VARIABLE piece STRING
+    VARIABLE dot INTEGER
+    VARIABLE part FLOAT
+    ASSIGN rest version ⊕ "." ;
+    FOR i INTEGER 1 ; 3 ;
+    BEGIN
+        CALL c0de/strings/INSTR
+            PARAMETER text rest ;
+            PARAMETER search "." ;
+            RESULT result dot
+        CALL c0de/strings/MID
+            PARAMETER text rest ;
+            PARAMETER start 0 ;
+            PARAMETER length dot ;
+            RESULT result piece
+        CALL c0de/strings/VAL
+            PARAMETER text piece ;
+            RESULT value part
+        ASSIGN result result * 1000 + part ;
+        CALL c0de/strings/MID
+            PARAMETER text rest ;
+            PARAMETER start dot + 1 ;
+            RESULT result rest
+    END FOR
+END FUNCTION
+NOOP
+FUNCTION outdated
+    PARAMETER installed STRING
+    PARAMETER latest STRING
+    RESULT result BOOLEAN
+BEGIN
+    VARIABLE mine FLOAT
+    VARIABLE theirs FLOAT
+    CALL number
+        PARAMETER version installed ;
+        RESULT result mine
+    CALL number
+        PARAMETER version latest ;
+        RESULT result theirs
+    ASSIGN result mine < theirs ;
+END FUNCTION

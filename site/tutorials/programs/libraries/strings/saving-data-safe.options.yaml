@@ -1,0 +1,4 @@
+function: add
+parameters:
+  scores: '[{"name":"Alex","points":"lots"}]'
+input: [Kai, 150]

@@ -1,0 +1,38 @@
+PROGRAM doorsign
+NOOP
+INCLUDE c0de/strings
+NOOP
+CONSTANT WIDTH INTEGER 32
+NOOP
+FUNCTION alignRight
+    PARAMETER text STRING
+    RESULT result STRING
+BEGIN
+    VARIABLE gap STRING
+    CALL c0de/strings/SPACE
+        PARAMETER count WIDTH ;
+        RESULT result gap
+    CALL c0de/strings/RIGHT
+        PARAMETER text gap ⊕ text ;
+        PARAMETER length WIDTH ;
+        RESULT result result
+END FUNCTION
+NOOP
+FUNCTION show
+    PARAMETER name STRING
+BEGIN
+    VARIABLE line STRING
+    CALL c0de/strings/UCASE
+        PARAMETER text name ;
+        RESULT result name
+    CALL alignRight
+        PARAMETER text "Room of" ;
+        RESULT result line
+    CALL PRINT
+        PARAMETER value line ;
+    CALL alignRight
+        PARAMETER text name ;
+        RESULT result line
+    CALL PRINT
+        PARAMETER value line ;
+END FUNCTION

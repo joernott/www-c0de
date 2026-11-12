@@ -51,11 +51,45 @@ chapters:
     label: { en: Libraries in practice, de: Bibliotheken in der Praxis }
   - link: /tutorials/libraries/c0de/math/
     label: { en: c0de/math, de: c0de/math }
+    lessons:
+      - dice
+      - fractions
+      - distance
+      - circle
+      - angles
+      - growth
   - link: /tutorials/libraries/c0de/strings/
     label: { en: c0de/strings, de: c0de/strings }
+    lessons:
+      - name-board
+      - commands
+      - secret-messages
+      - numbers-as-text
+      - saving-data
   - link: /tutorials/libraries/c0de/time/
     label: { en: c0de/time, de: c0de/time }
+    lessons:
+      - clock
+      - calendar
+      - stopwatch
+      - game-time
   - link: /tutorials/libraries/c0de/minecraft/
     label: { en: c0de/minecraft, de: c0de/minecraft }
+    lessons:
+      - doorbell
+      - combination-lock
+      - automatic-doors
+      - watching
+      - sorting
+      - building
+      - tunnel-digger
+      - rewards
   - link: /tutorials/libraries/c0de_net/http/
     label: { en: c0de_net/http, de: c0de_net/http }
+    lessons:
+      - weather
+      - todo-list
+      - checking
+      - network-errors
+      - home-automation
+      - up-to-date

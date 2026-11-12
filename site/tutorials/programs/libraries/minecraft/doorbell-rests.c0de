@@ -1,0 +1,32 @@
+PROGRAM melodyrests
+NOOP
+INCLUDE c0de/minecraft
+INCLUDE c0de/time
+NOOP
+VARIABLE notes ARRAY INTEGER
+BEGIN
+    1 1 8 8 10 10 8 -1 6 6 5 5 3 3 1
+END VARIABLE
+VARIABLE instruments ARRAY STRING
+BEGIN
+    "harp" "harp" "harp" "harp" "bell" "bell" "flute" "" "harp" "harp" "harp" "harp" "bell" "bell" "flute"
+END VARIABLE
+NOOP
+FUNCTION play
+BEGIN
+    VARIABLE count INTEGER
+    CALL LEN
+        PARAMETER value notes ;
+        RESULT result count
+    FOR i INTEGER 0 ; count - 1 ;
+    BEGIN
+        IF notes[i] ≥ 0 ;
+        BEGIN
+            CALL c0de/minecraft/SOUND
+                PARAMETER note notes[i] ;
+                PARAMETER instrument instruments[i] ;
+        END IF
+        CALL c0de/time/SLEEP
+            PARAMETER ticks 6 ;
+    END FOR
+END FUNCTION

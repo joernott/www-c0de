@@ -1,0 +1,43 @@
+PROGRAM farmwatch
+NOOP
+INCLUDE c0de/minecraft
+NOOP
+FUNCTION check
+BEGIN
+    VARIABLE spot STRUCT c0de/minecraft/POSITION
+    VARIABLE id STRING
+    VARIABLE states HASH STRING
+    VARIABLE ripe INTEGER
+    VARIABLE plants INTEGER
+    ASSIGN spot.y PID.y ;
+    FOR dx INTEGER 2 ; 5 ;
+    BEGIN
+        FOR dz INTEGER 0 ; 3 ;
+        BEGIN
+            ASSIGN spot.x PID.x + dx ;
+            ASSIGN spot.z PID.z + dz ;
+            CALL c0de/minecraft/GET_BLOCK
+                PARAMETER position spot ;
+                RESULT id id
+                RESULT properties states
+            IF id = "minecraft:wheat" ;
+            BEGIN
+                ASSIGN plants plants + 1 ;
+                IF states["age"] = "7" ;
+                BEGIN
+                    ASSIGN ripe ripe + 1 ;
+                END IF
+            END IF
+        END FOR
+    END FOR
+    CALL CLS
+    CALL PRINT
+        PARAMETER value "Wheat: " ⊕ plants ⊕ " plants" ;
+    CALL PRINT
+        PARAMETER value "Ripe: " ⊕ ripe ;
+    IF ripe > 0 AND ripe = plants ;
+    BEGIN
+        CALL c0de/minecraft/SAY
+            PARAMETER message "The wheat is ripe!" ;
+    END IF
+END FUNCTION

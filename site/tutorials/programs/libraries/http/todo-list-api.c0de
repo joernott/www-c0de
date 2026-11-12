@@ -1,0 +1,135 @@
+PROGRAM todolist
+NOOP
+INCLUDE c0de/strings
+INCLUDE c0de_net/http
+NOOP
+STRUCT todo
+BEGIN
+    id INTEGER
+    title STRING
+    done BOOLEAN
+END STRUCT
+NOOP
+STRUCT change
+BEGIN
+    title STRING
+END STRUCT
+NOOP
+FUNCTION connect
+    RESULT api STRUCT c0de_net/http/HTTP_CONNECTION
+BEGIN
+    ASSIGN api.use_ssl TRUE ;
+    ASSIGN api.server "c0de.at" ;
+    ASSIGN api.base_endpoint "/api/tutorial/todo" ;
+    ASSIGN api.headers["Content-Type"] "application/json" ;
+    ASSIGN api.timeout 10 ;
+END FUNCTION
+NOOP
+FUNCTION add
+    PARAMETER title STRING
+    RESULT id INTEGER
+BEGIN
+    VARIABLE api STRUCT c0de_net/http/HTTP_CONNECTION
+    VARIABLE entry STRUCT change
+    VARIABLE data STRING
+    VARIABLE answer STRING
+    VARIABLE created STRUCT todo
+    CALL connect
+        RESULT api api
+    ASSIGN entry.title title ;
+    CALL c0de/strings/TO_JSON
+        PARAMETER value entry ;
+        RESULT result data
+    CALL c0de_net/http/HTTP_POST
+        PARAMETER connection api ;
+        PARAMETER data data ;
+        RESULT result answer
+    CALL c0de/strings/FROM_JSON
+        PARAMETER source answer ;
+        PARAMETER destination created ;
+    ASSIGN id created.id ;
+END FUNCTION
+NOOP
+FUNCTION rename
+    PARAMETER id INTEGER
+    PARAMETER title STRING
+    RESULT answer STRING
+BEGIN
+    VARIABLE api STRUCT c0de_net/http/HTTP_CONNECTION
+    VARIABLE entry STRUCT change
+    VARIABLE data STRING
+    CALL connect
+        RESULT api api
+    ASSIGN entry.title title ;
+    CALL c0de/strings/TO_JSON
+        PARAMETER value entry ;
+        RESULT result data
+    CALL c0de_net/http/HTTP_PUT
+        PARAMETER connection api ;
+        PARAMETER endpoint "/" ⊕ id ;
+        PARAMETER data data ;
+        RESULT result answer
+END FUNCTION
+NOOP
+FUNCTION complete
+    PARAMETER id INTEGER
+    RESULT answer STRING
+BEGIN
+    VARIABLE api STRUCT c0de_net/http/HTTP_CONNECTION
+    VARIABLE done BOOLEAN TRUE TAG(json: "done")
+    VARIABLE data STRING
+    CALL connect
+        RESULT api api
+    CALL c0de/strings/TO_JSON
+        PARAMETER value done ;
+        RESULT result data
+    CALL c0de_net/http/HTTP_PATCH
+        PARAMETER connection api ;
+        PARAMETER endpoint "/" ⊕ id ;
+        PARAMETER data data ;
+        RESULT result answer
+END FUNCTION
+NOOP
+FUNCTION remove
+    PARAMETER id INTEGER
+    RESULT status INTEGER
+BEGIN
+    VARIABLE api STRUCT c0de_net/http/HTTP_CONNECTION
+    CALL connect
+        RESULT api api
+    CALL c0de_net/http/HTTP_DELETE
+        PARAMETER connection api ;
+        PARAMETER endpoint "/" ⊕ id ;
+        RESULT status status
+END FUNCTION
+NOOP
+FUNCTION show
+    RESULT count INTEGER
+BEGIN
+    VARIABLE api STRUCT c0de_net/http/HTTP_CONNECTION
+    VARIABLE answer STRING
+    VARIABLE list ARRAY STRUCT todo
+    VARIABLE mark STRING
+    CALL connect
+        RESULT api api
+    CALL c0de_net/http/HTTP_GET
+        PARAMETER connection api ;
+        RESULT result answer
+    CALL c0de/strings/FROM_JSON
+        PARAMETER source answer ;
+        PARAMETER destination list ;
+    CALL CLS
+    EACH entry list
+    BEGIN
+        ASSIGN mark "[ ] " ;
+        IF entry.done ;
+        BEGIN
+            ASSIGN mark "[x] " ;
+        END IF
+        CALL PRINT
+            PARAMETER value mark ⊕ entry.id ⊕ " " ⊕ entry.title ;
+    END EACH
+    CALL LEN
+        PARAMETER value list ;
+        RESULT result count
+END FUNCTION

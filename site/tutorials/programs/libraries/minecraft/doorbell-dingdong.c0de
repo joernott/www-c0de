@@ -1,0 +1,23 @@
+PROGRAM dingdong
+NOOP
+INCLUDE c0de/minecraft
+INCLUDE c0de/time
+NOOP
+FUNCTION ring
+BEGIN
+    VARIABLE visitor STRING "Someone"
+    IF PID.activator ≠ "" ;
+    BEGIN
+        ASSIGN visitor PID.activator ;
+    END IF
+    CALL c0de/minecraft/SOUND
+        PARAMETER note 19 ;
+        PARAMETER instrument "bell" ;
+    CALL c0de/time/SLEEP
+        PARAMETER ticks 8 ;
+    CALL c0de/minecraft/SOUND
+        PARAMETER note 15 ;
+        PARAMETER instrument "bell" ;
+    CALL c0de/minecraft/SAY
+        PARAMETER message visitor ⊕ " is at the front door." ;
+END FUNCTION

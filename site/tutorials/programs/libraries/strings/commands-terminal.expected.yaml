@@ -1,0 +1,11 @@
+state: FINISHED
+screen:
+  - 'Commands: say <text>, sum <a> <b>, quit'
+  - hello
+  - a ******* and another *******
+  - 3 + 4 = 7
+  - '? sum needs two whole numbers'
+  - '? sum needs two whole numbers'
+  - '? sum needs two whole numbers'
+  - '? unknown command: dance'
+  - Bye!
