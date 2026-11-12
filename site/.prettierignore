@@ -8,6 +8,8 @@ de/c0de/
 de/c0de_net/
 .vitepress/navigation.json
 public/img/
+public/models/
+.vitepress/models.json
 .cache/
 # written by scripts/screenshots.ts
 tutorials/screenshots.yaml

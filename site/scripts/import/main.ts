@@ -10,13 +10,21 @@ import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { languages } from '../../.vitepress/theme/language.ts'
 import { build, ImportError } from './build.ts'
+import { scenes } from './scenes.ts'
 import { fetchSource, readConfig } from './sources.ts'
 import { tutorialsTab } from './tutorials.ts'
 
 const site = join(dirname(fileURLToPath(import.meta.url)), '..', '..')
 
 // The folders written by the import; everything in them is replaced.
-export const generated = ['c0de', 'c0de_net', 'de/c0de', 'de/c0de_net', 'public/img']
+export const generated = [
+  'c0de',
+  'c0de_net',
+  'de/c0de',
+  'de/c0de_net',
+  'public/img',
+  'public/models',
+]
 
 async function main(args: string[]) {
   const config = readConfig(join(site, 'sources.yaml'))
@@ -64,6 +72,8 @@ async function main(args: string[]) {
   console.log(
     `imported ${output.pages.length} pages (${output.navigation.tabs.length} tabs, ${chapters} chapters, ${languages.length} languages) and ${output.images.length} images`,
   )
+  // The 3D views of the programs need the program runner, so Java 21 or newer (task 8.3).
+  await scenes(site, config, local)
 }
 
 main(process.argv.slice(2)).catch((error: unknown) => {

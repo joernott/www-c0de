@@ -9,7 +9,7 @@ The website [c0de.at](https://c0de.at) with the documentation and tutorials of t
 
 ## Building
 
-You need Go 1.27 and Node.js 26.
+You need Go 1.27, Node.js 26 and Java 21 or newer (the build lays out the programs of the site for their 3D views with the program runner of c0de).
 
 ```sh
 cd site

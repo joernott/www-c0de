@@ -19,7 +19,7 @@ The current stable version of every tool and package is used. Renovate keeps the
 | Go | 1.27.3 | `go.mod` (`go` and `toolchain` lines) |
 | Caddy | 2.11.9 | `go.mod` |
 | Node.js | 26 (LTS "Lithium", 26.13.0) | `.nvmrc`, `package.json` (`engines`) |
-| Java | 21 or newer | for `make test-programs`: the program runner of c0de (task 6.5); in CI `actions/setup-java` |
+| Java | 21 or newer | the program runner of c0de: `make test-programs` (task 6.5) and the layouts of the 3D views when the site is built (task 8.3); in CI `actions/setup-java`, in the image the JRE of `eclipse-temurin` (`Containerfile`) |
 | VitePress | 1.6.4 | `site/package.json` |
 | Vue.js | 3.5 | `site/package.json` |
 | Tailwind CSS | 4.3 (with `@tailwindcss/postcss`) | `site/package.json` |
@@ -28,6 +28,7 @@ The current stable version of every tool and package is used. Renovate keeps the
 | Vitest | 5.1 | `site/package.json` |
 | ESLint, typescript-eslint, eslint-plugin-vue | 10.14, 8.72, 10.12 | `site/package.json` |
 | Prettier | 3.9 | `site/package.json` |
+| `<model-viewer>`, three.js | 4.4.0, 0.183.2 (the version model-viewer asks for) | `site/package.json` |
 | Playwright, axe-core for Playwright | 1.65, 4.14 | `e2e/package.json` |
 | Lighthouse CI | 0.16 | `e2e/package.json` |
 | Docker | 29.8 | on the VM (installed for doenerstag) |
@@ -54,8 +55,8 @@ There is no Docker, Podman or `make` on the workstation. Containers are built an
 | Command | What it does |
 |---|---|
 | `npm run dev` (in `site/`) | VitePress development server with hot reload on `http://localhost:5173` |
-| `npm run content` (in `site/`) | Imports the documentation of the mods at the tags in `site/sources.yaml` (downloaded once into `site/.cache/`) and writes the pages, the images and `.vitepress/navigation.json`; `dev` and `build` run it first |
-| `node scripts/import/main.ts --local c0de=../../minecraft-c0de --local c0de_net=../../minecraft-c0de-net` (in `site/`) | Imports the documentation from the working copies instead, to see changes of the mods before their release |
+| `npm run content` (in `site/`) | Imports the documentation of the mods at the tags in `site/sources.yaml` (downloaded once into `site/.cache/`) and writes the pages, the images and `.vitepress/navigation.json`; then the 3D scenes of all programs (task 8.3, see below); `dev` and `build` run it first |
+| `node scripts/import/main.ts --local c0de=../../minecraft-c0de --local c0de_net=../../minecraft-c0de-net` (in `site/`) | Imports the documentation from the working copies instead, to see changes of the mods before their release; the 3D scenes then use their builds too: the models of `python scripts/export_models.py` (`build/models`) and the runners of `./gradlew :core:runnerJar` (c0de) and `./gradlew :runner:jar` (c0de net) |
 | `npm run check-links` (in `site/`) | Checks the built site: every internal link and anchor resolves, nothing is loaded from other sites; `build` runs it last |
 | `npm run build` (in `site/`) | Imports the documentation, builds the site into `internal/site/dist` (where the Go binary embeds it) and checks its links |
 | `npm test`, `npm run lint`, `npm run typecheck` (in `site/`) | Vitest, ESLint and Prettier, vue-tsc |

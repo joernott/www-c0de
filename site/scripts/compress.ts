@@ -8,7 +8,8 @@ import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { brotliCompressSync, constants, gzipSync, zstdCompressSync } from 'node:zlib'
 
-const compressible = /\.(html|js|mjs|css|json|xml|svg|txt)$/
+// .glb: the 3D scenes of the programs, mostly numbers, become a tenth of their size
+const compressible = /\.(html|js|mjs|css|json|xml|svg|txt|glb)$/
 const minimum = 1024 // smaller files aren't worth it
 
 const encodings: [string, (data: Buffer) => Buffer][] = [

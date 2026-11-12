@@ -38,6 +38,11 @@ jobs:
           echo "VERSION=${GITHUB_REF_NAME#v}" >>"$GITHUB_ENV"
       - name: Lint and unit tests
         run: make lint test
+      # The build lays out the programs for their 3D views with the program runner of c0de.
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: '21'
       - name: Static binary
         run: |
           make binary VERSION="$GITHUB_REF_NAME"

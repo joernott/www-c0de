@@ -179,11 +179,11 @@ A task is done when
 
 | Task | Description | Done |
 |---|---|:---:|
-| 8.1 | `<model-viewer>` (npm package, hosted on the site): loaded only on pages with a model, allowed by the Content-Security-Policy without `unsafe-eval`, works with the keyboard, respects "reduce motion", light and dark mode. |  |
-| 8.2 | The import downloads `c0de-models-<version>.zip` of the tag in `sources.yaml` (or reads it from a local build). |  |
-| 8.3 | A build step turns a program in the text notation into a scene: the sheet with its floor, the cursor rail and the line numbers, and every block at its place, as one GLB file per program. The texts of LABEL, LITERAL, OPERATOR and COMMENT blocks are shown as labels when the reader points at a block. Vitest. |  |
-| 8.4 | A switch "3D / text" at every program of the tutorials; the screenshot of 7.1 is the fallback without WebGL or JavaScript and the poster while the model loads. Outputs (screens, chat) stay screenshots. |  |
-| 8.5 | The same views for the complete programs of the imported guide and handbooks. |  |
+| 8.1 | `<model-viewer>` (npm package, hosted on the site): loaded only on pages with a model, allowed by the Content-Security-Policy without `unsafe-eval`, works with the keyboard, respects "reduce motion", light and dark mode. | ✅ |
+| 8.2 | The import downloads `c0de-models-<version>.zip` of the tag in `sources.yaml` (or reads it from a local build). | ✅ |
+| 8.3 | A build step turns a program in the text notation into a scene: the sheet with its floor, the cursor rail and the line numbers, and every block at its place, as one GLB file per program. The texts of LABEL, LITERAL, OPERATOR and COMMENT blocks are shown as labels when the reader points at a block. Vitest. | ✅ |
+| 8.4 | A switch "3D / text" at every program of the tutorials; the screenshot of 7.1 is the fallback without WebGL or JavaScript and the poster while the model loads. Outputs (screens, chat) stay screenshots. | ✅ |
+| 8.5 | The same views for the complete programs of the imported guide and handbooks. | ✅ |
 | 8.6 | Size and speed: models compressed, loaded lazily; Lighthouse stays at 100. Release. |  |
 
 ## Sprint 9: Tutorials: libraries in practice

@@ -11,10 +11,11 @@
 //
 // Usage: node scripts/test-programs.ts [<part of a file name>...]   (needs Java 21 or newer)
 import { spawnSync } from 'node:child_process'
-import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { existsSync, readdirSync, readFileSync } from 'node:fs'
 import { dirname, join, relative, sep } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { readConfig, version, type Source } from './import/sources.ts'
+import { readConfig } from './import/sources.ts'
+import { javaArgs, needs as needsOf, runner as getRunner } from './runner.ts'
 
 const site = join(dirname(fileURLToPath(import.meta.url)), '..')
 export const programsFolder = join(site, 'tutorials', 'programs')
@@ -36,7 +37,7 @@ export function plan(folder: string): ProgramRun[] {
     const program = join(folder, name)
     const base = program.slice(0, -'.c0de'.length)
     const text = readFileSync(program, 'utf-8')
-    const needs = /^\s*INCLUDE c0de_net\//m.test(text) ? ['c0de_net'] : []
+    const needs = needsOf(text)
     runs.push({
       program,
       ...(existsSync(`${base}.options.yaml`) && { options: `${base}.options.yaml` }),
@@ -71,32 +72,10 @@ export function args(run: ProgramRun): string[] {
   ]
 }
 
-// download returns the cached jar of a release, or undefined if the release has none.
-async function download(source: Source, jar: string, cache: string): Promise<string | undefined> {
-  const file = join(cache, jar)
-  if (existsSync(file)) return file
-  const url = `https://github.com/${source.repository}/releases/download/${source.tag}/${jar}`
-  const response = await fetch(url)
-  if (response.status === 404) return undefined
-  if (!response.ok) throw new Error(`downloading ${url}: ${response.status} ${response.statusText}`)
-  mkdirSync(cache, { recursive: true })
-  writeFileSync(file, Buffer.from(await response.arrayBuffer()))
-  return file
-}
-
 async function main(selected: string[]) {
   const config = readConfig(join(site, 'sources.yaml'))
-  const cache = join(site, '.cache', 'runner')
   const c0de = config.sources.c0de!
-  const runner = await download(c0de, `c0de-runner-${version(c0de)}.jar`, cache)
-  if (!runner) {
-    throw new Error(`c0de ${c0de.tag} has no program runner (c0de-runner-${version(c0de)}.jar)`)
-  }
-  const libraries: Record<string, string | undefined> = {}
-  const net = config.sources.c0de_net
-  if (net) {
-    libraries.c0de_net = await download(net, `c0de-net-runner-${version(net)}.jar`, cache)
-  }
+  const runner = await getRunner(config, join(site, '.cache', 'runner'))
 
   const runs = plan(programsFolder).filter(
     (run) =>
@@ -106,20 +85,13 @@ async function main(selected: string[]) {
   let skipped = 0
   for (const run of runs) {
     const name = relative(site, run.program) + (run.case ? ` (${run.case})` : '')
-    const missing = run.needs.filter((library) => !libraries[library])
+    const missing = run.needs.filter((library) => !runner.libraries[library])
     if (missing.length > 0) {
       console.log(`skip  ${name}: no runner library of ${missing.join(', ')} in its release`)
       skipped++
       continue
     }
-    const classpath = [runner, ...run.needs.map((library) => libraries[library]!)].join(
-      process.platform === 'win32' ? ';' : ':',
-    )
-    const result = spawnSync(
-      'java',
-      ['-cp', classpath, 'de.joernott.c0de.core.runner.Main', ...args(run)],
-      { encoding: 'utf-8' },
-    )
+    const result = spawnSync('java', javaArgs(runner, run.needs, args(run)), { encoding: 'utf-8' })
     if (result.error) throw result.error
     if (result.status === 0) {
       console.log(`ok    ${name}`)

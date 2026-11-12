@@ -27,6 +27,8 @@ jobs:
         run: make lint
       - name: Unit tests
         run: make test
+      # Java runs the program runner of c0de: for the tests of the tutorial programs and the
+      # layouts of the 3D views of the programs when the site is built.
       - uses: actions/setup-java@v6
         with:
           distribution: temurin

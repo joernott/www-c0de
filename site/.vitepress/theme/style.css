@@ -495,6 +495,55 @@ body {
   @apply rounded-md shadow-md;
 }
 
+/* A program as text or as 3D model of its sheet (task 8.4): the switch sits on the code block. */
+.program-view-switch {
+  @apply mt-4 flex justify-end gap-1 text-sm;
+}
+
+.program-view-switch + div > :first-child {
+  @apply mt-0;
+}
+
+.program-view-switch button {
+  @apply cursor-pointer rounded-t-md border border-b-0 px-3 py-0.5;
+  border-color: var(--color-rule);
+  color: var(--color-ink-muted);
+  background: var(--color-paper);
+}
+
+.program-view-switch button[aria-pressed='true'] {
+  @apply font-semibold;
+  color: var(--color-ink);
+  background: var(--color-code-bg);
+}
+
+.program-view-switch button:focus-visible,
+.program-view-3d model-viewer:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.program-view-3d {
+  @apply my-4;
+}
+
+.program-view-3d model-viewer {
+  @apply relative block w-full rounded-md;
+  height: clamp(18rem, 60vh, 30rem);
+  background: var(--color-code-bg);
+}
+
+.program-view-tip {
+  @apply pointer-events-none absolute rounded px-2 py-0.5 font-mono text-sm whitespace-pre shadow-md;
+  transform: translate(0.75rem, -150%);
+  color: var(--color-paper);
+  background: var(--color-ink);
+}
+
+.program-view-note {
+  @apply my-1 text-sm text-ink-muted;
+}
+
 /* ---------- Turning the pages ---------- */
 
 .page-nav {

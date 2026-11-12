@@ -135,3 +135,7 @@ v0.3.0 has been pushed and the container is deployed
 ## 2026-11-11 – Sprint 7
 
 please continue
+
+## 2026-11-12 – Sprint 8
+
+please start with the website sprint 8

@@ -26,6 +26,14 @@ export interface Texts {
   documentation: string
   chapterCount: (n: number) => string
   noLessons: string
+  programView: string
+  programText: string
+  program3d: string
+  program3dAlt: (program: string) => string
+  program3dHelp: string
+  program3dLoading: string
+  program3dFailed: string
+  programLine: (line: number) => string
 }
 
 export const texts: Record<Language, Texts> = {
@@ -54,6 +62,15 @@ export const texts: Record<Language, Texts> = {
     documentation: 'Documentation',
     chapterCount: (n) => (n === 1 ? '1 chapter' : `${n} chapters`),
     noLessons: 'The lessons of this path are being written.',
+    programView: 'Show the program',
+    programText: 'Text',
+    program3d: '3D',
+    program3dAlt: (program) => `The program ${program} on its sheet, as 3D model`,
+    program3dHelp:
+      'Drag to turn the sheet, scroll or pinch to zoom; point at a block to read its text. With the keyboard: the arrow keys turn it.',
+    program3dLoading: 'Loading the 3D model …',
+    program3dFailed: 'The 3D model could not be loaded.',
+    programLine: (line) => `Line ${line}`,
   },
   de: {
     home: 'Start',
@@ -80,5 +97,14 @@ export const texts: Record<Language, Texts> = {
     documentation: 'Dokumentation',
     chapterCount: (n) => (n === 1 ? '1 Kapitel' : `${n} Kapitel`),
     noLessons: 'Die Lektionen dieses Pfads werden gerade geschrieben.',
+    programView: 'Das Programm zeigen',
+    programText: 'Text',
+    program3d: '3D',
+    program3dAlt: (program) => `Das Programm ${program} auf seinem Blatt, als 3D-Modell`,
+    program3dHelp:
+      'Ziehen dreht das Blatt, Scrollen oder Zwei-Finger-Zoom vergrößert; zeig auf einen Block, um seinen Text zu lesen. Mit der Tastatur: Die Pfeiltasten drehen es.',
+    program3dLoading: 'Das 3D-Modell wird geladen …',
+    program3dFailed: 'Das 3D-Modell konnte nicht geladen werden.',
+    programLine: (line) => `Zeile ${line}`,
   },
 }

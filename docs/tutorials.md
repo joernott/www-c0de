@@ -43,6 +43,15 @@ The tutorials assume a **single-player world in creative mode with cheats on**, 
 
 Example programs are shown as text and, from sprint 8 on, as 3D models: c0de exports every block as a glTF model with its release, the site builds a scene of the sheet from the text of the program and shows it with `<model-viewer>`, which the reader turns and zooms. Screenshots remain the fallback (no WebGL, no JavaScript, the poster while the model loads) and show what can't be built from a program: screens, the chat, the world around a program. Path 1 shows every program and its result; paths 2 and 3 only where the world matters.
 
+### Programs in 3D
+
+Every complete program of the site (a file of the tutorials, or a ` ```c0de ` block of any page that starts with `PROGRAM`) gets a switch "Text / 3D" above its code. Nothing has to be written for it:
+
+- `npm run content` collects the programs and names each after a hash of its text (`.vitepress/programs.ts`). It downloads `c0de-models-<version>.zip` of the c0de tag in `sources.yaml`, lets the program runner print the layout of every program (`--layout`, cached in `site/.cache/layouts/`) and builds one GLB file per program (`scripts/import/scene.ts`): the floor of the sheet with the cursor rail, the line numbers in the colors of the game, and the blocks. The scenes, with the texts of their blocks in a JSON file, and the textures go to `site/public/models/<version>/`.
+- The Markdown renderer wraps every code block whose program has a scene in `ProgramView.vue`. The text comes first and is all there is without JavaScript or WebGL. The 3D view loads `<model-viewer>` (its own chunk of about 1 MB) only when the reader switches to it; the choice is kept in the browser for the next pages. Pointing at a block shows its text, pointing at a line number the line.
+- The poster while the model loads is the screenshot with the name of the program file (`first-program-sign.c0de` → `first-program-sign.webp`), if it exists.
+- A program that the runner can't lay out keeps its text only; `npm run content` names it.
+
 ### Screenshots
 
 A lesson marks a screenshot with a comment on a line of its own, in both languages at the same place: `<!-- screenshot: <id> | <what it shows> -->`. As soon as `site/public/tutorials/screenshots/<id>.webp` exists, the page shows the image there, with its width and height and the description as alternative text; until then the mark is invisible. `npm run screenshots` writes the list of all marks with their pages and whether the file exists to `site/tutorials/screenshots.yaml`; the lint fails if the list is out of date.

@@ -3,6 +3,7 @@ import { fileURLToPath } from 'node:url'
 import { slug } from 'github-slugger'
 import { defineConfigWithTheme, type HeadConfig } from 'vitepress'
 import { c0deDark, c0deLanguage, c0deLight } from './c0de-highlighting'
+import { programView, readManifest } from './programs'
 import { screenshotHtml } from './screenshots'
 import { languageOf, languages, pathIn, pathOf } from './theme/language'
 import type { ThemeConfig } from './theme/binder'
@@ -26,6 +27,8 @@ export default defineConfigWithTheme<ThemeConfig>({
   // Vite would inline small files (like font subsets) as data: URLs, which the
   // Content-Security-Policy of the server blocks; every asset stays a file of the site.
   vite: { build: { assetsInlineLimit: 0 } },
+  // <model-viewer> of the 3D views of the programs is a web component.
+  vue: { template: { compilerOptions: { isCustomElement: (tag) => tag === 'model-viewer' } } },
   // The Markdown files of the scripts (test fixtures of the import) are not pages.
   srcExclude: ['scripts/**'],
   cleanUrls: true,
@@ -41,13 +44,24 @@ export default defineConfigWithTheme<ThemeConfig>({
     anchor: { slugify: slug },
     headers: { slugify: slug },
     toc: { slugify: slug },
-    // The screenshot marks of the tutorials become images once their files exist (task 7.1).
+    // The screenshot marks of the tutorials become images once their files exist (task 7.1);
+    // programs with a 3D scene get the switch between text and 3D (task 8.4).
     config: (md) => {
       const render = md.renderer.rules.html_block!
       const publicFolder = fileURLToPath(new URL('../public', import.meta.url))
       md.renderer.rules.html_block = (tokens, index, options, env, self) => {
         const html = render(tokens, index, options, env, self)
         return screenshotHtml(html, publicFolder)
+      }
+      const manifest = readManifest(fileURLToPath(new URL('.', import.meta.url)))
+      const fence = md.renderer.rules.fence!
+      md.renderer.rules.fence = (tokens, index, options, env, self) => {
+        // The fence of VitePress reads included files (<<< @/...) into the token first.
+        const html = fence(tokens, index, options, env, self)
+        const token = tokens[index]!
+        if (token.info.trim().split(/\s/)[0] !== 'c0de') return html
+        const file = (token as { src?: string[] }).src?.[0]
+        return programView(html, token.content, file, publicFolder, manifest)
       }
     },
   },

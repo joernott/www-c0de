@@ -6,7 +6,14 @@ import tseslint from 'typescript-eslint'
 
 export default tseslint.config(
   {
-    ignores: ['.vitepress/cache/', '.vitepress/.temp/', 'node_modules/', '.cache/', 'public/img/'],
+    ignores: [
+      '.vitepress/cache/',
+      '.vitepress/.temp/',
+      'node_modules/',
+      '.cache/',
+      'public/img/',
+      'public/models/',
+    ],
   },
   js.configs.recommended,
   ...tseslint.configs.recommended,
