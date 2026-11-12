@@ -61,8 +61,18 @@ test('the footer leads to the privacy policy', async ({ page }) => {
   await expect(page.locator('.content')).toContainText('drei Monate')
 })
 
-test('the site sets no cookies and stores nothing in the browser', async ({ page, context }) => {
-  for (const path of ['/', '/c0de/minecraft/teleport', '/de/c0de/']) {
+// The only thing the site stores is the view of the programs that the reader chose (privacy
+// policy; programs.spec.ts).
+test('the site sets no cookies and stores nothing until the reader chooses a view', async ({
+  page,
+  context,
+}) => {
+  for (const path of [
+    '/',
+    '/c0de/minecraft/teleport',
+    '/tutorials/learning/first-program',
+    '/de/c0de/',
+  ]) {
     await page.goto(path)
   }
   await page.getByRole('combobox').fill('json')
