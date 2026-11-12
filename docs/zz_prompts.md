@@ -143,3 +143,7 @@ please start with the website sprint 8
 ## 2026-11-12 – Release 0.4.0
 
 let's release now, taking screenshots will need some time
+
+## 2026-11-12 – Release 0.4.0 is live
+
+The release is live at c0de.at, please go ahead with your tasks

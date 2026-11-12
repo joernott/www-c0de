@@ -171,7 +171,7 @@ A task is done when
 | 7.3 | Lessons 1.7–1.10: decisions, counting loops, loops with a condition, functions. | ✅ |
 | 7.4 | Lessons 1.11–1.14: lists, tables and own types, errors, libraries. | ✅ |
 | 7.5 | Lessons 1.15–1.17: the projects "Guess the number" and "The guarded door", where to go next. | ✅ |
-| 7.6 | Review with somebody who hasn't programmed before, if possible; Playwright, Lighthouse, link check. Release. |  |
+| 7.6 | Review with somebody who hasn't programmed before, if possible; Playwright, Lighthouse, link check. Release. (Released with sprint 8 as 0.4.0 on 2026-11-12; the review is 7.6.1.) | ✅ |
 | 7.6.1 | The review with somebody who hasn't programmed before, after the screenshots (7.1.1): the path was released without both, together with sprint 8 as 0.4.0, the pages work without the screenshots. |  |
 
 ## Sprint 8: Programs in 3D
@@ -185,7 +185,7 @@ A task is done when
 | 8.3 | A build step turns a program in the text notation into a scene: the sheet with its floor, the cursor rail and the line numbers, and every block at its place, as one GLB file per program. The texts of LABEL, LITERAL, OPERATOR and COMMENT blocks are shown as labels when the reader points at a block. Vitest. | ✅ |
 | 8.4 | A switch "3D / text" at every program of the tutorials; the screenshot of 7.1 is the fallback without WebGL or JavaScript and the poster while the model loads. Outputs (screens, chat) stay screenshots. | ✅ |
 | 8.5 | The same views for the complete programs of the imported guide and handbooks. | ✅ |
-| 8.6 | Size and speed: models compressed, loaded lazily; Lighthouse stays at 100. Release. |  |
+| 8.6 | Size and speed: models compressed, loaded lazily; Lighthouse stays at 100. Release. (Release 0.4.0 on 2026-11-12, live on c0de.at: live end-to-end tests 60 of 62, the 2 known differences of nginx; Lighthouse 100 on all 10 pages.) | ✅ |
 | 8.6.1 | The tutorial pages lost points in Lighthouse (layout shift 0.17 to 0.2, since sprint 6): the text moved when the web fonts arrived. The Latin fonts are preloaded now (`transformHead`); the layout shift is 0, all pages checked by Lighthouse CI are at 100, also a lesson with programs in 3D. The scenes are compressed (Brotli: 10 KiB on average, 18 KiB at most), `<model-viewer>` loads only when the reader switches to 3D and its model only when it is in view. | ✅ |
 
 ## Sprint 9: Tutorials: libraries in practice
