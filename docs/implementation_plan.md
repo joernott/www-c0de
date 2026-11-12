@@ -185,6 +185,7 @@ A task is done when
 | 8.4 | A switch "3D / text" at every program of the tutorials; the screenshot of 7.1 is the fallback without WebGL or JavaScript and the poster while the model loads. Outputs (screens, chat) stay screenshots. | ✅ |
 | 8.5 | The same views for the complete programs of the imported guide and handbooks. | ✅ |
 | 8.6 | Size and speed: models compressed, loaded lazily; Lighthouse stays at 100. Release. |  |
+| 8.6.1 | The tutorial pages lost points in Lighthouse (layout shift 0.17 to 0.2, since sprint 6): the text moved when the web fonts arrived. The Latin fonts are preloaded now (`transformHead`); the layout shift is 0, all pages checked by Lighthouse CI are at 100, also a lesson with programs in 3D. The scenes are compressed (Brotli: 10 KiB on average, 18 KiB at most), `<model-viewer>` loads only when the reader switches to 3D and its model only when it is in view. | ✅ |
 
 ## Sprint 9: Tutorials: libraries in practice
 
