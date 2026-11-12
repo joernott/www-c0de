@@ -155,3 +155,7 @@ I have found a small bug in the 3d display: Blocks, that have text on them, e.g.
 ## 2026-11-12 – Release 0.5.0
 
 yes, please release sprint 9
+
+## 2026-11-12 – Release 0.5.0 is live
+
+the page is live
