@@ -50,6 +50,9 @@ type Config struct {
 	// (C0DE_TRUSTED_PROXIES). The address of the client is then taken from the header
 	// X-Forwarded-For of their requests and logged as client_ip.
 	TrustedProxies string
+	// GitHubAPI is the address of the GitHub API for /api/version (C0DE_GITHUB_API, default
+	// https://api.github.com); the tests of the tutorial programs point it to a fake one.
+	GitHubAPI string
 }
 
 var (
@@ -68,6 +71,7 @@ func ConfigFromEnv(getenv func(string) string) (Config, error) {
 		Bind:       getenv("C0DE_BIND"),
 		ACMECA:     getenv("C0DE_ACME_CA"),
 		ACMECARoot: getenv("C0DE_ACME_CA_ROOT"),
+		GitHubAPI:  getenv("C0DE_GITHUB_API"),
 	}
 	c.TrustedProxies = normalizeList(getenv("C0DE_TRUSTED_PROXIES"))
 	var err error
@@ -108,6 +112,11 @@ func (c Config) Validate() error {
 	if c.ACMECA != "" {
 		if u, err := url.Parse(c.ACMECA); err != nil || u.Scheme != "https" || u.Host == "" || unsafePath.MatchString(c.ACMECA) {
 			return fmt.Errorf("C0DE_ACME_CA: %q is not an https URL", c.ACMECA)
+		}
+	}
+	if c.GitHubAPI != "" {
+		if u, err := url.Parse(c.GitHubAPI); err != nil || (u.Scheme != "https" && u.Scheme != "http") || u.Host == "" || unsafePath.MatchString(c.GitHubAPI) {
+			return fmt.Errorf("C0DE_GITHUB_API: %q is not an http or https URL", c.GitHubAPI)
 		}
 	}
 	if unsafePath.MatchString(c.ACMECARoot) {

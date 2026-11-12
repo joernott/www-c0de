@@ -103,7 +103,7 @@ Ports 80 and 443 are free on the VM (doenerstag uses 8443, mokapi 8080), so the 
 | `make run`, `make stop` | Runs the image with `docker run`, ports 80/443 published to 8080/8443 in the container, TLS mode `internal`, volume `www-c0de-data` |
 | `make e2e` | Runs the Playwright tests against `https://localhost` (Caddy's local CA is trusted by the tests) |
 | `make test lint` | All unit tests and checks, as in CI |
-| `make test-programs` | Runs the programs of the tutorials with the program runner of the c0de release in `site/sources.yaml` (downloaded into `site/.cache/runner`) |
+| `make test-programs` | Runs the programs of the tutorials with the program runner of the c0de release in `site/sources.yaml` (downloaded into `site/.cache/runner`). Programs that talk to the API of c0de.at run against a test service (`site/scripts/test-service.ts`, task 9.6.1): the server of this repository, built with Go, with the internal certificate authority of Caddy for c0de.at, a proxy that connects the requests of the runner for c0de.at to it, and a fake GitHub with the tags of `sources.yaml` |
 
 From sprint 5 on, the VM also runs:
 

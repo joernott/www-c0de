@@ -44,6 +44,7 @@ The binary is configured with environment variables:
 | `C0DE_HTTPS_PORT` | `443` (`8443` in the image) | Port for HTTPS and HTTP/3 |
 | `C0DE_BIND` | all addresses | IP address to listen on |
 | `C0DE_TRUSTED_PROXIES` | none | Reverse proxies in front of the server (IP addresses or ranges, or `private_ranges`); the client address is taken from their `X-Forwarded-For` |
+| `C0DE_GITHUB_API` | `https://api.github.com` | Where `/api/version` reads the releases of the mods; only for tests |
 | `C0DE_HEALTH_PORT` | `8081` | Port of the health check on 127.0.0.1 (`c0de-www health`) |
 | `C0DE_ACME_CA`, `C0DE_ACME_CA_ROOT` | Let's Encrypt | Another ACME server and its root certificate, for tests |
 

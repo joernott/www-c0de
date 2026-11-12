@@ -76,10 +76,16 @@ export async function runner(
 export const needs = (program: string): string[] =>
   /^\s*INCLUDE c0de_net\//m.test(program) ? ['c0de_net'] : []
 
-// javaArgs returns the arguments of java that start the runner with the given libraries.
-export function javaArgs(runner: Runner, libraries: string[], args: string[]): string[] {
+// javaArgs returns the arguments of java that start the runner with the given libraries; jvm
+// are options of java itself.
+export function javaArgs(
+  runner: Runner,
+  libraries: string[],
+  args: string[],
+  jvm: string[] = [],
+): string[] {
   const classpath = [runner.jar, ...libraries.map((library) => runner.libraries[library]!)].join(
     process.platform === 'win32' ? ';' : ':',
   )
-  return ['-cp', classpath, 'de.joernott.c0de.core.runner.Main', ...args]
+  return [...jvm, '-cp', classpath, 'de.joernott.c0de.core.runner.Main', ...args]
 }

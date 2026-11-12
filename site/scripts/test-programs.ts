@@ -7,15 +7,17 @@
 // program must be valid and run to its end. Further runs of the same program are cases:
 // <name>.<case>.options.yaml with <name>.<case>.expected.yaml. Programs that include c0de/minecraft are only
 // validated, because that library needs the game. Programs that include c0de_net need the
-// runner library of c0de net; if its release has none, they are skipped.
+// runner library of c0de net; if its release has none, they are skipped. Programs that talk to
+// the API of c0de.at run against a test service (test-service.ts), which needs Go.
 //
 // Usage: node scripts/test-programs.ts [<part of a file name>...]   (needs Java 21 or newer)
-import { spawnSync } from 'node:child_process'
+import { spawn } from 'node:child_process'
 import { existsSync, readdirSync, readFileSync } from 'node:fs'
 import { dirname, join, relative, sep } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { readConfig } from './import/sources.ts'
 import { javaArgs, needs as needsOf, runner as getRunner } from './runner.ts'
+import { startTestService, usesApi, type TestService } from './test-service.ts'
 
 const site = join(dirname(fileURLToPath(import.meta.url)), '..')
 export const programsFolder = join(site, 'tutorials', 'programs')
@@ -72,6 +74,19 @@ export function args(run: ProgramRun): string[] {
   ]
 }
 
+// java runs java and returns its exit code and output.
+function java(args: string[]): Promise<{ status: number | null; stdout: string; stderr: string }> {
+  return new Promise((resolve, reject) => {
+    const child = spawn('java', args)
+    let stdout = ''
+    let stderr = ''
+    child.stdout.on('data', (data: Buffer) => (stdout += data.toString('utf-8')))
+    child.stderr.on('data', (data: Buffer) => (stderr += data.toString('utf-8')))
+    child.on('error', reject)
+    child.on('close', (status) => resolve({ status, stdout, stderr }))
+  })
+}
+
 async function main(selected: string[]) {
   const config = readConfig(join(site, 'sources.yaml'))
   const c0de = config.sources.c0de!
@@ -81,24 +96,37 @@ async function main(selected: string[]) {
     (run) =>
       selected.length === 0 || selected.some((s) => run.program.replaceAll('\\', '/').includes(s)),
   )
+  const api = new Set(runs.filter((run) => usesApi(readFileSync(run.program, 'utf-8'))))
+  let service: TestService | undefined
+  if (api.size > 0) {
+    const releases = Object.fromEntries(
+      Object.values(config.sources).map((source) => [source.repository, source.tag]),
+    )
+    service = await startTestService(join(site, '..'), releases)
+  }
   let failed = 0
   let skipped = 0
-  for (const run of runs) {
-    const name = relative(site, run.program) + (run.case ? ` (${run.case})` : '')
-    const missing = run.needs.filter((library) => !runner.libraries[library])
-    if (missing.length > 0) {
-      console.log(`skip  ${name}: no runner library of ${missing.join(', ')} in its release`)
-      skipped++
-      continue
+  try {
+    for (const run of runs) {
+      const name = relative(site, run.program) + (run.case ? ` (${run.case})` : '')
+      const missing = run.needs.filter((library) => !runner.libraries[library])
+      if (missing.length > 0) {
+        console.log(`skip  ${name}: no runner library of ${missing.join(', ')} in its release`)
+        skipped++
+        continue
+      }
+      const jvm = api.has(run) ? service!.jvm : []
+      // not spawnSync: the proxy of the test service runs in this process
+      const result = await java(javaArgs(runner, run.needs, args(run), jvm))
+      if (result.status === 0) {
+        console.log(`ok    ${name}`)
+      } else {
+        failed++
+        console.log(`FAIL  ${name}\n${result.stderr}${result.stdout}`)
+      }
     }
-    const result = spawnSync('java', javaArgs(runner, run.needs, args(run)), { encoding: 'utf-8' })
-    if (result.error) throw result.error
-    if (result.status === 0) {
-      console.log(`ok    ${name}`)
-    } else {
-      failed++
-      console.log(`FAIL  ${name}\n${result.stderr}${result.stdout}`)
-    }
+  } finally {
+    await service?.stop()
   }
   console.log(
     `${runs.length - failed - skipped} of ${runs.length} programs ok, ${failed} failed, ${skipped} skipped (c0de ${c0de.tag})`,

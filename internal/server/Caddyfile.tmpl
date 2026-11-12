@@ -59,7 +59,9 @@
 
 	# The API for the recipes of c0de net (internal/api); it answers every path below /api/.
 	handle /api/* {
-		c0de_api
+		c0de_api{{if .GitHubAPI}} {
+			github {{.GitHubAPI}}
+		}{{end}}
 	}
 
 	handle {

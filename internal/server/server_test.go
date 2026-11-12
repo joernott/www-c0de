@@ -12,6 +12,7 @@ import (
 	"io/fs"
 	"net"
 	"net/http"
+	"net/http/httptest"
 	"os"
 	"path/filepath"
 	"strings"
@@ -63,6 +64,8 @@ func TestConfigErrors(t *testing.T) {
 		"ACME server over http":  {"C0DE_ACME_CA": "http://pebble:14000/dir"},
 		"ACME root with a brace": {"C0DE_ACME_CA_ROOT": "/certs/{root}.pem"},
 		"proxy not an address":   {"C0DE_TRUSTED_PROXIES": "10.0.0.0/8 proxy.local"},
+		"GitHub API not a URL":   {"C0DE_GITHUB_API": "api.github.com"},
+		"GitHub API with braces": {"C0DE_GITHUB_API": "http://github/{x}"},
 	} {
 		t.Run(name, func(t *testing.T) {
 			if _, err := ConfigFromEnv(func(k string) string { return env[k] }); err == nil {
@@ -468,7 +471,12 @@ func TestBehindAReverseProxy(t *testing.T) {
 }
 
 func TestAPI(t *testing.T) {
+	github := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		_, _ = w.Write([]byte(`[{"tag_name": "v1.2.3"}]`))
+	}))
+	defer github.Close()
 	c := testConfig(t, TLSOff)
+	c.GitHubAPI = github.URL
 	start(t, c)
 	base := fmt.Sprintf("http://127.0.0.1:%d", c.HTTPPort)
 
@@ -507,6 +515,10 @@ func TestAPI(t *testing.T) {
 	missing, body := get(t, plainClient, base+"/api/missing")
 	if missing.StatusCode != http.StatusNotFound || !strings.Contains(body, `"error"`) {
 		t.Errorf("/api/missing: %d %q", missing.StatusCode, body)
+	}
+	// The versions come from the configured GitHub.
+	if resp, body := get(t, plainClient, base+"/api/version"); resp.StatusCode != http.StatusOK || !strings.Contains(body, `"c0de":"1.2.3"`) {
+		t.Errorf("/api/version: %d %q", resp.StatusCode, body)
 	}
 	// The pages are still served.
 	if page, body := get(t, plainClient, base+"/c0de/guide"); page.StatusCode != http.StatusOK || !strings.Contains(body, "guide") {

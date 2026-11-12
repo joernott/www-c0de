@@ -116,4 +116,4 @@ To move the site to another host, container or VM: restore the volume there, ins
 
 ## Settings
 
-The service sets only the address and the image; the defaults of the image are those of production. The variables of the binary are listed in the [README](../README.md#running). `C0DE_ACME_CA` and `C0DE_ACME_CA_ROOT` are only for tests (`make acme-test` uses Pebble, the test server of Let's Encrypt).
+The service sets only the address and the image; the defaults of the image are those of production. The variables of the binary are listed in the [README](../README.md#running). `C0DE_ACME_CA` and `C0DE_ACME_CA_ROOT` are only for tests (`make acme-test` uses Pebble, the test server of Let's Encrypt), and so is `C0DE_GITHUB_API`, the address of the GitHub API that `/api/version` asks (the tests of the tutorial programs use a fake one).

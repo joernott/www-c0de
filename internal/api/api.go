@@ -37,6 +37,10 @@ func init() {
 // API is the Caddy module http.handlers.c0de_api. It answers every request itself: the
 // paths it doesn't know with 404.
 type API struct {
+	// GitHub is the address of the GitHub API that /api/version asks (default
+	// https://api.github.com); the tests of the tutorial programs use a fake one.
+	GitHub string `json:"github,omitempty"`
+
 	now      func() time.Time
 	limiter  limiter
 	todos    todos
@@ -51,17 +55,36 @@ func (*API) CaddyModule() caddy.ModuleInfo {
 	}
 }
 
-// Provision sets the clock.
+// Provision sets the clock and the address of GitHub.
 func (a *API) Provision(caddy.Context) error {
 	a.now = time.Now
+	a.versions.github = a.GitHub
 	return nil
 }
 
-// UnmarshalCaddyfile accepts the directive without options.
+// UnmarshalCaddyfile reads the directive and its only option:
+//
+//	c0de_api {
+//		github <address of the GitHub API>
+//	}
 func (a *API) UnmarshalCaddyfile(d *caddyfile.Dispenser) error {
 	d.Next() // the directive
 	if d.NextArg() {
 		return d.ArgErr()
+	}
+	for d.NextBlock(0) {
+		switch d.Val() {
+		case "github":
+			if !d.NextArg() {
+				return d.ArgErr()
+			}
+			a.GitHub = d.Val()
+			if d.NextArg() {
+				return d.ArgErr()
+			}
+		default:
+			return d.Errf("unknown option %q", d.Val())
+		}
 	}
 	return nil
 }
@@ -121,10 +144,17 @@ func (l *limiter) allow(client string, now time.Time) bool {
 	return l.counts[client] <= RequestsPerMinute
 }
 
+// writeJSON answers with a status and a value as JSON, without a line break at the end:
+// programs print the answers on screens, where it would be an empty line.
 func writeJSON(w http.ResponseWriter, status int, value any) {
+	data, err := json.Marshal(value)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(status)
-	_ = json.NewEncoder(w).Encode(value)
+	_, _ = w.Write(data)
 }
 
 // writeError answers with a status and a message: {"error": "..."}.
