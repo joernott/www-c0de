@@ -203,7 +203,7 @@ A task is done when
 | 9.6 | Recipes 3.24–3.29 (c0de_net/http), against Open-Meteo and the API of 9.1 and 9.2.  ✅ |
 | 9.6.1 | The tests of the recipes run against a test service instead of the site that is online, so they neither depend on it nor change its data (the plan of c0de net 6.1 expects it): `make test-programs` starts the server of this repository with the internal certificate authority of Caddy for c0de.at and a fake GitHub, and the runner sends its HTTPS requests through a proxy that connects c0de.at to it (`site/scripts/test-service.ts`). The API answers JSON without a line break at the end, which programs would print as an empty line. | ✅ |
 | 9.7 | Coverage check: the build fails if a function of a library handbook has no recipe in the coverage table of the tutorials; the handbook page of every function links to its recipes ("Used in the tutorials").  (The import reads the links of the recipes to the handbook pages: `addRecipes` in `scripts/import/tutorials.ts`.) | ✅ |
-| 9.8 | Review, Playwright, Lighthouse, link check. Release. (Reviewed on 2026-11-12 on the VM: 125 end-to-end tests passed, 8 skipped (3D in Firefox, the API in Firefox), Lighthouse 100 on 11 pages, link check 343 pages without errors, 261 program runs; the gaps found in the mods are c0de tasks 15.8 to 15.10 and c0de net sprint 7. The release is open.) |  |
+| 9.8 | Review, Playwright, Lighthouse, link check. Release. (Reviewed on 2026-11-12 on the VM: 125 end-to-end tests passed, 8 skipped (3D in Firefox, the API in Firefox), Lighthouse 100 on 11 pages, link check 343 pages without errors, 261 program runs; the gaps found in the mods are c0de tasks 15.8 to 15.10 and c0de net sprint 7. Released as 0.5.0 on 2026-11-12.) |  |
 
 ## Risks
 
