@@ -99,9 +99,19 @@ export default defineConfigWithTheme<ThemeConfig>({
   },
   // Every page names itself and its versions in the other languages for search engines, and
   // describes itself for link previews (Open Graph).
-  transformHead({ pageData, siteData }): HeadConfig[] {
+  transformHead({ pageData, siteData, assets }): HeadConfig[] {
+    // The Latin fonts (also for German) are loaded with the page, before the text is laid
+    // out; otherwise the text would move when they arrive late (Lighthouse: layout shift).
+    const fonts = assets
+      .filter((asset) =>
+        /\/(source-sans-3|jetbrains-mono)-latin-wght-normal\.[^/]*\.woff2$/.test(asset),
+      )
+      .map((href): HeadConfig => [
+        'link',
+        { rel: 'preload', href, as: 'font', type: 'font/woff2', crossorigin: '' },
+      ])
     if (pageData.isNotFound || pageData.frontmatter.notFound) {
-      return [['meta', { name: 'robots', content: 'noindex' }]]
+      return [...fonts, ['meta', { name: 'robots', content: 'noindex' }]]
     }
     const path = pathOf(pageData.relativePath)
     const language = languageOf(path)
@@ -110,6 +120,7 @@ export default defineConfigWithTheme<ThemeConfig>({
     const description = pageData.description || siteData.description
     const meta = (property: string, content: string): HeadConfig => ['meta', { property, content }]
     return [
+      ...fonts,
       ['link', { rel: 'canonical', href: origin + path }],
       ...languages.map((l): HeadConfig => [
         'link',

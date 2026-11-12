@@ -16,6 +16,8 @@ const pages = [
   '/tutorials/',
   '/tutorials/programmers/collections',
   '/de/tutorials/programmers/errors',
+  // a lesson with programs in 3D (sprint 8)
+  '/tutorials/learning/first-program',
 ]
 
 module.exports = {
