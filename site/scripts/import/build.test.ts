@@ -104,6 +104,7 @@ describe('pages', () => {
         version: '1.2.3',
         repository: 'someone/mod',
         modrinth: 'abc123',
+        curseforge: 'the-mod',
         description: { en: 'A mod.', de: 'Eine Mod.' },
         link: '/mod/',
       },

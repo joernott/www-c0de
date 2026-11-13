@@ -34,6 +34,7 @@ export interface Mod {
   version: string
   repository: string // owner/name on GitHub
   modrinth: string // the Modrinth project
+  curseforge: string // the slug of the CurseForge project
   description: Localized
   link: string // the overview page of its first tab
 }

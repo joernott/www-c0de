@@ -24,7 +24,7 @@ Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV: Jörn Ott, Anschrift wie 
 
 ## Links auf andere Websites
 
-Diese Seite verweist auf andere Websites, etwa GitHub und Modrinth. Für deren Inhalte sind ihre Betreiber verantwortlich. Die verlinkten Seiten wurden beim Setzen der Links geprüft; Rechtsverstöße waren dabei nicht erkennbar. Wird eine Rechtsverletzung bekannt, wird der Link umgehend entfernt.
+Diese Seite verweist auf andere Websites, etwa GitHub, Modrinth und CurseForge. Für deren Inhalte sind ihre Betreiber verantwortlich. Die verlinkten Seiten wurden beim Setzen der Links geprüft; Rechtsverstöße waren dabei nicht erkennbar. Wird eine Rechtsverletzung bekannt, wird der Link umgehend entfernt.
 
 ## Lizenz und Marken
 

@@ -53,7 +53,7 @@ The tutorials of c0de net show how programs in Minecraft talk to web services. S
 
 This site sets no cookies and uses no analytics or tracking. It stores one thing in your browser, and only when you ask for it: when you switch an example program between text and 3D, your browser remembers your choice (the entry `c0de-program-view` in its local storage) and shows the next programs the same way. The choice is never sent to the server; deleting the data of this site in your browser removes it. This storage is necessary for the function you asked for (§ 25 (2) no. 2 TDDDG). Its fonts, images and scripts come from this server; it loads nothing from other providers. The search runs in your browser: your search terms are not sent to the server.
 
-The site links to other websites, such as GitHub and Modrinth. Only when you follow such a link does your browser contact them, and their privacy policies apply.
+The site links to other websites, such as GitHub, Modrinth and CurseForge. Only when you follow such a link does your browser contact them, and their privacy policies apply.
 
 ## Your rights
 

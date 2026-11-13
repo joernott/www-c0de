@@ -188,6 +188,10 @@ The VM got a different IP, it is 192.168.178.183 again
 
 Please add another sprint to the www project, when you're ready. The first task in that sprint will be to add the curseforge links on the landing page.
 
+## 2026-11-13 – The slug of c0de net on CurseForge
+
+yes, c0de-net is the slug for the c0de-net project
+
 ## 2026-11-13 – Release 0.7.0 tagged
 
 the tag has been pushed but there has been no new package to deploy

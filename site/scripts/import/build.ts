@@ -514,6 +514,7 @@ function navigation(
       version: version(source),
       repository: source.repository,
       modrinth: source.modrinth,
+      curseforge: source.curseforge,
       description: source.description,
       link: config.tabs.find((t) => t.source === id)?.link ?? '/',
     })),

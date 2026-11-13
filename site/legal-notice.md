@@ -24,7 +24,7 @@ Responsible for the content according to § 18 (2) MStV (German Interstate Media
 
 ## Links to other websites
 
-This site links to other websites, such as GitHub and Modrinth. Their operators are responsible for their content. The linked pages were checked when the links were set; no infringements were found then. If a linked page infringes rights, the link is removed as soon as it becomes known.
+This site links to other websites, such as GitHub, Modrinth and CurseForge. Their operators are responsible for their content. The linked pages were checked when the links were set; no infringements were found then. If a linked page infringes rights, the link is removed as soon as it becomes known.
 
 ## License and trademarks
 

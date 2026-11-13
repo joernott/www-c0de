@@ -22,6 +22,7 @@ export interface Texts {
   searchResults: string
   searchNothing: string
   download: string
+  downloadCurseForge: string
   sourceCode: string
   documentation: string
   chapterCount: (n: number) => string
@@ -58,6 +59,7 @@ export const texts: Record<Language, Texts> = {
     searchResults: 'Search results',
     searchNothing: 'Nothing found',
     download: 'Download on Modrinth',
+    downloadCurseForge: 'Download on CurseForge',
     sourceCode: 'Source code on GitHub',
     documentation: 'Documentation',
     chapterCount: (n) => (n === 1 ? '1 chapter' : `${n} chapters`),
@@ -93,6 +95,7 @@ export const texts: Record<Language, Texts> = {
     searchResults: 'Suchergebnisse',
     searchNothing: 'Nichts gefunden',
     download: 'Download bei Modrinth',
+    downloadCurseForge: 'Download bei CurseForge',
     sourceCode: 'Quellcode bei GitHub',
     documentation: 'Dokumentation',
     chapterCount: (n) => (n === 1 ? '1 Kapitel' : `${n} Kapitel`),

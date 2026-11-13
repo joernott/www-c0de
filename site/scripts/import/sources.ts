@@ -10,6 +10,7 @@ export interface Source {
   name: string
   repository: string // owner/name on GitHub
   modrinth: string // the Modrinth project
+  curseforge: string // the slug of the CurseForge project
   description: Localized
   tag: string
   docs: string // the documentation folder in the repository

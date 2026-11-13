@@ -17,6 +17,10 @@ test('the home page shows both mods with their versions and links', async ({ pag
     'href',
     'https://modrinth.com/mod/T9RufCc0',
   )
+  await expect(mods.nth(1).getByRole('link', { name: 'Download on CurseForge' })).toHaveAttribute(
+    'href',
+    'https://www.curseforge.com/minecraft/mc-mods/c0de-net',
+  )
   await expect(mods.nth(1).getByRole('link', { name: 'Source code on GitHub' })).toHaveAttribute(
     'href',
     'https://github.com/joernott/minecraft-c0de-net',

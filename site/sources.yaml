@@ -1,7 +1,7 @@
 # The documentation imported into the site (npm run content, scripts/import/main.ts).
 #
-# sources: the mods, each with its repository at a release tag, its Modrinth project and a
-#   description for the home page. The documentation is in "docs";
+# sources: the mods, each with its repository at a release tag, its Modrinth project, the slug of
+#   its CurseForge project and a description for the home page. The documentation is in "docs";
 #   translations are in docs/<language>/ with the same file names and the same structure
 #   of ## and ### headings as the English files. Renovate proposes new tags.
 # tabs: the main tabs in their order. Every chapter is one page; its link is derived from
@@ -21,6 +21,7 @@ sources:
     tag: v0.5.0
     docs: docs
     modrinth: T9RufCc0
+    curseforge: c0de
     description:
       en: The programming language made of blocks, with its own dimension, triggers, tools and the libraries c0de/math, c0de/strings, c0de/time and c0de/minecraft.
       de: Die Programmiersprache aus Blöcken, mit eigener Dimension, Auslösern, Werkzeugen und den Bibliotheken c0de/math, c0de/strings, c0de/time und c0de/minecraft.
@@ -30,6 +31,7 @@ sources:
     tag: v0.3.0
     docs: docs
     modrinth: P2irzbnD
+    curseforge: c0de-net
     description:
       en: Adds the library c0de_net/http, so programs can send HTTP requests to web servers and REST APIs.
       de: Fügt die Bibliothek c0de_net/http hinzu, mit der Programme HTTP-Anfragen an Webserver und REST-APIs senden.

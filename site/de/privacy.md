@@ -53,7 +53,7 @@ Die Tutorials von c0de net zeigen, wie Programme in Minecraft mit Webdiensten sp
 
 Diese Website setzt keine Cookies und verwendet keine Analyse- oder Tracking-Werkzeuge. Sie speichert eine Sache in Ihrem Browser, und nur, wenn Sie es wünschen: Wenn Sie ein Beispielprogramm zwischen Text und 3D umschalten, merkt sich Ihr Browser Ihre Wahl (der Eintrag `c0de-program-view` in seinem lokalen Speicher) und zeigt die nächsten Programme genauso. Die Wahl wird nie an den Server gesendet; wenn Sie die Daten dieser Website in Ihrem Browser löschen, ist sie entfernt. Diese Speicherung ist für die Funktion erforderlich, die Sie gewünscht haben (§ 25 Abs. 2 Nr. 2 TDDDG). Schriften, Bilder und Skripte kommen von diesem Server; sie lädt nichts von anderen Anbietern. Die Suche läuft in Ihrem Browser: Ihre Suchbegriffe werden nicht an den Server gesendet.
 
-Die Website verlinkt auf andere Websites, etwa GitHub und Modrinth. Erst wenn Sie einem solchen Link folgen, nimmt Ihr Browser Kontakt zu ihnen auf, und es gelten deren Datenschutzerklärungen.
+Die Website verlinkt auf andere Websites, etwa GitHub, Modrinth und CurseForge. Erst wenn Sie einem solchen Link folgen, nimmt Ihr Browser Kontakt zu ihnen auf, und es gelten deren Datenschutzerklärungen.
 
 ## Ihre Rechte
 
