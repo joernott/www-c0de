@@ -7,7 +7,7 @@ This document describes how the website c0de.at is developed, built and tested. 
 | Place | Purpose |
 |---|---|
 | Windows workstation | Writing code and content, the VitePress development server with hot reload, unit tests (Vitest, Go), building the site and the Linux binary |
-| Development VM (`doener@192.168.178.101`, Debian 13, 8 cores, 16 GB) | Container builds and runs with Docker, the container on ports 80/443 as on the web server, end-to-end tests with Playwright, ACME tests with Pebble, the systemd unit |
+| Development VM (`doener@192.168.178.183`, Debian 13, 8 cores, 16 GB) | Container builds and runs with Docker, the container on ports 80/443 as on the web server, end-to-end tests with Playwright, ACME tests with Pebble, the systemd unit |
 | GitHub Actions | Build and test of every push, end-to-end tests, releases (GitHub release and image on ghcr.io) |
 
 ## Versions
@@ -71,7 +71,7 @@ There is no Docker, Podman or `make` on the workstation. Containers are built an
 
 ## Development VM
 
-The VM is shared with doenerstag, c0de and c0de net. SSH: `ssh -i ~/.ssh/id_ed25519_claude doener@192.168.178.101`, with passwordless sudo. Installing builds and tools on the VM is part of its purpose.
+The VM is shared with doenerstag, c0de and c0de net. SSH: `ssh -i ~/.ssh/id_ed25519_claude doener@192.168.178.183`, with passwordless sudo. Installing builds and tools on the VM is part of its purpose. Its address comes from DHCP and has changed before (.101 until 2026-11-13); if SSH times out, ask for the current one.
 
 ### Provisioning
 
@@ -89,7 +89,7 @@ The VM has its own clone in `~/src/www-c0de` (with `receive.denyCurrentBranch = 
 
 ```sh
 GIT_SSH_COMMAND="ssh -i ~/.ssh/id_ed25519_claude" \
-  git push ssh://doener@192.168.178.101/home/doener/src/www-c0de sprint-1
+  git push ssh://doener@192.168.178.183/home/doener/src/www-c0de sprint-1
 ```
 
 ### Running the site on the VM

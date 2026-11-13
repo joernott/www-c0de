@@ -179,3 +179,11 @@ the webserver has been updated
 ## 2026-11-13 – Sprint 11: c0de net 0.3.0
 
 The projects got approved on curseforge. I have added c0de as a default dependency to c0de-net on curseforge and added it as dependency to every released 0.2.0 mod. You can run the 0.3.0 release for c0de-net now and the remaining steps on www-c0de
+
+## 2026-11-13 – The VM has a new address
+
+The VM got a different IP, it is 192.168.178.183 again
+
+## 2026-11-13 – Sprint 12: CurseForge
+
+Please add another sprint to the www project, when you're ready. The first task in that sprint will be to add the curseforge links on the landing page.

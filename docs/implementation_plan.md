@@ -50,6 +50,7 @@ A task is done when
 | 9 | Tutorials: libraries in practice | The API for the tutorials and the version check, and the recipes of all libraries | ✅ |
 | 10 | c0de 0.5.0 | The site shows the documentation of c0de 0.5.0, and the programs of the tutorials are tested with its runner | ✅ |
 | 11 | c0de net 0.3.0 | The site shows the documentation of c0de net 0.3.0, and the recipes compare errors with its constants |  |
+| 12 | CurseForge | The mods can be downloaded from CurseForge as well as from Modrinth |  |
 
 ## Sprint 0: Concept and plan
 
@@ -224,9 +225,17 @@ A task is done when
 
 | Task | Description | Done |
 |---|---|:---:|
-| 11.1 | `sources.yaml` imports c0de net at `v0.3.0`, its documentation and its runner library. The version check answers 0.3.0 for c0de net; the recipes Staying up to date and When the network fails and their expected files say so. |  |
-| 11.2 | The programs of the recipes compare `problem.code` with the constants `c0de_net/http/HTTP_STATUS` to `c0de_net/http/RESPONSE_TOO_LARGE` instead of the numbers 1000 to 1005 (Checking a website, When the network fails); the texts say that the names are constants. English and German. |  |
-| 11.3 | Review on the VM: Playwright, Lighthouse, link check, program runs. Release. |  |
+| 11.1 | `sources.yaml` imports c0de net at `v0.3.0`, its documentation and its runner library. The version check answers 0.3.0 for c0de net; the recipes Staying up to date and When the network fails and their expected files say so. | ✅ |
+| 11.2 | The programs of the recipes compare `problem.code` with the constants `c0de_net/http/HTTP_STATUS` to `c0de_net/http/RESPONSE_TOO_LARGE` instead of the numbers 1000 to 1005 (Checking a website, When the network fails); the texts say that the names are constants. English and German. | ✅ |
+| 11.3 | Review on the VM: Playwright, Lighthouse, link check, program runs. Release. (Reviewed on 2026-11-13 on the VM: 126 end-to-end tests passed, 8 skipped (3D in Firefox, the API in Firefox), Lighthouse assertions passed on 11 pages, the link check of the build found no errors, 111 unit tests, 261 program runs with the runner library of c0de net 0.3.0. Released as 0.7.0 on 2026-11-13.) |  |
+
+## Sprint 12: CurseForge
+
+**Goal:** c0de and c0de net are on CurseForge since their releases 0.5.0 and 0.3.0 (c0de task 15.11, c0de net task 7.4), and the site links to both download sites.
+
+| Task | Description | Done |
+|---|---|:---:|
+| 12.1 | The landing page links every mod to its CurseForge project next to its Modrinth project: `sources.yaml` has the CurseForge project of each mod (c0de 1800913, c0de net 1800920; the links use the slugs of the projects on curseforge.com), and the mod list of the home page shows both links, in English and German. |  |
 
 ## Risks
 
