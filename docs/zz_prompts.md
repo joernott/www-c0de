@@ -163,3 +163,7 @@ the page is live
 ## 2026-11-13 – Sprint 10: c0de 0.5.0
 
 yes, please, then continue with sprint 7 of c0de-net without waiting for my confirmation
+
+## 2026-11-13 – Release 0.6.0
+
+ok, go

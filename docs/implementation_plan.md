@@ -215,7 +215,7 @@ A task is done when
 | 10.1 | `sources.yaml` imports c0de at `v0.5.0`: its documentation and the block models of the release. The new handbook pages of 0.5.0, the constant PI and the types POSITION, ENTITY and ITEM_STACK of c0de/minecraft, are linked from the recipes that use them (Drawing a circle and Ramps and angles, Watching and Sorting), so the coverage check of 9.7 passes. | ✅ |
 | 10.2 | The runner of 0.5.0 validates programs that use c0de/minecraft completely and runs them until they call a function of the library. Their expected files say so: `valid: true`, and where they stop with INVALID_ARGUMENT (34 programs). Two programs stop earlier: the reward games wait for INPUT, and the home automation recipe can't reach its hub. | ✅ |
 | 10.3 | The texts of the tutorials follow 0.5.0: PRINT shows a BOOLEAN as `TRUE` or `FALSE` (Making decisions), and the examples of the version check show 0.5.0 (Staying up to date, Network errors, Types). English and German. | ✅ |
-| 10.4 | Review on the VM: Playwright, Lighthouse, link check, program runs. Release. |  |
+| 10.4 | Review on the VM: Playwright, Lighthouse, link check, program runs. Release. (Reviewed on 2026-11-13 on the VM: 126 end-to-end tests passed, 8 skipped (3D in Firefox, the API in Firefox), Lighthouse assertions passed on 11 pages, the link check of the build found no errors, 111 unit tests, 261 program runs with c0de 0.5.0. Released as 0.6.0 on 2026-11-13.) |  |
 
 ## Risks
 
