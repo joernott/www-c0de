@@ -20,7 +20,7 @@ BEGIN
         ASSIGN api.server server ;
         CALL c0de_net/http/HTTP_HEAD problem
             PARAMETER connection api ;
-        IF problem.code = 0 OR problem.code = 1000 ;
+        IF problem.code = 0 OR problem.code = c0de_net/http/HTTP_STATUS ;
         BEGIN
             CALL PRINT
                 PARAMETER value server ⊕ ": up" ;

@@ -48,7 +48,7 @@ Den Prozess eines Zeitgeberblocks startet niemand, also kommen die Anfragen vom 
 ## So funktioniert es
 
 - **HEAD liefert die Header doppelt.** `headers` ist ein HASH, und `result` enthält – nur bei HEAD – dieselben Header als JSON-Objekt, etwa `{"content-type":"text/html; charset=utf-8","last-modified":"…",…}`. FROM_JSON liest es in die Struktur `page`, deren Tags die zwei Header auswählen, die das Programm zeigt. Fehlt ein Header, bleibt sein Element leer.
-- **Der Fehler bestimmt den Exit-Code.** Der CALL fängt jeden Fehler in `problem` ab. Code 1000, HTTP_STATUS, heißt: Der Server hat mit einem Status ab 400 geantwortet – er läuft, aber etwas stimmt nicht. Jeder andere Code heißt, dass es keine Antwort zu lesen gibt, und das Programm zeigt die Meldung, etwa einen unbekannten Host, und endet mit `EXIT 2`.
+- **Der Fehler bestimmt den Exit-Code.** Der CALL fängt jeden Fehler in `problem` ab. Der Code `c0de_net/http/HTTP_STATUS` (1000) heißt: Der Server hat mit einem Status ab 400 geantwortet – er läuft, aber etwas stimmt nicht. Jeder andere Code heißt, dass es keine Antwort zu lesen gibt, und das Programm zeigt die Meldung, etwa einen unbekannten Host, und endet mit `EXIT 2`.
 - **EXIT ist das Signal.** `EXIT 1` und `EXIT 2` beenden den Prozess mit diesem Code. Ohne EXIT endet die Funktion normal mit dem Code 0.
 - **Kurzes Timeout.** `timeout` 5 heißt: Eine Seite, die länger als fünf Sekunden braucht, gilt als ausgefallen.
 

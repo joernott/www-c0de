@@ -14,12 +14,12 @@ The mod **c0de net** in your game, a trigger block with a button, a **display wa
 
 ## The idea
 
-Every program knows the versions it runs on: the constant `C0DE_VERSION` holds the version of c0de as text, like `"0.5.0"`, and c0de net adds `C0DE_NET_VERSION`, like `"0.2.0"`. They need no INCLUDE.
+Every program knows the versions it runs on: the constant `C0DE_VERSION` holds the version of c0de as text, like `"0.5.0"`, and c0de net adds `C0DE_NET_VERSION`, like `"0.3.0"`. They need no INCLUDE.
 
 The latest released versions are on the web. c0de.at reads them from the releases on GitHub and answers `https://c0de.at/api/version` with a small JSON object:
 
 ```json
-{ "c0de": "0.5.0", "c0de_net": "0.2.0" }
+{ "c0de": "0.5.0", "c0de_net": "0.3.0" }
 ```
 
 So the program needs one GET, one FROM_JSON and two comparisons. The request comes from the computer of the player who presses the button, and every player can switch requests off for their own computer. The installed versions, though, are those of the server: the constants tell what the sheet runs on.
@@ -37,10 +37,10 @@ When everything is up to date, the wall shows two green lines, and the result `c
 
 ```
 c0de 0.5.0: up to date
-c0de net 0.2.0: up to date
+c0de net 0.3.0: up to date
 ```
 
-<!-- screenshot: up-to-date-wall | The display wall with the two green lines c0de 0.5.0: up to date and c0de net 0.2.0: up to date -->
+<!-- screenshot: up-to-date-wall | The display wall with the two green lines c0de 0.5.0: up to date and c0de net 0.3.0: up to date -->
 
 If a new version is out, its line is red, like `c0de 0.3.1: 0.4.0 is out`, and `current` is `FALSE`.
 

@@ -48,7 +48,7 @@ Nobody starts the process of a timer block, so the requests come from the comput
 ## How it works
 
 - **HEAD returns the headers twice.** `headers` is a HASH, and `result` – for HEAD only – is the same headers as a JSON object, like `{"content-type":"text/html; charset=utf-8","last-modified":"…",…}`. FROM_JSON reads it into the struct `page`, whose tags pick the two headers the program shows. A header that is missing leaves its element empty.
-- **The error decides the exit code.** The CALL catches every error in `problem`. Code 1000, HTTP_STATUS, means the server answered with a status of 400 or higher – it's up, but something is wrong. Every other code means there was no answer to read, and the program shows the message, like an unknown host, and ends with `EXIT 2`.
+- **The error decides the exit code.** The CALL catches every error in `problem`. The code `c0de_net/http/HTTP_STATUS` (1000) means the server answered with a status of 400 or higher – it's up, but something is wrong. Every other code means there was no answer to read, and the program shows the message, like an unknown host, and ends with `EXIT 2`.
 - **EXIT is the signal.** `EXIT 1` and `EXIT 2` end the process with that code. Without an EXIT, the function ends normally with code 0.
 - **Short timeout.** `timeout` 5 means: a site that takes longer than five seconds counts as down.
 

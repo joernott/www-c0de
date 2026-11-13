@@ -13,7 +13,7 @@ BEGIN
     BEGIN
         ASSIGN text "The connection settings are wrong" ;
     END IF
-    IF code = 1000 ;
+    IF code = c0de_net/http/HTTP_STATUS ;
     BEGIN
         ASSIGN text "The server refused with status " ⊕ status ;
         IF status = 404 ;
@@ -29,23 +29,23 @@ BEGIN
             ASSIGN text "The server has a problem" ;
         END IF
     END IF
-    IF code = 1001 ;
+    IF code = c0de_net/http/CLIENT_UNAVAILABLE ;
     BEGIN
         ASSIGN text "Nobody with c0de net is online" ;
     END IF
-    IF code = 1002 ;
+    IF code = c0de_net/http/REQUESTS_DISABLED ;
     BEGIN
         ASSIGN text "Requests are switched off" ;
     END IF
-    IF code = 1003 ;
+    IF code = c0de_net/http/REQUEST_FAILED ;
     BEGIN
         ASSIGN text "The server can't be reached" ;
     END IF
-    IF code = 1004 ;
+    IF code = c0de_net/http/REQUEST_TIMEOUT ;
     BEGIN
         ASSIGN text "The server is too slow" ;
     END IF
-    IF code = 1005 ;
+    IF code = c0de_net/http/RESPONSE_TOO_LARGE ;
     BEGIN
         ASSIGN text "The answer is too large" ;
     END IF
@@ -56,7 +56,7 @@ FUNCTION worthRetrying
     PARAMETER status INTEGER
     RESULT result BOOLEAN
 BEGIN
-    ASSIGN result code = 1003 OR code = 1004 OR ( code = 1000 AND ( status = 429 OR status ≥ 500 ) ) ;
+    ASSIGN result code = c0de_net/http/REQUEST_FAILED OR code = c0de_net/http/REQUEST_TIMEOUT OR ( code = c0de_net/http/HTTP_STATUS AND ( status = 429 OR status ≥ 500 ) ) ;
 END FUNCTION
 NOOP
 FUNCTION fetch

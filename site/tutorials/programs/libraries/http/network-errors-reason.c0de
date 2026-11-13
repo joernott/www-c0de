@@ -20,7 +20,7 @@ BEGIN
         PARAMETER endpoint endpoint ;
         RESULT result answer
     ASSIGN text "OK" ;
-    IF problem.code = 1000 ;
+    IF problem.code = c0de_net/http/HTTP_STATUS ;
     BEGIN
         ASSIGN text problem.message ;
         CALL c0de/strings/FROM_JSON unreadable

@@ -26,6 +26,8 @@ Jede Funktion von c0de_net/http löst einen Fehler aus, wenn die Anfrage nicht k
 | 1004 | REQUEST_TIMEOUT    | keine vollständige Antwort innerhalb des Timeouts          | ja                             |
 | 1005 | RESPONSE_TOO_LARGE | die Antwort ist größer, als der Server erlaubt             | nein, frag nach weniger        |
 
+Die Namen sind Konstanten, die die Codes enthalten: INVALID_ARGUMENT ist eine Konstante von c0de, die anderen kommen wie die Funktionen mit `INCLUDE c0de_net/http`, als `c0de_net/http/HTTP_STATUS` und so weiter. Vergleiche mit ihnen statt mit den Zahlen; das Programm liest sich besser, und ein Tippfehler fällt bei der Prüfung auf.
+
 Ein neuer Versuch hilft nur, wenn das Problem von selbst verschwinden kann. Und sofort nochmal zu fragen, hilft selten: Ist ein Server überlastet, machen hundert Programme, die gleichzeitig nochmal fragen, es schlimmer. Deshalb wächst die Wartezeit mit jedem Versuch – 1 Sekunde, 2, 4 –, das nennt man **exponentielles Backoff**. [SLEEP](/de/c0de/time/sleep) wartet eine Zahl von Spielticks; 20 Ticks sind eine Sekunde.
 
 ## Das Programm
@@ -35,7 +37,7 @@ Ein neuer Versuch hilft nur, wenn das Problem von selbst verschwinden kann. Und 
 ## Aufbauen und starten
 
 1. Binde den Laptop an `netretry` / `fetch`.
-2. Stelle den Auslöserblock auf `netretry` / `fetch`, leg zwei nicht initialisierte Variablenkarten hinein und drück den Knopf. Der Laptop zeigt die Antwort, `{"c0de":"0.5.0","c0de_net":"0.2.0"}`, und das Ergebnis `tries` ist 1.
+2. Stelle den Auslöserblock auf `netretry` / `fetch`, leg zwei nicht initialisierte Variablenkarten hinein und drück den Knopf. Der Laptop zeigt die Antwort, `{"c0de":"0.5.0","c0de_net":"0.3.0"}`, und das Ergebnis `tries` ist 1.
 3. Leg eine Variablenkarte `server` mit `nothing.invalid` hinein, einem Namen, den es nie gibt, und drück noch einmal. Jetzt zeigt der Laptop:
 
 ```
@@ -49,7 +51,7 @@ Der Exit-Code ist 1, also kann ein Komparator ihn anzeigen. Mit dem Server `c0de
 
 ## So funktioniert es
 
-- **`explain` macht aus einem Code Worte.** Es beginnt mit einer Meldung für unbekannte Codes und überschreibt sie für jeden Code, den es kennt. Bei HTTP_STATUS sagt der Status mehr: 404 ist eine falsche Adresse, 429 heißt „zu viele Anfragen“, ab 500 hat der Server ein Problem. `INVALID_ARGUMENT` ist eine Konstante von c0de; die Codes von c0de net stehen als Zahlen da.
+- **`explain` macht aus einem Code Worte.** Es beginnt mit einer Meldung für unbekannte Codes und überschreibt sie für jeden Code, den es kennt. Bei HTTP_STATUS sagt der Status mehr: 404 ist eine falsche Adresse, 429 heißt „zu viele Anfragen“, ab 500 hat der Server ein Problem. Es vergleicht `code` mit den Konstanten: `INVALID_ARGUMENT` von c0de und `c0de_net/http/HTTP_STATUS` und den anderen von c0de net.
 - **`worthRetrying` entscheidet.** Nur REQUEST_FAILED, REQUEST_TIMEOUT und die Status 429 und ab 500 können von selbst verschwinden. Ein 404 bleibt ein 404, egal wie oft du fragst.
 - **Die Schleife** läuft, solange `again` wahr ist. Jede Runde sendet die Anfrage mit `problem` in der CALL-Zeile, also lässt kein Fehler den Prozess abstürzen. Eine erfolgreiche Anfrage setzt `problem.code` wieder auf 0, und `worthRetrying` sagt `FALSE`. Nach dem vierten Versuch beendet das ELSE die Schleife ohnehin.
 - **Die Wartezeit verdoppelt sich:** `wait` beginnt bei 20 Ticks und wird zu 40 und 80. SLEEP hält nur diesen Prozess an; das Spiel und andere Programme laufen weiter.

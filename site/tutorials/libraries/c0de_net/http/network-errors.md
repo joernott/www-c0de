@@ -26,6 +26,8 @@ Every function of c0de_net/http raises an error when the request doesn't work ou
 | 1004 | REQUEST_TIMEOUT    | no complete answer within the timeout                 | yes                       |
 | 1005 | RESPONSE_TOO_LARGE | the answer is larger than the server allows           | no, ask for less          |
 
+The names are constants that hold the codes: INVALID_ARGUMENT is a constant of c0de, and the others come with `INCLUDE c0de_net/http`, like its functions, as `c0de_net/http/HTTP_STATUS` and so on. Compare with them instead of the numbers; a program reads better, and a typo is caught when it is checked.
+
 Trying again only helps when the problem may go away by itself. And trying again right away rarely helps: if a server is overloaded, a hundred programs that ask again at once make it worse. So the wait grows with every try – 1 second, 2, 4 – which is called **exponential backoff**. [SLEEP](/c0de/time/sleep) waits a number of game ticks; 20 ticks are a second.
 
 ## The program
@@ -35,7 +37,7 @@ Trying again only helps when the problem may go away by itself. And trying again
 ## Building and running it
 
 1. Bind the laptop to `netretry` / `fetch`.
-2. Set the trigger block to `netretry` / `fetch`, put two uninitialized variable items into it, and press the button. The laptop shows the answer, `{"c0de":"0.5.0","c0de_net":"0.2.0"}`, and the result `tries` is 1.
+2. Set the trigger block to `netretry` / `fetch`, put two uninitialized variable items into it, and press the button. The laptop shows the answer, `{"c0de":"0.5.0","c0de_net":"0.3.0"}`, and the result `tries` is 1.
 3. Put a variable item `server` with `nothing.invalid` in it, a name that never exists, and press again. Now the laptop shows:
 
 ```
@@ -49,7 +51,7 @@ The exit code is 1, so a comparator can show it. With the server `c0de.at` and t
 
 ## How it works
 
-- **`explain` turns a code into words.** It starts with a message for unknown codes and overwrites it for every code it knows. For HTTP_STATUS, the status says more: 404 is a wrong address, 429 means "too many requests", 500 and above is a problem of the server. `INVALID_ARGUMENT` is a constant of c0de; the codes of c0de net are written as numbers.
+- **`explain` turns a code into words.** It starts with a message for unknown codes and overwrites it for every code it knows. For HTTP_STATUS, the status says more: 404 is a wrong address, 429 means "too many requests", 500 and above is a problem of the server. It compares `code` with the constants: `INVALID_ARGUMENT` of c0de and `c0de_net/http/HTTP_STATUS` and the others of c0de net.
 - **`worthRetrying` decides.** Only REQUEST_FAILED, REQUEST_TIMEOUT and the statuses 429 and 500 and above may go away by themselves. A 404 stays a 404, however often you ask.
 - **The loop** runs while `again` is true. Each round sends the request with `problem` on the CALL line, so no error crashes the process. A successful request resets `problem.code` to 0, and `worthRetrying` says `FALSE`. After the fourth try, the ELSE ends the loop anyway.
 - **The wait doubles:** `wait` starts at 20 ticks and becomes 40 and 80. SLEEP pauses only this process; the game and other programs go on.

@@ -486,7 +486,7 @@
   size: missing
 - id: up-to-date-wall
   description: "The display wall with the two green lines c0de 0.5.0: up to date
-    and c0de net 0.2.0: up to date"
+    and c0de net 0.3.0: up to date"
   pages:
     - tutorials/libraries/c0de_net/http/up-to-date.md
     - de/tutorials/libraries/c0de_net/http/up-to-date.md

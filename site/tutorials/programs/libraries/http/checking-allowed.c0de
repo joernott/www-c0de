@@ -44,7 +44,7 @@ BEGIN
         PARAMETER endpoint endpoint ;
         RESULT result answer
         RESULT status traced
-    IF problem.code = 1000 ;
+    IF problem.code = c0de_net/http/HTTP_STATUS ;
     BEGIN
         CALL PRINT
             PARAMETER value "TRACE refused: " ⊕ problem.message ;

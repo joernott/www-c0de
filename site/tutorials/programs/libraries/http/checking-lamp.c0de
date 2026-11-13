@@ -29,7 +29,7 @@ BEGIN
     CALL CLS
     CALL PRINT
         PARAMETER value server ⊕ endpoint ;
-    IF problem.code ≠ 0 AND problem.code ≠ 1000 ;
+    IF problem.code ≠ 0 AND problem.code ≠ c0de_net/http/HTTP_STATUS ;
     BEGIN
         CALL PRINT
             PARAMETER value "DOWN: " ⊕ problem.message ;
@@ -44,7 +44,7 @@ BEGIN
         PARAMETER value info.type ;
     CALL PRINT
         PARAMETER value info.changed ;
-    IF problem.code = 1000 ;
+    IF problem.code = c0de_net/http/HTTP_STATUS ;
     BEGIN
         EXIT 1 ;
     END IF

@@ -27,7 +27,7 @@ sources:
   c0de_net:
     name: c0de net
     repository: joernott/minecraft-c0de-net
-    tag: v0.2.0
+    tag: v0.3.0
     docs: docs
     modrinth: P2irzbnD
     description:
