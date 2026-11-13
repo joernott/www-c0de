@@ -167,3 +167,11 @@ yes, please, then continue with sprint 7 of c0de-net without waiting for my conf
 ## 2026-11-13 – Release 0.6.0
 
 ok, go
+
+## 2026-11-13 – Release 0.6.0 tagged
+
+I have pushed the tag now
+
+## 2026-11-13 – Release 0.6.0 is live
+
+the webserver has been updated
