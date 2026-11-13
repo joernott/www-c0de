@@ -187,3 +187,11 @@ The VM got a different IP, it is 192.168.178.183 again
 ## 2026-11-13 – Sprint 12: CurseForge
 
 Please add another sprint to the www project, when you're ready. The first task in that sprint will be to add the curseforge links on the landing page.
+
+## 2026-11-13 – Release 0.7.0 tagged
+
+the tag has been pushed but there has been no new package to deploy
+
+## 2026-11-13 – Release 0.7.0 is live
+
+yes, plese add that as a task do sprint 12. Version 0.7.0 has been deployed successfully

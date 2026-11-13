@@ -49,7 +49,7 @@ A task is done when
 | 8 | Programs in 3D | Example programs can be turned and zoomed as 3D models, built from the block models of c0de | ✅ |
 | 9 | Tutorials: libraries in practice | The API for the tutorials and the version check, and the recipes of all libraries | ✅ |
 | 10 | c0de 0.5.0 | The site shows the documentation of c0de 0.5.0, and the programs of the tutorials are tested with its runner | ✅ |
-| 11 | c0de net 0.3.0 | The site shows the documentation of c0de net 0.3.0, and the recipes compare errors with its constants |  |
+| 11 | c0de net 0.3.0 | The site shows the documentation of c0de net 0.3.0, and the recipes compare errors with its constants | ✅ |
 | 12 | CurseForge | The mods can be downloaded from CurseForge as well as from Modrinth |  |
 
 ## Sprint 0: Concept and plan
@@ -227,7 +227,7 @@ A task is done when
 |---|---|:---:|
 | 11.1 | `sources.yaml` imports c0de net at `v0.3.0`, its documentation and its runner library. The version check answers 0.3.0 for c0de net; the recipes Staying up to date and When the network fails and their expected files say so. | ✅ |
 | 11.2 | The programs of the recipes compare `problem.code` with the constants `c0de_net/http/HTTP_STATUS` to `c0de_net/http/RESPONSE_TOO_LARGE` instead of the numbers 1000 to 1005 (Checking a website, When the network fails); the texts say that the names are constants. English and German. | ✅ |
-| 11.3 | Review on the VM: Playwright, Lighthouse, link check, program runs. Release. (Reviewed on 2026-11-13 on the VM: 126 end-to-end tests passed, 8 skipped (3D in Firefox, the API in Firefox), Lighthouse assertions passed on 11 pages, the link check of the build found no errors, 111 unit tests, 261 program runs with the runner library of c0de net 0.3.0. Released as 0.7.0 on 2026-11-13.) |  |
+| 11.3 | Review on the VM: Playwright, Lighthouse, link check, program runs. Release. (Reviewed on 2026-11-13 on the VM: 126 end-to-end tests passed, 8 skipped (3D in Firefox, the API in Firefox), Lighthouse assertions passed on 11 pages, the link check of the build found no errors, 111 unit tests, 261 program runs with the runner library of c0de net 0.3.0. Released as 0.7.0 on 2026-11-13; the first release run failed because GitHub answered the version check of the end-to-end tests with its rate limit (task 12.2), the second passed. Live checks: 65 end-to-end tests passed, the 2 that fail behind nginx by design failed, Lighthouse assertions passed on 11 pages, the API answers c0de net 0.3.0.) | ✅ |
 
 ## Sprint 12: CurseForge
 
