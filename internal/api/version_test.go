@@ -79,6 +79,28 @@ func TestVersion(t *testing.T) {
 	}
 }
 
+func TestVersionToken(t *testing.T) {
+	var auth []string
+	github := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		auth = append(auth, r.Header.Get("Authorization"))
+		_, _ = w.Write([]byte(`[{"tag_name": "v1.2.3"}]`))
+	}))
+	defer github.Close()
+	for _, tc := range []struct{ token, want string }{{"", ""}, {"secret", "Bearer secret"}} {
+		auth = nil
+		a, _ := newAPI()
+		a.versions.github, a.versions.token = github.URL, tc.token
+		if w := do(t, a, http.MethodGet, "/api/version", ""); w.Code != http.StatusOK {
+			t.Errorf("token %q: %d %s", tc.token, w.Code, w.Body)
+		}
+		for _, got := range auth {
+			if got != tc.want {
+				t.Errorf("token %q: Authorization %q, want %q", tc.token, got, tc.want)
+			}
+		}
+	}
+}
+
 func TestVersionUnknown(t *testing.T) {
 	var fail atomic.Bool
 	var calls atomic.Int32

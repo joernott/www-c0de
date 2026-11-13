@@ -7,6 +7,7 @@ import (
 	"encoding/json"
 	"net"
 	"net/http"
+	"os"
 	"strings"
 	"sync"
 	"time"
@@ -55,10 +56,13 @@ func (*API) CaddyModule() caddy.ModuleInfo {
 	}
 }
 
-// Provision sets the clock and the address of GitHub.
+// Provision sets the clock, the address of GitHub and the token for it. The token is read from
+// C0DE_GITHUB_TOKEN here rather than from the Caddyfile, so it is never part of the
+// configuration.
 func (a *API) Provision(caddy.Context) error {
 	a.now = time.Now
 	a.versions.github = a.GitHub
+	a.versions.token = os.Getenv("C0DE_GITHUB_TOKEN")
 	return nil
 }
 

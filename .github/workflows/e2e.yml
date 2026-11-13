@@ -21,9 +21,12 @@ jobs:
       - name: Image
         run: docker build -f Containerfile -t www-c0de:e2e .
       - name: Start the container
+        # The token lifts the rate limit of GitHub for /api/version (task 12.2).
+        env:
+          C0DE_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           docker run -d --name www-c0de -p 80:8080 -p 443:8443 \
-            -e C0DE_DOMAIN=localhost -e C0DE_TLS=internal www-c0de:e2e
+            -e C0DE_DOMAIN=localhost -e C0DE_TLS=internal -e C0DE_GITHUB_TOKEN www-c0de:e2e
           for _ in $(seq 30); do
             curl -fsk -o /dev/null https://localhost/ && exit 0
             sleep 1

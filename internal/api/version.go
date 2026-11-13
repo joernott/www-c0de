@@ -32,7 +32,10 @@ var repositories = map[string]string{
 type versions struct {
 	mu sync.Mutex
 	// github is the address of the GitHub API; tests replace it.
-	github  string
+	github string
+	// token is sent to GitHub if it is set (C0DE_GITHUB_TOKEN): without one, GitHub allows 60
+	// requests an hour from an address, which the shared addresses of CI runners use up.
+	token   string
 	client  *http.Client
 	known   map[string]string
 	refresh time.Time // when to ask GitHub again
@@ -95,6 +98,9 @@ func (v *versions) latest(ctx context.Context, repository string) (string, error
 	req.Header.Set("Accept", "application/vnd.github+json")
 	req.Header.Set("X-GitHub-Api-Version", "2022-11-28")
 	req.Header.Set("User-Agent", "c0de.at")
+	if v.token != "" {
+		req.Header.Set("Authorization", "Bearer "+v.token)
+	}
 	resp, err := client.Do(req)
 	if err != nil {
 		return "", err

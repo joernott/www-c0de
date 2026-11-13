@@ -236,6 +236,7 @@ A task is done when
 | Task | Description | Done |
 |---|---|:---:|
 | 12.1 | The landing page links every mod to its CurseForge project next to its Modrinth project: `sources.yaml` has the CurseForge project of each mod (c0de 1800913, c0de net 1800920; the links use the slugs of the projects on curseforge.com), and the mod list of the home page shows both links, in English and German. The slugs are `c0de` and `c0de-net`; the links go to `https://www.curseforge.com/minecraft/mc-mods/<slug>`. The legal notice and the privacy policy name CurseForge with GitHub and Modrinth among the linked sites. |  |
+| 12.2 | The end-to-end tests of the version check don't depend on the rate limit of GitHub. Without a token, GitHub allows 60 requests an hour from an address, and CI runners share addresses: the first release run of 0.7.0 failed because `/api/version` answered 503. The server sends an optional token, `C0DE_GITHUB_TOKEN`, to GitHub; it reads it from the environment, not from the Caddyfile, so it is never part of the configuration. `e2e.yml` and `release.yml` pass their `GITHUB_TOKEN` to the container through the environment of the step. |  |
 
 ## Risks
 

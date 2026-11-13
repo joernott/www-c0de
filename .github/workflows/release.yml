@@ -51,9 +51,13 @@ jobs:
       - name: Image
         run: docker build -f Containerfile --build-arg VERSION="$GITHUB_REF_NAME" -t "$IMAGE:$VERSION" .
       - name: End-to-end tests and Lighthouse
+        # The token lifts the rate limit of GitHub for /api/version (task 12.2).
+        env:
+          C0DE_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           docker run -d --name www-c0de --read-only --cap-drop ALL --security-opt no-new-privileges \
-            -p 80:8080 -p 443:8443 -e C0DE_DOMAIN=localhost -e C0DE_TLS=internal "$IMAGE:$VERSION"
+            -p 80:8080 -p 443:8443 -e C0DE_DOMAIN=localhost -e C0DE_TLS=internal -e C0DE_GITHUB_TOKEN \
+            "$IMAGE:$VERSION"
           for _ in $(seq 30); do curl -fsk -o /dev/null https://localhost/ && break; sleep 1; done
           cd e2e
           npm ci
