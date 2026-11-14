@@ -1,0 +1,60 @@
+{
+  "comment": "Answers of Open-Meteo, recorded on 2026-11-14, for the tests of the recipes in CI (task 12.2.1, test-service.ts). search answers the city Vienna, forecast all the fields the recipes ask for; the test service answers only the requested ones.",
+  "search": {
+    "Vienna": {
+      "results": [
+        {
+          "id": 2761369,
+          "name": "Vienna",
+          "latitude": 48.20849,
+          "longitude": 16.37208,
+          "elevation": 171.0,
+          "feature_code": "PPLC",
+          "country_code": "AT",
+          "admin1_id": 2761367,
+          "admin2_id": 2761333,
+          "timezone": "Europe/Vienna",
+          "population": 1691468,
+          "country_id": 2782113,
+          "country": "Austria",
+          "admin1": "State of Vienna",
+          "admin2": "Vienna"
+        }
+      ],
+      "generationtime_ms": 0.16641617
+    }
+  },
+  "forecast": {
+    "latitude": 48.205967,
+    "longitude": 16.351799,
+    "generationtime_ms": 0.23102760314941406,
+    "utc_offset_seconds": 0,
+    "timezone": "GMT",
+    "timezone_abbreviation": "GMT",
+    "elevation": 194.0,
+    "current_units": {
+      "time": "iso8601",
+      "interval": "seconds",
+      "temperature_2m": "°C",
+      "wind_speed_10m": "km/h",
+      "weather_code": "wmo code"
+    },
+    "current": {
+      "time": "2026-11-14T04:45",
+      "interval": 900,
+      "temperature_2m": 2.7,
+      "wind_speed_10m": 10.1,
+      "weather_code": 0
+    },
+    "daily_units": {
+      "time": "iso8601",
+      "temperature_2m_min": "°C",
+      "temperature_2m_max": "°C"
+    },
+    "daily": {
+      "time": ["2026-11-14", "2026-11-15"],
+      "temperature_2m_min": [2.7, 2.4],
+      "temperature_2m_max": [8.8, 6.0]
+    }
+  }
+}

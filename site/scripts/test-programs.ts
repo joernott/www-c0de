@@ -9,7 +9,8 @@
 // they call a function of that library, which needs the game: they expect INVALID_ARGUMENT
 // there (since c0de 0.5.0, the runner validates them completely). Programs that include c0de_net need the
 // runner library of c0de net; if its release has none, they are skipped. Programs that talk to
-// the API of c0de.at run against a test service (test-service.ts), which needs Go.
+// the API of c0de.at run against a test service (test-service.ts), which needs Go; in CI, so do
+// the programs that ask Open-Meteo, whose answers it has recorded (task 12.2.1).
 //
 // Usage: node scripts/test-programs.ts [<part of a file name>...]   (needs Java 21 or newer)
 import { spawn } from 'node:child_process'
@@ -18,7 +19,7 @@ import { dirname, join, relative, sep } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { readConfig } from './import/sources.ts'
 import { javaArgs, needs as needsOf, runner as getRunner } from './runner.ts'
-import { startTestService, usesApi, type TestService } from './test-service.ts'
+import { startTestService, usesApi, usesOpenMeteo, type TestService } from './test-service.ts'
 
 const site = join(dirname(fileURLToPath(import.meta.url)), '..')
 export const programsFolder = join(site, 'tutorials', 'programs')
@@ -97,13 +98,20 @@ async function main(selected: string[]) {
     (run) =>
       selected.length === 0 || selected.some((s) => run.program.replaceAll('\\', '/').includes(s)),
   )
-  const api = new Set(runs.filter((run) => usesApi(readFileSync(run.program, 'utf-8'))))
+  // GitHub sets CI; Open-Meteo doesn't always answer its runners (task 12.2.1)
+  const fakeOpenMeteo = process.env.CI === 'true'
+  const api = new Set(
+    runs.filter((run) => {
+      const program = readFileSync(run.program, 'utf-8')
+      return usesApi(program) || (fakeOpenMeteo && usesOpenMeteo(program))
+    }),
+  )
   let service: TestService | undefined
   if (api.size > 0) {
     const releases = Object.fromEntries(
       Object.values(config.sources).map((source) => [source.repository, source.tag]),
     )
-    service = await startTestService(join(site, '..'), releases)
+    service = await startTestService(join(site, '..'), releases, fakeOpenMeteo)
   }
   let failed = 0
   let skipped = 0

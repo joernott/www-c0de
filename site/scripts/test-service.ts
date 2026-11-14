@@ -9,13 +9,20 @@
 // versions that /api/version answers come from a fake GitHub with the tags of sources.yaml.
 // The pages of the test server are those of the last build of the site, in CI none: tests
 // use the API, not the pages.
+//
+// In CI, the proxy also connects the hosts of Open-Meteo to a fake one (task 12.2.1): Open-Meteo
+// sometimes doesn't answer the runners of GitHub, whose addresses many share. The fake answers
+// the requests of the recipes with the answers recorded in open-meteo.json, with a certificate
+// of its own, which the trust store contains as well. Elsewhere, the recipes ask Open-Meteo.
 import { spawn, spawnSync, type ChildProcess } from 'node:child_process'
 import { chmodSync, copyFileSync, existsSync, mkdtempSync, readFileSync, rmSync } from 'node:fs'
 import { createServer as createHttpServer, type Server } from 'node:http'
+import { createServer as createHttpsServer } from 'node:https'
 import { connect, createServer as createNetServer, type AddressInfo, type Socket } from 'node:net'
 import { tmpdir } from 'node:os'
-import { join } from 'node:path'
+import { dirname, join } from 'node:path'
 import { connect as connectTls } from 'node:tls'
+import { fileURLToPath } from 'node:url'
 
 export interface TestService {
   // the options of java that send the requests of the runner to the test service
@@ -26,13 +33,19 @@ export interface TestService {
 // usesApi tells if a program talks to the API of c0de.at.
 export const usesApi = (program: string) => program.includes('"c0de.at"')
 
+// usesOpenMeteo tells if a program asks Open-Meteo.
+export const usesOpenMeteo = (program: string) => program.includes('open-meteo.com')
+
+const openMeteoHosts = ['api.open-meteo.com', 'geocoding-api.open-meteo.com']
+
 const PASSWORD = 'changeit' // the password of the trust store of Java
 
 // startTestService starts the test service; releases are the tags that the fake GitHub
-// answers, by repository (owner/name).
+// answers, by repository (owner/name). With fakeOpenMeteo, a fake answers for Open-Meteo.
 export async function startTestService(
   repository: string,
   releases: Record<string, string>,
+  fakeOpenMeteo = false,
 ): Promise<TestService> {
   const folder = mkdtempSync(join(tmpdir(), 'c0de-test-service-'))
   const closers: (() => Promise<void> | void)[] = [
@@ -116,7 +129,13 @@ export async function startTestService(
     )
     if (keytool.status !== 0) throw new Error(`keytool: ${keytool.stderr}${keytool.stdout}`)
 
-    const proxy = await listen(createNetServer((client) => tunnel(client, https)))
+    const targets = new Map([['c0de.at', https]])
+    if (fakeOpenMeteo) {
+      const openMeteo = await startOpenMeteo(folder, trustStore, join(javaHome, 'bin', 'keytool'))
+      closers.push(() => close(openMeteo))
+      for (const host of openMeteoHosts) targets.set(host, port(openMeteo))
+    }
+    const proxy = await listen(createNetServer((client) => tunnel(client, targets)))
     closers.push(() => close(proxy))
 
     return {
@@ -135,8 +154,9 @@ export async function startTestService(
   }
 }
 
-// tunnel answers a CONNECT request: c0de.at goes to the test server, other hosts to themselves.
-function tunnel(client: Socket, testServer: number) {
+// tunnel answers a CONNECT request: the hosts of targets go to their port on this computer,
+// other hosts to themselves.
+function tunnel(client: Socket, targets: Map<string, number>) {
   let head = Buffer.alloc(0)
   const onData = (chunk: Buffer) => {
     head = Buffer.concat([head, chunk])
@@ -151,8 +171,8 @@ function tunnel(client: Socket, testServer: number) {
       client.end('HTTP/1.1 400 Bad Request\r\n\r\n')
       return
     }
-    const [host, target] =
-      match[1] === 'c0de.at' ? ['127.0.0.1', testServer] : [match[1]!, Number(match[2])]
+    const local = targets.get(match[1]!)
+    const [host, target] = local ? ['127.0.0.1', local] : [match[1]!, Number(match[2])]
     const upstream = connect(target, host, () => {
       client.write('HTTP/1.1 200 Connection Established\r\n\r\n')
       const rest = head.subarray(end + 4)
@@ -163,6 +183,75 @@ function tunnel(client: Socket, testServer: number) {
     client.on('error', () => upstream.destroy())
   }
   client.on('data', onData)
+}
+
+// startOpenMeteo starts the fake Open-Meteo with a certificate for its hosts, which it adds to
+// the trust store of Java.
+async function startOpenMeteo(folder: string, trustStore: string, keytool: string) {
+  const keyStore = join(folder, 'open-meteo.p12')
+  const certificate = join(folder, 'open-meteo.crt')
+  const tool = (args: string[]) => {
+    const result = spawnSync(keytool, args, { encoding: 'utf-8', timeout: 30000 })
+    if (result.status !== 0) throw new Error(`keytool: ${result.stderr}${result.stdout}`)
+  }
+  const store = ['-keystore', keyStore, '-storepass', PASSWORD, '-storetype', 'PKCS12']
+  const names = openMeteoHosts.map((host) => `dns:${host}`).join(',')
+  tool([
+    ...['-genkeypair', '-alias', 'open-meteo', '-keyalg', 'EC', '-dname', 'CN=open-meteo.com'],
+    ...['-ext', `SAN=${names}`, '-validity', '2', ...store],
+  ])
+  tool(['-exportcert', '-rfc', '-alias', 'open-meteo', '-file', certificate, ...store])
+  tool([
+    ...['-importcert', '-noprompt', '-alias', 'open-meteo', '-file', certificate],
+    ...['-keystore', trustStore, '-storepass', PASSWORD],
+  ])
+  const recorded = JSON.parse(
+    readFileSync(join(dirname(fileURLToPath(import.meta.url)), 'open-meteo.json'), 'utf-8'),
+  ) as { search: Record<string, unknown>; forecast: Record<string, unknown> }
+  const server = createHttpsServer(
+    { pfx: readFileSync(keyStore), passphrase: PASSWORD },
+    (request, response) => {
+      const url = new URL(request.url ?? '/', `https://${request.headers.host ?? 'localhost'}`)
+      let body: unknown
+      if (url.hostname.startsWith('geocoding-api.') && url.pathname === '/v1/search') {
+        body = recorded.search[url.searchParams.get('name') ?? ''] ?? { generationtime_ms: 0.1 }
+      } else if (url.hostname.startsWith('api.') && url.pathname === '/v1/forecast') {
+        body = forecast(recorded.forecast, url.searchParams)
+      }
+      response.writeHead(body ? 200 : 404, { 'Content-Type': 'application/json; charset=utf-8' })
+      response.end(request.method === 'HEAD' ? undefined : JSON.stringify(body ?? { error: true }))
+    },
+  )
+  return listen(server)
+}
+
+// forecast is the recorded forecast with the fields that a request asks for, as Open-Meteo
+// answers it: current and daily only with their requested variables, daily for forecast_days.
+function forecast(recorded: Record<string, unknown>, query: URLSearchParams) {
+  const { current, current_units, daily, daily_units, ...rest } = recorded as Record<
+    string,
+    Record<string, unknown>
+  >
+  const pick = (values: Record<string, unknown> | undefined, fields: string[]) =>
+    Object.fromEntries(Object.entries(values ?? {}).filter(([key]) => fields.includes(key)))
+  const answer: Record<string, unknown> = { ...rest }
+  const currentFields = query.get('current')?.split(',')
+  if (currentFields) {
+    answer.current_units = pick(current_units, ['time', 'interval', ...currentFields])
+    answer.current = pick(current, ['time', 'interval', ...currentFields])
+  }
+  const dailyFields = query.get('daily')?.split(',')
+  if (dailyFields) {
+    const days = Number(query.get('forecast_days') ?? 7)
+    answer.daily_units = pick(daily_units, ['time', ...dailyFields])
+    answer.daily = Object.fromEntries(
+      Object.entries(pick(daily, ['time', ...dailyFields])).map(([key, values]) => [
+        key,
+        (values as unknown[]).slice(0, days),
+      ]),
+    )
+  }
+  return answer
 }
 
 // handshake tells if the test server answers TLS for c0de.at with a certificate of its root.
