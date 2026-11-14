@@ -230,3 +230,7 @@ the default variants were just experiments based on the description, how all scr
 Don't crop the screenshots.
 
 Yes, go ahead with the release
+
+## 2026-11-14 – Sprint 12 is done
+
+v0.8.0 has been deployed
