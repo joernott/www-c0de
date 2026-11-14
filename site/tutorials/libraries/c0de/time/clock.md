@@ -27,8 +27,9 @@ A TIME value is a point in time, counted in milliseconds since the start of 1970
 1. Build the display wall: two display blocks side by side, facing the same way.
 2. Bind it to the program `wallclock` and the function `tick` (right-click a display block, pick the program and the function, click ✔).
 3. Place a timer block, set it to `wallclock` / `tick` and an interval of 20 ticks.
+4. Place a lever next to the timer block and leave it off. While the lever is on, the timer block pauses.
 
-The clock appears in the middle of the wall and counts the seconds. To change the program, first stop the timer block with a lever: a running process locks the sheet.
+The clock appears in the middle of the wall and counts the seconds. To change the program, first switch the lever on to stop the timer block: a running process locks the sheet.
 
 <!-- screenshot: clock-wall | a display wall of 2 × 1 display blocks showing the time 09:05:03 in the middle, the timer block in front of it -->
 

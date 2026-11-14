@@ -218,3 +218,7 @@ I found the following mistakes:
 - In tutorials/libraries/c0de/minecraft/automatic-doors, a timer and a trigger block are mentioned as requirements but the trigger block is never mentioned in the construction.
 
 Please review all the building instructions and make sure, they match the required blocks list, or make it clear in the requirement list, for which example the blocks are.
+
+## 2026-11-14 – Task 12.4.1
+
+yes, please fix 12.4.1 before the release

@@ -88,6 +88,8 @@ The type of a result follows from the types of the operands: two INTEGERs give a
 
 <<< @/tutorials/programs/programmers/expressions-numbers.c0de
 
+Set the trigger block to the program `numbers` and the function `divide`. Put in the INTEGER variable items `a` and `b` and four uninitialized items: `divide` has six results, and `a` and `b` take the place of two of them. Press the button and right-click the result items. Then change `a` to -7, and after that `a` to 7 and `b` to 0. With `b` = 0, the process crashes, the trigger block shows the error, and the items come out unchanged:
+
 | `a`, `b` | quotient                    | whole (DIV) | floor (INT) | rest | check | exact |
 | -------- | --------------------------- | ----------- | ----------- | ---- | ----- | ----- |
 | 7, 2     | 3.5                         | 3           | 3           | 1    | true  | false |

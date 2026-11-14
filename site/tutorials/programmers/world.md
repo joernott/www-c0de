@@ -7,7 +7,7 @@ description: How c0de programs live in the world – processes, PIDs and the cur
 A c0de program has no `main`, no command line and no files. It lies on a sheet and waits until a trigger block starts one of its functions. The arguments come in as items, the results go out as items, and hoppers carry them on to the next trigger block. This lesson connects two trigger blocks to a small pipeline and explains what runs where, who may do what, and how programs move between worlds.
 
 ::: info What you need
-A creative world with cheats on (see [Tutorials](/tutorials/)), a **trigger block**, a **timer block**, a **button**, two **hoppers**, a **chest**, an **INTEGER variable item** named `count`, a **STRING variable item** named `item` and an **uninitialized variable item**. For the exercises: a **comparator** and a **redstone lamp**.
+A creative world with cheats on (see [Tutorials](/tutorials/)), a **trigger block**, a **timer block**, a **wrench**, a **button**, two **hoppers**, a **chest**, an **INTEGER variable item** named `count`, a **STRING variable item** named `item` and an **uninitialized variable item**. For the exercises: a **comparator** and a **redstone lamp**.
 :::
 
 ## The model

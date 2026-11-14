@@ -20,6 +20,7 @@ Jeder Programmierer macht Fehler, jeden Tag. Einen guten Programmierer erkennt m
 - ein neues, leeres Blatt in der c0de-Dimension und den Schraubenschlüssel
 - einen **Auslöserblock** mit einem Knopf und einen **Debug-Auslöserblock**
 - das **Debugging-Werkzeug** (es sieht aus wie eine Fliegenklatsche)
+- den **Hammer**, um Zeilen einzufügen, und die **Zange**, um eine Zeile nach rechts zu rücken
 - drei INTEGER-**Variablenkarten** mit den Namen `rows`, `length` und `players`
 - die Blöcke, die du kennst: PROGRAM, NOOP, FUNCTION, PARAMETER, RESULT, BEGIN, END, ASSIGN, IF, LABEL, LITERAL, OPERATOR und die Typblöcke INTEGER und FLOAT
 - für die Aufgaben: deinen **Laptop**, die Blöcke VARIABLE, CALL und ELSE und den Typblock ERROR
@@ -98,7 +99,7 @@ Repariere es: Teile nur, wenn jemand zum Teilen da ist. Das ist das reparierte P
 
 <<< @/tutorials/programs/learning/errors-repair.c0de
 
-Zeile 11 ist jetzt ein IF, das fragt: `players > 0 ;`. Die Division rückt einen Block weiter nach Osten in einen eigenen Codeblock, in Zeile 13. Mit 0 Spielern ist `wheat` 30, und `each` bleibt 0.0.
+Zeile 11 ist jetzt ein IF, das fragt: `players > 0 ;`. Die Division rückt einen Block weiter nach Osten in einen eigenen Codeblock, in Zeile 13. Um Platz zu machen, klicke Zeile 11 zweimal mit dem Hammer mit rechts an, danach Zeile 14 einmal: Jeder Rechtsklick fügt vor der angeklickten Zeile eine leere Zeile ein. Klicke die Division, jetzt in Zeile 13, mit der **Zange** mit rechts an: Ihre Blöcke rücken einen Block nach rechts. Setze dann die Blöcke der Zeilen IF, BEGIN und END IF in die leeren Zeilen. Mit 0 Spielern ist `wheat` 30, und `each` bleibt 0.0.
 
 ## So funktioniert es
 

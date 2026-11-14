@@ -82,7 +82,7 @@ c0de wandelt von selbst nur in zwei Richtungen um: Ein INTEGER passt in ein FLOA
 
 <<< @/tutorials/programs/programmers/types-convert.c0de
 
-Mit dem Standardwert `"-12.85"` sind die Ergebnisse `number` -12.85, `whole` false, `down` -13, `cut` -12, `back` -12.0, `shown` "-12.0" und `joined` "cut -12, whole false". Mit `" 42 "` ignoriert VAL die Leerzeichen und gibt 42.0 mit `isInteger` true zurück. Mit `"forty-two"` löst VAL INVALID_ARGUMENT aus, und der Prozess stürzt mit Exit-Code 15 ab.
+Stelle den Auslöserblock auf das Programm `typeconvert` und die Funktion `convert` ein. Lege sieben nicht initialisierte Karten hinein, drücke den Knopf und klicke die Ergebniskarten mit rechts an. Mit dem Standardwert `"-12.85"` sind die Ergebnisse `number` -12.85, `whole` false, `down` -13, `cut` -12, `back` -12.0, `shown` "-12.0" und `joined` "cut -12, whole false". Lege jetzt die STRING-Variablenkarte `input` mit dem Wert `" 42 "` und sechs nicht initialisierte Karten hinein: `input` nimmt den Platz von einem Ergebnis ein. VAL ignoriert die Leerzeichen und gibt 42.0 mit `isInteger` true zurück. Mit `"forty-two"` löst VAL INVALID_ARGUMENT aus, und der Prozess stürzt mit Exit-Code 15 ab: Der Auslöserblock zeigt den Fehler, und die Karten kommen unverändert heraus.
 
 Bibliotheksfunktionen werden mit CALL aufgerufen, nie in einem Ausdruck; die nächste Lektion erklärt, warum.
 

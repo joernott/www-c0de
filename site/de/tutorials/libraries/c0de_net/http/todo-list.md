@@ -9,7 +9,7 @@ Eine Aufgabenliste für dein Team, die nicht in der Welt liegt, sondern auf eine
 **Funktionen:** [HTTP_POST](/de/c0de_net/http/http_post), [HTTP_PUT](/de/c0de_net/http/http_put), [HTTP_PATCH](/de/c0de_net/http/http_patch), [HTTP_DELETE](/de/c0de_net/http/http_delete), [HTTP_GET](/de/c0de_net/http/http_get) sowie [TO_JSON](/de/c0de/strings/to_json) und [FROM_JSON](/de/c0de/strings/from_json) aus c0de/strings
 
 ::: info Was du brauchst
-Die Mod **c0de net** in deinem Spiel, fünf Auslöserblöcke mit Knöpfen (einen für jede Funktion) und Schilder, um sie zu beschriften, eine **Anzeigewand** oder einen Laptop für die Liste, **Variablenkarten** `title` vom Typ STRING und `id` vom Typ INTEGER sowie nicht initialisierte Variablenkarten für die Ergebnisse. Für die Übungen: einen weiteren Auslöserblock mit Knopf und eine nicht initialisierte Variablenkarte für das Programm `todocleanup`.
+Die Mod **c0de net** in deinem Spiel, fünf Auslöserblöcke mit Knöpfen (einen für jede Funktion) und Schilder, um sie zu beschriften, eine **Anzeigewand** oder einen Laptop für die Liste, **Variablenkarten** `title` vom Typ STRING und `id` vom Typ INTEGER und eine nicht initialisierte Variablenkarte für das Ergebnis von `show`. Für die Übungen: einen weiteren Auslöserblock mit Knopf und eine nicht initialisierte Variablenkarte für das Programm `todocleanup`.
 :::
 
 ## Die Idee
@@ -36,11 +36,11 @@ Die Liste ist für jeden Spieler in jeder Welt dieselbe, also sei nett: Sie fass
 
 1. Stelle für jede Funktion des Programms `todolist` einen Auslöserblock auf: `add`, `rename`, `complete`, `remove` und `show`. Beschrifte sie mit Schildern.
 2. Binde die Anzeigewand oder den Laptop an `todolist` / `show`.
-3. `add`: Leg eine Variablenkarte `title` mit `Feed the cats` und eine nicht initialisierte Karte in den Auslöserblock und drück seinen Knopf. Die Ergebniskarte `id` enthält die Nummer des neuen Eintrags, zum Beispiel 1. Trag `Build a farm` genauso ein (2).
-4. `complete`: Leg eine Karte `id` mit 1 hinein. Das Ergebnis `answer` ist die Antwort des Servers: `{"id":1,"title":"Feed the cats","done":true}`.
+3. `add`: Leg eine Variablenkarte `title` mit `Feed the cats` in den Auslöserblock und drück seinen Knopf. Ein Ergebnis nimmt den Platz einer Parameterkarte ein, also brauchen `add`, `complete`, `rename` und `remove` keine nicht initialisierte Karte. Die Ergebniskarte `id` enthält die Nummer des neuen Eintrags, zum Beispiel 1. Trag `Build a farm` genauso ein (2).
+4. `complete`: Leg eine Karte `id` mit 1 hinein. Das Ergebnis `answer` kommt an ihrer Stelle heraus und ist die Antwort des Servers: `{"id":1,"title":"Feed the cats","done":true}`.
 5. `rename`: Karten `id` 2 und `title` `Build a big farm`. Die Antwort ist `{"id":2,"title":"Build a big farm","done":false}`.
-6. `remove`: eine Karte `id`. Das Ergebnis `status` ist 204: gelöscht, nichts zu antworten.
-7. `show` gibt die Liste aus und liefert die Zahl der Einträge:
+6. `remove`: eine Karte `id`, die als Ergebnis `status` zurückkommt. Es ist 204: gelöscht, nichts zu antworten.
+7. `show` hat keinen Parameter, also leg eine nicht initialisierte Karte für sein Ergebnis `count` hinein. Es gibt die Liste aus, und `count` enthält die Zahl der Einträge, 2:
 
 ```
 [x] 1 Feed the cats
@@ -65,7 +65,7 @@ Andere Spieler sehen dieselbe Liste – und die Nummern anderer Einträge, denn 
 ::: details Lösung
 <<< @/tutorials/programs/libraries/http/todo-list-cleanup.c0de
 
-GET liest die ganze Liste, EACH geht sie durch, und jeder Eintrag mit `done` bekommt sein eigenes DELETE. Ohne RESULT-Zeile wirft der CALL alle Ergebnisse weg. Nach den Schritten oben ist `removed` gleich 1.
+GET liest die ganze Liste, EACH geht sie durch, und jeder Eintrag mit `done` bekommt sein eigenes DELETE. Ohne RESULT-Zeile wirft der CALL alle Ergebnisse weg. Stelle den zusätzlichen Auslöserblock auf `todocleanup` / `cleanup`, leg eine nicht initialisierte Variablenkarte für das Ergebnis `removed` hinein und drück seinen Knopf. Nach den Schritten oben ist `removed` gleich 1.
 :::
 
 2. Hake den Eintrag 99 ab, den es nicht gibt. Was zeigt der Auslöserblock?

@@ -16,7 +16,7 @@ These functions make things out of nothing or move them without a player, so the
 
 - an empty sheet for each program
 - for the reward dispenser: a **trigger block** with a **button**, and your **laptop**
-- for the animal spawner: the same **trigger block**, and a fenced pen, like in [Watching the surroundings](/tutorials/libraries/c0de/minecraft/watching)
+- for the animal spawner: a second **trigger block** with a **button**, and a fenced pen, like in [Watching the surroundings](/tutorials/libraries/c0de/minecraft/watching)
 - for the teleporter hub: a **timer block**, three **pressure plates** with a **sign** each, and the positions of three places you want to reach
 - for the exercises: a **dispenser** full of diamonds with a **stone button** on top
 
@@ -49,7 +49,7 @@ Set the laptop and the trigger block to `rewardgame` and `play`, as in the lesso
 
 <<< @/tutorials/programs/libraries/minecraft/rewards-spawner.c0de
 
-Put the trigger block 5 blocks north of the center of the pen, like the timer block of the animal counter, set it to `animalspawner` and `spawn`, and press the button: a sheep appears in the middle of the pen. For pigs, put a STRING variable item `animal` with `minecraft:pig` into the trigger block.
+Leave the trigger block of the reward dispenser where it is – exercise 1 needs it. Place a second trigger block with a button 5 blocks north of the center of the pen, like the timer block of the animal counter, set it to `animalspawner` and `spawn`, and press the button: a sheep appears in the middle of the pen. For pigs, put a STRING variable item `animal` with `minecraft:pig` into the trigger block.
 
 <!-- screenshot: rewards-pen | the fenced pen with several sheep, one of them just appeared in the middle, the trigger block with its button north of the pen and the chat line "Animal number 4 is in the pen." -->
 

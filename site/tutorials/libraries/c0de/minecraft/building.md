@@ -16,9 +16,9 @@ PLACE_BLOCK with the parameter `inventory` takes each block from a chest, just l
 
 - a **trigger block** with a **button** on it, and an empty sheet for each program
 - for the wall: a **chest** with two stacks of **stone bricks**
-- for the tower: a **chest** with a stack of **cobblestone**
+- for the tower: a stack of **cobblestone** for the same chest
 - for the exercises: a **pickaxe**
-- a flat place of about 10 × 5 blocks
+- a flat place of about 10 × 5 blocks for the wall, and a second one of about 7 × 3 blocks for the tower
 
 :::
 
@@ -54,7 +54,7 @@ The second program has two entry functions: `build` puts up a hollow tower of co
 
 <<< @/tutorials/programs/libraries/minecraft/building-tower.c0de
 
-Again, the chest stands 2 blocks west of the trigger block; the tower takes the 3 × 3 blocks from 2 to 4 blocks east and from 1 block north to 1 block south. Set the trigger block to `towerbuilder` and `build`, and press the button. To pull it down, switch the function in the dialog to `pullDown` and press the button again.
+The tower would stand where the wall begins, so move to free ground first: take the button, the trigger block and the chest and place them there again, the chest again 2 blocks west of the trigger block. Take the leftover stone bricks out of the chest and put the cobblestone in. The tower takes the 3 × 3 blocks from 2 to 4 blocks east and from 1 block north to 1 block south. Set the trigger block to `towerbuilder` and `build`, and press the button. To pull it down, switch the function in the dialog to `pullDown` and press the button again.
 
 <!-- screenshot: building-tower | the hollow cobblestone tower, 6 blocks high, half pulled down from the top, cobblestone items lying around it, the trigger block and the chest in front of it -->
 

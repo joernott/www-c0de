@@ -37,8 +37,8 @@ Die Funktion `measure` kommt unverändert in ein Programm mit c0de/minecraft. `f
 ## So baust und startest du es
 
 1. Stelle den Auslöserblock auf das Programm `playerfinder` und die Funktion `find` ein. Er braucht keine Karten: `radius` hat den Vorgabewert 32.
-2. Geh ein Stück weg, oder bitte einen Freund darum, und drück den Knopf (oder lass deinen Freund drücken).
-3. Der Chat zeigt eine Zeile pro Spieler innerhalb von 32 Blöcken, etwa `[playerfinder/0] Alex is 7 blocks away, north-east, higher up`. Du stehst auch auf der Liste, als der Spieler direkt neben dem Auslöserblock.
+2. Bitte deinen Freund, sich vom Auslöserblock zu entfernen, aber nicht mehr als 32 Blöcke, und vielleicht ein Stück hinaufzuklettern. Dann drück selbst den Knopf. (Oder umgekehrt: Du gehst weg, und dein Freund drückt.)
+3. Der Chat zeigt eine Zeile pro Spieler innerhalb von 32 Blöcken, etwa `[playerfinder/0] Alex is 7 blocks away, north-east, higher up`. Wer den Knopf gedrückt hat, steht auch auf der Liste, direkt neben dem Auslöserblock.
 
 ## So funktioniert es
 

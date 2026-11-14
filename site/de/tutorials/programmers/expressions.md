@@ -88,6 +88,8 @@ Der Typ eines Ergebnisses folgt aus den Typen der Operanden: Zwei INTEGER ergebe
 
 <<< @/tutorials/programs/programmers/expressions-numbers.c0de
 
+Stelle den Auslöserblock auf das Programm `numbers` und die Funktion `divide` ein. Lege die INTEGER-Variablenkarten `a` und `b` und vier nicht initialisierte Karten hinein: `divide` hat sechs Ergebnisse, und `a` und `b` nehmen den Platz von zwei davon ein. Drücke den Knopf und klicke die Ergebniskarten mit rechts an. Ändere dann `a` auf -7 und danach `a` auf 7 und `b` auf 0. Mit `b` = 0 stürzt der Prozess ab, der Auslöserblock zeigt den Fehler, und die Karten kommen unverändert heraus:
+
 | `a`, `b` | quotient                     | whole (DIV) | floor (INT) | rest | check | exact |
 | -------- | ---------------------------- | ----------- | ----------- | ---- | ----- | ----- |
 | 7, 2     | 3.5                          | 3           | 3           | 1    | true  | false |

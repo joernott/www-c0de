@@ -7,7 +7,7 @@ description: Text on display walls, laptops and tablets, the keyboard with INPUT
 A c0de program has no stdin and stdout. It talks to players through devices that you bind to a program and a function: screens show what PRINT writes, laptops and tablets take keys and typed lines, and I/O blocks pass values in and out as items. The screen functions come from AmigaBASIC, so if you know `LOCATE` and `INKEY$`, you know most of this lesson.
 
 ::: info What you need
-A trigger block with a button, a **laptop** (or a tablet) and an uninitialized **variable item** for the result. Optionally a **display wall** of 2 × 1 display blocks, which shows the same screen. For the exercises: an **I/O block**, a few more uninitialized variable items and the **debugging tool**.
+A trigger block with a button, a **wrench**, a **laptop** (or a tablet) and an uninitialized **variable item** for the result. Optionally a **display wall** of 2 × 1 display blocks, which shows the same screen. For the exercises: an **I/O block**, a few more uninitialized variable items and the **debugging tool**.
 :::
 
 ## The model

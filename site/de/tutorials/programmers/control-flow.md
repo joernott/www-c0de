@@ -42,7 +42,7 @@ EACH geht durch eine Kopie eines Arrays oder Hashs. Bei einem Array bekommt die 
 
 <<< @/tutorials/programs/programmers/control-flow-stock.c0de
 
-Das Ergebnis ist `"Diamond=3 apple=12 torch=64 "`: Großbuchstaben kommen vor Kleinbuchstaben, und `coal` lässt das IF weg. Die Reihenfolge ist jedes Mal dieselbe, anders als die Reihenfolge eines `dict` oder einer `HashMap`, auf die du dich nicht verlassen solltest.
+Stelle den Auslöserblock auf das Programm `stocklist` und die Funktion `stock` ein, lege eine nicht initialisierte Karte hinein und drücke den Knopf. Klicke die Karte `report` im Ausgabeinventar mit rechts an: Sie ist `"Diamond=3 apple=12 torch=64 "`. Großbuchstaben kommen vor Kleinbuchstaben, und `coal` lässt das IF weg. Die Reihenfolge ist jedes Mal dieselbe, anders als die Reihenfolge eines `dict` oder einer `HashMap`, auf die du dich nicht verlassen solltest.
 
 ## Primzahlen, noch einmal
 

@@ -27,8 +27,9 @@ Ein TIME-Wert ist ein Zeitpunkt, gezählt in Millisekunden seit Anfang 1970. HOU
 1. Baue die Anzeigewand: zwei Anzeigeblöcke nebeneinander, die in dieselbe Richtung zeigen.
 2. Binde sie an das Programm `wallclock` und die Funktion `tick` (Anzeigeblock mit rechts anklicken, Programm und Funktion wählen, auf ✔ klicken).
 3. Setze einen Zeitgeberblock und stelle ihn auf `wallclock` / `tick` und einen Abstand von 20 Ticks ein.
+4. Setze einen Hebel neben den Zeitgeberblock und lass ihn aus. Solange der Hebel an ist, pausiert der Zeitgeberblock.
 
-Die Uhr erscheint in der Mitte der Wand und zählt die Sekunden. Um das Programm zu ändern, halte den Zeitgeberblock zuerst mit einem Hebel an: Ein laufender Prozess sperrt das Blatt.
+Die Uhr erscheint in der Mitte der Wand und zählt die Sekunden. Um das Programm zu ändern, leg zuerst den Hebel um, damit der Zeitgeberblock anhält: Ein laufender Prozess sperrt das Blatt.
 
 <!-- screenshot: clock-wall | a display wall of 2 × 1 display blocks showing the time 09:05:03 in the middle, the timer block in front of it -->
 

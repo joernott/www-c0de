@@ -60,6 +60,8 @@ Die Ergebniskarte `found` ist `TRUE`. Für einen Namen, den Open-Meteo nicht ken
 <<< @/tutorials/programs/libraries/http/weather-tomorrow.c0de
 
 `forecast_days=2` fragt nach heute und morgen, und jeder Tageswert kommt als Array mit einer Zahl pro Tag: `{"daily": {"temperature_2m_min": [3.1, 4.0], …}}`. Die Tags in den VARIABLE-Zeilen sind Pfade in die Antwort; Index 1 ist morgen. Eine Antwort lässt sich zweimal lesen, in verschiedene Variablen.
+
+Um es zu starten, stelle den Auslöserblock auf `weathertomorrow` / `tomorrow`, leg zwei nicht initialisierte Variablenkarten für die Ergebnisse `low` und `high` hinein und drück den Knopf. Die zwei Karten kommen mit den Temperaturen heraus. Um auch die PRINT-Zeile `Tomorrow: … to … °C` zu sehen, binde die Anzeigewand an `weathertomorrow` / `tomorrow`.
 :::
 
 2. Halte die Wand aktuell, ohne den Knopf zu drücken.

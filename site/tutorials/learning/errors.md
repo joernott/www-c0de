@@ -20,6 +20,7 @@ Every programmer makes mistakes, every day. What makes a good programmer is know
 - a new, empty sheet in the c0de dimension, and the wrench
 - a **trigger block** with a button, and a **debug trigger block**
 - the **debugging tool** (it looks like a fly swatter)
+- the **hammer**, to insert lines, and the **pliers**, to move a line to the right
 - three INTEGER **variable items** named `rows`, `length` and `players`
 - the blocks you know: PROGRAM, NOOP, FUNCTION, PARAMETER, RESULT, BEGIN, END, ASSIGN, IF, LABEL, LITERAL, OPERATOR and the type blocks INTEGER and FLOAT
 - for the exercises: your **laptop**, the blocks VARIABLE, CALL and ELSE and the type block ERROR
@@ -98,7 +99,7 @@ Repair it: only divide if there is somebody to share with. This is the repaired 
 
 <<< @/tutorials/programs/learning/errors-repair.c0de
 
-Line 11 is now an IF that asks `players > 0 ;`. The division moves one block further east into its own code block, in line 13. With 0 players, `wheat` is 30 and `each` stays 0.0.
+Line 11 is now an IF that asks `players > 0 ;`. The division moves one block further east into its own code block, in line 13. To make room, right-click line 11 twice with the hammer, then line 14 once: each right-click inserts an empty line in front of the clicked line. Right-click the division, now in line 13, with the **pliers**: its blocks move one block to the right. Then place the blocks of the IF, BEGIN and END IF lines in the empty lines. With 0 players, `wheat` is 30 and `each` stays 0.0.
 
 ## How it works
 

@@ -7,7 +7,7 @@ description: Functions in c0de – named parameters with defaults, several resul
 A c0de function looks like a function in any other language, until you call it. There are no positional arguments and no return value: every argument is a named PARAMETER line, every result a named RESULT line, and a function can have as many results as it likes. This lesson shows how calls, recursion and libraries work, and what the stack of the cursor has to do with it.
 
 ::: info What you need
-A creative world with cheats on (see [Tutorials](/tutorials/)), a **trigger block**, a **button**, an **INTEGER variable item** named `n`, a **FLOAT variable item** named `radius` and three **uninitialized variable items**.
+A creative world with cheats on (see [Tutorials](/tutorials/)), a **trigger block**, a **wrench**, a **button**, an **INTEGER variable item** named `n`, a **FLOAT variable item** named `radius` and three **uninitialized variable items**.
 :::
 
 ## The model

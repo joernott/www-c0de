@@ -7,7 +7,7 @@ description: JSON and YAML read into typed variables and structs with tags, and 
 c0de has no dynamic type – no `dict`, no `any`, no `Object`. JSON and YAML are read into variables of a declared type, and the type decides how the document is read, much like `encoding/json` in Go. This lesson reads a configuration into a struct and fetches JSON from the web with c0de net, whose requests come from the computer of a player, not from the server.
 
 ::: info What you need
-A trigger block with a button, a **variable item** `source` of type STRING with the JSON text, and four uninitialized variable items. For the network: the mod **c0de net**, a screen bound to the program (see [Screens, keyboards and I/O blocks](/tutorials/programmers/screens)) and one uninitialized variable item.
+A trigger block with a button, a **wrench**, a **variable item** `source` of type STRING with the JSON text, three uninitialized variable items and a screen (see [Screens, keyboards and I/O blocks](/tutorials/programmers/screens)). For the network: the mod **c0de net** and one uninitialized variable item.
 :::
 
 ## The model
@@ -52,7 +52,7 @@ def load(source: str):
 
 ## Running it
 
-Set the trigger block to the program `settings` and the function `load`. Put the variable item `source` with this text and the four uninitialized items into its input inventory:
+Set the trigger block to the program `settings` and the function `load`. Put the variable item `source` with this text and three uninitialized items into its input inventory: `load` has four results, and `source` takes the place of one of them.
 
 ```json
 {
@@ -124,7 +124,7 @@ What's different from a request in other languages:
 ::: details Solution
 <<< @/tutorials/programs/programmers/data-safe.c0de
 
-With `{"title": "Steve's base", "color": "yellow"}`, `code` is 302 (TYPE_MISMATCH) and `title` stays `"My base"` – the valid title isn't taken either. A missing `}` gives 309 (INVALID_ARGUMENT). Compare with the constants: `IF problem.code = TYPE_MISMATCH ;`.
+Bind a screen to `settings` / `load` and start it with the item `source` and one uninitialized item. With `{"title": "Steve's base", "color": "yellow"}`, the screen shows `Bad configuration: ` and the message, `code` is 302 (TYPE_MISMATCH) and `title` stays `"My base"` – the valid title isn't taken either. A missing `}` gives 309 (INVALID_ARGUMENT). Compare with the constants: `IF problem.code = TYPE_MISMATCH ;`.
 :::
 
 2. Read the configuration from YAML, with the key `close_after` there too, and return it as JSON.

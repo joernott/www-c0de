@@ -9,7 +9,7 @@ Ein Ball, der über eine Anzeige hüpft, und eine Anzeige, die den Tag und die U
 Funktionen: [SLEEP](/de/c0de/time/sleep) und [TICKS](/de/c0de/minecraft/ticks) aus c0de/minecraft.
 
 ::: info Was du brauchst
-Für die Animation: einen **Auslöserblock** mit Knopf und einen **Anzeigeblock**; wahlweise eine **Variablenkarte** `delay` vom Typ INTEGER. Für Tag und Nacht: einen **Zeitgeberblock** und einen zweiten **Anzeigeblock**; um `phase` allein auszuprobieren, eine Variablenkarte `ticks` vom Typ INTEGER und zwei nicht initialisierte Karten für den Auslöserblock.
+Für die Animation: einen **Auslöserblock** mit Knopf und einen **Anzeigeblock**; wahlweise eine **Variablenkarte** `delay` vom Typ INTEGER. Für Tag und Nacht: einen **Zeitgeberblock** und einen zweiten **Anzeigeblock**; um `phase` allein auszuprobieren, eine Variablenkarte `ticks` vom Typ INTEGER und zwei nicht initialisierte Karten für den Auslöserblock. Für die Übungen: eine weitere nicht initialisierte Karte.
 :::
 
 ## Die Idee
@@ -66,6 +66,8 @@ Ein Bild braucht etwa vier Ticks für die Zeilen der Schleife und `delay` Ticks 
 
 ::: details Lösung
 <<< @/tutorials/programs/libraries/time/game-time-speed.c0de
+
+Stelle den Auslöserblock der Animation auf `serverspeed` / `measure`, leg eine nicht initialisierte Karte für das Ergebnis `speed` hinein und binde auch seinen Anzeigeblock an `serverspeed` / `measure`. Nach 200 Ticks zeigt die Anzeige `Ticks per second: 20.0`, und `speed` enthält dieselbe Zahl.
 
 Die Ticks zwischen den beiden Messungen geteilt durch die Sekunden dazwischen. Ein gesunder Server zeigt 20.0, ein ausgelasteter weniger – und dann dauert jedes SLEEP und jedes Programm in echter Zeit länger.
 :::

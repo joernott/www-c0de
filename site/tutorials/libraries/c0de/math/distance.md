@@ -37,8 +37,8 @@ The function `measure` goes unchanged into a program with c0de/minecraft. `find`
 ## Building and running it
 
 1. Set the trigger block to the program `playerfinder` and the function `find`. It needs no items: `radius` has the default 32.
-2. Walk away a bit, or ask a friend to, and press the button (or let your friend press it).
-3. The chat shows one line per player within 32 blocks, like `[playerfinder/0] Alex is 7 blocks away, north-east, higher up`. You are on the list too, as the player right next to the trigger block.
+2. Ask your friend to walk away from the trigger block, but not more than 32 blocks, and maybe climb a little. Then press the button yourself. (Or swap: you walk away, and your friend presses it.)
+3. The chat shows one line per player within 32 blocks, like `[playerfinder/0] Alex is 7 blocks away, north-east, higher up`. The player who pressed the button is on the list too, right next to the trigger block.
 
 ## How it works
 

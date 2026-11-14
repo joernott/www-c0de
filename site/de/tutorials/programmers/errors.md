@@ -7,7 +7,7 @@ description: Fehler in c0de – keine Exceptions und kein try, aber Fehler, die 
 c0de hat keine Exceptions, keinen `try`- und keinen `catch`-Block. Trotzdem verhalten sich Fehler ganz ähnlich wie Exceptions: Eine Funktion, die scheitert, hält an, und ihr Fehler wandert die Aufrufe hinauf, bis ein Aufrufer ihn abfängt. Das Abfangen passiert beim CALL, mit einer Variablen vom Typ ERROR. Fängt ihn niemand ab, stürzt der Prozess ab, und der Auslöserblock zeigt den Fehler.
 
 ::: info Was du brauchst
-Eine Kreativwelt mit erlaubten Cheats (siehe [Tutorials](/de/tutorials/)), einen **Auslöserblock**, einen **Knopf**, eine **STRING-Variablenkarte** mit dem Namen `input`, eine **nicht initialisierte Variablenkarte** und für den Exit-Code einen **Komparator** und eine **Redstone-Lampe**. Für die Übungen: zwei **INTEGER-Variablenkarten** mit den Namen `total` und `count`.
+Eine Kreativwelt mit erlaubten Cheats (siehe [Tutorials](/de/tutorials/)), einen **Auslöserblock**, einen **Schraubenschlüssel**, einen **Knopf**, eine **STRING-Variablenkarte** mit dem Namen `input`, eine **nicht initialisierte Variablenkarte** und für den Exit-Code einen **Komparator** und eine **Redstone-Lampe**. Für die Übungen: zwei **INTEGER-Variablenkarten** mit den Namen `total` und `count`.
 :::
 
 ## Das Modell

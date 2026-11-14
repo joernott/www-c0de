@@ -7,7 +7,7 @@ description: Errors in c0de – no exceptions and no try, but errors that travel
 c0de has no exceptions, no `try` and no `catch` block. Still, errors behave much like exceptions: a function that fails stops, and its error travels up the calls until a caller catches it. The catching happens at the CALL, with a variable of type ERROR. If nobody catches it, the process crashes, and the trigger block shows the error.
 
 ::: info What you need
-A creative world with cheats on (see [Tutorials](/tutorials/)), a **trigger block**, a **button**, a **STRING variable item** named `input`, an **uninitialized variable item**, and for the exit code a **comparator** and a **redstone lamp**. For the exercises: two **INTEGER variable items** named `total` and `count`.
+A creative world with cheats on (see [Tutorials](/tutorials/)), a **trigger block**, a **wrench**, a **button**, a **STRING variable item** named `input`, an **uninitialized variable item**, and for the exit code a **comparator** and a **redstone lamp**. For the exercises: two **INTEGER variable items** named `total` and `count`.
 :::
 
 ## The model

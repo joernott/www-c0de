@@ -58,7 +58,7 @@ This program asks the to-do list of c0de.at (see [Talking to a REST service](/tu
 
 <<< @/tutorials/programs/libraries/http/checking-allowed.c0de
 
-Bind a laptop to `methodcheck` / `ask` and start it with a trigger block. The laptop shows:
+Bind a laptop to `methodcheck` / `ask`. Set the trigger block to `methodcheck` / `ask`, put in two uninitialized variable items for the results `methods` and `traced`, and press the button. The laptop shows:
 
 ```
 Allowed: GET, HEAD, POST, OPTIONS

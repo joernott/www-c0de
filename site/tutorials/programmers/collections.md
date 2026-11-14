@@ -7,7 +7,7 @@ description: Arrays, hashes and structs in c0de – indexes, the built-in functi
 c0de has three ways to group values: the ARRAY is a list, the HASH a dictionary with text keys, the STRUCT a record with named elements. They feel like Python's lists, dicts and dataclasses, with one big difference: they are values. Every assignment, every parameter and every result is a copy, and there are no references, no aliasing and no null.
 
 ::: info What you need
-A creative world with cheats on (see [Tutorials](/tutorials/)), a **trigger block**, a **button**, an **ARRAY variable item** with the subtype INTEGER named `numbers`, a **STRING variable item** named `text`, two **STRUCT variable items** named `a` and `b` and a few **uninitialized variable items**.
+A creative world with cheats on (see [Tutorials](/tutorials/)), a **trigger block**, a **wrench**, a **button**, an **ARRAY variable item** with the subtype INTEGER named `numbers`, a **STRING variable item** named `text`, two **STRUCT variable items** named `a` and `b` and a few **uninitialized variable items**.
 :::
 
 ## The model

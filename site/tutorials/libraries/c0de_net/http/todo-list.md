@@ -9,7 +9,7 @@ A to-do list for your team that isn't stored in the world but on a server: one p
 **Functions:** [HTTP_POST](/c0de_net/http/http_post), [HTTP_PUT](/c0de_net/http/http_put), [HTTP_PATCH](/c0de_net/http/http_patch), [HTTP_DELETE](/c0de_net/http/http_delete), [HTTP_GET](/c0de_net/http/http_get), and [TO_JSON](/c0de/strings/to_json) and [FROM_JSON](/c0de/strings/from_json) of c0de/strings
 
 ::: info What you need
-The mod **c0de net** in your game, five trigger blocks with buttons (one for each function) and signs to label them, a **display wall** or a laptop for the list, **variable items** `title` of type STRING and `id` of type INTEGER, and uninitialized variable items for the results. For the exercises: one more trigger block with a button and an uninitialized variable item for the program `todocleanup`.
+The mod **c0de net** in your game, five trigger blocks with buttons (one for each function) and signs to label them, a **display wall** or a laptop for the list, **variable items** `title` of type STRING and `id` of type INTEGER, and an uninitialized variable item for the result of `show`. For the exercises: one more trigger block with a button and an uninitialized variable item for the program `todocleanup`.
 :::
 
 ## The idea
@@ -36,11 +36,11 @@ The list is the same for every player in every world, so be nice: it holds at mo
 
 1. Set up one trigger block per function of the program `todolist`: `add`, `rename`, `complete`, `remove` and `show`. Label them with signs.
 2. Bind the display wall or the laptop to `todolist` / `show`.
-3. `add`: put a variable item `title` with `Feed the cats` and an uninitialized item into the trigger block and press its button. The result item `id` holds the number of the new entry, for example 1. Add `Build a farm` the same way (2).
-4. `complete`: put an item `id` with 1 in it. The result `answer` is what the server answers: `{"id":1,"title":"Feed the cats","done":true}`.
+3. `add`: put a variable item `title` with `Feed the cats` into the trigger block and press its button. A result takes the place of a parameter item, so `add`, `complete`, `rename` and `remove` need no uninitialized item. The result item `id` holds the number of the new entry, for example 1. Add `Build a farm` the same way (2).
+4. `complete`: put an item `id` with 1 in it. The result `answer` comes out in its place and is what the server answers: `{"id":1,"title":"Feed the cats","done":true}`.
 5. `rename`: items `id` 2 and `title` `Build a big farm`. The answer is `{"id":2,"title":"Build a big farm","done":false}`.
-6. `remove`: an item `id`. The result `status` is 204: deleted, nothing to answer.
-7. `show` prints the list and returns the number of entries:
+6. `remove`: an item `id`, which comes back as the result `status`. It is 204: deleted, nothing to answer.
+7. `show` has no parameter, so put an uninitialized item in for its result `count`. It prints the list and `count` holds the number of entries, 2:
 
 ```
 [x] 1 Feed the cats
@@ -65,7 +65,7 @@ Other players see the same list – and the numbers of other entries, because ev
 ::: details Solution
 <<< @/tutorials/programs/libraries/http/todo-list-cleanup.c0de
 
-GET reads the whole list, EACH goes through it, and every entry with `done` gets its own DELETE. Without a RESULT line, the CALL throws all results away. After the steps above, `removed` is 1.
+GET reads the whole list, EACH goes through it, and every entry with `done` gets its own DELETE. Without a RESULT line, the CALL throws all results away. Set the extra trigger block to `todocleanup` / `cleanup`, put in an uninitialized variable item for the result `removed` and press its button. After the steps above, `removed` is 1.
 :::
 
 2. Complete the entry 99, which doesn't exist. What does the trigger block show?

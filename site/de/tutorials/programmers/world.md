@@ -7,7 +7,7 @@ description: Wie c0de-Programme in der Welt leben – Prozesse, PIDs und der Cur
 Ein c0de-Programm hat kein `main`, keine Kommandozeile und keine Dateien. Es liegt auf einem Blatt und wartet, bis ein Auslöserblock eine seiner Funktionen startet. Die Argumente kommen als Karten herein, die Ergebnisse gehen als Karten hinaus, und Trichter tragen sie zum nächsten Auslöserblock weiter. Diese Lektion verbindet zwei Auslöserblöcke zu einer kleinen Kette und erklärt, was wo läuft, wer was darf und wie Programme zwischen Welten wandern.
 
 ::: info Was du brauchst
-Eine Kreativwelt mit erlaubten Cheats (siehe [Tutorials](/de/tutorials/)), einen **Auslöserblock**, einen **Zeitgeberblock**, einen **Knopf**, zwei **Trichter**, eine **Truhe**, eine **INTEGER-Variablenkarte** mit dem Namen `count`, eine **STRING-Variablenkarte** mit dem Namen `item` und eine **nicht initialisierte Variablenkarte**. Für die Übungen: einen **Komparator** und eine **Redstone-Lampe**.
+Eine Kreativwelt mit erlaubten Cheats (siehe [Tutorials](/de/tutorials/)), einen **Auslöserblock**, einen **Zeitgeberblock**, einen **Schraubenschlüssel**, einen **Knopf**, zwei **Trichter**, eine **Truhe**, eine **INTEGER-Variablenkarte** mit dem Namen `count`, eine **STRING-Variablenkarte** mit dem Namen `item` und eine **nicht initialisierte Variablenkarte**. Für die Übungen: einen **Komparator** und eine **Redstone-Lampe**.
 :::
 
 ## Das Modell

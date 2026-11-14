@@ -7,7 +7,7 @@ description: Arrays, Hashes und Strukturen in c0de – Indizes, die eingebauten 
 c0de hat drei Wege, Werte zusammenzufassen: Das ARRAY ist eine Liste, der HASH ein Wörterbuch mit Textschlüsseln, der STRUCT ein Datensatz mit benannten Elementen. Sie fühlen sich an wie Listen, Dicts und Dataclasses in Python, mit einem großen Unterschied: Sie sind Werte. Jede Zuweisung, jeder Parameter und jedes Ergebnis ist eine Kopie, und es gibt keine Referenzen, kein Aliasing und kein null.
 
 ::: info Was du brauchst
-Eine Kreativwelt mit erlaubten Cheats (siehe [Tutorials](/de/tutorials/)), einen **Auslöserblock**, einen **Knopf**, eine **ARRAY-Variablenkarte** mit dem Untertyp INTEGER und dem Namen `numbers`, eine **STRING-Variablenkarte** mit dem Namen `text`, zwei **STRUCT-Variablenkarten** mit den Namen `a` und `b` und ein paar **nicht initialisierte Variablenkarten**.
+Eine Kreativwelt mit erlaubten Cheats (siehe [Tutorials](/de/tutorials/)), einen **Auslöserblock**, einen **Schraubenschlüssel**, einen **Knopf**, eine **ARRAY-Variablenkarte** mit dem Untertyp INTEGER und dem Namen `numbers`, eine **STRING-Variablenkarte** mit dem Namen `text`, zwei **STRUCT-Variablenkarten** mit den Namen `a` und `b` und ein paar **nicht initialisierte Variablenkarten**.
 :::
 
 ## Das Modell

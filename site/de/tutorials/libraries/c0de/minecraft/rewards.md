@@ -16,7 +16,7 @@ Diese Funktionen machen Dinge aus dem Nichts oder bewegen sie ohne einen Spieler
 
 - ein leeres Blatt für jedes Programm
 - für den Belohnungsautomaten: einen **Auslöserblock** mit einem **Knopf** und deinen **Laptop**
-- für den Tierspawner: denselben **Auslöserblock** und ein eingezäuntes Gehege wie in [Die Umgebung beobachten](/de/tutorials/libraries/c0de/minecraft/watching)
+- für den Tierspawner: einen zweiten **Auslöserblock** mit einem **Knopf** und ein eingezäuntes Gehege wie in [Die Umgebung beobachten](/de/tutorials/libraries/c0de/minecraft/watching)
 - für den Teleporter-Knoten: einen **Zeitgeberblock**, drei **Druckplatten** mit je einem **Schild** und die Positionen von drei Orten, die du erreichen willst
 - für die Übungen: einen **Werfer** voller Diamanten mit einem **Steinknopf** obendrauf
 
@@ -49,7 +49,7 @@ Stelle den Laptop und den Auslöserblock wie in der Lektion auf `rewardgame` und
 
 <<< @/tutorials/programs/libraries/minecraft/rewards-spawner.c0de
 
-Stell den Auslöserblock 5 Blöcke nördlich der Mitte des Geheges auf, wie den Zeitgeberblock des Tierzählers, stelle ihn auf `animalspawner` und `spawn` ein und drück den Knopf: In der Mitte des Geheges erscheint ein Schaf. Für Schweine leg eine STRING-Variablenkarte `animal` mit `minecraft:pig` in den Auslöserblock.
+Lass den Auslöserblock des Belohnungsautomaten, wo er ist – Übung 1 braucht ihn. Stell einen zweiten Auslöserblock mit Knopf 5 Blöcke nördlich der Mitte des Geheges auf, wie den Zeitgeberblock des Tierzählers, stelle ihn auf `animalspawner` und `spawn` ein und drück den Knopf: In der Mitte des Geheges erscheint ein Schaf. Für Schweine leg eine STRING-Variablenkarte `animal` mit `minecraft:pig` in den Auslöserblock.
 
 <!-- screenshot: rewards-pen | the fenced pen with several sheep, one of them just appeared in the middle, the trigger block with its button north of the pen and the chat line "Animal number 4 is in the pen." -->
 

@@ -82,7 +82,7 @@ c0de converts only in two directions by itself: an INTEGER fits into a FLOAT, an
 
 <<< @/tutorials/programs/programmers/types-convert.c0de
 
-With the default `"-12.85"`, the results are `number` -12.85, `whole` false, `down` -13, `cut` -12, `back` -12.0, `shown` "-12.0" and `joined` "cut -12, whole false". With `" 42 "`, VAL ignores the spaces and returns 42.0 with `isInteger` true. With `"forty-two"`, VAL raises INVALID_ARGUMENT, and the process crashes with exit code 15.
+Set the trigger block to the program `typeconvert` and the function `convert`. Put in seven uninitialized items, press the button and right-click the result items. With the default `"-12.85"`, the results are `number` -12.85, `whole` false, `down` -13, `cut` -12, `back` -12.0, `shown` "-12.0" and `joined` "cut -12, whole false". Now put in the STRING variable item `input` with the value `" 42 "` and six uninitialized items: `input` takes the place of one result. VAL ignores the spaces and returns 42.0 with `isInteger` true. With `"forty-two"`, VAL raises INVALID_ARGUMENT, and the process crashes with exit code 15: the trigger block shows the error, and the items come out unchanged.
 
 Library functions are called with CALL, never inside an expression; the next lesson explains why.
 

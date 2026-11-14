@@ -9,7 +9,7 @@ A ball that bounces across a display, and a display that shows the day and the c
 Functions: [SLEEP](/c0de/time/sleep) and [TICKS](/c0de/minecraft/ticks) of c0de/minecraft.
 
 ::: info What you need
-For the animation: a **trigger block** with a button and a **display block**; optionally a **variable item** `delay` of type INTEGER. For day and night: a **timer block** and a second **display block**; to try `phase` alone, a variable item `ticks` of type INTEGER and two uninitialized items for the trigger block.
+For the animation: a **trigger block** with a button and a **display block**; optionally a **variable item** `delay` of type INTEGER. For day and night: a **timer block** and a second **display block**; to try `phase` alone, a variable item `ticks` of type INTEGER and two uninitialized items for the trigger block. For the exercises: one more uninitialized item.
 :::
 
 ## The idea
@@ -66,6 +66,8 @@ A frame takes about four ticks for the lines of the loop and `delay` ticks of SL
 
 ::: details Solution
 <<< @/tutorials/programs/libraries/time/game-time-speed.c0de
+
+Set the trigger block of the animation to `serverspeed` / `measure`, put in an uninitialized item for the result `speed`, and bind its display block to `serverspeed` / `measure` too. After 200 ticks, the display shows `Ticks per second: 20.0`, and `speed` holds the same number.
 
 The ticks between the two readings divided by the seconds between them. A healthy server shows 20.0; a busy one less, and then every SLEEP and every program takes longer in real time.
 :::

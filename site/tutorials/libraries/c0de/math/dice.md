@@ -55,7 +55,7 @@ That matters for a random step to the left, nowhere or to the right, -1, 0 or 1:
 
 <<< @/tutorials/programs/libraries/math/dice-steps.c0de
 
-Set a trigger block to `randomsteps` and `compare` and put two uninitialized items into it; the 120 rolls take the cursor about a minute. With the seed 42, `withInt` is `[46, 27, 47]` and `withFix` is `[0, 73, 47]`. With INT, all three steps come up about equally often. FIX turns everything from -1 up to 0 into 0, so -1 never comes up and 0 is twice as likely. Use INT for random numbers that can be negative; FIX is for cutting off decimals, like a price without its cents.
+Use the same trigger block: take the items of the die out, set it to `randomsteps` and `compare`, and put two uninitialized items into it for the results `withInt` and `withFix`. The program prints nothing, so the display stays as it is; the 120 rolls take the cursor about a minute. With the seed 42, `withInt` is `[46, 27, 47]` and `withFix` is `[0, 73, 47]`. With INT, all three steps come up about equally often. FIX turns everything from -1 up to 0 into 0, so -1 never comes up and 0 is twice as likely. Use INT for random numbers that can be negative; FIX is for cutting off decimals, like a price without its cents.
 
 ## Try it yourself
 

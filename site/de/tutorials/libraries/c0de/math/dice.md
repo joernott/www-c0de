@@ -55,7 +55,7 @@ Das zählt bei einem zufälligen Schritt nach links, nirgendwohin oder nach rech
 
 <<< @/tutorials/programs/libraries/math/dice-steps.c0de
 
-Stelle einen Auslöserblock auf `randomsteps` und `compare` ein und lege zwei nicht initialisierte Karten hinein; für die 120 Würfe braucht der Cursor etwa eine Minute. Mit dem Seed 42 ist `withInt` gleich `[46, 27, 47]` und `withFix` gleich `[0, 73, 47]`. Mit INT kommen alle drei Schritte etwa gleich oft vor. FIX macht alles von -1 bis 0 zu 0, also kommt -1 nie vor und 0 ist doppelt so wahrscheinlich. Nimm INT für Zufallszahlen, die negativ sein können; FIX ist zum Abschneiden von Nachkommastellen da, etwa für einen Preis ohne Cent.
+Nimm denselben Auslöserblock: Nimm die Karten des Würfels heraus, stelle ihn auf `randomsteps` und `compare` ein und lege zwei nicht initialisierte Karten für die Ergebnisse `withInt` und `withFix` hinein. Das Programm gibt nichts aus, die Anzeige bleibt also, wie sie ist; für die 120 Würfe braucht der Cursor etwa eine Minute. Mit dem Seed 42 ist `withInt` gleich `[46, 27, 47]` und `withFix` gleich `[0, 73, 47]`. Mit INT kommen alle drei Schritte etwa gleich oft vor. FIX macht alles von -1 bis 0 zu 0, also kommt -1 nie vor und 0 ist doppelt so wahrscheinlich. Nimm INT für Zufallszahlen, die negativ sein können; FIX ist zum Abschneiden von Nachkommastellen da, etwa für einen Preis ohne Cent.
 
 ## Probier es selbst
 

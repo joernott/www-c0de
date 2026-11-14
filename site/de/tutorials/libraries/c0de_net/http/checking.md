@@ -58,7 +58,7 @@ Dieses Programm fragt die Aufgabenliste von c0de.at (siehe [Mit einem REST-Diens
 
 <<< @/tutorials/programs/libraries/http/checking-allowed.c0de
 
-Binde einen Laptop an `methodcheck` / `ask` und starte es mit einem Auslöserblock. Der Laptop zeigt:
+Binde einen Laptop an `methodcheck` / `ask`. Stelle den Auslöserblock auf `methodcheck` / `ask`, leg zwei nicht initialisierte Variablenkarten für die Ergebnisse `methods` und `traced` hinein und drück den Knopf. Der Laptop zeigt:
 
 ```
 Allowed: GET, HEAD, POST, OPTIONS

@@ -7,7 +7,7 @@ description: JSON und YAML in typisierte Variablen und Strukturen mit Tags einle
 c0de hat keinen dynamischen Typ – kein `dict`, kein `any`, kein `Object`. JSON und YAML werden in Variablen eines deklarierten Typs gelesen, und der Typ bestimmt, wie das Dokument gelesen wird, ganz ähnlich wie `encoding/json` in Go. Diese Lektion liest eine Konfiguration in eine Struktur und holt JSON mit c0de net aus dem Web, dessen Anfragen vom Computer eines Spielers kommen, nicht vom Server.
 
 ::: info Was du brauchst
-Einen Auslöserblock mit Knopf, eine **Variablenkarte** `source` vom Typ STRING mit dem JSON-Text und vier nicht initialisierte Variablenkarten. Für das Netzwerk: die Mod **c0de net**, einen an das Programm gebundenen Bildschirm (siehe [Bildschirme, Tastaturen und E/A-Blöcke](/de/tutorials/programmers/screens)) und eine nicht initialisierte Variablenkarte.
+Einen Auslöserblock mit Knopf, einen **Schraubenschlüssel**, eine **Variablenkarte** `source` vom Typ STRING mit dem JSON-Text, drei nicht initialisierte Variablenkarten und einen Bildschirm (siehe [Bildschirme, Tastaturen und E/A-Blöcke](/de/tutorials/programmers/screens)). Für das Netzwerk: die Mod **c0de net** und eine nicht initialisierte Variablenkarte.
 :::
 
 ## Das Modell
@@ -52,7 +52,7 @@ def load(source: str):
 
 ## Starten
 
-Stelle den Auslöserblock auf das Programm `settings` und die Funktion `load` ein. Lege die Variablenkarte `source` mit diesem Text und die vier nicht initialisierten Karten in sein Eingabeinventar:
+Stelle den Auslöserblock auf das Programm `settings` und die Funktion `load` ein. Lege die Variablenkarte `source` mit diesem Text und drei nicht initialisierte Karten in sein Eingabeinventar: `load` hat vier Ergebnisse, und `source` nimmt den Platz von einem davon ein.
 
 ```json
 {
@@ -124,7 +124,7 @@ Was anders ist als bei einer Anfrage in anderen Sprachen:
 ::: details Lösung
 <<< @/tutorials/programs/programmers/data-safe.c0de
 
-Mit `{"title": "Steve's base", "color": "yellow"}` ist `code` 302 (TYPE_MISMATCH), und `title` bleibt `"My base"` – auch der gültige Titel wird nicht übernommen. Eine fehlende `}` ergibt 309 (INVALID_ARGUMENT). Vergleiche mit den Konstanten: `IF problem.code = TYPE_MISMATCH ;`.
+Binde einen Bildschirm an `settings` / `load` und starte es mit der Karte `source` und einer nicht initialisierten Karte. Mit `{"title": "Steve's base", "color": "yellow"}` zeigt der Bildschirm `Bad configuration: ` und die Meldung, `code` ist 302 (TYPE_MISMATCH), und `title` bleibt `"My base"` – auch der gültige Titel wird nicht übernommen. Eine fehlende `}` ergibt 309 (INVALID_ARGUMENT). Vergleiche mit den Konstanten: `IF problem.code = TYPE_MISMATCH ;`.
 :::
 
 2. Lies die Konfiguration aus YAML, auch dort mit dem Schlüssel `close_after`, und gib sie als JSON zurück.

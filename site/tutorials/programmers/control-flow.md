@@ -42,7 +42,7 @@ EACH goes through a copy of an array or a hash. For an array, the loop variable 
 
 <<< @/tutorials/programs/programmers/control-flow-stock.c0de
 
-The result is `"Diamond=3 apple=12 torch=64 "`: capital letters come before small ones, and `coal` is left out by the IF. The order is the same every time, unlike the order of a `dict` or a `HashMap` that you shouldn't rely on.
+Set the trigger block to the program `stocklist` and the function `stock`, put in one uninitialized item and press the button. Right-click the item `report` in the output inventory: it is `"Diamond=3 apple=12 torch=64 "`. Capital letters come before small ones, and `coal` is left out by the IF. The order is the same every time, unlike the order of a `dict` or a `HashMap` that you shouldn't rely on.
 
 ## Prime numbers, revisited
 

@@ -16,9 +16,9 @@ PLACE_BLOCK mit dem Parameter `inventory` nimmt jeden Block aus einer Truhe, so 
 
 - einen **Auslöserblock** mit einem **Knopf** darauf und ein leeres Blatt für jedes Programm
 - für die Mauer: eine **Truhe** mit zwei Stapeln **Steinziegel**
-- für den Turm: eine **Truhe** mit einem Stapel **Bruchstein**
+- für den Turm: einen Stapel **Bruchstein** für dieselbe Truhe
 - für die Übungen: eine **Spitzhacke**
-- einen ebenen Platz von etwa 10 × 5 Blöcken
+- einen ebenen Platz von etwa 10 × 5 Blöcken für die Mauer und einen zweiten von etwa 7 × 3 Blöcken für den Turm
 
 :::
 
@@ -54,7 +54,7 @@ Das zweite Programm hat zwei Einstiegsfunktionen: `build` baut einen hohlen Turm
 
 <<< @/tutorials/programs/libraries/minecraft/building-tower.c0de
 
-Wieder steht die Truhe 2 Blöcke westlich des Auslöserblocks; der Turm belegt die 3 × 3 Blöcke von 2 bis 4 Blöcke östlich und von 1 Block nördlich bis 1 Block südlich. Stelle den Auslöserblock auf `towerbuilder` und `build` ein und drück den Knopf. Zum Abreißen stellst du die Funktion im Dialog auf `pullDown` um und drückst den Knopf noch einmal.
+Der Turm stünde dort, wo die Mauer beginnt, also zieh zuerst auf freien Boden um: Nimm den Knopf, den Auslöserblock und die Truhe und stell sie dort wieder auf, die Truhe wieder 2 Blöcke westlich des Auslöserblocks. Nimm die übrigen Steinziegel aus der Truhe und leg den Bruchstein hinein. Der Turm belegt die 3 × 3 Blöcke von 2 bis 4 Blöcke östlich und von 1 Block nördlich bis 1 Block südlich. Stelle den Auslöserblock auf `towerbuilder` und `build` ein und drück den Knopf. Zum Abreißen stellst du die Funktion im Dialog auf `pullDown` um und drückst den Knopf noch einmal.
 
 <!-- screenshot: building-tower | the hollow cobblestone tower, 6 blocks high, half pulled down from the top, cobblestone items lying around it, the trigger block and the chest in front of it -->
 

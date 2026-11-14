@@ -7,7 +7,7 @@ description: Funktionen in c0de – benannte Parameter mit Standardwerten, mehre
 Eine Funktion in c0de sieht aus wie eine Funktion in jeder anderen Sprache, bis du sie aufrufst. Es gibt keine Argumente nach Position und keinen Rückgabewert: Jedes Argument ist eine benannte PARAMETER-Zeile, jedes Ergebnis eine benannte RESULT-Zeile, und eine Funktion kann so viele Ergebnisse haben, wie sie will. Diese Lektion zeigt, wie Aufrufe, Rekursion und Bibliotheken funktionieren und was der Stack des Cursors damit zu tun hat.
 
 ::: info Was du brauchst
-Eine Kreativwelt mit erlaubten Cheats (siehe [Tutorials](/de/tutorials/)), einen **Auslöserblock**, einen **Knopf**, eine **INTEGER-Variablenkarte** mit dem Namen `n`, eine **FLOAT-Variablenkarte** mit dem Namen `radius` und drei **nicht initialisierte Variablenkarten**.
+Eine Kreativwelt mit erlaubten Cheats (siehe [Tutorials](/de/tutorials/)), einen **Auslöserblock**, einen **Schraubenschlüssel**, einen **Knopf**, eine **INTEGER-Variablenkarte** mit dem Namen `n`, eine **FLOAT-Variablenkarte** mit dem Namen `radius` und drei **nicht initialisierte Variablenkarten**.
 :::
 
 ## Das Modell

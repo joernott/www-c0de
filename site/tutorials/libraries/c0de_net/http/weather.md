@@ -60,6 +60,8 @@ The result item `found` is `TRUE`. For a name that Open-Meteo doesn't know, like
 <<< @/tutorials/programs/libraries/http/weather-tomorrow.c0de
 
 `forecast_days=2` asks for today and tomorrow, and each daily value comes as an array with one number per day: `{"daily": {"temperature_2m_min": [3.1, 4.0], …}}`. The tags on the VARIABLE lines are paths into the answer; index 1 is tomorrow. One answer can be read twice, into different variables.
+
+To run it, set the trigger block to `weathertomorrow` / `tomorrow`, put in two uninitialized variable items for the results `low` and `high`, and press the button. The two items come out with the temperatures. To see the PRINT line `Tomorrow: … to … °C` as well, bind the display wall to `weathertomorrow` / `tomorrow`.
 :::
 
 2. Keep the wall up to date without pressing the button.
