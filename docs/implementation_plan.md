@@ -50,7 +50,7 @@ A task is done when
 | 9 | Tutorials: libraries in practice | The API for the tutorials and the version check, and the recipes of all libraries | ✅ |
 | 10 | c0de 0.5.0 | The site shows the documentation of c0de 0.5.0, and the programs of the tutorials are tested with its runner | ✅ |
 | 11 | c0de net 0.3.0 | The site shows the documentation of c0de net 0.3.0, and the recipes compare errors with its constants | ✅ |
-| 12 | CurseForge | The mods can be downloaded from CurseForge as well as from Modrinth |  |
+| 12 | CurseForge | The mods can be downloaded from CurseForge as well as from Modrinth | ✅ |
 
 ## Sprint 0: Concept and plan
 
