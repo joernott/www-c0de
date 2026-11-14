@@ -222,3 +222,11 @@ Please review all the building instructions and make sure, they match the requir
 ## 2026-11-14 – Task 12.4.1
 
 yes, please fix 12.4.1 before the release
+
+## 2026-11-14 – Release 0.8.0
+
+the default variants were just experiments based on the description, how all screenshots should look, ignore them, as we have more detailed instruction for every screenshot.
+
+Don't crop the screenshots.
+
+Yes, go ahead with the release
