@@ -199,3 +199,11 @@ the tag has been pushed but there has been no new package to deploy
 ## 2026-11-13 – Release 0.7.0 is live
 
 yes, plese add that as a task do sprint 12. Version 0.7.0 has been deployed successfully
+
+## 2026-11-14 – Open-Meteo in CI and the screenshot world
+
+let's add the new task but don't create a new release yet. I wnt to add the screenshots to this release, too.
+
+For the screenshots, I'd like you to assist me in the following way:
+- Compile a ToDo list for the screenshots. Each entry contains the page name, the program name, the program code. Also create an accompanying yaml file with the program code.
+- Prepare a world on the server, where all the programs from the list have been placed. Leave the first sheet empty and always leave 1 empty sheet between programs to make sure that the screenshots all look similar and don't contain parts of other programs. For each sheet, place the same base setup 3 blocks north of the sheet: A regular trigger with a stone button on top, a debug trigger with a laptop on top, a timer trigger with a switch on top (turned on to disable the timer), an input block , a disk drive and a gray shulker box containing a stack of variable, constant and literal cards each, as well as a disk. place a  line of 6 iron blocks at z:-6 behind those blocks and above those a 4 wide and 3 high display framed by iron blocks.

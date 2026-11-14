@@ -33,3 +33,6 @@ site/.vitepress/models.json
 site/.cache/
 e2e/lighthouse/
 e2e/.lighthouseci/
+
+# The datapack of the screenshot world (contrib/screenshots/README.md)
+contrib/screenshots/out/

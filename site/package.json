@@ -17,6 +17,7 @@
     "format": "prettier --write .",
     "typecheck": "vue-tsc --noEmit",
     "check-links": "node scripts/check-links.ts",
+    "screenshot-world": "node scripts/screenshot-world.ts",
     "test-programs": "node scripts/test-programs.ts",
     "screenshots": "node scripts/screenshots.ts"
   },

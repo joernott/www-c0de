@@ -58,7 +58,7 @@ A lesson marks a screenshot with a comment on a line of its own, in both languag
 
 The screenshots are taken in the game by hand, all the same way, so they can be taken again after visual changes of the mod:
 
-- Minecraft 1.21.1 with the newest c0de and c0de net, Fabric, no other mods or resource packs (the default textures), in the tutorial world (creative, cheats on).
+- Minecraft 1.21.1 with the newest c0de and c0de net, Fabric, no other mods or resource packs (the default textures), in creative mode in the screenshot world: every program on its own sheet with the same devices north of it, built by a datapack on the 1.21.1 Fabric test server (`contrib/screenshots/README.md`, task 12.3). `docs/screenshots.md` is the to-do list with the sheet of every screenshot.
 - Window 1920 × 1080, GUI scale 2, field of view 70, brightness "Moody", daylight.
 - The HUD hidden with F1, unless the screenshot is of a dialog or the chat.
 - Programs on their sheet: seen from the south, about 6 blocks behind and 4 blocks above the last line, looking down at the sheet, so all lines and the line numbers are in the picture.
