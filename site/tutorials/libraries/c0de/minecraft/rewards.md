@@ -14,9 +14,11 @@ These functions make things out of nothing or move them without a player, so the
 
 ::: info What you need
 
-- a **trigger block** with a **button**, your **laptop**, a **timer block**, and an empty sheet for each program
-- a fenced pen, like in [Watching the surroundings](/tutorials/libraries/c0de/minecraft/watching)
-- three **pressure plates**, and the positions of three places you want to reach
+- an empty sheet for each program
+- for the reward dispenser: a **trigger block** with a **button**, and your **laptop**
+- for the animal spawner: the same **trigger block**, and a fenced pen, like in [Watching the surroundings](/tutorials/libraries/c0de/minecraft/watching)
+- for the teleporter hub: a **timer block**, three **pressure plates** with a **sign** each, and the positions of three places you want to reach
+- for the exercises: a **dispenser** full of diamonds with a **stone button** on top
 
 :::
 

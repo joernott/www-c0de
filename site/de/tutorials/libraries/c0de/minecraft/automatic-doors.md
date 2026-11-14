@@ -10,9 +10,10 @@ Eine Ladentür, die von selbst aufgeht: Tritt auf die Druckplatte davor, und sie
 
 ::: info Was du brauchst
 
-- einen **Zeitgeberblock**, einen **Auslöserblock** mit einem **Knopf** darauf und ein leeres Blatt für jedes Programm
-- eine **Holztür** und zwei **Druckplatten**
-- für den Bericht: noch ein paar Türen, **Zauntore** oder **Falltüren**
+- für die Tür: einen **Zeitgeberblock**, eine **Holztür** und zwei **Druckplatten**
+- für den Bericht: einen **Auslöserblock** mit einem **Knopf** darauf und noch ein paar Türen, **Zauntore** oder **Falltüren**
+- ein leeres Blatt für jedes Programm
+- für die Übungen: eine **leichte Wägeplatte** (die goldene)
 - keine Rechte für Holztüren, Tore und Falltüren. Eisentüren und Eisenfalltüren brauchen auf einem Server `allowBlockChanges` oder einen Operator als Besitzer, wie bei der [bewachten Tür](/de/tutorials/learning/guarded-door).
 
 :::

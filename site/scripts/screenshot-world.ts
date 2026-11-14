@@ -293,7 +293,8 @@ function todo(all: Shot[], programs: Program[]): string {
       page = shot.page
       md.push(`## ${shot.title}`, '', `\`site/${page}\``, '')
     }
-    md.push(`### [ ] ${shot.id}`, '', shot.description, '')
+    const taken = existsSync(join(site, 'public', 'tutorials', 'screenshots', `${shot.id}.webp`))
+    md.push(`### [${taken ? 'x' : ' '}] ${shot.id}`, '', shot.description, '')
     const program = shot.program ? byFile.get(shot.program) : undefined
     if (program) {
       md.push(

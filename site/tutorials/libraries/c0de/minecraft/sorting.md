@@ -14,9 +14,10 @@ MOVE_ITEMS and DELETE_ITEMS move items without a player, so they only work if th
 
 ::: info What you need
 
-- two **timer blocks** and an empty sheet for each program
-- four **chests** and a **hopper**
-- a few stacks of cobblestone, dirt, bread, apples, and something else, like diamonds
+- an empty sheet for each program
+- for the sorter: a **timer block**, three **chests** and a **hopper**, plus some cobblestone, bread and a diamond
+- for the trash can: a second **timer block**, a fourth **chest** and some rotten flesh
+- for the exercises: rotten flesh, poisonous potatoes and a fifth **chest**
 
 :::
 

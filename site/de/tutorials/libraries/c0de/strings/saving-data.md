@@ -9,7 +9,7 @@ Eine Bestenliste für deine Spiele: Nach jedem Spiel tippt der Spieler seinen Na
 **Funktionen:** [TO_JSON](/de/c0de/strings/to_json), [FROM_JSON](/de/c0de/strings/from_json), [TO_YAML](/de/c0de/strings/to_yaml), [FROM_YAML](/de/c0de/strings/from_yaml)
 
 ::: info Was du brauchst
-Einen Auslöserblock mit Knopf, einen **Laptop**, einen **E/A-Block** und ein paar nicht initialisierte **Variablenkarten**: für jedes Spiel eine für den Auslöserblock und eine für den E/A-Block.
+Einen Auslöserblock mit Knopf, einen **Laptop**, einen **E/A-Block** und ein paar nicht initialisierte **Variablenkarten**: für jedes Spiel eine für den Auslöserblock und eine für den E/A-Block. Für die zweite Übung: eine Variablenkarte `list` vom Typ STRING.
 :::
 
 ## Die Idee

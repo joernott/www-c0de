@@ -22,6 +22,7 @@ Every programmer makes mistakes, every day. What makes a good programmer is know
 - the **debugging tool** (it looks like a fly swatter)
 - three INTEGER **variable items** named `rows`, `length` and `players`
 - the blocks you know: PROGRAM, NOOP, FUNCTION, PARAMETER, RESULT, BEGIN, END, ASSIGN, IF, LABEL, LITERAL, OPERATOR and the type blocks INTEGER and FLOAT
+- for the exercises: your **laptop**, the blocks VARIABLE, CALL and ELSE and the type block ERROR
 
 :::
 

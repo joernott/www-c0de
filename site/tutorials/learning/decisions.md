@@ -16,6 +16,7 @@ Until now, your programs did the same thing every time. Today the welcome sign o
 ::: info What you need
 
 - your display wall of 2 × 1 display blocks next to the entrance, and a trigger block with a button next to it
+- a **block of redstone**, to start the guard without a player (also for exercise 2)
 - a new, empty sheet in the c0de dimension, and the wrench
 - from the creative inventory: the blocks you know (PROGRAM, NOOP, CONSTANT, FUNCTION, BEGIN, END, VARIABLE, ASSIGN, CALL, PARAMETER, LABEL, LITERAL, OPERATOR, the type block STRING) and the new ones: an **IF** block, an **ELSE** block and a **BOOLEAN** type block
   :::

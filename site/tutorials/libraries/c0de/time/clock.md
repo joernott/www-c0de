@@ -9,7 +9,7 @@ A digital clock on a display wall that shows the real time and moves on every se
 Functions: [NOW](/c0de/time/now), [HOUR](/c0de/time/hour), [MINUTE](/c0de/time/minute), [SECOND](/c0de/time/second) and [FORMAT](/c0de/strings/format) of c0de/strings.
 
 ::: info What you need
-A **timer block** and a **display wall** of 2 × 1 display blocks (32 columns, 8 rows). No variable items: the program has no parameters and no results.
+A **timer block**, a **lever** to stop it when you change the program, and a **display wall** of 2 × 1 display blocks (32 columns, 8 rows). No variable items: the program has no parameters and no results.
 :::
 
 ## The idea

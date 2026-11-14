@@ -9,7 +9,7 @@ Eine Aufgabenliste für dein Team, die nicht in der Welt liegt, sondern auf eine
 **Funktionen:** [HTTP_POST](/de/c0de_net/http/http_post), [HTTP_PUT](/de/c0de_net/http/http_put), [HTTP_PATCH](/de/c0de_net/http/http_patch), [HTTP_DELETE](/de/c0de_net/http/http_delete), [HTTP_GET](/de/c0de_net/http/http_get) sowie [TO_JSON](/de/c0de/strings/to_json) und [FROM_JSON](/de/c0de/strings/from_json) aus c0de/strings
 
 ::: info Was du brauchst
-Die Mod **c0de net** in deinem Spiel, fünf Auslöserblöcke mit Knöpfen (einen für jede Funktion), eine **Anzeigewand** oder einen Laptop für die Liste, **Variablenkarten** `title` vom Typ STRING und `id` vom Typ INTEGER sowie nicht initialisierte Variablenkarten für die Ergebnisse.
+Die Mod **c0de net** in deinem Spiel, fünf Auslöserblöcke mit Knöpfen (einen für jede Funktion) und Schilder, um sie zu beschriften, eine **Anzeigewand** oder einen Laptop für die Liste, **Variablenkarten** `title` vom Typ STRING und `id` vom Typ INTEGER sowie nicht initialisierte Variablenkarten für die Ergebnisse. Für die Übungen: einen weiteren Auslöserblock mit Knopf und eine nicht initialisierte Variablenkarte für das Programm `todocleanup`.
 :::
 
 ## Die Idee

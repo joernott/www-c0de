@@ -10,7 +10,8 @@ Ein Knopf an der Haustür läutet eine Glocke, und der Chat sagt allen in der Ba
 
 ::: info Was du brauchst
 
-- zwei **Auslöserblöcke** mit je einem **Knopf** darauf, neben deiner Haustür
+- für die Türklingel: einen **Auslöserblock** mit einem **Knopf** darauf, neben deiner Haustür
+- für die Melodie: einen zweiten **Auslöserblock** mit einem **Knopf** darauf, neben dem ersten
 - ein leeres Blatt für jedes Programm
 - sonst nichts: Diese Funktionen brauchen keine Rechte, sie funktionieren für jeden Besitzer auf jedem Server
 

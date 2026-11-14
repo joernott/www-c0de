@@ -13,7 +13,7 @@ Filling in a variable item for every question works, but it's slow. Today the st
   :::
 
 ::: info What you need
-The stack calculator of the last lesson, its trigger block and button, and a **laptop**. Language blocks: VARIABLE, CALL, PARAMETER, LABEL, LITERAL, OPERATOR and INTEGER type blocks.
+The stack calculator of the last lesson, its trigger block and button, and a **laptop**. Language blocks: VARIABLE, CALL, PARAMETER, LABEL, LITERAL, OPERATOR and INTEGER type blocks, and the **hammer** to remove lines.
 :::
 
 ## The idea

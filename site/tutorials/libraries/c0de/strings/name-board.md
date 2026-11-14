@@ -9,7 +9,7 @@ A board at the entrance of your base: a frame of `=` signs on a display wall, a 
 **Functions:** [UCASE](/c0de/strings/ucase), [LCASE](/c0de/strings/lcase), [LEFT](/c0de/strings/left), [RIGHT](/c0de/strings/right), [SPACE](/c0de/strings/space), [FILL](/c0de/strings/fill), and [DIV](/c0de/math/div) of c0de/math
 
 ::: info What you need
-A trigger block with a button, a **display wall** of 2 × 1 display blocks (32 columns and 8 rows) and a **variable item** `name` of type STRING with the name, for example `sTEVE`. Optionally a second variable item `title` of type STRING for another greeting.
+A trigger block with a button, a **display wall** of 2 × 1 display blocks (32 columns and 8 rows) and a **variable item** `name` of type STRING with the name, for example `sTEVE`. Optionally a second variable item `title` of type STRING for another greeting. For the first exercise: a variable item `edge` of type CHAR.
 :::
 
 ## The idea

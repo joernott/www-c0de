@@ -7,7 +7,7 @@ description: JSON und YAML in typisierte Variablen und Strukturen mit Tags einle
 c0de hat keinen dynamischen Typ – kein `dict`, kein `any`, kein `Object`. JSON und YAML werden in Variablen eines deklarierten Typs gelesen, und der Typ bestimmt, wie das Dokument gelesen wird, ganz ähnlich wie `encoding/json` in Go. Diese Lektion liest eine Konfiguration in eine Struktur und holt JSON mit c0de net aus dem Web, dessen Anfragen vom Computer eines Spielers kommen, nicht vom Server.
 
 ::: info Was du brauchst
-Einen Auslöserblock mit Knopf, eine **Variablenkarte** `source` vom Typ STRING mit dem JSON-Text und vier nicht initialisierte Variablenkarten. Für die Anfrage: die Mod **c0de net**, einen an das Programm gebundenen Bildschirm (siehe [Bildschirme, Tastaturen und E/A-Blöcke](/de/tutorials/programmers/screens)) und eine nicht initialisierte Variablenkarte.
+Einen Auslöserblock mit Knopf, eine **Variablenkarte** `source` vom Typ STRING mit dem JSON-Text und vier nicht initialisierte Variablenkarten. Für das Netzwerk: die Mod **c0de net**, einen an das Programm gebundenen Bildschirm (siehe [Bildschirme, Tastaturen und E/A-Blöcke](/de/tutorials/programmers/screens)) und eine nicht initialisierte Variablenkarte.
 :::
 
 ## Das Modell

@@ -9,7 +9,7 @@ Eine Rampe hinauf zu deiner Burg, eine Rutsche einen Berg hinab, ein Dach: Du we
 **Funktionen:** [TAN](/de/c0de/math/tan) und [ATN](/de/c0de/math/atn), mit [ROUND](/de/c0de/math/round) und der Konstante [PI](/de/c0de/math/pi)
 
 ::: info Was du brauchst
-Einen Auslöserblock mit einem Knopf und einen **Anzeigeblock**. Für `height` die **Variablenkarten** `length` vom Typ INTEGER und `degrees` vom Typ FLOAT (wahlweise: Die Vorgabewerte sind 10 Blöcke und 30 Grad) und zwei nicht initialisierte Karten; für `slope` die Variablenkarten `run` und `rise` vom Typ INTEGER und eine nicht initialisierte Karte.
+Einen Auslöserblock mit einem Knopf und einen **Anzeigeblock**. Für `height` die **Variablenkarten** `length` vom Typ INTEGER und `degrees` vom Typ FLOAT (wahlweise: Die Vorgabewerte sind 10 Blöcke und 30 Grad) und zwei nicht initialisierte Karten; für `slope` die Variablenkarten `run` und `rise` vom Typ INTEGER und eine nicht initialisierte Karte. Für die erste Übung: eine Variablenkarte `height` vom Typ INTEGER und eine nicht initialisierte Karte.
 :::
 
 ## Die Idee

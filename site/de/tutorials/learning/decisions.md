@@ -16,6 +16,7 @@ Bisher haben deine Programme jedes Mal dasselbe getan. Heute wird das Willkommen
 ::: info Was du brauchst
 
 - deine Anzeigewand aus 2 × 1 Anzeigeblöcken neben dem Eingang und daneben einen Auslöserblock mit einem Knopf
+- einen **Redstone-Block**, um den Wächter ohne Spieler zu starten (auch für Aufgabe 2)
 - ein neues, leeres Blatt in der c0de-Dimension und den Schraubenschlüssel
 - aus dem Kreativinventar: die Blöcke, die du kennst (PROGRAM, NOOP, CONSTANT, FUNCTION, BEGIN, END, VARIABLE, ASSIGN, CALL, PARAMETER, LABEL, LITERAL, OPERATOR, den Typblock STRING) und die neuen: einen **IF**-Block, einen **ELSE**-Block und einen **BOOLEAN**-Typblock
   :::

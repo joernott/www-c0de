@@ -13,6 +13,7 @@ Ein Programm als Bergmann: Es gräbt einen zwei Blöcke hohen Tunnel geradeaus i
 - einen **Auslöserblock** mit einem **Knopf** darauf und ein leeres Blatt für jedes Programm
 - zwei **Truhen**; in einer ein paar **Spitzhacken** und **Schaufeln**
 - einen Hügel oder eine Felswand zum Hineingraben
+- für die Übungen: ein paar **Fackeln** in der Truhe mit den Werkzeugen
 - keine Rechte: MINE_BLOCK tut nur, was ein Spieler auch kann, darum funktioniert es für jeden Besitzer auf jedem Server
 
 :::

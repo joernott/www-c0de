@@ -9,7 +9,7 @@ A ball that bounces across a display, and a display that shows the day and the c
 Functions: [SLEEP](/c0de/time/sleep) and [TICKS](/c0de/minecraft/ticks) of c0de/minecraft.
 
 ::: info What you need
-A **trigger block** with a button, a **timer block** and two **display blocks**.
+For the animation: a **trigger block** with a button and a **display block**; optionally a **variable item** `delay` of type INTEGER. For day and night: a **timer block** and a second **display block**; to try `phase` alone, a variable item `ticks` of type INTEGER and two uninitialized items for the trigger block.
 :::
 
 ## The idea

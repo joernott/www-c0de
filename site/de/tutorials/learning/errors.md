@@ -22,6 +22,7 @@ Jeder Programmierer macht Fehler, jeden Tag. Einen guten Programmierer erkennt m
 - das **Debugging-Werkzeug** (es sieht aus wie eine Fliegenklatsche)
 - drei INTEGER-**Variablenkarten** mit den Namen `rows`, `length` und `players`
 - die Blöcke, die du kennst: PROGRAM, NOOP, FUNCTION, PARAMETER, RESULT, BEGIN, END, ASSIGN, IF, LABEL, LITERAL, OPERATOR und die Typblöcke INTEGER und FLOAT
+- für die Aufgaben: deinen **Laptop**, die Blöcke VARIABLE, CALL und ELSE und den Typblock ERROR
 
 :::
 

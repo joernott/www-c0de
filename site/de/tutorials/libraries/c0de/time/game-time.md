@@ -9,7 +9,7 @@ Ein Ball, der über eine Anzeige hüpft, und eine Anzeige, die den Tag und die U
 Funktionen: [SLEEP](/de/c0de/time/sleep) und [TICKS](/de/c0de/minecraft/ticks) aus c0de/minecraft.
 
 ::: info Was du brauchst
-Einen **Auslöserblock** mit Knopf, einen **Zeitgeberblock** und zwei **Anzeigeblöcke**.
+Für die Animation: einen **Auslöserblock** mit Knopf und einen **Anzeigeblock**; wahlweise eine **Variablenkarte** `delay` vom Typ INTEGER. Für Tag und Nacht: einen **Zeitgeberblock** und einen zweiten **Anzeigeblock**; um `phase` allein auszuprobieren, eine Variablenkarte `ticks` vom Typ INTEGER und zwei nicht initialisierte Karten für den Auslöserblock.
 :::
 
 ## Die Idee

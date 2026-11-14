@@ -9,7 +9,7 @@ A high-score table for your games: after every game, the player types their name
 **Functions:** [TO_JSON](/c0de/strings/to_json), [FROM_JSON](/c0de/strings/from_json), [TO_YAML](/c0de/strings/to_yaml), [FROM_YAML](/c0de/strings/from_yaml)
 
 ::: info What you need
-A trigger block with a button, a **laptop**, an **I/O block** and a few uninitialized **variable items**: one for the trigger block and one for the I/O block for every game.
+A trigger block with a button, a **laptop**, an **I/O block** and a few uninitialized **variable items**: one for the trigger block and one for the I/O block for every game. For the second exercise: a variable item `list` of type STRING.
 :::
 
 ## The idea

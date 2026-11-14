@@ -10,19 +10,19 @@ The world: every program is on its own sheet of the c0de dimension, built by the
 
 `site/tutorials/learning/before-you-start.md`
 
-### [ ] before-you-start-new-world
+### [x] before-you-start-new-world
 
 the Minecraft "Create New World" screen with game mode Creative and Allow Cheats ON
 
 - No program: a menu or a book of the game
 
-### [ ] before-you-start-creative-tab
+### [x] before-you-start-creative-tab
 
 the creative inventory with the c0de tab open, showing the trigger block, the wrench and the language blocks
 
 - No program: a menu or a book of the game
 
-### [ ] before-you-start-sheet
+### [x] before-you-start-sheet
 
 the north end of an empty sheet in the c0de dimension, seen from the north-west: the sheet number on the black floor, the green and white stripes and the cursor rail
 
@@ -32,7 +32,7 @@ the north end of an empty sheet in the c0de dimension, seen from the north-west:
 
 `site/tutorials/learning/first-program.md`
 
-### [ ] first-program-sign
+### [x] first-program-sign
 
 the program "sign" on its sheet, seen from above at the north end, with dark green line numbers
 
@@ -52,7 +52,7 @@ BEGIN
 END FUNCTION
 ```
 
-### [ ] first-program-result
+### [x] first-program-result
 
 the display wall of 2 x 1 display blocks at the entrance of the base, showing "Welcome to my base!", with the trigger block and button next to it
 
@@ -76,7 +76,7 @@ END FUNCTION
 
 `site/tutorials/learning/colors.md`
 
-### [ ] colors-sign
+### [x] colors-sign
 
 the program "sign" with the COLOR and LOCATE lines on its sheet, seen from above, all line numbers dark green
 
@@ -112,7 +112,7 @@ BEGIN
 END FUNCTION
 ```
 
-### [ ] colors-result
+### [x] colors-result
 
 the display wall at the entrance showing the welcome text in yellow on dark blue between two gold lines of equal signs
 
@@ -152,7 +152,7 @@ END FUNCTION
 
 `site/tutorials/learning/variables.md`
 
-### [ ] variables-sign
+### [x] variables-sign
 
 the top of the program "sign" on its sheet, seen from above: the CONSTANT lines, the VARIABLE and ASSIGN lines inside the function
 
@@ -199,7 +199,7 @@ BEGIN
 END FUNCTION
 ```
 
-### [ ] variables-result
+### [x] variables-result
 
 the display wall at the entrance showing "Welcome to Oak Hill!" in yellow on blue and "Founded in 2026" in white, between the gold lines
 
@@ -250,7 +250,7 @@ END FUNCTION
 
 `site/tutorials/learning/calculating.md`
 
-### [ ] calculating-stacks
+### [x] calculating-stacks
 
 the program "stacks" on its sheet, seen from above, with the OPERATOR blocks of lines 14 to 23 visible
 
@@ -286,7 +286,7 @@ BEGIN
 END FUNCTION
 ```
 
-### [ ] calculating-result
+### [x] calculating-result
 
 the second display wall next to the storage chests showing the four lines of the stack calculator
 
@@ -326,7 +326,7 @@ END FUNCTION
 
 `site/tutorials/learning/parameters.md`
 
-### [ ] parameters-stacks
+### [x] parameters-stacks
 
 the program "stacks" on its sheet, seen from above, with the PARAMETER and RESULT lines between FUNCTION and BEGIN
 
@@ -353,7 +353,7 @@ BEGIN
 END FUNCTION
 ```
 
-### [ ] parameters-trigger
+### [x] parameters-trigger
 
 the dialog of the trigger block with the variable item "items" and an uninitialized variable item in the input inventory
 
@@ -384,7 +384,7 @@ END FUNCTION
 
 `site/tutorials/learning/asking.md`
 
-### [ ] asking-input
+### [x] asking-input
 
 the open terminal of the laptop while INPUT waits: "How many items?" on the screen and the input line "INPUT items (INTEGER):" with 1000 typed
 
@@ -419,7 +419,7 @@ BEGIN
 END FUNCTION
 ```
 
-### [ ] asking-laptop
+### [x] asking-laptop
 
 the terminal of the laptop after the run: the prompt "How many items?", the typed 1000 and the two lines of the answer, with the input line below
 
@@ -458,7 +458,7 @@ END FUNCTION
 
 `site/tutorials/learning/decisions.md`
 
-### [ ] decisions-guard-sheet
+### [x] decisions-guard-sheet
 
 the program guard on its sheet in the c0de dimension, seen from above at the south end, with the IF and ELSE lines in the middle and all line numbers dark green
 
@@ -492,7 +492,7 @@ BEGIN
 END FUNCTION
 ```
 
-### [ ] decisions-guard-wall
+### [x] decisions-guard-wall
 
 the display wall at the entrance of the base showing "Welcome home, Steve!", the trigger block with a button below it, the player standing in front
 
@@ -530,7 +530,7 @@ END FUNCTION
 
 `site/tutorials/learning/counting-loops.md`
 
-### [ ] counting-loops-countdown-sheet
+### [x] counting-loops-countdown-sheet
 
 the program countdown on its sheet, seen from the side, with the FOR line and its indented ASSIGN line in front
 
@@ -556,7 +556,7 @@ BEGIN
 END FUNCTION
 ```
 
-### [ ] counting-loops-countdown-wall
+### [x] counting-loops-countdown-wall
 
 the display wall showing "10 9 8 7 6 5 4 3 2 1 0" and "Lift-off!" below it
 
@@ -586,7 +586,7 @@ END FUNCTION
 
 `site/tutorials/learning/condition-loops.md`
 
-### [ ] condition-loops-halving-sheet
+### [x] condition-loops-halving-sheet
 
 the program halving on its sheet, seen from the south end, showing the REPEAT block with the WHILE loop indented inside it
 
@@ -628,7 +628,7 @@ BEGIN
 END FUNCTION
 ```
 
-### [ ] condition-loops-halving-laptop
+### [x] condition-loops-halving-laptop
 
 the laptop terminal after two numbers: "Type a number:", 8, "You can halve 8 3 times.", "Another number? (yes/no)", yes, "Type a number:", 1000, "You can halve 1000 10 times." and the input line waiting for the answer
 
@@ -674,7 +674,7 @@ END FUNCTION
 
 `site/tutorials/learning/functions.md`
 
-### [ ] functions-frame-sheet
+### [x] functions-frame-sheet
 
 the program frame on its sheet, seen from above, with the two FUNCTION lines (framed and welcome), each with a NOOP line above it, and the three CALL framed lines at the south end
 
@@ -738,7 +738,7 @@ BEGIN
 END FUNCTION
 ```
 
-### [ ] functions-frame-wall
+### [x] functions-frame-wall
 
 the display wall with the three framed texts: "Welcome" and "Oak Hill" side by side at the top, "Mind the creepers!" below
 
@@ -806,7 +806,7 @@ END FUNCTION
 
 `site/tutorials/learning/lists.md`
 
-### [ ] lists-notes-sheet
+### [x] lists-notes-sheet
 
 the program notes on its sheet, seen from above, with the VARIABLE notes ARRAY STRING block and its start value "Feed the cats" at the top and the EACH loop in the middle
 
@@ -848,7 +848,7 @@ BEGIN
 END FUNCTION
 ```
 
-### [ ] lists-notes-wall
+### [x] lists-notes-wall
 
 the display wall at the entrance with three notes, "Feed the cats", "Get more torches" and "Plant wheat", and the laptop next to it with its terminal open
 
@@ -894,7 +894,7 @@ END FUNCTION
 
 `site/tutorials/learning/tables.md`
 
-### [ ] tables-shop-sheet
+### [x] tables-shop-sheet
 
 the program shop on its sheet, seen from above, with the STRUCT offer declaration at the top and the two VARIABLE blocks with their start values (the price table and the offer) below
 
@@ -941,7 +941,7 @@ BEGIN
 END FUNCTION
 ```
 
-### [ ] tables-shop-laptop
+### [x] tables-shop-laptop
 
 the laptop terminal showing the offer of the day, the question, the typed word saddle and the answer "saddle costs 12 emeralds."
 
@@ -992,7 +992,7 @@ END FUNCTION
 
 `site/tutorials/learning/errors.md`
 
-### [ ] errors-broken-sheet
+### [x] errors-broken-sheet
 
 the program repair with its three bugs on its sheet, seen from the south, the line number 11 dark red and all other line numbers dark green or faint
 
@@ -1015,7 +1015,7 @@ BEGIN
 END FUNCTION
 ```
 
-### [ ] errors-debug-cursor
+### [x] errors-debug-cursor
 
 the red debug cursor on the cursor rail next to line 11 of the program repair, and the dialog of the cursor with the values of rows, length and wheat
 
@@ -1038,7 +1038,7 @@ BEGIN
 END FUNCTION
 ```
 
-### [ ] errors-crash-dialog
+### [x] errors-crash-dialog
 
 the dialog of the trigger block after the crash, showing the error code 303 DIVISION_BY_ZERO, the message "Division by 0", the function share and the line 11
 
@@ -1065,7 +1065,7 @@ END FUNCTION
 
 `site/tutorials/learning/libraries.md`
 
-### [ ] libraries-dice-sheet
+### [x] libraries-dice-sheet
 
 the program dice on its sheet, seen from the south, with the two INCLUDE lines at the top and all line numbers dark green
 
@@ -1095,7 +1095,7 @@ BEGIN
 END FUNCTION
 ```
 
-### [ ] libraries-dice-chat
+### [x] libraries-dice-chat
 
 the player in the base pressing the button on the trigger block, the chat showing three lines like "[dice/0] You rolled a 4"
 
@@ -1129,7 +1129,7 @@ END FUNCTION
 
 `site/tutorials/learning/guess-the-number.md`
 
-### [ ] guess-the-number-sheet
+### [x] guess-the-number-sheet
 
 the whole program guess on its sheet, seen from above at the south end, with the function secretNumber at the top and the REPEAT loop of the function play below it
 
@@ -1191,7 +1191,7 @@ BEGIN
 END FUNCTION
 ```
 
-### [ ] guess-the-number-laptop
+### [x] guess-the-number-laptop
 
 the terminal of the laptop during a game: the yellow hello, guesses with aqua and light purple answers, and the green line "Right! You needed 5 tries."
 
@@ -1257,7 +1257,7 @@ END FUNCTION
 
 `site/tutorials/learning/guarded-door.md`
 
-### [ ] guarded-door-sheet
+### [x] guarded-door-sheet
 
 the whole program door on its sheet, seen from above, with the start values of plate and door at the top, the function isFriend and the function watch below it
 
@@ -1353,7 +1353,7 @@ BEGIN
 END FUNCTION
 ```
 
-### [ ] guarded-door-entrance
+### [x] guarded-door-entrance
 
 the entrance of the base from outside: the iron door open, the player on the pressure plate one block in front of it, the display wall next to the entrance showing "Welcome to Oak Hill!" and "Visitors at the door: 1"
 
@@ -1453,7 +1453,7 @@ END FUNCTION
 
 `site/tutorials/learning/next-steps.md`
 
-### [ ] next-steps-handbook
+### [x] next-steps-handbook
 
 the handbook Functions open in the game as a red Patchouli book, showing the page of SAY with its parameters and its example
 
@@ -1463,7 +1463,7 @@ the handbook Functions open in the game as a red Patchouli book, showing the pag
 
 `site/tutorials/libraries/c0de/math/dice.md`
 
-### [ ] dice-display
+### [x] dice-display
 
 a display block next to a trigger block with a button, showing "D20: 15", "D20: 4", "D20: 6" and "Total: 25"
 
@@ -1509,7 +1509,7 @@ END FUNCTION
 
 `site/tutorials/libraries/c0de/math/circle.md`
 
-### [ ] circle-ring
+### [x] circle-ring
 
 a ring of stone bricks with the radius 5 on flat grass around a trigger block with a button, seen from above at an angle
 
@@ -1610,7 +1610,7 @@ END FUNCTION
 
 `site/tutorials/libraries/c0de/math/growth.md`
 
-### [ ] growth-display
+### [x] growth-display
 
 a display block showing the lines "Day 0: 1" to "Day 7: 128"
 
@@ -1702,7 +1702,7 @@ END FUNCTION
 
 `site/tutorials/libraries/c0de/strings/name-board.md`
 
-### [ ] name-board-wall
+### [x] name-board-wall
 
 the display wall of 2 × 1 blocks with the frame of = signs, the greeting WELCOME TO THE BASE OF and the name Steve
 
@@ -1818,7 +1818,7 @@ END FUNCTION
 
 `site/tutorials/libraries/c0de/strings/commands.md`
 
-### [ ] commands-laptop
+### [x] commands-laptop
 
 the terminal of the laptop after the run: the typed commands say, sum and dance with their answers, and Bye! at the end
 
@@ -1963,7 +1963,7 @@ END FUNCTION
 
 `site/tutorials/libraries/c0de/strings/secret-messages.md`
 
-### [ ] secret-messages-laptop
+### [x] secret-messages-laptop
 
 the terminal of the laptop after the run: the typed message and key, the secret text and the decoded message
 
@@ -2056,7 +2056,7 @@ END FUNCTION
 
 `site/tutorials/libraries/c0de/strings/numbers-as-text.md`
 
-### [ ] numbers-as-text-laptop
+### [x] numbers-as-text-laptop
 
 the terminal of the laptop with the date, the stock table in aligned columns and the total
 
@@ -2141,7 +2141,7 @@ END FUNCTION
 
 `site/tutorials/libraries/c0de/strings/saving-data.md`
 
-### [ ] saving-data-io-block
+### [x] saving-data-io-block
 
 the dialog of the I/O block after the run, with the variable item scores in its output
 
@@ -2228,7 +2228,7 @@ END FUNCTION
 
 `site/tutorials/libraries/c0de/time/clock.md`
 
-### [ ] clock-wall
+### [x] clock-wall
 
 a display wall of 2 × 1 display blocks showing the time 09:05:03 in the middle, the timer block in front of it
 
@@ -2283,7 +2283,7 @@ END FUNCTION
 
 `site/tutorials/libraries/c0de/time/stopwatch.md`
 
-### [ ] stopwatch-buttons
+### [x] stopwatch-buttons
 
 the two trigger blocks with buttons side by side, the hopper and chest under the second one, and the display wall showing the start, stop and elapsed time
 
@@ -2356,7 +2356,7 @@ END FUNCTION
 
 `site/tutorials/libraries/c0de/time/game-time.md`
 
-### [ ] game-time-bounce
+### [x] game-time-bounce
 
 a display block with the ball "o" in the middle of row 3, the trigger block with its button in front of it
 
@@ -2403,7 +2403,7 @@ END FUNCTION
 
 `site/tutorials/libraries/c0de/minecraft/doorbell.md`
 
-### [ ] doorbell-door
+### [x] doorbell-door
 
 the front door of the base from outside with the trigger block and its button beside it, and the chat line with "Steve is at the front door."
 
@@ -2432,7 +2432,7 @@ END FUNCTION
 
 `site/tutorials/libraries/c0de/minecraft/combination-lock.md`
 
-### [ ] combination-lock-levers
+### [x] combination-lock-levers
 
 the four levers on the ground in front of the base, two of them on, the stone button at the end of the row, the timer block on the left and the closed iron door behind them
 
@@ -2544,7 +2544,7 @@ END FUNCTION
 
 `site/tutorials/libraries/c0de/minecraft/automatic-doors.md`
 
-### [ ] automatic-doors-door
+### [x] automatic-doors-door
 
 the open wooden door seen from outside, the player on the outside plate two blocks in front of it, the inside plate visible through the doorway and the timer block in the foreground
 
@@ -2634,7 +2634,7 @@ END FUNCTION
 
 `site/tutorials/libraries/c0de/minecraft/watching.md`
 
-### [ ] watching-farm
+### [x] watching-farm
 
 the wheat field of 4 × 4 plants, partly ripe, with the timer block beside it and the display wall showing "Wheat: 16 plants" and "Ripe: 5"
 
@@ -2687,7 +2687,7 @@ BEGIN
 END FUNCTION
 ```
 
-### [ ] watching-pen
+### [x] watching-pen
 
 the fenced pen with sheep, cows and pigs, the timer block north of it, and the display wall listing the animals and "Animals: 9"
 
@@ -2737,7 +2737,7 @@ END FUNCTION
 
 `site/tutorials/libraries/c0de/minecraft/sorting.md`
 
-### [ ] sorting-chests
+### [x] sorting-chests
 
 the row of chests seen from the side, the hopper on the input chest, the timer block to the west, and the open food chest with bread and apples
 
@@ -2820,7 +2820,7 @@ END FUNCTION
 
 `site/tutorials/libraries/c0de/minecraft/building.md`
 
-### [ ] building-wall
+### [x] building-wall
 
 the finished wall of stone bricks, 8 blocks long and 3 high, with the trigger block and its button in front of its west end and the chest 2 blocks west of it
 
@@ -2865,7 +2865,7 @@ BEGIN
 END FUNCTION
 ```
 
-### [ ] building-tower
+### [x] building-tower
 
 the hollow cobblestone tower, 6 blocks high, half pulled down from the top, cobblestone items lying around it, the trigger block and the chest in front of it
 
@@ -2941,7 +2941,7 @@ END FUNCTION
 
 `site/tutorials/libraries/c0de/minecraft/tunnel-digger.md`
 
-### [ ] tunnel-digger-tunnel
+### [x] tunnel-digger-tunnel
 
 the entrance of the tunnel in the side of a hill, two blocks high, the trigger block in front of it, the tools chest on the left and the open drops chest on the right with cobblestone and coal
 
@@ -3025,7 +3025,7 @@ END FUNCTION
 
 `site/tutorials/libraries/c0de/minecraft/rewards.md`
 
-### [ ] rewards-pen
+### [x] rewards-pen
 
 the fenced pen with several sheep, one of them just appeared in the middle, the trigger block with its button north of the pen and the chat line "Animal number 4 is in the pen."
 
@@ -3069,7 +3069,7 @@ BEGIN
 END FUNCTION
 ```
 
-### [ ] rewards-hub
+### [x] rewards-hub
 
 the teleporter hub: three pressure plates in a row with signs "Farm", "Mine" and "Tower" behind them, the timer block at the west end
 
@@ -3151,7 +3151,7 @@ END FUNCTION
 
 `site/tutorials/libraries/c0de_net/http/weather.md`
 
-### [ ] weather-wall
+### [x] weather-wall
 
 The display wall showing Vienna, Austria, the sky, the temperature and the wind
 
@@ -3276,7 +3276,7 @@ END FUNCTION
 
 `site/tutorials/libraries/c0de_net/http/checking.md`
 
-### [ ] checking-lamp
+### [x] checking-lamp
 
 The timer block with comparator and a dark redstone lamp, the display wall showing c0de.at/ and Status 200
 
@@ -3341,7 +3341,7 @@ END FUNCTION
 
 `site/tutorials/libraries/c0de_net/http/home-automation.md`
 
-### [ ] home-automation-lever
+### [x] home-automation-lever
 
 The trigger block with the lever on top, switched on, and the PID block of the running process on the sheet
 
@@ -3405,7 +3405,7 @@ END FUNCTION
 
 `site/tutorials/libraries/c0de_net/http/up-to-date.md`
 
-### [ ] up-to-date-wall
+### [x] up-to-date-wall
 
 The display wall with the two green lines c0de 0.5.0: up to date and c0de net 0.3.0: up to date
 

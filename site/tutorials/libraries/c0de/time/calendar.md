@@ -9,7 +9,7 @@ A board for your base that shows today's date with the weekday and the week of t
 Functions: [DAY](/c0de/time/day), [MONTH](/c0de/time/month), [YEAR](/c0de/time/year), [WEEK](/c0de/time/week) and [WEEKDAY](/c0de/time/weekday), with [NOW](/c0de/time/now) and [DIV](/c0de/math/div) of c0de/math.
 
 ::: info What you need
-A **trigger block** with a button and a **display wall** of 3 × 1 display blocks (48 columns), or a **laptop**. Optionally a **timer block** instead of the button, to refresh the board by itself.
+A **trigger block** with a button and a **display wall** of 3 × 1 display blocks (48 columns). Optionally a **timer block** instead of the button, to refresh the board by itself. For the second exercise, if you don't use the program runner: a variable item `time` of type TIME.
 :::
 
 ## The idea

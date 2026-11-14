@@ -15,7 +15,9 @@ PLACE_BLOCK mit dem Parameter `inventory` nimmt jeden Block aus einer Truhe, so 
 ::: info Was du brauchst
 
 - einen **Auslöserblock** mit einem **Knopf** darauf und ein leeres Blatt für jedes Programm
-- eine **Truhe** mit zwei Stapeln **Steinziegel** und eine mit einem Stapel **Bruchstein**
+- für die Mauer: eine **Truhe** mit zwei Stapeln **Steinziegel**
+- für den Turm: eine **Truhe** mit einem Stapel **Bruchstein**
+- für die Übungen: eine **Spitzhacke**
 - einen ebenen Platz von etwa 10 × 5 Blöcken
 
 :::

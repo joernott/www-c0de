@@ -15,7 +15,9 @@ PLACE_BLOCK with the parameter `inventory` takes each block from a chest, just l
 ::: info What you need
 
 - a **trigger block** with a **button** on it, and an empty sheet for each program
-- a **chest** with two stacks of **stone bricks**, and one with a stack of **cobblestone**
+- for the wall: a **chest** with two stacks of **stone bricks**
+- for the tower: a **chest** with a stack of **cobblestone**
+- for the exercises: a **pickaxe**
 - a flat place of about 10 × 5 blocks
 
 :::

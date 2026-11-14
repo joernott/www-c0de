@@ -9,7 +9,7 @@ A to-do list for your team that isn't stored in the world but on a server: one p
 **Functions:** [HTTP_POST](/c0de_net/http/http_post), [HTTP_PUT](/c0de_net/http/http_put), [HTTP_PATCH](/c0de_net/http/http_patch), [HTTP_DELETE](/c0de_net/http/http_delete), [HTTP_GET](/c0de_net/http/http_get), and [TO_JSON](/c0de/strings/to_json) and [FROM_JSON](/c0de/strings/from_json) of c0de/strings
 
 ::: info What you need
-The mod **c0de net** in your game, five trigger blocks with buttons (one for each function), a **display wall** or a laptop for the list, **variable items** `title` of type STRING and `id` of type INTEGER, and uninitialized variable items for the results.
+The mod **c0de net** in your game, five trigger blocks with buttons (one for each function) and signs to label them, a **display wall** or a laptop for the list, **variable items** `title` of type STRING and `id` of type INTEGER, and uninitialized variable items for the results. For the exercises: one more trigger block with a button and an uninitialized variable item for the program `todocleanup`.
 :::
 
 ## The idea

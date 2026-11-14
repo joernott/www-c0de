@@ -7,7 +7,7 @@ description: JSON and YAML read into typed variables and structs with tags, and 
 c0de has no dynamic type – no `dict`, no `any`, no `Object`. JSON and YAML are read into variables of a declared type, and the type decides how the document is read, much like `encoding/json` in Go. This lesson reads a configuration into a struct and fetches JSON from the web with c0de net, whose requests come from the computer of a player, not from the server.
 
 ::: info What you need
-A trigger block with a button, a **variable item** `source` of type STRING with the JSON text, and four uninitialized variable items. For the request: the mod **c0de net**, a screen bound to the program (see [Screens, keyboards and I/O blocks](/tutorials/programmers/screens)) and one uninitialized variable item.
+A trigger block with a button, a **variable item** `source` of type STRING with the JSON text, and four uninitialized variable items. For the network: the mod **c0de net**, a screen bound to the program (see [Screens, keyboards and I/O blocks](/tutorials/programmers/screens)) and one uninitialized variable item.
 :::
 
 ## The model

@@ -18,7 +18,7 @@ For game nights in Oak Hill, you need a die. You could carve one out of wood –
 
 - a new, empty sheet in the c0de dimension, and the wrench
 - a **trigger block** with a button on it, in your base
-- the blocks you know (PROGRAM, NOOP, FUNCTION, BEGIN, END, VARIABLE, CALL, PARAMETER, RESULT, LABEL, LITERAL, OPERATOR, the type blocks INTEGER and FLOAT) and the new one: an **INCLUDE** block
+- the blocks you know (PROGRAM, NOOP, FUNCTION, BEGIN, END, VARIABLE, CALL, PARAMETER, RESULT, LABEL, LITERAL, OPERATOR, the type blocks INTEGER and FLOAT) and the new one: an **INCLUDE** block (for the exercises also IF and ELSE)
 
 :::
 

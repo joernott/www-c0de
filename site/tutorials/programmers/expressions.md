@@ -7,7 +7,7 @@ description: Operators, precedence and assignments in c0de, compared with C, Jav
 c0de separates statements and expressions strictly: a line is a statement, an expression is only a part of it and ends with `;`. Assignment is a statement of its own, functions are called by a statement of their own, and some operators look familiar but mean something else. This lesson compares the operators with C, Java and Python and shows where the precedence differs.
 
 ::: info What you need
-A creative world with cheats on (see [Tutorials](/tutorials/)), a **trigger block**, a **wrench**, a **button** and eleven **uninitialized variable items**.
+A creative world with cheats on (see [Tutorials](/tutorials/)), a **trigger block**, a **wrench**, a **button** and eleven **uninitialized variable items**. For integer and float arithmetic and the exercises: two **INTEGER variable items** named `a` and `b`.
 :::
 
 ## Statements and expressions

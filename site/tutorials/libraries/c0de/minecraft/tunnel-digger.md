@@ -13,6 +13,7 @@ A program as a miner: it digs a tunnel two blocks high straight into the hill, w
 - a **trigger block** with a **button** on it, and an empty sheet for each program
 - two **chests**; in one, a few **pickaxes** and **shovels**
 - a hill or a cliff to dig into
+- for the exercises: a few **torches** in the chest with the tools
 - no rights: MINE_BLOCK only does what a player can do, so it works for every owner on every server
 
 :::

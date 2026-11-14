@@ -18,7 +18,7 @@ Für Spieleabende in Oak Hill brauchst du einen Würfel. Du könntest einen aus 
 
 - ein neues, leeres Blatt in der c0de-Dimension und den Schraubenschlüssel
 - einen **Auslöserblock** mit einem Knopf darauf, in deiner Basis
-- die Blöcke, die du kennst (PROGRAM, NOOP, FUNCTION, BEGIN, END, VARIABLE, CALL, PARAMETER, RESULT, LABEL, LITERAL, OPERATOR, die Typblöcke INTEGER und FLOAT) und den neuen: einen **INCLUDE**-Block
+- die Blöcke, die du kennst (PROGRAM, NOOP, FUNCTION, BEGIN, END, VARIABLE, CALL, PARAMETER, RESULT, LABEL, LITERAL, OPERATOR, die Typblöcke INTEGER und FLOAT) und den neuen: einen **INCLUDE**-Block (für die Aufgaben auch IF und ELSE)
 
 :::
 

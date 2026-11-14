@@ -18,7 +18,7 @@ Das Willkommensschild von Oak Hill soll schick aussehen: jeder Text in einem Rah
 
 - deine Anzeigewand aus 2 × 1 Anzeigeblöcken und den Auslöserblock mit seinem Knopf
 - ein neues, leeres Blatt in der c0de-Dimension
-- aus dem Kreativinventar: die Blöcke, die du kennst (mit PARAMETER, RESULT, IF und FOR), und den neuen **RETURN**-Block
+- aus dem Kreativinventar: die Blöcke, die du kennst (mit PARAMETER, RESULT, IF und FOR), und den neuen **RETURN**-Block (für die Aufgaben auch einen **CHAR**-Typblock)
   :::
 
 ## Die Idee

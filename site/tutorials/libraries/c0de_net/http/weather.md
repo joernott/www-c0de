@@ -9,7 +9,7 @@ A weather station for your base: type the name of a city, press the button, and 
 **Functions:** [HTTP_CONNECTION](/c0de_net/http/http_connection), [HTTP_GET](/c0de_net/http/http_get), and [FROM_JSON](/c0de/strings/from_json) of c0de/strings
 
 ::: info What you need
-The mod **c0de net** in your game, a trigger block with a button, a **display wall** of 2 × 1 display blocks (32 columns and 8 rows), one uninitialized variable item, and optionally a **variable item** `city` of type STRING with the name of a city, for example `Berlin`. Without it, the program shows Vienna.
+The mod **c0de net** in your game, a trigger block with a button, a **display wall** of 2 × 1 display blocks (32 columns and 8 rows), one uninitialized variable item, and optionally a **variable item** `city` of type STRING with the name of a city, for example `Berlin`. Without it, the program shows Vienna. For the exercises: two uninitialized variable items and a **timer block**.
 :::
 
 ## The idea

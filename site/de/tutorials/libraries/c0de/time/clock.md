@@ -9,7 +9,7 @@ Eine Digitaluhr auf einer Anzeigewand, die die echte Uhrzeit zeigt und jede Seku
 Funktionen: [NOW](/de/c0de/time/now), [HOUR](/de/c0de/time/hour), [MINUTE](/de/c0de/time/minute), [SECOND](/de/c0de/time/second) und [FORMAT](/de/c0de/strings/format) aus c0de/strings.
 
 ::: info Was du brauchst
-Einen **Zeitgeberblock** und eine **Anzeigewand** aus 2 × 1 Anzeigeblöcken (32 Spalten, 8 Zeilen). Keine Variablenkarten: Das Programm hat keine Parameter und keine Ergebnisse.
+Einen **Zeitgeberblock**, einen **Hebel**, um ihn anzuhalten, wenn du das Programm änderst, und eine **Anzeigewand** aus 2 × 1 Anzeigeblöcken (32 Spalten, 8 Zeilen). Keine Variablenkarten: Das Programm hat keine Parameter und keine Ergebnisse.
 :::
 
 ## Die Idee

@@ -1,7 +1,7 @@
 # The screenshots of the tutorials, written by scripts/screenshots.ts from the marks
 # <!-- screenshot: <id> | <description> --> of the pages. Take them as described in
 # docs/tutorials.md ("Screenshots") and save them as the file; the page shows them then.
-# 63 screenshots, 63 missing.
+# 63 screenshots, 0 missing.
 - id: asking-input
   description: 'the open terminal of the laptop while INPUT waits: "How many
     items?" on the screen and the input line "INPUT items (INTEGER):" with 1000
@@ -10,7 +10,7 @@
     - tutorials/learning/asking.md
     - de/tutorials/learning/asking.md
   file: public/tutorials/screenshots/asking-input.webp
-  size: missing
+  size: 1280x673
 - id: asking-laptop
   description: 'the terminal of the laptop after the run: the prompt "How many
     items?", the typed 1000 and the two lines of the answer, with the input line
@@ -19,7 +19,7 @@
     - tutorials/learning/asking.md
     - de/tutorials/learning/asking.md
   file: public/tutorials/screenshots/asking-laptop.webp
-  size: missing
+  size: 1280x673
 - id: automatic-doors-door
   description: the open wooden door seen from outside, the player on the outside
     plate two blocks in front of it, the inside plate visible through the
@@ -28,7 +28,7 @@
     - tutorials/libraries/c0de/minecraft/automatic-doors.md
     - de/tutorials/libraries/c0de/minecraft/automatic-doors.md
   file: public/tutorials/screenshots/automatic-doors-door.webp
-  size: missing
+  size: 1280x673
 - id: before-you-start-creative-tab
   description: the creative inventory with the c0de tab open, showing the trigger
     block, the wrench and the language blocks
@@ -36,7 +36,7 @@
     - tutorials/learning/before-you-start.md
     - de/tutorials/learning/before-you-start.md
   file: public/tutorials/screenshots/before-you-start-creative-tab.webp
-  size: missing
+  size: 1280x673
 - id: before-you-start-new-world
   description: the Minecraft "Create New World" screen with game mode Creative and
     Allow Cheats ON
@@ -44,7 +44,7 @@
     - tutorials/learning/before-you-start.md
     - de/tutorials/learning/before-you-start.md
   file: public/tutorials/screenshots/before-you-start-new-world.webp
-  size: missing
+  size: 1280x673
 - id: before-you-start-sheet
   description: "the north end of an empty sheet in the c0de dimension, seen from
     the north-west: the sheet number on the black floor, the green and white
@@ -53,7 +53,7 @@
     - tutorials/learning/before-you-start.md
     - de/tutorials/learning/before-you-start.md
   file: public/tutorials/screenshots/before-you-start-sheet.webp
-  size: missing
+  size: 1280x673
 - id: building-tower
   description: the hollow cobblestone tower, 6 blocks high, half pulled down from
     the top, cobblestone items lying around it, the trigger block and the chest
@@ -62,7 +62,7 @@
     - tutorials/libraries/c0de/minecraft/building.md
     - de/tutorials/libraries/c0de/minecraft/building.md
   file: public/tutorials/screenshots/building-tower.webp
-  size: missing
+  size: 1280x673
 - id: building-wall
   description: the finished wall of stone bricks, 8 blocks long and 3 high, with
     the trigger block and its button in front of its west end and the chest 2
@@ -71,7 +71,7 @@
     - tutorials/libraries/c0de/minecraft/building.md
     - de/tutorials/libraries/c0de/minecraft/building.md
   file: public/tutorials/screenshots/building-wall.webp
-  size: missing
+  size: 1280x673
 - id: calculating-result
   description: the second display wall next to the storage chests showing the four
     lines of the stack calculator
@@ -79,7 +79,7 @@
     - tutorials/learning/calculating.md
     - de/tutorials/learning/calculating.md
   file: public/tutorials/screenshots/calculating-result.webp
-  size: missing
+  size: 1280x673
 - id: calculating-stacks
   description: the program "stacks" on its sheet, seen from above, with the
     OPERATOR blocks of lines 14 to 23 visible
@@ -87,7 +87,7 @@
     - tutorials/learning/calculating.md
     - de/tutorials/learning/calculating.md
   file: public/tutorials/screenshots/calculating-stacks.webp
-  size: missing
+  size: 1280x673
 - id: checking-lamp
   description: The timer block with comparator and a dark redstone lamp, the
     display wall showing c0de.at/ and Status 200
@@ -95,7 +95,7 @@
     - tutorials/libraries/c0de_net/http/checking.md
     - de/tutorials/libraries/c0de_net/http/checking.md
   file: public/tutorials/screenshots/checking-lamp.webp
-  size: missing
+  size: 1280x673
 - id: circle-ring
   description: a ring of stone bricks with the radius 5 on flat grass around a
     trigger block with a button, seen from above at an angle
@@ -103,7 +103,7 @@
     - tutorials/libraries/c0de/math/circle.md
     - de/tutorials/libraries/c0de/math/circle.md
   file: public/tutorials/screenshots/circle-ring.webp
-  size: missing
+  size: 1280x673
 - id: clock-wall
   description: a display wall of 2 × 1 display blocks showing the time 09:05:03 in
     the middle, the timer block in front of it
@@ -111,7 +111,7 @@
     - tutorials/libraries/c0de/time/clock.md
     - de/tutorials/libraries/c0de/time/clock.md
   file: public/tutorials/screenshots/clock-wall.webp
-  size: missing
+  size: 1280x673
 - id: colors-result
   description: the display wall at the entrance showing the welcome text in yellow
     on dark blue between two gold lines of equal signs
@@ -119,7 +119,7 @@
     - tutorials/learning/colors.md
     - de/tutorials/learning/colors.md
   file: public/tutorials/screenshots/colors-result.webp
-  size: missing
+  size: 1280x673
 - id: colors-sign
   description: the program "sign" with the COLOR and LOCATE lines on its sheet,
     seen from above, all line numbers dark green
@@ -127,7 +127,7 @@
     - tutorials/learning/colors.md
     - de/tutorials/learning/colors.md
   file: public/tutorials/screenshots/colors-sign.webp
-  size: missing
+  size: 1280x673
 - id: combination-lock-levers
   description: the four levers on the ground in front of the base, two of them on,
     the stone button at the end of the row, the timer block on the left and the
@@ -136,7 +136,7 @@
     - tutorials/libraries/c0de/minecraft/combination-lock.md
     - de/tutorials/libraries/c0de/minecraft/combination-lock.md
   file: public/tutorials/screenshots/combination-lock-levers.webp
-  size: missing
+  size: 1280x673
 - id: commands-laptop
   description: "the terminal of the laptop after the run: the typed commands say,
     sum and dance with their answers, and Bye! at the end"
@@ -144,7 +144,7 @@
     - tutorials/libraries/c0de/strings/commands.md
     - de/tutorials/libraries/c0de/strings/commands.md
   file: public/tutorials/screenshots/commands-laptop.webp
-  size: missing
+  size: 1280x673
 - id: condition-loops-halving-laptop
   description: 'the laptop terminal after two numbers: "Type a number:", 8, "You
     can halve 8 3 times.", "Another number? (yes/no)", yes, "Type a number:",
@@ -154,7 +154,7 @@
     - tutorials/learning/condition-loops.md
     - de/tutorials/learning/condition-loops.md
   file: public/tutorials/screenshots/condition-loops-halving-laptop.webp
-  size: missing
+  size: 1280x673
 - id: condition-loops-halving-sheet
   description: the program halving on its sheet, seen from the south end, showing
     the REPEAT block with the WHILE loop indented inside it
@@ -162,7 +162,7 @@
     - tutorials/learning/condition-loops.md
     - de/tutorials/learning/condition-loops.md
   file: public/tutorials/screenshots/condition-loops-halving-sheet.webp
-  size: missing
+  size: 1280x673
 - id: counting-loops-countdown-sheet
   description: the program countdown on its sheet, seen from the side, with the
     FOR line and its indented ASSIGN line in front
@@ -170,14 +170,14 @@
     - tutorials/learning/counting-loops.md
     - de/tutorials/learning/counting-loops.md
   file: public/tutorials/screenshots/counting-loops-countdown-sheet.webp
-  size: missing
+  size: 1280x673
 - id: counting-loops-countdown-wall
   description: the display wall showing "10 9 8 7 6 5 4 3 2 1 0" and "Lift-off!" below it
   pages:
     - tutorials/learning/counting-loops.md
     - de/tutorials/learning/counting-loops.md
   file: public/tutorials/screenshots/counting-loops-countdown-wall.webp
-  size: missing
+  size: 1280x673
 - id: decisions-guard-sheet
   description: the program guard on its sheet in the c0de dimension, seen from
     above at the south end, with the IF and ELSE lines in the middle and all
@@ -186,7 +186,7 @@
     - tutorials/learning/decisions.md
     - de/tutorials/learning/decisions.md
   file: public/tutorials/screenshots/decisions-guard-sheet.webp
-  size: missing
+  size: 1280x673
 - id: decisions-guard-wall
   description: the display wall at the entrance of the base showing "Welcome home,
     Steve!", the trigger block with a button below it, the player standing in
@@ -195,7 +195,7 @@
     - tutorials/learning/decisions.md
     - de/tutorials/learning/decisions.md
   file: public/tutorials/screenshots/decisions-guard-wall.webp
-  size: missing
+  size: 1280x673
 - id: dice-display
   description: 'a display block next to a trigger block with a button, showing
     "D20: 15", "D20: 4", "D20: 6" and "Total: 25"'
@@ -203,7 +203,7 @@
     - tutorials/libraries/c0de/math/dice.md
     - de/tutorials/libraries/c0de/math/dice.md
   file: public/tutorials/screenshots/dice-display.webp
-  size: missing
+  size: 1280x673
 - id: doorbell-door
   description: the front door of the base from outside with the trigger block and
     its button beside it, and the chat line with "Steve is at the front door."
@@ -211,7 +211,7 @@
     - tutorials/libraries/c0de/minecraft/doorbell.md
     - de/tutorials/libraries/c0de/minecraft/doorbell.md
   file: public/tutorials/screenshots/doorbell-door.webp
-  size: missing
+  size: 1280x673
 - id: errors-broken-sheet
   description: the program repair with its three bugs on its sheet, seen from the
     south, the line number 11 dark red and all other line numbers dark green or
@@ -220,7 +220,7 @@
     - tutorials/learning/errors.md
     - de/tutorials/learning/errors.md
   file: public/tutorials/screenshots/errors-broken-sheet.webp
-  size: missing
+  size: 1280x673
 - id: errors-crash-dialog
   description: the dialog of the trigger block after the crash, showing the error
     code 303 DIVISION_BY_ZERO, the message "Division by 0", the function share
@@ -229,7 +229,7 @@
     - tutorials/learning/errors.md
     - de/tutorials/learning/errors.md
   file: public/tutorials/screenshots/errors-crash-dialog.webp
-  size: missing
+  size: 1280x673
 - id: errors-debug-cursor
   description: the red debug cursor on the cursor rail next to line 11 of the
     program repair, and the dialog of the cursor with the values of rows, length
@@ -238,7 +238,7 @@
     - tutorials/learning/errors.md
     - de/tutorials/learning/errors.md
   file: public/tutorials/screenshots/errors-debug-cursor.webp
-  size: missing
+  size: 1280x673
 - id: first-program-result
   description: the display wall of 2 x 1 display blocks at the entrance of the
     base, showing "Welcome to my base!", with the trigger block and button next
@@ -247,7 +247,7 @@
     - tutorials/learning/first-program.md
     - de/tutorials/learning/first-program.md
   file: public/tutorials/screenshots/first-program-result.webp
-  size: missing
+  size: 1280x673
 - id: first-program-sign
   description: the program "sign" on its sheet, seen from above at the north end,
     with dark green line numbers
@@ -255,7 +255,7 @@
     - tutorials/learning/first-program.md
     - de/tutorials/learning/first-program.md
   file: public/tutorials/screenshots/first-program-sign.webp
-  size: missing
+  size: 1280x673
 - id: functions-frame-sheet
   description: the program frame on its sheet, seen from above, with the two
     FUNCTION lines (framed and welcome), each with a NOOP line above it, and the
@@ -264,7 +264,7 @@
     - tutorials/learning/functions.md
     - de/tutorials/learning/functions.md
   file: public/tutorials/screenshots/functions-frame-sheet.webp
-  size: missing
+  size: 1280x673
 - id: functions-frame-wall
   description: 'the display wall with the three framed texts: "Welcome" and "Oak
     Hill" side by side at the top, "Mind the creepers!" below'
@@ -272,7 +272,7 @@
     - tutorials/learning/functions.md
     - de/tutorials/learning/functions.md
   file: public/tutorials/screenshots/functions-frame-wall.webp
-  size: missing
+  size: 1280x673
 - id: game-time-bounce
   description: a display block with the ball "o" in the middle of row 3, the
     trigger block with its button in front of it
@@ -280,14 +280,14 @@
     - tutorials/libraries/c0de/time/game-time.md
     - de/tutorials/libraries/c0de/time/game-time.md
   file: public/tutorials/screenshots/game-time-bounce.webp
-  size: missing
+  size: 1280x673
 - id: growth-display
   description: 'a display block showing the lines "Day 0: 1" to "Day 7: 128"'
   pages:
     - tutorials/libraries/c0de/math/growth.md
     - de/tutorials/libraries/c0de/math/growth.md
   file: public/tutorials/screenshots/growth-display.webp
-  size: missing
+  size: 1280x673
 - id: guarded-door-entrance
   description: 'the entrance of the base from outside: the iron door open, the
     player on the pressure plate one block in front of it, the display wall next
@@ -297,7 +297,7 @@
     - tutorials/learning/guarded-door.md
     - de/tutorials/learning/guarded-door.md
   file: public/tutorials/screenshots/guarded-door-entrance.webp
-  size: missing
+  size: 1280x673
 - id: guarded-door-sheet
   description: the whole program door on its sheet, seen from above, with the
     start values of plate and door at the top, the function isFriend and the
@@ -306,7 +306,7 @@
     - tutorials/learning/guarded-door.md
     - de/tutorials/learning/guarded-door.md
   file: public/tutorials/screenshots/guarded-door-sheet.webp
-  size: missing
+  size: 1280x673
 - id: guess-the-number-laptop
   description: 'the terminal of the laptop during a game: the yellow hello,
     guesses with aqua and light purple answers, and the green line "Right! You
@@ -315,7 +315,7 @@
     - tutorials/learning/guess-the-number.md
     - de/tutorials/learning/guess-the-number.md
   file: public/tutorials/screenshots/guess-the-number-laptop.webp
-  size: missing
+  size: 1280x673
 - id: guess-the-number-sheet
   description: the whole program guess on its sheet, seen from above at the south
     end, with the function secretNumber at the top and the REPEAT loop of the
@@ -324,7 +324,7 @@
     - tutorials/learning/guess-the-number.md
     - de/tutorials/learning/guess-the-number.md
   file: public/tutorials/screenshots/guess-the-number-sheet.webp
-  size: missing
+  size: 1280x673
 - id: home-automation-lever
   description: The trigger block with the lever on top, switched on, and the PID
     block of the running process on the sheet
@@ -332,7 +332,7 @@
     - tutorials/libraries/c0de_net/http/home-automation.md
     - de/tutorials/libraries/c0de_net/http/home-automation.md
   file: public/tutorials/screenshots/home-automation-lever.webp
-  size: missing
+  size: 1280x673
 - id: libraries-dice-chat
   description: the player in the base pressing the button on the trigger block,
     the chat showing three lines like "[dice/0] You rolled a 4"
@@ -340,7 +340,7 @@
     - tutorials/learning/libraries.md
     - de/tutorials/learning/libraries.md
   file: public/tutorials/screenshots/libraries-dice-chat.webp
-  size: missing
+  size: 1280x673
 - id: libraries-dice-sheet
   description: the program dice on its sheet, seen from the south, with the two
     INCLUDE lines at the top and all line numbers dark green
@@ -348,7 +348,7 @@
     - tutorials/learning/libraries.md
     - de/tutorials/learning/libraries.md
   file: public/tutorials/screenshots/libraries-dice-sheet.webp
-  size: missing
+  size: 1280x673
 - id: lists-notes-sheet
   description: the program notes on its sheet, seen from above, with the VARIABLE
     notes ARRAY STRING block and its start value "Feed the cats" at the top and
@@ -357,7 +357,7 @@
     - tutorials/learning/lists.md
     - de/tutorials/learning/lists.md
   file: public/tutorials/screenshots/lists-notes-sheet.webp
-  size: missing
+  size: 1280x673
 - id: lists-notes-wall
   description: the display wall at the entrance with three notes, "Feed the cats",
     "Get more torches" and "Plant wheat", and the laptop next to it with its
@@ -366,7 +366,7 @@
     - tutorials/learning/lists.md
     - de/tutorials/learning/lists.md
   file: public/tutorials/screenshots/lists-notes-wall.webp
-  size: missing
+  size: 1280x673
 - id: name-board-wall
   description: the display wall of 2 × 1 blocks with the frame of = signs, the
     greeting WELCOME TO THE BASE OF and the name Steve
@@ -374,7 +374,7 @@
     - tutorials/libraries/c0de/strings/name-board.md
     - de/tutorials/libraries/c0de/strings/name-board.md
   file: public/tutorials/screenshots/name-board-wall.webp
-  size: missing
+  size: 1280x673
 - id: next-steps-handbook
   description: the handbook Functions open in the game as a red Patchouli book,
     showing the page of SAY with its parameters and its example
@@ -382,7 +382,7 @@
     - tutorials/learning/next-steps.md
     - de/tutorials/learning/next-steps.md
   file: public/tutorials/screenshots/next-steps-handbook.webp
-  size: missing
+  size: 1280x673
 - id: numbers-as-text-laptop
   description: the terminal of the laptop with the date, the stock table in
     aligned columns and the total
@@ -390,7 +390,7 @@
     - tutorials/libraries/c0de/strings/numbers-as-text.md
     - de/tutorials/libraries/c0de/strings/numbers-as-text.md
   file: public/tutorials/screenshots/numbers-as-text-laptop.webp
-  size: missing
+  size: 1280x673
 - id: parameters-stacks
   description: the program "stacks" on its sheet, seen from above, with the
     PARAMETER and RESULT lines between FUNCTION and BEGIN
@@ -398,7 +398,7 @@
     - tutorials/learning/parameters.md
     - de/tutorials/learning/parameters.md
   file: public/tutorials/screenshots/parameters-stacks.webp
-  size: missing
+  size: 1280x673
 - id: parameters-trigger
   description: the dialog of the trigger block with the variable item "items" and
     an uninitialized variable item in the input inventory
@@ -406,7 +406,7 @@
     - tutorials/learning/parameters.md
     - de/tutorials/learning/parameters.md
   file: public/tutorials/screenshots/parameters-trigger.webp
-  size: missing
+  size: 1280x673
 - id: rewards-hub
   description: 'the teleporter hub: three pressure plates in a row with signs
     "Farm", "Mine" and "Tower" behind them, the timer block at the west end'
@@ -414,7 +414,7 @@
     - tutorials/libraries/c0de/minecraft/rewards.md
     - de/tutorials/libraries/c0de/minecraft/rewards.md
   file: public/tutorials/screenshots/rewards-hub.webp
-  size: missing
+  size: 1280x673
 - id: rewards-pen
   description: the fenced pen with several sheep, one of them just appeared in the
     middle, the trigger block with its button north of the pen and the chat line
@@ -423,7 +423,7 @@
     - tutorials/libraries/c0de/minecraft/rewards.md
     - de/tutorials/libraries/c0de/minecraft/rewards.md
   file: public/tutorials/screenshots/rewards-pen.webp
-  size: missing
+  size: 1280x673
 - id: saving-data-io-block
   description: the dialog of the I/O block after the run, with the variable item
     scores in its output
@@ -431,7 +431,7 @@
     - tutorials/libraries/c0de/strings/saving-data.md
     - de/tutorials/libraries/c0de/strings/saving-data.md
   file: public/tutorials/screenshots/saving-data-io-block.webp
-  size: missing
+  size: 1280x673
 - id: secret-messages-laptop
   description: "the terminal of the laptop after the run: the typed message and
     key, the secret text and the decoded message"
@@ -439,7 +439,7 @@
     - tutorials/libraries/c0de/strings/secret-messages.md
     - de/tutorials/libraries/c0de/strings/secret-messages.md
   file: public/tutorials/screenshots/secret-messages-laptop.webp
-  size: missing
+  size: 1280x673
 - id: sorting-chests
   description: the row of chests seen from the side, the hopper on the input
     chest, the timer block to the west, and the open food chest with bread and
@@ -448,7 +448,7 @@
     - tutorials/libraries/c0de/minecraft/sorting.md
     - de/tutorials/libraries/c0de/minecraft/sorting.md
   file: public/tutorials/screenshots/sorting-chests.webp
-  size: missing
+  size: 1280x673
 - id: stopwatch-buttons
   description: the two trigger blocks with buttons side by side, the hopper and
     chest under the second one, and the display wall showing the start, stop and
@@ -457,7 +457,7 @@
     - tutorials/libraries/c0de/time/stopwatch.md
     - de/tutorials/libraries/c0de/time/stopwatch.md
   file: public/tutorials/screenshots/stopwatch-buttons.webp
-  size: missing
+  size: 1280x673
 - id: tables-shop-laptop
   description: the laptop terminal showing the offer of the day, the question, the
     typed word saddle and the answer "saddle costs 12 emeralds."
@@ -465,7 +465,7 @@
     - tutorials/learning/tables.md
     - de/tutorials/learning/tables.md
   file: public/tutorials/screenshots/tables-shop-laptop.webp
-  size: missing
+  size: 1280x673
 - id: tables-shop-sheet
   description: the program shop on its sheet, seen from above, with the STRUCT
     offer declaration at the top and the two VARIABLE blocks with their start
@@ -474,7 +474,7 @@
     - tutorials/learning/tables.md
     - de/tutorials/learning/tables.md
   file: public/tutorials/screenshots/tables-shop-sheet.webp
-  size: missing
+  size: 1280x673
 - id: tunnel-digger-tunnel
   description: the entrance of the tunnel in the side of a hill, two blocks high,
     the trigger block in front of it, the tools chest on the left and the open
@@ -483,7 +483,7 @@
     - tutorials/libraries/c0de/minecraft/tunnel-digger.md
     - de/tutorials/libraries/c0de/minecraft/tunnel-digger.md
   file: public/tutorials/screenshots/tunnel-digger-tunnel.webp
-  size: missing
+  size: 1280x673
 - id: up-to-date-wall
   description: "The display wall with the two green lines c0de 0.5.0: up to date
     and c0de net 0.3.0: up to date"
@@ -491,7 +491,7 @@
     - tutorials/libraries/c0de_net/http/up-to-date.md
     - de/tutorials/libraries/c0de_net/http/up-to-date.md
   file: public/tutorials/screenshots/up-to-date-wall.webp
-  size: missing
+  size: 1280x673
 - id: variables-result
   description: the display wall at the entrance showing "Welcome to Oak Hill!" in
     yellow on blue and "Founded in 2026" in white, between the gold lines
@@ -499,7 +499,7 @@
     - tutorials/learning/variables.md
     - de/tutorials/learning/variables.md
   file: public/tutorials/screenshots/variables-result.webp
-  size: missing
+  size: 1280x673
 - id: variables-sign
   description: 'the top of the program "sign" on its sheet, seen from above: the
     CONSTANT lines, the VARIABLE and ASSIGN lines inside the function'
@@ -507,7 +507,7 @@
     - tutorials/learning/variables.md
     - de/tutorials/learning/variables.md
   file: public/tutorials/screenshots/variables-sign.webp
-  size: missing
+  size: 1280x673
 - id: watching-farm
   description: 'the wheat field of 4 × 4 plants, partly ripe, with the timer block
     beside it and the display wall showing "Wheat: 16 plants" and "Ripe: 5"'
@@ -515,7 +515,7 @@
     - tutorials/libraries/c0de/minecraft/watching.md
     - de/tutorials/libraries/c0de/minecraft/watching.md
   file: public/tutorials/screenshots/watching-farm.webp
-  size: missing
+  size: 1280x673
 - id: watching-pen
   description: 'the fenced pen with sheep, cows and pigs, the timer block north of
     it, and the display wall listing the animals and "Animals: 9"'
@@ -523,7 +523,7 @@
     - tutorials/libraries/c0de/minecraft/watching.md
     - de/tutorials/libraries/c0de/minecraft/watching.md
   file: public/tutorials/screenshots/watching-pen.webp
-  size: missing
+  size: 1280x673
 - id: weather-wall
   description: The display wall showing Vienna, Austria, the sky, the temperature
     and the wind
@@ -531,4 +531,4 @@
     - tutorials/libraries/c0de_net/http/weather.md
     - de/tutorials/libraries/c0de_net/http/weather.md
   file: public/tutorials/screenshots/weather-wall.webp
-  size: missing
+  size: 1280x673

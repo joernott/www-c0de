@@ -7,7 +7,7 @@ description: IF and ELSE, the loops FOR, EACH, WHILE and REPEAT, BREAK, RETURN a
 c0de has one condition and four loops, all made of a keyword line and a code block between BEGIN and END. They look like the statements of BASIC or Pascal, but the details differ: there is no ELSE IF, FOR includes its end value, and REPEAT goes on while its condition is true. This lesson writes FizzBuzz, goes through a hash, and revisits the prime numbers of the guide.
 
 ::: info What you need
-A creative world with cheats on (see [Tutorials](/tutorials/)), a **trigger block**, a **wrench**, a **button**, a few **uninitialized variable items**, a variable item named `n` of type INTEGER, one named `limit` of type INTEGER, and a **comparator** with a **redstone lamp**.
+A creative world with cheats on (see [Tutorials](/tutorials/)), a **trigger block**, a **wrench**, a **button**, a few **uninitialized variable items**, a variable item named `n` of type INTEGER and one named `limit` of type INTEGER. For the prime numbers: a **comparator** with a **redstone lamp**.
 :::
 
 ## The statements

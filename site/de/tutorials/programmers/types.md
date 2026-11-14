@@ -7,7 +7,7 @@ description: Die Typen von c0de – einfache und komplexe Typen, Literale, Stand
 c0de ist statisch typisiert: Jede Variable, Konstante, jeder Parameter und jedes Ergebnis hat genau einen Typ, geschrieben als Typblock hinter seinem Namen. Es gibt kein `null`, keine automatische Umwandlung von Text in Zahlen und nur zwei Erweiterungen. Diese Lektion geht die Typen durch, ihre Literale und Standardwerte, die Umwandlungen zwischen ihnen und die Konstanten, die jedes Programm kennt, ohne sie zu deklarieren.
 
 ::: info Was du brauchst
-Eine Kreativwelt mit erlaubten Cheats (siehe [Tutorials](/de/tutorials/)), einen **Auslöserblock**, einen **Schraubenschlüssel**, einen **Knopf** und zehn **nicht initialisierte Variablenkarten**.
+Eine Kreativwelt mit erlaubten Cheats (siehe [Tutorials](/de/tutorials/)), einen **Auslöserblock**, einen **Schraubenschlüssel**, einen **Knopf** und zehn **nicht initialisierte Variablenkarten**. Für die Umwandlungen: eine **STRING-Variablenkarte** mit dem Namen `input`.
 :::
 
 ## Die Typen

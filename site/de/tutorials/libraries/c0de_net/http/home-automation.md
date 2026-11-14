@@ -9,7 +9,7 @@ Leg in deiner Basis einen Hebel um, und die Lampe in deiner echten Küche geht a
 **Funktionen:** [HTTP_PUT](/de/c0de_net/http/http_put), [HTTP_CONNECTION](/de/c0de_net/http/http_connection), [TO_JSON](/de/c0de/strings/to_json) aus c0de/strings, [SLEEP](/de/c0de/time/sleep) aus c0de/time und [GET_LEVER](/de/c0de/minecraft/get_lever) aus c0de/minecraft
 
 ::: info Was du brauchst
-Die Mod **c0de net** in deinem Spiel, eine Hausautomation mit HTTP-API in deinem Heimnetz und ein Token dafür, einen Auslöserblock mit einem **Hebel** obendrauf und eine **Konstantenkarte** `token` vom Typ STRING mit dem Token. Um die Anfrage vorher auszuprobieren: einen zweiten Auslöserblock mit Knopf und einen Laptop.
+Die Mod **c0de net** in deinem Spiel, eine Hausautomation mit HTTP-API in deinem Heimnetz und ein Token dafür, einen Auslöserblock mit einem **Hebel** obendrauf und eine **Konstantenkarte** `token` vom Typ STRING mit dem Token. Um die Anfrage vorher auszuprobieren: einen zweiten Auslöserblock mit Knopf und einen Laptop. Für die Übungen: für jede weitere Lampe einen weiteren Auslöserblock mit **Hebel** und eine **Variablenkarte** `lamp` vom Typ STRING.
 :::
 
 ## Die Idee

@@ -10,9 +10,10 @@ A shop door that opens by itself: step on the pressure plate in front of it, and
 
 ::: info What you need
 
-- a **timer block**, a **trigger block** with a **button** on it, and an empty sheet for each program
-- a **wooden door** and two **pressure plates**
-- for the report: a few more doors, **fence gates** or **trapdoors**
+- for the door: a **timer block**, a **wooden door** and two **pressure plates**
+- for the report: a **trigger block** with a **button** on it, and a few more doors, **fence gates** or **trapdoors**
+- an empty sheet for each program
+- for the exercises: a **light weighted pressure plate** (the gold one)
 - no rights for wooden doors, gates and trapdoors. Iron doors and iron trapdoors need `allowBlockChanges` on a server, or an operator as owner, like in the [guarded door](/tutorials/learning/guarded-door).
 
 :::

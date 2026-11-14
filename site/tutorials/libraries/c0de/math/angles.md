@@ -9,7 +9,7 @@ A ramp up to your castle, a slide down a mountain, a roof: you know how long it 
 **Functions:** [TAN](/c0de/math/tan) and [ATN](/c0de/math/atn), with [ROUND](/c0de/math/round) and the constant [PI](/c0de/math/pi)
 
 ::: info What you need
-A trigger block with a button and a **display block**. For `height`, the **variable items** `length` of type INTEGER and `degrees` of type FLOAT (optional: the defaults are 10 blocks and 30 degrees) and two uninitialized items; for `slope`, the variable items `run` and `rise` of type INTEGER and one uninitialized item.
+A trigger block with a button and a **display block**. For `height`, the **variable items** `length` of type INTEGER and `degrees` of type FLOAT (optional: the defaults are 10 blocks and 30 degrees) and two uninitialized items; for `slope`, the variable items `run` and `rise` of type INTEGER and one uninitialized item. For the first exercise: a variable item `height` of type INTEGER and one uninitialized item.
 :::
 
 ## The idea

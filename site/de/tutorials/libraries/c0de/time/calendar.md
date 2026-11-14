@@ -9,7 +9,7 @@ Eine Tafel für deine Basis, die das heutige Datum mit Wochentag und Kalenderwoc
 Funktionen: [DAY](/de/c0de/time/day), [MONTH](/de/c0de/time/month), [YEAR](/de/c0de/time/year), [WEEK](/de/c0de/time/week) und [WEEKDAY](/de/c0de/time/weekday), dazu [NOW](/de/c0de/time/now) und [DIV](/de/c0de/math/div) aus c0de/math.
 
 ::: info Was du brauchst
-Einen **Auslöserblock** mit Knopf und eine **Anzeigewand** aus 3 × 1 Anzeigeblöcken (48 Spalten) oder einen **Laptop**. Wahlweise einen **Zeitgeberblock** statt des Knopfs, damit sich die Tafel von selbst auffrischt.
+Einen **Auslöserblock** mit Knopf und eine **Anzeigewand** aus 3 × 1 Anzeigeblöcken (48 Spalten). Wahlweise einen **Zeitgeberblock** statt des Knopfs, damit sich die Tafel von selbst auffrischt. Für die zweite Übung, wenn du nicht den Programm-Runner nimmst: eine Variablenkarte `time` vom Typ TIME.
 :::
 
 ## Die Idee

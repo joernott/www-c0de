@@ -9,7 +9,7 @@ A die for every game: a D6 for board games, a D20 for adventures, three of them 
 **Functions:** [RANDOM](/c0de/math/random), [RANDOMIZE](/c0de/math/randomize), [INT](/c0de/math/int) and [FIX](/c0de/math/fix)
 
 ::: info What you need
-A trigger block with a button, a **display block** (16 columns and 8 rows are enough) and, if you like, the **variable items** `sides`, `count` and `seed` of type INTEGER and an uninitialized variable item for the result `total`. Without the items, the die is a single D6.
+A trigger block with a button, a **display block** (16 columns and 8 rows are enough) and an uninitialized **variable item** for the result `total`. If you like, the variable items `sides`, `count` and `seed` of type INTEGER; without them, the die is a single D6. For "INT or FIX?": two uninitialized items for the trigger block.
 :::
 
 ## The idea

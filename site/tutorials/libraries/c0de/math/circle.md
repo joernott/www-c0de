@@ -13,7 +13,7 @@ PLACE_BLOCK without `inventory` puts blocks into the world out of nothing, so th
 :::
 
 ::: info What you need
-A trigger block with a button on flat ground, with some free space around it. Optionally the **variable items** `radius` of type INTEGER and `block` of type STRING (a block ID, like `minecraft:oak_planks`); without them, the ring has the radius 5 and is made of stone bricks.
+A trigger block with a button on flat ground, with some free space around it. Optionally the **variable items** `radius` of type INTEGER and `block` of type STRING (a block ID, like `minecraft:oak_planks`); without them, the ring has the radius 5 and is made of stone bricks. For the first exercise: a **chest** with 40 stone bricks on top of the trigger block, and the button on a side of the trigger block.
 :::
 
 ## The idea

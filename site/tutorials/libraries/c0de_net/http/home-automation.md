@@ -9,7 +9,7 @@ Flip a lever in your base, and the lamp in your real kitchen goes on; flip it ba
 **Functions:** [HTTP_PUT](/c0de_net/http/http_put), [HTTP_CONNECTION](/c0de_net/http/http_connection), [TO_JSON](/c0de/strings/to_json) of c0de/strings, [SLEEP](/c0de/time/sleep) of c0de/time and [GET_LEVER](/c0de/minecraft/get_lever) of c0de/minecraft
 
 ::: info What you need
-The mod **c0de net** in your game, a home automation with an HTTP API in your home network and a token for it, a trigger block with a **lever** on top, and a **constant item** `token` of type STRING with the token. To try the request first: a second trigger block with a button and a laptop.
+The mod **c0de net** in your game, a home automation with an HTTP API in your home network and a token for it, a trigger block with a **lever** on top, and a **constant item** `token` of type STRING with the token. To try the request first: a second trigger block with a button and a laptop. For the exercises: for each further lamp, another trigger block with a **lever** and a **variable item** `lamp` of type STRING.
 :::
 
 ## The idea

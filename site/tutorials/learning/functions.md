@@ -18,7 +18,7 @@ The welcome sign of Oak Hill should look fancy: every text in a frame of stars. 
 
 - your display wall of 2 × 1 display blocks and the trigger block with its button
 - a new, empty sheet in the c0de dimension
-- from the creative inventory: the blocks you know (with PARAMETER, RESULT, IF and FOR) and the new **RETURN** block
+- from the creative inventory: the blocks you know (with PARAMETER, RESULT, IF and FOR) and the new **RETURN** block (for the exercises also a **CHAR** type block)
   :::
 
 ## The idea

@@ -9,7 +9,7 @@ A lamp in your base that lights up when your favourite web site is down, and a d
 **Functions:** [HTTP_HEAD](/c0de_net/http/http_head), [HTTP_OPTIONS](/c0de_net/http/http_options), [HTTP_TRACE](/c0de_net/http/http_trace), and [FROM_JSON](/c0de/strings/from_json) of c0de/strings
 
 ::: info What you need
-The mod **c0de net** in your game, a **timer block**, a **comparator** and a **redstone lamp**, a **display wall** of 2 × 1 display blocks, and optionally **variable items** `server` and `endpoint` of type STRING to check another site than c0de.at. For the second program: a trigger block with a button, a laptop and two uninitialized variable items.
+The mod **c0de net** in your game. For the status lamp: a **timer block**, a **comparator** and a **redstone lamp**, a **display wall** of 2 × 1 display blocks, and optionally **variable items** `server` and `endpoint` of type STRING to check another site than c0de.at. For what a server allows: a trigger block with a button, a laptop and two uninitialized variable items. For the exercises: a **redstone torch** and a second **redstone lamp**.
 :::
 
 ## The idea

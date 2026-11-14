@@ -15,7 +15,7 @@ The stack calculator always counts 1000 cobblestone. To count something else, yo
   :::
 
 ::: info What you need
-The stack calculator of the last lesson. Language blocks: PARAMETER and RESULT (a PARAMETER block turns into a RESULT block in the crafting grid), LABEL and INTEGER type blocks. From the creative inventory: two **variable items**.
+The stack calculator of the last lesson, and the **hammer** to delete lines. Language blocks: PARAMETER and RESULT (a PARAMETER block turns into a RESULT block in the crafting grid), LABEL and INTEGER type blocks. From the creative inventory: two **variable items**.
 :::
 
 ## The idea

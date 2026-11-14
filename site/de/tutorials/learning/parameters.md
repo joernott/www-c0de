@@ -15,7 +15,7 @@ Der Stapelrechner zählt immer 1000 Bruchstein. Um etwas anderes zu zählen, mus
   :::
 
 ::: info Was du brauchst
-Den Stapelrechner aus der letzten Lektion. Sprachblöcke: PARAMETER und RESULT (ein PARAMETER-Block wird im Handwerksraster zu einem RESULT-Block), LABEL und INTEGER-Typblöcke. Aus dem Kreativinventar: zwei **Variablenkarten**.
+Den Stapelrechner aus der letzten Lektion und den **Hammer**, um Zeilen zu löschen. Sprachblöcke: PARAMETER und RESULT (ein PARAMETER-Block wird im Handwerksraster zu einem RESULT-Block), LABEL und INTEGER-Typblöcke. Aus dem Kreativinventar: zwei **Variablenkarten**.
 :::
 
 ## Die Idee

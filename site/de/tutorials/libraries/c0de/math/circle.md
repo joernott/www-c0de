@@ -13,7 +13,7 @@ PLACE_BLOCK ohne `inventory` setzt Blöcke aus dem Nichts in die Welt, darum mus
 :::
 
 ::: info Was du brauchst
-Einen Auslöserblock mit einem Knopf auf ebenem Boden, mit etwas Platz drumherum. Wahlweise die **Variablenkarten** `radius` vom Typ INTEGER und `block` vom Typ STRING (eine Block-ID wie `minecraft:oak_planks`); ohne sie hat der Ring den Radius 5 und ist aus Steinziegeln.
+Einen Auslöserblock mit einem Knopf auf ebenem Boden, mit etwas Platz drumherum. Wahlweise die **Variablenkarten** `radius` vom Typ INTEGER und `block` vom Typ STRING (eine Block-ID wie `minecraft:oak_planks`); ohne sie hat der Ring den Radius 5 und ist aus Steinziegeln. Für die erste Übung: eine **Truhe** mit 40 Steinziegeln oben auf dem Auslöserblock, und den Knopf an einer Seite des Auslöserblocks.
 :::
 
 ## Die Idee

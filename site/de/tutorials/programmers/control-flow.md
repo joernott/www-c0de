@@ -7,7 +7,7 @@ description: IF und ELSE, die Schleifen FOR, EACH, WHILE und REPEAT, BREAK, RETU
 c0de hat eine Bedingung und vier Schleifen, alle aus einer Schlüsselwortzeile und einem Codeblock zwischen BEGIN und END. Sie sehen aus wie die Anweisungen von BASIC oder Pascal, aber die Einzelheiten sind anders: Es gibt kein ELSE IF, FOR schließt seinen Endwert ein, und REPEAT macht weiter, solange seine Bedingung wahr ist. Diese Lektion schreibt FizzBuzz, geht durch einen Hash und nimmt sich noch einmal die Primzahlen der Anleitung vor.
 
 ::: info Was du brauchst
-Eine Kreativwelt mit erlaubten Cheats (siehe [Tutorials](/de/tutorials/)), einen **Auslöserblock**, einen **Schraubenschlüssel**, einen **Knopf**, ein paar **nicht initialisierte Variablenkarten**, eine Variablenkarte mit dem Namen `n` vom Typ INTEGER, eine mit dem Namen `limit` vom Typ INTEGER und einen **Komparator** mit einer **Redstone-Lampe**.
+Eine Kreativwelt mit erlaubten Cheats (siehe [Tutorials](/de/tutorials/)), einen **Auslöserblock**, einen **Schraubenschlüssel**, einen **Knopf**, ein paar **nicht initialisierte Variablenkarten**, eine Variablenkarte mit dem Namen `n` vom Typ INTEGER und eine mit dem Namen `limit` vom Typ INTEGER. Für die Primzahlen: einen **Komparator** mit einer **Redstone-Lampe**.
 :::
 
 ## Die Anweisungen

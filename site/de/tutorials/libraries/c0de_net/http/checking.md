@@ -9,7 +9,7 @@ Eine Lampe in deiner Basis, die aufleuchtet, wenn deine Lieblings-Website ausgef
 **Funktionen:** [HTTP_HEAD](/de/c0de_net/http/http_head), [HTTP_OPTIONS](/de/c0de_net/http/http_options), [HTTP_TRACE](/de/c0de_net/http/http_trace) und [FROM_JSON](/de/c0de/strings/from_json) aus c0de/strings
 
 ::: info Was du brauchst
-Die Mod **c0de net** in deinem Spiel, einen **Zeitgeberblock**, einen **Komparator** und eine **Redstone-Lampe**, eine **Anzeigewand** aus 2 × 1 Anzeigeblöcken und wahlweise **Variablenkarten** `server` und `endpoint` vom Typ STRING, um eine andere Seite als c0de.at zu prüfen. Für das zweite Programm: einen Auslöserblock mit Knopf, einen Laptop und zwei nicht initialisierte Variablenkarten.
+Die Mod **c0de net** in deinem Spiel. Für die Statuslampe: einen **Zeitgeberblock**, einen **Komparator** und eine **Redstone-Lampe**, eine **Anzeigewand** aus 2 × 1 Anzeigeblöcken und wahlweise **Variablenkarten** `server` und `endpoint` vom Typ STRING, um eine andere Seite als c0de.at zu prüfen. Für „Was ein Server erlaubt“: einen Auslöserblock mit Knopf, einen Laptop und zwei nicht initialisierte Variablenkarten. Für die Übungen: eine **Redstone-Fackel** und eine zweite **Redstone-Lampe**.
 :::
 
 ## Die Idee

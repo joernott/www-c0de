@@ -7,7 +7,7 @@ description: Text auf Anzeigewänden, Laptops und Tablets, die Tastatur mit INPU
 Ein c0de-Programm hat kein stdin und stdout. Es spricht mit Spielern über Geräte, die du an ein Programm und eine Funktion bindest: Bildschirme zeigen, was PRINT schreibt, Laptops und Tablets nehmen Tasten und eingetippte Zeilen entgegen, und E/A-Blöcke bringen Werte als Karten hinein und hinaus. Die Bildschirmfunktionen stammen aus AmigaBASIC; wenn du `LOCATE` und `INKEY$` kennst, kennst du den Großteil dieser Lektion.
 
 ::: info Was du brauchst
-Einen Auslöserblock mit Knopf, einen **Laptop** (oder ein Tablet) und eine nicht initialisierte **Variablenkarte** für das Ergebnis. Wahlweise eine **Anzeigewand** aus 2 × 1 Anzeigeblöcken, die denselben Bildschirm zeigt. Für die Übungen: einen **E/A-Block** und ein paar weitere nicht initialisierte Variablenkarten.
+Einen Auslöserblock mit Knopf, einen **Laptop** (oder ein Tablet) und eine nicht initialisierte **Variablenkarte** für das Ergebnis. Wahlweise eine **Anzeigewand** aus 2 × 1 Anzeigeblöcken, die denselben Bildschirm zeigt. Für die Übungen: einen **E/A-Block**, ein paar weitere nicht initialisierte Variablenkarten und das **Debugging-Werkzeug**.
 :::
 
 ## Das Modell

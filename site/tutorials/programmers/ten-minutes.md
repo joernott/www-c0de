@@ -7,7 +7,7 @@ description: The model of c0de for programmers – code made of blocks, the layo
 You know how to program. This lesson shows how c0de is different from the languages you know: programs are rows of blocks, a few layout rules replace the boilerplate of other languages, and a function gets its arguments from items and returns its results as items.
 
 ::: info What you need
-A creative world with cheats on (see [Tutorials](/tutorials/)), a **trigger block**, a **wrench**, a **button** and two **variable items**: one named `name` of type STRING, one uninitialized.
+A creative world with cheats on (see [Tutorials](/tutorials/)), a **trigger block**, a **wrench**, a **button** and two **variable items**: one named `name` of type STRING, one uninitialized. For the exercises: a **CHAR variable item** named `mark`.
 :::
 
 ## The model

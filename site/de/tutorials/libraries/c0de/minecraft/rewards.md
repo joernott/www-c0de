@@ -14,9 +14,11 @@ Diese Funktionen machen Dinge aus dem Nichts oder bewegen sie ohne einen Spieler
 
 ::: info Was du brauchst
 
-- einen **Auslöserblock** mit einem **Knopf**, deinen **Laptop**, einen **Zeitgeberblock** und ein leeres Blatt für jedes Programm
-- ein eingezäuntes Gehege wie in [Die Umgebung beobachten](/de/tutorials/libraries/c0de/minecraft/watching)
-- drei **Druckplatten** und die Positionen von drei Orten, die du erreichen willst
+- ein leeres Blatt für jedes Programm
+- für den Belohnungsautomaten: einen **Auslöserblock** mit einem **Knopf** und deinen **Laptop**
+- für den Tierspawner: denselben **Auslöserblock** und ein eingezäuntes Gehege wie in [Die Umgebung beobachten](/de/tutorials/libraries/c0de/minecraft/watching)
+- für den Teleporter-Knoten: einen **Zeitgeberblock**, drei **Druckplatten** mit je einem **Schild** und die Positionen von drei Orten, die du erreichen willst
+- für die Übungen: einen **Werfer** voller Diamanten mit einem **Steinknopf** obendrauf
 
 :::
 

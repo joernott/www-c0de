@@ -10,9 +10,9 @@ Zwei Programme, die nur schauen: ein Feldwächter, der auf einer Anzeigewand zei
 
 ::: info Was du brauchst
 
-- zwei **Zeitgeberblöcke** und ein leeres Blatt für jedes Programm
-- eine **Anzeigewand** für jedes Programm
-- ein Weizenfeld mit 4 × 4 Pflanzen und ein eingezäuntes Gehege mit ein paar Tieren
+- ein leeres Blatt für jedes Programm
+- für den Feldwächter: einen **Zeitgeberblock**, eine **Anzeigewand** und ein Weizenfeld mit 4 × 4 Pflanzen
+- für den Tierzähler: einen zweiten **Zeitgeberblock**, eine zweite **Anzeigewand** und ein eingezäuntes Gehege mit ein paar Tieren
 - keine Rechte: Die Welt zu lesen ist jedem Besitzer erlaubt
 
 :::

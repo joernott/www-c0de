@@ -7,7 +7,7 @@ description: Operatoren, Vorrang und Zuweisungen in c0de, verglichen mit C, Java
 c0de trennt Anweisungen und Ausdrücke streng: Eine Zeile ist eine Anweisung, ein Ausdruck ist nur ein Teil davon und endet mit `;`. Die Zuweisung ist eine eigene Anweisung, Funktionen werden mit einer eigenen Anweisung aufgerufen, und manche Operatoren sehen vertraut aus, bedeuten aber etwas anderes. Diese Lektion vergleicht die Operatoren mit C, Java und Python und zeigt, wo der Vorrang anders ist.
 
 ::: info Was du brauchst
-Eine Kreativwelt mit erlaubten Cheats (siehe [Tutorials](/de/tutorials/)), einen **Auslöserblock**, einen **Schraubenschlüssel**, einen **Knopf** und elf **nicht initialisierte Variablenkarten**.
+Eine Kreativwelt mit erlaubten Cheats (siehe [Tutorials](/de/tutorials/)), einen **Auslöserblock**, einen **Schraubenschlüssel**, einen **Knopf** und elf **nicht initialisierte Variablenkarten**. Für die Ganzzahl- und Gleitkommarechnung und die Übungen: zwei **INTEGER-Variablenkarten** mit den Namen `a` und `b`.
 :::
 
 ## Anweisungen und Ausdrücke

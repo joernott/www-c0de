@@ -14,9 +14,10 @@ MOVE_ITEMS und DELETE_ITEMS bewegen Gegenstände ohne einen Spieler, darum funkt
 
 ::: info Was du brauchst
 
-- zwei **Zeitgeberblöcke** und ein leeres Blatt für jedes Programm
-- vier **Truhen** und einen **Trichter**
-- ein paar Stapel Bruchstein, Erde, Brot, Äpfel und etwas anderes, zum Beispiel Diamanten
+- ein leeres Blatt für jedes Programm
+- für den Sortierer: einen **Zeitgeberblock**, drei **Truhen** und einen **Trichter**, dazu etwas Bruchstein, Brot und einen Diamanten
+- für den Mülleimer: einen zweiten **Zeitgeberblock**, eine vierte **Truhe** und etwas verrottetes Fleisch
+- für die Übungen: verrottetes Fleisch, giftige Kartoffeln und eine fünfte **Truhe**
 
 :::
 

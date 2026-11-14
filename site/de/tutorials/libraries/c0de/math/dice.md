@@ -9,7 +9,7 @@ Ein Würfel für jedes Spiel: ein W6 für Brettspiele, ein W20 für Abenteuer, d
 **Funktionen:** [RANDOM](/de/c0de/math/random), [RANDOMIZE](/de/c0de/math/randomize), [INT](/de/c0de/math/int) und [FIX](/de/c0de/math/fix)
 
 ::: info Was du brauchst
-Einen Auslöserblock mit einem Knopf, einen **Anzeigeblock** (16 Spalten und 8 Zeilen reichen) und, wenn du magst, die **Variablenkarten** `sides`, `count` und `seed` vom Typ INTEGER und eine nicht initialisierte Variablenkarte für das Ergebnis `total`. Ohne die Karten ist der Würfel ein einzelner W6.
+Einen Auslöserblock mit einem Knopf, einen **Anzeigeblock** (16 Spalten und 8 Zeilen reichen) und eine nicht initialisierte **Variablenkarte** für das Ergebnis `total`. Wenn du magst, die Variablenkarten `sides`, `count` und `seed` vom Typ INTEGER; ohne sie ist der Würfel ein einzelner W6. Für „INT oder FIX?“: zwei nicht initialisierte Karten für den Auslöserblock.
 :::
 
 ## Die Idee

@@ -10,7 +10,8 @@ A button at the front door rings a bell, and the chat tells everybody in the bas
 
 ::: info What you need
 
-- two **trigger blocks**, each with a **button** on it, next to your front door
+- for the doorbell: a **trigger block** with a **button** on it, next to your front door
+- for the melody: a second **trigger block** with a **button** on it, next to the first one
 - an empty sheet for each program
 - nothing else: these functions need no rights, they work for every owner on every server
 

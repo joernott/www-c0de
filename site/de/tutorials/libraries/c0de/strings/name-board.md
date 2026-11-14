@@ -9,7 +9,7 @@ Ein Schild am Eingang deiner Basis: ein Rahmen aus `=`-Zeichen auf einer Anzeige
 **Funktionen:** [UCASE](/de/c0de/strings/ucase), [LCASE](/de/c0de/strings/lcase), [LEFT](/de/c0de/strings/left), [RIGHT](/de/c0de/strings/right), [SPACE](/de/c0de/strings/space), [FILL](/de/c0de/strings/fill) und [DIV](/de/c0de/math/div) aus c0de/math
 
 ::: info Was du brauchst
-Einen Auslöserblock mit Knopf, eine **Anzeigewand** aus 2 × 1 Anzeigeblöcken (32 Spalten und 8 Zeilen) und eine **Variablenkarte** `name` vom Typ STRING mit dem Namen, zum Beispiel `sTEVE`. Wahlweise eine zweite Variablenkarte `title` vom Typ STRING für einen anderen Gruß.
+Einen Auslöserblock mit Knopf, eine **Anzeigewand** aus 2 × 1 Anzeigeblöcken (32 Spalten und 8 Zeilen) und eine **Variablenkarte** `name` vom Typ STRING mit dem Namen, zum Beispiel `sTEVE`. Wahlweise eine zweite Variablenkarte `title` vom Typ STRING für einen anderen Gruß. Für die erste Übung: eine Variablenkarte `edge` vom Typ CHAR.
 :::
 
 ## Die Idee

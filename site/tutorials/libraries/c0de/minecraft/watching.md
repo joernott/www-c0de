@@ -10,9 +10,9 @@ Two programs that only look: a farm monitor that shows on a display wall how muc
 
 ::: info What you need
 
-- two **timer blocks** and an empty sheet for each program
-- a **display wall** for each program
-- a wheat field of 4 × 4 plants and a fenced pen with some animals
+- an empty sheet for each program
+- for the farm monitor: a **timer block**, a **display wall** and a wheat field of 4 × 4 plants
+- for the animal counter: a second **timer block**, a second **display wall** and a fenced pen with some animals
 - no rights: reading the world is allowed for every owner
 
 :::

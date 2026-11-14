@@ -7,7 +7,7 @@ description: Das Modell von c0de für Programmierer – Code aus Blöcken, der A
 Du kannst programmieren. Diese Lektion zeigt, worin sich c0de von den Sprachen unterscheidet, die du kennst: Programme sind Reihen aus Blöcken, ein paar Regeln für den Aufbau ersetzen den Rahmencode anderer Sprachen, und eine Funktion bekommt ihre Argumente aus Karten und gibt ihre Ergebnisse als Karten zurück.
 
 ::: info Was du brauchst
-Eine Kreativwelt mit erlaubten Cheats (siehe [Tutorials](/de/tutorials/)), einen **Auslöserblock**, einen **Schraubenschlüssel**, einen **Knopf** und zwei **Variablenkarten**: eine mit dem Namen `name` vom Typ STRING und eine nicht initialisierte.
+Eine Kreativwelt mit erlaubten Cheats (siehe [Tutorials](/de/tutorials/)), einen **Auslöserblock**, einen **Schraubenschlüssel**, einen **Knopf** und zwei **Variablenkarten**: eine mit dem Namen `name` vom Typ STRING und eine nicht initialisierte. Für die Übungen: eine **CHAR-Variablenkarte** mit dem Namen `mark`.
 :::
 
 ## Das Modell

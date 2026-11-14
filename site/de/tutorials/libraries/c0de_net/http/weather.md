@@ -9,7 +9,7 @@ Eine Wetterstation für deine Basis: Gib den Namen einer Stadt ein, drück den K
 **Funktionen:** [HTTP_CONNECTION](/de/c0de_net/http/http_connection), [HTTP_GET](/de/c0de_net/http/http_get) und [FROM_JSON](/de/c0de/strings/from_json) aus c0de/strings
 
 ::: info Was du brauchst
-Die Mod **c0de net** in deinem Spiel, einen Auslöserblock mit Knopf, eine **Anzeigewand** aus 2 × 1 Anzeigeblöcken (32 Spalten und 8 Zeilen), eine nicht initialisierte Variablenkarte und wahlweise eine **Variablenkarte** `city` vom Typ STRING mit dem Namen einer Stadt, zum Beispiel `Berlin`. Ohne sie zeigt das Programm Wien.
+Die Mod **c0de net** in deinem Spiel, einen Auslöserblock mit Knopf, eine **Anzeigewand** aus 2 × 1 Anzeigeblöcken (32 Spalten und 8 Zeilen), eine nicht initialisierte Variablenkarte und wahlweise eine **Variablenkarte** `city` vom Typ STRING mit dem Namen einer Stadt, zum Beispiel `Berlin`. Ohne sie zeigt das Programm Wien. Für die Übungen: zwei nicht initialisierte Variablenkarten und einen **Zeitgeberblock**.
 :::
 
 ## Die Idee

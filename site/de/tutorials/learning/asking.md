@@ -13,7 +13,7 @@ Für jede Frage eine Variablenkarte auszufüllen funktioniert, ist aber langsam.
   :::
 
 ::: info Was du brauchst
-Den Stapelrechner aus der letzten Lektion, seinen Auslöserblock mit Knopf und einen **Laptop**. Sprachblöcke: VARIABLE, CALL, PARAMETER, LABEL, LITERAL, OPERATOR und INTEGER-Typblöcke.
+Den Stapelrechner aus der letzten Lektion, seinen Auslöserblock mit Knopf und einen **Laptop**. Sprachblöcke: VARIABLE, CALL, PARAMETER, LABEL, LITERAL, OPERATOR und INTEGER-Typblöcke, und den **Hammer**, um Zeilen zu entfernen.
 :::
 
 ## Die Idee

@@ -7,7 +7,7 @@ description: The types of c0de – simple and complex types, literals, default v
 c0de is statically typed: every variable, constant, parameter and result has exactly one type, written as a type block after its name. There is no `null`, no implicit conversion from text to numbers and only two widenings. This lesson goes through the types, their literals and default values, the conversions between them and the constants every program knows without declaring them.
 
 ::: info What you need
-A creative world with cheats on (see [Tutorials](/tutorials/)), a **trigger block**, a **wrench**, a **button** and ten **uninitialized variable items**.
+A creative world with cheats on (see [Tutorials](/tutorials/)), a **trigger block**, a **wrench**, a **button** and ten **uninitialized variable items**. For the conversions: a **STRING variable item** named `input`.
 :::
 
 ## The types
