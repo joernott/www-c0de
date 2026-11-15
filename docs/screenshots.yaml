@@ -16,7 +16,7 @@ screenshots:
     file: site/public/tutorials/screenshots/before-you-start-sheet.webp
     page: site/tutorials/learning/before-you-start.md
     title: Before you start
-    description: "the north end of an empty sheet in the c0de dimension, seen from the north-west: the sheet number on the black floor, the green and white stripes and the cursor rail"
+    description: 'the north end of an empty sheet in the c0de dimension, seen from the north-west: the sheet number on the black floor, the green and white stripes and the cursor rail'
     sheet: 0
     x: 0
   - id: first-program-sign
@@ -138,7 +138,7 @@ screenshots:
   - id: variables-sign
     file: site/public/tutorials/screenshots/variables-sign.webp
     page: site/tutorials/learning/variables.md
-    title: "Remembering things: variables"
+    title: 'Remembering things: variables'
     description: 'the top of the program "sign" on its sheet, seen from above: the CONSTANT lines, the VARIABLE and ASSIGN lines inside the function'
     program: sign
     program_file: site/tutorials/programs/learning/variables-sign.c0de
@@ -186,7 +186,7 @@ screenshots:
   - id: variables-result
     file: site/public/tutorials/screenshots/variables-result.webp
     page: site/tutorials/learning/variables.md
-    title: "Remembering things: variables"
+    title: 'Remembering things: variables'
     description: the display wall at the entrance showing "Welcome to Oak Hill!" in yellow on blue and "Founded in 2026" in white, between the gold lines
     program: sign
     program_file: site/tutorials/programs/learning/variables-sign.c0de
@@ -506,7 +506,7 @@ screenshots:
   - id: counting-loops-countdown-sheet
     file: site/public/tutorials/screenshots/counting-loops-countdown-sheet.webp
     page: site/tutorials/learning/counting-loops.md
-    title: "Doing things again: counting loops"
+    title: 'Doing things again: counting loops'
     description: the program countdown on its sheet, seen from the side, with the FOR line and its indented ASSIGN line in front
     program: countdown
     program_file: site/tutorials/programs/learning/counting-loops-countdown.c0de
@@ -533,7 +533,7 @@ screenshots:
   - id: counting-loops-countdown-wall
     file: site/public/tutorials/screenshots/counting-loops-countdown-wall.webp
     page: site/tutorials/learning/counting-loops.md
-    title: "Doing things again: counting loops"
+    title: 'Doing things again: counting loops'
     description: the display wall showing "10 9 8 7 6 5 4 3 2 1 0" and "Lift-off!" below it
     program: countdown
     program_file: site/tutorials/programs/learning/counting-loops-countdown.c0de
@@ -1092,7 +1092,7 @@ screenshots:
   - id: guess-the-number-sheet
     file: site/public/tutorials/screenshots/guess-the-number-sheet.webp
     page: site/tutorials/learning/guess-the-number.md
-    title: "Project: guess the number"
+    title: 'Project: guess the number'
     description: the whole program guess on its sheet, seen from above at the south end, with the function secretNumber at the top and the REPEAT loop of the function play below it
     program: guess
     program_file: site/tutorials/programs/learning/guess-the-number-guess.c0de
@@ -1155,7 +1155,7 @@ screenshots:
   - id: guess-the-number-laptop
     file: site/public/tutorials/screenshots/guess-the-number-laptop.webp
     page: site/tutorials/learning/guess-the-number.md
-    title: "Project: guess the number"
+    title: 'Project: guess the number'
     description: 'the terminal of the laptop during a game: the yellow hello, guesses with aqua and light purple answers, and the green line "Right! You needed 5 tries."'
     program: guess
     program_file: site/tutorials/programs/learning/guess-the-number-guess.c0de
@@ -1218,7 +1218,7 @@ screenshots:
   - id: guarded-door-sheet
     file: site/public/tutorials/screenshots/guarded-door-sheet.webp
     page: site/tutorials/learning/guarded-door.md
-    title: "Project: the guarded door"
+    title: 'Project: the guarded door'
     description: the whole program door on its sheet, seen from above, with the start values of plate and door at the top, the function isFriend and the function watch below it
     program: door
     program_file: site/tutorials/programs/learning/guarded-door-door.c0de
@@ -1315,7 +1315,7 @@ screenshots:
   - id: guarded-door-entrance
     file: site/public/tutorials/screenshots/guarded-door-entrance.webp
     page: site/tutorials/learning/guarded-door.md
-    title: "Project: the guarded door"
+    title: 'Project: the guarded door'
     description: 'the entrance of the base from outside: the iron door open, the player on the pressure plate one block in front of it, the display wall next to the entrance showing "Welcome to Oak Hill!" and "Visitors at the door: 1"'
     program: door
     program_file: site/tutorials/programs/learning/guarded-door-door.c0de
@@ -1413,7 +1413,7 @@ screenshots:
     file: site/public/tutorials/screenshots/next-steps-handbook.webp
     page: site/tutorials/learning/next-steps.md
     title: Where to go next
-    description: the handbook Functions open in the game as a red Patchouli book, showing the page of SAY with its parameters and its example
+    description: the handbook Functions open in the game as a red binder, showing the page of SAY with its parameters and its example
   - id: dice-display
     file: site/public/tutorials/screenshots/dice-display.webp
     page: site/tutorials/libraries/c0de/math/dice.md
@@ -1761,7 +1761,7 @@ screenshots:
     file: site/public/tutorials/screenshots/commands-laptop.webp
     page: site/tutorials/libraries/c0de/strings/commands.md
     title: Reading commands
-    description: "the terminal of the laptop after the run: the typed commands say, sum and dance with their answers, and Bye! at the end"
+    description: 'the terminal of the laptop after the run: the typed commands say, sum and dance with their answers, and Bye! at the end'
     program: commands
     program_file: site/tutorials/programs/libraries/strings/commands-terminal.c0de
     function: terminal
@@ -1903,7 +1903,7 @@ screenshots:
     file: site/public/tutorials/screenshots/secret-messages-laptop.webp
     page: site/tutorials/libraries/c0de/strings/secret-messages.md
     title: Secret messages
-    description: "the terminal of the laptop after the run: the typed message and key, the secret text and the decoded message"
+    description: 'the terminal of the laptop after the run: the typed message and key, the secret text and the decoded message'
     program: caesar
     program_file: site/tutorials/programs/libraries/strings/secret-messages-caesar.c0de
     function: laptop
@@ -2155,6 +2155,95 @@ screenshots:
                   PARAMETER value e.name ⊕ " " ⊕ e.points ;
           END EACH
       END FUNCTION
+  - id: checking-input-laptop
+    file: site/public/tutorials/screenshots/checking-input-laptop.webp
+    page: site/tutorials/libraries/c0de/strings/checking-input.md
+    title: Checking input
+    description: 'the screen of the laptop after the run: the rejected names and coordinates with their ? answers, and the welcome line at the end'
+    program: checking
+    program_file: site/tutorials/programs/libraries/strings/checking-input-signup.c0de
+    function: signup
+    sheet: 50
+    x: 1600
+    code: |
+      PROGRAM checking
+      NOOP
+      INCLUDE c0de/strings
+      NOOP
+      FUNCTION askName
+          RESULT name STRING
+      BEGIN
+          VARIABLE ok BOOLEAN
+          REPEAT
+          BEGIN
+              CALL PRINT
+                  PARAMETER value "Your name:" ;
+              CALL INPUT
+                  PARAMETER variable name ;
+              CALL c0de/strings/REGEX_MATCH
+                  PARAMETER text name ;
+                  PARAMETER pattern "^[A-Za-z0-9_]{3,16}$" ;
+                  RESULT result ok
+              IF NOT ok ;
+              BEGIN
+                  CALL PRINT
+                      PARAMETER value "? 3 to 16 letters, digits or _" ;
+              END IF
+          END REPEAT NOT ok ;
+      END FUNCTION
+      NOOP
+      FUNCTION askHome
+          RESULT home STRING
+      BEGIN
+          VARIABLE ok BOOLEAN
+          REPEAT
+          BEGIN
+              CALL PRINT
+                  PARAMETER value "Your home (x y z):" ;
+              CALL INPUT
+                  PARAMETER variable home ;
+              CALL c0de/strings/REGEX_REPLACE
+                  PARAMETER text home ;
+                  PARAMETER pattern "[ ,]+" ;
+                  PARAMETER replacement " " ;
+                  PARAMETER flags "g" ;
+                  RESULT result home
+              CALL c0de/strings/REGEX_REPLACE
+                  PARAMETER text home ;
+                  PARAMETER pattern "^ | $" ;
+                  PARAMETER replacement "" ;
+                  PARAMETER flags "g" ;
+                  RESULT result home
+              CALL c0de/strings/REGEX_MATCH
+                  PARAMETER text home ;
+                  PARAMETER pattern "^-?[0-9]+ -?[0-9]+ -?[0-9]+$" ;
+                  RESULT result ok
+              IF NOT ok ;
+              BEGIN
+                  CALL PRINT
+                      PARAMETER value "? three whole numbers, like 12 64 -30" ;
+              END IF
+          END REPEAT NOT ok ;
+      END FUNCTION
+      NOOP
+      FUNCTION signup
+      BEGIN
+          VARIABLE name STRING
+          VARIABLE home STRING
+          VARIABLE coordinates STRING
+          CALL CLS
+          CALL askName
+              RESULT name name
+          CALL askHome
+              RESULT home home
+          CALL c0de/strings/REGEX_REPLACE
+              PARAMETER text home ;
+              PARAMETER pattern "(-?[0-9]+) (-?[0-9]+) (-?[0-9]+)" ;
+              PARAMETER replacement "x=\\1 y=\\2 z=\\3" ;
+              RESULT result coordinates
+          CALL PRINT
+              PARAMETER value "Welcome, " ⊕ name ⊕ "! Home: " ⊕ coordinates ;
+      END FUNCTION
   - id: clock-wall
     file: site/public/tutorials/screenshots/clock-wall.webp
     page: site/tutorials/libraries/c0de/time/clock.md
@@ -2163,8 +2252,8 @@ screenshots:
     program: wallclock
     program_file: site/tutorials/programs/libraries/time/clock-wall.c0de
     function: tick
-    sheet: 50
-    x: 1600
+    sheet: 52
+    x: 1664
     code: |
       PROGRAM wallclock
       NOOP
@@ -2215,8 +2304,8 @@ screenshots:
     program: stopwatch
     program_file: site/tutorials/programs/libraries/time/stopwatch-buttons.c0de
     function: stop
-    sheet: 52
-    x: 1664
+    sheet: 54
+    x: 1728
     code: |
       PROGRAM stopwatch
       NOOP
@@ -2285,8 +2374,8 @@ screenshots:
     program: bouncer
     program_file: site/tutorials/programs/libraries/time/game-time-bounce.c0de
     function: bounce
-    sheet: 54
-    x: 1728
+    sheet: 56
+    x: 1792
     code: |
       PROGRAM bouncer
       NOOP
@@ -2329,8 +2418,8 @@ screenshots:
     program: doorbell
     program_file: site/tutorials/programs/libraries/minecraft/doorbell-bell.c0de
     function: ring
-    sheet: 56
-    x: 1792
+    sheet: 58
+    x: 1856
     code: |
       PROGRAM doorbell
       NOOP
@@ -2355,8 +2444,8 @@ screenshots:
     program: combolock
     program_file: site/tutorials/programs/libraries/minecraft/combination-lock-lock.c0de
     function: watch
-    sheet: 58
-    x: 1856
+    sheet: 60
+    x: 1920
     code: |
       PROGRAM combolock
       NOOP
@@ -2464,8 +2553,8 @@ screenshots:
     program: autodoor
     program_file: site/tutorials/programs/libraries/minecraft/automatic-doors-door.c0de
     function: watch
-    sheet: 60
-    x: 1920
+    sheet: 62
+    x: 1984
     code: |
       PROGRAM autodoor
       NOOP
@@ -2551,8 +2640,8 @@ screenshots:
     program: farmwatch
     program_file: site/tutorials/programs/libraries/minecraft/watching-farm.c0de
     function: check
-    sheet: 62
-    x: 1984
+    sheet: 64
+    x: 2048
     code: |
       PROGRAM farmwatch
       NOOP
@@ -2605,8 +2694,8 @@ screenshots:
     program: pencount
     program_file: site/tutorials/programs/libraries/minecraft/watching-pen.c0de
     function: count
-    sheet: 64
-    x: 2048
+    sheet: 66
+    x: 2112
     code: |
       PROGRAM pencount
       NOOP
@@ -2652,8 +2741,8 @@ screenshots:
     program: sorter
     program_file: site/tutorials/programs/libraries/minecraft/sorting-sorter.c0de
     function: sort
-    sheet: 66
-    x: 2112
+    sheet: 68
+    x: 2176
     code: |
       PROGRAM sorter
       NOOP
@@ -2732,8 +2821,8 @@ screenshots:
     program: wallbuilder
     program_file: site/tutorials/programs/libraries/minecraft/building-wall.c0de
     function: wall
-    sheet: 68
-    x: 2176
+    sheet: 70
+    x: 2240
     code: |
       PROGRAM wallbuilder
       NOOP
@@ -2778,8 +2867,8 @@ screenshots:
     program: towerbuilder
     program_file: site/tutorials/programs/libraries/minecraft/building-tower.c0de
     function: build
-    sheet: 70
-    x: 2240
+    sheet: 72
+    x: 2304
     code: |
       PROGRAM towerbuilder
       NOOP
@@ -2851,8 +2940,8 @@ screenshots:
     program: tunneldigger
     program_file: site/tutorials/programs/libraries/minecraft/tunnel-digger-dig.c0de
     function: dig
-    sheet: 72
-    x: 2304
+    sheet: 74
+    x: 2368
     code: |
       PROGRAM tunneldigger
       NOOP
@@ -2932,8 +3021,8 @@ screenshots:
     program: animalspawner
     program_file: site/tutorials/programs/libraries/minecraft/rewards-spawner.c0de
     function: spawn
-    sheet: 74
-    x: 2368
+    sheet: 76
+    x: 2432
     code: |
       PROGRAM animalspawner
       NOOP
@@ -2977,8 +3066,8 @@ screenshots:
     program: teleporterhub
     program_file: site/tutorials/programs/libraries/minecraft/rewards-hub.c0de
     function: hub
-    sheet: 76
-    x: 2432
+    sheet: 78
+    x: 2496
     code: |
       PROGRAM teleporterhub
       NOOP
@@ -3048,6 +3137,565 @@ screenshots:
               PARAMETER dx 6 ;
               PARAMETER place tower ;
       END FUNCTION
+  - id: copying-signs-copy
+    file: site/public/tutorials/screenshots/copying-signs-copy.webp
+    page: site/tutorials/libraries/c0de/minecraft/copying-signs.md
+    title: Copying signs and chests
+    description: the trigger block with its button between a written sign and its copy, the chat showing the copied data
+    program: copier
+    program_file: site/tutorials/programs/libraries/minecraft/copying-signs-copy.c0de
+    function: copy
+    sheet: 80
+    x: 2560
+    code: |
+      PROGRAM copier
+      NOOP
+      INCLUDE c0de/minecraft
+      NOOP
+      FUNCTION copy
+      BEGIN
+          VARIABLE source STRUCT c0de/minecraft/POSITION
+          VARIABLE target STRUCT c0de/minecraft/POSITION
+          VARIABLE blockId STRING
+          VARIABLE states HASH STRING
+          VARIABLE data STRING
+          VARIABLE problem ERROR
+          ASSIGN source.x PID.x - 2 ;
+          ASSIGN source.y PID.y ;
+          ASSIGN source.z PID.z ;
+          ASSIGN target source ;
+          ASSIGN target.x PID.x + 2 ;
+          CALL c0de/minecraft/GET_BLOCK
+              PARAMETER position source ;
+              RESULT id blockId
+              RESULT properties states
+              RESULT data data
+          IF blockId = "minecraft:air" ;
+          BEGIN
+              CALL c0de/minecraft/SAY
+                  PARAMETER message "There is nothing to copy." ;
+              RETURN
+          END IF
+          CALL c0de/minecraft/PLACE_BLOCK problem
+              PARAMETER position target ;
+              PARAMETER id blockId ;
+              PARAMETER properties states ;
+              PARAMETER data data ;
+          IF problem.code ≠ 0 ;
+          BEGIN
+              CALL c0de/minecraft/SAY
+                  PARAMETER message "No copy: " ⊕ problem.message ;
+              RETURN
+          END IF
+          CALL c0de/minecraft/SAY
+              PARAMETER message "Copied " ⊕ blockId ⊕ " with the data " ⊕ data ;
+      END FUNCTION
+  - id: server-commands-morning
+    file: site/public/tutorials/screenshots/server-commands-morning.webp
+    page: site/tutorials/libraries/c0de/minecraft/server-commands.md
+    title: Server commands
+    description: the trigger block with its button in the morning sun, the chat showing the good morning message of goodmorning
+    program: goodmorning
+    program_file: site/tutorials/programs/libraries/minecraft/server-commands-morning.c0de
+    function: morning
+    sheet: 82
+    x: 2624
+    code: |
+      PROGRAM goodmorning
+      NOOP
+      INCLUDE c0de/minecraft
+      NOOP
+      VARIABLE commands ARRAY STRING
+      BEGIN
+          "time set day" "weather clear"
+      END VARIABLE
+      NOOP
+      FUNCTION morning
+      BEGIN
+          VARIABLE done INTEGER
+          VARIABLE message STRING
+          VARIABLE failed INTEGER
+          EACH line commands
+          BEGIN
+              CALL c0de/minecraft/COMMAND
+                  PARAMETER command line ;
+                  RESULT result done
+                  RESULT output message
+              IF done = 0 ;
+              BEGIN
+                  CALL c0de/minecraft/SAY
+                      PARAMETER message "/" ⊕ line ⊕ " failed: " ⊕ message ;
+                  ASSIGN failed failed + 1 ;
+              END IF
+          END EACH
+          IF failed = 0 ;
+          BEGIN
+              CALL c0de/minecraft/COMMAND
+                  PARAMETER command "say Good morning, everybody! The sun is up." ;
+          END IF
+      END FUNCTION
+  - id: password-door-setup
+    file: site/public/tutorials/screenshots/password-door-setup.webp
+    page: site/tutorials/libraries/c0de/security/password-door.md
+    title: A door with a password
+    description: 'the laptop of the door after setup: "New password:", "***", "Repeat it:", "***" and "Password set."'
+    program: passdoor
+    program_file: site/tutorials/programs/libraries/security/password-door-door.c0de
+    function: open
+    sheet: 84
+    x: 2688
+    code: |
+      PROGRAM passdoor
+      NOOP
+      INCLUDE c0de/security
+      NOOP
+      CONSTANT NAME STRING "doorPassword"
+      NOOP
+      FUNCTION check
+          RESULT right BOOLEAN
+      BEGIN
+          SECRET doorPassword STRING
+          VARIABLE typed STRING TAG(security: "sensitive")
+          CALL PRINT
+              PARAMETER value "Password:" ;
+          CALL INPUT
+              PARAMETER variable typed ;
+              PARAMETER hide TRUE ;
+          ASSIGN right typed = doorPassword ;
+      END FUNCTION
+      NOOP
+      FUNCTION setup
+      BEGIN
+          VARIABLE password STRING TAG(security: "sensitive")
+          VARIABLE again STRING TAG(security: "sensitive")
+          CALL CLS
+          CALL PRINT
+              PARAMETER value "New password:" ;
+          CALL INPUT
+              PARAMETER variable password ;
+              PARAMETER hide TRUE ;
+          CALL PRINT
+              PARAMETER value "Repeat it:" ;
+          CALL INPUT
+              PARAMETER variable again ;
+              PARAMETER hide TRUE ;
+          IF password = "" OR password ≠ again ;
+          BEGIN
+              CALL PRINT
+                  PARAMETER value "Not the same twice. Nothing changed." ;
+              RETURN
+          END IF
+          CALL c0de/security/SET_SECRET
+              PARAMETER name NAME ;
+              PARAMETER value password ;
+          CALL PRINT
+              PARAMETER value "Password set." ;
+      END FUNCTION
+      NOOP
+      FUNCTION open
+      BEGIN
+          VARIABLE known BOOLEAN
+          VARIABLE right BOOLEAN
+          VARIABLE problem ERROR
+          CALL CLS
+          CALL c0de/security/HAS_SECRET problem
+              PARAMETER name NAME ;
+              RESULT result known
+          IF problem.code = VAULT_UNAVAILABLE ;
+          BEGIN
+              CALL PRINT
+                  PARAMETER value "This door only listens to its owner." ;
+              RETURN
+          END IF
+          IF NOT known ;
+          BEGIN
+              CALL PRINT
+                  PARAMETER value "No password yet. Run setup first." ;
+              RETURN
+          END IF
+          CALL check
+              RESULT right right
+          IF NOT right ;
+          BEGIN
+              CALL PRINT
+                  PARAMETER value "Wrong password." ;
+              RETURN
+          END IF
+          CALL PRINT
+              PARAMETER value "Welcome home!" ;
+          EXIT 1 ;
+      END FUNCTION
+      NOOP
+      FUNCTION forget
+      BEGIN
+          VARIABLE problem ERROR
+          CALL CLS
+          CALL c0de/security/DELETE_SECRET problem
+              PARAMETER name NAME ;
+          IF problem.code = SECRET_NOT_FOUND ;
+          BEGIN
+              CALL PRINT
+                  PARAMETER value "There is no password to forget." ;
+              RETURN
+          END IF
+          CALL PRINT
+              PARAMETER value "Password forgotten. The door stays shut." ;
+      END FUNCTION
+  - id: password-door-open
+    file: site/public/tutorials/screenshots/password-door-open.webp
+    page: site/tutorials/libraries/c0de/security/password-door.md
+    title: A door with a password
+    description: the iron door open, the comparator between the trigger block and the door lit, the laptop next to it showing "Password:", "***" and "Welcome home!"
+    program: passdoor
+    program_file: site/tutorials/programs/libraries/security/password-door-door.c0de
+    function: open
+    sheet: 84
+    x: 2688
+    code: |
+      PROGRAM passdoor
+      NOOP
+      INCLUDE c0de/security
+      NOOP
+      CONSTANT NAME STRING "doorPassword"
+      NOOP
+      FUNCTION check
+          RESULT right BOOLEAN
+      BEGIN
+          SECRET doorPassword STRING
+          VARIABLE typed STRING TAG(security: "sensitive")
+          CALL PRINT
+              PARAMETER value "Password:" ;
+          CALL INPUT
+              PARAMETER variable typed ;
+              PARAMETER hide TRUE ;
+          ASSIGN right typed = doorPassword ;
+      END FUNCTION
+      NOOP
+      FUNCTION setup
+      BEGIN
+          VARIABLE password STRING TAG(security: "sensitive")
+          VARIABLE again STRING TAG(security: "sensitive")
+          CALL CLS
+          CALL PRINT
+              PARAMETER value "New password:" ;
+          CALL INPUT
+              PARAMETER variable password ;
+              PARAMETER hide TRUE ;
+          CALL PRINT
+              PARAMETER value "Repeat it:" ;
+          CALL INPUT
+              PARAMETER variable again ;
+              PARAMETER hide TRUE ;
+          IF password = "" OR password ≠ again ;
+          BEGIN
+              CALL PRINT
+                  PARAMETER value "Not the same twice. Nothing changed." ;
+              RETURN
+          END IF
+          CALL c0de/security/SET_SECRET
+              PARAMETER name NAME ;
+              PARAMETER value password ;
+          CALL PRINT
+              PARAMETER value "Password set." ;
+      END FUNCTION
+      NOOP
+      FUNCTION open
+      BEGIN
+          VARIABLE known BOOLEAN
+          VARIABLE right BOOLEAN
+          VARIABLE problem ERROR
+          CALL CLS
+          CALL c0de/security/HAS_SECRET problem
+              PARAMETER name NAME ;
+              RESULT result known
+          IF problem.code = VAULT_UNAVAILABLE ;
+          BEGIN
+              CALL PRINT
+                  PARAMETER value "This door only listens to its owner." ;
+              RETURN
+          END IF
+          IF NOT known ;
+          BEGIN
+              CALL PRINT
+                  PARAMETER value "No password yet. Run setup first." ;
+              RETURN
+          END IF
+          CALL check
+              RESULT right right
+          IF NOT right ;
+          BEGIN
+              CALL PRINT
+                  PARAMETER value "Wrong password." ;
+              RETURN
+          END IF
+          CALL PRINT
+              PARAMETER value "Welcome home!" ;
+          EXIT 1 ;
+      END FUNCTION
+      NOOP
+      FUNCTION forget
+      BEGIN
+          VARIABLE problem ERROR
+          CALL CLS
+          CALL c0de/security/DELETE_SECRET problem
+              PARAMETER name NAME ;
+          IF problem.code = SECRET_NOT_FOUND ;
+          BEGIN
+              CALL PRINT
+                  PARAMETER value "There is no password to forget." ;
+              RETURN
+          END IF
+          CALL PRINT
+              PARAMETER value "Password forgotten. The door stays shut." ;
+      END FUNCTION
+  - id: keeping-keys-create
+    file: site/public/tutorials/screenshots/keeping-keys-create.webp
+    page: site/tutorials/libraries/c0de/security/keeping-keys.md
+    title: Keeping keys
+    description: the dialog "Create your vault" with the fields Password and Repeat filled with dots, and the buttons OK and Cancel
+    program: keys
+    program_file: site/tutorials/programs/libraries/security/keeping-keys-keys.c0de
+    function: store
+    sheet: 86
+    x: 2752
+    code: |
+      PROGRAM keys
+      NOOP
+      INCLUDE c0de/security
+      INCLUDE c0de/strings
+      NOOP
+      CONSTANT NAME STRING "apiKey"
+      NOOP
+      FUNCTION unlock
+          PARAMETER password STRING
+          RESULT ready BOOLEAN
+      BEGIN
+          VARIABLE exists BOOLEAN
+          VARIABLE problem ERROR
+          CALL c0de/security/IS_VAULT_OPEN
+              RESULT result ready
+          IF ready ;
+          BEGIN
+              RETURN
+          END IF
+          CALL c0de/security/HAS_VAULT
+              RESULT result exists
+          IF exists ;
+          BEGIN
+              CALL c0de/security/OPEN_VAULT problem
+                  PARAMETER password password ;
+          END
+          ELSE
+          BEGIN
+              CALL c0de/security/CREATE_VAULT problem
+                  PARAMETER password password ;
+          END IF
+          IF problem.code = VAULT_CANCELLED ;
+          BEGIN
+              CALL PRINT
+                  PARAMETER value "Cancelled. Your vault stays shut." ;
+              RETURN
+          END IF
+          IF problem.code ≠ 0 ;
+          BEGIN
+              CALL PRINT
+                  PARAMETER value "? " ⊕ problem.message ;
+              RETURN
+          END IF
+          IF NOT exists ;
+          BEGIN
+              CALL PRINT
+                  PARAMETER value "Your new vault is ready." ;
+          END IF
+          ASSIGN ready TRUE ;
+      END FUNCTION
+      NOOP
+      FUNCTION store
+          PARAMETER password STRING ""
+      BEGIN
+          VARIABLE ready BOOLEAN
+          VARIABLE key STRING TAG(security: "sensitive")
+          CALL CLS
+          CALL unlock
+              PARAMETER password password ;
+              RESULT ready ready
+          IF NOT ready ;
+          BEGIN
+              RETURN
+          END IF
+          CALL PRINT
+              PARAMETER value "Key:" ;
+          CALL INPUT
+              PARAMETER variable key ;
+              PARAMETER hide TRUE ;
+          CALL c0de/security/SET_SECRET
+              PARAMETER name NAME ;
+              PARAMETER value key ;
+              PARAMETER persistent TRUE ;
+          CALL PRINT
+              PARAMETER value "Key kept in your vault." ;
+      END FUNCTION
+      NOOP
+      FUNCTION peek
+      BEGIN
+          SECRET apiKey STRING
+          VARIABLE ending STRING
+          CALL c0de/strings/RIGHT
+              PARAMETER text apiKey ;
+              PARAMETER length 4 ;
+              RESULT result ending
+          CALL PRINT
+              PARAMETER value "Your key ends with ..." ⊕ ending ;
+      END FUNCTION
+      NOOP
+      FUNCTION show
+          PARAMETER password STRING ""
+      BEGIN
+          VARIABLE ready BOOLEAN
+          VARIABLE known BOOLEAN
+          CALL CLS
+          CALL unlock
+              PARAMETER password password ;
+              RESULT ready ready
+          IF NOT ready ;
+          BEGIN
+              RETURN
+          END IF
+          CALL c0de/security/HAS_SECRET
+              PARAMETER name NAME ;
+              RESULT result known
+          IF NOT known ;
+          BEGIN
+              CALL PRINT
+                  PARAMETER value "No key in your vault. Run store first." ;
+              RETURN
+          END IF
+          CALL peek
+      END FUNCTION
+  - id: keeping-keys-open
+    file: site/public/tutorials/screenshots/keeping-keys-open.webp
+    page: site/tutorials/libraries/c0de/security/keeping-keys.md
+    title: Keeping keys
+    description: the dialog "Open your vault" with one password field, the message "Wrong password, try again" below it
+    program: keys
+    program_file: site/tutorials/programs/libraries/security/keeping-keys-keys.c0de
+    function: store
+    sheet: 86
+    x: 2752
+    code: |
+      PROGRAM keys
+      NOOP
+      INCLUDE c0de/security
+      INCLUDE c0de/strings
+      NOOP
+      CONSTANT NAME STRING "apiKey"
+      NOOP
+      FUNCTION unlock
+          PARAMETER password STRING
+          RESULT ready BOOLEAN
+      BEGIN
+          VARIABLE exists BOOLEAN
+          VARIABLE problem ERROR
+          CALL c0de/security/IS_VAULT_OPEN
+              RESULT result ready
+          IF ready ;
+          BEGIN
+              RETURN
+          END IF
+          CALL c0de/security/HAS_VAULT
+              RESULT result exists
+          IF exists ;
+          BEGIN
+              CALL c0de/security/OPEN_VAULT problem
+                  PARAMETER password password ;
+          END
+          ELSE
+          BEGIN
+              CALL c0de/security/CREATE_VAULT problem
+                  PARAMETER password password ;
+          END IF
+          IF problem.code = VAULT_CANCELLED ;
+          BEGIN
+              CALL PRINT
+                  PARAMETER value "Cancelled. Your vault stays shut." ;
+              RETURN
+          END IF
+          IF problem.code ≠ 0 ;
+          BEGIN
+              CALL PRINT
+                  PARAMETER value "? " ⊕ problem.message ;
+              RETURN
+          END IF
+          IF NOT exists ;
+          BEGIN
+              CALL PRINT
+                  PARAMETER value "Your new vault is ready." ;
+          END IF
+          ASSIGN ready TRUE ;
+      END FUNCTION
+      NOOP
+      FUNCTION store
+          PARAMETER password STRING ""
+      BEGIN
+          VARIABLE ready BOOLEAN
+          VARIABLE key STRING TAG(security: "sensitive")
+          CALL CLS
+          CALL unlock
+              PARAMETER password password ;
+              RESULT ready ready
+          IF NOT ready ;
+          BEGIN
+              RETURN
+          END IF
+          CALL PRINT
+              PARAMETER value "Key:" ;
+          CALL INPUT
+              PARAMETER variable key ;
+              PARAMETER hide TRUE ;
+          CALL c0de/security/SET_SECRET
+              PARAMETER name NAME ;
+              PARAMETER value key ;
+              PARAMETER persistent TRUE ;
+          CALL PRINT
+              PARAMETER value "Key kept in your vault." ;
+      END FUNCTION
+      NOOP
+      FUNCTION peek
+      BEGIN
+          SECRET apiKey STRING
+          VARIABLE ending STRING
+          CALL c0de/strings/RIGHT
+              PARAMETER text apiKey ;
+              PARAMETER length 4 ;
+              RESULT result ending
+          CALL PRINT
+              PARAMETER value "Your key ends with ..." ⊕ ending ;
+      END FUNCTION
+      NOOP
+      FUNCTION show
+          PARAMETER password STRING ""
+      BEGIN
+          VARIABLE ready BOOLEAN
+          VARIABLE known BOOLEAN
+          CALL CLS
+          CALL unlock
+              PARAMETER password password ;
+              RESULT ready ready
+          IF NOT ready ;
+          BEGIN
+              RETURN
+          END IF
+          CALL c0de/security/HAS_SECRET
+              PARAMETER name NAME ;
+              RESULT result known
+          IF NOT known ;
+          BEGIN
+              CALL PRINT
+                  PARAMETER value "No key in your vault. Run store first." ;
+              RETURN
+          END IF
+          CALL peek
+      END FUNCTION
   - id: weather-wall
     file: site/public/tutorials/screenshots/weather-wall.webp
     page: site/tutorials/libraries/c0de_net/http/weather.md
@@ -3056,8 +3704,8 @@ screenshots:
     program: weatherwall
     program_file: site/tutorials/programs/libraries/http/weather-wall.c0de
     function: show
-    sheet: 78
-    x: 2496
+    sheet: 88
+    x: 2816
     code: |
       PROGRAM weatherwall
       NOOP
@@ -3178,8 +3826,8 @@ screenshots:
     program: statuslamp
     program_file: site/tutorials/programs/libraries/http/checking-lamp.c0de
     function: check
-    sheet: 80
-    x: 2560
+    sheet: 90
+    x: 2880
     code: |
       PROGRAM statuslamp
       NOOP
@@ -3240,8 +3888,8 @@ screenshots:
     program: lamppreview
     program_file: site/tutorials/programs/libraries/http/home-automation-preview.c0de
     function: preview
-    sheet: 82
-    x: 2624
+    sheet: 92
+    x: 2944
     code: |
       PROGRAM lamppreview
       NOOP
@@ -3297,12 +3945,12 @@ screenshots:
     file: site/public/tutorials/screenshots/up-to-date-wall.webp
     page: site/tutorials/libraries/c0de_net/http/up-to-date.md
     title: Is my c0de up to date?
-    description: "The display wall with the two green lines c0de 0.5.0: up to date and c0de net 0.3.0: up to date"
+    description: 'The display wall with the two green lines c0de 0.5.0: up to date and c0de net 0.3.0: up to date'
     program: versioncheck
     program_file: site/tutorials/programs/libraries/http/up-to-date-check.c0de
     function: check
-    sheet: 84
-    x: 2688
+    sheet: 94
+    x: 3008
     code: |
       PROGRAM versioncheck
       NOOP
@@ -7516,11 +8164,283 @@ programs:
                     - keyword: PARAMETER
                       name: value
                       expression: e.name ⊕ " " ⊕ e.points
+  - file: site/tutorials/programs/libraries/strings/checking-input-signup.c0de
+    name: checking
+    function: signup
+    sheet: 50
+    x: 1600
+    code: |
+      PROGRAM checking
+      NOOP
+      INCLUDE c0de/strings
+      NOOP
+      FUNCTION askName
+          RESULT name STRING
+      BEGIN
+          VARIABLE ok BOOLEAN
+          REPEAT
+          BEGIN
+              CALL PRINT
+                  PARAMETER value "Your name:" ;
+              CALL INPUT
+                  PARAMETER variable name ;
+              CALL c0de/strings/REGEX_MATCH
+                  PARAMETER text name ;
+                  PARAMETER pattern "^[A-Za-z0-9_]{3,16}$" ;
+                  RESULT result ok
+              IF NOT ok ;
+              BEGIN
+                  CALL PRINT
+                      PARAMETER value "? 3 to 16 letters, digits or _" ;
+              END IF
+          END REPEAT NOT ok ;
+      END FUNCTION
+      NOOP
+      FUNCTION askHome
+          RESULT home STRING
+      BEGIN
+          VARIABLE ok BOOLEAN
+          REPEAT
+          BEGIN
+              CALL PRINT
+                  PARAMETER value "Your home (x y z):" ;
+              CALL INPUT
+                  PARAMETER variable home ;
+              CALL c0de/strings/REGEX_REPLACE
+                  PARAMETER text home ;
+                  PARAMETER pattern "[ ,]+" ;
+                  PARAMETER replacement " " ;
+                  PARAMETER flags "g" ;
+                  RESULT result home
+              CALL c0de/strings/REGEX_REPLACE
+                  PARAMETER text home ;
+                  PARAMETER pattern "^ | $" ;
+                  PARAMETER replacement "" ;
+                  PARAMETER flags "g" ;
+                  RESULT result home
+              CALL c0de/strings/REGEX_MATCH
+                  PARAMETER text home ;
+                  PARAMETER pattern "^-?[0-9]+ -?[0-9]+ -?[0-9]+$" ;
+                  RESULT result ok
+              IF NOT ok ;
+              BEGIN
+                  CALL PRINT
+                      PARAMETER value "? three whole numbers, like 12 64 -30" ;
+              END IF
+          END REPEAT NOT ok ;
+      END FUNCTION
+      NOOP
+      FUNCTION signup
+      BEGIN
+          VARIABLE name STRING
+          VARIABLE home STRING
+          VARIABLE coordinates STRING
+          CALL CLS
+          CALL askName
+              RESULT name name
+          CALL askHome
+              RESULT home home
+          CALL c0de/strings/REGEX_REPLACE
+              PARAMETER text home ;
+              PARAMETER pattern "(-?[0-9]+) (-?[0-9]+) (-?[0-9]+)" ;
+              PARAMETER replacement "x=\\1 y=\\2 z=\\3" ;
+              RESULT result coordinates
+          CALL PRINT
+              PARAMETER value "Welcome, " ⊕ name ⊕ "! Home: " ⊕ coordinates ;
+      END FUNCTION
+    disk: |
+      PROGRAM: checking
+      INCLUDE:
+        - c0de/strings
+      code:
+        - keyword: NOOP
+        - keyword: FUNCTION
+          name: askName
+          results:
+            - keyword: RESULT
+              name: name
+              type: STRING
+          code:
+            - keyword: VARIABLE
+              name: ok
+              type: BOOLEAN
+            - keyword: REPEAT
+              code:
+                - keyword: CALL
+                  name: PRINT
+                  parameters:
+                    - keyword: PARAMETER
+                      name: value
+                      expression: '"Your name:"'
+                - keyword: CALL
+                  name: INPUT
+                  parameters:
+                    - keyword: PARAMETER
+                      name: variable
+                      expression: name
+                - keyword: CALL
+                  name: c0de/strings/REGEX_MATCH
+                  parameters:
+                    - keyword: PARAMETER
+                      name: text
+                      expression: name
+                    - keyword: PARAMETER
+                      name: pattern
+                      expression: '"^[A-Za-z0-9_]{3,16}$"'
+                  results:
+                    - keyword: RESULT
+                      name: result
+                      target: ok
+                - keyword: IF
+                  expression: NOT ok
+                  code:
+                    - keyword: CALL
+                      name: PRINT
+                      parameters:
+                        - keyword: PARAMETER
+                          name: value
+                          expression: '"? 3 to 16 letters, digits or _"'
+              expression: NOT ok
+        - keyword: NOOP
+        - keyword: FUNCTION
+          name: askHome
+          results:
+            - keyword: RESULT
+              name: home
+              type: STRING
+          code:
+            - keyword: VARIABLE
+              name: ok
+              type: BOOLEAN
+            - keyword: REPEAT
+              code:
+                - keyword: CALL
+                  name: PRINT
+                  parameters:
+                    - keyword: PARAMETER
+                      name: value
+                      expression: '"Your home (x y z):"'
+                - keyword: CALL
+                  name: INPUT
+                  parameters:
+                    - keyword: PARAMETER
+                      name: variable
+                      expression: home
+                - keyword: CALL
+                  name: c0de/strings/REGEX_REPLACE
+                  parameters:
+                    - keyword: PARAMETER
+                      name: text
+                      expression: home
+                    - keyword: PARAMETER
+                      name: pattern
+                      expression: '"[ ,]+"'
+                    - keyword: PARAMETER
+                      name: replacement
+                      expression: '" "'
+                    - keyword: PARAMETER
+                      name: flags
+                      expression: '"g"'
+                  results:
+                    - keyword: RESULT
+                      name: result
+                      target: home
+                - keyword: CALL
+                  name: c0de/strings/REGEX_REPLACE
+                  parameters:
+                    - keyword: PARAMETER
+                      name: text
+                      expression: home
+                    - keyword: PARAMETER
+                      name: pattern
+                      expression: '"^ | $"'
+                    - keyword: PARAMETER
+                      name: replacement
+                      expression: '""'
+                    - keyword: PARAMETER
+                      name: flags
+                      expression: '"g"'
+                  results:
+                    - keyword: RESULT
+                      name: result
+                      target: home
+                - keyword: CALL
+                  name: c0de/strings/REGEX_MATCH
+                  parameters:
+                    - keyword: PARAMETER
+                      name: text
+                      expression: home
+                    - keyword: PARAMETER
+                      name: pattern
+                      expression: '"^-?[0-9]+ -?[0-9]+ -?[0-9]+$"'
+                  results:
+                    - keyword: RESULT
+                      name: result
+                      target: ok
+                - keyword: IF
+                  expression: NOT ok
+                  code:
+                    - keyword: CALL
+                      name: PRINT
+                      parameters:
+                        - keyword: PARAMETER
+                          name: value
+                          expression: '"? three whole numbers, like 12 64 -30"'
+              expression: NOT ok
+        - keyword: NOOP
+        - keyword: FUNCTION
+          name: signup
+          code:
+            - keyword: VARIABLE
+              name: name
+              type: STRING
+            - keyword: VARIABLE
+              name: home
+              type: STRING
+            - keyword: VARIABLE
+              name: coordinates
+              type: STRING
+            - keyword: CALL
+              name: CLS
+            - keyword: CALL
+              name: askName
+              results:
+                - keyword: RESULT
+                  name: name
+                  target: name
+            - keyword: CALL
+              name: askHome
+              results:
+                - keyword: RESULT
+                  name: home
+                  target: home
+            - keyword: CALL
+              name: c0de/strings/REGEX_REPLACE
+              parameters:
+                - keyword: PARAMETER
+                  name: text
+                  expression: home
+                - keyword: PARAMETER
+                  name: pattern
+                  expression: '"(-?[0-9]+) (-?[0-9]+) (-?[0-9]+)"'
+                - keyword: PARAMETER
+                  name: replacement
+                  expression: '"x=\\1 y=\\2 z=\\3"'
+              results:
+                - keyword: RESULT
+                  name: result
+                  target: coordinates
+            - keyword: CALL
+              name: PRINT
+              parameters:
+                - keyword: PARAMETER
+                  name: value
+                  expression: '"Welcome, " ⊕ name ⊕ "! Home: " ⊕ coordinates'
   - file: site/tutorials/programs/libraries/time/clock-wall.c0de
     name: wallclock
     function: tick
-    sheet: 50
-    x: 1600
+    sheet: 52
+    x: 1664
     code: |
       PROGRAM wallclock
       NOOP
@@ -7681,8 +8601,8 @@ programs:
   - file: site/tutorials/programs/libraries/time/stopwatch-buttons.c0de
     name: stopwatch
     function: stop
-    sheet: 52
-    x: 1664
+    sheet: 54
+    x: 1728
     code: |
       PROGRAM stopwatch
       NOOP
@@ -7903,8 +8823,8 @@ programs:
   - file: site/tutorials/programs/libraries/time/game-time-bounce.c0de
     name: bouncer
     function: bounce
-    sheet: 54
-    x: 1728
+    sheet: 56
+    x: 1792
     code: |
       PROGRAM bouncer
       NOOP
@@ -8023,8 +8943,8 @@ programs:
   - file: site/tutorials/programs/libraries/minecraft/doorbell-bell.c0de
     name: doorbell
     function: ring
-    sheet: 56
-    x: 1792
+    sheet: 58
+    x: 1856
     code: |
       PROGRAM doorbell
       NOOP
@@ -8071,8 +8991,8 @@ programs:
   - file: site/tutorials/programs/libraries/minecraft/combination-lock-lock.c0de
     name: combolock
     function: watch
-    sheet: 58
-    x: 1856
+    sheet: 60
+    x: 1920
     code: |
       PROGRAM combolock
       NOOP
@@ -8413,8 +9333,8 @@ programs:
   - file: site/tutorials/programs/libraries/minecraft/automatic-doors-door.c0de
     name: autodoor
     function: watch
-    sheet: 60
-    x: 1920
+    sheet: 62
+    x: 1984
     code: |
       PROGRAM autodoor
       NOOP
@@ -8687,8 +9607,8 @@ programs:
   - file: site/tutorials/programs/libraries/minecraft/watching-farm.c0de
     name: farmwatch
     function: check
-    sheet: 62
-    x: 1984
+    sheet: 64
+    x: 2048
     code: |
       PROGRAM farmwatch
       NOOP
@@ -8831,8 +9751,8 @@ programs:
   - file: site/tutorials/programs/libraries/minecraft/watching-pen.c0de
     name: pencount
     function: count
-    sheet: 64
-    x: 2048
+    sheet: 66
+    x: 2112
     code: |
       PROGRAM pencount
       NOOP
@@ -8965,8 +9885,8 @@ programs:
   - file: site/tutorials/programs/libraries/minecraft/sorting-sorter.c0de
     name: sorter
     function: sort
-    sheet: 66
-    x: 2112
+    sheet: 68
+    x: 2176
     code: |
       PROGRAM sorter
       NOOP
@@ -9193,8 +10113,8 @@ programs:
   - file: site/tutorials/programs/libraries/minecraft/building-wall.c0de
     name: wallbuilder
     function: wall
-    sheet: 68
-    x: 2176
+    sheet: 70
+    x: 2240
     code: |
       PROGRAM wallbuilder
       NOOP
@@ -9320,8 +10240,8 @@ programs:
   - file: site/tutorials/programs/libraries/minecraft/building-tower.c0de
     name: towerbuilder
     function: build
-    sheet: 70
-    x: 2240
+    sheet: 72
+    x: 2304
     code: |
       PROGRAM towerbuilder
       NOOP
@@ -9532,8 +10452,8 @@ programs:
   - file: site/tutorials/programs/libraries/minecraft/tunnel-digger-dig.c0de
     name: tunneldigger
     function: dig
-    sheet: 72
-    x: 2304
+    sheet: 74
+    x: 2368
     code: |
       PROGRAM tunneldigger
       NOOP
@@ -9769,8 +10689,8 @@ programs:
   - file: site/tutorials/programs/libraries/minecraft/rewards-spawner.c0de
     name: animalspawner
     function: spawn
-    sheet: 74
-    x: 2368
+    sheet: 76
+    x: 2432
     code: |
       PROGRAM animalspawner
       NOOP
@@ -9899,8 +10819,8 @@ programs:
   - file: site/tutorials/programs/libraries/minecraft/rewards-hub.c0de
     name: teleporterhub
     function: hub
-    sheet: 76
-    x: 2432
+    sheet: 78
+    x: 2496
     code: |
       PROGRAM teleporterhub
       NOOP
@@ -10129,11 +11049,488 @@ programs:
                 - keyword: PARAMETER
                   name: place
                   expression: tower
+  - file: site/tutorials/programs/libraries/minecraft/copying-signs-copy.c0de
+    name: copier
+    function: copy
+    sheet: 80
+    x: 2560
+    code: |
+      PROGRAM copier
+      NOOP
+      INCLUDE c0de/minecraft
+      NOOP
+      FUNCTION copy
+      BEGIN
+          VARIABLE source STRUCT c0de/minecraft/POSITION
+          VARIABLE target STRUCT c0de/minecraft/POSITION
+          VARIABLE blockId STRING
+          VARIABLE states HASH STRING
+          VARIABLE data STRING
+          VARIABLE problem ERROR
+          ASSIGN source.x PID.x - 2 ;
+          ASSIGN source.y PID.y ;
+          ASSIGN source.z PID.z ;
+          ASSIGN target source ;
+          ASSIGN target.x PID.x + 2 ;
+          CALL c0de/minecraft/GET_BLOCK
+              PARAMETER position source ;
+              RESULT id blockId
+              RESULT properties states
+              RESULT data data
+          IF blockId = "minecraft:air" ;
+          BEGIN
+              CALL c0de/minecraft/SAY
+                  PARAMETER message "There is nothing to copy." ;
+              RETURN
+          END IF
+          CALL c0de/minecraft/PLACE_BLOCK problem
+              PARAMETER position target ;
+              PARAMETER id blockId ;
+              PARAMETER properties states ;
+              PARAMETER data data ;
+          IF problem.code ≠ 0 ;
+          BEGIN
+              CALL c0de/minecraft/SAY
+                  PARAMETER message "No copy: " ⊕ problem.message ;
+              RETURN
+          END IF
+          CALL c0de/minecraft/SAY
+              PARAMETER message "Copied " ⊕ blockId ⊕ " with the data " ⊕ data ;
+      END FUNCTION
+    disk: |
+      PROGRAM: copier
+      INCLUDE:
+        - c0de/minecraft
+      code:
+        - keyword: NOOP
+        - keyword: FUNCTION
+          name: copy
+          code:
+            - keyword: VARIABLE
+              name: source
+              type: STRUCT
+              struct: c0de/minecraft/POSITION
+            - keyword: VARIABLE
+              name: target
+              type: STRUCT
+              struct: c0de/minecraft/POSITION
+            - keyword: VARIABLE
+              name: blockId
+              type: STRING
+            - keyword: VARIABLE
+              name: states
+              type: HASH
+              subtype: STRING
+            - keyword: VARIABLE
+              name: data
+              type: STRING
+            - keyword: VARIABLE
+              name: problem
+              type: ERROR
+            - keyword: ASSIGN
+              name: source.x
+              expression: PID.x - 2
+            - keyword: ASSIGN
+              name: source.y
+              expression: PID.y
+            - keyword: ASSIGN
+              name: source.z
+              expression: PID.z
+            - keyword: ASSIGN
+              name: target
+              expression: source
+            - keyword: ASSIGN
+              name: target.x
+              expression: PID.x + 2
+            - keyword: CALL
+              name: c0de/minecraft/GET_BLOCK
+              parameters:
+                - keyword: PARAMETER
+                  name: position
+                  expression: source
+              results:
+                - keyword: RESULT
+                  name: id
+                  target: blockId
+                - keyword: RESULT
+                  name: properties
+                  target: states
+                - keyword: RESULT
+                  name: data
+                  target: data
+            - keyword: IF
+              expression: blockId = "minecraft:air"
+              code:
+                - keyword: CALL
+                  name: c0de/minecraft/SAY
+                  parameters:
+                    - keyword: PARAMETER
+                      name: message
+                      expression: '"There is nothing to copy."'
+                - keyword: RETURN
+            - keyword: CALL
+              name: c0de/minecraft/PLACE_BLOCK
+              error: problem
+              parameters:
+                - keyword: PARAMETER
+                  name: position
+                  expression: target
+                - keyword: PARAMETER
+                  name: id
+                  expression: blockId
+                - keyword: PARAMETER
+                  name: properties
+                  expression: states
+                - keyword: PARAMETER
+                  name: data
+                  expression: data
+            - keyword: IF
+              expression: problem.code ≠ 0
+              code:
+                - keyword: CALL
+                  name: c0de/minecraft/SAY
+                  parameters:
+                    - keyword: PARAMETER
+                      name: message
+                      expression: '"No copy: " ⊕ problem.message'
+                - keyword: RETURN
+            - keyword: CALL
+              name: c0de/minecraft/SAY
+              parameters:
+                - keyword: PARAMETER
+                  name: message
+                  expression: '"Copied " ⊕ blockId ⊕ " with the data " ⊕ data'
+  - file: site/tutorials/programs/libraries/minecraft/server-commands-morning.c0de
+    name: goodmorning
+    function: morning
+    sheet: 82
+    x: 2624
+    code: |
+      PROGRAM goodmorning
+      NOOP
+      INCLUDE c0de/minecraft
+      NOOP
+      VARIABLE commands ARRAY STRING
+      BEGIN
+          "time set day" "weather clear"
+      END VARIABLE
+      NOOP
+      FUNCTION morning
+      BEGIN
+          VARIABLE done INTEGER
+          VARIABLE message STRING
+          VARIABLE failed INTEGER
+          EACH line commands
+          BEGIN
+              CALL c0de/minecraft/COMMAND
+                  PARAMETER command line ;
+                  RESULT result done
+                  RESULT output message
+              IF done = 0 ;
+              BEGIN
+                  CALL c0de/minecraft/SAY
+                      PARAMETER message "/" ⊕ line ⊕ " failed: " ⊕ message ;
+                  ASSIGN failed failed + 1 ;
+              END IF
+          END EACH
+          IF failed = 0 ;
+          BEGIN
+              CALL c0de/minecraft/COMMAND
+                  PARAMETER command "say Good morning, everybody! The sun is up." ;
+          END IF
+      END FUNCTION
+    disk: |
+      PROGRAM: goodmorning
+      INCLUDE:
+        - c0de/minecraft
+      code:
+        - keyword: NOOP
+        - keyword: VARIABLE
+          name: commands
+          type: ARRAY
+          subtype: STRING
+          code:
+            - keyword: LITERAL
+              values:
+                - time set day
+                - weather clear
+        - keyword: NOOP
+        - keyword: FUNCTION
+          name: morning
+          code:
+            - keyword: VARIABLE
+              name: done
+              type: INTEGER
+            - keyword: VARIABLE
+              name: message
+              type: STRING
+            - keyword: VARIABLE
+              name: failed
+              type: INTEGER
+            - keyword: EACH
+              name: line
+              iterable: commands
+              code:
+                - keyword: CALL
+                  name: c0de/minecraft/COMMAND
+                  parameters:
+                    - keyword: PARAMETER
+                      name: command
+                      expression: line
+                  results:
+                    - keyword: RESULT
+                      name: result
+                      target: done
+                    - keyword: RESULT
+                      name: output
+                      target: message
+                - keyword: IF
+                  expression: done = 0
+                  code:
+                    - keyword: CALL
+                      name: c0de/minecraft/SAY
+                      parameters:
+                        - keyword: PARAMETER
+                          name: message
+                          expression: '"/" ⊕ line ⊕ " failed: " ⊕ message'
+                    - keyword: ASSIGN
+                      name: failed
+                      expression: failed + 1
+            - keyword: IF
+              expression: failed = 0
+              code:
+                - keyword: CALL
+                  name: c0de/minecraft/COMMAND
+                  parameters:
+                    - keyword: PARAMETER
+                      name: command
+                      expression: '"say Good morning, everybody! The sun is up."'
+  - file: site/tutorials/programs/libraries/security/password-door-door.c0de
+    name: passdoor
+    function: open
+    sheet: 84
+    x: 2688
+    code: |
+      PROGRAM passdoor
+      NOOP
+      INCLUDE c0de/security
+      NOOP
+      CONSTANT NAME STRING "doorPassword"
+      NOOP
+      FUNCTION check
+          RESULT right BOOLEAN
+      BEGIN
+          SECRET doorPassword STRING
+          VARIABLE typed STRING TAG(security: "sensitive")
+          CALL PRINT
+              PARAMETER value "Password:" ;
+          CALL INPUT
+              PARAMETER variable typed ;
+              PARAMETER hide TRUE ;
+          ASSIGN right typed = doorPassword ;
+      END FUNCTION
+      NOOP
+      FUNCTION setup
+      BEGIN
+          VARIABLE password STRING TAG(security: "sensitive")
+          VARIABLE again STRING TAG(security: "sensitive")
+          CALL CLS
+          CALL PRINT
+              PARAMETER value "New password:" ;
+          CALL INPUT
+              PARAMETER variable password ;
+              PARAMETER hide TRUE ;
+          CALL PRINT
+              PARAMETER value "Repeat it:" ;
+          CALL INPUT
+              PARAMETER variable again ;
+              PARAMETER hide TRUE ;
+          IF password = "" OR password ≠ again ;
+          BEGIN
+              CALL PRINT
+                  PARAMETER value "Not the same twice. Nothing changed." ;
+              RETURN
+          END IF
+          CALL c0de/security/SET_SECRET
+              PARAMETER name NAME ;
+              PARAMETER value password ;
+          CALL PRINT
+              PARAMETER value "Password set." ;
+      END FUNCTION
+      NOOP
+      FUNCTION open
+      BEGIN
+          VARIABLE known BOOLEAN
+          VARIABLE right BOOLEAN
+          VARIABLE problem ERROR
+          CALL CLS
+          CALL c0de/security/HAS_SECRET problem
+              PARAMETER name NAME ;
+              RESULT result known
+          IF problem.code = VAULT_UNAVAILABLE ;
+          BEGIN
+              CALL PRINT
+                  PARAMETER value "This door only listens to its owner." ;
+              RETURN
+          END IF
+          IF NOT known ;
+          BEGIN
+              CALL PRINT
+                  PARAMETER value "No password yet. Run setup first." ;
+              RETURN
+          END IF
+          CALL check
+              RESULT right right
+          IF NOT right ;
+          BEGIN
+              CALL PRINT
+                  PARAMETER value "Wrong password." ;
+              RETURN
+          END IF
+          CALL PRINT
+              PARAMETER value "Welcome home!" ;
+          EXIT 1 ;
+      END FUNCTION
+      NOOP
+      FUNCTION forget
+      BEGIN
+          VARIABLE problem ERROR
+          CALL CLS
+          CALL c0de/security/DELETE_SECRET problem
+              PARAMETER name NAME ;
+          IF problem.code = SECRET_NOT_FOUND ;
+          BEGIN
+              CALL PRINT
+                  PARAMETER value "There is no password to forget." ;
+              RETURN
+          END IF
+          CALL PRINT
+              PARAMETER value "Password forgotten. The door stays shut." ;
+      END FUNCTION
+  - file: site/tutorials/programs/libraries/security/keeping-keys-keys.c0de
+    name: keys
+    function: store
+    sheet: 86
+    x: 2752
+    code: |
+      PROGRAM keys
+      NOOP
+      INCLUDE c0de/security
+      INCLUDE c0de/strings
+      NOOP
+      CONSTANT NAME STRING "apiKey"
+      NOOP
+      FUNCTION unlock
+          PARAMETER password STRING
+          RESULT ready BOOLEAN
+      BEGIN
+          VARIABLE exists BOOLEAN
+          VARIABLE problem ERROR
+          CALL c0de/security/IS_VAULT_OPEN
+              RESULT result ready
+          IF ready ;
+          BEGIN
+              RETURN
+          END IF
+          CALL c0de/security/HAS_VAULT
+              RESULT result exists
+          IF exists ;
+          BEGIN
+              CALL c0de/security/OPEN_VAULT problem
+                  PARAMETER password password ;
+          END
+          ELSE
+          BEGIN
+              CALL c0de/security/CREATE_VAULT problem
+                  PARAMETER password password ;
+          END IF
+          IF problem.code = VAULT_CANCELLED ;
+          BEGIN
+              CALL PRINT
+                  PARAMETER value "Cancelled. Your vault stays shut." ;
+              RETURN
+          END IF
+          IF problem.code ≠ 0 ;
+          BEGIN
+              CALL PRINT
+                  PARAMETER value "? " ⊕ problem.message ;
+              RETURN
+          END IF
+          IF NOT exists ;
+          BEGIN
+              CALL PRINT
+                  PARAMETER value "Your new vault is ready." ;
+          END IF
+          ASSIGN ready TRUE ;
+      END FUNCTION
+      NOOP
+      FUNCTION store
+          PARAMETER password STRING ""
+      BEGIN
+          VARIABLE ready BOOLEAN
+          VARIABLE key STRING TAG(security: "sensitive")
+          CALL CLS
+          CALL unlock
+              PARAMETER password password ;
+              RESULT ready ready
+          IF NOT ready ;
+          BEGIN
+              RETURN
+          END IF
+          CALL PRINT
+              PARAMETER value "Key:" ;
+          CALL INPUT
+              PARAMETER variable key ;
+              PARAMETER hide TRUE ;
+          CALL c0de/security/SET_SECRET
+              PARAMETER name NAME ;
+              PARAMETER value key ;
+              PARAMETER persistent TRUE ;
+          CALL PRINT
+              PARAMETER value "Key kept in your vault." ;
+      END FUNCTION
+      NOOP
+      FUNCTION peek
+      BEGIN
+          SECRET apiKey STRING
+          VARIABLE ending STRING
+          CALL c0de/strings/RIGHT
+              PARAMETER text apiKey ;
+              PARAMETER length 4 ;
+              RESULT result ending
+          CALL PRINT
+              PARAMETER value "Your key ends with ..." ⊕ ending ;
+      END FUNCTION
+      NOOP
+      FUNCTION show
+          PARAMETER password STRING ""
+      BEGIN
+          VARIABLE ready BOOLEAN
+          VARIABLE known BOOLEAN
+          CALL CLS
+          CALL unlock
+              PARAMETER password password ;
+              RESULT ready ready
+          IF NOT ready ;
+          BEGIN
+              RETURN
+          END IF
+          CALL c0de/security/HAS_SECRET
+              PARAMETER name NAME ;
+              RESULT result known
+          IF NOT known ;
+          BEGIN
+              CALL PRINT
+                  PARAMETER value "No key in your vault. Run store first." ;
+              RETURN
+          END IF
+          CALL peek
+      END FUNCTION
   - file: site/tutorials/programs/libraries/http/weather-wall.c0de
     name: weatherwall
     function: show
-    sheet: 78
-    x: 2496
+    sheet: 88
+    x: 2816
     code: |
       PROGRAM weatherwall
       NOOP
@@ -10515,8 +11912,8 @@ programs:
   - file: site/tutorials/programs/libraries/http/checking-lamp.c0de
     name: statuslamp
     function: check
-    sheet: 80
-    x: 2560
+    sheet: 90
+    x: 2880
     code: |
       PROGRAM statuslamp
       NOOP
@@ -10699,8 +12096,8 @@ programs:
   - file: site/tutorials/programs/libraries/http/home-automation-preview.c0de
     name: lamppreview
     function: preview
-    sheet: 82
-    x: 2624
+    sheet: 92
+    x: 2944
     code: |
       PROGRAM lamppreview
       NOOP
@@ -10892,8 +12289,8 @@ programs:
   - file: site/tutorials/programs/libraries/http/up-to-date-check.c0de
     name: versioncheck
     function: check
-    sheet: 84
-    x: 2688
+    sheet: 94
+    x: 3008
     code: |
       PROGRAM versioncheck
       NOOP

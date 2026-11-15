@@ -9,7 +9,8 @@ Rezepte für die Funktionen der Bibliotheken: Jedes Rezept baut etwas Nützliche
 ## Die Bibliotheken
 
 - [c0de/math](/de/tutorials/libraries/c0de/math/): Würfel, Entfernungen, Kreise, Winkel und Wachstum
-- [c0de/strings](/de/tutorials/libraries/c0de/strings/): Namensschilder, Befehle, Geheimbotschaften und Daten als Text
+- [c0de/strings](/de/tutorials/libraries/c0de/strings/): Namensschilder, Befehle, Geheimbotschaften, Daten als Text und Eingaben prüfen
 - [c0de/time](/de/tutorials/libraries/c0de/time/): Uhren, Kalender, Stoppuhren und Spielzeit
-- [c0de/minecraft](/de/tutorials/libraries/c0de/minecraft/): Musik, Schlösser, Türen, Lager, Bauen und Abbauen
+- [c0de/minecraft](/de/tutorials/libraries/c0de/minecraft/): Musik, Schlösser, Türen, Lager, Bauen, Abbauen, Blöcke kopieren und Serverbefehle
+- [c0de/security](/de/tutorials/libraries/c0de/security/): Passwörter und Schlüssel im Tresor
 - [c0de_net/http](/de/tutorials/libraries/c0de_net/http/): das Wetter, REST-Dienste, Statusprüfungen und Hausautomation

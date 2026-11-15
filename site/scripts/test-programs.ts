@@ -102,7 +102,8 @@ export function parseArgs(args: string[]): { selected: string[]; local: Map<stri
       continue
     }
     const match = /^([^=]+)=(.+)$/.exec(args[++i] ?? '')
-    if (!match) throw new Error('usage: test-programs.ts [--local <source>=<folder>]... [program]...')
+    if (!match)
+      throw new Error('usage: test-programs.ts [--local <source>=<folder>]... [program]...')
     local.set(match[1]!, resolve(match[2]!))
   }
   return { selected, local }

@@ -1,7 +1,7 @@
 # The screenshots of the tutorials, written by scripts/screenshots.ts from the marks
 # <!-- screenshot: <id> | <description> --> of the pages. Take them as described in
 # docs/tutorials.md ("Screenshots") and save them as the file; the page shows them then.
-# 63 screenshots, 1 missing.
+# 70 screenshots, 8 missing.
 - id: asking-input
   description: 'the open terminal of the laptop while INPUT waits: "How many
     items?" on the screen and the input line "INPUT items (INTEGER):" with 1000
@@ -88,6 +88,14 @@
     - de/tutorials/learning/calculating.md
   file: public/tutorials/screenshots/calculating-stacks.webp
   size: 1280x673
+- id: checking-input-laptop
+  description: "the screen of the laptop after the run: the rejected names and
+    coordinates with their ? answers, and the welcome line at the end"
+  pages:
+    - tutorials/libraries/c0de/strings/checking-input.md
+    - de/tutorials/libraries/c0de/strings/checking-input.md
+  file: public/tutorials/screenshots/checking-input-laptop.webp
+  size: missing
 - id: checking-lamp
   description: The timer block with comparator and a dark redstone lamp, the
     display wall showing c0de.at/ and Status 200
@@ -163,6 +171,14 @@
     - de/tutorials/learning/condition-loops.md
   file: public/tutorials/screenshots/condition-loops-halving-sheet.webp
   size: 1280x673
+- id: copying-signs-copy
+  description: the trigger block with its button between a written sign and its
+    copy, the chat showing the copied data
+  pages:
+    - tutorials/libraries/c0de/minecraft/copying-signs.md
+    - de/tutorials/libraries/c0de/minecraft/copying-signs.md
+  file: public/tutorials/screenshots/copying-signs-copy.webp
+  size: missing
 - id: counting-loops-countdown-sheet
   description: the program countdown on its sheet, seen from the side, with the
     FOR line and its indented ASSIGN line in front
@@ -333,6 +349,22 @@
     - de/tutorials/libraries/c0de_net/http/home-automation.md
   file: public/tutorials/screenshots/home-automation-lever.webp
   size: 1280x673
+- id: keeping-keys-create
+  description: the dialog "Create your vault" with the fields Password and Repeat
+    filled with dots, and the buttons OK and Cancel
+  pages:
+    - tutorials/libraries/c0de/security/keeping-keys.md
+    - de/tutorials/libraries/c0de/security/keeping-keys.md
+  file: public/tutorials/screenshots/keeping-keys-create.webp
+  size: missing
+- id: keeping-keys-open
+  description: the dialog "Open your vault" with one password field, the message
+    "Wrong password, try again" below it
+  pages:
+    - tutorials/libraries/c0de/security/keeping-keys.md
+    - de/tutorials/libraries/c0de/security/keeping-keys.md
+  file: public/tutorials/screenshots/keeping-keys-open.webp
+  size: missing
 - id: libraries-dice-chat
   description: the player in the base pressing the button on the trigger block,
     the chat showing three lines like "[dice/0] You rolled a 4"
@@ -407,6 +439,23 @@
     - de/tutorials/learning/parameters.md
   file: public/tutorials/screenshots/parameters-trigger.webp
   size: 1280x673
+- id: password-door-open
+  description: the iron door open, the comparator between the trigger block and
+    the door lit, the laptop next to it showing "Password:", "***" and "Welcome
+    home!"
+  pages:
+    - tutorials/libraries/c0de/security/password-door.md
+    - de/tutorials/libraries/c0de/security/password-door.md
+  file: public/tutorials/screenshots/password-door-open.webp
+  size: missing
+- id: password-door-setup
+  description: 'the laptop of the door after setup: "New password:", "***",
+    "Repeat it:", "***" and "Password set."'
+  pages:
+    - tutorials/libraries/c0de/security/password-door.md
+    - de/tutorials/libraries/c0de/security/password-door.md
+  file: public/tutorials/screenshots/password-door-setup.webp
+  size: missing
 - id: rewards-hub
   description: 'the teleporter hub: three pressure plates in a row with signs
     "Farm", "Mine" and "Tower" behind them, the timer block at the west end'
@@ -440,6 +489,14 @@
     - de/tutorials/libraries/c0de/strings/secret-messages.md
   file: public/tutorials/screenshots/secret-messages-laptop.webp
   size: 1280x673
+- id: server-commands-morning
+  description: the trigger block with its button in the morning sun, the chat
+    showing the good morning message of goodmorning
+  pages:
+    - tutorials/libraries/c0de/minecraft/server-commands.md
+    - de/tutorials/libraries/c0de/minecraft/server-commands.md
+  file: public/tutorials/screenshots/server-commands-morning.webp
+  size: missing
 - id: sorting-chests
   description: the row of chests seen from the side, the hopper on the input
     chest, the timer block to the west, and the open food chest with bread and

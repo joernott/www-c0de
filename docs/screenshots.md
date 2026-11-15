@@ -4,7 +4,7 @@ The screenshots of the tutorials (task 7.1.1), taken as [tutorials.md](tutorials
 
 The world: every program is on its own sheet of the c0de dimension, built by the datapack of `contrib/screenshots/` (see its README). Sheet 0 is empty, and an empty sheet lies between two programs. North of every sheet, at z = -3 from x + 5 on: a trigger block with a stone button, a debug trigger block with a laptop, a timer block with a lever that is on (so it is paused), an I/O block, a disk drive and a gray shulker box with a stack of variable, constant and literal items and a disk; behind them, at z = -6, a display wall of 4 × 3 blocks in a frame of iron blocks. The three trigger blocks are set to the program and the function of its test.
 
-63 screenshots, 42 programs on sheets 2 to 84.
+70 screenshots, 47 programs on sheets 2 to 94.
 
 ## Before you start
 
@@ -1453,9 +1453,9 @@ END FUNCTION
 
 `site/tutorials/learning/next-steps.md`
 
-### [x] next-steps-handbook
+### [ ] next-steps-handbook
 
-the handbook Functions open in the game as a red Patchouli book, showing the page of SAY with its parameters and its example
+the handbook Functions open in the game as a red binder, showing the page of SAY with its parameters and its example
 
 - No program: a menu or a book of the game
 
@@ -2224,6 +2224,98 @@ BEGIN
 END FUNCTION
 ```
 
+## Checking input
+
+`site/tutorials/libraries/c0de/strings/checking-input.md`
+
+### [ ] checking-input-laptop
+
+the screen of the laptop after the run: the rejected names and coordinates with their ? answers, and the welcome line at the end
+
+- Program **checking**, function `signup` (`site/tutorials/programs/libraries/strings/checking-input-signup.c0de`)
+- Sheet 50, x = 1600
+
+```c0de
+PROGRAM checking
+NOOP
+INCLUDE c0de/strings
+NOOP
+FUNCTION askName
+    RESULT name STRING
+BEGIN
+    VARIABLE ok BOOLEAN
+    REPEAT
+    BEGIN
+        CALL PRINT
+            PARAMETER value "Your name:" ;
+        CALL INPUT
+            PARAMETER variable name ;
+        CALL c0de/strings/REGEX_MATCH
+            PARAMETER text name ;
+            PARAMETER pattern "^[A-Za-z0-9_]{3,16}$" ;
+            RESULT result ok
+        IF NOT ok ;
+        BEGIN
+            CALL PRINT
+                PARAMETER value "? 3 to 16 letters, digits or _" ;
+        END IF
+    END REPEAT NOT ok ;
+END FUNCTION
+NOOP
+FUNCTION askHome
+    RESULT home STRING
+BEGIN
+    VARIABLE ok BOOLEAN
+    REPEAT
+    BEGIN
+        CALL PRINT
+            PARAMETER value "Your home (x y z):" ;
+        CALL INPUT
+            PARAMETER variable home ;
+        CALL c0de/strings/REGEX_REPLACE
+            PARAMETER text home ;
+            PARAMETER pattern "[ ,]+" ;
+            PARAMETER replacement " " ;
+            PARAMETER flags "g" ;
+            RESULT result home
+        CALL c0de/strings/REGEX_REPLACE
+            PARAMETER text home ;
+            PARAMETER pattern "^ | $" ;
+            PARAMETER replacement "" ;
+            PARAMETER flags "g" ;
+            RESULT result home
+        CALL c0de/strings/REGEX_MATCH
+            PARAMETER text home ;
+            PARAMETER pattern "^-?[0-9]+ -?[0-9]+ -?[0-9]+$" ;
+            RESULT result ok
+        IF NOT ok ;
+        BEGIN
+            CALL PRINT
+                PARAMETER value "? three whole numbers, like 12 64 -30" ;
+        END IF
+    END REPEAT NOT ok ;
+END FUNCTION
+NOOP
+FUNCTION signup
+BEGIN
+    VARIABLE name STRING
+    VARIABLE home STRING
+    VARIABLE coordinates STRING
+    CALL CLS
+    CALL askName
+        RESULT name name
+    CALL askHome
+        RESULT home home
+    CALL c0de/strings/REGEX_REPLACE
+        PARAMETER text home ;
+        PARAMETER pattern "(-?[0-9]+) (-?[0-9]+) (-?[0-9]+)" ;
+        PARAMETER replacement "x=\\1 y=\\2 z=\\3" ;
+        RESULT result coordinates
+    CALL PRINT
+        PARAMETER value "Welcome, " ⊕ name ⊕ "! Home: " ⊕ coordinates ;
+END FUNCTION
+```
+
 ## A clock on the wall
 
 `site/tutorials/libraries/c0de/time/clock.md`
@@ -2233,7 +2325,7 @@ END FUNCTION
 a display wall of 2 × 1 display blocks showing the time 09:05:03 in the middle, the timer block in front of it
 
 - Program **wallclock**, function `tick` (`site/tutorials/programs/libraries/time/clock-wall.c0de`)
-- Sheet 50, x = 1600
+- Sheet 52, x = 1664
 
 ```c0de
 PROGRAM wallclock
@@ -2288,7 +2380,7 @@ END FUNCTION
 the two trigger blocks with buttons side by side, the hopper and chest under the second one, and the display wall showing the start, stop and elapsed time
 
 - Program **stopwatch**, function `stop` (`site/tutorials/programs/libraries/time/stopwatch-buttons.c0de`)
-- Sheet 52, x = 1664
+- Sheet 54, x = 1728
 
 ```c0de
 PROGRAM stopwatch
@@ -2361,7 +2453,7 @@ END FUNCTION
 a display block with the ball "o" in the middle of row 3, the trigger block with its button in front of it
 
 - Program **bouncer**, function `bounce` (`site/tutorials/programs/libraries/time/game-time-bounce.c0de`)
-- Sheet 54, x = 1728
+- Sheet 56, x = 1792
 
 ```c0de
 PROGRAM bouncer
@@ -2408,7 +2500,7 @@ END FUNCTION
 the front door of the base from outside with the trigger block and its button beside it, and the chat line with "Steve is at the front door."
 
 - Program **doorbell**, function `ring` (`site/tutorials/programs/libraries/minecraft/doorbell-bell.c0de`)
-- Sheet 56, x = 1792
+- Sheet 58, x = 1856
 
 ```c0de
 PROGRAM doorbell
@@ -2437,7 +2529,7 @@ END FUNCTION
 the four levers on the ground in front of the base, two of them on, the stone button at the end of the row, the timer block on the left and the closed iron door behind them
 
 - Program **combolock**, function `watch` (`site/tutorials/programs/libraries/minecraft/combination-lock-lock.c0de`)
-- Sheet 58, x = 1856
+- Sheet 60, x = 1920
 
 ```c0de
 PROGRAM combolock
@@ -2549,7 +2641,7 @@ END FUNCTION
 the open wooden door seen from outside, the player on the outside plate two blocks in front of it, the inside plate visible through the doorway and the timer block in the foreground
 
 - Program **autodoor**, function `watch` (`site/tutorials/programs/libraries/minecraft/automatic-doors-door.c0de`)
-- Sheet 60, x = 1920
+- Sheet 62, x = 1984
 
 ```c0de
 PROGRAM autodoor
@@ -2639,7 +2731,7 @@ END FUNCTION
 the wheat field of 4 × 4 plants, partly ripe, with the timer block beside it and the display wall showing "Wheat: 16 plants" and "Ripe: 5"
 
 - Program **farmwatch**, function `check` (`site/tutorials/programs/libraries/minecraft/watching-farm.c0de`)
-- Sheet 62, x = 1984
+- Sheet 64, x = 2048
 
 ```c0de
 PROGRAM farmwatch
@@ -2692,7 +2784,7 @@ END FUNCTION
 the fenced pen with sheep, cows and pigs, the timer block north of it, and the display wall listing the animals and "Animals: 9"
 
 - Program **pencount**, function `count` (`site/tutorials/programs/libraries/minecraft/watching-pen.c0de`)
-- Sheet 64, x = 2048
+- Sheet 66, x = 2112
 
 ```c0de
 PROGRAM pencount
@@ -2742,7 +2834,7 @@ END FUNCTION
 the row of chests seen from the side, the hopper on the input chest, the timer block to the west, and the open food chest with bread and apples
 
 - Program **sorter**, function `sort` (`site/tutorials/programs/libraries/minecraft/sorting-sorter.c0de`)
-- Sheet 66, x = 2112
+- Sheet 68, x = 2176
 
 ```c0de
 PROGRAM sorter
@@ -2825,7 +2917,7 @@ END FUNCTION
 the finished wall of stone bricks, 8 blocks long and 3 high, with the trigger block and its button in front of its west end and the chest 2 blocks west of it
 
 - Program **wallbuilder**, function `wall` (`site/tutorials/programs/libraries/minecraft/building-wall.c0de`)
-- Sheet 68, x = 2176
+- Sheet 70, x = 2240
 
 ```c0de
 PROGRAM wallbuilder
@@ -2870,7 +2962,7 @@ END FUNCTION
 the hollow cobblestone tower, 6 blocks high, half pulled down from the top, cobblestone items lying around it, the trigger block and the chest in front of it
 
 - Program **towerbuilder**, function `build` (`site/tutorials/programs/libraries/minecraft/building-tower.c0de`)
-- Sheet 70, x = 2240
+- Sheet 72, x = 2304
 
 ```c0de
 PROGRAM towerbuilder
@@ -2946,7 +3038,7 @@ END FUNCTION
 the entrance of the tunnel in the side of a hill, two blocks high, the trigger block in front of it, the tools chest on the left and the open drops chest on the right with cobblestone and coal
 
 - Program **tunneldigger**, function `dig` (`site/tutorials/programs/libraries/minecraft/tunnel-digger-dig.c0de`)
-- Sheet 72, x = 2304
+- Sheet 74, x = 2368
 
 ```c0de
 PROGRAM tunneldigger
@@ -3030,7 +3122,7 @@ END FUNCTION
 the fenced pen with several sheep, one of them just appeared in the middle, the trigger block with its button north of the pen and the chat line "Animal number 4 is in the pen."
 
 - Program **animalspawner**, function `spawn` (`site/tutorials/programs/libraries/minecraft/rewards-spawner.c0de`)
-- Sheet 74, x = 2368
+- Sheet 76, x = 2432
 
 ```c0de
 PROGRAM animalspawner
@@ -3074,7 +3166,7 @@ END FUNCTION
 the teleporter hub: three pressure plates in a row with signs "Farm", "Mine" and "Tower" behind them, the timer block at the west end
 
 - Program **teleporterhub**, function `hub` (`site/tutorials/programs/libraries/minecraft/rewards-hub.c0de`)
-- Sheet 76, x = 2432
+- Sheet 78, x = 2496
 
 ```c0de
 PROGRAM teleporterhub
@@ -3147,6 +3239,575 @@ BEGIN
 END FUNCTION
 ```
 
+## Copying signs and chests
+
+`site/tutorials/libraries/c0de/minecraft/copying-signs.md`
+
+### [ ] copying-signs-copy
+
+the trigger block with its button between a written sign and its copy, the chat showing the copied data
+
+- Program **copier**, function `copy` (`site/tutorials/programs/libraries/minecraft/copying-signs-copy.c0de`)
+- Sheet 80, x = 2560
+
+```c0de
+PROGRAM copier
+NOOP
+INCLUDE c0de/minecraft
+NOOP
+FUNCTION copy
+BEGIN
+    VARIABLE source STRUCT c0de/minecraft/POSITION
+    VARIABLE target STRUCT c0de/minecraft/POSITION
+    VARIABLE blockId STRING
+    VARIABLE states HASH STRING
+    VARIABLE data STRING
+    VARIABLE problem ERROR
+    ASSIGN source.x PID.x - 2 ;
+    ASSIGN source.y PID.y ;
+    ASSIGN source.z PID.z ;
+    ASSIGN target source ;
+    ASSIGN target.x PID.x + 2 ;
+    CALL c0de/minecraft/GET_BLOCK
+        PARAMETER position source ;
+        RESULT id blockId
+        RESULT properties states
+        RESULT data data
+    IF blockId = "minecraft:air" ;
+    BEGIN
+        CALL c0de/minecraft/SAY
+            PARAMETER message "There is nothing to copy." ;
+        RETURN
+    END IF
+    CALL c0de/minecraft/PLACE_BLOCK problem
+        PARAMETER position target ;
+        PARAMETER id blockId ;
+        PARAMETER properties states ;
+        PARAMETER data data ;
+    IF problem.code ≠ 0 ;
+    BEGIN
+        CALL c0de/minecraft/SAY
+            PARAMETER message "No copy: " ⊕ problem.message ;
+        RETURN
+    END IF
+    CALL c0de/minecraft/SAY
+        PARAMETER message "Copied " ⊕ blockId ⊕ " with the data " ⊕ data ;
+END FUNCTION
+```
+
+## Server commands
+
+`site/tutorials/libraries/c0de/minecraft/server-commands.md`
+
+### [ ] server-commands-morning
+
+the trigger block with its button in the morning sun, the chat showing the good morning message of goodmorning
+
+- Program **goodmorning**, function `morning` (`site/tutorials/programs/libraries/minecraft/server-commands-morning.c0de`)
+- Sheet 82, x = 2624
+
+```c0de
+PROGRAM goodmorning
+NOOP
+INCLUDE c0de/minecraft
+NOOP
+VARIABLE commands ARRAY STRING
+BEGIN
+    "time set day" "weather clear"
+END VARIABLE
+NOOP
+FUNCTION morning
+BEGIN
+    VARIABLE done INTEGER
+    VARIABLE message STRING
+    VARIABLE failed INTEGER
+    EACH line commands
+    BEGIN
+        CALL c0de/minecraft/COMMAND
+            PARAMETER command line ;
+            RESULT result done
+            RESULT output message
+        IF done = 0 ;
+        BEGIN
+            CALL c0de/minecraft/SAY
+                PARAMETER message "/" ⊕ line ⊕ " failed: " ⊕ message ;
+            ASSIGN failed failed + 1 ;
+        END IF
+    END EACH
+    IF failed = 0 ;
+    BEGIN
+        CALL c0de/minecraft/COMMAND
+            PARAMETER command "say Good morning, everybody! The sun is up." ;
+    END IF
+END FUNCTION
+```
+
+## A door with a password
+
+`site/tutorials/libraries/c0de/security/password-door.md`
+
+### [ ] password-door-setup
+
+the laptop of the door after setup: "New password:", "***", "Repeat it:", "***" and "Password set."
+
+- Program **passdoor**, function `open` (`site/tutorials/programs/libraries/security/password-door-door.c0de`)
+- Sheet 84, x = 2688
+
+```c0de
+PROGRAM passdoor
+NOOP
+INCLUDE c0de/security
+NOOP
+CONSTANT NAME STRING "doorPassword"
+NOOP
+FUNCTION check
+    RESULT right BOOLEAN
+BEGIN
+    SECRET doorPassword STRING
+    VARIABLE typed STRING TAG(security: "sensitive")
+    CALL PRINT
+        PARAMETER value "Password:" ;
+    CALL INPUT
+        PARAMETER variable typed ;
+        PARAMETER hide TRUE ;
+    ASSIGN right typed = doorPassword ;
+END FUNCTION
+NOOP
+FUNCTION setup
+BEGIN
+    VARIABLE password STRING TAG(security: "sensitive")
+    VARIABLE again STRING TAG(security: "sensitive")
+    CALL CLS
+    CALL PRINT
+        PARAMETER value "New password:" ;
+    CALL INPUT
+        PARAMETER variable password ;
+        PARAMETER hide TRUE ;
+    CALL PRINT
+        PARAMETER value "Repeat it:" ;
+    CALL INPUT
+        PARAMETER variable again ;
+        PARAMETER hide TRUE ;
+    IF password = "" OR password ≠ again ;
+    BEGIN
+        CALL PRINT
+            PARAMETER value "Not the same twice. Nothing changed." ;
+        RETURN
+    END IF
+    CALL c0de/security/SET_SECRET
+        PARAMETER name NAME ;
+        PARAMETER value password ;
+    CALL PRINT
+        PARAMETER value "Password set." ;
+END FUNCTION
+NOOP
+FUNCTION open
+BEGIN
+    VARIABLE known BOOLEAN
+    VARIABLE right BOOLEAN
+    VARIABLE problem ERROR
+    CALL CLS
+    CALL c0de/security/HAS_SECRET problem
+        PARAMETER name NAME ;
+        RESULT result known
+    IF problem.code = VAULT_UNAVAILABLE ;
+    BEGIN
+        CALL PRINT
+            PARAMETER value "This door only listens to its owner." ;
+        RETURN
+    END IF
+    IF NOT known ;
+    BEGIN
+        CALL PRINT
+            PARAMETER value "No password yet. Run setup first." ;
+        RETURN
+    END IF
+    CALL check
+        RESULT right right
+    IF NOT right ;
+    BEGIN
+        CALL PRINT
+            PARAMETER value "Wrong password." ;
+        RETURN
+    END IF
+    CALL PRINT
+        PARAMETER value "Welcome home!" ;
+    EXIT 1 ;
+END FUNCTION
+NOOP
+FUNCTION forget
+BEGIN
+    VARIABLE problem ERROR
+    CALL CLS
+    CALL c0de/security/DELETE_SECRET problem
+        PARAMETER name NAME ;
+    IF problem.code = SECRET_NOT_FOUND ;
+    BEGIN
+        CALL PRINT
+            PARAMETER value "There is no password to forget." ;
+        RETURN
+    END IF
+    CALL PRINT
+        PARAMETER value "Password forgotten. The door stays shut." ;
+END FUNCTION
+```
+
+### [ ] password-door-open
+
+the iron door open, the comparator between the trigger block and the door lit, the laptop next to it showing "Password:", "***" and "Welcome home!"
+
+- Program **passdoor**, function `open` (`site/tutorials/programs/libraries/security/password-door-door.c0de`)
+- Sheet 84, x = 2688
+
+```c0de
+PROGRAM passdoor
+NOOP
+INCLUDE c0de/security
+NOOP
+CONSTANT NAME STRING "doorPassword"
+NOOP
+FUNCTION check
+    RESULT right BOOLEAN
+BEGIN
+    SECRET doorPassword STRING
+    VARIABLE typed STRING TAG(security: "sensitive")
+    CALL PRINT
+        PARAMETER value "Password:" ;
+    CALL INPUT
+        PARAMETER variable typed ;
+        PARAMETER hide TRUE ;
+    ASSIGN right typed = doorPassword ;
+END FUNCTION
+NOOP
+FUNCTION setup
+BEGIN
+    VARIABLE password STRING TAG(security: "sensitive")
+    VARIABLE again STRING TAG(security: "sensitive")
+    CALL CLS
+    CALL PRINT
+        PARAMETER value "New password:" ;
+    CALL INPUT
+        PARAMETER variable password ;
+        PARAMETER hide TRUE ;
+    CALL PRINT
+        PARAMETER value "Repeat it:" ;
+    CALL INPUT
+        PARAMETER variable again ;
+        PARAMETER hide TRUE ;
+    IF password = "" OR password ≠ again ;
+    BEGIN
+        CALL PRINT
+            PARAMETER value "Not the same twice. Nothing changed." ;
+        RETURN
+    END IF
+    CALL c0de/security/SET_SECRET
+        PARAMETER name NAME ;
+        PARAMETER value password ;
+    CALL PRINT
+        PARAMETER value "Password set." ;
+END FUNCTION
+NOOP
+FUNCTION open
+BEGIN
+    VARIABLE known BOOLEAN
+    VARIABLE right BOOLEAN
+    VARIABLE problem ERROR
+    CALL CLS
+    CALL c0de/security/HAS_SECRET problem
+        PARAMETER name NAME ;
+        RESULT result known
+    IF problem.code = VAULT_UNAVAILABLE ;
+    BEGIN
+        CALL PRINT
+            PARAMETER value "This door only listens to its owner." ;
+        RETURN
+    END IF
+    IF NOT known ;
+    BEGIN
+        CALL PRINT
+            PARAMETER value "No password yet. Run setup first." ;
+        RETURN
+    END IF
+    CALL check
+        RESULT right right
+    IF NOT right ;
+    BEGIN
+        CALL PRINT
+            PARAMETER value "Wrong password." ;
+        RETURN
+    END IF
+    CALL PRINT
+        PARAMETER value "Welcome home!" ;
+    EXIT 1 ;
+END FUNCTION
+NOOP
+FUNCTION forget
+BEGIN
+    VARIABLE problem ERROR
+    CALL CLS
+    CALL c0de/security/DELETE_SECRET problem
+        PARAMETER name NAME ;
+    IF problem.code = SECRET_NOT_FOUND ;
+    BEGIN
+        CALL PRINT
+            PARAMETER value "There is no password to forget." ;
+        RETURN
+    END IF
+    CALL PRINT
+        PARAMETER value "Password forgotten. The door stays shut." ;
+END FUNCTION
+```
+
+## Keeping keys
+
+`site/tutorials/libraries/c0de/security/keeping-keys.md`
+
+### [ ] keeping-keys-create
+
+the dialog "Create your vault" with the fields Password and Repeat filled with dots, and the buttons OK and Cancel
+
+- Program **keys**, function `store` (`site/tutorials/programs/libraries/security/keeping-keys-keys.c0de`)
+- Sheet 86, x = 2752
+
+```c0de
+PROGRAM keys
+NOOP
+INCLUDE c0de/security
+INCLUDE c0de/strings
+NOOP
+CONSTANT NAME STRING "apiKey"
+NOOP
+FUNCTION unlock
+    PARAMETER password STRING
+    RESULT ready BOOLEAN
+BEGIN
+    VARIABLE exists BOOLEAN
+    VARIABLE problem ERROR
+    CALL c0de/security/IS_VAULT_OPEN
+        RESULT result ready
+    IF ready ;
+    BEGIN
+        RETURN
+    END IF
+    CALL c0de/security/HAS_VAULT
+        RESULT result exists
+    IF exists ;
+    BEGIN
+        CALL c0de/security/OPEN_VAULT problem
+            PARAMETER password password ;
+    END
+    ELSE
+    BEGIN
+        CALL c0de/security/CREATE_VAULT problem
+            PARAMETER password password ;
+    END IF
+    IF problem.code = VAULT_CANCELLED ;
+    BEGIN
+        CALL PRINT
+            PARAMETER value "Cancelled. Your vault stays shut." ;
+        RETURN
+    END IF
+    IF problem.code ≠ 0 ;
+    BEGIN
+        CALL PRINT
+            PARAMETER value "? " ⊕ problem.message ;
+        RETURN
+    END IF
+    IF NOT exists ;
+    BEGIN
+        CALL PRINT
+            PARAMETER value "Your new vault is ready." ;
+    END IF
+    ASSIGN ready TRUE ;
+END FUNCTION
+NOOP
+FUNCTION store
+    PARAMETER password STRING ""
+BEGIN
+    VARIABLE ready BOOLEAN
+    VARIABLE key STRING TAG(security: "sensitive")
+    CALL CLS
+    CALL unlock
+        PARAMETER password password ;
+        RESULT ready ready
+    IF NOT ready ;
+    BEGIN
+        RETURN
+    END IF
+    CALL PRINT
+        PARAMETER value "Key:" ;
+    CALL INPUT
+        PARAMETER variable key ;
+        PARAMETER hide TRUE ;
+    CALL c0de/security/SET_SECRET
+        PARAMETER name NAME ;
+        PARAMETER value key ;
+        PARAMETER persistent TRUE ;
+    CALL PRINT
+        PARAMETER value "Key kept in your vault." ;
+END FUNCTION
+NOOP
+FUNCTION peek
+BEGIN
+    SECRET apiKey STRING
+    VARIABLE ending STRING
+    CALL c0de/strings/RIGHT
+        PARAMETER text apiKey ;
+        PARAMETER length 4 ;
+        RESULT result ending
+    CALL PRINT
+        PARAMETER value "Your key ends with ..." ⊕ ending ;
+END FUNCTION
+NOOP
+FUNCTION show
+    PARAMETER password STRING ""
+BEGIN
+    VARIABLE ready BOOLEAN
+    VARIABLE known BOOLEAN
+    CALL CLS
+    CALL unlock
+        PARAMETER password password ;
+        RESULT ready ready
+    IF NOT ready ;
+    BEGIN
+        RETURN
+    END IF
+    CALL c0de/security/HAS_SECRET
+        PARAMETER name NAME ;
+        RESULT result known
+    IF NOT known ;
+    BEGIN
+        CALL PRINT
+            PARAMETER value "No key in your vault. Run store first." ;
+        RETURN
+    END IF
+    CALL peek
+END FUNCTION
+```
+
+### [ ] keeping-keys-open
+
+the dialog "Open your vault" with one password field, the message "Wrong password, try again" below it
+
+- Program **keys**, function `store` (`site/tutorials/programs/libraries/security/keeping-keys-keys.c0de`)
+- Sheet 86, x = 2752
+
+```c0de
+PROGRAM keys
+NOOP
+INCLUDE c0de/security
+INCLUDE c0de/strings
+NOOP
+CONSTANT NAME STRING "apiKey"
+NOOP
+FUNCTION unlock
+    PARAMETER password STRING
+    RESULT ready BOOLEAN
+BEGIN
+    VARIABLE exists BOOLEAN
+    VARIABLE problem ERROR
+    CALL c0de/security/IS_VAULT_OPEN
+        RESULT result ready
+    IF ready ;
+    BEGIN
+        RETURN
+    END IF
+    CALL c0de/security/HAS_VAULT
+        RESULT result exists
+    IF exists ;
+    BEGIN
+        CALL c0de/security/OPEN_VAULT problem
+            PARAMETER password password ;
+    END
+    ELSE
+    BEGIN
+        CALL c0de/security/CREATE_VAULT problem
+            PARAMETER password password ;
+    END IF
+    IF problem.code = VAULT_CANCELLED ;
+    BEGIN
+        CALL PRINT
+            PARAMETER value "Cancelled. Your vault stays shut." ;
+        RETURN
+    END IF
+    IF problem.code ≠ 0 ;
+    BEGIN
+        CALL PRINT
+            PARAMETER value "? " ⊕ problem.message ;
+        RETURN
+    END IF
+    IF NOT exists ;
+    BEGIN
+        CALL PRINT
+            PARAMETER value "Your new vault is ready." ;
+    END IF
+    ASSIGN ready TRUE ;
+END FUNCTION
+NOOP
+FUNCTION store
+    PARAMETER password STRING ""
+BEGIN
+    VARIABLE ready BOOLEAN
+    VARIABLE key STRING TAG(security: "sensitive")
+    CALL CLS
+    CALL unlock
+        PARAMETER password password ;
+        RESULT ready ready
+    IF NOT ready ;
+    BEGIN
+        RETURN
+    END IF
+    CALL PRINT
+        PARAMETER value "Key:" ;
+    CALL INPUT
+        PARAMETER variable key ;
+        PARAMETER hide TRUE ;
+    CALL c0de/security/SET_SECRET
+        PARAMETER name NAME ;
+        PARAMETER value key ;
+        PARAMETER persistent TRUE ;
+    CALL PRINT
+        PARAMETER value "Key kept in your vault." ;
+END FUNCTION
+NOOP
+FUNCTION peek
+BEGIN
+    SECRET apiKey STRING
+    VARIABLE ending STRING
+    CALL c0de/strings/RIGHT
+        PARAMETER text apiKey ;
+        PARAMETER length 4 ;
+        RESULT result ending
+    CALL PRINT
+        PARAMETER value "Your key ends with ..." ⊕ ending ;
+END FUNCTION
+NOOP
+FUNCTION show
+    PARAMETER password STRING ""
+BEGIN
+    VARIABLE ready BOOLEAN
+    VARIABLE known BOOLEAN
+    CALL CLS
+    CALL unlock
+        PARAMETER password password ;
+        RESULT ready ready
+    IF NOT ready ;
+    BEGIN
+        RETURN
+    END IF
+    CALL c0de/security/HAS_SECRET
+        PARAMETER name NAME ;
+        RESULT result known
+    IF NOT known ;
+    BEGIN
+        CALL PRINT
+            PARAMETER value "No key in your vault. Run store first." ;
+        RETURN
+    END IF
+    CALL peek
+END FUNCTION
+```
+
 ## Reading data from the web
 
 `site/tutorials/libraries/c0de_net/http/weather.md`
@@ -3156,7 +3817,7 @@ END FUNCTION
 The display wall showing Vienna, Austria, the sky, the temperature and the wind
 
 - Program **weatherwall**, function `show` (`site/tutorials/programs/libraries/http/weather-wall.c0de`)
-- Sheet 78, x = 2496
+- Sheet 88, x = 2816
 
 ```c0de
 PROGRAM weatherwall
@@ -3281,7 +3942,7 @@ END FUNCTION
 The timer block with comparator and a dark redstone lamp, the display wall showing c0de.at/ and Status 200
 
 - Program **statuslamp**, function `check` (`site/tutorials/programs/libraries/http/checking-lamp.c0de`)
-- Sheet 80, x = 2560
+- Sheet 90, x = 2880
 
 ```c0de
 PROGRAM statuslamp
@@ -3346,7 +4007,7 @@ END FUNCTION
 The trigger block with the lever on top, switched on, and the PID block of the running process on the sheet
 
 - Program **lamppreview**, function `preview` (`site/tutorials/programs/libraries/http/home-automation-preview.c0de`)
-- Sheet 82, x = 2624
+- Sheet 92, x = 2944
 
 ```c0de
 PROGRAM lamppreview
@@ -3410,7 +4071,7 @@ END FUNCTION
 The display wall with the two green lines c0de 0.5.0: up to date and c0de net 0.3.0: up to date
 
 - Program **versioncheck**, function `check` (`site/tutorials/programs/libraries/http/up-to-date-check.c0de`)
-- Sheet 84, x = 2688
+- Sheet 94, x = 3008
 
 ```c0de
 PROGRAM versioncheck

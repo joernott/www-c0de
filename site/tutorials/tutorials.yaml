@@ -66,6 +66,7 @@ chapters:
       - secret-messages
       - numbers-as-text
       - saving-data
+      - checking-input
   - link: /tutorials/libraries/c0de/time/
     label: { en: c0de/time, de: c0de/time }
     lessons:
@@ -84,6 +85,13 @@ chapters:
       - building
       - tunnel-digger
       - rewards
+      - copying-signs
+      - server-commands
+  - link: /tutorials/libraries/c0de/security/
+    label: { en: c0de/security, de: c0de/security }
+    lessons:
+      - password-door
+      - keeping-keys
   - link: /tutorials/libraries/c0de_net/http/
     label: { en: c0de_net/http, de: c0de_net/http }
     lessons:
