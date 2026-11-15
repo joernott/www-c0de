@@ -23,8 +23,8 @@ sources:
     modrinth: T9RufCc0
     curseforge: c0de
     description:
-      en: The programming language made of blocks, with its own dimension, triggers, tools and the libraries c0de/math, c0de/strings, c0de/time and c0de/minecraft.
-      de: Die Programmiersprache aus Blöcken, mit eigener Dimension, Auslösern, Werkzeugen und den Bibliotheken c0de/math, c0de/strings, c0de/time und c0de/minecraft.
+      en: The programming language made of blocks, with its own dimension, triggers, tools, handbooks in the game and the libraries c0de/math, c0de/strings, c0de/time, c0de/minecraft and c0de/security.
+      de: Die Programmiersprache aus Blöcken, mit eigener Dimension, Auslösern, Werkzeugen, Handbüchern im Spiel und den Bibliotheken c0de/math, c0de/strings, c0de/time, c0de/minecraft und c0de/security.
   c0de_net:
     name: c0de net
     repository: joernott/minecraft-c0de-net
@@ -62,7 +62,7 @@ tabs:
       - { file: reference/devices.md, group: handbook }
       - file: reference/functions.md
         group: handbook
-        without: [c0de/math, c0de/strings, c0de/time, c0de/minecraft]
+        without: [c0de/math, c0de/strings, c0de/time, c0de/minecraft, c0de/security]
 
   - id: c0de/math
     label: c0de/math
@@ -97,6 +97,15 @@ tabs:
     link: /c0de/minecraft/
     source: c0de
     library: { file: reference/functions.md, section: c0de/minecraft }
+    chapters:
+      - functions: true
+
+  - id: c0de/security
+    label: c0de/security
+    color: lib6
+    link: /c0de/security/
+    source: c0de
+    library: { file: reference/functions.md, section: c0de/security }
     chapters:
       - functions: true
 
