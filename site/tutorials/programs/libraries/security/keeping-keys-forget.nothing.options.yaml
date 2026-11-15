@@ -1,0 +1,8 @@
+function: forget
+parameters:
+  password: correct horse
+vault:
+  secrets: {}
+  persistent:
+    password: correct horse
+    secrets: {}

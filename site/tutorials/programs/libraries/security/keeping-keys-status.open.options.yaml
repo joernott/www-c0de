@@ -1,0 +1,8 @@
+function: status
+vault:
+  secrets: {}
+  persistent:
+    password: correct horse
+    open: true
+    secrets:
+      apiKey: { type: STRING, value: wx-3f9a-77c2-d00d }

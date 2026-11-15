@@ -1,0 +1,9 @@
+function: forget
+parameters:
+  password: correct horse
+vault:
+  secrets: {}
+  persistent:
+    password: correct horse
+    secrets:
+      apiKey: { type: STRING, value: wx-3f9a-77c2-d00d }

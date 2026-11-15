@@ -1,0 +1,113 @@
+PROGRAM keys
+NOOP
+INCLUDE c0de/security
+INCLUDE c0de/strings
+NOOP
+CONSTANT NAME STRING "apiKey"
+NOOP
+FUNCTION unlock
+    PARAMETER password STRING
+    RESULT ready BOOLEAN
+BEGIN
+    VARIABLE exists BOOLEAN
+    VARIABLE problem ERROR
+    CALL c0de/security/IS_VAULT_OPEN
+        RESULT result ready
+    IF ready ;
+    BEGIN
+        RETURN
+    END IF
+    CALL c0de/security/HAS_VAULT
+        RESULT result exists
+    IF exists ;
+    BEGIN
+        CALL c0de/security/OPEN_VAULT problem
+            PARAMETER password password ;
+    END
+    ELSE
+    BEGIN
+        CALL c0de/security/CREATE_VAULT problem
+            PARAMETER password password ;
+    END IF
+    IF problem.code = VAULT_CANCELLED ;
+    BEGIN
+        CALL PRINT
+            PARAMETER value "Cancelled. Your vault stays shut." ;
+        RETURN
+    END IF
+    IF problem.code ≠ 0 ;
+    BEGIN
+        CALL PRINT
+            PARAMETER value "? " ⊕ problem.message ;
+        RETURN
+    END IF
+    IF NOT exists ;
+    BEGIN
+        CALL PRINT
+            PARAMETER value "Your new vault is ready." ;
+    END IF
+    ASSIGN ready TRUE ;
+END FUNCTION
+NOOP
+FUNCTION store
+    PARAMETER password STRING ""
+BEGIN
+    VARIABLE ready BOOLEAN
+    VARIABLE key STRING TAG(security: "sensitive")
+    CALL CLS
+    CALL unlock
+        PARAMETER password password ;
+        RESULT ready ready
+    IF NOT ready ;
+    BEGIN
+        RETURN
+    END IF
+    CALL PRINT
+        PARAMETER value "Key:" ;
+    CALL INPUT
+        PARAMETER variable key ;
+        PARAMETER hide TRUE ;
+    CALL c0de/security/SET_SECRET
+        PARAMETER name NAME ;
+        PARAMETER value key ;
+        PARAMETER persistent TRUE ;
+    CALL PRINT
+        PARAMETER value "Key kept in your vault." ;
+END FUNCTION
+NOOP
+FUNCTION peek
+BEGIN
+    SECRET apiKey STRING
+    VARIABLE ending STRING
+    CALL c0de/strings/RIGHT
+        PARAMETER text apiKey ;
+        PARAMETER length 4 ;
+        RESULT result ending
+    CALL PRINT
+        PARAMETER value "Your key ends with ..." ⊕ ending ;
+END FUNCTION
+NOOP
+FUNCTION show
+    PARAMETER password STRING ""
+BEGIN
+    VARIABLE ready BOOLEAN
+    VARIABLE known BOOLEAN
+    CALL CLS
+    CALL unlock
+        PARAMETER password password ;
+        RESULT ready ready
+    IF NOT ready ;
+    BEGIN
+        RETURN
+    END IF
+    CALL c0de/security/HAS_SECRET
+        PARAMETER name NAME ;
+        RESULT result known
+    IF NOT known ;
+    BEGIN
+        CALL PRINT
+            PARAMETER value "No key in your vault. Run store first." ;
+        RETURN
+    END IF
+    CALL peek
+END FUNCTION

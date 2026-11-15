@@ -1,0 +1,5 @@
+state: FINISHED
+screen:
+  - Your new vault is ready.
+  - 'Key:'
+  - Key kept in your vault.

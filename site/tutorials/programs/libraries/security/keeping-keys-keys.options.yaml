@@ -1,0 +1,6 @@
+function: store
+parameters:
+  password: correct horse
+vault:
+  secrets: {}
+input: [wx-3f9a-77c2-d00d]

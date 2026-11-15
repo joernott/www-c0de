@@ -1,0 +1,3 @@
+state: FINISHED
+screen:
+  - "? The password doesn't open the persistent vault"

@@ -1,0 +1,43 @@
+PROGRAM vaultstatus
+NOOP
+INCLUDE c0de/security
+NOOP
+FUNCTION status
+BEGIN
+    VARIABLE exists BOOLEAN
+    VARIABLE open BOOLEAN
+    VARIABLE known BOOLEAN
+    CALL CLS
+    CALL c0de/security/HAS_VAULT
+        RESULT result exists
+    CALL c0de/security/IS_VAULT_OPEN
+        RESULT result open
+    CALL c0de/security/HAS_SECRET
+        PARAMETER name "apiKey" ;
+        RESULT result known
+    IF NOT exists ;
+    BEGIN
+        CALL PRINT
+            PARAMETER value "Vault: none yet" ;
+    END IF
+    IF exists AND NOT open ;
+    BEGIN
+        CALL PRINT
+            PARAMETER value "Vault: locked" ;
+    END IF
+    IF open ;
+    BEGIN
+        CALL PRINT
+            PARAMETER value "Vault: open" ;
+    END IF
+    IF known ;
+    BEGIN
+        CALL PRINT
+            PARAMETER value "Key: ready" ;
+    END
+    ELSE
+    BEGIN
+        CALL PRINT
+            PARAMETER value "Key: not here" ;
+    END IF
+END FUNCTION
