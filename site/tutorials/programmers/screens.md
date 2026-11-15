@@ -66,7 +66,7 @@ Open the laptop and type `+`, `+`, `+`, `-`, `+` and `q`. The screen shows the m
 **INPUT** reads one value into a variable. It looks for it in this order:
 
 1. The input inventories of the bound I/O blocks, in the order they were bound: a variable or constant item with the name and the type of the variable, or a literal item of its type (whatever the variable is called).
-2. A line typed on a bound laptop or tablet. The input line only works while an INPUT waits and shows what it asks for, like `INPUT count (INTEGER):`. The text is read like the value of a LITERAL block, and as JSON for arrays, hashes and structs. Text that doesn't fit the type is refused with a line starting with `? `, and INPUT keeps waiting.
+2. A line typed on a bound laptop or tablet. The input line only works while an INPUT waits and shows what it asks for, like `INPUT count (INTEGER):`. The text is read like the value of a LITERAL block, and as JSON for arrays, hashes and structs. Text that doesn't fit the type is refused with a line starting with `? `, and INPUT keeps waiting. With the parameter `hide` TRUE (since c0de 0.6.0), the input line shows `*` for every typed character and the screen `***` for the line, for passwords.
 
 The used item moves to the output inventory of the I/O block: a variable item uninitialized, a constant item unchanged, a literal item without its value.
 

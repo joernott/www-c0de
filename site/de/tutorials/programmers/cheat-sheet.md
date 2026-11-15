@@ -12,6 +12,7 @@ Alles aus diesem Pfad auf einer Seite: was du in Python, JavaScript oder BASIC s
 | ------------- | ----------------------------- | ----------------------------- | ---------------- | ------------------------------------------------------------------------------------------------------------------- |
 | Variable      | `x = 5`                       | `let x = 5`                   | `x = 5`          | `VARIABLE x INTEGER 5`                                                                                              |
 | Konstante     | `MAX = 10`                    | `const MAX = 10`              | `CONST MAX = 10` | `CONSTANT MAX INTEGER 10`                                                                                           |
+| Geheimnis     | `os.environ['TOKEN']`         | `process.env.TOKEN`           | –                | `SECRET token STRING` (aus dem [Tresor](/de/c0de/security/) des Spielers)                                           |
 | Zuweisung     | `x = x + 1`                   | `x += 1`                      | `x = x + 1`      | `ASSIGN x x + 1 ;`                                                                                                  |
 | Typen         | `bool`, `int`, `float`, `str` | `boolean`, `number`, `string` | `x%`, `x!`, `x$` | BOOLEAN, INTEGER (64 Bit), FLOAT, CHAR, STRING, TIME (ms seit 1970)                                                 |
 | Kein Wert     | `None`                        | `null`, `undefined`           | –                | keiner: Jede Variable beginnt mit dem Standardwert ihres Typs (0, 0.0, `FALSE`, `""`, ein Leerzeichen, leere Liste) |
@@ -95,12 +96,13 @@ Alles aus diesem Pfad auf einer Seite: was du in Python, JavaScript oder BASIC s
 
 ## Eingabe und Ausgabe
 
-|             | Python        | JavaScript         | BASIC                                     | c0de                                     |
-| ----------- | ------------- | ------------------ | ----------------------------------------- | ---------------------------------------- |
-| Ausgeben    | `print(x)`    | `console.log(x)`   | `PRINT x`                                 | `CALL PRINT`<br>`PARAMETER value x ;`    |
-| Zeile lesen | `x = input()` | `prompt()`         | `INPUT x`                                 | `CALL INPUT`<br>`PARAMETER variable x ;` |
-| Taste lesen | –             | `keydown`-Ereignis | `k$ = INKEY$`                             | `CALL INKEY`<br>`RESULT result k`        |
-| Bildschirm  | curses        | –                  | `CLS`, `LOCATE`, `COLOR`, `CSRLIN`, `POS` | dieselben Namen, Zeilen und Spalten ab 0 |
+|                | Python        | JavaScript         | BASIC                                     | c0de                                                                |
+| -------------- | ------------- | ------------------ | ----------------------------------------- | ------------------------------------------------------------------- |
+| Ausgeben       | `print(x)`    | `console.log(x)`   | `PRINT x`                                 | `CALL PRINT`<br>`PARAMETER value x ;`                               |
+| Zeile lesen    | `x = input()` | `prompt()`         | `INPUT x`                                 | `CALL INPUT`<br>`PARAMETER variable x ;`                            |
+| Passwort lesen | `getpass()`   | –                  | –                                         | `CALL INPUT`<br>`PARAMETER variable x ;`<br>`PARAMETER hide TRUE ;` |
+| Taste lesen    | –             | `keydown`-Ereignis | `k$ = INKEY$`                             | `CALL INKEY`<br>`RESULT result k`                                   |
+| Bildschirm     | curses        | –                  | `CLS`, `LOCATE`, `COLOR`, `CSRLIN`, `POS` | dieselben Namen, Zeilen und Spalten ab 0                            |
 
 ## Die Fallen
 

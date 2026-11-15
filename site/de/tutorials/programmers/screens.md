@@ -66,7 +66,7 @@ Binde den Laptop (und die Anzeigewand, wenn du eine gebaut hast) an das Programm
 **INPUT** liest einen Wert in eine Variable. Es sucht ihn in dieser Reihenfolge:
 
 1. In den Eingabeinventaren der gebundenen E/A-Blöcke, in der Reihenfolge, in der sie gebunden wurden: eine Variablen- oder Konstantenkarte mit dem Namen und dem Typ der Variablen oder eine Literalkarte ihres Typs (egal, wie die Variable heißt).
-2. Eine Zeile, die auf einem gebundenen Laptop oder Tablet eingetippt wird. Die Eingabezeile funktioniert nur, während ein INPUT wartet, und zeigt, was es abfragt, zum Beispiel `INPUT count (INTEGER):`. Der Text wird wie der Wert eines LITERAL-Blocks gelesen, bei Arrays, Hashes und Strukturen als JSON. Text, der nicht zum Typ passt, wird mit einer Zeile abgelehnt, die mit `? ` beginnt, und INPUT wartet weiter.
+2. Eine Zeile, die auf einem gebundenen Laptop oder Tablet eingetippt wird. Die Eingabezeile funktioniert nur, während ein INPUT wartet, und zeigt, was es abfragt, zum Beispiel `INPUT count (INTEGER):`. Der Text wird wie der Wert eines LITERAL-Blocks gelesen, bei Arrays, Hashes und Strukturen als JSON. Text, der nicht zum Typ passt, wird mit einer Zeile abgelehnt, die mit `? ` beginnt, und INPUT wartet weiter. Mit dem Parameter `hide` TRUE (seit c0de 0.6.0) zeigt die Eingabezeile `*` für jedes getippte Zeichen und der Bildschirm `***` für die Zeile, für Passwörter.
 
 Die verwendete Karte wandert ins Ausgabeinventar des E/A-Blocks: eine Variablenkarte nicht initialisiert, eine Konstantenkarte unverändert, eine Literalkarte ohne ihren Wert.
 
