@@ -13,10 +13,16 @@ test('the tutorials tab shows the paths and the libraries as chapter tabs', asyn
     'aria-current',
     'page',
   )
-  for (const name of ['Learning to program', 'c0de for programmers', 'Libraries in practice']) {
+  for (const name of [
+    'Learning to program',
+    'c0de for programmers',
+    'Libraries in practice',
+    'c0de/security',
+  ]) {
     await expect(tabs(page).locator('.tab-chapter', { hasText: name })).toBeVisible()
   }
-  await expect(page.locator('.tab-chapter')).toHaveCount(8)
+  // the three paths and the six libraries of the recipes
+  await expect(page.locator('.tab-chapter')).toHaveCount(9)
   await expect(page.getByRole('heading', { name: 'The world of the tutorials' })).toBeVisible()
 })
 

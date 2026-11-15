@@ -37,8 +37,8 @@ test('the home page shows the screenshot, an example and the tabs', async ({ pag
     .toBe(1280)
   await expect(page.locator('.shiki').first()).toContainText('FUNCTION greet')
   const tabs = page.locator('.tab-overview li')
-  // the tabs of c0de, the five libraries and the tutorials
-  await expect(tabs).toHaveCount(7)
+  // the tabs of c0de, the six libraries (c0de/security since c0de 0.6.0) and the tutorials
+  await expect(tabs).toHaveCount(8)
   await expect(tabs.first()).toContainText('12 Kapitel')
   await expect(
     page.locator('.mod').first().getByRole('link', { name: 'Dokumentation' }),

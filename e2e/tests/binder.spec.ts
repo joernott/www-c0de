@@ -9,6 +9,7 @@ const mainTabs = [
   'c0de/strings',
   'c0de/time',
   'c0de/minecraft',
+  'c0de/security',
   'c0de_net/http',
   'Tutorials',
 ]
