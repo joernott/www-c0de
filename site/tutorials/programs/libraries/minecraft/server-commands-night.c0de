@@ -1,0 +1,44 @@
+PROGRAM daynight
+NOOP
+INCLUDE c0de/minecraft
+NOOP
+VARIABLE morningCommands ARRAY STRING
+BEGIN
+    "time set day" "weather clear" "say Good morning, everybody! The sun is up."
+END VARIABLE
+VARIABLE eveningCommands ARRAY STRING
+BEGIN
+    "time set night" "say Good night, everybody! Watch out for zombies."
+END VARIABLE
+NOOP
+FUNCTION runAll
+    PARAMETER commands ARRAY STRING
+BEGIN
+    VARIABLE done INTEGER
+    VARIABLE message STRING
+    EACH line commands
+    BEGIN
+        CALL c0de/minecraft/COMMAND
+            PARAMETER command line ;
+            RESULT result done
+            RESULT output message
+        IF done = 0 ;
+        BEGIN
+            CALL c0de/minecraft/SAY
+                PARAMETER message "/" ⊕ line ⊕ " failed: " ⊕ message ;
+            RETURN
+        END IF
+    END EACH
+END FUNCTION
+NOOP
+FUNCTION morning
+BEGIN
+    CALL runAll
+        PARAMETER commands morningCommands ;
+END FUNCTION
+NOOP
+FUNCTION evening
+BEGIN
+    CALL runAll
+        PARAMETER commands eveningCommands ;
+END FUNCTION

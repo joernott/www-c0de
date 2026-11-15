@@ -1,0 +1,59 @@
+PROGRAM signcopier
+NOOP
+INCLUDE c0de/minecraft
+INCLUDE c0de/strings
+NOOP
+FUNCTION isSign
+    PARAMETER id STRING
+    RESULT sign BOOLEAN
+BEGIN
+    VARIABLE found INTEGER
+    CALL c0de/strings/INSTR
+        PARAMETER text id ;
+        PARAMETER search "_sign" ;
+        RESULT result found
+    ASSIGN sign found ≥ 0 ;
+END FUNCTION
+NOOP
+FUNCTION copy
+BEGIN
+    VARIABLE source STRUCT c0de/minecraft/POSITION
+    VARIABLE target STRUCT c0de/minecraft/POSITION
+    VARIABLE blockId STRING
+    VARIABLE states HASH STRING
+    VARIABLE data STRING
+    VARIABLE sign BOOLEAN
+    VARIABLE problem ERROR
+    ASSIGN source.x PID.x - 2 ;
+    ASSIGN source.y PID.y ;
+    ASSIGN source.z PID.z ;
+    ASSIGN target source ;
+    ASSIGN target.x PID.x + 2 ;
+    CALL c0de/minecraft/GET_BLOCK
+        PARAMETER position source ;
+        RESULT id blockId
+        RESULT properties states
+        RESULT data data
+    CALL isSign
+        PARAMETER id blockId ;
+        RESULT sign sign
+    IF NOT sign ;
+    BEGIN
+        CALL c0de/minecraft/SAY
+            PARAMETER message "I only copy signs, not " ⊕ blockId ⊕ "." ;
+        RETURN
+    END IF
+    CALL c0de/minecraft/PLACE_BLOCK problem
+        PARAMETER position target ;
+        PARAMETER id blockId ;
+        PARAMETER properties states ;
+        PARAMETER data data ;
+    IF problem.code ≠ 0 ;
+    BEGIN
+        CALL c0de/minecraft/SAY
+            PARAMETER message "No copy: " ⊕ problem.message ;
+        RETURN
+    END IF
+    CALL c0de/minecraft/SAY
+        PARAMETER message "Copied the sign." ;
+END FUNCTION

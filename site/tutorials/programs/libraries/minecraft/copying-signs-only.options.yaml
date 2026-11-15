@@ -1,0 +1,3 @@
+function: isSign
+parameters:
+  id: minecraft:oak_sign

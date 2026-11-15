@@ -8,8 +8,8 @@ Throw everything you bring home into one chest, and a program sorts it: building
 
 **Functions:** [GET_INVENTORY](/c0de/minecraft/get_inventory), [MOVE_ITEMS](/c0de/minecraft/move_items), [DELETE_ITEMS](/c0de/minecraft/delete_items), and [SAY](/c0de/minecraft/say)
 
-::: warning Needs an operator
-MOVE_ITEMS and DELETE_ITEMS move items without a player, so they only work if the owner of the timer block is an operator. In the world of the tutorials, you are one. On a server, the administrator can allow them for everybody with `allowInventoryChanges=true` in `config/c0de.properties`; without that right, the program crashes with PERMISSION_DENIED. There is no way around it for everyone, but GET_INVENTORY always works: a program can still tell you what is in a chest, and hoppers can do simple sorting without a program.
+::: warning Needs an operator – partly
+The sorter works for every owner, on every server: MOVE_ITEMS only does what a player does who carries the items from chest to chest, so the owner of the timer block just has to be able to open both chests – they may not be locked or in the spawn protection. The trash can is different: DELETE_ITEMS makes items disappear, so it only works if the owner is an operator – in the world of the tutorials, you are one – or if the server allows it for everybody with `allowInventoryChanges=true` in `config/c0de.properties`; otherwise the program crashes with PERMISSION_DENIED. The same goes for exercise 1. A server can also switch MOVE_ITEMS off for everyone with `enableMoveItems=false`.
 :::
 
 ::: info What you need
@@ -17,7 +17,7 @@ MOVE_ITEMS and DELETE_ITEMS move items without a player, so they only work if th
 - an empty sheet for each program
 - for the sorter: a **timer block**, three **chests** and a **hopper**, plus some cobblestone, bread and a diamond
 - for the trash can: a second **timer block**, a fourth **chest** and some rotten flesh
-- for the exercises: rotten flesh, poisonous potatoes and a fifth **chest**
+- for the exercises: rotten flesh, poisonous potatoes, some ores, raw iron or diamonds, and a fifth **chest**
 
 :::
 
@@ -25,7 +25,7 @@ MOVE_ITEMS and DELETE_ITEMS move items without a player, so they only work if th
 
 GET_INVENTORY gives the content of a chest as an array of [ITEM_STACK](/c0de/minecraft/position-entity-and-item_stack) structs, one per slot: each has an `id`, like `minecraft:bread`, and a `count`. An empty slot has the id `""` and the count 0.
 
-MOVE_ITEMS moves up to `count` items with an `id` from one inventory to another and says how many it moved – fewer if the target is full. DELETE_ITEMS removes items for good.
+MOVE_ITEMS moves up to `count` items with an `id` from one inventory to another and says how many it moved – fewer if the target is full. Like a player, it needs a moment for it: the program waits a tick for every stack it carries. DELETE_ITEMS removes items for good.
 
 What goes where is a decision of its own, and it's pure computation: an item ID goes in, a chest number comes out. That part is easy to test without any chest.
 
@@ -59,6 +59,7 @@ Set the timer block to `sorter` and `sort`, with an interval of 100 ticks. Throw
 
 - **EACH slot.** The loop goes through all 27 slots of the input chest. For an empty slot, `chestFor` gives 0, like for an unknown item, and nothing happens.
 - **The target** is a copy of the input position whose `x` moves 2 blocks east per chest number: `input.x + 2 * chest`. A third chest would simply be 2 blocks further.
+- **Carrying takes time.** Every MOVE_ITEMS waits a tick for each stack it moved, as long as the chests are less than 128 blocks apart. A full input chest is sorted in a bit more than a second – well within the 100 ticks of the timer.
 - **A full chest.** MOVE_ITEMS returns how many items it moved. If that's fewer than the slot held, the target is full, and the chat says so. The rest stays in the input chest and is tried again in the next run.
 
 ## The trash can
@@ -84,6 +85,16 @@ A third list, `junk`, for which `chestFor` gives -1. The sorter calls DELETE_ITE
 
 ::: details Solution
 Start `chestFor` with `ASSIGN chest 3 ;`. The two lists then overwrite it for the known items. Empty slots get 3 too, but `slot.count > 0` skips them.
+:::
+
+3. Before sorting, move all ores, raw metals, diamonds and emeralds into a chest 3, 8 blocks east of the timer block – with one single MOVE_ITEMS, without looking at the slots. (If you did exercise 2, the unknown items end up there too, which is fine.)
+
+::: details Solution
+Instead of `id`, MOVE_ITEMS takes a `filter`: an item ID, or a search like in the search field of JEI. `$ores` matches all items with a tag that contains "ores", such as `minecraft:iron_ores` – the ore blocks of all mods that tag them. `&raw_` matches all items whose ID contains `raw_`, like `minecraft:raw_iron`. An array of filters matches every item that one of them matches, so the two item IDs complete the list. With `count` -1, MOVE_ITEMS takes all matching items from all slots at once.
+
+<<< @/tutorials/programs/libraries/minecraft/sorting-ores.c0de
+
+Now the diamond no longer stays in the input chest. Other words of the filter: `@create` for all items of the mod Create, `-word` for items that must not match, and `|` between alternatives: `"$ores | &raw_"` is the same as the first two elements of the array.
 :::
 
 ## Read more

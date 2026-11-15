@@ -1,0 +1,33 @@
+PROGRAM goodmorning
+NOOP
+INCLUDE c0de/minecraft
+NOOP
+VARIABLE commands ARRAY STRING
+BEGIN
+    "time set day" "weather clear"
+END VARIABLE
+NOOP
+FUNCTION morning
+BEGIN
+    VARIABLE done INTEGER
+    VARIABLE message STRING
+    VARIABLE failed INTEGER
+    EACH line commands
+    BEGIN
+        CALL c0de/minecraft/COMMAND
+            PARAMETER command line ;
+            RESULT result done
+            RESULT output message
+        IF done = 0 ;
+        BEGIN
+            CALL c0de/minecraft/SAY
+                PARAMETER message "/" ⊕ line ⊕ " failed: " ⊕ message ;
+            ASSIGN failed failed + 1 ;
+        END IF
+    END EACH
+    IF failed = 0 ;
+    BEGIN
+        CALL c0de/minecraft/COMMAND
+            PARAMETER command "say Good morning, everybody! The sun is up." ;
+    END IF
+END FUNCTION

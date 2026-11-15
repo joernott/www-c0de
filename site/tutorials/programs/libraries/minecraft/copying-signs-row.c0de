@@ -1,0 +1,46 @@
+PROGRAM rowcopier
+NOOP
+INCLUDE c0de/minecraft
+NOOP
+FUNCTION copy
+    PARAMETER copies INTEGER 5
+BEGIN
+    VARIABLE source STRUCT c0de/minecraft/POSITION
+    VARIABLE target STRUCT c0de/minecraft/POSITION
+    VARIABLE blockId STRING
+    VARIABLE states HASH STRING
+    VARIABLE data STRING
+    VARIABLE problem ERROR
+    ASSIGN source.x PID.x - 2 ;
+    ASSIGN source.y PID.y ;
+    ASSIGN source.z PID.z ;
+    ASSIGN target source ;
+    CALL c0de/minecraft/GET_BLOCK
+        PARAMETER position source ;
+        RESULT id blockId
+        RESULT properties states
+        RESULT data data
+    IF blockId = "minecraft:air" ;
+    BEGIN
+        CALL c0de/minecraft/SAY
+            PARAMETER message "There is nothing to copy." ;
+        RETURN
+    END IF
+    FOR i INTEGER 1 ; copies ;
+    BEGIN
+        ASSIGN target.x PID.x + 1 + i ;
+        CALL c0de/minecraft/PLACE_BLOCK problem
+            PARAMETER position target ;
+            PARAMETER id blockId ;
+            PARAMETER properties states ;
+            PARAMETER data data ;
+        IF problem.code ≠ 0 ;
+        BEGIN
+            CALL c0de/minecraft/SAY
+                PARAMETER message "Copy " ⊕ i ⊕ " failed: " ⊕ problem.message ;
+            RETURN
+        END IF
+    END FOR
+    CALL c0de/minecraft/SAY
+        PARAMETER message copies ⊕ " copies of " ⊕ blockId ⊕ " are done." ;
+END FUNCTION
