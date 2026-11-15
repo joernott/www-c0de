@@ -84,7 +84,22 @@ export async function fetchSource(source: Source, cache: string): Promise<string
   )
   writeFileSync(join(temporary, '.complete'), url + '\n')
   rmSync(folder, { recursive: true, force: true })
-  renameSync(temporary, folder)
+  await renameWithRetry(temporary, folder)
   rmSync(archive)
   return folder
+}
+
+// renameWithRetry renames a folder, trying again for a few seconds: on Windows, a virus scanner
+// that still reads the files just unpacked makes the rename fail with EPERM or EBUSY.
+export async function renameWithRetry(from: string, to: string, tries = 10): Promise<void> {
+  for (let attempt = 1; ; attempt++) {
+    try {
+      renameSync(from, to)
+      return
+    } catch (error) {
+      const code = (error as NodeJS.ErrnoException).code
+      if (attempt >= tries || (code !== 'EPERM' && code !== 'EBUSY')) throw error
+      await new Promise((resolve) => setTimeout(resolve, 500 * attempt))
+    }
+  }
 }

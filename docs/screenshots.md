@@ -4068,7 +4068,7 @@ END FUNCTION
 
 ### [x] up-to-date-wall
 
-The display wall with the two green lines c0de 0.5.0: up to date and c0de net 0.3.0: up to date
+The display wall with the two green lines c0de 0.6.0: up to date and c0de net 0.3.0: up to date
 
 - Program **versioncheck**, function `check` (`site/tutorials/programs/libraries/http/up-to-date-check.c0de`)
 - Sheet 94, x = 3008

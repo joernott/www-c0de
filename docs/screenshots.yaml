@@ -1,6 +1,6 @@
 # The screenshots of the tutorials with their programs (task 12.3), written by
 # site/scripts/screenshot-world.ts; docs/screenshots.md is the to-do list.
-c0de: v0.5.0
+c0de: v0.6.0
 screenshots:
   - id: before-you-start-new-world
     file: site/public/tutorials/screenshots/before-you-start-new-world.webp
@@ -16,7 +16,7 @@ screenshots:
     file: site/public/tutorials/screenshots/before-you-start-sheet.webp
     page: site/tutorials/learning/before-you-start.md
     title: Before you start
-    description: 'the north end of an empty sheet in the c0de dimension, seen from the north-west: the sheet number on the black floor, the green and white stripes and the cursor rail'
+    description: "the north end of an empty sheet in the c0de dimension, seen from the north-west: the sheet number on the black floor, the green and white stripes and the cursor rail"
     sheet: 0
     x: 0
   - id: first-program-sign
@@ -138,7 +138,7 @@ screenshots:
   - id: variables-sign
     file: site/public/tutorials/screenshots/variables-sign.webp
     page: site/tutorials/learning/variables.md
-    title: 'Remembering things: variables'
+    title: "Remembering things: variables"
     description: 'the top of the program "sign" on its sheet, seen from above: the CONSTANT lines, the VARIABLE and ASSIGN lines inside the function'
     program: sign
     program_file: site/tutorials/programs/learning/variables-sign.c0de
@@ -186,7 +186,7 @@ screenshots:
   - id: variables-result
     file: site/public/tutorials/screenshots/variables-result.webp
     page: site/tutorials/learning/variables.md
-    title: 'Remembering things: variables'
+    title: "Remembering things: variables"
     description: the display wall at the entrance showing "Welcome to Oak Hill!" in yellow on blue and "Founded in 2026" in white, between the gold lines
     program: sign
     program_file: site/tutorials/programs/learning/variables-sign.c0de
@@ -506,7 +506,7 @@ screenshots:
   - id: counting-loops-countdown-sheet
     file: site/public/tutorials/screenshots/counting-loops-countdown-sheet.webp
     page: site/tutorials/learning/counting-loops.md
-    title: 'Doing things again: counting loops'
+    title: "Doing things again: counting loops"
     description: the program countdown on its sheet, seen from the side, with the FOR line and its indented ASSIGN line in front
     program: countdown
     program_file: site/tutorials/programs/learning/counting-loops-countdown.c0de
@@ -533,7 +533,7 @@ screenshots:
   - id: counting-loops-countdown-wall
     file: site/public/tutorials/screenshots/counting-loops-countdown-wall.webp
     page: site/tutorials/learning/counting-loops.md
-    title: 'Doing things again: counting loops'
+    title: "Doing things again: counting loops"
     description: the display wall showing "10 9 8 7 6 5 4 3 2 1 0" and "Lift-off!" below it
     program: countdown
     program_file: site/tutorials/programs/learning/counting-loops-countdown.c0de
@@ -1092,7 +1092,7 @@ screenshots:
   - id: guess-the-number-sheet
     file: site/public/tutorials/screenshots/guess-the-number-sheet.webp
     page: site/tutorials/learning/guess-the-number.md
-    title: 'Project: guess the number'
+    title: "Project: guess the number"
     description: the whole program guess on its sheet, seen from above at the south end, with the function secretNumber at the top and the REPEAT loop of the function play below it
     program: guess
     program_file: site/tutorials/programs/learning/guess-the-number-guess.c0de
@@ -1155,7 +1155,7 @@ screenshots:
   - id: guess-the-number-laptop
     file: site/public/tutorials/screenshots/guess-the-number-laptop.webp
     page: site/tutorials/learning/guess-the-number.md
-    title: 'Project: guess the number'
+    title: "Project: guess the number"
     description: 'the terminal of the laptop during a game: the yellow hello, guesses with aqua and light purple answers, and the green line "Right! You needed 5 tries."'
     program: guess
     program_file: site/tutorials/programs/learning/guess-the-number-guess.c0de
@@ -1218,7 +1218,7 @@ screenshots:
   - id: guarded-door-sheet
     file: site/public/tutorials/screenshots/guarded-door-sheet.webp
     page: site/tutorials/learning/guarded-door.md
-    title: 'Project: the guarded door'
+    title: "Project: the guarded door"
     description: the whole program door on its sheet, seen from above, with the start values of plate and door at the top, the function isFriend and the function watch below it
     program: door
     program_file: site/tutorials/programs/learning/guarded-door-door.c0de
@@ -1315,7 +1315,7 @@ screenshots:
   - id: guarded-door-entrance
     file: site/public/tutorials/screenshots/guarded-door-entrance.webp
     page: site/tutorials/learning/guarded-door.md
-    title: 'Project: the guarded door'
+    title: "Project: the guarded door"
     description: 'the entrance of the base from outside: the iron door open, the player on the pressure plate one block in front of it, the display wall next to the entrance showing "Welcome to Oak Hill!" and "Visitors at the door: 1"'
     program: door
     program_file: site/tutorials/programs/learning/guarded-door-door.c0de
@@ -1761,7 +1761,7 @@ screenshots:
     file: site/public/tutorials/screenshots/commands-laptop.webp
     page: site/tutorials/libraries/c0de/strings/commands.md
     title: Reading commands
-    description: 'the terminal of the laptop after the run: the typed commands say, sum and dance with their answers, and Bye! at the end'
+    description: "the terminal of the laptop after the run: the typed commands say, sum and dance with their answers, and Bye! at the end"
     program: commands
     program_file: site/tutorials/programs/libraries/strings/commands-terminal.c0de
     function: terminal
@@ -1903,7 +1903,7 @@ screenshots:
     file: site/public/tutorials/screenshots/secret-messages-laptop.webp
     page: site/tutorials/libraries/c0de/strings/secret-messages.md
     title: Secret messages
-    description: 'the terminal of the laptop after the run: the typed message and key, the secret text and the decoded message'
+    description: "the terminal of the laptop after the run: the typed message and key, the secret text and the decoded message"
     program: caesar
     program_file: site/tutorials/programs/libraries/strings/secret-messages-caesar.c0de
     function: laptop
@@ -2159,7 +2159,7 @@ screenshots:
     file: site/public/tutorials/screenshots/checking-input-laptop.webp
     page: site/tutorials/libraries/c0de/strings/checking-input.md
     title: Checking input
-    description: 'the screen of the laptop after the run: the rejected names and coordinates with their ? answers, and the welcome line at the end'
+    description: "the screen of the laptop after the run: the rejected names and coordinates with their ? answers, and the welcome line at the end"
     program: checking
     program_file: site/tutorials/programs/libraries/strings/checking-input-signup.c0de
     function: signup
@@ -3945,7 +3945,7 @@ screenshots:
     file: site/public/tutorials/screenshots/up-to-date-wall.webp
     page: site/tutorials/libraries/c0de_net/http/up-to-date.md
     title: Is my c0de up to date?
-    description: 'The display wall with the two green lines c0de 0.5.0: up to date and c0de net 0.3.0: up to date'
+    description: "The display wall with the two green lines c0de 0.6.0: up to date and c0de net 0.3.0: up to date"
     program: versioncheck
     program_file: site/tutorials/programs/libraries/http/up-to-date-check.c0de
     function: check
@@ -11407,6 +11407,223 @@ programs:
           CALL PRINT
               PARAMETER value "Password forgotten. The door stays shut." ;
       END FUNCTION
+    disk: |
+      PROGRAM: passdoor
+      INCLUDE:
+        - c0de/security
+      code:
+        - keyword: NOOP
+        - keyword: CONSTANT
+          name: NAME
+          type: STRING
+          value: doorPassword
+        - keyword: NOOP
+        - keyword: FUNCTION
+          name: check
+          results:
+            - keyword: RESULT
+              name: right
+              type: BOOLEAN
+          code:
+            - keyword: SECRET
+              name: doorPassword
+              type: STRING
+            - keyword: VARIABLE
+              name: typed
+              type: STRING
+              tags:
+                security: sensitive
+            - keyword: CALL
+              name: PRINT
+              parameters:
+                - keyword: PARAMETER
+                  name: value
+                  expression: '"Password:"'
+            - keyword: CALL
+              name: INPUT
+              parameters:
+                - keyword: PARAMETER
+                  name: variable
+                  expression: typed
+                - keyword: PARAMETER
+                  name: hide
+                  expression: TRUE
+            - keyword: ASSIGN
+              name: right
+              expression: typed = doorPassword
+        - keyword: NOOP
+        - keyword: FUNCTION
+          name: setup
+          code:
+            - keyword: VARIABLE
+              name: password
+              type: STRING
+              tags:
+                security: sensitive
+            - keyword: VARIABLE
+              name: again
+              type: STRING
+              tags:
+                security: sensitive
+            - keyword: CALL
+              name: CLS
+            - keyword: CALL
+              name: PRINT
+              parameters:
+                - keyword: PARAMETER
+                  name: value
+                  expression: '"New password:"'
+            - keyword: CALL
+              name: INPUT
+              parameters:
+                - keyword: PARAMETER
+                  name: variable
+                  expression: password
+                - keyword: PARAMETER
+                  name: hide
+                  expression: TRUE
+            - keyword: CALL
+              name: PRINT
+              parameters:
+                - keyword: PARAMETER
+                  name: value
+                  expression: '"Repeat it:"'
+            - keyword: CALL
+              name: INPUT
+              parameters:
+                - keyword: PARAMETER
+                  name: variable
+                  expression: again
+                - keyword: PARAMETER
+                  name: hide
+                  expression: TRUE
+            - keyword: IF
+              expression: password = "" OR password ≠ again
+              code:
+                - keyword: CALL
+                  name: PRINT
+                  parameters:
+                    - keyword: PARAMETER
+                      name: value
+                      expression: '"Not the same twice. Nothing changed."'
+                - keyword: RETURN
+            - keyword: CALL
+              name: c0de/security/SET_SECRET
+              parameters:
+                - keyword: PARAMETER
+                  name: name
+                  expression: NAME
+                - keyword: PARAMETER
+                  name: value
+                  expression: password
+            - keyword: CALL
+              name: PRINT
+              parameters:
+                - keyword: PARAMETER
+                  name: value
+                  expression: '"Password set."'
+        - keyword: NOOP
+        - keyword: FUNCTION
+          name: open
+          code:
+            - keyword: VARIABLE
+              name: known
+              type: BOOLEAN
+            - keyword: VARIABLE
+              name: right
+              type: BOOLEAN
+            - keyword: VARIABLE
+              name: problem
+              type: ERROR
+            - keyword: CALL
+              name: CLS
+            - keyword: CALL
+              name: c0de/security/HAS_SECRET
+              error: problem
+              parameters:
+                - keyword: PARAMETER
+                  name: name
+                  expression: NAME
+              results:
+                - keyword: RESULT
+                  name: result
+                  target: known
+            - keyword: IF
+              expression: problem.code = VAULT_UNAVAILABLE
+              code:
+                - keyword: CALL
+                  name: PRINT
+                  parameters:
+                    - keyword: PARAMETER
+                      name: value
+                      expression: '"This door only listens to its owner."'
+                - keyword: RETURN
+            - keyword: IF
+              expression: NOT known
+              code:
+                - keyword: CALL
+                  name: PRINT
+                  parameters:
+                    - keyword: PARAMETER
+                      name: value
+                      expression: '"No password yet. Run setup first."'
+                - keyword: RETURN
+            - keyword: CALL
+              name: check
+              results:
+                - keyword: RESULT
+                  name: right
+                  target: right
+            - keyword: IF
+              expression: NOT right
+              code:
+                - keyword: CALL
+                  name: PRINT
+                  parameters:
+                    - keyword: PARAMETER
+                      name: value
+                      expression: '"Wrong password."'
+                - keyword: RETURN
+            - keyword: CALL
+              name: PRINT
+              parameters:
+                - keyword: PARAMETER
+                  name: value
+                  expression: '"Welcome home!"'
+            - keyword: EXIT
+              expression: '1'
+        - keyword: NOOP
+        - keyword: FUNCTION
+          name: forget
+          code:
+            - keyword: VARIABLE
+              name: problem
+              type: ERROR
+            - keyword: CALL
+              name: CLS
+            - keyword: CALL
+              name: c0de/security/DELETE_SECRET
+              error: problem
+              parameters:
+                - keyword: PARAMETER
+                  name: name
+                  expression: NAME
+            - keyword: IF
+              expression: problem.code = SECRET_NOT_FOUND
+              code:
+                - keyword: CALL
+                  name: PRINT
+                  parameters:
+                    - keyword: PARAMETER
+                      name: value
+                      expression: '"There is no password to forget."'
+                - keyword: RETURN
+            - keyword: CALL
+              name: PRINT
+              parameters:
+                - keyword: PARAMETER
+                  name: value
+                  expression: '"Password forgotten. The door stays shut."'
   - file: site/tutorials/programs/libraries/security/keeping-keys-keys.c0de
     name: keys
     function: store
@@ -11526,6 +11743,249 @@ programs:
           END IF
           CALL peek
       END FUNCTION
+    disk: |
+      PROGRAM: keys
+      INCLUDE:
+        - c0de/security
+        - c0de/strings
+      code:
+        - keyword: NOOP
+        - keyword: CONSTANT
+          name: NAME
+          type: STRING
+          value: apiKey
+        - keyword: NOOP
+        - keyword: FUNCTION
+          name: unlock
+          parameters:
+            - keyword: PARAMETER
+              name: password
+              type: STRING
+          results:
+            - keyword: RESULT
+              name: ready
+              type: BOOLEAN
+          code:
+            - keyword: VARIABLE
+              name: exists
+              type: BOOLEAN
+            - keyword: VARIABLE
+              name: problem
+              type: ERROR
+            - keyword: CALL
+              name: c0de/security/IS_VAULT_OPEN
+              results:
+                - keyword: RESULT
+                  name: result
+                  target: ready
+            - keyword: IF
+              expression: ready
+              code:
+                - keyword: RETURN
+            - keyword: CALL
+              name: c0de/security/HAS_VAULT
+              results:
+                - keyword: RESULT
+                  name: result
+                  target: exists
+            - keyword: IF
+              expression: exists
+              code:
+                - keyword: CALL
+                  name: c0de/security/OPEN_VAULT
+                  error: problem
+                  parameters:
+                    - keyword: PARAMETER
+                      name: password
+                      expression: password
+              else:
+                - keyword: CALL
+                  name: c0de/security/CREATE_VAULT
+                  error: problem
+                  parameters:
+                    - keyword: PARAMETER
+                      name: password
+                      expression: password
+            - keyword: IF
+              expression: problem.code = VAULT_CANCELLED
+              code:
+                - keyword: CALL
+                  name: PRINT
+                  parameters:
+                    - keyword: PARAMETER
+                      name: value
+                      expression: '"Cancelled. Your vault stays shut."'
+                - keyword: RETURN
+            - keyword: IF
+              expression: problem.code ≠ 0
+              code:
+                - keyword: CALL
+                  name: PRINT
+                  parameters:
+                    - keyword: PARAMETER
+                      name: value
+                      expression: '"? " ⊕ problem.message'
+                - keyword: RETURN
+            - keyword: IF
+              expression: NOT exists
+              code:
+                - keyword: CALL
+                  name: PRINT
+                  parameters:
+                    - keyword: PARAMETER
+                      name: value
+                      expression: '"Your new vault is ready."'
+            - keyword: ASSIGN
+              name: ready
+              expression: TRUE
+        - keyword: NOOP
+        - keyword: FUNCTION
+          name: store
+          parameters:
+            - keyword: PARAMETER
+              name: password
+              type: STRING
+              value: ''
+          code:
+            - keyword: VARIABLE
+              name: ready
+              type: BOOLEAN
+            - keyword: VARIABLE
+              name: key
+              type: STRING
+              tags:
+                security: sensitive
+            - keyword: CALL
+              name: CLS
+            - keyword: CALL
+              name: unlock
+              parameters:
+                - keyword: PARAMETER
+                  name: password
+                  expression: password
+              results:
+                - keyword: RESULT
+                  name: ready
+                  target: ready
+            - keyword: IF
+              expression: NOT ready
+              code:
+                - keyword: RETURN
+            - keyword: CALL
+              name: PRINT
+              parameters:
+                - keyword: PARAMETER
+                  name: value
+                  expression: '"Key:"'
+            - keyword: CALL
+              name: INPUT
+              parameters:
+                - keyword: PARAMETER
+                  name: variable
+                  expression: key
+                - keyword: PARAMETER
+                  name: hide
+                  expression: TRUE
+            - keyword: CALL
+              name: c0de/security/SET_SECRET
+              parameters:
+                - keyword: PARAMETER
+                  name: name
+                  expression: NAME
+                - keyword: PARAMETER
+                  name: value
+                  expression: key
+                - keyword: PARAMETER
+                  name: persistent
+                  expression: TRUE
+            - keyword: CALL
+              name: PRINT
+              parameters:
+                - keyword: PARAMETER
+                  name: value
+                  expression: '"Key kept in your vault."'
+        - keyword: NOOP
+        - keyword: FUNCTION
+          name: peek
+          code:
+            - keyword: SECRET
+              name: apiKey
+              type: STRING
+            - keyword: VARIABLE
+              name: ending
+              type: STRING
+            - keyword: CALL
+              name: c0de/strings/RIGHT
+              parameters:
+                - keyword: PARAMETER
+                  name: text
+                  expression: apiKey
+                - keyword: PARAMETER
+                  name: length
+                  expression: '4'
+              results:
+                - keyword: RESULT
+                  name: result
+                  target: ending
+            - keyword: CALL
+              name: PRINT
+              parameters:
+                - keyword: PARAMETER
+                  name: value
+                  expression: '"Your key ends with ..." ⊕ ending'
+        - keyword: NOOP
+        - keyword: FUNCTION
+          name: show
+          parameters:
+            - keyword: PARAMETER
+              name: password
+              type: STRING
+              value: ''
+          code:
+            - keyword: VARIABLE
+              name: ready
+              type: BOOLEAN
+            - keyword: VARIABLE
+              name: known
+              type: BOOLEAN
+            - keyword: CALL
+              name: CLS
+            - keyword: CALL
+              name: unlock
+              parameters:
+                - keyword: PARAMETER
+                  name: password
+                  expression: password
+              results:
+                - keyword: RESULT
+                  name: ready
+                  target: ready
+            - keyword: IF
+              expression: NOT ready
+              code:
+                - keyword: RETURN
+            - keyword: CALL
+              name: c0de/security/HAS_SECRET
+              parameters:
+                - keyword: PARAMETER
+                  name: name
+                  expression: NAME
+              results:
+                - keyword: RESULT
+                  name: result
+                  target: known
+            - keyword: IF
+              expression: NOT known
+              code:
+                - keyword: CALL
+                  name: PRINT
+                  parameters:
+                    - keyword: PARAMETER
+                      name: value
+                      expression: '"No key in your vault. Run store first."'
+                - keyword: RETURN
+            - keyword: CALL
+              name: peek
   - file: site/tutorials/programs/libraries/http/weather-wall.c0de
     name: weatherwall
     function: show
