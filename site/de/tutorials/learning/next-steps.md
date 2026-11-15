@@ -40,7 +40,7 @@ Wenn du eines Tages eine andere Sprache lernst – Python, JavaScript, Java –,
 
 ## Wie du die Handbücher liest
 
-Die Tutorials haben nur einen Teil von c0de gezeigt. Alles andere steht in den **Handbüchern**, und du kannst sie jetzt lesen. Sie stehen auf dieser Seite unter [c0de](/de/c0de/), und mit der Mod Patchouli sind sie auch rote Bücher im Spiel.
+Die Tutorials haben nur einen Teil von c0de gezeigt. Alles andere steht in den **Handbüchern**, und du kannst sie jetzt lesen. Sie stehen auf dieser Seite unter [c0de](/de/c0de/), und im Spiel sind sie rote Ordner: Die Anleitung hast du bekommen, als du deine Welt zum ersten Mal betreten hast, und die anderen Handbücher stellst du aus einem Buch und einem Gegenstand her (siehe [Handbücher](/de/c0de/guide/tools#handbücher)).
 
 Es gibt Handbücher für Daten, Anweisungen, Werkzeuge, Auslöser, Geräte und Funktionen. Jeder Eintrag hat dieselben Teile:
 
@@ -57,7 +57,7 @@ Jede Zeile ist eine PARAMETER-Zeile deines CALL: der Name, der hinter PARAMETER 
 
 Wenn du eine Funktion suchst und ihren Namen nicht kennst, fang mit der Liste einer Bibliothek an, zum Beispiel [c0de/strings](/de/c0de/strings/): Sie nennt jede Funktion mit einem Satz darüber, was sie tut.
 
-<!-- screenshot: next-steps-handbook | the handbook Functions open in the game as a red Patchouli book, showing the page of SAY with its parameters and its example -->
+<!-- screenshot: next-steps-handbook | the handbook Functions open in the game as a red binder, showing the page of SAY with its parameters and its example -->
 
 ## Wie es weitergeht
 

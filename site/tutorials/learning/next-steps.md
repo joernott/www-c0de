@@ -40,7 +40,7 @@ If you learn another language one day – Python, JavaScript, Java – you will 
 
 ## How to read the handbooks
 
-The tutorials only showed a part of c0de. Everything else is in the **handbooks**, and you can read them now. They are on this site under [c0de](/c0de/), and with the mod Patchouli they are red books in the game too.
+The tutorials only showed a part of c0de. Everything else is in the **handbooks**, and you can read them now. They are on this site under [c0de](/c0de/), and in the game they are red binders: you got the guide when you joined your world for the first time, and you craft the other handbooks from a book and an item (see [Handbooks](/c0de/guide/tools#handbooks)).
 
 There are handbooks for data, statements, tools, triggers, devices and functions. Each entry has the same parts:
 
@@ -57,7 +57,7 @@ Every line is one PARAMETER line of your CALL: the name to put after PARAMETER, 
 
 When you look for a function and don't know its name, start with the list of a library, like [c0de/strings](/c0de/strings/): it names every function with one sentence about what it does.
 
-<!-- screenshot: next-steps-handbook | the handbook Functions open in the game as a red Patchouli book, showing the page of SAY with its parameters and its example -->
+<!-- screenshot: next-steps-handbook | the handbook Functions open in the game as a red binder, showing the page of SAY with its parameters and its example -->
 
 ## Where to go next
 
