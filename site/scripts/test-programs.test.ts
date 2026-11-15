@@ -2,7 +2,7 @@ import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { afterEach, beforeEach, describe, expect, it } from 'vitest'
-import { args, plan } from './test-programs.ts'
+import { args, parseArgs, plan } from './test-programs.ts'
 
 let folder: string
 
@@ -55,5 +55,18 @@ describe('args', () => {
       join(folder, 'adder.c0de'),
     ])
     expect(args(weather!)).toEqual([join(folder, 'net', 'weather.c0de')])
+  })
+})
+
+describe('parseArgs', () => {
+  it('separates the selected programs from the local working copies', () => {
+    const { selected, local } = parseArgs(['--local', 'c0de=../c0de', 'commands', 'dice'])
+    expect(selected).toEqual(['commands', 'dice'])
+    expect([...local.keys()]).toEqual(['c0de'])
+    expect(local.get('c0de')).toMatch(/c0de$/)
+  })
+
+  it('refuses --local without a source and a folder', () => {
+    expect(() => parseArgs(['--local', 'c0de'])).toThrow(/usage/)
   })
 })

@@ -12,10 +12,11 @@
 // the API of c0de.at run against a test service (test-service.ts), which needs Go; in CI, so do
 // the programs that ask Open-Meteo, whose answers it has recorded (task 12.2.1).
 //
-// Usage: node scripts/test-programs.ts [<part of a file name>...]   (needs Java 21 or newer)
+// Usage: node scripts/test-programs.ts [--local <source>=<folder>]... [<part of a file name>...]
+// (needs Java 21 or newer; --local c0de=../../minecraft-c0de uses the runner of a working copy)
 import { spawn } from 'node:child_process'
 import { existsSync, readdirSync, readFileSync } from 'node:fs'
-import { dirname, join, relative, sep } from 'node:path'
+import { dirname, join, relative, resolve, sep } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { readConfig } from './import/sources.ts'
 import { javaArgs, needs as needsOf, runner as getRunner } from './runner.ts'
@@ -89,10 +90,29 @@ function java(args: string[]): Promise<{ status: number | null; stdout: string; 
   })
 }
 
-async function main(selected: string[]) {
+// parseArgs splits the arguments into the programs to run (parts of their paths) and the local
+// working copies (--local <source>=<folder>, like the import), whose runners replace the ones of
+// the releases, e.g. to test the programs against a version of c0de before its release.
+export function parseArgs(args: string[]): { selected: string[]; local: Map<string, string> } {
+  const selected: string[] = []
+  const local = new Map<string, string>()
+  for (let i = 0; i < args.length; i++) {
+    if (args[i] !== '--local') {
+      selected.push(args[i]!)
+      continue
+    }
+    const match = /^([^=]+)=(.+)$/.exec(args[++i] ?? '')
+    if (!match) throw new Error('usage: test-programs.ts [--local <source>=<folder>]... [program]...')
+    local.set(match[1]!, resolve(match[2]!))
+  }
+  return { selected, local }
+}
+
+async function main(argv: string[]) {
+  const { selected, local } = parseArgs(argv)
   const config = readConfig(join(site, 'sources.yaml'))
   const c0de = config.sources.c0de!
-  const runner = await getRunner(config, join(site, '.cache', 'runner'))
+  const runner = await getRunner(config, join(site, '.cache', 'runner'), local)
 
   const runs = plan(programsFolder).filter(
     (run) =>
@@ -146,7 +166,7 @@ async function main(selected: string[]) {
     await service?.stop()
   }
   console.log(
-    `${runs.length - failed - skipped} of ${runs.length} programs ok, ${failed} failed, ${skipped} skipped (c0de ${c0de.tag})`,
+    `${runs.length - failed - skipped} of ${runs.length} programs ok, ${failed} failed, ${skipped} skipped (c0de ${local.has('c0de') ? local.get('c0de') : c0de.tag})`,
   )
   if (failed > 0) process.exit(1)
 }
