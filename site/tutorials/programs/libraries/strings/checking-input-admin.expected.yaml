@@ -1,0 +1,9 @@
+state: FINISHED
+screen:
+  - 'Your name:'
+  - '? that name is reserved'
+  - 'Your name:'
+  - '? that name is reserved'
+  - 'Your name:'
+  - 'Your home (x y z):'
+  - 'Welcome, Steve_42! Home: x=12 y=64 z=-30'

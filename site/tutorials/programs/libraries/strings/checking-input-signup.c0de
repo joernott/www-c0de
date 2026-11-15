@@ -1,0 +1,78 @@
+PROGRAM checking
+NOOP
+INCLUDE c0de/strings
+NOOP
+FUNCTION askName
+    RESULT name STRING
+BEGIN
+    VARIABLE ok BOOLEAN
+    REPEAT
+    BEGIN
+        CALL PRINT
+            PARAMETER value "Your name:" ;
+        CALL INPUT
+            PARAMETER variable name ;
+        CALL c0de/strings/REGEX_MATCH
+            PARAMETER text name ;
+            PARAMETER pattern "^[A-Za-z0-9_]{3,16}$" ;
+            RESULT result ok
+        IF NOT ok ;
+        BEGIN
+            CALL PRINT
+                PARAMETER value "? 3 to 16 letters, digits or _" ;
+        END IF
+    END REPEAT NOT ok ;
+END FUNCTION
+NOOP
+FUNCTION askHome
+    RESULT home STRING
+BEGIN
+    VARIABLE ok BOOLEAN
+    REPEAT
+    BEGIN
+        CALL PRINT
+            PARAMETER value "Your home (x y z):" ;
+        CALL INPUT
+            PARAMETER variable home ;
+        CALL c0de/strings/REGEX_REPLACE
+            PARAMETER text home ;
+            PARAMETER pattern "[ ,]+" ;
+            PARAMETER replacement " " ;
+            PARAMETER flags "g" ;
+            RESULT result home
+        CALL c0de/strings/REGEX_REPLACE
+            PARAMETER text home ;
+            PARAMETER pattern "^ | $" ;
+            PARAMETER replacement "" ;
+            PARAMETER flags "g" ;
+            RESULT result home
+        CALL c0de/strings/REGEX_MATCH
+            PARAMETER text home ;
+            PARAMETER pattern "^-?[0-9]+ -?[0-9]+ -?[0-9]+$" ;
+            RESULT result ok
+        IF NOT ok ;
+        BEGIN
+            CALL PRINT
+                PARAMETER value "? three whole numbers, like 12 64 -30" ;
+        END IF
+    END REPEAT NOT ok ;
+END FUNCTION
+NOOP
+FUNCTION signup
+BEGIN
+    VARIABLE name STRING
+    VARIABLE home STRING
+    VARIABLE coordinates STRING
+    CALL CLS
+    CALL askName
+        RESULT name name
+    CALL askHome
+        RESULT home home
+    CALL c0de/strings/REGEX_REPLACE
+        PARAMETER text home ;
+        PARAMETER pattern "(-?[0-9]+) (-?[0-9]+) (-?[0-9]+)" ;
+        PARAMETER replacement "x=\\1 y=\\2 z=\\3" ;
+        RESULT result coordinates
+    CALL PRINT
+        PARAMETER value "Welcome, " ⊕ name ⊕ "! Home: " ⊕ coordinates ;
+END FUNCTION

@@ -1,0 +1,13 @@
+state: FINISHED
+screen:
+  - 'Your name:'
+  - '? 3 to 16 letters, digits or _'
+  - 'Your name:'
+  - '? 3 to 16 letters, digits or _'
+  - 'Your name:'
+  - 'Your home (x y z):'
+  - '? three whole numbers, like 12 64 -30'
+  - 'Your home (x y z):'
+  - '? three whole numbers, like 12 64 -30'
+  - 'Your home (x y z):'
+  - 'Welcome, Steve_42! Home: x=12 y=64 z=-30'

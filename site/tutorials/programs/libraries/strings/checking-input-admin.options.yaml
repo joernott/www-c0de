@@ -1,0 +1,6 @@
+function: signup
+input:
+  - SuperAdmin
+  - admin_1
+  - Steve_42
+  - 12 64 -30

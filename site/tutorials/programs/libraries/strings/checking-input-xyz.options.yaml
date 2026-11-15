@@ -1,0 +1,4 @@
+function: signup
+input:
+  - Steve_42
+  - X=12, Y = 64, Z=-30
