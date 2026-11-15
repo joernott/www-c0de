@@ -255,3 +255,12 @@ I also want to introduce a new library c0de/security indo c0de and a few securit
 ## 2026-11-15 – Sprint 13: c0de 0.6.0 and c0de net 0.4.0
 
 please create a new sprint in both and add the tasks for the necessary changes to those. Then make sure, all changes in c0de show up in c0de.at. Wait with preparing a release there as I want to add a few modifications to c0de-net first.
+
+## 2026-11-15 – Sprint 17 of c0de, Dependabot and a mail library for c0de net
+
+I triggered the reruns.
+Please plan a c0de sprint 17 for the 0.6.1 fixes. It should also contain the recipe.json unification or rather a solution that multiple mods can provide full featured documentation without needing to change anything in c0de itself.
+
+For c0de-net, please make sure, the open PR from Dependabot is included in the current sprint. Also, I want to add another library named MAIL that implement a SMTP_SERVER data type with all the properties needed to connect to a mail server as well as a SMTP_SEND function implementing an SMTP client.
+Another data type would be the IMAP_SERVER and a set of functions that implement an IMAP client:
+ - IMAP_CREATE, IMAP_DELETE, IMAP_RENAME, IMAP_LIST, IMAP_STATUS, IMAP_SELECT, IMAP_FETCH, IMAP_SEARCH, IMAP_STORE, IMAP_MOVE and IMAP_EXPUNGE.
