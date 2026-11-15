@@ -57,16 +57,16 @@ You can test both functions without the pipeline: the program runner runs `pack`
 - **A running program can't be changed.** While a process runs, nobody can place or break blocks on its sheet, not even pistons or explosions; the wrench, the hammer and the pliers don't work there, and the dialogs of its blocks open read-only. Pause a fast timer block with a lever before you edit its program. A stuck process is ended by shift-right-clicking its PID block with the debugging tool; it crashes with PROCESS_ABORTED.
 - **Sheets have owners.** The first player who builds on an empty sheet owns it. Only the owner and administrators can change it.
 - **Trigger blocks have owners.** The player who configured a trigger block last owns it, and its programs act on behalf of this player. The button **Run** in its dialog decides who may start it: _Only me_, _Players_, _Mobs_ or _Everyone_ (also plain redstone).
-- **Changing the world needs rights.** The functions of c0de/minecraft that move items, place or remove blocks, spawn things or teleport only work if the owner is an administrator, or if the server allows them in `config/c0de.properties`:
+- **Changing the world needs rights.** The functions of c0de/minecraft that delete items, place or remove blocks, spawn things or teleport only work if the owner is an administrator, or if the server allows them in `config/c0de.properties`:
 
-| Setting                 | Functions                                       |
-| ----------------------- | ----------------------------------------------- |
-| `allowInventoryChanges` | MOVE_ITEMS, DELETE_ITEMS                        |
-| `allowBlockChanges`     | PLACE_BLOCK (without `inventory`), REMOVE_BLOCK |
-| `allowSpawning`         | SPAWN_ITEM, SPAWN_ENTITY                        |
-| `allowTeleporting`      | TELEPORT                                        |
+| Setting                 | Functions                                                       |
+| ----------------------- | --------------------------------------------------------------- |
+| `allowInventoryChanges` | DELETE_ITEMS                                                    |
+| `allowBlockChanges`     | PLACE_BLOCK (without `inventory`, or with `data`), REMOVE_BLOCK |
+| `allowSpawning`         | SPAWN_ITEM, SPAWN_ENTITY                                        |
+| `allowTeleporting`      | TELEPORT                                                        |
 
-All four are off by default. Without the right, the function raises PERMISSION_DENIED; if a player who isn't an administrator started the process, it crashes instead. The rights of an administrator only count for programs on sheets that belong to an administrator or to nobody, so nobody can run their own program with an administrator's trigger block.
+All four are off by default. Without the right, the function raises PERMISSION_DENIED; if a player who isn't an administrator started the process, it crashes instead. Since c0de 0.6.0, MOVE_ITEMS needs no right: it works for every owner who could open both inventories, and it takes time. COMMAND, which runs a command like a command block, always needs an administrator. The server can switch both off for everyone (`enableMoveItems`, `enableCommand`). The rights of an administrator only count for programs on sheets that belong to an administrator or to nobody, so nobody can run their own program with an administrator's trigger block.
 
 ## Disks
 

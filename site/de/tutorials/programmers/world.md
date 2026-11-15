@@ -57,16 +57,16 @@ Du kannst beide Funktionen ohne die Kette testen: Der Programm-Runner führt `pa
 - **Ein laufendes Programm kann nicht geändert werden.** Solange ein Prozess läuft, kann niemand Blöcke auf seinem Blatt setzen oder abbauen, nicht einmal Kolben oder Explosionen; der Schraubenschlüssel, der Hammer und die Zange funktionieren dort nicht, und die Dialoge seiner Blöcke öffnen sich schreibgeschützt. Pausiere einen schnellen Zeitgeberblock mit einem Hebel, bevor du sein Programm bearbeitest. Ein hängender Prozess wird beendet, indem du seinen PID-Block mit dem Debugging-Werkzeug bei gedrückter Umschalttaste mit rechts anklickst; er stürzt mit PROCESS_ABORTED ab.
 - **Blätter haben Besitzer.** Der erste Spieler, der auf einem leeren Blatt baut, besitzt es. Nur der Besitzer und Administratoren können es ändern.
 - **Auslöserblöcke haben Besitzer.** Der Spieler, der einen Auslöserblock zuletzt eingerichtet hat, besitzt ihn, und seine Programme handeln im Namen dieses Spielers. Der Knopf **Starten durch** in seinem Dialog legt fest, wer ihn starten darf: _Nur mich_, _Spieler_, _Mobs_ oder _Alle_ (auch einfaches Redstone).
-- **Die Welt zu verändern braucht Rechte.** Die Funktionen von c0de/minecraft, die Gegenstände bewegen, Blöcke setzen oder entfernen, etwas erscheinen lassen oder teleportieren, funktionieren nur, wenn der Besitzer ein Administrator ist oder wenn der Server sie in `config/c0de.properties` erlaubt:
+- **Die Welt zu verändern braucht Rechte.** Die Funktionen von c0de/minecraft, die Gegenstände löschen, Blöcke setzen oder entfernen, etwas erscheinen lassen oder teleportieren, funktionieren nur, wenn der Besitzer ein Administrator ist oder wenn der Server sie in `config/c0de.properties` erlaubt:
 
-| Einstellung             | Funktionen                                   |
-| ----------------------- | -------------------------------------------- |
-| `allowInventoryChanges` | MOVE_ITEMS, DELETE_ITEMS                     |
-| `allowBlockChanges`     | PLACE_BLOCK (ohne `inventory`), REMOVE_BLOCK |
-| `allowSpawning`         | SPAWN_ITEM, SPAWN_ENTITY                     |
-| `allowTeleporting`      | TELEPORT                                     |
+| Einstellung             | Funktionen                                                   |
+| ----------------------- | ------------------------------------------------------------ |
+| `allowInventoryChanges` | DELETE_ITEMS                                                 |
+| `allowBlockChanges`     | PLACE_BLOCK (ohne `inventory` oder mit `data`), REMOVE_BLOCK |
+| `allowSpawning`         | SPAWN_ITEM, SPAWN_ENTITY                                     |
+| `allowTeleporting`      | TELEPORT                                                     |
 
-Alle vier sind standardmäßig aus. Ohne das Recht löst die Funktion PERMISSION_DENIED aus; hat ein Spieler, der kein Administrator ist, den Prozess gestartet, stürzt er stattdessen ab. Die Rechte eines Administrators zählen nur für Programme auf Blättern, die einem Administrator oder niemandem gehören, damit niemand sein eigenes Programm mit dem Auslöserblock eines Administrators ausführen kann.
+Alle vier sind standardmäßig aus. Ohne das Recht löst die Funktion PERMISSION_DENIED aus; hat ein Spieler, der kein Administrator ist, den Prozess gestartet, stürzt er stattdessen ab. Seit c0de 0.6.0 braucht MOVE_ITEMS kein Recht: Die Funktion arbeitet für jeden Besitzer, der beide Inventare öffnen könnte, und braucht Zeit. COMMAND, das einen Befehl wie ein Befehlsblock ausführt, braucht immer einen Administrator. Der Server kann beide für alle abschalten (`enableMoveItems`, `enableCommand`). Die Rechte eines Administrators zählen nur für Programme auf Blättern, die einem Administrator oder niemandem gehören, damit niemand sein eigenes Programm mit dem Auslöserblock eines Administrators ausführen kann.
 
 ## Disketten
 
