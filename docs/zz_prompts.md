@@ -264,3 +264,7 @@ Please plan a c0de sprint 17 for the 0.6.1 fixes. It should also contain the rec
 For c0de-net, please make sure, the open PR from Dependabot is included in the current sprint. Also, I want to add another library named MAIL that implement a SMTP_SERVER data type with all the properties needed to connect to a mail server as well as a SMTP_SEND function implementing an SMTP client.
 Another data type would be the IMAP_SERVER and a set of functions that implement an IMAP client:
  - IMAP_CREATE, IMAP_DELETE, IMAP_RENAME, IMAP_LIST, IMAP_STATUS, IMAP_SELECT, IMAP_FETCH, IMAP_SEARCH, IMAP_STORE, IMAP_MOVE and IMAP_EXPUNGE.
+
+## 2026-11-16 – Sprints while the user is at work
+
+I pushed 0.6.1 yesterday night. Please start with the sprint in c0de-net. As I will be off for work for the next 8-9 hours, please complete as many steps as you can without my interaction in the meantime. Once you've done that, please make sure that the www-c0de sprint contains the necessary steps to reflect the changes, both in c0de and c0de-net and has tutorials for the new features
