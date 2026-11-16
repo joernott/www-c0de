@@ -11,6 +11,7 @@ const mainTabs = [
   'c0de/minecraft',
   'c0de/security',
   'c0de_net/http',
+  'c0de_net/mail',
   'Tutorials',
 ]
 
