@@ -268,3 +268,7 @@ Another data type would be the IMAP_SERVER and a set of functions that implement
 ## 2026-11-16 – Sprints while the user is at work
 
 I pushed 0.6.1 yesterday night. Please start with the sprint in c0de-net. As I will be off for work for the next 8-9 hours, please complete as many steps as you can without my interaction in the meantime. Once you've done that, please make sure that the www-c0de sprint contains the necessary steps to reflect the changes, both in c0de and c0de-net and has tutorials for the new features
+
+## 2026-11-16 – Rerun of the release of c0de 0.6.1
+
+OK, I triggered the rerun for c0de now.
