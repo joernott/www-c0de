@@ -1,0 +1,3 @@
+exit_code: 1
+screen:
+  - Port 25 is blocked, use 465 or 587

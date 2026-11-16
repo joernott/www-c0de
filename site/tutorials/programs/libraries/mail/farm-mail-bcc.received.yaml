@@ -1,0 +1,10 @@
+alex@example.com:
+  INBOX:
+    - from: Farm computer <steve@example.com>
+      to: [steve@example.com]
+      cc: []
+      subject: Harvest festival at the farm
+sam@example.com:
+  INBOX:
+    - to: [steve@example.com]
+      subject: Harvest festival at the farm

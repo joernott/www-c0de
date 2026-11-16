@@ -1,0 +1,16 @@
+steve@example.com:
+  INBOX:
+    - subject: 'Order: 32 wheat'
+    - subject: 'Village news: the market moves'
+    - subject: 'Order: 12 carrots'
+    - subject: Thanks for the bread
+    - subject: 'Order: 5 pumpkins'
+    - subject: 'Village news: harvest festival'
+    - from: Farm computer <steve@example.com>
+      to: [steve@example.com]
+      cc: [alex@example.com]
+      subject: The farm today
+      text: "Good morning!\n\nIn the barn today:\n64 wheat\n12 carrots\n\nYour farm"
+alex@example.com:
+  INBOX:
+    - subject: The farm today

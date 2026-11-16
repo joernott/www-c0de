@@ -1,0 +1,35 @@
+PROGRAM newfolder
+NOOP
+INCLUDE c0de_net/mail
+NOOP
+FUNCTION create
+    PARAMETER server STRING "imap.example.com"
+    PARAMETER port INTEGER 0
+    PARAMETER name STRING "Orders"
+BEGIN
+    SECRET mailPassword STRING
+    VARIABLE imap STRUCT c0de_net/mail/IMAP_SERVER
+    VARIABLE problem ERROR
+    ASSIGN imap.server server ;
+    ASSIGN imap.port port ;
+    ASSIGN imap.user "steve@example.com" ;
+    ASSIGN imap.password mailPassword ;
+    CALL CLS
+    CALL c0de_net/mail/IMAP_CREATE problem
+        PARAMETER server imap ;
+        PARAMETER folder name ;
+    IF problem.code = c0de_net/mail/MAIL_REJECTED ;
+    BEGIN
+        CALL PRINT
+            PARAMETER value "The server refused: " ⊕ name ⊕ " exists already?" ;
+        EXIT 1 ;
+    END IF
+    IF problem.code ≠ 0 ;
+    BEGIN
+        CALL PRINT
+            PARAMETER value problem.message ;
+        EXIT 2 ;
+    END IF
+    CALL PRINT
+        PARAMETER value "Created " ⊕ name ;
+END FUNCTION

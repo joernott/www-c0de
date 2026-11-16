@@ -1,0 +1,10 @@
+steve@example.com:
+  INBOX:
+    - subject: 'Order: 32 wheat'
+    - subject: 'Order: 12 carrots'
+    - subject: Thanks for the bread
+    - subject: 'Order: 5 pumpkins'
+    - subject: 'Village news: harvest festival'
+  Archive: []
+  Archive 2025:
+    - subject: 'Order: 20 potatoes'

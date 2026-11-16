@@ -1,0 +1,109 @@
+PROGRAM mailcheck
+NOOP
+INCLUDE c0de/security
+INCLUDE c0de_net/mail
+NOOP
+FUNCTION explain
+    PARAMETER code INTEGER
+    RESULT text STRING
+BEGIN
+    ASSIGN text "Unexpected error " ⊕ code ;
+    IF code = INVALID_ARGUMENT ;
+    BEGIN
+        ASSIGN text "Check the server, the sender and the addresses" ;
+    END IF
+    IF code = PERMISSION_DENIED ;
+    BEGIN
+        ASSIGN text "Port 25 is blocked, use 465 or 587" ;
+    END IF
+    IF code = c0de_net/mail/CLIENT_UNAVAILABLE ;
+    BEGIN
+        ASSIGN text "Nobody with c0de net is online" ;
+    END IF
+    IF code = c0de_net/mail/MAIL_DISABLED ;
+    BEGIN
+        ASSIGN text "Mail is switched off" ;
+    END IF
+    IF code = c0de_net/mail/AUTHENTICATION_FAILED ;
+    BEGIN
+        ASSIGN text "Wrong user or password (an app password?)" ;
+    END IF
+    IF code = c0de_net/mail/MAIL_REJECTED ;
+    BEGIN
+        ASSIGN text "The mail server refused it" ;
+    END IF
+    IF code = c0de_net/mail/MAIL_LIMIT ;
+    BEGIN
+        ASSIGN text "Too much mail: send less or wait a minute" ;
+    END IF
+    IF code = c0de_net/mail/REQUEST_FAILED ;
+    BEGIN
+        ASSIGN text "The mail server can't be reached" ;
+    END IF
+    IF code = c0de_net/mail/REQUEST_TIMEOUT ;
+    BEGIN
+        ASSIGN text "The mail server is too slow" ;
+    END IF
+END FUNCTION
+NOOP
+FUNCTION account
+    PARAMETER server STRING
+    PARAMETER port INTEGER
+    RESULT smtp STRUCT c0de_net/mail/SMTP_SERVER
+BEGIN
+    SECRET mailPassword STRING
+    ASSIGN smtp.server server ;
+    ASSIGN smtp.port port ;
+    ASSIGN smtp.security "tls" ;
+    ASSIGN smtp.user "steve@example.com" ;
+    ASSIGN smtp.password mailPassword ;
+    ASSIGN smtp.from "Farm computer <steve@example.com>" ;
+    ASSIGN smtp.timeout 10 ;
+END FUNCTION
+NOOP
+FUNCTION send
+    PARAMETER server STRING "smtp.example.com"
+    PARAMETER port INTEGER 0
+    PARAMETER to STRING "steve@example.com"
+    PARAMETER lines INTEGER 3
+BEGIN
+    VARIABLE known BOOLEAN
+    VARIABLE smtp STRUCT c0de_net/mail/SMTP_SERVER
+    VARIABLE problem ERROR
+    VARIABLE text STRING
+    VARIABLE message STRING
+    CALL CLS
+    CALL c0de/security/HAS_SECRET
+        PARAMETER name "mailPassword" ;
+        RESULT result known
+    IF NOT known ;
+    BEGIN
+        CALL PRINT
+            PARAMETER value "Put your password into the vault first" ;
+        EXIT 2 ;
+    END IF
+    CALL account
+        PARAMETER server server ;
+        PARAMETER port port ;
+        RESULT smtp smtp
+    FOR i INTEGER 1 ; lines ;
+    BEGIN
+        ASSIGN text text ⊕ "Line " ⊕ i ⊕ ": the farm is fine.\n" ;
+    END FOR
+    CALL c0de_net/mail/SMTP_SEND problem
+        PARAMETER server smtp ;
+        PARAMETER to to ;
+        PARAMETER subject "A test from the farm" ;
+        PARAMETER text text ;
+    IF problem.code ≠ 0 ;
+    BEGIN
+        CALL explain
+            PARAMETER code problem.code ;
+            RESULT text message
+        CALL PRINT
+            PARAMETER value message ;
+        EXIT 1 ;
+    END IF
+    CALL PRINT
+        PARAMETER value "Sent to " ⊕ to ;
+END FUNCTION

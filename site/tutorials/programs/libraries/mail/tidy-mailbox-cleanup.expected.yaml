@@ -1,0 +1,8 @@
+exit_code: 0
+results:
+  removed: 1
+screen:
+  - Archive is now Archive 2025
+  - Deleted Archive 2024
+  - Removed 1 old news
+  - 'INBOX: 5 messages, 3 unseen'

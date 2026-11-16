@@ -174,6 +174,17 @@ Recipes marked **(op)** change the world with functions that need an operator or
 
 The services of these recipes: the weather comes from a free public API without a key (Open-Meteo); echo, to-do list and version check are a small API of c0de.at itself (`/api/tutorial/echo`, `/api/tutorial/todo`, in memory and emptied daily, and `/api/version`, read from the GitHub releases). Recipe 3.28 uses a placeholder address, because every home automation is different. The requests come from the computer of the player who runs the program.
 
+### c0de_net/mail
+
+| # | Recipe | Functions | What it builds |
+|---|---|---|---|
+| 3.30 | Mail from the farm | SMTP_SERVER, SMTP_SEND, SECRET | A daily report of the farm by mail, with cc, bcc and reply_to; the password comes from the vault |
+| 3.31 | The order desk | IMAP_SERVER, MAILBOX, MAIL, IMAP_SELECT, IMAP_SEARCH, IMAP_FETCH, IMAP_STORE, IMAP_MOVE | New orders from the INBOX are listed, flagged and moved to a folder; a second button shows the next open order |
+| 3.32 | Tidying the mailbox | IMAP_LIST, IMAP_CREATE, IMAP_RENAME, IMAP_DELETE, IMAP_STORE, IMAP_EXPUNGE, IMAP_STATUS | The yearly clean-up of the archive folders and old news |
+| 3.33 | When mail fails | the errors of c0de_net/mail, HAS_SECRET, IMAP_CREATE | A test mail with a friendly message for every error, app passwords and port 25 |
+
+The recipes use example addresses of `example.com`; the reader puts in the server, port and address of their own mail provider. Their tests run against GreenMail (task 13.9). The mail goes out from the computer of the player who runs the program, like the requests of c0de_net/http.
+
 ### Coverage
 
 Every library function and the recipes that use it. A function that gets added to a library must get a recipe too. The import checks it (task 9.7): a recipe links to the handbook page of every function it uses, the page of every function lists the recipes that link to it ("Used in the tutorials"), and `npm run content` fails if a function has no recipe. This table is the plan; the links of the recipes are what counts.

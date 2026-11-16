@@ -28,13 +28,13 @@ sources:
   c0de_net:
     name: c0de net
     repository: joernott/minecraft-c0de-net
-    tag: v0.3.0
+    tag: v0.4.0
     docs: docs
     modrinth: P2irzbnD
     curseforge: c0de-net
     description:
-      en: Adds the library c0de_net/http, so programs can send HTTP requests to web servers and REST APIs.
-      de: Fügt die Bibliothek c0de_net/http hinzu, mit der Programme HTTP-Anfragen an Webserver und REST-APIs senden.
+      en: Adds the libraries c0de_net/http and c0de_net/mail, so programs can send HTTP requests to web servers and REST APIs, send mail and read mailboxes.
+      de: Fügt die Bibliotheken c0de_net/http und c0de_net/mail hinzu, mit denen Programme HTTP-Anfragen an Webserver und REST-APIs senden, Mails verschicken und Postfächer lesen.
 
 tabs:
   - id: c0de
@@ -120,3 +120,18 @@ tabs:
       - functions: true
       - { file: reference/net.md, section: Errors }
       - { file: reference/net.md, section: Examples }
+
+  # The getting started, the errors and the examples of c0de net are shared by both libraries;
+  # they stay in the tab of c0de_net/http, and the overview of c0de_net/mail links to them.
+  - id: c0de_net/mail
+    label: c0de_net/mail
+    color: lib7
+    link: /c0de_net/mail/
+    source: c0de_net
+    library: { file: reference/net.md, section: c0de_net/mail }
+    overview:
+      text:
+        en: 'How c0de net sends requests and mail, its settings, its errors and its examples are in the tab c0de_net/http: [Getting started](/c0de_net/http/getting-started), [Errors](/c0de_net/http/errors), [Examples](/c0de_net/http/examples).'
+        de: 'Wie c0de net Anfragen und Mails sendet, seine Einstellungen, Fehler und Beispiele stehen im Reiter c0de_net/http: [Erste Schritte](/de/c0de_net/http/getting-started), [Fehler](/de/c0de_net/http/errors), [Beispiele](/de/c0de_net/http/examples).'
+    chapters:
+      - functions: true

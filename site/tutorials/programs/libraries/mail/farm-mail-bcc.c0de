@@ -1,0 +1,30 @@
+PROGRAM farminvite
+NOOP
+INCLUDE c0de_net/mail
+NOOP
+FUNCTION invite
+    PARAMETER server STRING "smtp.example.com"
+    PARAMETER port INTEGER 0
+BEGIN
+    SECRET mailPassword STRING
+    VARIABLE smtp STRUCT c0de_net/mail/SMTP_SERVER
+    VARIABLE neighbours ARRAY STRING
+    BEGIN
+        "alex@example.com"
+        "sam@example.com"
+    END VARIABLE
+    ASSIGN smtp.server server ;
+    ASSIGN smtp.port port ;
+    ASSIGN smtp.security "tls" ;
+    ASSIGN smtp.user "steve@example.com" ;
+    ASSIGN smtp.password mailPassword ;
+    ASSIGN smtp.from "Farm computer <steve@example.com>" ;
+    CALL c0de_net/mail/SMTP_SEND
+        PARAMETER server smtp ;
+        PARAMETER to "steve@example.com" ;
+        PARAMETER bcc neighbours ;
+        PARAMETER subject "Harvest festival at the farm" ;
+        PARAMETER text "Saturday at noon, bring a friend!" ;
+    CALL PRINT
+        PARAMETER value "Invitations sent" ;
+END FUNCTION

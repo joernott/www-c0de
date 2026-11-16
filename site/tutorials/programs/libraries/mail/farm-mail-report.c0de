@@ -1,0 +1,36 @@
+PROGRAM farmmail
+NOOP
+INCLUDE c0de_net/mail
+NOOP
+FUNCTION report
+    PARAMETER server STRING "smtp.example.com"
+    PARAMETER port INTEGER 0
+    PARAMETER wheat INTEGER 64
+    PARAMETER carrots INTEGER 12
+    RESULT id STRING
+BEGIN
+    SECRET mailPassword STRING
+    VARIABLE smtp STRUCT c0de_net/mail/SMTP_SERVER
+    VARIABLE helpers ARRAY STRING
+    BEGIN
+        "alex@example.com"
+    END VARIABLE
+    VARIABLE text STRING
+    ASSIGN smtp.server server ;
+    ASSIGN smtp.port port ;
+    ASSIGN smtp.security "tls" ;
+    ASSIGN smtp.user "steve@example.com" ;
+    ASSIGN smtp.password mailPassword ;
+    ASSIGN smtp.from "Farm computer <steve@example.com>" ;
+    ASSIGN text "Good morning!\n\nIn the barn today:\n" ⊕ wheat ⊕ " wheat\n" ⊕ carrots ⊕ " carrots\n\nYour farm" ;
+    CALL c0de_net/mail/SMTP_SEND
+        PARAMETER server smtp ;
+        PARAMETER to "steve@example.com" ;
+        PARAMETER cc helpers ;
+        PARAMETER subject "The farm today" ;
+        PARAMETER text text ;
+        PARAMETER reply_to "steve@example.com" ;
+        RESULT result id
+    CALL PRINT
+        PARAMETER value "Report sent" ;
+END FUNCTION

@@ -10,7 +10,10 @@
 // there (since c0de 0.5.0, the runner validates them completely). Programs that include c0de_net need the
 // runner library of c0de net; if its release has none, they are skipped. Programs that talk to
 // the API of c0de.at run against a test service (test-service.ts), which needs Go; in CI, so do
-// the programs that ask Open-Meteo, whose answers it has recorded (task 12.2.1).
+// the programs that ask Open-Meteo, whose answers it has recorded (task 12.2.1). Programs that
+// include c0de_net/mail run against GreenMail (mail-service.ts, task 13.9), which is reset before
+// every run; <name>[.<case>].received.yaml lists what the mailboxes hold after it, by user and
+// folder, with the parts of every message that matter.
 //
 // Usage: node scripts/test-programs.ts [--local <source>=<folder>]... [<part of a file name>...]
 // (needs Java 21 or newer; --local c0de=../../minecraft-c0de uses the runner of a working copy)
@@ -20,6 +23,8 @@ import { dirname, join, relative, resolve, sep } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { readConfig } from './import/sources.ts'
 import { javaArgs, needs as needsOf, runner as getRunner } from './runner.ts'
+import { parse } from 'yaml'
+import { startMailService, usesMail, type MailService, type Received } from './mail-service.ts'
 import { startTestService, usesApi, usesOpenMeteo, type TestService } from './test-service.ts'
 
 const site = join(dirname(fileURLToPath(import.meta.url)), '..')
@@ -30,6 +35,8 @@ export interface ProgramRun {
   case?: string
   options?: string
   expected?: string
+  // what the mailboxes of GreenMail hold after the run (c0de_net/mail)
+  received?: string
   // The libraries of other mods the program includes (c0de_net/http needs c0de net).
   needs: string[]
 }
@@ -47,6 +54,7 @@ export function plan(folder: string): ProgramRun[] {
       program,
       ...(existsSync(`${base}.options.yaml`) && { options: `${base}.options.yaml` }),
       ...(existsSync(`${base}.expected.yaml`) && { expected: `${base}.expected.yaml` }),
+      ...(existsSync(`${base}.received.yaml`) && { received: `${base}.received.yaml` }),
       needs,
     })
     const prefix = `${base.slice(base.lastIndexOf(sep) + 1)}.`
@@ -56,11 +64,13 @@ export function plan(folder: string): ProgramRun[] {
         : null
       if (!match) continue
       const options = `${base}.${match[1]}.options.yaml`
+      const received = `${base}.${match[1]}.received.yaml`
       runs.push({
         program,
         case: match[1]!,
         ...(existsSync(options) && { options }),
         expected: join(dirname(program), file),
+        ...(existsSync(received) && { received }),
         needs,
       })
     }
@@ -75,6 +85,41 @@ export function args(run: ProgramRun): string[] {
     ...(run.expected ? ['--expected', run.expected] : []),
     run.program,
   ]
+}
+
+// Mailboxes are the messages of some folders of some users: user -> folder -> messages, each
+// with the parts that matter.
+export type Mailboxes = Record<string, Record<string, Partial<Received>[]>>
+
+// compareMailboxes returns the differences between the expected and the actual mailboxes: every
+// folder must have as many messages as expected, and every given part must be equal.
+export async function compareMailboxes(
+  expected: Mailboxes,
+  read: (user: string, folder: string) => Promise<Received[]>,
+): Promise<string[]> {
+  const problems: string[] = []
+  for (const [user, folders] of Object.entries(expected)) {
+    for (const [folder, messages] of Object.entries(folders)) {
+      const actual = await read(user, folder)
+      if (actual.length !== messages.length) {
+        problems.push(
+          `${user} ${folder}: ${actual.length} messages instead of ${messages.length}: ${JSON.stringify(actual)}`,
+        )
+        continue
+      }
+      messages.forEach((message, i) => {
+        for (const [key, value] of Object.entries(message)) {
+          const got = actual[i]![key as keyof Received]
+          if (JSON.stringify(got) !== JSON.stringify(value)) {
+            problems.push(
+              `${user} ${folder} message ${i + 1}: ${key} is ${JSON.stringify(got)}, not ${JSON.stringify(value)}`,
+            )
+          }
+        }
+      })
+    }
+  }
+  return problems
 }
 
 // java runs java and returns its exit code and output.
@@ -127,6 +172,8 @@ async function main(argv: string[]) {
       return usesApi(program) || (fakeOpenMeteo && usesOpenMeteo(program))
     }),
   )
+  const mailRuns = new Set(runs.filter((run) => usesMail(readFileSync(run.program, 'utf-8'))))
+  let mail: MailService | undefined
   let service: TestService | undefined
   if (api.size > 0) {
     const releases = Object.fromEntries(
@@ -137,6 +184,9 @@ async function main(argv: string[]) {
   let failed = 0
   let skipped = 0
   try {
+    if ([...mailRuns].some((run) => run.needs.every((library) => runner.libraries[library]))) {
+      mail = await startMailService(join(site, '.cache', 'greenmail'))
+    }
     for (const run of runs) {
       const name = relative(site, run.program) + (run.case ? ` (${run.case})` : '')
       const missing = run.needs.filter((library) => !runner.libraries[library])
@@ -145,7 +195,8 @@ async function main(argv: string[]) {
         skipped++
         continue
       }
-      const jvm = api.has(run) ? service!.jvm : []
+      const jvm = mailRuns.has(run) ? mail!.jvm : api.has(run) ? service!.jvm : []
+      if (mailRuns.has(run)) await mail!.reset()
       // not spawnSync: the proxy of the test service runs in this process
       let result = await java(javaArgs(runner, run.needs, args(run), jvm))
       // A public service (the weather of Open-Meteo) sometimes doesn't answer in time: such a
@@ -156,6 +207,15 @@ async function main(argv: string[]) {
         await new Promise((resolve) => setTimeout(resolve, 5000 * retry))
         result = await java(javaArgs(runner, run.needs, args(run), jvm))
       }
+      if (result.status === 0 && run.received) {
+        const expected = parse(readFileSync(run.received, 'utf-8')) as Mailboxes
+        const problems = await compareMailboxes(expected, (user, folder) =>
+          mail!.received(user, folder),
+        )
+        if (problems.length > 0) {
+          result = { ...result, status: 1, stdout: `${result.stdout}${problems.join('\n')}\n` }
+        }
+      }
       if (result.status === 0) {
         console.log(`ok    ${name}`)
       } else {
@@ -165,6 +225,7 @@ async function main(argv: string[]) {
     }
   } finally {
     await service?.stop()
+    await mail?.stop()
   }
   console.log(
     `${runs.length - failed - skipped} of ${runs.length} programs ok, ${failed} failed, ${skipped} skipped (c0de ${local.has('c0de') ? local.get('c0de') : c0de.tag})`,

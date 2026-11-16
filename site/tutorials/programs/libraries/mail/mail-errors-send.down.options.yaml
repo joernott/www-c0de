@@ -1,0 +1,6 @@
+function: send
+parameters:
+  server: smtp.nothing.invalid
+vault:
+  secrets:
+    mailPassword: { type: STRING, value: secret }

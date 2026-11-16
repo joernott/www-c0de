@@ -1,0 +1,7 @@
+function: report
+parameters:
+  server: 127.0.0.1
+  port: 3465
+vault:
+  secrets:
+    mailPassword: { type: STRING, value: secret }

@@ -1,7 +1,7 @@
 # The screenshots of the tutorials, written by scripts/screenshots.ts from the marks
 # <!-- screenshot: <id> | <description> --> of the pages. Take them as described in
 # docs/tutorials.md ("Screenshots") and save them as the file; the page shows them then.
-# 70 screenshots, 8 missing.
+# 74 screenshots, 12 missing.
 - id: asking-input
   description: 'the open terminal of the laptop while INPUT waits: "How many
     items?" on the screen and the input line "INPUT items (INTEGER):" with 1000
@@ -255,6 +255,15 @@
     - de/tutorials/learning/errors.md
   file: public/tutorials/screenshots/errors-debug-cursor.webp
   size: 1280x673
+- id: farm-mail-laptop
+  description: the laptop next to the trigger block of farmmail with "Report sent"
+    on its screen, the variable items server and port in the input inventory of
+    the trigger block
+  pages:
+    - tutorials/libraries/c0de_net/mail/farm-mail.md
+    - de/tutorials/libraries/c0de_net/mail/farm-mail.md
+  file: public/tutorials/screenshots/farm-mail-laptop.webp
+  size: missing
 - id: first-program-result
   description: the display wall of 2 x 1 display blocks at the entrance of the
     base, showing "Welcome to my base!", with the trigger block and button next
@@ -399,6 +408,14 @@
     - de/tutorials/learning/lists.md
   file: public/tutorials/screenshots/lists-notes-wall.webp
   size: 1280x673
+- id: mail-errors-laptop
+  description: the laptop showing "Wrong user or password (an app password?)" next
+    to the trigger block of mailcheck
+  pages:
+    - tutorials/libraries/c0de_net/mail/mail-errors.md
+    - de/tutorials/libraries/c0de_net/mail/mail-errors.md
+  file: public/tutorials/screenshots/mail-errors-laptop.webp
+  size: missing
 - id: name-board-wall
   description: the display wall of 2 × 1 blocks with the frame of = signs, the
     greeting WELCOME TO THE BASE OF and the name Steve
@@ -423,6 +440,15 @@
     - de/tutorials/libraries/c0de/strings/numbers-as-text.md
   file: public/tutorials/screenshots/numbers-as-text-laptop.webp
   size: 1280x673
+- id: order-desk-laptop
+  description: 'the laptop showing "3 of 6 messages unseen" and the two lines
+    "New: Order: 32 wheat" and "New: Order: 12 carrots", the two trigger blocks
+    of orders and deliver next to it'
+  pages:
+    - tutorials/libraries/c0de_net/mail/order-desk.md
+    - de/tutorials/libraries/c0de_net/mail/order-desk.md
+  file: public/tutorials/screenshots/order-desk-laptop.webp
+  size: missing
 - id: parameters-stacks
   description: the program "stacks" on its sheet, seen from above, with the
     PARAMETER and RESULT lines between FUNCTION and BEGIN
@@ -532,6 +558,15 @@
     - de/tutorials/learning/tables.md
   file: public/tutorials/screenshots/tables-shop-sheet.webp
   size: 1280x673
+- id: tidy-mailbox-laptop
+  description: 'the laptop after the clean-up with the four lines "Archive is now
+    Archive 2025", "Deleted Archive 2024", "Removed 1 old news" and "INBOX: 5
+    messages, 3 unseen"'
+  pages:
+    - tutorials/libraries/c0de_net/mail/tidy-mailbox.md
+    - de/tutorials/libraries/c0de_net/mail/tidy-mailbox.md
+  file: public/tutorials/screenshots/tidy-mailbox-laptop.webp
+  size: missing
 - id: tunnel-digger-tunnel
   description: the entrance of the tunnel in the side of a hill, two blocks high,
     the trigger block in front of it, the tools chest on the left and the open
@@ -543,7 +578,7 @@
   size: 1280x673
 - id: up-to-date-wall
   description: "The display wall with the two green lines c0de 0.6.1: up to date
-    and c0de net 0.3.0: up to date"
+    and c0de net 0.4.0: up to date"
   pages:
     - tutorials/libraries/c0de_net/http/up-to-date.md
     - de/tutorials/libraries/c0de_net/http/up-to-date.md

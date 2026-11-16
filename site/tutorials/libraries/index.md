@@ -14,3 +14,4 @@ Recipes for the library functions: every recipe builds something useful in the g
 - [c0de/minecraft](/tutorials/libraries/c0de/minecraft/): music, locks, doors, storage, building, mining, copying blocks and server commands
 - [c0de/security](/tutorials/libraries/c0de/security/): passwords and keys in the vault
 - [c0de_net/http](/tutorials/libraries/c0de_net/http/): the weather, REST services, status checks and home automation
+- [c0de_net/mail](/tutorials/libraries/c0de_net/mail/): reports by mail, an order desk, a tidy mailbox and mail errors

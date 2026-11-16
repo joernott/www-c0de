@@ -14,3 +14,4 @@ Rezepte für die Funktionen der Bibliotheken: Jedes Rezept baut etwas Nützliche
 - [c0de/minecraft](/de/tutorials/libraries/c0de/minecraft/): Musik, Schlösser, Türen, Lager, Bauen, Abbauen, Blöcke kopieren und Serverbefehle
 - [c0de/security](/de/tutorials/libraries/c0de/security/): Passwörter und Schlüssel im Tresor
 - [c0de_net/http](/de/tutorials/libraries/c0de_net/http/): das Wetter, REST-Dienste, Statusprüfungen und Hausautomation
+- [c0de_net/mail](/de/tutorials/libraries/c0de_net/mail/): Berichte per Mail, ein Bestellschalter, ein aufgeräumtes Postfach und Mail-Fehler

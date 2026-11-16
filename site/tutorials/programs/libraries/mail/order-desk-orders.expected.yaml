@@ -1,0 +1,7 @@
+exit_code: 0
+results:
+  count: 2
+screen:
+  - 3 of 6 messages unseen
+  - 'New: Order: 32 wheat'
+  - 'New: Order: 12 carrots'

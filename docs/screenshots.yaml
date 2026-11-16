@@ -3945,7 +3945,7 @@ screenshots:
     file: site/public/tutorials/screenshots/up-to-date-wall.webp
     page: site/tutorials/libraries/c0de_net/http/up-to-date.md
     title: Is my c0de up to date?
-    description: "The display wall with the two green lines c0de 0.6.0: up to date and c0de net 0.3.0: up to date"
+    description: "The display wall with the two green lines c0de 0.6.0: up to date and c0de net 0.4.0: up to date"
     program: versioncheck
     program_file: site/tutorials/programs/libraries/http/up-to-date-check.c0de
     function: check

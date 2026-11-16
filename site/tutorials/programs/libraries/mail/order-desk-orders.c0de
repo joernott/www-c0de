@@ -1,0 +1,103 @@
+PROGRAM orderdesk
+NOOP
+INCLUDE c0de_net/mail
+NOOP
+FUNCTION orders
+    PARAMETER server STRING "imap.example.com"
+    PARAMETER port INTEGER 0
+    RESULT count INTEGER
+BEGIN
+    SECRET mailPassword STRING
+    VARIABLE imap STRUCT c0de_net/mail/IMAP_SERVER
+    VARIABLE box STRUCT c0de_net/mail/MAILBOX
+    VARIABLE uids ARRAY INTEGER
+    VARIABLE letters ARRAY STRUCT c0de_net/mail/MAIL
+    ASSIGN imap.server server ;
+    ASSIGN imap.port port ;
+    ASSIGN imap.user "steve@example.com" ;
+    ASSIGN imap.password mailPassword ;
+    CALL CLS
+    CALL c0de_net/mail/IMAP_SELECT
+        PARAMETER server imap ;
+        RESULT result box
+    CALL PRINT
+        PARAMETER value box.unseen ⊕ " of " ⊕ box.messages ⊕ " messages unseen" ;
+    CALL c0de_net/mail/IMAP_SEARCH
+        PARAMETER server imap ;
+        PARAMETER criteria "UNSEEN SUBJECT Order:" ;
+        RESULT result uids
+    CALL c0de_net/mail/IMAP_FETCH
+        PARAMETER server imap ;
+        PARAMETER uids uids ;
+        PARAMETER text FALSE ;
+        RESULT result letters
+    EACH letter letters
+    BEGIN
+        CALL PRINT
+            PARAMETER value "New: " ⊕ letter.subject ;
+    END EACH
+    CALL c0de_net/mail/IMAP_STORE
+        PARAMETER server imap ;
+        PARAMETER uids uids ;
+        PARAMETER flags "\\Flagged" ;
+    CALL c0de_net/mail/IMAP_MOVE
+        PARAMETER server imap ;
+        PARAMETER uids uids ;
+        PARAMETER folder "Orders" ;
+    CALL LEN
+        PARAMETER value uids ;
+        RESULT result count
+END FUNCTION
+NOOP
+FUNCTION deliver
+    PARAMETER server STRING "imap.example.com"
+    PARAMETER port INTEGER 0
+BEGIN
+    SECRET mailPassword STRING
+    VARIABLE imap STRUCT c0de_net/mail/IMAP_SERVER
+    VARIABLE box STRUCT c0de_net/mail/MAILBOX
+    VARIABLE uids ARRAY INTEGER
+    VARIABLE letters ARRAY STRUCT c0de_net/mail/MAIL
+    VARIABLE count INTEGER
+    ASSIGN imap.server server ;
+    ASSIGN imap.port port ;
+    ASSIGN imap.user "steve@example.com" ;
+    ASSIGN imap.password mailPassword ;
+    CALL CLS
+    CALL c0de_net/mail/IMAP_SELECT
+        PARAMETER server imap ;
+        PARAMETER folder "Orders" ;
+        RESULT result box
+    CALL c0de_net/mail/IMAP_SEARCH
+        PARAMETER server imap ;
+        PARAMETER criteria "FLAGGED UNANSWERED" ;
+        RESULT result uids
+    CALL LEN
+        PARAMETER value uids ;
+        RESULT result count
+    IF count = 0 ;
+    BEGIN
+        CALL PRINT
+            PARAMETER value "No open orders" ;
+        EXIT 0 ;
+    END IF
+    CALL c0de_net/mail/IMAP_FETCH
+        PARAMETER server imap ;
+        PARAMETER uids uids[0] ;
+        RESULT result letters
+    CALL PRINT
+        PARAMETER value letters[0].from ;
+    CALL PRINT
+        PARAMETER value letters[0].subject ;
+    CALL PRINT
+        PARAMETER value letters[0].text ;
+    CALL c0de_net/mail/IMAP_STORE
+        PARAMETER server imap ;
+        PARAMETER uids uids[0] ;
+        PARAMETER flags "\\Answered" ;
+    CALL c0de_net/mail/IMAP_STORE
+        PARAMETER server imap ;
+        PARAMETER uids uids[0] ;
+        PARAMETER flags "\\Flagged" ;
+        PARAMETER mode "remove" ;
+END FUNCTION

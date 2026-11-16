@@ -272,3 +272,9 @@ I pushed 0.6.1 yesterday night. Please start with the sprint in c0de-net. As I w
 ## 2026-11-16 – Rerun of the release of c0de 0.6.1
 
 OK, I triggered the rerun for c0de now.
+
+## 2026-11-16 – c0de net 0.4.0 on the site
+
+I have sorted out vs code, please go ahead with www-c0de
+
+I disabled the various java related extensions

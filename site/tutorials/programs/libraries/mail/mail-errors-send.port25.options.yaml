@@ -1,0 +1,7 @@
+function: send
+parameters:
+  server: 127.0.0.1
+  port: 25
+vault:
+  secrets:
+    mailPassword: { type: STRING, value: secret }

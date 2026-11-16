@@ -1,0 +1,5 @@
+steve@example.com:
+  Orders:
+    - subject: 'Order: 8 bread'
+    - subject: 'Order: 16 eggs'
+      flags: ['\Answered', '\Seen']

@@ -1,0 +1,5 @@
+exit_code: 0
+screen:
+  - Sam <sam@example.com>
+  - 'Order: 16 eggs'
+  - Sixteen eggs for the bakery, by Friday.

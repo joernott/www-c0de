@@ -1,0 +1,13 @@
+steve@example.com:
+  INBOX:
+    - subject: 'Village news: the market moves'
+    - subject: Thanks for the bread
+    - subject: 'Order: 5 pumpkins'
+    - subject: 'Village news: harvest festival'
+  Orders:
+    - subject: 'Order: 8 bread'
+    - subject: 'Order: 16 eggs'
+    - subject: 'Order: 32 wheat'
+      flags: ['\Flagged']
+    - subject: 'Order: 12 carrots'
+      flags: ['\Flagged']

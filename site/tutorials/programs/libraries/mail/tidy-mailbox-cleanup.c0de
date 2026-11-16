@@ -1,0 +1,74 @@
+PROGRAM tidymail
+NOOP
+INCLUDE c0de_net/mail
+NOOP
+FUNCTION cleanup
+    PARAMETER server STRING "imap.example.com"
+    PARAMETER port INTEGER 0
+    PARAMETER year INTEGER 2026
+    RESULT removed INTEGER
+BEGIN
+    SECRET mailPassword STRING
+    VARIABLE imap STRUCT c0de_net/mail/IMAP_SERVER
+    VARIABLE folders ARRAY STRING
+    VARIABLE box STRUCT c0de_net/mail/MAILBOX
+    VARIABLE uids ARRAY INTEGER
+    VARIABLE oldest STRING
+    VARIABLE last STRING
+    ASSIGN imap.server server ;
+    ASSIGN imap.port port ;
+    ASSIGN imap.user "steve@example.com" ;
+    ASSIGN imap.password mailPassword ;
+    ASSIGN oldest "Archive " ⊕ ( year - 2 ) ;
+    ASSIGN last "Archive " ⊕ ( year - 1 ) ;
+    CALL CLS
+    CALL c0de_net/mail/IMAP_LIST
+        PARAMETER server imap ;
+        PARAMETER pattern "Archive*" ;
+        RESULT result folders
+    EACH name folders
+    BEGIN
+        IF name = oldest ;
+        BEGIN
+            CALL c0de_net/mail/IMAP_DELETE
+                PARAMETER server imap ;
+                PARAMETER folder name ;
+            CALL PRINT
+                PARAMETER value "Deleted " ⊕ name ;
+        END IF
+        IF name = "Archive" ;
+        BEGIN
+            CALL c0de_net/mail/IMAP_RENAME
+                PARAMETER server imap ;
+                PARAMETER folder name ;
+                PARAMETER new_name last ;
+            CALL c0de_net/mail/IMAP_CREATE
+                PARAMETER server imap ;
+                PARAMETER folder "Archive" ;
+            CALL PRINT
+                PARAMETER value "Archive is now " ⊕ last ;
+        END IF
+    END EACH
+    CALL c0de_net/mail/IMAP_SELECT
+        PARAMETER server imap ;
+        RESULT result box
+    CALL c0de_net/mail/IMAP_SEARCH
+        PARAMETER server imap ;
+        PARAMETER criteria "SEEN SUBJECT \"Village news\"" ;
+        RESULT result uids
+    CALL c0de_net/mail/IMAP_STORE
+        PARAMETER server imap ;
+        PARAMETER uids uids ;
+        PARAMETER flags "\\Deleted" ;
+    CALL c0de_net/mail/IMAP_EXPUNGE
+        PARAMETER server imap ;
+        RESULT result removed
+    CALL PRINT
+        PARAMETER value "Removed " ⊕ removed ⊕ " old news" ;
+    CALL c0de_net/mail/IMAP_STATUS
+        PARAMETER server imap ;
+        PARAMETER folder "INBOX" ;
+        RESULT result box
+    CALL PRINT
+        PARAMETER value "INBOX: " ⊕ box.messages ⊕ " messages, " ⊕ box.unseen ⊕ " unseen" ;
+END FUNCTION
