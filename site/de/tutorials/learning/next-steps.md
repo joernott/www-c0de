@@ -42,7 +42,7 @@ Wenn du eines Tages eine andere Sprache lernst – Python, JavaScript, Java –,
 
 Die Tutorials haben nur einen Teil von c0de gezeigt. Alles andere steht in den **Handbüchern**, und du kannst sie jetzt lesen. Sie stehen auf dieser Seite unter [c0de](/de/c0de/), und im Spiel sind sie rote Ordner: Die Anleitung hast du bekommen, als du deine Welt zum ersten Mal betreten hast, und die anderen Handbücher stellst du aus einem Buch und einem Gegenstand her (siehe [Handbücher](/de/c0de/guide/tools#handbücher)).
 
-Es gibt Handbücher für Daten, Anweisungen, Werkzeuge, Auslöser, Geräte und Funktionen. Jeder Eintrag hat dieselben Teile:
+Es gibt Handbücher für Daten, Anweisungen, Werkzeuge, Auslöser, Geräte und Funktionen. Andere Mods bringen eigene Ordner mit: c0de net hat einen mit türkisem Etikett, hergestellt aus einem INCLUDE-Block, umgeben von acht Fäden, und sein Handbuch steht auf dieser Seite unter [c0de_net/http](/de/c0de_net/http/). Jeder Eintrag hat dieselben Teile:
 
 - **eine kurze Beschreibung**: was der Block oder die Funktion tut, in ein oder zwei Sätzen,
 - **das Rezept**: wie du den Block oder die Karte herstellst,

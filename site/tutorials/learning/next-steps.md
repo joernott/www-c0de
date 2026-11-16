@@ -42,7 +42,7 @@ If you learn another language one day – Python, JavaScript, Java – you will 
 
 The tutorials only showed a part of c0de. Everything else is in the **handbooks**, and you can read them now. They are on this site under [c0de](/c0de/), and in the game they are red binders: you got the guide when you joined your world for the first time, and you craft the other handbooks from a book and an item (see [Handbooks](/c0de/guide/tools#handbooks)).
 
-There are handbooks for data, statements, tools, triggers, devices and functions. Each entry has the same parts:
+There are handbooks for data, statements, tools, triggers, devices and functions. Other mods bring binders of their own: c0de net has one with a teal label, crafted from an INCLUDE block surrounded by eight strings, and its handbook is on this site under [c0de_net/http](/c0de_net/http/). Each entry has the same parts:
 
 - **a short description**: what the block or function does, in one or two sentences,
 - **the recipe**: how to craft the block or item,

@@ -18,7 +18,7 @@ sources:
   c0de:
     name: c0de
     repository: joernott/minecraft-c0de
-    tag: v0.6.0
+    tag: v0.6.1
     docs: docs
     modrinth: T9RufCc0
     curseforge: c0de
