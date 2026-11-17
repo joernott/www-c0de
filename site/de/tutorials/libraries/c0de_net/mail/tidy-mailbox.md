@@ -50,8 +50,8 @@ Die Reihenfolge der ersten beiden Zeilen hängt davon ab, in welcher Reihenfolge
 
 - **Die Namen** der Archive entstehen aus dem Parameter `year`: `"Archive " ⊕ ( year - 2 )` ist `"Archive 2024"`. Die Klammern sorgen dafür, dass das Jahr ausgerechnet wird, bevor es an den Text gehängt wird.
 - **IMAP_LIST** mit `Archive*` gibt nur die Namen der Archive zurück. EACH geht sie durch: Das älteste wird gelöscht, und **Archive** wird auf das Vorjahr umbenannt und mit IMAP_CREATE neu angelegt.
-- **IMAP_SELECT** wählt INBOX, damit die Funktionen für Nachrichten wissen, wo sie arbeiten. Die Kriterien `SEEN SUBJECT "Village news"` finden die Nachrichten, die du gelesen hast; die Anführungszeichen halten die beiden Wörter zusammen und werden im Text des Programms `\"` geschrieben.
-- **IMAP_STORE** fügt ihnen `\Deleted` hinzu, geschrieben `"\\Deleted"`, und **IMAP_EXPUNGE** entfernt sie und gibt zurück, wie viele – das Ergebnis `removed`.
+- **IMAP_SELECT** wählt INBOX, damit die Funktionen für Nachrichten wissen, wo sie arbeiten. Die Kriterien `SEEN SUBJECT "Village news"` finden die Nachrichten, die du gelesen hast; die Anführungszeichen halten die beiden Wörter zusammen. Im Dialog des Literals tippst du sie, wie sie sind; die Textschreibweise des Programms schreibt sie `\"`.
+- **IMAP_STORE** fügt ihnen `\Deleted` hinzu – im Dialog als `\Deleted` getippt, in der Textschreibweise `"\\Deleted"` geschrieben – und **IMAP_EXPUNGE** entfernt sie und gibt zurück, wie viele – das Ergebnis `removed`.
 - **IMAP_STATUS** liest am Ende die MAILBOX der INBOX. Anders als IMAP_SELECT ändert es `imap.folder` nicht.
 
 ## Probier es selbst

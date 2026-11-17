@@ -4,7 +4,7 @@ The screenshots of the tutorials (task 7.1.1), taken as [tutorials.md](tutorials
 
 The world: every program is on its own sheet of the c0de dimension, built by the datapack of `contrib/screenshots/` (see its README). Sheet 0 is empty, and an empty sheet lies between two programs. North of every sheet, at z = -3 from x + 5 on: a trigger block with a stone button, a debug trigger block with a laptop, a timer block with a lever that is on (so it is paused), an I/O block, a disk drive and a gray shulker box with a stack of variable, constant and literal items and a disk; behind them, at z = -6, a display wall of 4 × 3 blocks in a frame of iron blocks. The three trigger blocks are set to the program and the function of its test.
 
-74 screenshots, 51 programs on the sheets 2 to 102. The sheets of the programs never change; new screenshots are added at the end of this list, and their programs get the next free sheets. Not built yet: the sheets 86, 88, 90, 92, 94, 96, 98, 100, 102; `function c0de_screenshots:build_new` builds them (contrib/screenshots/README.md).
+74 screenshots, 51 programs on the sheets 2 to 102. The sheets of the programs never change; new screenshots are added at the end of this list, and their programs get the next free sheets. All sheets are built.
 
 ## Before you start
 
@@ -3490,7 +3490,7 @@ END FUNCTION
 the screen of the laptop after the run: the rejected names and coordinates with their ? answers, and the welcome line at the end
 
 - Program **checking**, function `signup` (`site/tutorials/programs/libraries/strings/checking-input-signup.c0de`)
-- Sheet 86, x = 2752 – not built yet: `/function c0de_screenshots:build_new`
+- Sheet 86, x = 2752
 
 ```c0de
 PROGRAM checking
@@ -3582,7 +3582,7 @@ END FUNCTION
 the trigger block with its button between a written sign and its copy, the chat showing the copied data
 
 - Program **copier**, function `copy` (`site/tutorials/programs/libraries/minecraft/copying-signs-copy.c0de`)
-- Sheet 88, x = 2816 – not built yet: `/function c0de_screenshots:build_new`
+- Sheet 88, x = 2816
 
 ```c0de
 PROGRAM copier
@@ -3638,7 +3638,7 @@ END FUNCTION
 the trigger block with its button in the morning sun, the chat showing the good morning message of goodmorning
 
 - Program **goodmorning**, function `morning` (`site/tutorials/programs/libraries/minecraft/server-commands-morning.c0de`)
-- Sheet 90, x = 2880 – not built yet: `/function c0de_screenshots:build_new`
+- Sheet 90, x = 2880
 
 ```c0de
 PROGRAM goodmorning
@@ -3685,7 +3685,7 @@ END FUNCTION
 the laptop of the door after setup: "New password:", "***", "Repeat it:", "***" and "Password set."
 
 - Program **passdoor**, function `open` (`site/tutorials/programs/libraries/security/password-door-door.c0de`)
-- Sheet 92, x = 2944 – not built yet: `/function c0de_screenshots:build_new`
+- Sheet 92, x = 2944
 
 ```c0de
 PROGRAM passdoor
@@ -3791,7 +3791,7 @@ END FUNCTION
 the iron door open, the comparator between the trigger block and the door lit, the laptop next to it showing "Password:", "***" and "Welcome home!"
 
 - Program **passdoor**, function `open` (`site/tutorials/programs/libraries/security/password-door-door.c0de`)
-- Sheet 92, x = 2944 – not built yet: `/function c0de_screenshots:build_new`
+- Sheet 92, x = 2944
 
 ```c0de
 PROGRAM passdoor
@@ -3901,7 +3901,7 @@ END FUNCTION
 the dialog "Create your vault" with the fields Password and Repeat filled with dots, and the buttons OK and Cancel
 
 - Program **keys**, function `store` (`site/tutorials/programs/libraries/security/keeping-keys-keys.c0de`)
-- Sheet 94, x = 3008 – not built yet: `/function c0de_screenshots:build_new`
+- Sheet 94, x = 3008
 
 ```c0de
 PROGRAM keys
@@ -4024,7 +4024,7 @@ END FUNCTION
 the dialog "Open your vault" with one password field, the message "Wrong password, try again" below it
 
 - Program **keys**, function `store` (`site/tutorials/programs/libraries/security/keeping-keys-keys.c0de`)
-- Sheet 94, x = 3008 – not built yet: `/function c0de_screenshots:build_new`
+- Sheet 94, x = 3008
 
 ```c0de
 PROGRAM keys
@@ -4151,11 +4151,12 @@ END FUNCTION
 the laptop next to the trigger block of farmmail with "Report sent" on its screen, the variable items server and port in the input inventory of the trigger block
 
 - Program **farmmail**, function `report` (`site/tutorials/programs/libraries/mail/farm-mail-report.c0de`)
-- Sheet 96, x = 3072 – not built yet: `/function c0de_screenshots:build_new`
+- Sheet 96, x = 3072
 
 ```c0de
 PROGRAM farmmail
 NOOP
+INCLUDE c0de/strings
 INCLUDE c0de_net/mail
 NOOP
 FUNCTION report
@@ -4172,13 +4173,19 @@ BEGIN
         "alex@example.com"
     END VARIABLE
     VARIABLE text STRING
+    VARIABLE nl CHAR
     ASSIGN smtp.server server ;
     ASSIGN smtp.port port ;
     ASSIGN smtp.security "tls" ;
     ASSIGN smtp.user "steve@example.com" ;
     ASSIGN smtp.password mailPassword ;
     ASSIGN smtp.from "Farm computer <steve@example.com>" ;
-    ASSIGN text "Good morning!\n\nIn the barn today:\n" ⊕ wheat ⊕ " wheat\n" ⊕ carrots ⊕ " carrots\n\nYour farm" ;
+    CALL c0de/strings/CHR
+        PARAMETER code 10 ;
+        RESULT result nl
+    ASSIGN text "Good morning!" ⊕ nl ⊕ nl ⊕ "In the barn today:" ⊕ nl ;
+    ASSIGN text text ⊕ wheat ⊕ " wheat" ⊕ nl ⊕ carrots ⊕ " carrots" ⊕ nl ;
+    ASSIGN text text ⊕ nl ⊕ "Your farm" ;
     CALL c0de_net/mail/SMTP_SEND
         PARAMETER server smtp ;
         PARAMETER to "steve@example.com" ;
@@ -4201,7 +4208,7 @@ END FUNCTION
 the laptop showing "3 of 6 messages unseen" and the two lines "New: Order: 32 wheat" and "New: Order: 12 carrots", the two trigger blocks of orders and deliver next to it
 
 - Program **orderdesk**, function `orders` (`site/tutorials/programs/libraries/mail/order-desk-orders.c0de`)
-- Sheet 98, x = 3136 – not built yet: `/function c0de_screenshots:build_new`
+- Sheet 98, x = 3136
 
 ```c0de
 PROGRAM orderdesk
@@ -4318,7 +4325,7 @@ END FUNCTION
 the laptop after the clean-up with the four lines "Archive is now Archive 2025", "Deleted Archive 2024", "Removed 1 old news" and "INBOX: 5 messages, 3 unseen"
 
 - Program **tidymail**, function `cleanup` (`site/tutorials/programs/libraries/mail/tidy-mailbox-cleanup.c0de`)
-- Sheet 100, x = 3200 – not built yet: `/function c0de_screenshots:build_new`
+- Sheet 100, x = 3200
 
 ```c0de
 PROGRAM tidymail
@@ -4406,12 +4413,13 @@ END FUNCTION
 the laptop showing "Wrong user or password (an app password?)" next to the trigger block of mailcheck
 
 - Program **mailcheck**, function `send` (`site/tutorials/programs/libraries/mail/mail-errors-send.c0de`)
-- Sheet 102, x = 3264 – not built yet: `/function c0de_screenshots:build_new`
+- Sheet 102, x = 3264
 
 ```c0de
 PROGRAM mailcheck
 NOOP
 INCLUDE c0de/security
+INCLUDE c0de/strings
 INCLUDE c0de_net/mail
 NOOP
 FUNCTION explain
@@ -4483,6 +4491,7 @@ BEGIN
     VARIABLE problem ERROR
     VARIABLE text STRING
     VARIABLE message STRING
+    VARIABLE nl CHAR
     CALL CLS
     CALL c0de/security/HAS_SECRET
         PARAMETER name "mailPassword" ;
@@ -4497,9 +4506,12 @@ BEGIN
         PARAMETER server server ;
         PARAMETER port port ;
         RESULT smtp smtp
+    CALL c0de/strings/CHR
+        PARAMETER code 10 ;
+        RESULT result nl
     FOR i INTEGER 1 ; lines ;
     BEGIN
-        ASSIGN text text ⊕ "Line " ⊕ i ⊕ ": the farm is fine.\n" ;
+        ASSIGN text text ⊕ "Line " ⊕ i ⊕ ": the farm is fine." ⊕ nl ;
     END FOR
     CALL c0de_net/mail/SMTP_SEND problem
         PARAMETER server smtp ;

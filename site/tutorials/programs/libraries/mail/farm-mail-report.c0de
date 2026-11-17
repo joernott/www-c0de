@@ -1,5 +1,6 @@
 PROGRAM farmmail
 NOOP
+INCLUDE c0de/strings
 INCLUDE c0de_net/mail
 NOOP
 FUNCTION report
@@ -16,13 +17,19 @@ BEGIN
         "alex@example.com"
     END VARIABLE
     VARIABLE text STRING
+    VARIABLE nl CHAR
     ASSIGN smtp.server server ;
     ASSIGN smtp.port port ;
     ASSIGN smtp.security "tls" ;
     ASSIGN smtp.user "steve@example.com" ;
     ASSIGN smtp.password mailPassword ;
     ASSIGN smtp.from "Farm computer <steve@example.com>" ;
-    ASSIGN text "Good morning!\n\nIn the barn today:\n" ⊕ wheat ⊕ " wheat\n" ⊕ carrots ⊕ " carrots\n\nYour farm" ;
+    CALL c0de/strings/CHR
+        PARAMETER code 10 ;
+        RESULT result nl
+    ASSIGN text "Good morning!" ⊕ nl ⊕ nl ⊕ "In the barn today:" ⊕ nl ;
+    ASSIGN text text ⊕ wheat ⊕ " wheat" ⊕ nl ⊕ carrots ⊕ " carrots" ⊕ nl ;
+    ASSIGN text text ⊕ nl ⊕ "Your farm" ;
     CALL c0de_net/mail/SMTP_SEND
         PARAMETER server smtp ;
         PARAMETER to "steve@example.com" ;

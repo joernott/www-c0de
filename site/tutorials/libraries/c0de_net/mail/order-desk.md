@@ -58,9 +58,9 @@ Press it again for the next order. When all are done, it says `No open orders`.
 ## How it works
 
 - **IMAP_SELECT** without a `folder` selects INBOX and returns its **MAILBOX**: `messages`, `unseen`, `recent`, `uid_next` and `uid_validity`. After the CALL, `imap.folder` is `"INBOX"`.
-- **The criteria** `UNSEEN SUBJECT Order:` are words of IMAP, and all of them must match: unread, with `Order:` in the subject. Others are `SEEN`, `FLAGGED`, `UNANSWERED`, `FROM alex`, `SINCE 1-Nov-2026` and more – the page of [IMAP_SEARCH](/c0de_net/mail/imap_search) lists them. A text with spaces goes in double quotes, written `\"` in a text: `"SUBJECT \"wheat order\""`.
+- **The criteria** `UNSEEN SUBJECT Order:` are words of IMAP, and all of them must match: unread, with `Order:` in the subject. Others are `SEEN`, `FLAGGED`, `UNANSWERED`, `FROM alex`, `SINCE 1-Nov-2026` and more – the page of [IMAP_SEARCH](/c0de_net/mail/imap_search) lists them. A text with spaces goes in double quotes: type `SUBJECT "wheat order"` in the dialog of the literal, which the text notation writes as `"SUBJECT \"wheat order\""`.
 - **IMAP_FETCH** returns a list of **MAIL** structs: `uid`, `from`, `to`, `cc`, `subject`, `date`, `text`, `flags` and `size`. With `text` FALSE, it reads everything but the text, which is faster and leaves the message **unseen** – your mail program still shows it as new. In `deliver`, it reads the text, and the message becomes `\Seen`, as when you open it.
-- **IMAP_STORE** adds flags by default. In the text notation, a backslash is written twice: `"\\Flagged"` is the flag `\Flagged`. `mode "remove"` takes a flag away, `mode "set"` replaces all of them.
+- **IMAP_STORE** adds flags by default. In the dialog of the literal, type `\Flagged`; the text notation of the program writes the backslash twice, `"\\Flagged"`. `mode "remove"` takes a flag away, `mode "set"` replaces all of them.
 - **IMAP_MOVE** puts the messages into another folder of the same mailbox. In INBOX, they are gone; in **Orders**, they get new UIDs.
 - **`deliver`** selects **Orders**, searches `FLAGGED UNANSWERED` and takes the first UID, `uids[0]` – the UIDs come oldest first. After showing the order, it adds `\Answered` and removes `\Flagged`, so the next press shows the next one.
 
@@ -71,7 +71,7 @@ The functions take one UID or a list, so `uids[0]` and `uids` both work.
 1. The orders should also be shown with their text when they arrive.
 
 ::: details Solution
-Leave out `PARAMETER text FALSE ;` in `orders`, and print `letter.text` in the EACH loop. Mind that this marks every new order as seen. A laptop has 20 rows, so long texts scroll away – print only the first line: find the first `"\n"` with [INSTR](/c0de/strings/instr) of c0de/strings and cut the text there with [LEFT](/c0de/strings/left).
+Leave out `PARAMETER text FALSE ;` in `orders`, and print `letter.text` in the EACH loop. Mind that this marks every new order as seen. A laptop has 20 rows, so long texts scroll away – print only the first line: find the first line break, [CHR](/c0de/strings/chr) 10, with [INSTR](/c0de/strings/instr) of c0de/strings and cut the text there with [LEFT](/c0de/strings/left).
 :::
 
 2. Only orders from your neighbours should count, not the ones from strangers.

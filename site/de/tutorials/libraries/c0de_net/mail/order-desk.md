@@ -58,9 +58,9 @@ Drück ihn noch einmal für die nächste Bestellung. Wenn alle erledigt sind, sa
 ## So funktioniert es
 
 - **IMAP_SELECT** ohne `folder` wählt INBOX und gibt ihre **MAILBOX** zurück: `messages`, `unseen`, `recent`, `uid_next` und `uid_validity`. Nach dem CALL ist `imap.folder` gleich `"INBOX"`.
-- **Die Kriterien** `UNSEEN SUBJECT Order:` sind Wörter von IMAP, und alle müssen passen: ungelesen, mit `Order:` im Betreff. Andere sind `SEEN`, `FLAGGED`, `UNANSWERED`, `FROM alex`, `SINCE 1-Nov-2026` und mehr – die Seite von [IMAP_SEARCH](/de/c0de_net/mail/imap_search) listet sie. Ein Text mit Leerzeichen kommt in doppelte Anführungszeichen, in einem Text als `\"` geschrieben: `"SUBJECT \"wheat order\""`.
+- **Die Kriterien** `UNSEEN SUBJECT Order:` sind Wörter von IMAP, und alle müssen passen: ungelesen, mit `Order:` im Betreff. Andere sind `SEEN`, `FLAGGED`, `UNANSWERED`, `FROM alex`, `SINCE 1-Nov-2026` und mehr – die Seite von [IMAP_SEARCH](/de/c0de_net/mail/imap_search) listet sie. Ein Text mit Leerzeichen kommt in doppelte Anführungszeichen: Tippe `SUBJECT "wheat order"` in den Dialog des Literals, was die Textschreibweise als `"SUBJECT \"wheat order\""` schreibt.
 - **IMAP_FETCH** gibt eine Liste von **MAIL**-Structs zurück: `uid`, `from`, `to`, `cc`, `subject`, `date`, `text`, `flags` und `size`. Mit `text` FALSE liest es alles außer dem Text, was schneller ist und die Nachricht **ungelesen** lässt – dein Mailprogramm zeigt sie weiter als neu. In `deliver` liest es den Text, und die Nachricht wird `\Seen`, wie wenn du sie öffnest.
-- **IMAP_STORE** fügt Flags standardmäßig hinzu. In der Textschreibweise wird ein Backslash doppelt geschrieben: `"\\Flagged"` ist das Flag `\Flagged`. `mode "remove"` nimmt ein Flag weg, `mode "set"` ersetzt alle.
+- **IMAP_STORE** fügt Flags standardmäßig hinzu. Im Dialog des Literals tippst du `\Flagged`; die Textschreibweise des Programms schreibt den Backslash doppelt, `"\\Flagged"`. `mode "remove"` nimmt ein Flag weg, `mode "set"` ersetzt alle.
 - **IMAP_MOVE** legt die Nachrichten in einen anderen Ordner desselben Postfachs. In INBOX sind sie weg; in **Orders** bekommen sie neue UIDs.
 - **`deliver`** wählt **Orders**, sucht `FLAGGED UNANSWERED` und nimmt die erste UID, `uids[0]` – die UIDs kommen älteste zuerst. Nach dem Anzeigen fügt es `\Answered` hinzu und entfernt `\Flagged`, damit der nächste Druck die nächste zeigt.
 
@@ -71,7 +71,7 @@ Die Funktionen nehmen eine UID oder eine Liste, `uids[0]` und `uids` gehen also 
 1. Die Bestellungen sollen beim Eintreffen gleich mit ihrem Text gezeigt werden.
 
 ::: details Lösung
-Lass in `orders` die Zeile `PARAMETER text FALSE ;` weg und gib in der EACH-Schleife `letter.text` aus. Bedenke, dass dadurch jede neue Bestellung gelesen ist. Ein Laptop hat 20 Zeilen, lange Texte rollen also weg – gib nur die erste Zeile aus: Finde das erste `"\n"` mit [INSTR](/de/c0de/strings/instr) aus c0de/strings und schneide den Text dort mit [LEFT](/de/c0de/strings/left) ab.
+Lass in `orders` die Zeile `PARAMETER text FALSE ;` weg und gib in der EACH-Schleife `letter.text` aus. Bedenke, dass dadurch jede neue Bestellung gelesen ist. Ein Laptop hat 20 Zeilen, lange Texte rollen also weg – gib nur die erste Zeile aus: Finde den ersten Zeilenumbruch, [CHR](/de/c0de/strings/chr) 10, mit [INSTR](/de/c0de/strings/instr) aus c0de/strings und schneide den Text dort mit [LEFT](/de/c0de/strings/left) ab.
 :::
 
 2. Nur Bestellungen deiner Nachbarn sollen zählen, nicht die von Fremden.

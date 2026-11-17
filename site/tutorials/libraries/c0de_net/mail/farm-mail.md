@@ -6,7 +6,7 @@ description: Your farm writes you a mail every morning – an SMTP_SERVER with t
 
 You're away from the server, and your farm keeps working. This recipe makes it write you a short report: what's in the barn today, sent as a real mail to your inbox, with a copy for your neighbour. You read it on your phone like any other message.
 
-**Functions:** [SMTP_SERVER](/c0de_net/mail/smtp_server), [SMTP_SEND](/c0de_net/mail/smtp_send), and [SECRET](/c0de/reference/data#secret) for the password from the vault
+**Functions:** [SMTP_SERVER](/c0de_net/mail/smtp_server), [SMTP_SEND](/c0de_net/mail/smtp_send), [SECRET](/c0de/reference/data#secret) for the password from the vault, and [CHR](/c0de/strings/chr) of c0de/strings
 
 ::: info What you need
 
@@ -55,7 +55,7 @@ Your farm
 - **`smtp.security "tls"`** encrypts the connection from the start, which is what port 465 expects. With `starttls`, the default, the connection starts unencrypted on port 587 and is encrypted before the login. `none` sends everything readable – only for a server in your home network. `port 0` picks 465 for `tls` and 587 otherwise.
 - **`smtp.from`** is the sender with a name in front of the address, `Farm computer <steve@example.com>`. Most providers only accept addresses of your own account as sender.
 - **`SECRET mailPassword STRING`** reads the password from your vault into a variable that only lives in this function. If it isn't there, the line raises SECRET_NOT_FOUND – [When mail fails](/tutorials/libraries/c0de_net/mail/mail-errors) checks that first.
-- **`\n`** in a text is a line break. A mail is plain text: no colours, no pictures, no attachments.
+- **`nl`** is a line break: [CHR](/c0de/strings/chr) of c0de/strings with the code 10. The dialog of a literal takes what you type as it is, so a line break can't be typed into a text; the program joins it in with `⊕`. A mail is plain text: no colours, no pictures, no attachments.
 - **`to`** takes one address as a text, **`cc`** a list of addresses, here the variable `helpers` with its value in a BEGIN block. Everybody sees the addresses of `to` and `cc`.
 - **`reply_to`** says where answers go. Without it, they go to the sender – here that's the same, so you may leave it out; it helps when the farm sends from another account than yours.
 - **`id`**, the Message-ID, is how mail programs link an answer to its message. Keep it if you want to recognize answers later.

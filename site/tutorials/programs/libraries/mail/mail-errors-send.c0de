@@ -1,6 +1,7 @@
 PROGRAM mailcheck
 NOOP
 INCLUDE c0de/security
+INCLUDE c0de/strings
 INCLUDE c0de_net/mail
 NOOP
 FUNCTION explain
@@ -72,6 +73,7 @@ BEGIN
     VARIABLE problem ERROR
     VARIABLE text STRING
     VARIABLE message STRING
+    VARIABLE nl CHAR
     CALL CLS
     CALL c0de/security/HAS_SECRET
         PARAMETER name "mailPassword" ;
@@ -86,9 +88,12 @@ BEGIN
         PARAMETER server server ;
         PARAMETER port port ;
         RESULT smtp smtp
+    CALL c0de/strings/CHR
+        PARAMETER code 10 ;
+        RESULT result nl
     FOR i INTEGER 1 ; lines ;
     BEGIN
-        ASSIGN text text ⊕ "Line " ⊕ i ⊕ ": the farm is fine.\n" ;
+        ASSIGN text text ⊕ "Line " ⊕ i ⊕ ": the farm is fine." ⊕ nl ;
     END FOR
     CALL c0de_net/mail/SMTP_SEND problem
         PARAMETER server smtp ;

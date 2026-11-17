@@ -132,22 +132,31 @@ programs:
     built: 2026-11-14
   - file: tutorials/programs/libraries/strings/checking-input-signup.c0de
     sheet: 86
+    built: 2026-11-17
   - file: tutorials/programs/libraries/minecraft/copying-signs-copy.c0de
     sheet: 88
+    built: 2026-11-17
   - file: tutorials/programs/libraries/minecraft/server-commands-morning.c0de
     sheet: 90
+    built: 2026-11-17
   - file: tutorials/programs/libraries/security/password-door-door.c0de
     sheet: 92
+    built: 2026-11-17
   - file: tutorials/programs/libraries/security/keeping-keys-keys.c0de
     sheet: 94
+    built: 2026-11-17
   - file: tutorials/programs/libraries/mail/farm-mail-report.c0de
     sheet: 96
+    built: 2026-11-17
   - file: tutorials/programs/libraries/mail/order-desk-orders.c0de
     sheet: 98
+    built: 2026-11-17
   - file: tutorials/programs/libraries/mail/tidy-mailbox-cleanup.c0de
     sheet: 100
+    built: 2026-11-17
   - file: tutorials/programs/libraries/mail/mail-errors-send.c0de
     sheet: 102
+    built: 2026-11-17
 shots:
   - before-you-start-new-world
   - before-you-start-creative-tab

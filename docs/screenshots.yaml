@@ -4031,6 +4031,7 @@ screenshots:
     code: |
       PROGRAM farmmail
       NOOP
+      INCLUDE c0de/strings
       INCLUDE c0de_net/mail
       NOOP
       FUNCTION report
@@ -4047,13 +4048,19 @@ screenshots:
               "alex@example.com"
           END VARIABLE
           VARIABLE text STRING
+          VARIABLE nl CHAR
           ASSIGN smtp.server server ;
           ASSIGN smtp.port port ;
           ASSIGN smtp.security "tls" ;
           ASSIGN smtp.user "steve@example.com" ;
           ASSIGN smtp.password mailPassword ;
           ASSIGN smtp.from "Farm computer <steve@example.com>" ;
-          ASSIGN text "Good morning!\n\nIn the barn today:\n" ⊕ wheat ⊕ " wheat\n" ⊕ carrots ⊕ " carrots\n\nYour farm" ;
+          CALL c0de/strings/CHR
+              PARAMETER code 10 ;
+              RESULT result nl
+          ASSIGN text "Good morning!" ⊕ nl ⊕ nl ⊕ "In the barn today:" ⊕ nl ;
+          ASSIGN text text ⊕ wheat ⊕ " wheat" ⊕ nl ⊕ carrots ⊕ " carrots" ⊕ nl ;
+          ASSIGN text text ⊕ nl ⊕ "Your farm" ;
           CALL c0de_net/mail/SMTP_SEND
               PARAMETER server smtp ;
               PARAMETER to "steve@example.com" ;
@@ -4278,6 +4285,7 @@ screenshots:
       PROGRAM mailcheck
       NOOP
       INCLUDE c0de/security
+      INCLUDE c0de/strings
       INCLUDE c0de_net/mail
       NOOP
       FUNCTION explain
@@ -4349,6 +4357,7 @@ screenshots:
           VARIABLE problem ERROR
           VARIABLE text STRING
           VARIABLE message STRING
+          VARIABLE nl CHAR
           CALL CLS
           CALL c0de/security/HAS_SECRET
               PARAMETER name "mailPassword" ;
@@ -4363,9 +4372,12 @@ screenshots:
               PARAMETER server server ;
               PARAMETER port port ;
               RESULT smtp smtp
+          CALL c0de/strings/CHR
+              PARAMETER code 10 ;
+              RESULT result nl
           FOR i INTEGER 1 ; lines ;
           BEGIN
-              ASSIGN text text ⊕ "Line " ⊕ i ⊕ ": the farm is fine.\n" ;
+              ASSIGN text text ⊕ "Line " ⊕ i ⊕ ": the farm is fine." ⊕ nl ;
           END FOR
           CALL c0de_net/mail/SMTP_SEND problem
               PARAMETER server smtp ;
@@ -12185,7 +12197,7 @@ programs:
     function: signup
     sheet: 86
     x: 2752
-    built: null
+    built: 2026-11-17
     code: |
       PROGRAM checking
       NOOP
@@ -12458,7 +12470,7 @@ programs:
     function: copy
     sheet: 88
     x: 2816
-    built: null
+    built: 2026-11-17
     code: |
       PROGRAM copier
       NOOP
@@ -12610,7 +12622,7 @@ programs:
     function: morning
     sheet: 90
     x: 2880
-    built: null
+    built: 2026-11-17
     code: |
       PROGRAM goodmorning
       NOOP
@@ -12716,7 +12728,7 @@ programs:
     function: open
     sheet: 92
     x: 2944
-    built: null
+    built: 2026-11-17
     code: |
       PROGRAM passdoor
       NOOP
@@ -13036,7 +13048,7 @@ programs:
     function: store
     sheet: 94
     x: 3008
-    built: null
+    built: 2026-11-17
     code: |
       PROGRAM keys
       NOOP
@@ -13399,10 +13411,11 @@ programs:
     function: report
     sheet: 96
     x: 3072
-    built: null
+    built: 2026-11-17
     code: |
       PROGRAM farmmail
       NOOP
+      INCLUDE c0de/strings
       INCLUDE c0de_net/mail
       NOOP
       FUNCTION report
@@ -13419,13 +13432,19 @@ programs:
               "alex@example.com"
           END VARIABLE
           VARIABLE text STRING
+          VARIABLE nl CHAR
           ASSIGN smtp.server server ;
           ASSIGN smtp.port port ;
           ASSIGN smtp.security "tls" ;
           ASSIGN smtp.user "steve@example.com" ;
           ASSIGN smtp.password mailPassword ;
           ASSIGN smtp.from "Farm computer <steve@example.com>" ;
-          ASSIGN text "Good morning!\n\nIn the barn today:\n" ⊕ wheat ⊕ " wheat\n" ⊕ carrots ⊕ " carrots\n\nYour farm" ;
+          CALL c0de/strings/CHR
+              PARAMETER code 10 ;
+              RESULT result nl
+          ASSIGN text "Good morning!" ⊕ nl ⊕ nl ⊕ "In the barn today:" ⊕ nl ;
+          ASSIGN text text ⊕ wheat ⊕ " wheat" ⊕ nl ⊕ carrots ⊕ " carrots" ⊕ nl ;
+          ASSIGN text text ⊕ nl ⊕ "Your farm" ;
           CALL c0de_net/mail/SMTP_SEND
               PARAMETER server smtp ;
               PARAMETER to "steve@example.com" ;
@@ -13440,6 +13459,7 @@ programs:
     disk: |
       PROGRAM: farmmail
       INCLUDE:
+        - c0de/strings
         - c0de_net/mail
       code:
         - keyword: NOOP
@@ -13485,6 +13505,9 @@ programs:
             - keyword: VARIABLE
               name: text
               type: STRING
+            - keyword: VARIABLE
+              name: nl
+              type: CHAR
             - keyword: ASSIGN
               name: smtp.server
               expression: server
@@ -13503,10 +13526,25 @@ programs:
             - keyword: ASSIGN
               name: smtp.from
               expression: '"Farm computer <steve@example.com>"'
+            - keyword: CALL
+              name: c0de/strings/CHR
+              parameters:
+                - keyword: PARAMETER
+                  name: code
+                  expression: '10'
+              results:
+                - keyword: RESULT
+                  name: result
+                  target: nl
             - keyword: ASSIGN
               name: text
-              expression: '"Good morning!\n\nIn the barn today:\n" ⊕ wheat ⊕ " wheat\n"
-                ⊕ carrots ⊕ " carrots\n\nYour farm"'
+              expression: '"Good morning!" ⊕ nl ⊕ nl ⊕ "In the barn today:" ⊕ nl'
+            - keyword: ASSIGN
+              name: text
+              expression: text ⊕ wheat ⊕ " wheat" ⊕ nl ⊕ carrots ⊕ " carrots" ⊕ nl
+            - keyword: ASSIGN
+              name: text
+              expression: text ⊕ nl ⊕ "Your farm"
             - keyword: CALL
               name: c0de_net/mail/SMTP_SEND
               parameters:
@@ -13543,7 +13581,7 @@ programs:
     function: orders
     sheet: 98
     x: 3136
-    built: null
+    built: 2026-11-17
     code: |
       PROGRAM orderdesk
       NOOP
@@ -13953,7 +13991,7 @@ programs:
     function: cleanup
     sheet: 100
     x: 3200
-    built: null
+    built: 2026-11-17
     code: |
       PROGRAM tidymail
       NOOP
@@ -14241,11 +14279,12 @@ programs:
     function: send
     sheet: 102
     x: 3264
-    built: null
+    built: 2026-11-17
     code: |
       PROGRAM mailcheck
       NOOP
       INCLUDE c0de/security
+      INCLUDE c0de/strings
       INCLUDE c0de_net/mail
       NOOP
       FUNCTION explain
@@ -14317,6 +14356,7 @@ programs:
           VARIABLE problem ERROR
           VARIABLE text STRING
           VARIABLE message STRING
+          VARIABLE nl CHAR
           CALL CLS
           CALL c0de/security/HAS_SECRET
               PARAMETER name "mailPassword" ;
@@ -14331,9 +14371,12 @@ programs:
               PARAMETER server server ;
               PARAMETER port port ;
               RESULT smtp smtp
+          CALL c0de/strings/CHR
+              PARAMETER code 10 ;
+              RESULT result nl
           FOR i INTEGER 1 ; lines ;
           BEGIN
-              ASSIGN text text ⊕ "Line " ⊕ i ⊕ ": the farm is fine.\n" ;
+              ASSIGN text text ⊕ "Line " ⊕ i ⊕ ": the farm is fine." ⊕ nl ;
           END FOR
           CALL c0de_net/mail/SMTP_SEND problem
               PARAMETER server smtp ;
@@ -14356,6 +14399,7 @@ programs:
       PROGRAM: mailcheck
       INCLUDE:
         - c0de/security
+        - c0de/strings
         - c0de_net/mail
       code:
         - keyword: NOOP
@@ -14504,6 +14548,9 @@ programs:
             - keyword: VARIABLE
               name: message
               type: STRING
+            - keyword: VARIABLE
+              name: nl
+              type: CHAR
             - keyword: CALL
               name: CLS
             - keyword: CALL
@@ -14540,6 +14587,16 @@ programs:
                 - keyword: RESULT
                   name: smtp
                   target: smtp
+            - keyword: CALL
+              name: c0de/strings/CHR
+              parameters:
+                - keyword: PARAMETER
+                  name: code
+                  expression: '10'
+              results:
+                - keyword: RESULT
+                  name: result
+                  target: nl
             - keyword: FOR
               name: i
               type: INTEGER
@@ -14548,7 +14605,7 @@ programs:
               code:
                 - keyword: ASSIGN
                   name: text
-                  expression: 'text ⊕ "Line " ⊕ i ⊕ ": the farm is fine.\n"'
+                  expression: 'text ⊕ "Line " ⊕ i ⊕ ": the farm is fine." ⊕ nl'
             - keyword: CALL
               name: c0de_net/mail/SMTP_SEND
               error: problem

@@ -50,8 +50,8 @@ The order of the first two lines depends on the order in which the server lists 
 
 - **The names** of the archives are made from the parameter `year`: `"Archive " ⊕ ( year - 2 )` is `"Archive 2024"`. The parentheses make sure the year is calculated before it is joined to the text.
 - **IMAP_LIST** with `Archive*` returns the names of the archives only. EACH goes through them: the oldest is deleted, and **Archive** is renamed to the year before and made anew with IMAP_CREATE.
-- **IMAP_SELECT** selects INBOX, so the functions for messages know where to work. The criteria `SEEN SUBJECT "Village news"` find the news you've read; the quotes keep the two words together, and inside the text of the program they are written `\"`.
-- **IMAP_STORE** adds `\Deleted` to them, written `"\\Deleted"`, and **IMAP_EXPUNGE** removes them and returns how many – the result `removed`.
+- **IMAP_SELECT** selects INBOX, so the functions for messages know where to work. The criteria `SEEN SUBJECT "Village news"` find the news you've read; the quotes keep the two words together. In the dialog of the literal you type them as they are; the text notation of the program writes them `\"`.
+- **IMAP_STORE** adds `\Deleted` to them – typed `\Deleted` in the dialog, written `"\\Deleted"` in the text notation – and **IMAP_EXPUNGE** removes them and returns how many – the result `removed`.
 - **IMAP_STATUS** reads the MAILBOX of INBOX at the end. Unlike IMAP_SELECT, it doesn't change `imap.folder`.
 
 ## Try it yourself

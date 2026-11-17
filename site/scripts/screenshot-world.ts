@@ -457,6 +457,10 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const sheetOf = new Map(world.programs.map((p) => [p.file, p]))
   const blocks = new Map<string, Program['blocks']>()
   for (const [file, x, z, block] of helper(classpath, files)) {
+    // A line ends at the edge of its sheet; the runner doesn't know sheets and accepts longer ones
+    if (Number(x) >= sheetWidth) {
+      throw new Error(`${file}: line ${z} is wider than a sheet; split it into shorter lines`)
+    }
     const list = blocks.get(file!) ?? []
     list.push({ x: Number(x), z: Number(z), block: block! })
     blocks.set(file!, list)

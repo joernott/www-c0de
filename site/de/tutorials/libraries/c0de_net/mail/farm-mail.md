@@ -6,7 +6,7 @@ description: Deine Farm schreibt dir jeden Morgen eine Mail – ein SMTP_SERVER 
 
 Du bist nicht auf dem Server, und deine Farm arbeitet weiter. Dieses Rezept lässt sie dir einen kurzen Bericht schreiben: was heute in der Scheune liegt, als echte Mail in dein Postfach, mit einer Kopie für deinen Nachbarn. Du liest sie auf dem Handy wie jede andere Nachricht.
 
-**Funktionen:** [SMTP_SERVER](/de/c0de_net/mail/smtp_server), [SMTP_SEND](/de/c0de_net/mail/smtp_send) und [SECRET](/de/c0de/reference/data#secret) für das Passwort aus dem Tresor
+**Funktionen:** [SMTP_SERVER](/de/c0de_net/mail/smtp_server), [SMTP_SEND](/de/c0de_net/mail/smtp_send), [SECRET](/de/c0de/reference/data#secret) für das Passwort aus dem Tresor und [CHR](/de/c0de/strings/chr) aus c0de/strings
 
 ::: info Was du brauchst
 
@@ -55,7 +55,7 @@ Your farm
 - **`smtp.security "tls"`** verschlüsselt die Verbindung von Anfang an, wie es Port 465 erwartet. Mit `starttls`, der Vorgabe, beginnt die Verbindung auf Port 587 unverschlüsselt und wird vor der Anmeldung verschlüsselt. `none` schickt alles lesbar – nur für einen Server in deinem Heimnetz. `port 0` wählt 465 bei `tls` und sonst 587.
 - **`smtp.from`** ist der Absender mit einem Namen vor der Adresse, `Farm computer <steve@example.com>`. Die meisten Anbieter nehmen als Absender nur Adressen deines eigenen Kontos an.
 - **`SECRET mailPassword STRING`** liest das Passwort aus deinem Tresor in eine Variable, die nur in dieser Funktion lebt. Fehlt es, löst die Zeile SECRET_NOT_FOUND aus – [Wenn Mails scheitern](/de/tutorials/libraries/c0de_net/mail/mail-errors) prüft das vorher.
-- **`\n`** in einem Text ist ein Zeilenumbruch. Eine Mail ist reiner Text: keine Farben, keine Bilder, keine Anhänge.
+- **`nl`** ist ein Zeilenumbruch: [CHR](/de/c0de/strings/chr) aus c0de/strings mit dem Code 10. Der Dialog eines Literals nimmt, was du tippst, so wie es ist, deshalb lässt sich ein Zeilenumbruch nicht in einen Text tippen; das Programm hängt ihn mit `⊕` an. Eine Mail ist reiner Text: keine Farben, keine Bilder, keine Anhänge.
 - **`to`** nimmt eine Adresse als Text, **`cc`** eine Liste von Adressen, hier die Variable `helpers` mit ihrem Wert in einem BEGIN-Block. Die Adressen von `to` und `cc` sehen alle.
 - **`reply_to`** sagt, wohin Antworten gehen. Ohne geht es an den Absender – hier ist das dasselbe, du kannst es also weglassen; es hilft, wenn die Farm von einem anderen Konto sendet als deinem.
 - **`id`**, die Message-ID, ist das, womit Mailprogramme eine Antwort ihrer Nachricht zuordnen. Heb sie auf, wenn du Antworten später erkennen willst.

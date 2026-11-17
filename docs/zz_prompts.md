@@ -286,3 +286,5 @@ the fabric server on the VM does not run, can you start it, so I can take the sc
 yes, add c0de net 0.4.0 to the server
 
 I have been looking at the screenshots.md and it looks like you messed up the sheet numbers, most likely by inserting new examples between existing entries but wthout adding sheets in the actual dimension.. Please fix the document to match the actual sheets in the dimension and append new entries always at the end of the document. That also makes it much easier for me to spot what needs to be done.
+
+yes, build the new sheets on the server
