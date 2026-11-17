@@ -1,0 +1,225 @@
+# The screenshot world as it is built on the 1.21.1 Fabric test server (tasks 12.3 and 13.11.1),
+# kept by site/scripts/screenshot-world.ts. programs: the sheet of every program, which never changes;
+# a new program gets the next free sheet after the last one, and built is the day its sheet was built
+# (none yet: function c0de_screenshots:build_new builds it, then node scripts/screenshot-world.ts --built).
+# shots: the order of the to-do list docs/screenshots.md; new screenshots are added at its end.
+programs:
+  - file: tutorials/programs/learning/first-program-sign.c0de
+    sheet: 2
+    built: 2026-11-14
+  - file: tutorials/programs/learning/colors-sign.c0de
+    sheet: 4
+    built: 2026-11-14
+  - file: tutorials/programs/learning/variables-sign.c0de
+    sheet: 6
+    built: 2026-11-14
+  - file: tutorials/programs/learning/calculating-stacks.c0de
+    sheet: 8
+    built: 2026-11-14
+  - file: tutorials/programs/learning/parameters-stacks.c0de
+    sheet: 10
+    built: 2026-11-14
+  - file: tutorials/programs/learning/asking-stacks.c0de
+    sheet: 12
+    built: 2026-11-14
+  - file: tutorials/programs/learning/decisions-guard.c0de
+    sheet: 14
+    built: 2026-11-14
+  - file: tutorials/programs/learning/counting-loops-countdown.c0de
+    sheet: 16
+    built: 2026-11-14
+  - file: tutorials/programs/learning/condition-loops-halving.c0de
+    sheet: 18
+    built: 2026-11-14
+  - file: tutorials/programs/learning/functions-frame.c0de
+    sheet: 20
+    built: 2026-11-14
+  - file: tutorials/programs/learning/lists-notes.c0de
+    sheet: 22
+    built: 2026-11-14
+  - file: tutorials/programs/learning/tables-shop.c0de
+    sheet: 24
+    built: 2026-11-14
+  - file: tutorials/programs/learning/errors-broken.c0de
+    sheet: 26
+    built: 2026-11-14
+  - file: tutorials/programs/learning/libraries-dice.c0de
+    sheet: 28
+    built: 2026-11-14
+  - file: tutorials/programs/learning/guess-the-number-guess.c0de
+    sheet: 30
+    built: 2026-11-14
+  - file: tutorials/programs/learning/guarded-door-door.c0de
+    sheet: 32
+    built: 2026-11-14
+  - file: tutorials/programs/libraries/math/dice-roll.c0de
+    sheet: 34
+    built: 2026-11-14
+  - file: tutorials/programs/libraries/math/circle-ring.c0de
+    sheet: 36
+    built: 2026-11-14
+  - file: tutorials/programs/libraries/math/growth-farm.c0de
+    sheet: 38
+    built: 2026-11-14
+  - file: tutorials/programs/libraries/strings/name-board-frame.c0de
+    sheet: 40
+    built: 2026-11-14
+  - file: tutorials/programs/libraries/strings/commands-terminal.c0de
+    sheet: 42
+    built: 2026-11-14
+  - file: tutorials/programs/libraries/strings/secret-messages-caesar.c0de
+    sheet: 44
+    built: 2026-11-14
+  - file: tutorials/programs/libraries/strings/numbers-as-text-table.c0de
+    sheet: 46
+    built: 2026-11-14
+  - file: tutorials/programs/libraries/strings/saving-data-highscores.c0de
+    sheet: 48
+    built: 2026-11-14
+  - file: tutorials/programs/libraries/time/clock-wall.c0de
+    sheet: 50
+    built: 2026-11-14
+  - file: tutorials/programs/libraries/time/stopwatch-buttons.c0de
+    sheet: 52
+    built: 2026-11-14
+  - file: tutorials/programs/libraries/time/game-time-bounce.c0de
+    sheet: 54
+    built: 2026-11-14
+  - file: tutorials/programs/libraries/minecraft/doorbell-bell.c0de
+    sheet: 56
+    built: 2026-11-14
+  - file: tutorials/programs/libraries/minecraft/combination-lock-lock.c0de
+    sheet: 58
+    built: 2026-11-14
+  - file: tutorials/programs/libraries/minecraft/automatic-doors-door.c0de
+    sheet: 60
+    built: 2026-11-14
+  - file: tutorials/programs/libraries/minecraft/watching-farm.c0de
+    sheet: 62
+    built: 2026-11-14
+  - file: tutorials/programs/libraries/minecraft/watching-pen.c0de
+    sheet: 64
+    built: 2026-11-14
+  - file: tutorials/programs/libraries/minecraft/sorting-sorter.c0de
+    sheet: 66
+    built: 2026-11-14
+  - file: tutorials/programs/libraries/minecraft/building-wall.c0de
+    sheet: 68
+    built: 2026-11-14
+  - file: tutorials/programs/libraries/minecraft/building-tower.c0de
+    sheet: 70
+    built: 2026-11-14
+  - file: tutorials/programs/libraries/minecraft/tunnel-digger-dig.c0de
+    sheet: 72
+    built: 2026-11-14
+  - file: tutorials/programs/libraries/minecraft/rewards-spawner.c0de
+    sheet: 74
+    built: 2026-11-14
+  - file: tutorials/programs/libraries/minecraft/rewards-hub.c0de
+    sheet: 76
+    built: 2026-11-14
+  - file: tutorials/programs/libraries/http/weather-wall.c0de
+    sheet: 78
+    built: 2026-11-14
+  - file: tutorials/programs/libraries/http/checking-lamp.c0de
+    sheet: 80
+    built: 2026-11-14
+  - file: tutorials/programs/libraries/http/home-automation-preview.c0de
+    sheet: 82
+    built: 2026-11-14
+  - file: tutorials/programs/libraries/http/up-to-date-check.c0de
+    sheet: 84
+    built: 2026-11-14
+  - file: tutorials/programs/libraries/strings/checking-input-signup.c0de
+    sheet: 86
+  - file: tutorials/programs/libraries/minecraft/copying-signs-copy.c0de
+    sheet: 88
+  - file: tutorials/programs/libraries/minecraft/server-commands-morning.c0de
+    sheet: 90
+  - file: tutorials/programs/libraries/security/password-door-door.c0de
+    sheet: 92
+  - file: tutorials/programs/libraries/security/keeping-keys-keys.c0de
+    sheet: 94
+  - file: tutorials/programs/libraries/mail/farm-mail-report.c0de
+    sheet: 96
+  - file: tutorials/programs/libraries/mail/order-desk-orders.c0de
+    sheet: 98
+  - file: tutorials/programs/libraries/mail/tidy-mailbox-cleanup.c0de
+    sheet: 100
+  - file: tutorials/programs/libraries/mail/mail-errors-send.c0de
+    sheet: 102
+shots:
+  - before-you-start-new-world
+  - before-you-start-creative-tab
+  - before-you-start-sheet
+  - first-program-sign
+  - first-program-result
+  - colors-sign
+  - colors-result
+  - variables-sign
+  - variables-result
+  - calculating-stacks
+  - calculating-result
+  - parameters-stacks
+  - parameters-trigger
+  - asking-input
+  - asking-laptop
+  - decisions-guard-sheet
+  - decisions-guard-wall
+  - counting-loops-countdown-sheet
+  - counting-loops-countdown-wall
+  - condition-loops-halving-sheet
+  - condition-loops-halving-laptop
+  - functions-frame-sheet
+  - functions-frame-wall
+  - lists-notes-sheet
+  - lists-notes-wall
+  - tables-shop-sheet
+  - tables-shop-laptop
+  - errors-broken-sheet
+  - errors-debug-cursor
+  - errors-crash-dialog
+  - libraries-dice-sheet
+  - libraries-dice-chat
+  - guess-the-number-sheet
+  - guess-the-number-laptop
+  - guarded-door-sheet
+  - guarded-door-entrance
+  - next-steps-handbook
+  - dice-display
+  - circle-ring
+  - growth-display
+  - name-board-wall
+  - commands-laptop
+  - secret-messages-laptop
+  - numbers-as-text-laptop
+  - saving-data-io-block
+  - clock-wall
+  - stopwatch-buttons
+  - game-time-bounce
+  - doorbell-door
+  - combination-lock-levers
+  - automatic-doors-door
+  - watching-farm
+  - watching-pen
+  - sorting-chests
+  - building-wall
+  - building-tower
+  - tunnel-digger-tunnel
+  - rewards-pen
+  - rewards-hub
+  - weather-wall
+  - checking-lamp
+  - home-automation-lever
+  - up-to-date-wall
+  - checking-input-laptop
+  - copying-signs-copy
+  - server-commands-morning
+  - password-door-setup
+  - password-door-open
+  - keeping-keys-create
+  - keeping-keys-open
+  - farm-mail-laptop
+  - order-desk-laptop
+  - tidy-mailbox-laptop
+  - mail-errors-laptop

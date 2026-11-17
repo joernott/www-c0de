@@ -14,8 +14,12 @@ properties.
 
 ## The world
 
-- Sheet 0 is empty; the programs are on the even sheets from 2 on, in the order of the pages, so an empty sheet
-  lies between two programs. A sheet starts at x = 32 × its number.
+- Sheet 0 is empty; the programs are on the even sheets from 2 on, so an empty sheet lies between two programs. A
+  sheet starts at x = 32 × its number.
+- The world only grows (task 13.11.1): `world.yaml` keeps the sheet of every program and the order of the to-do
+  list. A program keeps its sheet for good; a new program gets the next free sheet after the last one, and a new
+  screenshot is added at the end of `docs/screenshots.md`, even if its page comes earlier in the tutorials.
+  `built` is the day a sheet was built; the to-do list marks the sheets that aren't built yet.
 - North of every sheet, at z = -3 from x + 5 on: a trigger block with a stone button, a debug trigger block with a
   laptop, a timer block with a lever that is on (it pauses the timer), an I/O block, a disk drive and a gray
   shulker box with a stack of variable, constant and literal items and a disk. The three trigger blocks are set
@@ -40,7 +44,23 @@ $C exec -T c0de-1.21.1-fabric rcon-cli reload
 $C exec -T c0de-1.21.1-fabric rcon-cli "function c0de_screenshots:build"
 ```
 
-The build loads one sheet after the other and takes about half a minute. Afterwards
+The build loads one sheet after the other and takes about half a minute.
+
+## Adding new sheets
+
+The world is there already; only the programs that aren't built yet are added, on their own sheets after the
+last one:
+
+```sh
+# from site/ on Windows
+npm run screenshot-world
+# copy the datapack into the world of the server as above, reload, then
+$C exec -T c0de-1.21.1-fabric rcon-cli "function c0de_screenshots:build_new"
+# when the sheets are there, record them as built and commit world.yaml and the to-do list
+node scripts/screenshot-world.ts --built
+```
+
+`build` would build every sheet again, which only makes sense in a new world. Afterwards
 `function c0de_screenshots:check` counts the blocks of every program whose line number isn't dark green; read the
 counts with `scoreboard players get sheet_<n> c0de_shots`. They are 0, except for the program of the lesson
 Errors, which has its bugs on purpose, and the programs that share a name.

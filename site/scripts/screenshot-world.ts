@@ -13,7 +13,13 @@
 // The blocks come from contrib/screenshots/SheetBlocks.java, which places them like the c0de disk
 // with the classes of the program runner; npm run content downloads the runners.
 //
-// Usage: node scripts/screenshot-world.ts
+// The world on the server only grows (task 13.11.1): contrib/screenshots/world.yaml keeps the sheet
+// of every program and the order of the to-do list. A program keeps its sheet; a new one gets the
+// next free sheet after the last one, and a new screenshot is added at the end of the to-do list, so
+// what is new is easy to spot. function c0de_screenshots:build_new builds the sheets that aren't
+// built yet; --built then records them as built today.
+//
+// Usage: node scripts/screenshot-world.ts [--built]
 import { execFileSync } from 'node:child_process'
 import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { basename, delimiter, dirname, join } from 'node:path'
@@ -50,11 +56,66 @@ interface Shot {
   program?: string // the file of the program in site/
 }
 
+// The world as it is built: the sheet of every program (built: the day it was built) and the order
+// of the screenshots in the to-do list.
+export interface World {
+  programs: { file: string; sheet: number; built?: string }[]
+  shots: string[]
+}
+
+const worldFile = join(contrib, 'world.yaml')
+
+// place gives the programs of files their sheets: the ones in the world keep theirs, new ones get
+// the next free even sheets after the last one. It returns the world with the new programs.
+export function place(world: World, files: string[]): World {
+  const programs = [...world.programs]
+  let last = Math.max(0, ...programs.map((p) => p.sheet))
+  for (const file of files) {
+    if (programs.some((p) => p.file === file)) continue
+    last += 2
+    programs.push({ file, sheet: last })
+  }
+  return { ...world, programs }
+}
+
+// order puts the screenshots in the order of the to-do list: the known ones as before, new ones at
+// the end in the order of the pages. Screenshots that no page shows anymore are left out.
+export function order<T extends { id: string }>(
+  world: World,
+  all: T[],
+): { shots: T[]; ids: string[] } {
+  const byId = new Map(all.map((shot) => [shot.id, shot]))
+  const ids = [
+    ...world.shots.filter((id) => byId.has(id)),
+    ...all.map((shot) => shot.id).filter((id) => !world.shots.includes(id)),
+  ]
+  return { shots: ids.map((id) => byId.get(id)!), ids }
+}
+
+function readWorld(): World {
+  if (!existsSync(worldFile)) return { programs: [], shots: [] }
+  const world = parse(readFileSync(worldFile, 'utf-8')) as Partial<World> | null
+  return { programs: world?.programs ?? [], shots: world?.shots ?? [] }
+}
+
+function writeWorld(world: World) {
+  const head = readFileSync(worldFile, 'utf-8')
+    .split('\n')
+    .filter((line) => line.startsWith('#'))
+  writeFileSync(
+    worldFile,
+    [...head, stringify({ programs: world.programs, shots: world.shots }, { lineWidth: 0 })].join(
+      '\n',
+    ),
+  )
+}
+
 interface Program {
   file: string
   name: string
   function?: string
   sheet: number
+  built?: string
   code: string
   disk?: string // the YAML of the c0de disk; none for a program with errors
   blocks: { x: number; z: number; block: string }[]
@@ -181,15 +242,11 @@ function datapack(programs: Program[]) {
       2,
     ) + '\n',
   )
-  const seconds = Math.ceil(((programs.length + 1) * step + loaded) / 20)
-  const build = [
-    `# Builds the devices of sheet 0 and all ${programs.length} programs with their devices; takes about ${seconds} seconds.`,
-  ]
   const sheets: [number, Program | undefined][] = [
     [0, undefined],
     ...programs.map((p): [number, Program] => [p.sheet, p]),
   ]
-  sheets.forEach(([sheet, program], i) => {
+  for (const [sheet, program] of sheets) {
     const lastZ = Math.max(0, ...(program?.blocks.map((b) => b.z) ?? []))
     const blocks =
       program?.blocks.map((b) =>
@@ -198,14 +255,26 @@ function datapack(programs: Program[]) {
     writeFunction(`sheet/${sheet}/load`, [run(`forceload add ${area(sheet, lastZ)}`)])
     writeFunction(`sheet/${sheet}/place`, [...devices(sheet, program), ...blocks])
     writeFunction(`sheet/${sheet}/unload`, [run(`forceload remove ${area(sheet, lastZ)}`)])
-    build.push(`schedule function ${namespace}:sheet/${sheet}/load ${i * step + 1}t`)
-    build.push(`schedule function ${namespace}:sheet/${sheet}/place ${i * step + 5}t`)
-    build.push(`schedule function ${namespace}:sheet/${sheet}/unload ${i * step + loaded}t`)
-  })
-  build.push(
-    `tellraw @a {"text":"c0de screenshots: building ${programs.length} programs on sheets 2 to ${2 * programs.length}","color":"yellow"}`,
-  )
-  writeFunction('build', build)
+  }
+  // build builds a new world: sheet 0 and all programs; build_new adds the sheets of the programs
+  // that aren't built yet to the world that is there.
+  const schedule = (name: string, chosen: [number, Program | undefined][], what: string) => {
+    const seconds = Math.ceil((chosen.length * step + loaded) / 20)
+    const lines = [`# Builds ${what}; takes about ${seconds} seconds.`]
+    chosen.forEach(([sheet], i) => {
+      lines.push(`schedule function ${namespace}:sheet/${sheet}/load ${i * step + 1}t`)
+      lines.push(`schedule function ${namespace}:sheet/${sheet}/place ${i * step + 5}t`)
+      lines.push(`schedule function ${namespace}:sheet/${sheet}/unload ${i * step + loaded}t`)
+    })
+    const numbers = chosen.filter(([sheet]) => sheet > 0).map(([sheet]) => sheet)
+    lines.push(
+      `tellraw @a {"text":"c0de screenshots: building ${numbers.length} programs on the sheets ${numbers.join(', ') || '–'}","color":"yellow"}`,
+    )
+    writeFunction(name, lines)
+  }
+  schedule('build', sheets, `the devices of sheet 0 and all ${programs.length} programs`)
+  const unbuilt = sheets.filter(([, program]) => program && !program.built)
+  schedule('build_new', unbuilt, `the ${unbuilt.length} programs that aren't built yet`)
 
   // check counts the blocks of every sheet whose line number isn't dark green: blocks that are
   // invalid or incomplete. The NOOP, COMMENT and type blocks have no such state. The counts are
@@ -275,6 +344,13 @@ function activate(program: Program, programs: Program[]): string | undefined {
     : undefined
 }
 
+function unbuiltText(programs: Program[]): string {
+  const unbuilt = programs.filter((p) => !p.built).map((p) => p.sheet)
+  return unbuilt.length === 0
+    ? 'All sheets are built.'
+    : `Not built yet: the sheets ${unbuilt.join(', ')}; \`function c0de_screenshots:build_new\` builds them (contrib/screenshots/README.md).`
+}
+
 function todo(all: Shot[], programs: Program[]): string {
   const byFile = new Map(programs.map((p) => [p.file, p]))
   const md = [
@@ -284,7 +360,7 @@ function todo(all: Shot[], programs: Program[]): string {
     '',
     'The world: every program is on its own sheet of the c0de dimension, built by the datapack of `contrib/screenshots/` (see its README). Sheet 0 is empty, and an empty sheet lies between two programs. North of every sheet, at z = -3 from x + 5 on: a trigger block with a stone button, a debug trigger block with a laptop, a timer block with a lever that is on (so it is paused), an I/O block, a disk drive and a gray shulker box with a stack of variable, constant and literal items and a disk; behind them, at z = -6, a display wall of 4 × 3 blocks in a frame of iron blocks. The three trigger blocks are set to the program and the function of its test.',
     '',
-    `${all.length} screenshots, ${programs.length} programs on sheets 2 to ${2 * programs.length}.`,
+    `${all.length} screenshots, ${programs.length} programs on the sheets 2 to ${Math.max(0, ...programs.map((p) => p.sheet))}. The sheets of the programs never change; new screenshots are added at the end of this list, and their programs get the next free sheets. ${unbuiltText(programs)}`,
     '',
   ]
   let page = ''
@@ -299,7 +375,7 @@ function todo(all: Shot[], programs: Program[]): string {
     if (program) {
       md.push(
         `- Program **${program.name}**, function \`${program.function ?? '–'}\` (\`site/${program.file}\`)`,
-        `- Sheet ${program.sheet}, x = ${program.sheet * sheetWidth}`,
+        `- Sheet ${program.sheet}, x = ${program.sheet * sheetWidth}${program.built ? '' : ' – not built yet: `/function c0de_screenshots:build_new`'}`,
       )
       const command = activate(program, programs)
       if (command) {
@@ -353,6 +429,7 @@ function data(all: Shot[], programs: Program[], tag: string): string {
           function: p.function ?? null,
           sheet: p.sheet,
           x: p.sheet * sheetWidth,
+          built: p.built ?? null,
           code: p.code,
           ...(p.disk ? { disk: p.disk } : {}),
         })),
@@ -364,8 +441,20 @@ function data(all: Shot[], programs: Program[], tag: string): string {
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const { classpath, tag } = runnerClasspath()
-  const all = pages().flatMap(shots)
-  const files = [...new Set(all.flatMap((s) => (s.program ? [s.program] : [])))]
+  const found = pages().flatMap(shots)
+  const files = [...new Set(found.flatMap((s) => (s.program ? [s.program] : [])))]
+  let world = place(readWorld(), files)
+  if (process.argv.includes('--built')) {
+    const today = new Date().toISOString().slice(0, 10)
+    world = {
+      ...world,
+      programs: world.programs.map((p) => (p.built ? p : { ...p, built: today })),
+    }
+  }
+  const ordered = order(world, found)
+  world = { ...world, shots: ordered.ids }
+  const all = ordered.shots
+  const sheetOf = new Map(world.programs.map((p) => [p.file, p]))
   const blocks = new Map<string, Program['blocks']>()
   for (const [file, x, z, block] of helper(classpath, files)) {
     const list = blocks.get(file!) ?? []
@@ -378,26 +467,31 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
       text!.replace(/\\(\\|n)/g, (_, c: string) => (c === 'n' ? '\n' : '\\')),
     ]),
   )
-  const programs = files.map((file, i): Program => {
-    const code = readFileSync(join(site, file), 'utf-8')
-    const optionsFile = join(site, file.replace(/\.c0de$/, '.options.yaml'))
-    const options = existsSync(optionsFile)
-      ? ((parse(readFileSync(optionsFile, 'utf-8')) ?? {}) as { function?: string })
-      : {}
-    return {
-      file,
-      name: code.split('\n')[0]!.split(/\s+/)[1]!,
-      function: options.function,
-      sheet: 2 * (i + 1),
-      code,
-      disk: disks.get(file),
-      blocks: blocks.get(file)!,
-    }
-  })
+  const programs = files
+    .map((file): Program => {
+      const code = readFileSync(join(site, file), 'utf-8')
+      const optionsFile = join(site, file.replace(/\.c0de$/, '.options.yaml'))
+      const options = existsSync(optionsFile)
+        ? ((parse(readFileSync(optionsFile, 'utf-8')) ?? {}) as { function?: string })
+        : {}
+      const placed = sheetOf.get(file)!
+      return {
+        file,
+        name: code.split('\n')[0]!.split(/\s+/)[1]!,
+        function: options.function,
+        sheet: placed.sheet,
+        ...(placed.built ? { built: placed.built } : {}),
+        code,
+        disk: disks.get(file),
+        blocks: blocks.get(file)!,
+      }
+    })
+    .sort((a, b) => a.sheet - b.sheet)
   datapack(programs)
+  writeWorld(world)
   writeFileSync(join(root, 'docs', 'screenshots.md'), todo(all, programs))
   writeFileSync(join(root, 'docs', 'screenshots.yaml'), data(all, programs, tag))
   console.log(
-    `${all.length} screenshots, ${programs.length} programs on sheets 2 to ${2 * programs.length}; datapack in contrib/screenshots/out/`,
+    `${all.length} screenshots, ${programs.length} programs on the sheets 2 to ${Math.max(0, ...programs.map((p) => p.sheet))}. ${unbuiltText(programs)} Datapack in contrib/screenshots/out/`,
   )
 }

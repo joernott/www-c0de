@@ -278,3 +278,11 @@ OK, I triggered the rerun for c0de now.
 I have sorted out vs code, please go ahead with www-c0de
 
 I disabled the various java related extensions
+
+## 2026-11-17 – The test server and the sheets of the screenshot world
+
+the fabric server on the VM does not run, can you start it, so I can take the screenshots
+
+yes, add c0de net 0.4.0 to the server
+
+I have been looking at the screenshots.md and it looks like you messed up the sheet numbers, most likely by inserting new examples between existing entries but wthout adding sheets in the actual dimension.. Please fix the document to match the actual sheets in the dimension and append new entries always at the end of the document. That also makes it much easier for me to spot what needs to be done.
