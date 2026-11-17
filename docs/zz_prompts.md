@@ -288,3 +288,10 @@ yes, add c0de net 0.4.0 to the server
 I have been looking at the screenshots.md and it looks like you messed up the sheet numbers, most likely by inserting new examples between existing entries but wthout adding sheets in the actual dimension.. Please fix the document to match the actual sheets in the dimension and append new entries always at the end of the document. That also makes it much easier for me to spot what needs to be done.
 
 yes, build the new sheets on the server
+
+## 2026-11-17 – Findings while taking the screenshots
+
+I took the first few screenshots and I have three findings:
+- You now configure the timer blocks to the new programs and put a lever on to that is on. Somehow, the blocks don't get that and the new programs just started running on their own (and running into errors)
+- I left the c0de dimension and when I re-entered it, I always ended up at the very beginning when re-entering it. That seems to have changed from the behavior we had before, where you always ended up at the place you left the dimension.
+- I tried to take the screenshot for keeping-keys-open and was asked to enter a password. I intentionally entered the wrong password and the dialog just closed.

@@ -208,6 +208,10 @@ function devices(sheet: number, program?: Program): string[] {
     run(`setblock ${x} ${codeY + 1} -3 minecraft:stone_button[face=floor,facing=south]`),
     run(`setblock ${x + 1} ${codeY} -3 c0de:debug_trigger_block${bound}`),
     run(`setblock ${x + 1} ${codeY + 1} -3 c0de:laptop[facing=south]`),
+    // A timer block takes the signal of the lever when it is new; one that is placed again over
+    // itself keeps running unpowered, so lever and timer go first (task 13.11.3)
+    run(`setblock ${x + 2} ${codeY + 1} -3 minecraft:air`),
+    run(`setblock ${x + 2} ${codeY} -3 minecraft:air`),
     run(`setblock ${x + 2} ${codeY} -3 c0de:timer_block${bound}`),
     // A lever that is on pauses the timer block
     run(`setblock ${x + 2} ${codeY + 1} -3 minecraft:lever[face=floor,facing=south,powered=true]`),
