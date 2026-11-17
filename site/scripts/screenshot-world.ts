@@ -34,6 +34,8 @@ const out = join(contrib, 'out', 'c0de_screenshots')
 const namespace = 'c0de_screenshots'
 const codeY = -3
 const sheetWidth = 32
+// The last x of the code area of a sheet (SheetGeometry.CODE_MAX_X of c0de)
+const codeMaxX = 28
 // The pack format of Minecraft 1.21.1, the version of the screenshots
 const packFormat = 48
 // Ticks between two sheets of the build, and how long a sheet stays loaded for its validation
@@ -461,8 +463,8 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const sheetOf = new Map(world.programs.map((p) => [p.file, p]))
   const blocks = new Map<string, Program['blocks']>()
   for (const [file, x, z, block] of helper(classpath, files)) {
-    // A line ends at the edge of its sheet; the runner doesn't know sheets and accepts longer ones
-    if (Number(x) >= sheetWidth) {
+    // The code area of a sheet ends at x = 28; the runner of c0de 0.6.1 accepts longer lines (c0de task 18.4)
+    if (Number(x) > codeMaxX) {
       throw new Error(`${file}: line ${z} is wider than a sheet; split it into shorter lines`)
     }
     const list = blocks.get(file!) ?? []

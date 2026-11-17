@@ -56,7 +56,8 @@ FUNCTION worthRetrying
     PARAMETER status INTEGER
     RESULT result BOOLEAN
 BEGIN
-    ASSIGN result code = c0de_net/http/REQUEST_FAILED OR code = c0de_net/http/REQUEST_TIMEOUT OR ( code = c0de_net/http/HTTP_STATUS AND ( status = 429 OR status ≥ 500 ) ) ;
+    ASSIGN result code = c0de_net/http/REQUEST_FAILED OR code = c0de_net/http/REQUEST_TIMEOUT OR
+        ( code = c0de_net/http/HTTP_STATUS AND ( status = 429 OR status ≥ 500 ) ) ;
 END FUNCTION
 NOOP
 FUNCTION fetch
