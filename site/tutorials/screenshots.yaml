@@ -1,7 +1,7 @@
 # The screenshots of the tutorials, written by scripts/screenshots.ts from the marks
 # <!-- screenshot: <id> | <description> --> of the pages. Take them as described in
 # docs/tutorials.md ("Screenshots") and save them as the file; the page shows them then.
-# 74 screenshots, 1 missing.
+# 74 screenshots, 0 missing.
 - id: asking-input
   description: 'the open terminal of the laptop while INPUT waits: "How many
     items?" on the screen and the input line "INPUT items (INTEGER):" with 1000
@@ -431,7 +431,7 @@
     - tutorials/learning/next-steps.md
     - de/tutorials/learning/next-steps.md
   file: public/tutorials/screenshots/next-steps-handbook.webp
-  size: missing
+  size: 1280x673
 - id: numbers-as-text-laptop
   description: the terminal of the laptop with the date, the stock table in
     aligned columns and the total

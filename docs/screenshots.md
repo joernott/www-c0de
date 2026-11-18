@@ -1453,7 +1453,7 @@ END FUNCTION
 
 `site/tutorials/learning/next-steps.md`
 
-### [ ] next-steps-handbook
+### [x] next-steps-handbook
 
 the handbook Functions open in the game as a red binder, showing the page of SAY with its parameters and its example
 

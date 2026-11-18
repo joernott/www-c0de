@@ -301,3 +301,7 @@ I took the first few screenshots and I have three findings:
 I did some more tests and created the screenshots for the web server. Let's shelve the c0de-net release until we have something more substantial in it.
 
 Please add the screenshots from the folder minecraft-c0de-net/run/screenshots and continue with the remaining tasks for www-c0de
+
+## 2026-11-18 – Release 0.9.0
+
+I added the two remaining screenshots, please add them and go ahead with the release
