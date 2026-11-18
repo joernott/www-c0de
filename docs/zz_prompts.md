@@ -307,3 +307,7 @@ Please add the screenshots from the folder minecraft-c0de-net/run/screenshots an
 I added the two remaining screenshots, please add them and go ahead with the release
 
 The tag has been pushed and the site is live
+
+## 2026-11-18 – Sprint 14 planned
+
+yes, add tht to the tasks for  sprint 14 but don't start that sprint yet

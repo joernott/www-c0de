@@ -52,6 +52,7 @@ A task is done when
 | 11 | c0de net 0.3.0 | The site shows the documentation of c0de net 0.3.0, and the recipes compare errors with its constants | ✅ |
 | 12 | CurseForge | The mods can be downloaded from CurseForge as well as from Modrinth | ✅ |
 | 13 | c0de 0.6.0 and c0de net 0.4.0 | The site shows c0de 0.6.0 (security, the vault, block data, MOVE_ITEMS with filters, COMMAND, regular expressions, handbooks without Patchouli) and c0de net 0.4.0, with recipes for every new function (released as 0.9.0 with c0de 0.6.2 and c0de net 0.4.0, the library c0de_net/mail and its recipes) | ✅ |
+| 14 | Fonts without layout shifts | The pages don't jump when the web fonts arrive late |  |
 
 ## Sprint 0: Concept and plan
 
@@ -266,6 +267,15 @@ A task is done when
 | 13.11.3 | The timer blocks of the new sheets ran their programs: a sheet that is placed again sets its timer block over itself, unpowered, and the lever, which is already there, doesn't tell it again. The place functions now remove lever and timer first, so the timer block is new and takes the signal of the lever. Sheets 96 to 102 were placed again on 2026-11-17; their timers are paused. | ✅ |
 | 13.11.4 | Lines that fit on a sheet: the code area ends at x = 28 (24 blocks), not at the edge of the sheet. The runner of c0de 0.6.2 reports longer lines (c0de task 18.4); the expression of `worthRetrying` in When the network fails reached x = 29 and continues on a continuation line now, and `screenshot-world.ts` refuses blocks past x = 28. Done on 2026-11-17. | ✅ |
 | 13.12 | c0de 0.6.2 (c0de sprint 18: the wrench leads to the program of a trigger block or to where the player left the dimension, the password dialog of the vault, the runner reports lines wider than a sheet, line breaks with CHR 10): `sources.yaml` imports c0de at `v0.6.2`; the version texts of the version check, the network errors and the types say 0.6.2. Done on 2026-11-18: 314 of 314 program runs with the runner of 0.6.2, 121 unit tests, the link check of the build without errors. The screenshot of the version check shows older versions; it is taken again with 13.11. | ✅ |
+
+## Sprint 14: Fonts without layout shifts
+
+**Goal:** the pages don't jump when the web fonts arrive after the first paint. Found in the live check of 0.9.0 (task 13.11): the tutorial pages of c0de.at shift by about 0.17 (CLS), so 2 to 3 of the 11 pages of Lighthouse fall below the performance of 90. Planned on 2026-11-18; not started yet.
+
+| Task | Description | Done |
+|---|---|:---:|
+| 14.1 | The web fonts Source Sans 3 and JetBrains Mono are declared with `font-display: optional` instead of the `swap` of @fontsource: the theme gets its own `@font-face` rules for the files of the packages, which stay preloaded. A font that is there in time is used; one that is late leaves that page view in the fallback font, without a shift, and the next page has it from the cache. Checked with the layout shifts of the tutorial pages in Chromium against a server with a delay (like c0de.at) and Lighthouse; the end-to-end tests check that the pages use Source Sans 3. |  |
+| 14.2 | Review on the VM and live: Playwright, Lighthouse (all 11 pages at 90 or better against c0de.at), link check. Release 0.9.1, when the user asks for it. |  |
 
 ## Risks
 
