@@ -305,3 +305,5 @@ Please add the screenshots from the folder minecraft-c0de-net/run/screenshots an
 ## 2026-11-18 – Release 0.9.0
 
 I added the two remaining screenshots, please add them and go ahead with the release
+
+The tag has been pushed and the site is live
