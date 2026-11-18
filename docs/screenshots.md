@@ -3485,7 +3485,7 @@ END FUNCTION
 
 `site/tutorials/libraries/c0de/strings/checking-input.md`
 
-### [ ] checking-input-laptop
+### [x] checking-input-laptop
 
 the screen of the laptop after the run: the rejected names and coordinates with their ? answers, and the welcome line at the end
 
@@ -3577,7 +3577,7 @@ END FUNCTION
 
 `site/tutorials/libraries/c0de/minecraft/copying-signs.md`
 
-### [ ] copying-signs-copy
+### [x] copying-signs-copy
 
 the trigger block with its button between a written sign and its copy, the chat showing the copied data
 
@@ -3633,7 +3633,7 @@ END FUNCTION
 
 `site/tutorials/libraries/c0de/minecraft/server-commands.md`
 
-### [ ] server-commands-morning
+### [x] server-commands-morning
 
 the trigger block with its button in the morning sun, the chat showing the good morning message of goodmorning
 
@@ -3680,7 +3680,7 @@ END FUNCTION
 
 `site/tutorials/libraries/c0de/security/password-door.md`
 
-### [ ] password-door-setup
+### [x] password-door-setup
 
 the laptop of the door after setup: "New password:", "***", "Repeat it:", "***" and "Password set."
 
@@ -3786,7 +3786,7 @@ BEGIN
 END FUNCTION
 ```
 
-### [ ] password-door-open
+### [x] password-door-open
 
 the iron door open, the comparator between the trigger block and the door lit, the laptop next to it showing "Password:", "***" and "Welcome home!"
 
@@ -3896,7 +3896,7 @@ END FUNCTION
 
 `site/tutorials/libraries/c0de/security/keeping-keys.md`
 
-### [ ] keeping-keys-create
+### [x] keeping-keys-create
 
 the dialog "Create your vault" with the fields Password and Repeat filled with dots, and the buttons OK and Cancel
 
@@ -4019,7 +4019,7 @@ BEGIN
 END FUNCTION
 ```
 
-### [ ] keeping-keys-open
+### [x] keeping-keys-open
 
 the dialog "Open your vault" with one password field, the message "Wrong password, try again" below it
 
@@ -4146,7 +4146,7 @@ END FUNCTION
 
 `site/tutorials/libraries/c0de_net/mail/farm-mail.md`
 
-### [ ] farm-mail-laptop
+### [x] farm-mail-laptop
 
 the laptop next to the trigger block of farmmail with "Report sent" on its screen, the variable items server and port in the input inventory of the trigger block
 
@@ -4203,7 +4203,7 @@ END FUNCTION
 
 `site/tutorials/libraries/c0de_net/mail/order-desk.md`
 
-### [ ] order-desk-laptop
+### [x] order-desk-laptop
 
 the laptop showing "3 of 6 messages unseen" and the two lines "New: Order: 32 wheat" and "New: Order: 12 carrots", the two trigger blocks of orders and deliver next to it
 
@@ -4320,7 +4320,7 @@ END FUNCTION
 
 `site/tutorials/libraries/c0de_net/mail/tidy-mailbox.md`
 
-### [ ] tidy-mailbox-laptop
+### [x] tidy-mailbox-laptop
 
 the laptop after the clean-up with the four lines "Archive is now Archive 2025", "Deleted Archive 2024", "Removed 1 old news" and "INBOX: 5 messages, 3 unseen"
 
@@ -4408,7 +4408,7 @@ END FUNCTION
 
 `site/tutorials/libraries/c0de_net/mail/mail-errors.md`
 
-### [ ] mail-errors-laptop
+### [x] mail-errors-laptop
 
 the laptop showing "Wrong user or password (an app password?)" next to the trigger block of mailcheck
 

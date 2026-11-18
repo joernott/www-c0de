@@ -295,3 +295,9 @@ I took the first few screenshots and I have three findings:
 - You now configure the timer blocks to the new programs and put a lever on to that is on. Somehow, the blocks don't get that and the new programs just started running on their own (and running into errors)
 - I left the c0de dimension and when I re-entered it, I always ended up at the very beginning when re-entering it. That seems to have changed from the behavior we had before, where you always ended up at the place you left the dimension.
 - I tried to take the screenshot for keeping-keys-open and was asked to enter a password. I intentionally entered the wrong password and the dialog just closed.
+
+## 2026-11-18 – The screenshots of the new recipes
+
+I did some more tests and created the screenshots for the web server. Let's shelve the c0de-net release until we have something more substantial in it.
+
+Please add the screenshots from the folder minecraft-c0de-net/run/screenshots and continue with the remaining tasks for www-c0de

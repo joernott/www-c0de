@@ -1,7 +1,7 @@
 # The screenshots of the tutorials, written by scripts/screenshots.ts from the marks
 # <!-- screenshot: <id> | <description> --> of the pages. Take them as described in
 # docs/tutorials.md ("Screenshots") and save them as the file; the page shows them then.
-# 74 screenshots, 12 missing.
+# 74 screenshots, 1 missing.
 - id: asking-input
   description: 'the open terminal of the laptop while INPUT waits: "How many
     items?" on the screen and the input line "INPUT items (INTEGER):" with 1000
@@ -95,7 +95,7 @@
     - tutorials/libraries/c0de/strings/checking-input.md
     - de/tutorials/libraries/c0de/strings/checking-input.md
   file: public/tutorials/screenshots/checking-input-laptop.webp
-  size: missing
+  size: 1280x673
 - id: checking-lamp
   description: The timer block with comparator and a dark redstone lamp, the
     display wall showing c0de.at/ and Status 200
@@ -178,7 +178,7 @@
     - tutorials/libraries/c0de/minecraft/copying-signs.md
     - de/tutorials/libraries/c0de/minecraft/copying-signs.md
   file: public/tutorials/screenshots/copying-signs-copy.webp
-  size: missing
+  size: 1280x673
 - id: counting-loops-countdown-sheet
   description: the program countdown on its sheet, seen from the side, with the
     FOR line and its indented ASSIGN line in front
@@ -263,7 +263,7 @@
     - tutorials/libraries/c0de_net/mail/farm-mail.md
     - de/tutorials/libraries/c0de_net/mail/farm-mail.md
   file: public/tutorials/screenshots/farm-mail-laptop.webp
-  size: missing
+  size: 1280x673
 - id: first-program-result
   description: the display wall of 2 x 1 display blocks at the entrance of the
     base, showing "Welcome to my base!", with the trigger block and button next
@@ -365,7 +365,7 @@
     - tutorials/libraries/c0de/security/keeping-keys.md
     - de/tutorials/libraries/c0de/security/keeping-keys.md
   file: public/tutorials/screenshots/keeping-keys-create.webp
-  size: missing
+  size: 1280x673
 - id: keeping-keys-open
   description: the dialog "Open your vault" with one password field, the message
     "Wrong password, try again" below it
@@ -373,7 +373,7 @@
     - tutorials/libraries/c0de/security/keeping-keys.md
     - de/tutorials/libraries/c0de/security/keeping-keys.md
   file: public/tutorials/screenshots/keeping-keys-open.webp
-  size: missing
+  size: 1280x673
 - id: libraries-dice-chat
   description: the player in the base pressing the button on the trigger block,
     the chat showing three lines like "[dice/0] You rolled a 4"
@@ -415,7 +415,7 @@
     - tutorials/libraries/c0de_net/mail/mail-errors.md
     - de/tutorials/libraries/c0de_net/mail/mail-errors.md
   file: public/tutorials/screenshots/mail-errors-laptop.webp
-  size: missing
+  size: 1280x673
 - id: name-board-wall
   description: the display wall of 2 × 1 blocks with the frame of = signs, the
     greeting WELCOME TO THE BASE OF and the name Steve
@@ -448,7 +448,7 @@
     - tutorials/libraries/c0de_net/mail/order-desk.md
     - de/tutorials/libraries/c0de_net/mail/order-desk.md
   file: public/tutorials/screenshots/order-desk-laptop.webp
-  size: missing
+  size: 1280x673
 - id: parameters-stacks
   description: the program "stacks" on its sheet, seen from above, with the
     PARAMETER and RESULT lines between FUNCTION and BEGIN
@@ -473,7 +473,7 @@
     - tutorials/libraries/c0de/security/password-door.md
     - de/tutorials/libraries/c0de/security/password-door.md
   file: public/tutorials/screenshots/password-door-open.webp
-  size: missing
+  size: 1280x673
 - id: password-door-setup
   description: 'the laptop of the door after setup: "New password:", "***",
     "Repeat it:", "***" and "Password set."'
@@ -481,7 +481,7 @@
     - tutorials/libraries/c0de/security/password-door.md
     - de/tutorials/libraries/c0de/security/password-door.md
   file: public/tutorials/screenshots/password-door-setup.webp
-  size: missing
+  size: 1280x673
 - id: rewards-hub
   description: 'the teleporter hub: three pressure plates in a row with signs
     "Farm", "Mine" and "Tower" behind them, the timer block at the west end'
@@ -522,7 +522,7 @@
     - tutorials/libraries/c0de/minecraft/server-commands.md
     - de/tutorials/libraries/c0de/minecraft/server-commands.md
   file: public/tutorials/screenshots/server-commands-morning.webp
-  size: missing
+  size: 1280x673
 - id: sorting-chests
   description: the row of chests seen from the side, the hopper on the input
     chest, the timer block to the west, and the open food chest with bread and
@@ -566,7 +566,7 @@
     - tutorials/libraries/c0de_net/mail/tidy-mailbox.md
     - de/tutorials/libraries/c0de_net/mail/tidy-mailbox.md
   file: public/tutorials/screenshots/tidy-mailbox-laptop.webp
-  size: missing
+  size: 1280x673
 - id: tunnel-digger-tunnel
   description: the entrance of the tunnel in the side of a hill, two blocks high,
     the trigger block in front of it, the tools chest on the left and the open
