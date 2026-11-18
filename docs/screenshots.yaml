@@ -1,6 +1,6 @@
 # The screenshots of the tutorials with their programs (task 12.3), written by
 # site/scripts/screenshot-world.ts; docs/screenshots.md is the to-do list.
-c0de: v0.6.1
+c0de: v0.6.2
 screenshots:
   - id: before-you-start-new-world
     file: site/public/tutorials/screenshots/before-you-start-new-world.webp
@@ -3297,7 +3297,7 @@ screenshots:
     file: site/public/tutorials/screenshots/up-to-date-wall.webp
     page: site/tutorials/libraries/c0de_net/http/up-to-date.md
     title: Is my c0de up to date?
-    description: "The display wall with the two green lines c0de 0.6.1: up to date and c0de net 0.4.0: up to date"
+    description: "The display wall with the two green lines c0de 0.6.2: up to date and c0de net 0.4.0: up to date"
     program: versioncheck
     program_file: site/tutorials/programs/libraries/http/up-to-date-check.c0de
     function: check
