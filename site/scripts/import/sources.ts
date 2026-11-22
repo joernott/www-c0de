@@ -19,7 +19,9 @@ export interface Source {
 export type ChapterSpec =
   | { file: string; group?: 'guide' | 'handbook'; without?: string[] }
   | { file: string; section: string; group?: 'guide' | 'handbook' }
-  | { functions: true }
+  // the ### sections of the library section, or of another ## section of the library file;
+  // those are listed on the overview page under the heading of their section
+  | { functions: true; section?: string }
 
 export interface TabSpec {
   id: string
@@ -28,7 +30,9 @@ export interface TabSpec {
   link: string
   source: string
   overview?: { text?: Localized; include?: string; list?: string[] }
-  library?: { file: string; section: string }
+  // the file of the library and its ## section; without a section, the library is the whole
+  // file, and its introduction is the text before the first ## section
+  library?: { file: string; section?: string }
   chapters: ChapterSpec[]
 }
 
@@ -48,6 +52,15 @@ export function readConfig(file: string): Config {
     }
     if (tab.chapters.some((c) => 'functions' in c) && !tab.library) {
       throw new Error(`${file}: tab ${tab.id} has functions, but no library section`)
+    }
+    if (
+      tab.library &&
+      !tab.library.section &&
+      tab.chapters.some((c) => 'functions' in c && !c.section)
+    ) {
+      throw new Error(
+        `${file}: tab ${tab.id} has functions without a section, but its library has none`,
+      )
     }
   }
   return config

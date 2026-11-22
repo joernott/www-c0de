@@ -1,4 +1,4 @@
-import { cpSync, mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs'
+import { cpSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -186,5 +186,57 @@ describe('errors', () => {
     expect(broken('docs/de/reference/functions.md', translatedFunctions)).toThrow(
       /section 2 is missing/,
     )
+  })
+})
+
+describe('libraries with functions in several sections', () => {
+  const book = readConfig(join(fixtures, 'book.yaml'))
+  const output = build(book, { book: join(fixtures, 'book') }, ['en', 'de'])
+
+  it('makes a page of every function of the sections', () => {
+    expect(output.pages.map((p) => p.file).sort()).toEqual(
+      [
+        'b/c/index.md',
+        'b/c/getting-started.md',
+        'b/c/thing.md',
+        'b/c/zap.md',
+        'b/c/zip-and-zap_all.md',
+        'b/c/errors.md',
+      ]
+        .flatMap((f) => [f, `de/${f}`])
+        .sort(),
+    )
+    expect(output.pages.filter((p) => p.function).length).toBe(6)
+  })
+
+  it('takes the introduction of the file for the overview and lists the functions by section', () => {
+    const overview = page(output, 'b/c/index.md')
+    expect(overview).toMatch(
+      /^# b\/c\n+The book adds the library b\/c\. It draws with \[ZAP\]\(\/b\/c\/zap\)\./m,
+    )
+    expect(overview).not.toContain('The Book Handbook')
+    expect(overview).toContain('## Chapters\n\n- [Getting started](/b/c/getting-started)')
+    expect(overview).toContain('## Types\n\n- [THING](/b/c/thing): A thing to draw on.')
+    expect(overview).toContain('## Drawing\n\n- [ZAP](/b/c/zap)')
+    const german = page(output, 'de/b/c/index.md')
+    expect(german).toContain('## Typen\n\n- [THING](/de/b/c/thing): Ein Ding zum Zeichnen.')
+    expect(german).toContain('## Zeichnen\n\n- [ZAP](/de/b/c/zap)')
+  })
+
+  it('rewrites links between the sections to the pages of the functions', () => {
+    expect(page(output, 'b/c/zap.md')).toContain('Zaps a [THING](/b/c/thing).')
+    expect(page(output, 'de/b/c/zap.md')).toContain('Zappt ein [THING](/de/b/c/thing).')
+  })
+
+  it('needs a section for functions if the library is a whole file', () => {
+    const file = join(fixtures, 'book.yaml')
+    const yaml = readFileSync(file, 'utf-8').replace('section: Types }', '}')
+    const folder = mkdtempSync(join(tmpdir(), 'book-'))
+    writeFileSync(join(folder, 'book.yaml'), yaml)
+    try {
+      expect(() => readConfig(join(folder, 'book.yaml'))).toThrow(/functions without a section/)
+    } finally {
+      rmSync(folder, { recursive: true, force: true })
+    }
   })
 })

@@ -25,8 +25,10 @@ e2e/playwright-report/
 site/.vitepress/navigation.json
 site/c0de/
 site/c0de_net/
+site/c0de_paint/
 site/de/c0de/
 site/de/c0de_net/
+site/de/c0de_paint/
 site/public/img/
 site/public/models/
 site/.vitepress/models.json

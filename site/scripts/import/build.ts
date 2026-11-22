@@ -54,6 +54,7 @@ type Part =
   | { kind: 'section'; section: number } // a ## section
   | { kind: 'function'; section: number; index: number } // a ### section in a ## section
   | { kind: 'intro'; section: number } // the text of a ## section before its first ###
+  | { kind: 'preface' } // the text of a file before its first ## section
   | { kind: 'include' } // a whole file with its headings one level down
 
 interface FilePart {
@@ -66,6 +67,8 @@ interface Planned {
   tab: TabSpec
   group?: 'guide' | 'handbook'
   function?: true
+  // the ## section of the library file whose heading lists the function on the overview page
+  functionSection?: number
   // A chapter is one part of a file; an overview page has a title of its own and is made of
   // the introduction of the library and an included file.
   content: FilePart[]
@@ -203,8 +206,12 @@ function plan(config: Config, english: Files): Planned[] {
   for (const tab of config.tabs) {
     const overview: FilePart[] = []
     if (tab.library) {
-      const section = sectionIndex(english.get(tab.source, tab.library.file), tab.library.section)
-      overview.push({ file: tab.library.file, part: { kind: 'intro', section } })
+      const name = tab.library.section
+      const library = english.get(tab.source, tab.library.file)
+      overview.push({
+        file: tab.library.file,
+        part: name ? { kind: 'intro', section: sectionIndex(library, name) } : { kind: 'preface' },
+      })
     }
     if (tab.overview?.include) {
       overview.push({ file: tab.overview.include, part: { kind: 'include' } })
@@ -214,7 +221,7 @@ function plan(config: Config, english: Files): Planned[] {
     for (const spec of tab.chapters) {
       if ('functions' in spec) {
         const library = english.get(tab.source, tab.library!.file)
-        const section = sectionIndex(library, tab.library!.section)
+        const section = sectionIndex(library, (spec.section ?? tab.library!.section)!)
         functionHeadings(library, section).forEach((h, index) => {
           result.push({
             link: tab.link + h.anchor,
@@ -222,6 +229,7 @@ function plan(config: Config, english: Files): Planned[] {
             content: [{ file: tab.library!.file, part: { kind: 'function', section, index } }],
             overview: false,
             function: true,
+            ...(spec.section && { functionSection: section }),
           })
         })
       } else if ('section' in spec) {
@@ -309,6 +317,13 @@ function block(f: SourceFile, part: Part): Block {
       // The heading of the library itself becomes the title of the overview page.
       return make(lineNumbers(heading.line + 1, end), 0, heading)
     }
+    case 'preface': {
+      const title = f.headings.find((h) => h.level === 1)
+      const first = sections(f)[0]
+      const start = title ? title.line + 1 : 0
+      // The level 1 heading of the file is the library; the overview page has the title.
+      return make(lineNumbers(start, first ? first.line : f.lines.length), 0, title)
+    }
     case 'include':
       return make(lineNumbers(0, f.lines.length), 1)
   }
@@ -357,7 +372,17 @@ function render(
     const blocks = p.content.map((c) => block(files.get(p.tab.source, c.file), c.part))
     for (const b of blocks) mapHeadings(b, p.link)
     const title = p.overview ? p.tab.label : (blocks[0]!.title?.text ?? p.tab.label)
-    return { planned: p, blocks, title, untranslated: blocks.some((b) => !b.file.translated) }
+    const group =
+      p.functionSection === undefined
+        ? undefined
+        : sectionHeading(files.get(p.tab.source, p.tab.library!.file), p.functionSection).text
+    return {
+      planned: p,
+      blocks,
+      title,
+      group,
+      untranslated: blocks.some((b) => !b.file.translated),
+    }
   })
   // A file whose level 1 heading isn't imported starts at the first page made from it.
   for (const page of pages) {
@@ -466,6 +491,7 @@ function withContents(lines: string[]): string[] {
 interface RenderedPage {
   planned: Planned
   title: string
+  group?: string // the heading of the section that lists a function on the overview page
   lines: string[][] // one array per block
 }
 
@@ -483,12 +509,14 @@ function overview(page: RenderedPage, all: RenderedPage[], language: Language): 
   const lines = [`# ${tab.label}`, '']
   if (tab.overview?.text) lines.push(localized(tab.overview.text), '')
   lines.push(...intro, '')
-  const groups = new Map<keyof typeof groupTitles, string[]>()
+  // The groups by their headings; functions of a section of their own are listed under it.
+  const groups = new Map<string, string[]>()
   for (const c of all) {
     if (c.planned.tab !== tab || c.planned.overview) continue
     const link = pathIn(c.planned.link, language)
-    const group = c.planned.group ?? (c.planned.function ? 'functions' : 'chapters')
-    if (listed && !listed.includes(group)) continue
+    const kind = c.planned.group ?? (c.planned.function ? 'functions' : 'chapters')
+    if (listed && !listed.includes(kind)) continue
+    const group = c.group ?? localized(groupTitles[kind])
     const summary = shorten(firstParagraph(c.lines[0]!.slice(1)))
     groups.set(group, [
       ...(groups.get(group) ?? []),
@@ -496,7 +524,7 @@ function overview(page: RenderedPage, all: RenderedPage[], language: Language): 
     ])
   }
   for (const [group, list] of groups) {
-    lines.push(`## ${localized(groupTitles[group])}`, '', ...list, '')
+    lines.push(`## ${group}`, '', ...list, '')
   }
   lines.push(...included)
   return lines

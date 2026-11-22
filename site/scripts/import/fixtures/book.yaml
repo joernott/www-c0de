@@ -1,0 +1,22 @@
+# A mod whose handbook has its functions in several sections (like c0de paint).
+sources:
+  book:
+    name: The Book
+    repository: someone/book
+    modrinth: def456
+    curseforge: the-book
+    description: { en: A book., de: Ein Buch. }
+    tag: v0.1.0
+    docs: docs
+tabs:
+  - id: b/c
+    label: b/c
+    color: lib8
+    link: /b/c/
+    source: book
+    library: { file: reference/book.md }
+    chapters:
+      - { file: reference/book.md, section: Getting started }
+      - { functions: true, section: Types }
+      - { functions: true, section: Drawing }
+      - { file: reference/book.md, section: Errors }

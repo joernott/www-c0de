@@ -35,6 +35,16 @@ sources:
     description:
       en: Adds the libraries c0de_net/http and c0de_net/mail, so programs can send HTTP requests to web servers and REST APIs, send mail and read mailboxes.
       de: Fügt die Bibliotheken c0de_net/http und c0de_net/mail hinzu, mit denen Programme HTTP-Anfragen an Webserver und REST-APIs senden, Mails verschicken und Postfächer lesen.
+  c0de_paint:
+    name: c0de paint
+    repository: joernott/minecraft-c0de-paint
+    tag: v0.1.0
+    docs: docs
+    modrinth: zuHwh3ir
+    curseforge: c0de-paint
+    description:
+      en: Adds the library c0de_paint/cpaint, so programs draw lines, flat shapes and bodies into canvases, rotate, mirror and combine them, and build them in the world with the blocks from a chest.
+      de: Fügt die Bibliothek c0de_paint/cpaint hinzu, mit der Programme Linien, Flächen und Körper in Leinwände zeichnen, sie drehen, spiegeln und kombinieren und mit den Blöcken aus einer Truhe in der Welt bauen.
 
 tabs:
   - id: c0de
@@ -135,3 +145,21 @@ tabs:
         de: 'Wie c0de net Anfragen und Mails sendet, seine Einstellungen, Fehler und Beispiele stehen im Reiter c0de_net/http: [Erste Schritte](/de/c0de_net/http/getting-started), [Fehler](/de/c0de_net/http/errors), [Beispiele](/de/c0de_net/http/examples).'
     chapters:
       - functions: true
+
+  # The handbook of c0de paint has its functions in several sections; the overview lists them
+  # under the headings of their sections.
+  - id: c0de_paint/cpaint
+    label: c0de_paint/cpaint
+    color: lib8
+    link: /c0de_paint/cpaint/
+    source: c0de_paint
+    library: { file: reference/paint.md }
+    chapters:
+      - { file: reference/paint.md, section: Getting started }
+      - { functions: true, section: Types }
+      - { functions: true, section: Styles }
+      - { functions: true, section: Drawing }
+      - { functions: true, section: Canvas operations }
+      - { functions: true, section: Rendering }
+      - { file: reference/paint.md, section: Errors }
+      - { file: reference/paint.md, section: Examples }

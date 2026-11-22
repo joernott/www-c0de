@@ -39,10 +39,17 @@ function localJar(folder: string, prefix: string): string | undefined {
 }
 
 // The jars of local working copies (main.ts --local): ./gradlew :core:runnerJar in c0de,
-// ./gradlew :runner:jar in c0de net.
+// ./gradlew :runner:jar in c0de net and c0de paint.
 const localJars: Record<string, [string, string]> = {
   c0de: [join('core', 'build', 'runner'), 'c0de-runner-'],
   c0de_net: [join('runner', 'build', 'libs'), 'c0de-net-runner-'],
+  c0de_paint: [join('runner', 'build', 'libs'), 'c0de-paint-runner-'],
+}
+
+// The libraries of the other mods: the prefix of the INCLUDE that needs them, by source name.
+const libraryIncludes: Record<string, string> = {
+  c0de_net: 'c0de_net/',
+  c0de_paint: 'c0de_paint/',
 }
 
 // runner returns the runner and its libraries, from the local working copies in local or
@@ -67,14 +74,20 @@ export async function runner(
   if (!jar)
     throw new Error(`c0de ${c0de.tag} has no program runner (c0de-runner-${version(c0de)}.jar)`)
   const libraries: Record<string, string | undefined> = {}
-  const net = config.sources.c0de_net
-  if (net) libraries.c0de_net = await jarOf('c0de_net', `c0de-net-runner-${version(net)}.jar`)
+  for (const name of Object.keys(libraryIncludes)) {
+    const source = config.sources[name]
+    if (!source) continue
+    const prefix = localJars[name]![1]
+    libraries[name] = await jarOf(name, `${prefix}${version(source)}.jar`)
+  }
   return { jar, libraries }
 }
 
 // needs returns the libraries of other mods that a program includes.
 export const needs = (program: string): string[] =>
-  /^\s*INCLUDE c0de_net\//m.test(program) ? ['c0de_net'] : []
+  Object.entries(libraryIncludes)
+    .filter(([, include]) => new RegExp(`^\\s*INCLUDE ${include}`, 'm').test(program))
+    .map(([name]) => name)
 
 // javaArgs returns the arguments of java that start the runner with the given libraries; jvm
 // are options of java itself.

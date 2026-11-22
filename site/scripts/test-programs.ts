@@ -13,12 +13,15 @@
 // the programs that ask Open-Meteo, whose answers it has recorded (task 12.2.1). Programs that
 // include c0de_net/mail run against GreenMail (mail-service.ts, task 13.9), which is reset before
 // every run; <name>[.<case>].received.yaml lists what the mailboxes hold after it, by user and
-// folder, with the parts of every message that matter.
+// folder, with the parts of every message that matter. Programs that include c0de_paint run with the
+// runner library of c0de paint, whose RENDER_CANVAS writes the blocks it would place to a file;
+// <name>[.<case>].render.yaml is what that file must hold after the run.
 //
 // Usage: node scripts/test-programs.ts [--local <source>=<folder>]... [<part of a file name>...]
 // (needs Java 21 or newer; --local c0de=../../minecraft-c0de uses the runner of a working copy)
 import { spawn } from 'node:child_process'
-import { existsSync, readdirSync, readFileSync } from 'node:fs'
+import { existsSync, readdirSync, readFileSync, rmSync } from 'node:fs'
+import { tmpdir } from 'node:os'
 import { dirname, join, relative, resolve, sep } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { readConfig } from './import/sources.ts'
@@ -37,6 +40,8 @@ export interface ProgramRun {
   expected?: string
   // what the mailboxes of GreenMail hold after the run (c0de_net/mail)
   received?: string
+  // the blocks RENDER_CANVAS places (c0de_paint)
+  render?: string
   // The libraries of other mods the program includes (c0de_net/http needs c0de net).
   needs: string[]
 }
@@ -55,6 +60,7 @@ export function plan(folder: string): ProgramRun[] {
       ...(existsSync(`${base}.options.yaml`) && { options: `${base}.options.yaml` }),
       ...(existsSync(`${base}.expected.yaml`) && { expected: `${base}.expected.yaml` }),
       ...(existsSync(`${base}.received.yaml`) && { received: `${base}.received.yaml` }),
+      ...(existsSync(`${base}.render.yaml`) && { render: `${base}.render.yaml` }),
       needs,
     })
     const prefix = `${base.slice(base.lastIndexOf(sep) + 1)}.`
@@ -65,12 +71,14 @@ export function plan(folder: string): ProgramRun[] {
       if (!match) continue
       const options = `${base}.${match[1]}.options.yaml`
       const received = `${base}.${match[1]}.received.yaml`
+      const render = `${base}.${match[1]}.render.yaml`
       runs.push({
         program,
         case: match[1]!,
         ...(existsSync(options) && { options }),
         expected: join(dirname(program), file),
         ...(existsSync(received) && { received }),
+        ...(existsSync(render) && { render }),
         needs,
       })
     }
@@ -120,6 +128,30 @@ export async function compareMailboxes(
     }
   }
   return problems
+}
+
+// compareRender returns the differences between the expected and the actual blocks of
+// RENDER_CANVAS: the files must be equal line by line, apart from line endings and the space
+// at the ends of the lines.
+export function compareRender(expected: string, actual: string): string[] {
+  const lines = (text: string) =>
+    text
+      .replace(/\r\n/g, '\n')
+      .split('\n')
+      .map((line) => line.trimEnd())
+      .join('\n')
+      .trim()
+      .split('\n')
+  const want = lines(expected)
+  const got = lines(actual)
+  for (let i = 0; i < Math.max(want.length, got.length); i++) {
+    if (want[i] !== got[i]) {
+      return [
+        `render line ${i + 1}: expected ${JSON.stringify(want[i] ?? '')}, got ${JSON.stringify(got[i] ?? '')}`,
+      ]
+    }
+  }
+  return []
 }
 
 // java runs java and returns its exit code and output.
@@ -195,7 +227,12 @@ async function main(argv: string[]) {
         skipped++
         continue
       }
-      const jvm = mailRuns.has(run) ? mail!.jvm : api.has(run) ? service!.jvm : []
+      const render = join(tmpdir(), `c0de-paint-render-${process.pid}.yaml`)
+      rmSync(render, { force: true })
+      const jvm = [
+        ...(mailRuns.has(run) ? mail!.jvm : api.has(run) ? service!.jvm : []),
+        ...(run.needs.includes('c0de_paint') ? [`-Dc0depaint.render=${render}`] : []),
+      ]
       if (mailRuns.has(run)) await mail!.reset()
       // not spawnSync: the proxy of the test service runs in this process
       let result = await java(javaArgs(runner, run.needs, args(run), jvm))
@@ -216,6 +253,14 @@ async function main(argv: string[]) {
           result = { ...result, status: 1, stdout: `${result.stdout}${problems.join('\n')}\n` }
         }
       }
+      if (result.status === 0 && run.render) {
+        const actual = existsSync(render) ? readFileSync(render, 'utf-8') : ''
+        const problems = compareRender(readFileSync(run.render, 'utf-8'), actual)
+        if (problems.length > 0) {
+          result = { ...result, status: 1, stdout: `${result.stdout}${problems.join('\n')}\n` }
+        }
+      }
+      rmSync(render, { force: true })
       if (result.status === 0) {
         console.log(`ok    ${name}`)
       } else {

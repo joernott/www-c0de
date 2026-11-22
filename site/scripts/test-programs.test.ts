@@ -2,7 +2,7 @@ import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { afterEach, beforeEach, describe, expect, it } from 'vitest'
-import { args, compareMailboxes, parseArgs, plan } from './test-programs.ts'
+import { args, compareMailboxes, compareRender, parseArgs, plan } from './test-programs.ts'
 
 let folder: string
 
@@ -78,6 +78,37 @@ describe('received', () => {
     const [adder, zero] = plan(folder)
     expect(adder!.received).toBe(join(folder, 'adder.received.yaml'))
     expect(zero!.received).toBe(join(folder, 'adder.zero.received.yaml'))
+  })
+})
+
+describe('render', () => {
+  it('finds the expected blocks of a program and of its cases', () => {
+    writeFileSync(join(folder, 'adder.render.yaml'), '---\nlayers: []\n')
+    writeFileSync(join(folder, 'adder.zero.render.yaml'), '---\nlayers: []\n')
+    const [adder, zero] = plan(folder)
+    expect(adder!.render).toBe(join(folder, 'adder.render.yaml'))
+    expect(zero!.render).toBe(join(folder, 'adder.zero.render.yaml'))
+  })
+
+  it('knows the programs that need c0de paint', () => {
+    writeFileSync(join(folder, 'net', 'hut.c0de'), 'PROGRAM hut\nINCLUDE c0de_paint/cpaint\n')
+    expect(plan(folder).find((run) => run.program.endsWith('hut.c0de'))!.needs).toEqual([
+      'c0de_paint',
+    ])
+  })
+})
+
+describe('compareRender', () => {
+  const blocks = '---\nposition: {x: 0, y: 64, z: 0}\nlayers:\n  - y: 64\n'
+  it('accepts the same blocks with other line endings', () => {
+    expect(compareRender(blocks, blocks.replaceAll('\n', '\r\n') + '\n')).toEqual([])
+  })
+
+  it('reports the first line that differs', () => {
+    expect(compareRender(blocks, blocks.replace('y: 64\n', 'y: 65\n'))).toEqual([
+      'render line 4: expected "  - y: 64", got "  - y: 65"',
+    ])
+    expect(compareRender(blocks, '')).toEqual(['render line 1: expected "---", got ""'])
   })
 })
 

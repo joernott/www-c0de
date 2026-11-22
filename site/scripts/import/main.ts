@@ -20,8 +20,10 @@ const site = join(dirname(fileURLToPath(import.meta.url)), '..', '..')
 export const generated = [
   'c0de',
   'c0de_net',
+  'c0de_paint',
   'de/c0de',
   'de/c0de_net',
+  'de/c0de_paint',
   'public/img',
   'public/models',
 ]

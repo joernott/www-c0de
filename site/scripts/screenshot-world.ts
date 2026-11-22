@@ -162,6 +162,7 @@ function runnerClasspath(): { classpath: string; tag: string } {
   const jars = [
     join(site, '.cache', 'runner', `c0de-runner-${version('c0de')}.jar`),
     join(site, '.cache', 'runner', `c0de-net-runner-${version('c0de_net')}.jar`),
+    join(site, '.cache', 'runner', `c0de-paint-runner-${version('c0de_paint')}.jar`),
   ]
   for (const jar of jars) {
     if (!existsSync(jar)) throw new Error(`${jar} is missing: run npm run content first`)
