@@ -577,7 +577,7 @@
   file: public/tutorials/screenshots/tunnel-digger-tunnel.webp
   size: 1280x673
 - id: up-to-date-wall
-  description: "The display wall with the two green lines c0de 0.6.2: up to date
+  description: "The display wall with the two green lines c0de 0.7.1: up to date
     and c0de net 0.4.0: up to date"
   pages:
     - tutorials/libraries/c0de_net/http/up-to-date.md
