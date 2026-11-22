@@ -53,6 +53,7 @@ A task is done when
 | 12 | CurseForge | The mods can be downloaded from CurseForge as well as from Modrinth | ✅ |
 | 13 | c0de 0.6.0 and c0de net 0.4.0 | The site shows c0de 0.6.0 (security, the vault, block data, MOVE_ITEMS with filters, COMMAND, regular expressions, handbooks without Patchouli) and c0de net 0.4.0, with recipes for every new function (released as 0.9.0 with c0de 0.6.2 and c0de net 0.4.0, the library c0de_net/mail and its recipes) | ✅ |
 | 14 | Fonts without layout shifts | The pages don't jump when the web fonts arrive late |  |
+| 15 | c0de 0.7.1 and c0de paint 0.1.0 | The site shows c0de 0.7.1 with the library types and the library c0de_paint/cpaint with its handbook, recipes tested with its runner library, and screenshots |  |
 
 ## Sprint 0: Concept and plan
 
@@ -276,6 +277,20 @@ A task is done when
 |---|---|:---:|
 | 14.1 | The web fonts Source Sans 3 and JetBrains Mono are declared with `font-display: optional` instead of the `swap` of @fontsource: the theme gets its own `@font-face` rules for the files of the packages, which stay preloaded. A font that is there in time is used; one that is late leaves that page view in the fallback font, without a shift, and the next page has it from the cache. Checked with the layout shifts of the tutorial pages in Chromium against a server with a delay (like c0de.at) and Lighthouse; the end-to-end tests check that the pages use Source Sans 3. |  |
 | 14.2 | Review on the VM and live: Playwright, Lighthouse (all 11 pages at 90 or better against c0de.at), link check. Release 0.9.1, when the user asks for it. |  |
+
+## Sprint 15: c0de 0.7.1 and c0de paint 0.1.0
+
+**Goal:** the site shows c0de 0.7.1 (c0de sprints 19 and 20: the library types, TYPE and `typename`, constants that stay constants in trigger blocks, red line numbers for arguments of a wrong type) and the new mod c0de paint 0.1.0 with its library c0de_paint/cpaint: its handbook in English and German, recipes whose programs are tested with its runner library, and screenshots. Planned on 2026-11-22 (c0de paint task 8.4); sprint 14 stays planned and can follow or come first. Until the user has released c0de paint (tag `v0.1.0`), the import and the tests use its working copy (`--local c0de_paint=…`).
+
+| Task | Description | Done |
+|---|---|:---:|
+| 15.1 | c0de 0.7.1: `sources.yaml` imports c0de at `v0.7.1`; all programs pass with its runner; the version texts (version check, network errors, types) say 0.7.1. The new pages and sections of the library types (TYPE, `typename`) arrive with the import; the texts of the tutorials follow where they describe types, constants in trigger blocks or the validation. English and German. |  |
+| 15.2 | c0de paint as a source: `sources.yaml` gets `c0de_paint` (repository `joernott/minecraft-c0de-paint`, Modrinth `zuHwh3ir`, CurseForge `c0de-paint`, description in English and German); the landing page, the downloads and the version check (`/api/version`) name it. |  |
+| 15.3 | The tab c0de_paint/cpaint (a new colour `lib8` in light and dark mode): the import splits `reference/paint.md` into the overview, Getting started, one page per type, style, drawing function, canvas operation and rendering function (the `###` sections of several `##` sections; the import learns `functions` of a section), Errors and Examples, with the pictures of the handbook, in English and German. Vitest with a fixture. |  |
+| 15.4 | The runner library of c0de paint: `runner.ts` downloads `c0de-paint-runner-<version>.jar` (or takes `runner/build/libs` of a working copy), programs that include `c0de_paint/` get it on the class path, and `test-programs` compares `c0de-paint-render.yaml` (the blocks RENDER_CANVAS placed, layer by layer) with an expected file `<name>[.<case>].render.yaml`. |  |
+| 15.5 | Recipes for c0de_paint/cpaint, a new chapter under Libraries (`site/tutorials/libraries/c0de_paint/cpaint/`), English and German, with exercises and tested programs; the coverage check requires all functions. Proposed: **A first canvas** (CANVAS, STYLE_SOLID, DRAW_BOX, RENDER_CANVAS with the blocks from a chest, CANVAS_COUNT and CANVAS_MATERIALS), **Shapes in any plane** (POINT, DRAW_BLOCK, DRAW_LINE, DRAW_RECTANGLE, DRAW_POLYGON, DRAW_ELLIPSE, DRAW_ARC, DRAW_SPIRAL: a spiral staircase), **Styles** (STYLE_NONE, STYLE_EMPTY, STYLE_RANDOM, STYLE_GRADIENT, STYLE_PATTERN, INVENTORY_BLOCKS, the states of blocks), **Bodies** (DRAW_ELLIPSOID, DRAW_CYLINDER, DRAW_CONE, DRAW_PYRAMID, the Platonic solids: a lighthouse), **Shaping canvases** (CANVAS_MIN, CANVAS_MAX, CANVAS_GET, CANVAS_CLEAR, CANVAS_CROP, CANVAS_MOVE, CANVAS_REPLACE, CANVAS_MERGE, CANVAS_SCALE, CANVAS_ROTATE, CANVAS_MIRROR: a street of houses) and **Copying a building** (CANVAS_FROM_WORLD, which the runner refuses: the recipe explains it with a program that is shown but not run, like the network-only parts of c0de net). |  |
+| 15.6 | Screenshots of the recipes and of the handbook of c0de paint in the game: marks in `screenshots.yaml`, the screenshot world gets c0de paint and the new sheets (`build_new`). |  |
+| 15.7 | Review on the VM: Playwright, Lighthouse, link check, program runs; the screenshots are taken in the game. Release, when the user asks for it (after c0de paint 0.1.0). |  |
 
 ## Risks
 
