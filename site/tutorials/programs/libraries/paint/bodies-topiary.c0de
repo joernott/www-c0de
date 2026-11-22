@@ -1,0 +1,58 @@
+PROGRAM topiary
+NOOP
+INCLUDE c0de/minecraft
+INCLUDE c0de_paint/cpaint
+NOOP
+FUNCTION hedges
+    PARAMETER r INTEGER 3
+BEGIN
+    VARIABLE c TYPE c0de_paint/cpaint/CANVAS
+    VARIABLE m STRUCT c0de_paint/cpaint/POINT
+    VARIABLE log STRUCT c0de_paint/cpaint/BLOCK
+    VARIABLE leaves STRUCT c0de_paint/cpaint/BLOCK
+    VARIABLE trunk TYPE c0de_paint/cpaint/STYLE
+    VARIABLE green TYPE c0de_paint/cpaint/STYLE
+    VARIABLE at STRUCT c0de/minecraft/POSITION
+    ASSIGN log.id "spruce_log" ;
+    ASSIGN leaves.id "spruce_leaves" ;
+    // leaves that don't fall off without a tree
+    ASSIGN leaves.properties["persistent"] "true" ;
+    CALL c0de_paint/cpaint/STYLE_SOLID
+        PARAMETER block log ;
+        RESULT result trunk
+    CALL c0de_paint/cpaint/STYLE_SOLID
+        PARAMETER block leaves ;
+        RESULT result green
+    // a tree: a trunk and a cone of leaves
+    CALL c0de_paint/cpaint/DRAW_CYLINDER
+        PARAMETER canvas c ;
+        PARAMETER center m ;
+        PARAMETER r 0 ;
+        PARAMETER h 2 ;
+        PARAMETER direction "+y" ;
+        PARAMETER fill_style trunk ;
+    ASSIGN m.y 2 ;
+    CALL c0de_paint/cpaint/DRAW_CONE
+        PARAMETER canvas c ;
+        PARAMETER center m ;
+        PARAMETER r r ;
+        PARAMETER h 2 * r + 1 ;
+        PARAMETER direction "+y" ;
+        PARAMETER fill_style green ;
+    // a hedge pyramid next to it
+    ASSIGN m.x 3 * r ;
+    ASSIGN m.y 0 ;
+    CALL c0de_paint/cpaint/DRAW_PYRAMID
+        PARAMETER canvas c ;
+        PARAMETER center m ;
+        PARAMETER r r ;
+        PARAMETER h r ;
+        PARAMETER direction "+y" ;
+        PARAMETER fill_style green ;
+    ASSIGN at.x PID.x + r + 2 ;
+    ASSIGN at.y PID.y ;
+    ASSIGN at.z PID.z ;
+    CALL c0de_paint/cpaint/RENDER_CANVAS
+        PARAMETER canvas c ;
+        PARAMETER position at ;
+END FUNCTION

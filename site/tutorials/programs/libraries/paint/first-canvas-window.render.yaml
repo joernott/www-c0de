@@ -1,0 +1,79 @@
+---
+position: { x: 2, y: 0, z: 0 }
+layers:
+  - y: 0
+    blocks:
+      - { x: 2, z: 0, block: 'minecraft:oak_log' }
+      - { x: 2, z: 1, block: 'minecraft:oak_log' }
+      - { x: 2, z: 2, block: 'minecraft:oak_log' }
+      - { x: 2, z: 3, block: 'minecraft:oak_log' }
+      - { x: 3, z: 0, block: 'minecraft:oak_log' }
+      - { x: 3, z: 1, block: 'minecraft:oak_planks' }
+      - { x: 3, z: 2, block: 'minecraft:oak_planks' }
+      - { x: 3, z: 3, block: 'minecraft:oak_log' }
+      - { x: 4, z: 0, block: 'minecraft:oak_log' }
+      - { x: 4, z: 1, block: 'minecraft:oak_planks' }
+      - { x: 4, z: 2, block: 'minecraft:oak_planks' }
+      - { x: 4, z: 3, block: 'minecraft:oak_log' }
+      - { x: 5, z: 0, block: 'minecraft:oak_log' }
+      - { x: 5, z: 1, block: 'minecraft:oak_planks' }
+      - { x: 5, z: 2, block: 'minecraft:oak_planks' }
+      - { x: 5, z: 3, block: 'minecraft:oak_log' }
+      - { x: 6, z: 0, block: 'minecraft:oak_log' }
+      - { x: 6, z: 1, block: 'minecraft:oak_log' }
+      - { x: 6, z: 2, block: 'minecraft:oak_log' }
+      - { x: 6, z: 3, block: 'minecraft:oak_log' }
+  - y: 1
+    blocks:
+      - { x: 2, z: 0, block: 'minecraft:oak_log' }
+      - { x: 2, z: 1, block: 'minecraft:air' }
+      - { x: 2, z: 2, block: 'minecraft:oak_planks' }
+      - { x: 2, z: 3, block: 'minecraft:oak_log' }
+      - { x: 3, z: 0, block: 'minecraft:oak_planks' }
+      - { x: 3, z: 3, block: 'minecraft:oak_planks' }
+      - { x: 4, z: 0, block: 'minecraft:oak_planks' }
+      - { x: 4, z: 3, block: 'minecraft:oak_planks' }
+      - { x: 5, z: 0, block: 'minecraft:oak_planks' }
+      - { x: 5, z: 3, block: 'minecraft:oak_planks' }
+      - { x: 6, z: 0, block: 'minecraft:oak_log' }
+      - { x: 6, z: 1, block: 'minecraft:oak_planks' }
+      - { x: 6, z: 2, block: 'minecraft:oak_planks' }
+      - { x: 6, z: 3, block: 'minecraft:oak_log' }
+  - y: 2
+    blocks:
+      - { x: 2, z: 0, block: 'minecraft:oak_log' }
+      - { x: 2, z: 1, block: 'minecraft:air' }
+      - { x: 2, z: 2, block: 'minecraft:oak_planks' }
+      - { x: 2, z: 3, block: 'minecraft:oak_log' }
+      - { x: 3, z: 0, block: 'minecraft:oak_planks' }
+      - { x: 3, z: 3, block: 'minecraft:oak_planks' }
+      - { x: 4, z: 0, block: 'minecraft:oak_planks' }
+      - { x: 4, z: 3, block: 'minecraft:oak_planks' }
+      - { x: 5, z: 0, block: 'minecraft:oak_planks' }
+      - { x: 5, z: 3, block: 'minecraft:oak_planks' }
+      - { x: 6, z: 0, block: 'minecraft:oak_log' }
+      - { x: 6, z: 1, block: 'minecraft:glass' }
+      - { x: 6, z: 2, block: 'minecraft:glass' }
+      - { x: 6, z: 3, block: 'minecraft:oak_log' }
+  - y: 3
+    blocks:
+      - { x: 2, z: 0, block: 'minecraft:oak_log' }
+      - { x: 2, z: 1, block: 'minecraft:oak_log' }
+      - { x: 2, z: 2, block: 'minecraft:oak_log' }
+      - { x: 2, z: 3, block: 'minecraft:oak_log' }
+      - { x: 3, z: 0, block: 'minecraft:oak_log' }
+      - { x: 3, z: 1, block: 'minecraft:oak_planks' }
+      - { x: 3, z: 2, block: 'minecraft:oak_planks' }
+      - { x: 3, z: 3, block: 'minecraft:oak_log' }
+      - { x: 4, z: 0, block: 'minecraft:oak_log' }
+      - { x: 4, z: 1, block: 'minecraft:oak_planks' }
+      - { x: 4, z: 2, block: 'minecraft:oak_planks' }
+      - { x: 4, z: 3, block: 'minecraft:oak_log' }
+      - { x: 5, z: 0, block: 'minecraft:oak_log' }
+      - { x: 5, z: 1, block: 'minecraft:oak_planks' }
+      - { x: 5, z: 2, block: 'minecraft:oak_planks' }
+      - { x: 5, z: 3, block: 'minecraft:oak_log' }
+      - { x: 6, z: 0, block: 'minecraft:oak_log' }
+      - { x: 6, z: 1, block: 'minecraft:oak_log' }
+      - { x: 6, z: 2, block: 'minecraft:oak_log' }
+      - { x: 6, z: 3, block: 'minecraft:oak_log' }

@@ -1,0 +1,88 @@
+PROGRAM shed
+NOOP
+INCLUDE c0de/minecraft
+INCLUDE c0de_paint/cpaint
+NOOP
+FUNCTION draw
+    PARAMETER width INTEGER
+    PARAMETER depth INTEGER
+    PARAMETER height INTEGER
+    RESULT result TYPE c0de_paint/cpaint/CANVAS
+BEGIN
+    VARIABLE a STRUCT c0de_paint/cpaint/POINT
+    VARIABLE b STRUCT c0de_paint/cpaint/POINT
+    VARIABLE planks STRUCT c0de_paint/cpaint/BLOCK
+    VARIABLE log STRUCT c0de_paint/cpaint/BLOCK
+    VARIABLE pane STRUCT c0de_paint/cpaint/BLOCK
+    VARIABLE walls TYPE c0de_paint/cpaint/STYLE
+    VARIABLE posts TYPE c0de_paint/cpaint/STYLE
+    VARIABLE air TYPE c0de_paint/cpaint/STYLE
+    VARIABLE glass TYPE c0de_paint/cpaint/STYLE
+    ASSIGN planks.id "oak_planks" ;
+    ASSIGN log.id "oak_log" ;
+    ASSIGN pane.id "glass" ;
+    CALL c0de_paint/cpaint/STYLE_SOLID
+        PARAMETER block planks ;
+        RESULT result walls
+    CALL c0de_paint/cpaint/STYLE_SOLID
+        PARAMETER block log ;
+        RESULT result posts
+    CALL c0de_paint/cpaint/STYLE_SOLID
+        PARAMETER block pane ;
+        RESULT result glass
+    CALL c0de_paint/cpaint/STYLE_EMPTY
+        RESULT result air
+    ASSIGN b.x width - 1 ;
+    ASSIGN b.y height - 1 ;
+    ASSIGN b.z depth - 1 ;
+    CALL c0de_paint/cpaint/DRAW_BOX
+        PARAMETER canvas result ;
+        PARAMETER from a ;
+        PARAMETER to b ;
+        PARAMETER line_style posts ;
+        PARAMETER side_style walls ;
+    ASSIGN a.y 1 ;
+    ASSIGN a.z 1 ;
+    ASSIGN b.x 0 ;
+    ASSIGN b.y 2 ;
+    ASSIGN b.z 1 ;
+    CALL c0de_paint/cpaint/DRAW_BOX
+        PARAMETER canvas result ;
+        PARAMETER from a ;
+        PARAMETER to b ;
+        PARAMETER fill_style air ;
+    ASSIGN a.x width - 1 ;
+    ASSIGN a.y 2 ;
+    ASSIGN b.x width - 1 ;
+    ASSIGN b.z depth - 2 ;
+    CALL c0de_paint/cpaint/DRAW_BOX
+        PARAMETER canvas result ;
+        PARAMETER from a ;
+        PARAMETER to b ;
+        PARAMETER fill_style glass ;
+END FUNCTION
+NOOP
+FUNCTION build
+    PARAMETER width INTEGER 5
+    PARAMETER depth INTEGER 4
+    PARAMETER height INTEGER 4
+BEGIN
+    VARIABLE shed TYPE c0de_paint/cpaint/CANVAS
+    VARIABLE site STRUCT c0de/minecraft/POSITION
+    VARIABLE chest STRUCT c0de/minecraft/POSITION
+    CALL draw
+        PARAMETER width width ;
+        PARAMETER depth depth ;
+        PARAMETER height height ;
+        RESULT result shed
+    ASSIGN site.x PID.x + 2 ;
+    ASSIGN site.y PID.y ;
+    ASSIGN site.z PID.z ;
+    ASSIGN chest.x PID.x - 2 ;
+    ASSIGN chest.y PID.y ;
+    ASSIGN chest.z PID.z ;
+    CALL c0de_paint/cpaint/RENDER_CANVAS
+        PARAMETER canvas shed ;
+        PARAMETER position site ;
+        PARAMETER input chest ;
+END FUNCTION

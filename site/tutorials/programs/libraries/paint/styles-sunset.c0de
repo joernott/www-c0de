@@ -1,0 +1,91 @@
+PROGRAM sunset
+NOOP
+INCLUDE c0de/minecraft
+INCLUDE c0de_paint/cpaint
+NOOP
+FUNCTION paint
+    PARAMETER half INTEGER 7
+    PARAMETER height INTEGER 9
+BEGIN
+    VARIABLE c TYPE c0de_paint/cpaint/CANVAS
+    VARIABLE a STRUCT c0de_paint/cpaint/POINT
+    VARIABLE b STRUCT c0de_paint/cpaint/POINT
+    VARIABLE sun STRUCT c0de_paint/cpaint/POINT
+    VARIABLE wool STRUCT c0de_paint/cpaint/BLOCK
+    VARIABLE sky ARRAY STRUCT c0de_paint/cpaint/BLOCK
+    VARIABLE log STRUCT c0de_paint/cpaint/BLOCK
+    VARIABLE colors TYPE c0de_paint/cpaint/STYLE
+    VARIABLE posts TYPE c0de_paint/cpaint/STYLE
+    VARIABLE beams TYPE c0de_paint/cpaint/STYLE
+    VARIABLE site STRUCT c0de/minecraft/POSITION
+    ASSIGN wool.id "yellow_wool" ;
+    ASSIGN wool.weight 2 ;
+    ASSIGN sky[0] wool ;
+    ASSIGN wool.id "orange_wool" ;
+    ASSIGN sky[1] wool ;
+    ASSIGN wool.id "red_wool" ;
+    ASSIGN sky[2] wool ;
+    ASSIGN wool.id "magenta_wool" ;
+    ASSIGN wool.weight 1 ;
+    ASSIGN sky[3] wool ;
+    ASSIGN wool.id "purple_wool" ;
+    ASSIGN sky[4] wool ;
+    ASSIGN wool.id "blue_wool" ;
+    ASSIGN wool.weight 3 ;
+    ASSIGN sky[5] wool ;
+    ASSIGN sun.y 1 ;
+    CALL c0de_paint/cpaint/STYLE_GRADIENT
+        PARAMETER blocks sky ;
+        PARAMETER from sun ;
+        PARAMETER fuzzy 1 ;
+        RESULT result colors
+    ASSIGN a.x - half ;
+    ASSIGN a.y 1 ;
+    ASSIGN b.x half ;
+    ASSIGN b.y height ;
+    CALL c0de_paint/cpaint/DRAW_BOX
+        PARAMETER canvas c ;
+        PARAMETER from a ;
+        PARAMETER to b ;
+        PARAMETER fill_style colors ;
+    NOOP
+    ASSIGN log.id "oak_log" ;
+    CALL c0de_paint/cpaint/STYLE_SOLID
+        PARAMETER block log ;
+        RESULT result posts
+    ASSIGN log.properties["axis"] "x" ;
+    CALL c0de_paint/cpaint/STYLE_SOLID
+        PARAMETER block log ;
+        RESULT result beams
+    ASSIGN a.x - half - 1 ;
+    ASSIGN a.y 0 ;
+    ASSIGN b.x half + 1 ;
+    ASSIGN b.y height + 1 ;
+    CALL c0de_paint/cpaint/DRAW_BOX
+        PARAMETER canvas c ;
+        PARAMETER from a ;
+        PARAMETER to b ;
+        PARAMETER line_style posts ;
+    ASSIGN a.x - half ;
+    ASSIGN b.x half ;
+    ASSIGN b.y 0 ;
+    CALL c0de_paint/cpaint/DRAW_BOX
+        PARAMETER canvas c ;
+        PARAMETER from a ;
+        PARAMETER to b ;
+        PARAMETER fill_style beams ;
+    ASSIGN a.y height + 1 ;
+    ASSIGN b.y height + 1 ;
+    CALL c0de_paint/cpaint/DRAW_BOX
+        PARAMETER canvas c ;
+        PARAMETER from a ;
+        PARAMETER to b ;
+        PARAMETER fill_style beams ;
+    NOOP
+    ASSIGN site.x PID.x ;
+    ASSIGN site.y PID.y ;
+    ASSIGN site.z PID.z - 4 ;
+    CALL c0de_paint/cpaint/RENDER_CANVAS
+        PARAMETER canvas c ;
+        PARAMETER position site ;
+END FUNCTION

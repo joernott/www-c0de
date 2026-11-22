@@ -1,0 +1,6 @@
+valid: true
+state: CRASHED
+error:
+  name: INVALID_ARGUMENT
+  context: c0de_paint/cpaint/INVENTORY_BLOCKS
+  line: 45

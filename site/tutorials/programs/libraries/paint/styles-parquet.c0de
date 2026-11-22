@@ -1,0 +1,59 @@
+PROGRAM parquet
+NOOP
+INCLUDE c0de/minecraft
+INCLUDE c0de_paint/cpaint
+NOOP
+FUNCTION lay
+    PARAMETER width INTEGER 8
+    PARAMETER depth INTEGER 8
+BEGIN
+    VARIABLE tile TYPE c0de_paint/cpaint/CANVAS
+    VARIABLE c TYPE c0de_paint/cpaint/CANVAS
+    VARIABLE a STRUCT c0de_paint/cpaint/POINT
+    VARIABLE b STRUCT c0de_paint/cpaint/POINT
+    VARIABLE log STRUCT c0de_paint/cpaint/BLOCK
+    VARIABLE eastwest TYPE c0de_paint/cpaint/STYLE
+    VARIABLE northsouth TYPE c0de_paint/cpaint/STYLE
+    VARIABLE parquet TYPE c0de_paint/cpaint/STYLE
+    VARIABLE site STRUCT c0de/minecraft/POSITION
+    ASSIGN log.id "stripped_oak_log" ;
+    ASSIGN log.properties["axis"] "x" ;
+    CALL c0de_paint/cpaint/STYLE_SOLID
+        PARAMETER block log ;
+        RESULT result eastwest
+    ASSIGN log.properties["axis"] "z" ;
+    CALL c0de_paint/cpaint/STYLE_SOLID
+        PARAMETER block log ;
+        RESULT result northsouth
+    ASSIGN b.x 1 ;
+    ASSIGN b.z 1 ;
+    CALL c0de_paint/cpaint/DRAW_BOX
+        PARAMETER canvas tile ;
+        PARAMETER from a ;
+        PARAMETER to b ;
+        PARAMETER fill_style northsouth ;
+    CALL c0de_paint/cpaint/DRAW_BLOCK
+        PARAMETER canvas tile ;
+        PARAMETER point a ;
+        PARAMETER style eastwest ;
+    CALL c0de_paint/cpaint/DRAW_BLOCK
+        PARAMETER canvas tile ;
+        PARAMETER point b ;
+        PARAMETER style eastwest ;
+    CALL c0de_paint/cpaint/STYLE_PATTERN
+        PARAMETER pattern tile ;
+        RESULT result parquet
+    ASSIGN b.x width - 1 ;
+    ASSIGN b.z depth - 1 ;
+    CALL c0de_paint/cpaint/DRAW_BOX
+        PARAMETER canvas c ;
+        PARAMETER from a ;
+        PARAMETER to b ;
+        PARAMETER fill_style parquet ;
+    ASSIGN site.x PID.x + 2 ;
+    ASSIGN site.y PID.y - 1 ;
+    ASSIGN site.z PID.z ;
+    CALL c0de_paint/cpaint/RENDER_CANVAS
+        PARAMETER canvas c ;
+        PARAMETER position site ;
+END FUNCTION

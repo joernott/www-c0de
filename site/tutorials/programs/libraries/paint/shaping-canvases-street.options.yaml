@@ -1,0 +1,5 @@
+function: build
+parameters:
+  width: 3
+  depth: 3
+  height: 3

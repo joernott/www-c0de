@@ -1,0 +1,6 @@
+valid: true
+state: CRASHED
+error:
+  code: 1100
+  context: c0de_paint/cpaint/DRAW_ICOSAHEDRON
+  line: 76

@@ -1,0 +1,77 @@
+PROGRAM archgate
+NOOP
+INCLUDE c0de/minecraft
+INCLUDE c0de_paint/cpaint
+NOOP
+FUNCTION solid
+    PARAMETER id STRING
+    RESULT result TYPE c0de_paint/cpaint/STYLE
+BEGIN
+    VARIABLE block STRUCT c0de_paint/cpaint/BLOCK
+    ASSIGN block.id id ;
+    CALL c0de_paint/cpaint/STYLE_SOLID
+        PARAMETER block block ;
+        RESULT result result
+END FUNCTION
+NOOP
+FUNCTION gate
+    PARAMETER r INTEGER 3
+BEGIN
+    VARIABLE c TYPE c0de_paint/cpaint/CANVAS
+    VARIABLE a STRUCT c0de_paint/cpaint/POINT
+    VARIABLE b STRUCT c0de_paint/cpaint/POINT
+    VARIABLE m STRUCT c0de_paint/cpaint/POINT
+    VARIABLE wall TYPE c0de_paint/cpaint/STYLE
+    VARIABLE arch TYPE c0de_paint/cpaint/STYLE
+    VARIABLE air TYPE c0de_paint/cpaint/STYLE
+    VARIABLE at STRUCT c0de/minecraft/POSITION
+    CALL solid
+        PARAMETER id "cobblestone" ;
+        RESULT result wall
+    CALL solid
+        PARAMETER id "chiseled_stone_bricks" ;
+        RESULT result arch
+    CALL c0de_paint/cpaint/STYLE_EMPTY
+        RESULT result air
+    // the wall, upright, 2 blocks wider than the arch
+    ASSIGN b.x 2 * r + 4 ;
+    ASSIGN m.y r + 4 ;
+    CALL c0de_paint/cpaint/DRAW_RECTANGLE
+        PARAMETER canvas c ;
+        PARAMETER a a ;
+        PARAMETER b b ;
+        PARAMETER c m ;
+        PARAMETER fill_style wall ;
+    // the passage: 3 high, filled with air
+    ASSIGN a.x 3 ;
+    ASSIGN b.x 2 * r + 1 ;
+    ASSIGN m.y 2 ;
+    CALL c0de_paint/cpaint/DRAW_RECTANGLE
+        PARAMETER canvas c ;
+        PARAMETER a a ;
+        PARAMETER b b ;
+        PARAMETER c m ;
+        PARAMETER fill_style air ;
+    // the arch: half an ellipse on top
+    ASSIGN m.x r + 2 ;
+    ASSIGN m.y 2 ;
+    ASSIGN a.x 2 * r + 2 ;
+    ASSIGN a.y 2 ;
+    ASSIGN b.x r + 2 ;
+    ASSIGN b.y r + 2 ;
+    CALL c0de_paint/cpaint/DRAW_ARC
+        PARAMETER canvas c ;
+        PARAMETER center m ;
+        PARAMETER a a ;
+        PARAMETER b b ;
+        PARAMETER start 0 ;
+        PARAMETER end 180 ;
+        PARAMETER line_style arch ;
+        PARAMETER fill_style air ;
+    ASSIGN at.x PID.x + 2 ;
+    ASSIGN at.y PID.y ;
+    ASSIGN at.z PID.z ;
+    CALL c0de_paint/cpaint/RENDER_CANVAS
+        PARAMETER canvas c ;
+        PARAMETER position at ;
+END FUNCTION

@@ -1,0 +1,101 @@
+PROGRAM lighthousedoor
+NOOP
+INCLUDE c0de/minecraft
+INCLUDE c0de_paint/cpaint
+NOOP
+FUNCTION solid
+    PARAMETER id STRING
+    RESULT result TYPE c0de_paint/cpaint/STYLE
+BEGIN
+    VARIABLE block STRUCT c0de_paint/cpaint/BLOCK
+    ASSIGN block.id id ;
+    CALL c0de_paint/cpaint/STYLE_SOLID
+        PARAMETER block block ;
+        RESULT result result
+END FUNCTION
+NOOP
+FUNCTION build
+    PARAMETER r INTEGER 4
+    PARAMETER h INTEGER 16
+BEGIN
+    VARIABLE c TYPE c0de_paint/cpaint/CANVAS
+    VARIABLE m STRUCT c0de_paint/cpaint/POINT
+    VARIABLE d STRUCT c0de_paint/cpaint/POINT
+    VARIABLE white TYPE c0de_paint/cpaint/STYLE
+    VARIABLE red TYPE c0de_paint/cpaint/STYLE
+    VARIABLE glass TYPE c0de_paint/cpaint/STYLE
+    VARIABLE copper TYPE c0de_paint/cpaint/STYLE
+    VARIABLE light TYPE c0de_paint/cpaint/STYLE
+    VARIABLE air TYPE c0de_paint/cpaint/STYLE
+    VARIABLE at STRUCT c0de/minecraft/POSITION
+    CALL solid
+        PARAMETER id "white_concrete" ;
+        RESULT result white
+    CALL solid
+        PARAMETER id "red_concrete" ;
+        RESULT result red
+    CALL solid
+        PARAMETER id "glass" ;
+        RESULT result glass
+    CALL solid
+        PARAMETER id "copper_block" ;
+        RESULT result copper
+    CALL solid
+        PARAMETER id "sea_lantern" ;
+        RESULT result light
+    CALL c0de_paint/cpaint/STYLE_EMPTY
+        RESULT result air
+    // the dome: half of it sinks into the lantern room
+    ASSIGN m.y h + 3 ;
+    CALL c0de_paint/cpaint/DRAW_ELLIPSOID
+        PARAMETER canvas c ;
+        PARAMETER center m ;
+        PARAMETER rx r - 1 ;
+        PARAMETER ry r - 1 ;
+        PARAMETER rz r - 1 ;
+        PARAMETER side_style copper ;
+    // the tower: white, with red rims, hollow
+    ASSIGN m.y 0 ;
+    CALL c0de_paint/cpaint/DRAW_CYLINDER
+        PARAMETER canvas c ;
+        PARAMETER center m ;
+        PARAMETER r r ;
+        PARAMETER h h ;
+        PARAMETER direction "+y" ;
+        PARAMETER line_style red ;
+        PARAMETER side_style white ;
+        PARAMETER fill_style air ;
+    // the lantern room on top, made of glass
+    ASSIGN m.y h ;
+    CALL c0de_paint/cpaint/DRAW_CYLINDER
+        PARAMETER canvas c ;
+        PARAMETER center m ;
+        PARAMETER r r - 1 ;
+        PARAMETER h 4 ;
+        PARAMETER direction "+y" ;
+        PARAMETER side_style glass ;
+        PARAMETER fill_style air ;
+    // the light in its middle
+    ASSIGN m.y h + 1 ;
+    CALL c0de_paint/cpaint/DRAW_BLOCK
+        PARAMETER canvas c ;
+        PARAMETER point m ;
+        PARAMETER style light ;
+    // the door: 2 blocks of air in the west wall
+    ASSIGN m.x - r ;
+    ASSIGN m.y 1 ;
+    ASSIGN d.x - r ;
+    ASSIGN d.y 2 ;
+    CALL c0de_paint/cpaint/DRAW_BOX
+        PARAMETER canvas c ;
+        PARAMETER from m ;
+        PARAMETER to d ;
+        PARAMETER fill_style air ;
+    // the axis r + 2 blocks east of the trigger block
+    ASSIGN at.x PID.x + r + 2 ;
+    ASSIGN at.y PID.y ;
+    ASSIGN at.z PID.z ;
+    CALL c0de_paint/cpaint/RENDER_CANVAS
+        PARAMETER canvas c ;
+        PARAMETER position at ;
+END FUNCTION

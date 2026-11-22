@@ -1,0 +1,5 @@
+function: build
+seed: 1
+parameters:
+  half: 4
+  height: 4

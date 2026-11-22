@@ -1,0 +1,54 @@
+PROGRAM stonewall
+NOOP
+INCLUDE c0de/minecraft
+INCLUDE c0de_paint/cpaint
+NOOP
+FUNCTION build
+    PARAMETER half INTEGER 6
+    PARAMETER height INTEGER 5
+BEGIN
+    VARIABLE c TYPE c0de_paint/cpaint/CANVAS
+    VARIABLE a STRUCT c0de_paint/cpaint/POINT
+    VARIABLE b STRUCT c0de_paint/cpaint/POINT
+    VARIABLE stone STRUCT c0de_paint/cpaint/BLOCK
+    VARIABLE stones ARRAY STRUCT c0de_paint/cpaint/BLOCK
+    VARIABLE mixed TYPE c0de_paint/cpaint/STYLE
+    VARIABLE air TYPE c0de_paint/cpaint/STYLE
+    VARIABLE site STRUCT c0de/minecraft/POSITION
+    ASSIGN stone.id "stone_bricks" ;
+    ASSIGN stone.weight 6 ;
+    ASSIGN stones[0] stone ;
+    ASSIGN stone.id "mossy_stone_bricks" ;
+    ASSIGN stone.weight 3 ;
+    ASSIGN stones[1] stone ;
+    ASSIGN stone.id "cracked_stone_bricks" ;
+    ASSIGN stone.weight 1 ;
+    ASSIGN stones[2] stone ;
+    CALL c0de_paint/cpaint/STYLE_RANDOM
+        PARAMETER blocks stones ;
+        RESULT result mixed
+    CALL c0de_paint/cpaint/STYLE_EMPTY
+        RESULT result air
+    ASSIGN a.x - half ;
+    ASSIGN b.x half ;
+    ASSIGN b.y height - 1 ;
+    CALL c0de_paint/cpaint/DRAW_BOX
+        PARAMETER canvas c ;
+        PARAMETER from a ;
+        PARAMETER to b ;
+        PARAMETER fill_style mixed ;
+    ASSIGN a.x -1 ;
+    ASSIGN b.x 1 ;
+    ASSIGN b.y 2 ;
+    CALL c0de_paint/cpaint/DRAW_BOX
+        PARAMETER canvas c ;
+        PARAMETER from a ;
+        PARAMETER to b ;
+        PARAMETER fill_style air ;
+    ASSIGN site.x PID.x ;
+    ASSIGN site.y PID.y ;
+    ASSIGN site.z PID.z - 3 ;
+    CALL c0de_paint/cpaint/RENDER_CANVAS
+        PARAMETER canvas c ;
+        PARAMETER position site ;
+END FUNCTION

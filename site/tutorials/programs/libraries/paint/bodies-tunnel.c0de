@@ -1,0 +1,54 @@
+PROGRAM tunnel
+NOOP
+INCLUDE c0de/minecraft
+INCLUDE c0de_paint/cpaint
+NOOP
+FUNCTION solid
+    PARAMETER id STRING
+    RESULT result TYPE c0de_paint/cpaint/STYLE
+BEGIN
+    VARIABLE block STRUCT c0de_paint/cpaint/BLOCK
+    ASSIGN block.id id ;
+    CALL c0de_paint/cpaint/STYLE_SOLID
+        PARAMETER block block ;
+        RESULT result result
+END FUNCTION
+NOOP
+FUNCTION tunnel
+    PARAMETER r INTEGER 3
+    PARAMETER length INTEGER 12
+BEGIN
+    VARIABLE c TYPE c0de_paint/cpaint/CANVAS
+    VARIABLE m STRUCT c0de_paint/cpaint/POINT
+    VARIABLE walls TYPE c0de_paint/cpaint/STYLE
+    VARIABLE air TYPE c0de_paint/cpaint/STYLE
+    VARIABLE at STRUCT c0de/minecraft/POSITION
+    CALL solid
+        PARAMETER id "stone_bricks" ;
+        RESULT result walls
+    CALL c0de_paint/cpaint/STYLE_EMPTY
+        RESULT result air
+    // a lying cylinder, its floor 1 below the trigger block
+    ASSIGN m.y r - 1 ;
+    CALL c0de_paint/cpaint/DRAW_CYLINDER
+        PARAMETER canvas c ;
+        PARAMETER center m ;
+        PARAMETER r r ;
+        PARAMETER h length ;
+        PARAMETER direction "+x" ;
+        PARAMETER side_style walls ;
+    // its ends are sides too: a thinner one of air
+    CALL c0de_paint/cpaint/DRAW_CYLINDER
+        PARAMETER canvas c ;
+        PARAMETER center m ;
+        PARAMETER r r - 1 ;
+        PARAMETER h length ;
+        PARAMETER direction "+x" ;
+        PARAMETER fill_style air ;
+    ASSIGN at.x PID.x + 2 ;
+    ASSIGN at.y PID.y ;
+    ASSIGN at.z PID.z ;
+    CALL c0de_paint/cpaint/RENDER_CANVAS
+        PARAMETER canvas c ;
+        PARAMETER position at ;
+END FUNCTION

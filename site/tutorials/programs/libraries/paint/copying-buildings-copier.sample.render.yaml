@@ -1,0 +1,60 @@
+---
+position: { x: 14, y: 0, z: 1 }
+layers:
+  - y: 0
+    blocks:
+      - { x: 14, z: 1, block: 'minecraft:cobblestone' }
+      - { x: 14, z: 2, block: 'minecraft:cobblestone' }
+      - { x: 14, z: 3, block: 'minecraft:cobblestone' }
+      - { x: 14, z: 4, block: 'minecraft:cobblestone' }
+      - { x: 15, z: 0, block: 'minecraft:cobblestone_stairs[facing=south]' }
+      - { x: 15, z: 1, block: 'minecraft:cobblestone' }
+      - { x: 15, z: 2, block: 'minecraft:cobblestone' }
+      - { x: 15, z: 3, block: 'minecraft:cobblestone' }
+      - { x: 15, z: 4, block: 'minecraft:cobblestone' }
+      - { x: 16, z: 1, block: 'minecraft:cobblestone' }
+      - { x: 16, z: 2, block: 'minecraft:cobblestone' }
+      - { x: 16, z: 3, block: 'minecraft:cobblestone' }
+      - { x: 16, z: 4, block: 'minecraft:cobblestone' }
+  - y: 1
+    blocks:
+      - { x: 14, z: 1, block: 'minecraft:cobblestone' }
+      - { x: 14, z: 2, block: 'minecraft:cobblestone' }
+      - { x: 14, z: 3, block: 'minecraft:cobblestone' }
+      - { x: 14, z: 4, block: 'minecraft:cobblestone' }
+      - { x: 15, z: 1, block: 'minecraft:air' }
+      - { x: 15, z: 2, block: 'minecraft:air' }
+      - { x: 15, z: 3, block: 'minecraft:air' }
+      - { x: 15, z: 4, block: 'minecraft:cobblestone' }
+      - { x: 16, z: 1, block: 'minecraft:cobblestone' }
+      - { x: 16, z: 2, block: 'minecraft:cobblestone' }
+      - { x: 16, z: 3, block: 'minecraft:cobblestone' }
+      - { x: 16, z: 4, block: 'minecraft:cobblestone' }
+  - y: 2
+    blocks:
+      - { x: 14, z: 1, block: 'minecraft:cobblestone' }
+      - { x: 14, z: 2, block: 'minecraft:cobblestone' }
+      - { x: 14, z: 3, block: 'minecraft:cobblestone' }
+      - { x: 14, z: 4, block: 'minecraft:cobblestone' }
+      - { x: 15, z: 1, block: 'minecraft:air' }
+      - { x: 15, z: 2, block: 'minecraft:air' }
+      - { x: 15, z: 3, block: 'minecraft:air' }
+      - { x: 15, z: 4, block: 'minecraft:cobblestone' }
+      - { x: 16, z: 1, block: 'minecraft:cobblestone' }
+      - { x: 16, z: 2, block: 'minecraft:cobblestone' }
+      - { x: 16, z: 3, block: 'minecraft:cobblestone' }
+      - { x: 16, z: 4, block: 'minecraft:cobblestone' }
+  - y: 3
+    blocks:
+      - { x: 14, z: 1, block: 'minecraft:cobblestone' }
+      - { x: 14, z: 2, block: 'minecraft:cobblestone' }
+      - { x: 14, z: 3, block: 'minecraft:cobblestone' }
+      - { x: 14, z: 4, block: 'minecraft:cobblestone' }
+      - { x: 15, z: 1, block: 'minecraft:cobblestone' }
+      - { x: 15, z: 2, block: 'minecraft:cobblestone' }
+      - { x: 15, z: 3, block: 'minecraft:cobblestone' }
+      - { x: 15, z: 4, block: 'minecraft:cobblestone' }
+      - { x: 16, z: 1, block: 'minecraft:cobblestone' }
+      - { x: 16, z: 2, block: 'minecraft:cobblestone' }
+      - { x: 16, z: 3, block: 'minecraft:cobblestone' }
+      - { x: 16, z: 4, block: 'minecraft:cobblestone' }

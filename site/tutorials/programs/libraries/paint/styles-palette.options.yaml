@@ -1,0 +1,9 @@
+function: show
+seed: 1
+parameters:
+  palette:
+    - { id: 'minecraft:sandstone', weight: 64 }
+    - { id: 'minecraft:smooth_sandstone', weight: 32 }
+    - { id: 'minecraft:terracotta', weight: 32 }
+  length: 8
+  height: 2

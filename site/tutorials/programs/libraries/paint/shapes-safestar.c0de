@@ -1,0 +1,89 @@
+PROGRAM safestar
+NOOP
+INCLUDE c0de/math
+INCLUDE c0de/minecraft
+INCLUDE c0de_paint/cpaint
+NOOP
+FUNCTION solid
+    PARAMETER id STRING
+    RESULT result TYPE c0de_paint/cpaint/STYLE
+BEGIN
+    VARIABLE block STRUCT c0de_paint/cpaint/BLOCK
+    ASSIGN block.id id ;
+    CALL c0de_paint/cpaint/STYLE_SOLID
+        PARAMETER block block ;
+        RESULT result result
+END FUNCTION
+NOOP
+FUNCTION star
+    PARAMETER r INTEGER 8
+BEGIN
+    VARIABLE c TYPE c0de_paint/cpaint/CANVAS
+    VARIABLE p STRUCT c0de_paint/cpaint/POINT
+    VARIABLE corners ARRAY STRUCT c0de_paint/cpaint/POINT
+    VARIABLE gold TYPE c0de_paint/cpaint/STYLE
+    VARIABLE white TYPE c0de_paint/cpaint/STYLE
+    VARIABLE light TYPE c0de_paint/cpaint/STYLE
+    VARIABLE at STRUCT c0de/minecraft/POSITION
+    VARIABLE angle FLOAT
+    VARIABLE radius FLOAT
+    VARIABLE f FLOAT
+    VARIABLE problem ERROR
+    CALL solid
+        PARAMETER id "gold_block" ;
+        RESULT result gold
+    CALL solid
+        PARAMETER id "white_concrete" ;
+        RESULT result white
+    CALL solid
+        PARAMETER id "sea_lantern" ;
+        RESULT result light
+    // 10 corners: tips and notches take turns
+    FOR i INTEGER 0 ; 9 ;
+    BEGIN
+        ASSIGN radius r ;
+        IF i \ 2 = 1 ;
+        BEGIN
+            ASSIGN radius r * 2 / 5 ;
+        END IF
+        ASSIGN angle ( i / 5 - 0.5 ) * c0de/math/PI ;
+        CALL c0de/math/COS
+            PARAMETER value angle ;
+            RESULT result f
+        CALL c0de/math/ROUND
+            PARAMETER value radius * f ;
+            RESULT result p.x
+        CALL c0de/math/SIN
+            PARAMETER value angle ;
+            RESULT result f
+        CALL c0de/math/ROUND
+            PARAMETER value radius * f ;
+            RESULT result p.z
+        ASSIGN corners[i] p ;
+    END FOR
+    CALL c0de_paint/cpaint/DRAW_POLYGON problem
+        PARAMETER canvas c ;
+        PARAMETER points corners ;
+        PARAMETER line_style gold ;
+        PARAMETER fill_style white ;
+    IF problem.code = c0de_paint/cpaint/NOT_A_PLANE ;
+    BEGIN
+        CALL c0de/minecraft/SAY
+            PARAMETER message "No star: r is too small" ;
+        RETURN
+    END IF
+    // a lamp in the middle
+    ASSIGN p.x 0 ;
+    ASSIGN p.z 0 ;
+    CALL c0de_paint/cpaint/DRAW_BLOCK
+        PARAMETER canvas c ;
+        PARAMETER point p ;
+        PARAMETER style light ;
+    // into the floor, its middle r + 2 blocks east
+    ASSIGN at.x PID.x + r + 2 ;
+    ASSIGN at.y PID.y - 1 ;
+    ASSIGN at.z PID.z ;
+    CALL c0de_paint/cpaint/RENDER_CANVAS
+        PARAMETER canvas c ;
+        PARAMETER position at ;
+END FUNCTION

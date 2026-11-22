@@ -1,0 +1,4 @@
+function: lay
+parameters:
+  width: 4
+  depth: 4

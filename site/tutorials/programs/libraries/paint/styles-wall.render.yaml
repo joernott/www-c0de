@@ -1,0 +1,47 @@
+---
+position: { x: 0, y: 0, z: -3 }
+layers:
+  - y: 0
+    blocks:
+      - { x: -4, z: -3, block: 'minecraft:stone_bricks' }
+      - { x: -3, z: -3, block: 'minecraft:cracked_stone_bricks' }
+      - { x: -2, z: -3, block: 'minecraft:stone_bricks' }
+      - { x: -1, z: -3, block: 'minecraft:air' }
+      - { x: 0, z: -3, block: 'minecraft:air' }
+      - { x: 1, z: -3, block: 'minecraft:air' }
+      - { x: 2, z: -3, block: 'minecraft:mossy_stone_bricks' }
+      - { x: 3, z: -3, block: 'minecraft:stone_bricks' }
+      - { x: 4, z: -3, block: 'minecraft:mossy_stone_bricks' }
+  - y: 1
+    blocks:
+      - { x: -4, z: -3, block: 'minecraft:mossy_stone_bricks' }
+      - { x: -3, z: -3, block: 'minecraft:stone_bricks' }
+      - { x: -2, z: -3, block: 'minecraft:mossy_stone_bricks' }
+      - { x: -1, z: -3, block: 'minecraft:air' }
+      - { x: 0, z: -3, block: 'minecraft:air' }
+      - { x: 1, z: -3, block: 'minecraft:air' }
+      - { x: 2, z: -3, block: 'minecraft:stone_bricks' }
+      - { x: 3, z: -3, block: 'minecraft:stone_bricks' }
+      - { x: 4, z: -3, block: 'minecraft:cracked_stone_bricks' }
+  - y: 2
+    blocks:
+      - { x: -4, z: -3, block: 'minecraft:stone_bricks' }
+      - { x: -3, z: -3, block: 'minecraft:stone_bricks' }
+      - { x: -2, z: -3, block: 'minecraft:mossy_stone_bricks' }
+      - { x: -1, z: -3, block: 'minecraft:air' }
+      - { x: 0, z: -3, block: 'minecraft:air' }
+      - { x: 1, z: -3, block: 'minecraft:air' }
+      - { x: 2, z: -3, block: 'minecraft:stone_bricks' }
+      - { x: 3, z: -3, block: 'minecraft:mossy_stone_bricks' }
+      - { x: 4, z: -3, block: 'minecraft:stone_bricks' }
+  - y: 3
+    blocks:
+      - { x: -4, z: -3, block: 'minecraft:cracked_stone_bricks' }
+      - { x: -3, z: -3, block: 'minecraft:mossy_stone_bricks' }
+      - { x: -2, z: -3, block: 'minecraft:mossy_stone_bricks' }
+      - { x: -1, z: -3, block: 'minecraft:stone_bricks' }
+      - { x: 0, z: -3, block: 'minecraft:stone_bricks' }
+      - { x: 1, z: -3, block: 'minecraft:stone_bricks' }
+      - { x: 2, z: -3, block: 'minecraft:mossy_stone_bricks' }
+      - { x: 3, z: -3, block: 'minecraft:stone_bricks' }
+      - { x: 4, z: -3, block: 'minecraft:stone_bricks' }

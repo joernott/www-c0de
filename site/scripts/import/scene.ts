@@ -561,7 +561,9 @@ function primitive(writer: Writer, q: Quads, material: number): Primitive {
 // model returns the model of a block in a block state and its rotation around y (degrees,
 // clockwise seen from above).
 function model(index: ModelIndex, block: string, state?: string): { path: string; y: number } {
-  const entry = index.blocks[block]
+  // The runners of c0de up to 0.7.1 name the block of TYPE c0de:type_type_block; it is
+  // c0de:type_library_block (c0de task 21.2).
+  const entry = index.blocks[block === 'c0de:type_type_block' ? 'c0de:type_library_block' : block]
   if (!entry) throw new Error(`no model for the block ${block}`)
   const states = entry.states ?? {}
   // The layout names the property that selects the model (operator=add); the other

@@ -1,0 +1,7 @@
+valid: true
+state: FINISHED
+screen:
+  - 'The shed needs:'
+  - 36 minecraft:oak_log
+  - 30 minecraft:oak_planks
+  - 68 voxels in all

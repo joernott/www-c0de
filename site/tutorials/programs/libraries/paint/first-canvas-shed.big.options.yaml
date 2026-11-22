@@ -1,0 +1,5 @@
+function: materials
+parameters:
+  width: 7
+  depth: 5
+  height: 5

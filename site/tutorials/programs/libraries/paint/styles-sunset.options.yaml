@@ -1,0 +1,5 @@
+function: paint
+seed: 1
+parameters:
+  half: 3
+  height: 4

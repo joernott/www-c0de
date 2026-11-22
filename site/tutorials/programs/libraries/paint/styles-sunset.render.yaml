@@ -1,0 +1,69 @@
+---
+position: { x: 0, y: 0, z: -4 }
+layers:
+  - y: 0
+    blocks:
+      - { x: -4, z: -4, block: 'minecraft:oak_log' }
+      - { x: -3, z: -4, block: 'minecraft:oak_log[axis=x]' }
+      - { x: -2, z: -4, block: 'minecraft:oak_log[axis=x]' }
+      - { x: -1, z: -4, block: 'minecraft:oak_log[axis=x]' }
+      - { x: 0, z: -4, block: 'minecraft:oak_log[axis=x]' }
+      - { x: 1, z: -4, block: 'minecraft:oak_log[axis=x]' }
+      - { x: 2, z: -4, block: 'minecraft:oak_log[axis=x]' }
+      - { x: 3, z: -4, block: 'minecraft:oak_log[axis=x]' }
+      - { x: 4, z: -4, block: 'minecraft:oak_log' }
+  - y: 1
+    blocks:
+      - { x: -4, z: -4, block: 'minecraft:oak_log' }
+      - { x: -3, z: -4, block: 'minecraft:purple_wool' }
+      - { x: -2, z: -4, block: 'minecraft:purple_wool' }
+      - { x: -1, z: -4, block: 'minecraft:orange_wool' }
+      - { x: 0, z: -4, block: 'minecraft:yellow_wool' }
+      - { x: 1, z: -4, block: 'minecraft:orange_wool' }
+      - { x: 2, z: -4, block: 'minecraft:purple_wool' }
+      - { x: 3, z: -4, block: 'minecraft:purple_wool' }
+      - { x: 4, z: -4, block: 'minecraft:oak_log' }
+  - y: 2
+    blocks:
+      - { x: -4, z: -4, block: 'minecraft:oak_log' }
+      - { x: -3, z: -4, block: 'minecraft:blue_wool' }
+      - { x: -2, z: -4, block: 'minecraft:purple_wool' }
+      - { x: -1, z: -4, block: 'minecraft:red_wool' }
+      - { x: 0, z: -4, block: 'minecraft:orange_wool' }
+      - { x: 1, z: -4, block: 'minecraft:red_wool' }
+      - { x: 2, z: -4, block: 'minecraft:red_wool' }
+      - { x: 3, z: -4, block: 'minecraft:purple_wool' }
+      - { x: 4, z: -4, block: 'minecraft:oak_log' }
+  - y: 3
+    blocks:
+      - { x: -4, z: -4, block: 'minecraft:oak_log' }
+      - { x: -3, z: -4, block: 'minecraft:blue_wool' }
+      - { x: -2, z: -4, block: 'minecraft:blue_wool' }
+      - { x: -1, z: -4, block: 'minecraft:red_wool' }
+      - { x: 0, z: -4, block: 'minecraft:purple_wool' }
+      - { x: 1, z: -4, block: 'minecraft:purple_wool' }
+      - { x: 2, z: -4, block: 'minecraft:blue_wool' }
+      - { x: 3, z: -4, block: 'minecraft:blue_wool' }
+      - { x: 4, z: -4, block: 'minecraft:oak_log' }
+  - y: 4
+    blocks:
+      - { x: -4, z: -4, block: 'minecraft:oak_log' }
+      - { x: -3, z: -4, block: 'minecraft:blue_wool' }
+      - { x: -2, z: -4, block: 'minecraft:blue_wool' }
+      - { x: -1, z: -4, block: 'minecraft:blue_wool' }
+      - { x: 0, z: -4, block: 'minecraft:blue_wool' }
+      - { x: 1, z: -4, block: 'minecraft:blue_wool' }
+      - { x: 2, z: -4, block: 'minecraft:blue_wool' }
+      - { x: 3, z: -4, block: 'minecraft:purple_wool' }
+      - { x: 4, z: -4, block: 'minecraft:oak_log' }
+  - y: 5
+    blocks:
+      - { x: -4, z: -4, block: 'minecraft:oak_log' }
+      - { x: -3, z: -4, block: 'minecraft:oak_log[axis=x]' }
+      - { x: -2, z: -4, block: 'minecraft:oak_log[axis=x]' }
+      - { x: -1, z: -4, block: 'minecraft:oak_log[axis=x]' }
+      - { x: 0, z: -4, block: 'minecraft:oak_log[axis=x]' }
+      - { x: 1, z: -4, block: 'minecraft:oak_log[axis=x]' }
+      - { x: 2, z: -4, block: 'minecraft:oak_log[axis=x]' }
+      - { x: 3, z: -4, block: 'minecraft:oak_log[axis=x]' }
+      - { x: 4, z: -4, block: 'minecraft:oak_log' }

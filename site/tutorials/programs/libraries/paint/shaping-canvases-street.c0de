@@ -1,0 +1,296 @@
+PROGRAM street
+NOOP
+INCLUDE c0de/minecraft
+INCLUDE c0de_paint/cpaint
+NOOP
+FUNCTION house
+    PARAMETER width INTEGER
+    PARAMETER depth INTEGER
+    PARAMETER height INTEGER
+    RESULT result TYPE c0de_paint/cpaint/CANVAS
+BEGIN
+    VARIABLE a STRUCT c0de_paint/cpaint/POINT
+    VARIABLE b STRUCT c0de_paint/cpaint/POINT
+    VARIABLE c STRUCT c0de_paint/cpaint/POINT
+    VARIABLE block STRUCT c0de_paint/cpaint/BLOCK
+    VARIABLE planks TYPE c0de_paint/cpaint/STYLE
+    VARIABLE south TYPE c0de_paint/cpaint/STYLE
+    VARIABLE north TYPE c0de_paint/cpaint/STYLE
+    VARIABLE lower TYPE c0de_paint/cpaint/STYLE
+    VARIABLE upper TYPE c0de_paint/cpaint/STYLE
+    ASSIGN block.id "oak_planks" ;
+    CALL c0de_paint/cpaint/STYLE_SOLID
+        PARAMETER block block ;
+        RESULT result planks
+    ASSIGN block.id "oak_stairs" ;
+    ASSIGN block.properties["facing"] "south" ;
+    CALL c0de_paint/cpaint/STYLE_SOLID
+        PARAMETER block block ;
+        RESULT result south
+    ASSIGN block.properties["facing"] "north" ;
+    CALL c0de_paint/cpaint/STYLE_SOLID
+        PARAMETER block block ;
+        RESULT result north
+    ASSIGN block.id "oak_door" ;
+    ASSIGN block.properties["hinge"] "left" ;
+    ASSIGN block.properties["half"] "lower" ;
+    CALL c0de_paint/cpaint/STYLE_SOLID
+        PARAMETER block block ;
+        RESULT result lower
+    ASSIGN block.properties["half"] "upper" ;
+    CALL c0de_paint/cpaint/STYLE_SOLID
+        PARAMETER block block ;
+        RESULT result upper
+    NOOP
+    ASSIGN b.x width - 1 ;
+    ASSIGN b.y height - 1 ;
+    ASSIGN b.z depth - 1 ;
+    CALL c0de_paint/cpaint/DRAW_BOX
+        PARAMETER canvas result ;
+        PARAMETER from a ;
+        PARAMETER to b ;
+        PARAMETER side_style planks ;
+    ASSIGN a.x 1 ;
+    CALL c0de_paint/cpaint/DRAW_BLOCK
+        PARAMETER canvas result ;
+        PARAMETER point a ;
+        PARAMETER style lower ;
+    ASSIGN a.y 1 ;
+    CALL c0de_paint/cpaint/DRAW_BLOCK
+        PARAMETER canvas result ;
+        PARAMETER point a ;
+        PARAMETER style upper ;
+    NOOP
+    ASSIGN a.x 0 ;
+    ASSIGN a.y height ;
+    ASSIGN b.y height ;
+    WHILE a.z ≤ b.z ;
+    BEGIN
+        CALL c0de_paint/cpaint/DRAW_BOX
+            PARAMETER canvas result ;
+            PARAMETER from a ;
+            PARAMETER to b ;
+            PARAMETER fill_style planks ;
+        IF a.z < b.z ;
+        BEGIN
+            ASSIGN c a ;
+            ASSIGN c.x b.x ;
+            CALL c0de_paint/cpaint/DRAW_LINE
+                PARAMETER canvas result ;
+                PARAMETER from a ;
+                PARAMETER to c ;
+                PARAMETER style south ;
+            ASSIGN c b ;
+            ASSIGN c.x 0 ;
+            CALL c0de_paint/cpaint/DRAW_LINE
+                PARAMETER canvas result ;
+                PARAMETER from c ;
+                PARAMETER to b ;
+                PARAMETER style north ;
+        END IF
+        ASSIGN a.y a.y + 1 ;
+        ASSIGN b.y b.y + 1 ;
+        ASSIGN a.z a.z + 1 ;
+        ASSIGN b.z b.z - 1 ;
+    END WHILE
+END FUNCTION
+NOOP
+FUNCTION addHouse
+    PARAMETER street TYPE c0de_paint/cpaint/CANVAS
+    PARAMETER house TYPE c0de_paint/cpaint/CANVAS
+    PARAMETER z INTEGER 0
+    RESULT result TYPE c0de_paint/cpaint/CANVAS
+BEGIN
+    VARIABLE low STRUCT c0de_paint/cpaint/POINT
+    VARIABLE high STRUCT c0de_paint/cpaint/POINT
+    VARIABLE offset STRUCT c0de_paint/cpaint/POINT
+    VARIABLE moved TYPE c0de_paint/cpaint/CANVAS
+    CALL c0de_paint/cpaint/CANVAS_MAX
+        PARAMETER canvas street ;
+        RESULT result high
+    CALL c0de_paint/cpaint/CANVAS_MIN
+        PARAMETER canvas house ;
+        RESULT result low
+    ASSIGN offset.x high.x + 3 - low.x ;
+    ASSIGN offset.y - low.y ;
+    ASSIGN offset.z z - low.z ;
+    ASSIGN moved house ;
+    CALL c0de_paint/cpaint/CANVAS_MOVE
+        PARAMETER canvas moved ;
+        PARAMETER offset offset ;
+    ASSIGN result street ;
+    CALL c0de_paint/cpaint/CANVAS_MERGE
+        PARAMETER target result ;
+        PARAMETER source moved ;
+END FUNCTION
+NOOP
+FUNCTION paths
+    PARAMETER street TYPE c0de_paint/cpaint/CANVAS
+    RESULT result TYPE c0de_paint/cpaint/CANVAS
+BEGIN
+    VARIABLE low STRUCT c0de_paint/cpaint/POINT
+    VARIABLE high STRUCT c0de_paint/cpaint/POINT
+    VARIABLE p STRUCT c0de_paint/cpaint/POINT
+    VARIABLE block STRUCT c0de_paint/cpaint/BLOCK
+    VARIABLE path TYPE c0de_paint/cpaint/STYLE
+    VARIABLE facing STRING
+    VARIABLE dx HASH INTEGER
+    BEGIN
+        east 1
+        west -1
+        north 0
+        south 0
+    END VARIABLE
+    VARIABLE dz HASH INTEGER
+    BEGIN
+        east 0
+        west 0
+        north -1
+        south 1
+    END VARIABLE
+    ASSIGN result street ;
+    ASSIGN block.id "dirt_path" ;
+    CALL c0de_paint/cpaint/STYLE_SOLID
+        PARAMETER block block ;
+        RESULT result path
+    CALL c0de_paint/cpaint/CANVAS_MIN
+        PARAMETER canvas street ;
+        RESULT result low
+    CALL c0de_paint/cpaint/CANVAS_MAX
+        PARAMETER canvas street ;
+        RESULT result high
+    FOR x INTEGER low.x ; high.x ;
+    BEGIN
+        FOR z INTEGER low.z ; high.z ;
+        BEGIN
+            ASSIGN p.x x ;
+            ASSIGN p.y 0 ;
+            ASSIGN p.z z ;
+            CALL c0de_paint/cpaint/CANVAS_GET
+                PARAMETER canvas street ;
+                PARAMETER point p ;
+                RESULT result block
+            IF block.id = "minecraft:oak_door" ;
+            BEGIN
+                ASSIGN facing block.properties["facing"] ;
+                ASSIGN p.x x + dx[facing] ;
+                ASSIGN p.y -1 ;
+                ASSIGN p.z z + dz[facing] ;
+                CALL c0de_paint/cpaint/DRAW_BLOCK
+                    PARAMETER canvas result ;
+                    PARAMETER point p ;
+                    PARAMETER style path ;
+            END IF
+        END FOR
+    END FOR
+END FUNCTION
+NOOP
+FUNCTION build
+    PARAMETER width INTEGER 5
+    PARAMETER depth INTEGER 5
+    PARAMETER height INTEGER 4
+BEGIN
+    VARIABLE home TYPE c0de_paint/cpaint/CANVAS
+    VARIABLE street TYPE c0de_paint/cpaint/CANVAS
+    VARIABLE copy TYPE c0de_paint/cpaint/CANVAS
+    VARIABLE a STRUCT c0de_paint/cpaint/POINT
+    VARIABLE b STRUCT c0de_paint/cpaint/POINT
+    VARIABLE block STRUCT c0de_paint/cpaint/BLOCK
+    VARIABLE bricks TYPE c0de_paint/cpaint/STYLE
+    VARIABLE air TYPE c0de_paint/cpaint/STYLE
+    VARIABLE at STRUCT c0de/minecraft/POSITION
+    CALL house
+        PARAMETER width width ;
+        PARAMETER depth depth ;
+        PARAMETER height height ;
+        RESULT result home
+    ASSIGN street home ;
+    NOOP
+    ASSIGN block.id "bricks" ;
+    CALL c0de_paint/cpaint/STYLE_SOLID
+        PARAMETER block block ;
+        RESULT result bricks
+    ASSIGN copy home ;
+    CALL c0de_paint/cpaint/CANVAS_REPLACE
+        PARAMETER canvas copy ;
+        PARAMETER id "oak_planks" ;
+        PARAMETER style bricks ;
+    CALL addHouse
+        PARAMETER street street ;
+        PARAMETER house copy ;
+        RESULT result street
+    NOOP
+    ASSIGN copy home ;
+    ASSIGN a.y 2 ;
+    CALL c0de_paint/cpaint/CANVAS_MAX
+        PARAMETER canvas copy ;
+        RESULT result b
+    CALL c0de_paint/cpaint/CANVAS_CLEAR
+        PARAMETER canvas copy ;
+        PARAMETER from a ;
+        PARAMETER to b ;
+    CALL addHouse
+        PARAMETER street street ;
+        PARAMETER house copy ;
+        RESULT result street
+    NOOP
+    ASSIGN copy home ;
+    ASSIGN a.y 0 ;
+    ASSIGN b.z 0 ;
+    CALL c0de_paint/cpaint/CANVAS_CROP
+        PARAMETER canvas copy ;
+        PARAMETER from a ;
+        PARAMETER to b ;
+    CALL addHouse
+        PARAMETER street street ;
+        PARAMETER house copy ;
+        RESULT result street
+    NOOP
+    ASSIGN copy home ;
+    CALL c0de_paint/cpaint/CANVAS_SCALE
+        PARAMETER canvas copy ;
+        PARAMETER x 200 ;
+        PARAMETER y 200 ;
+        PARAMETER z 200 ;
+    CALL c0de_paint/cpaint/STYLE_EMPTY
+        RESULT result air
+    CALL c0de_paint/cpaint/CANVAS_REPLACE
+        PARAMETER canvas copy ;
+        PARAMETER id "oak_door" ;
+        PARAMETER style air ;
+    CALL addHouse
+        PARAMETER street street ;
+        PARAMETER house copy ;
+        RESULT result street
+    NOOP
+    ASSIGN copy home ;
+    CALL c0de_paint/cpaint/CANVAS_ROTATE
+        PARAMETER canvas copy ;
+        PARAMETER center a ;
+        PARAMETER axis "y" ;
+        PARAMETER degrees 90 ;
+    CALL addHouse
+        PARAMETER street street ;
+        PARAMETER house copy ;
+        PARAMETER z - width ;
+        RESULT result street
+    NOOP
+    ASSIGN copy home ;
+    CALL c0de_paint/cpaint/CANVAS_MIRROR
+        PARAMETER canvas copy ;
+        PARAMETER axis "z" ;
+        PARAMETER position -2.0 ;
+    CALL c0de_paint/cpaint/CANVAS_MERGE
+        PARAMETER target street ;
+        PARAMETER source copy ;
+    NOOP
+    CALL paths
+        PARAMETER street street ;
+        RESULT result street
+    ASSIGN at.x PID.x + 2 ;
+    ASSIGN at.y PID.y ;
+    ASSIGN at.z PID.z + 2 ;
+    CALL c0de_paint/cpaint/RENDER_CANVAS
+        PARAMETER canvas street ;
+        PARAMETER position at ;
+END FUNCTION

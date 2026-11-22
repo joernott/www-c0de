@@ -1,0 +1,5 @@
+function: lay
+parameters:
+  width: 5
+  depth: 4
+  border: false

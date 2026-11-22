@@ -1,0 +1,124 @@
+PROGRAM copier
+NOOP
+INCLUDE c0de/minecraft
+INCLUDE c0de_paint/cpaint
+NOOP
+FUNCTION place
+    PARAMETER building TYPE c0de_paint/cpaint/CANVAS
+    PARAMETER turn INTEGER
+    PARAMETER distance INTEGER
+BEGIN
+    VARIABLE turned TYPE c0de_paint/cpaint/CANVAS
+    VARIABLE center STRUCT c0de_paint/cpaint/POINT
+    VARIABLE low STRUCT c0de_paint/cpaint/POINT
+    VARIABLE at STRUCT c0de/minecraft/POSITION
+    VARIABLE blocks STRUCT c0de/minecraft/POSITION
+    VARIABLE tools STRUCT c0de/minecraft/POSITION
+    VARIABLE rubble STRUCT c0de/minecraft/POSITION
+    ASSIGN turned building ;
+    CALL c0de_paint/cpaint/CANVAS_ROTATE
+        PARAMETER canvas turned ;
+        PARAMETER center center ;
+        PARAMETER axis "y" ;
+        PARAMETER degrees turn ;
+    CALL c0de_paint/cpaint/CANVAS_MIN
+        PARAMETER canvas turned ;
+        RESULT result low
+    ASSIGN at.x PID.x + 2 + distance - low.x ;
+    ASSIGN at.y PID.y - low.y ;
+    ASSIGN at.z PID.z - low.z ;
+    ASSIGN blocks.x PID.x ;
+    ASSIGN blocks.y PID.y ;
+    ASSIGN blocks.z PID.z - 2 ;
+    ASSIGN tools blocks ;
+    ASSIGN tools.x PID.x - 2 ;
+    ASSIGN tools.z PID.z ;
+    ASSIGN rubble blocks ;
+    ASSIGN rubble.z PID.z + 2 ;
+    CALL c0de_paint/cpaint/RENDER_CANVAS
+        PARAMETER canvas turned ;
+        PARAMETER position at ;
+        PARAMETER input blocks ;
+        PARAMETER tools tools ;
+        PARAMETER output rubble ;
+END FUNCTION
+NOOP
+FUNCTION copy
+    PARAMETER width INTEGER 7
+    PARAMETER height INTEGER 6
+    PARAMETER depth INTEGER 7
+    PARAMETER turn INTEGER 0
+    PARAMETER distance INTEGER 12
+BEGIN
+    VARIABLE from STRUCT c0de/minecraft/POSITION
+    VARIABLE to STRUCT c0de/minecraft/POSITION
+    VARIABLE building TYPE c0de_paint/cpaint/CANVAS
+    ASSIGN from.x PID.x + 2 ;
+    ASSIGN from.y PID.y ;
+    ASSIGN from.z PID.z ;
+    ASSIGN to.x from.x + width - 1 ;
+    ASSIGN to.y from.y + height - 1 ;
+    ASSIGN to.z from.z + depth - 1 ;
+    CALL c0de_paint/cpaint/CANVAS_FROM_WORLD
+        PARAMETER from from ;
+        PARAMETER to to ;
+        PARAMETER air TRUE ;
+        RESULT result building
+    CALL place
+        PARAMETER building building ;
+        PARAMETER turn turn ;
+        PARAMETER distance distance ;
+END FUNCTION
+NOOP
+FUNCTION sample
+    PARAMETER turn INTEGER 0
+    PARAMETER distance INTEGER 12
+BEGIN
+    VARIABLE hut TYPE c0de_paint/cpaint/CANVAS
+    VARIABLE a STRUCT c0de_paint/cpaint/POINT
+    VARIABLE b STRUCT c0de_paint/cpaint/POINT
+    VARIABLE block STRUCT c0de_paint/cpaint/BLOCK
+    VARIABLE stone TYPE c0de_paint/cpaint/STYLE
+    VARIABLE step TYPE c0de_paint/cpaint/STYLE
+    VARIABLE air TYPE c0de_paint/cpaint/STYLE
+    ASSIGN block.id "cobblestone" ;
+    CALL c0de_paint/cpaint/STYLE_SOLID
+        PARAMETER block block ;
+        RESULT result stone
+    ASSIGN block.id "cobblestone_stairs" ;
+    ASSIGN block.properties["facing"] "south" ;
+    CALL c0de_paint/cpaint/STYLE_SOLID
+        PARAMETER block block ;
+        RESULT result step
+    CALL c0de_paint/cpaint/STYLE_EMPTY
+        RESULT result air
+    ASSIGN b.x 2 ;
+    ASSIGN b.y 3 ;
+    ASSIGN b.z 3 ;
+    CALL c0de_paint/cpaint/DRAW_BOX
+        PARAMETER canvas hut ;
+        PARAMETER from a ;
+        PARAMETER to b ;
+        PARAMETER side_style stone ;
+        PARAMETER fill_style air ;
+    ASSIGN a.x 1 ;
+    ASSIGN a.y 1 ;
+    ASSIGN b.x 1 ;
+    ASSIGN b.y 2 ;
+    ASSIGN b.z 0 ;
+    CALL c0de_paint/cpaint/DRAW_LINE
+        PARAMETER canvas hut ;
+        PARAMETER from a ;
+        PARAMETER to b ;
+        PARAMETER style air ;
+    ASSIGN a.y 0 ;
+    ASSIGN a.z -1 ;
+    CALL c0de_paint/cpaint/DRAW_BLOCK
+        PARAMETER canvas hut ;
+        PARAMETER point a ;
+        PARAMETER style step ;
+    CALL place
+        PARAMETER building hut ;
+        PARAMETER turn turn ;
+        PARAMETER distance distance ;
+END FUNCTION

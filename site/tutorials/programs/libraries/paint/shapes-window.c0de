@@ -1,0 +1,89 @@
+PROGRAM roundwindow
+NOOP
+INCLUDE c0de/minecraft
+INCLUDE c0de_paint/cpaint
+NOOP
+FUNCTION solid
+    PARAMETER id STRING
+    RESULT result TYPE c0de_paint/cpaint/STYLE
+BEGIN
+    VARIABLE block STRUCT c0de_paint/cpaint/BLOCK
+    ASSIGN block.id id ;
+    CALL c0de_paint/cpaint/STYLE_SOLID
+        PARAMETER block block ;
+        RESULT result result
+END FUNCTION
+NOOP
+FUNCTION window
+    PARAMETER r INTEGER 4
+BEGIN
+    VARIABLE c TYPE c0de_paint/cpaint/CANVAS
+    VARIABLE a STRUCT c0de_paint/cpaint/POINT
+    VARIABLE b STRUCT c0de_paint/cpaint/POINT
+    VARIABLE m STRUCT c0de_paint/cpaint/POINT
+    VARIABLE wall TYPE c0de_paint/cpaint/STYLE
+    VARIABLE rim TYPE c0de_paint/cpaint/STYLE
+    VARIABLE glass TYPE c0de_paint/cpaint/STYLE
+    VARIABLE frame TYPE c0de_paint/cpaint/STYLE
+    VARIABLE at STRUCT c0de/minecraft/POSITION
+    CALL solid
+        PARAMETER id "stone_bricks" ;
+        RESULT result wall
+    CALL solid
+        PARAMETER id "polished_andesite" ;
+        RESULT result rim
+    CALL solid
+        PARAMETER id "light_blue_stained_glass" ;
+        RESULT result glass
+    CALL solid
+        PARAMETER id "dark_oak_planks" ;
+        RESULT result frame
+    // the wall: a rectangle standing upright
+    ASSIGN b.x 2 * r + 4 ;
+    ASSIGN m.y 2 * r + 4 ;
+    CALL c0de_paint/cpaint/DRAW_RECTANGLE
+        PARAMETER canvas c ;
+        PARAMETER a a ;
+        PARAMETER b b ;
+        PARAMETER c m ;
+        PARAMETER fill_style wall ;
+    // the window: a circle in the same plane
+    ASSIGN m.x r + 2 ;
+    ASSIGN m.y r + 2 ;
+    ASSIGN a.x 2 * r + 2 ;
+    ASSIGN a.y r + 2 ;
+    ASSIGN b.x r + 2 ;
+    ASSIGN b.y 2 * r + 2 ;
+    CALL c0de_paint/cpaint/DRAW_ELLIPSE
+        PARAMETER canvas c ;
+        PARAMETER center m ;
+        PARAMETER a a ;
+        PARAMETER b b ;
+        PARAMETER line_style rim ;
+        PARAMETER fill_style glass ;
+    // the cross of the window frame
+    ASSIGN a.x 3 ;
+    ASSIGN b.x 2 * r + 1 ;
+    ASSIGN b.y r + 2 ;
+    CALL c0de_paint/cpaint/DRAW_LINE
+        PARAMETER canvas c ;
+        PARAMETER from a ;
+        PARAMETER to b ;
+        PARAMETER style frame ;
+    ASSIGN a.x r + 2 ;
+    ASSIGN a.y 3 ;
+    ASSIGN b.x r + 2 ;
+    ASSIGN b.y 2 * r + 1 ;
+    CALL c0de_paint/cpaint/DRAW_LINE
+        PARAMETER canvas c ;
+        PARAMETER from a ;
+        PARAMETER to b ;
+        PARAMETER style frame ;
+    // build it 2 blocks east of the trigger block
+    ASSIGN at.x PID.x + 2 ;
+    ASSIGN at.y PID.y ;
+    ASSIGN at.z PID.z ;
+    CALL c0de_paint/cpaint/RENDER_CANVAS
+        PARAMETER canvas c ;
+        PARAMETER position at ;
+END FUNCTION

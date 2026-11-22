@@ -1,0 +1,21 @@
+---
+position: { x: 2, y: -1, z: 0 }
+layers:
+  - y: -1
+    blocks:
+      - { x: 2, z: 0, block: 'minecraft:stripped_oak_log[axis=x]' }
+      - { x: 2, z: 1, block: 'minecraft:stripped_oak_log[axis=z]' }
+      - { x: 2, z: 2, block: 'minecraft:stripped_oak_log[axis=x]' }
+      - { x: 2, z: 3, block: 'minecraft:stripped_oak_log[axis=z]' }
+      - { x: 3, z: 0, block: 'minecraft:stripped_oak_log[axis=z]' }
+      - { x: 3, z: 1, block: 'minecraft:stripped_oak_log[axis=x]' }
+      - { x: 3, z: 2, block: 'minecraft:stripped_oak_log[axis=z]' }
+      - { x: 3, z: 3, block: 'minecraft:stripped_oak_log[axis=x]' }
+      - { x: 4, z: 0, block: 'minecraft:stripped_oak_log[axis=x]' }
+      - { x: 4, z: 1, block: 'minecraft:stripped_oak_log[axis=z]' }
+      - { x: 4, z: 2, block: 'minecraft:stripped_oak_log[axis=x]' }
+      - { x: 4, z: 3, block: 'minecraft:stripped_oak_log[axis=z]' }
+      - { x: 5, z: 0, block: 'minecraft:stripped_oak_log[axis=z]' }
+      - { x: 5, z: 1, block: 'minecraft:stripped_oak_log[axis=x]' }
+      - { x: 5, z: 2, block: 'minecraft:stripped_oak_log[axis=z]' }
+      - { x: 5, z: 3, block: 'minecraft:stripped_oak_log[axis=x]' }

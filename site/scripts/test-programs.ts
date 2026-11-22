@@ -26,7 +26,7 @@ import { dirname, join, relative, resolve, sep } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { readConfig } from './import/sources.ts'
 import { javaArgs, needs as needsOf, runner as getRunner } from './runner.ts'
-import { parse } from 'yaml'
+import { parse, parseAllDocuments } from 'yaml'
 import { startMailService, usesMail, type MailService, type Received } from './mail-service.ts'
 import { startTestService, usesApi, usesOpenMeteo, type TestService } from './test-service.ts'
 
@@ -131,27 +131,29 @@ export async function compareMailboxes(
 }
 
 // compareRender returns the differences between the expected and the actual blocks of
-// RENDER_CANVAS: the files must be equal line by line, apart from line endings and the space
-// at the ends of the lines.
+// RENDER_CANVAS: both files are YAML documents, one per call, and must hold the same values (the
+// formatting doesn't matter, so Prettier may format the expected files).
 export function compareRender(expected: string, actual: string): string[] {
-  const lines = (text: string) =>
-    text
-      .replace(/\r\n/g, '\n')
-      .split('\n')
-      .map((line) => line.trimEnd())
-      .join('\n')
-      .trim()
-      .split('\n')
-  const want = lines(expected)
-  const got = lines(actual)
-  for (let i = 0; i < Math.max(want.length, got.length); i++) {
-    if (want[i] !== got[i]) {
-      return [
-        `render line ${i + 1}: expected ${JSON.stringify(want[i] ?? '')}, got ${JSON.stringify(got[i] ?? '')}`,
-      ]
-    }
+  const documents = (text: string): unknown[] =>
+    parseAllDocuments(text).map((document) => document.toJS() as unknown)
+  const want = documents(expected)
+  const got = documents(actual)
+  if (want.length !== got.length) {
+    return [`render: ${got.length} calls of RENDER_CANVAS instead of ${want.length}`]
   }
-  return []
+  const problems: string[] = []
+  want.forEach((document, i) => {
+    const a = JSON.stringify(document)
+    const b = JSON.stringify(got[i])
+    if (a === b) return
+    let at = 0
+    while (at < a.length && a[at] === b[at]) at++
+    const from = Math.max(0, at - 40)
+    problems.push(
+      `render call ${i + 1}: expected …${a.slice(from, at + 40)}…, got …${b.slice(from, at + 40)}…`,
+    )
+  })
+  return problems
 }
 
 // java runs java and returns its exit code and output.

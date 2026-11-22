@@ -1,0 +1,74 @@
+PROGRAM floor
+NOOP
+INCLUDE c0de/minecraft
+INCLUDE c0de_paint/cpaint
+NOOP
+FUNCTION lay
+    PARAMETER width INTEGER 8
+    PARAMETER depth INTEGER 8
+    PARAMETER border BOOLEAN TRUE
+BEGIN
+    VARIABLE tile TYPE c0de_paint/cpaint/CANVAS
+    VARIABLE c TYPE c0de_paint/cpaint/CANVAS
+    VARIABLE a STRUCT c0de_paint/cpaint/POINT
+    VARIABLE b STRUCT c0de_paint/cpaint/POINT
+    VARIABLE block STRUCT c0de_paint/cpaint/BLOCK
+    VARIABLE black TYPE c0de_paint/cpaint/STYLE
+    VARIABLE white TYPE c0de_paint/cpaint/STYLE
+    VARIABLE checks TYPE c0de_paint/cpaint/STYLE
+    VARIABLE edge TYPE c0de_paint/cpaint/STYLE
+    VARIABLE site STRUCT c0de/minecraft/POSITION
+    ASSIGN block.id "black_concrete" ;
+    CALL c0de_paint/cpaint/STYLE_SOLID
+        PARAMETER block block ;
+        RESULT result black
+    ASSIGN block.id "white_concrete" ;
+    CALL c0de_paint/cpaint/STYLE_SOLID
+        PARAMETER block block ;
+        RESULT result white
+    ASSIGN b.x 1 ;
+    ASSIGN b.z 1 ;
+    CALL c0de_paint/cpaint/DRAW_BOX
+        PARAMETER canvas tile ;
+        PARAMETER from a ;
+        PARAMETER to b ;
+        PARAMETER fill_style black ;
+    CALL c0de_paint/cpaint/DRAW_BLOCK
+        PARAMETER canvas tile ;
+        PARAMETER point a ;
+        PARAMETER style white ;
+    CALL c0de_paint/cpaint/DRAW_BLOCK
+        PARAMETER canvas tile ;
+        PARAMETER point b ;
+        PARAMETER style white ;
+    CALL c0de_paint/cpaint/STYLE_PATTERN
+        PARAMETER pattern tile ;
+        RESULT result checks
+    NOOP
+    IF border ;
+    BEGIN
+        ASSIGN block.id "dark_oak_planks" ;
+        CALL c0de_paint/cpaint/STYLE_SOLID
+            PARAMETER block block ;
+            RESULT result edge
+    END
+    ELSE
+    BEGIN
+        CALL c0de_paint/cpaint/STYLE_NONE
+            RESULT result edge
+    END IF
+    ASSIGN b.x width - 1 ;
+    ASSIGN b.z depth - 1 ;
+    CALL c0de_paint/cpaint/DRAW_BOX
+        PARAMETER canvas c ;
+        PARAMETER from a ;
+        PARAMETER to b ;
+        PARAMETER line_style edge ;
+        PARAMETER fill_style checks ;
+    ASSIGN site.x PID.x + 2 ;
+    ASSIGN site.y PID.y - 1 ;
+    ASSIGN site.z PID.z ;
+    CALL c0de_paint/cpaint/RENDER_CANVAS
+        PARAMETER canvas c ;
+        PARAMETER position site ;
+END FUNCTION

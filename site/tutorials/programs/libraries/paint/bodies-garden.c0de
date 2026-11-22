@@ -1,0 +1,90 @@
+PROGRAM sculptures
+NOOP
+INCLUDE c0de/minecraft
+INCLUDE c0de_paint/cpaint
+NOOP
+FUNCTION solid
+    PARAMETER id STRING
+    RESULT result TYPE c0de_paint/cpaint/STYLE
+BEGIN
+    VARIABLE block STRUCT c0de_paint/cpaint/BLOCK
+    ASSIGN block.id id ;
+    CALL c0de_paint/cpaint/STYLE_SOLID
+        PARAMETER block block ;
+        RESULT result result
+END FUNCTION
+NOOP
+FUNCTION garden
+    PARAMETER r INTEGER 4
+BEGIN
+    VARIABLE c TYPE c0de_paint/cpaint/CANVAS
+    VARIABLE m STRUCT c0de_paint/cpaint/POINT
+    VARIABLE a STRUCT c0de_paint/cpaint/POINT
+    VARIABLE b STRUCT c0de_paint/cpaint/POINT
+    VARIABLE gold TYPE c0de_paint/cpaint/STYLE
+    VARIABLE glass TYPE c0de_paint/cpaint/STYLE
+    VARIABLE quartz TYPE c0de_paint/cpaint/STYLE
+    VARIABLE moss TYPE c0de_paint/cpaint/STYLE
+    VARIABLE at STRUCT c0de/minecraft/POSITION
+    CALL solid
+        PARAMETER id "gold_block" ;
+        RESULT result gold
+    CALL solid
+        PARAMETER id "light_blue_stained_glass" ;
+        RESULT result glass
+    CALL solid
+        PARAMETER id "quartz_block" ;
+        RESULT result quartz
+    CALL solid
+        PARAMETER id "moss_block" ;
+        RESULT result moss
+    // all corners r away from the middle
+    ASSIGN m.y r ;
+    // only lines: a frame of gold
+    CALL c0de_paint/cpaint/DRAW_TETRAHEDRON
+        PARAMETER canvas c ;
+        PARAMETER center m ;
+        PARAMETER r r ;
+        PARAMETER line_style gold ;
+    // only sides: a hollow shell of glass
+    ASSIGN m.x 3 * r ;
+    CALL c0de_paint/cpaint/DRAW_OCTAHEDRON
+        PARAMETER canvas c ;
+        PARAMETER center m ;
+        PARAMETER r r ;
+        PARAMETER side_style glass ;
+    // the cube is a box, with lines and sides
+    ASSIGN a.x 5 * r + 1 ;
+    ASSIGN a.z 1 - r ;
+    ASSIGN b.x 7 * r - 1 ;
+    ASSIGN b.y 2 * r - 2 ;
+    ASSIGN b.z r - 1 ;
+    CALL c0de_paint/cpaint/DRAW_BOX
+        PARAMETER canvas c ;
+        PARAMETER from a ;
+        PARAMETER to b ;
+        PARAMETER line_style quartz ;
+        PARAMETER side_style glass ;
+    // only the inside: full of moss
+    ASSIGN m.x 9 * r ;
+    CALL c0de_paint/cpaint/DRAW_DODECAHEDRON
+        PARAMETER canvas c ;
+        PARAMETER center m ;
+        PARAMETER r r ;
+        PARAMETER fill_style moss ;
+    // lines and sides: quartz edges, glass faces
+    ASSIGN m.x 12 * r ;
+    CALL c0de_paint/cpaint/DRAW_ICOSAHEDRON
+        PARAMETER canvas c ;
+        PARAMETER center m ;
+        PARAMETER r r ;
+        PARAMETER line_style quartz ;
+        PARAMETER side_style glass ;
+    // a row from west to east, r + 2 blocks away
+    ASSIGN at.x PID.x + r + 2 ;
+    ASSIGN at.y PID.y ;
+    ASSIGN at.z PID.z ;
+    CALL c0de_paint/cpaint/RENDER_CANVAS
+        PARAMETER canvas c ;
+        PARAMETER position at ;
+END FUNCTION

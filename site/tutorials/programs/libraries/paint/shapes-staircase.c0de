@@ -1,0 +1,54 @@
+PROGRAM spiralstairs
+NOOP
+INCLUDE c0de/minecraft
+INCLUDE c0de_paint/cpaint
+NOOP
+FUNCTION solid
+    PARAMETER id STRING
+    RESULT result TYPE c0de_paint/cpaint/STYLE
+BEGIN
+    VARIABLE block STRUCT c0de_paint/cpaint/BLOCK
+    ASSIGN block.id id ;
+    CALL c0de_paint/cpaint/STYLE_SOLID
+        PARAMETER block block ;
+        RESULT result result
+END FUNCTION
+NOOP
+FUNCTION stairs
+    PARAMETER r INTEGER 3
+    PARAMETER h INTEGER 12
+    PARAMETER elevation FLOAT 0.5
+BEGIN
+    VARIABLE c TYPE c0de_paint/cpaint/CANVAS
+    VARIABLE m STRUCT c0de_paint/cpaint/POINT
+    VARIABLE east STRUCT c0de_paint/cpaint/POINT
+    VARIABLE south STRUCT c0de_paint/cpaint/POINT
+    VARIABLE edge TYPE c0de_paint/cpaint/STYLE
+    VARIABLE steps TYPE c0de_paint/cpaint/STYLE
+    VARIABLE at STRUCT c0de/minecraft/POSITION
+    CALL solid
+        PARAMETER id "spruce_planks" ;
+        RESULT result edge
+    CALL solid
+        PARAMETER id "oak_planks" ;
+        RESULT result steps
+    ASSIGN east.x r ;
+    ASSIGN south.z r ;
+    CALL c0de_paint/cpaint/DRAW_SPIRAL
+        PARAMETER canvas c ;
+        PARAMETER center m ;
+        PARAMETER a east ;
+        PARAMETER b south ;
+        PARAMETER direction "+y" ;
+        PARAMETER elevation elevation ;
+        PARAMETER h h ;
+        PARAMETER line_style edge ;
+        PARAMETER fill_style steps ;
+    // the axis r + 2 blocks east of the trigger block
+    ASSIGN at.x PID.x + r + 2 ;
+    ASSIGN at.y PID.y ;
+    ASSIGN at.z PID.z ;
+    CALL c0de_paint/cpaint/RENDER_CANVAS
+        PARAMETER canvas c ;
+        PARAMETER position at ;
+END FUNCTION

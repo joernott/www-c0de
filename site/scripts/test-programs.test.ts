@@ -99,16 +99,21 @@ describe('render', () => {
 })
 
 describe('compareRender', () => {
-  const blocks = '---\nposition: {x: 0, y: 64, z: 0}\nlayers:\n  - y: 64\n'
-  it('accepts the same blocks with other line endings', () => {
-    expect(compareRender(blocks, blocks.replaceAll('\n', '\r\n') + '\n')).toEqual([])
+  const blocks =
+    '---\nposition: {x: 0, y: 64, z: 0}\nlayers:\n  - y: 64\n    blocks:\n      - {x: 0, z: 0, block: "minecraft:stone"}\n'
+  it('accepts the same blocks in another format', () => {
+    const formatted =
+      '---\r\nposition: { x: 0, y: 64, z: 0 }\r\nlayers:\r\n  - y: 64\r\n    blocks:\r\n      - { x: 0, z: 0, block: minecraft:stone }\r\n'
+    expect(compareRender(blocks, formatted)).toEqual([])
   })
 
-  it('reports the first line that differs', () => {
-    expect(compareRender(blocks, blocks.replace('y: 64\n', 'y: 65\n'))).toEqual([
-      'render line 4: expected "  - y: 64", got "  - y: 65"',
+  it('reports other blocks and other numbers of calls', () => {
+    const [problem] = compareRender(blocks, blocks.replace('stone', 'dirt'))
+    expect(problem).toMatch(/^render call 1: expected .*minecraft:stone.*, got .*minecraft:dirt/)
+    expect(compareRender(blocks, '')).toEqual(['render: 0 calls of RENDER_CANVAS instead of 1'])
+    expect(compareRender(blocks, blocks + blocks)).toEqual([
+      'render: 2 calls of RENDER_CANVAS instead of 1',
     ])
-    expect(compareRender(blocks, '')).toEqual(['render line 1: expected "---", got ""'])
   })
 })
 

@@ -1,0 +1,53 @@
+PROGRAM palette
+NOOP
+INCLUDE c0de/minecraft
+INCLUDE c0de_paint/cpaint
+NOOP
+FUNCTION show
+    PARAMETER palette ARRAY STRUCT c0de_paint/cpaint/BLOCK
+    PARAMETER length INTEGER 16
+    PARAMETER height INTEGER 4
+BEGIN
+    VARIABLE c TYPE c0de_paint/cpaint/CANVAS
+    VARIABLE a STRUCT c0de_paint/cpaint/POINT
+    VARIABLE b STRUCT c0de_paint/cpaint/POINT
+    VARIABLE stripes TYPE c0de_paint/cpaint/STYLE
+    VARIABLE site STRUCT c0de/minecraft/POSITION
+    CALL c0de_paint/cpaint/STYLE_GRADIENT
+        PARAMETER blocks palette ;
+        PARAMETER from a ;
+        PARAMETER axes "x" ;
+        PARAMETER fuzzy 1 ;
+        RESULT result stripes
+    ASSIGN b.x length - 1 ;
+    ASSIGN b.y height - 1 ;
+    CALL c0de_paint/cpaint/DRAW_BOX
+        PARAMETER canvas c ;
+        PARAMETER from a ;
+        PARAMETER to b ;
+        PARAMETER fill_style stripes ;
+    ASSIGN site.x PID.x + 2 ;
+    ASSIGN site.y PID.y ;
+    ASSIGN site.z PID.z ;
+    CALL c0de_paint/cpaint/RENDER_CANVAS
+        PARAMETER canvas c ;
+        PARAMETER position site ;
+END FUNCTION
+NOOP
+FUNCTION build
+    PARAMETER length INTEGER 16
+    PARAMETER height INTEGER 4
+BEGIN
+    VARIABLE chest STRUCT c0de/minecraft/POSITION
+    VARIABLE blocks ARRAY STRUCT c0de_paint/cpaint/BLOCK
+    ASSIGN chest.x PID.x - 2 ;
+    ASSIGN chest.y PID.y ;
+    ASSIGN chest.z PID.z ;
+    CALL c0de_paint/cpaint/INVENTORY_BLOCKS
+        PARAMETER position chest ;
+        RESULT result blocks
+    CALL show
+        PARAMETER palette blocks ;
+        PARAMETER length length ;
+        PARAMETER height height ;
+END FUNCTION

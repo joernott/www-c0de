@@ -1,0 +1,33 @@
+PROGRAM copylist
+NOOP
+INCLUDE c0de/minecraft
+INCLUDE c0de_paint/cpaint
+NOOP
+FUNCTION list
+    PARAMETER width INTEGER 7
+    PARAMETER height INTEGER 6
+    PARAMETER depth INTEGER 7
+BEGIN
+    VARIABLE from STRUCT c0de/minecraft/POSITION
+    VARIABLE to STRUCT c0de/minecraft/POSITION
+    VARIABLE building TYPE c0de_paint/cpaint/CANVAS
+    VARIABLE needs HASH INTEGER
+    ASSIGN from.x PID.x + 2 ;
+    ASSIGN from.y PID.y ;
+    ASSIGN from.z PID.z ;
+    ASSIGN to.x from.x + width - 1 ;
+    ASSIGN to.y from.y + height - 1 ;
+    ASSIGN to.z from.z + depth - 1 ;
+    CALL c0de_paint/cpaint/CANVAS_FROM_WORLD
+        PARAMETER from from ;
+        PARAMETER to to ;
+        RESULT result building
+    CALL c0de_paint/cpaint/CANVAS_MATERIALS
+        PARAMETER canvas building ;
+        RESULT result needs
+    EACH id needs
+    BEGIN
+        CALL c0de/minecraft/SAY
+            PARAMETER message needs[id] ⊕ " " ⊕ id ;
+    END EACH
+END FUNCTION

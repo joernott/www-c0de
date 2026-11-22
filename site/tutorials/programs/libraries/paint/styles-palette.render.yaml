@@ -1,0 +1,23 @@
+---
+position: { x: 2, y: 0, z: 0 }
+layers:
+  - y: 0
+    blocks:
+      - { x: 2, z: 0, block: 'minecraft:sandstone' }
+      - { x: 3, z: 0, block: 'minecraft:sandstone' }
+      - { x: 4, z: 0, block: 'minecraft:sandstone' }
+      - { x: 5, z: 0, block: 'minecraft:sandstone' }
+      - { x: 6, z: 0, block: 'minecraft:smooth_sandstone' }
+      - { x: 7, z: 0, block: 'minecraft:smooth_sandstone' }
+      - { x: 8, z: 0, block: 'minecraft:terracotta' }
+      - { x: 9, z: 0, block: 'minecraft:terracotta' }
+  - y: 1
+    blocks:
+      - { x: 2, z: 0, block: 'minecraft:sandstone' }
+      - { x: 3, z: 0, block: 'minecraft:sandstone' }
+      - { x: 4, z: 0, block: 'minecraft:sandstone' }
+      - { x: 5, z: 0, block: 'minecraft:smooth_sandstone' }
+      - { x: 6, z: 0, block: 'minecraft:sandstone' }
+      - { x: 7, z: 0, block: 'minecraft:terracotta' }
+      - { x: 8, z: 0, block: 'minecraft:smooth_sandstone' }
+      - { x: 9, z: 0, block: 'minecraft:terracotta' }
