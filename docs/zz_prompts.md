@@ -316,3 +316,5 @@ yes, add tht to the tasks for  sprint 14 but don't start that sprint yet
 ## 2026-11-22 – c0de paint on the web page
 
 Concerning minecraft-c0de-paint, we can go ahead with releasing it and starting the work on the web page
+
+please update docs/screenshots.md as well to show me, which screenshots need to be taken
