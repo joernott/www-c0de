@@ -21,8 +21,8 @@ test('the tutorials tab shows the paths and the libraries as chapter tabs', asyn
   ]) {
     await expect(tabs(page).locator('.tab-chapter', { hasText: name })).toBeVisible()
   }
-  // the three paths and the seven libraries of the recipes
-  await expect(page.locator('.tab-chapter')).toHaveCount(10)
+  // the three paths and the eight libraries of the recipes
+  await expect(page.locator('.tab-chapter')).toHaveCount(11)
   await expect(page.getByRole('heading', { name: 'The world of the tutorials' })).toBeVisible()
 })
 

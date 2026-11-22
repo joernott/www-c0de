@@ -55,4 +55,5 @@ test('the version check answers the latest versions of the mods', async ({ reque
   const versions = await answer.json()
   expect(versions.c0de).toMatch(/^\d+\.\d+\.\d+/)
   expect(versions.c0de_net).toMatch(/^\d+\.\d+\.\d+/)
+  expect(versions.c0de_paint).toMatch(/^\d+\.\d+\.\d+/)
 })

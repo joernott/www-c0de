@@ -6,10 +6,10 @@ import { version } from './sources'
 
 test.use({ viewport: { width: 1440, height: 900 } })
 
-test('the home page shows both mods with their versions and links', async ({ page }) => {
+test('the home page shows the mods with their versions and links', async ({ page }) => {
   await page.goto('/')
   const mods = page.locator('.mod')
-  await expect(mods).toHaveCount(2)
+  await expect(mods).toHaveCount(3)
   // toHaveText with a string compares the whole text with normalized whitespace
   await expect(mods.nth(0).getByRole('heading')).toHaveText(`c0de ${version('c0de')}`)
   await expect(mods.nth(1).getByRole('heading')).toHaveText(`c0de net ${version('c0de_net')}`)
@@ -25,6 +25,11 @@ test('the home page shows both mods with their versions and links', async ({ pag
     'href',
     'https://github.com/joernott/minecraft-c0de-net',
   )
+  await expect(mods.nth(2).getByRole('heading')).toHaveText(`c0de paint ${version('c0de_paint')}`)
+  await expect(mods.nth(2).getByRole('link', { name: 'Download on Modrinth' })).toHaveAttribute(
+    'href',
+    'https://modrinth.com/mod/zuHwh3ir',
+  )
   await mods.nth(1).getByRole('link', { name: 'Documentation' }).click()
   await expect(page).toHaveURL(/\/c0de_net\/http\/$/)
 })
@@ -37,9 +42,9 @@ test('the home page shows the screenshot, an example and the tabs', async ({ pag
     .toBe(1280)
   await expect(page.locator('.shiki').first()).toContainText('FUNCTION greet')
   const tabs = page.locator('.tab-overview li')
-  // the tabs of c0de, the seven libraries (c0de/security since c0de 0.6.0, c0de_net/mail since c0de net
-  // 0.4.0) and the tutorials
-  await expect(tabs).toHaveCount(9)
+  // the tabs of c0de, the eight libraries (c0de/security since c0de 0.6.0, c0de_net/mail since c0de net
+  // 0.4.0, c0de_paint/cpaint since c0de paint 0.1.0) and the tutorials
+  await expect(tabs).toHaveCount(10)
   await expect(tabs.first()).toContainText('12 Kapitel')
   await expect(
     page.locator('.mod').first().getByRole('link', { name: 'Dokumentation' }),

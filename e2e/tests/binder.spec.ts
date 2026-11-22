@@ -12,6 +12,7 @@ const mainTabs = [
   'c0de/security',
   'c0de_net/http',
   'c0de_net/mail',
+  'c0de_paint/cpaint',
   'Tutorials',
 ]
 
