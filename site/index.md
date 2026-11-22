@@ -8,7 +8,7 @@ description: c0de is a programming language made of blocks in Minecraft. This si
 
 **Programming in Minecraft, one block at a time.**
 
-c0de is a small programming language inside Minecraft. You don't type programs, you build them: every line is a row of colorful blocks on a sheet of endless greenbar paper, in a dimension of its own. Trigger blocks anywhere in your world start the programs. Their results can open doors, move items, play sounds, or ask a web server for the weather.
+c0de is a small programming language inside Minecraft. You don't type programs, you build them: every line is a row of colorful blocks on a sheet of endless greenbar paper, in a dimension of its own. Trigger blocks anywhere in your world start the programs. Their results can open doors, move items, play sounds, ask a web server for the weather, or build a castle from a drawing.
 
 <img src="/images/screenshot.webp" alt="A c0de program in the c0de dimension: rows of colored blocks on green and white striped paper" width="1280" height="673" class="screenshot">
 
@@ -35,7 +35,7 @@ The function `greet` joins three parts into one text. Called with the name "c0de
 
 <ModList />
 
-Both mods run on Minecraft 1.21.1, 1.21.11, 26.1.2, 26.2 and 26.3, with Fabric or NeoForge. They are free and open source (BSD 3-Clause License).
+All mods run on Minecraft 1.21.1, 1.21.11, 26.1.2, 26.2 and 26.3, with Fabric or NeoForge. They are free and open source (BSD 3-Clause License).
 
 ## In this binder
 
