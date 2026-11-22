@@ -157,6 +157,28 @@ programs:
   - file: tutorials/programs/libraries/mail/mail-errors-send.c0de
     sheet: 102
     built: 2026-11-17
+  - file: tutorials/programs/libraries/paint/first-canvas-shed.c0de
+    sheet: 104
+  - file: tutorials/programs/libraries/paint/shapes-window.c0de
+    sheet: 106
+  - file: tutorials/programs/libraries/paint/shapes-star.c0de
+    sheet: 108
+  - file: tutorials/programs/libraries/paint/shapes-staircase.c0de
+    sheet: 110
+  - file: tutorials/programs/libraries/paint/styles-wall.c0de
+    sheet: 112
+  - file: tutorials/programs/libraries/paint/styles-floor.c0de
+    sheet: 114
+  - file: tutorials/programs/libraries/paint/styles-palette.c0de
+    sheet: 116
+  - file: tutorials/programs/libraries/paint/bodies-lighthouse.c0de
+    sheet: 118
+  - file: tutorials/programs/libraries/paint/bodies-garden.c0de
+    sheet: 120
+  - file: tutorials/programs/libraries/paint/shaping-canvases-street.c0de
+    sheet: 122
+  - file: tutorials/programs/libraries/paint/copying-buildings-copier.c0de
+    sheet: 124
 shots:
   - before-you-start-new-world
   - before-you-start-creative-tab
@@ -232,3 +254,15 @@ shots:
   - order-desk-laptop
   - tidy-mailbox-laptop
   - mail-errors-laptop
+  - first-canvas-shed
+  - first-canvas-list
+  - shapes-window
+  - shapes-star
+  - shapes-staircase
+  - styles-wall
+  - styles-floor
+  - styles-palette
+  - bodies-lighthouse
+  - bodies-sculptures
+  - shaping-canvases-street
+  - copying-buildings-copy

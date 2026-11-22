@@ -4,7 +4,7 @@ The screenshots of the tutorials (task 7.1.1), taken as [tutorials.md](tutorials
 
 The world: every program is on its own sheet of the c0de dimension, built by the datapack of `contrib/screenshots/` (see its README). Sheet 0 is empty, and an empty sheet lies between two programs. North of every sheet, at z = -3 from x + 5 on: a trigger block with a stone button, a debug trigger block with a laptop, a timer block with a lever that is on (so it is paused), an I/O block, a disk drive and a gray shulker box with a stack of variable, constant and literal items and a disk; behind them, at z = -6, a display wall of 4 × 3 blocks in a frame of iron blocks. The three trigger blocks are set to the program and the function of its test.
 
-74 screenshots, 51 programs on the sheets 2 to 102. The sheets of the programs never change; new screenshots are added at the end of this list, and their programs get the next free sheets. All sheets are built.
+86 screenshots, 62 programs on the sheets 2 to 124. The sheets of the programs never change; new screenshots are added at the end of this list, and their programs get the next free sheets. Not built yet: the sheets 104, 106, 108, 110, 112, 114, 116, 118, 120, 122, 124; `function c0de_screenshots:build_new` builds them (contrib/screenshots/README.md).
 
 ## Before you start
 
@@ -3407,7 +3407,7 @@ END FUNCTION
 
 ### [x] up-to-date-wall
 
-The display wall with the two green lines c0de 0.6.2: up to date and c0de net 0.4.0: up to date
+The display wall with the two green lines c0de 0.7.1: up to date and c0de net 0.4.0: up to date
 
 - Program **versioncheck**, function `check` (`site/tutorials/programs/libraries/http/up-to-date-check.c0de`)
 - Sheet 84, x = 2688
@@ -3583,6 +3583,7 @@ the trigger block with its button between a written sign and its copy, the chat 
 
 - Program **copier**, function `copy` (`site/tutorials/programs/libraries/minecraft/copying-signs-copy.c0de`)
 - Sheet 88, x = 2816
+- Other sheets also have a program copier: run `/function c0de_screenshots:activate/copying-signs-copy` first
 
 ```c0de
 PROGRAM copier
@@ -4529,5 +4530,1364 @@ BEGIN
     END IF
     CALL PRINT
         PARAMETER value "Sent to " ⊕ to ;
+END FUNCTION
+```
+
+## A first canvas
+
+`site/tutorials/libraries/c0de_paint/cpaint/first-canvas.md`
+
+### [ ] first-canvas-shed
+
+the finished garden shed, 5 × 4 blocks and 4 high, oak planks with oak logs on all edges, its doorway in the west wall, the trigger block with its button 2 blocks west of it and the chest 2 blocks further west
+
+- Program **shed**, function `build` (`site/tutorials/programs/libraries/paint/first-canvas-shed.c0de`)
+- Sheet 104, x = 3328 – not built yet: `/function c0de_screenshots:build_new`
+
+```c0de
+PROGRAM shed
+NOOP
+INCLUDE c0de/minecraft
+INCLUDE c0de_paint/cpaint
+NOOP
+FUNCTION draw
+    PARAMETER width INTEGER
+    PARAMETER depth INTEGER
+    PARAMETER height INTEGER
+    RESULT result TYPE c0de_paint/cpaint/CANVAS
+BEGIN
+    VARIABLE a STRUCT c0de_paint/cpaint/POINT
+    VARIABLE b STRUCT c0de_paint/cpaint/POINT
+    VARIABLE planks STRUCT c0de_paint/cpaint/BLOCK
+    VARIABLE log STRUCT c0de_paint/cpaint/BLOCK
+    VARIABLE walls TYPE c0de_paint/cpaint/STYLE
+    VARIABLE posts TYPE c0de_paint/cpaint/STYLE
+    VARIABLE air TYPE c0de_paint/cpaint/STYLE
+    ASSIGN planks.id "oak_planks" ;
+    ASSIGN log.id "oak_log" ;
+    CALL c0de_paint/cpaint/STYLE_SOLID
+        PARAMETER block planks ;
+        RESULT result walls
+    CALL c0de_paint/cpaint/STYLE_SOLID
+        PARAMETER block log ;
+        RESULT result posts
+    CALL c0de_paint/cpaint/STYLE_EMPTY
+        RESULT result air
+    ASSIGN b.x width - 1 ;
+    ASSIGN b.y height - 1 ;
+    ASSIGN b.z depth - 1 ;
+    CALL c0de_paint/cpaint/DRAW_BOX
+        PARAMETER canvas result ;
+        PARAMETER from a ;
+        PARAMETER to b ;
+        PARAMETER line_style posts ;
+        PARAMETER side_style walls ;
+    ASSIGN a.y 1 ;
+    ASSIGN a.z 1 ;
+    ASSIGN b.x 0 ;
+    ASSIGN b.y 2 ;
+    ASSIGN b.z 1 ;
+    CALL c0de_paint/cpaint/DRAW_BOX
+        PARAMETER canvas result ;
+        PARAMETER from a ;
+        PARAMETER to b ;
+        PARAMETER fill_style air ;
+END FUNCTION
+NOOP
+FUNCTION build
+    PARAMETER width INTEGER 5
+    PARAMETER depth INTEGER 4
+    PARAMETER height INTEGER 4
+BEGIN
+    VARIABLE shed TYPE c0de_paint/cpaint/CANVAS
+    VARIABLE site STRUCT c0de/minecraft/POSITION
+    VARIABLE chest STRUCT c0de/minecraft/POSITION
+    CALL draw
+        PARAMETER width width ;
+        PARAMETER depth depth ;
+        PARAMETER height height ;
+        RESULT result shed
+    ASSIGN site.x PID.x + 2 ;
+    ASSIGN site.y PID.y ;
+    ASSIGN site.z PID.z ;
+    ASSIGN chest.x PID.x - 2 ;
+    ASSIGN chest.y PID.y ;
+    ASSIGN chest.z PID.z ;
+    CALL c0de_paint/cpaint/RENDER_CANVAS
+        PARAMETER canvas shed ;
+        PARAMETER position site ;
+        PARAMETER input chest ;
+END FUNCTION
+NOOP
+FUNCTION materials
+    PARAMETER width INTEGER 5
+    PARAMETER depth INTEGER 4
+    PARAMETER height INTEGER 4
+BEGIN
+    VARIABLE shed TYPE c0de_paint/cpaint/CANVAS
+    VARIABLE list HASH INTEGER
+    VARIABLE voxels INTEGER
+    CALL draw
+        PARAMETER width width ;
+        PARAMETER depth depth ;
+        PARAMETER height height ;
+        RESULT result shed
+    CALL c0de_paint/cpaint/CANVAS_MATERIALS
+        PARAMETER canvas shed ;
+        RESULT result list
+    CALL c0de_paint/cpaint/CANVAS_COUNT
+        PARAMETER canvas shed ;
+        RESULT result voxels
+    CALL CLS
+    CALL PRINT
+        PARAMETER value "The shed needs:" ;
+    EACH id list
+    BEGIN
+        CALL PRINT
+            PARAMETER value list[id] ⊕ " " ⊕ id ;
+    END EACH
+    CALL PRINT
+        PARAMETER value voxels ⊕ " voxels in all" ;
+END FUNCTION
+```
+
+### [ ] first-canvas-list
+
+the laptop screen with the list "The shed needs:", "36 minecraft:oak_log", "30 minecraft:oak_planks" and "68 voxels in all", the trigger block and the chest next to it
+
+- Program **shed**, function `build` (`site/tutorials/programs/libraries/paint/first-canvas-shed.c0de`)
+- Sheet 104, x = 3328 – not built yet: `/function c0de_screenshots:build_new`
+
+```c0de
+PROGRAM shed
+NOOP
+INCLUDE c0de/minecraft
+INCLUDE c0de_paint/cpaint
+NOOP
+FUNCTION draw
+    PARAMETER width INTEGER
+    PARAMETER depth INTEGER
+    PARAMETER height INTEGER
+    RESULT result TYPE c0de_paint/cpaint/CANVAS
+BEGIN
+    VARIABLE a STRUCT c0de_paint/cpaint/POINT
+    VARIABLE b STRUCT c0de_paint/cpaint/POINT
+    VARIABLE planks STRUCT c0de_paint/cpaint/BLOCK
+    VARIABLE log STRUCT c0de_paint/cpaint/BLOCK
+    VARIABLE walls TYPE c0de_paint/cpaint/STYLE
+    VARIABLE posts TYPE c0de_paint/cpaint/STYLE
+    VARIABLE air TYPE c0de_paint/cpaint/STYLE
+    ASSIGN planks.id "oak_planks" ;
+    ASSIGN log.id "oak_log" ;
+    CALL c0de_paint/cpaint/STYLE_SOLID
+        PARAMETER block planks ;
+        RESULT result walls
+    CALL c0de_paint/cpaint/STYLE_SOLID
+        PARAMETER block log ;
+        RESULT result posts
+    CALL c0de_paint/cpaint/STYLE_EMPTY
+        RESULT result air
+    ASSIGN b.x width - 1 ;
+    ASSIGN b.y height - 1 ;
+    ASSIGN b.z depth - 1 ;
+    CALL c0de_paint/cpaint/DRAW_BOX
+        PARAMETER canvas result ;
+        PARAMETER from a ;
+        PARAMETER to b ;
+        PARAMETER line_style posts ;
+        PARAMETER side_style walls ;
+    ASSIGN a.y 1 ;
+    ASSIGN a.z 1 ;
+    ASSIGN b.x 0 ;
+    ASSIGN b.y 2 ;
+    ASSIGN b.z 1 ;
+    CALL c0de_paint/cpaint/DRAW_BOX
+        PARAMETER canvas result ;
+        PARAMETER from a ;
+        PARAMETER to b ;
+        PARAMETER fill_style air ;
+END FUNCTION
+NOOP
+FUNCTION build
+    PARAMETER width INTEGER 5
+    PARAMETER depth INTEGER 4
+    PARAMETER height INTEGER 4
+BEGIN
+    VARIABLE shed TYPE c0de_paint/cpaint/CANVAS
+    VARIABLE site STRUCT c0de/minecraft/POSITION
+    VARIABLE chest STRUCT c0de/minecraft/POSITION
+    CALL draw
+        PARAMETER width width ;
+        PARAMETER depth depth ;
+        PARAMETER height height ;
+        RESULT result shed
+    ASSIGN site.x PID.x + 2 ;
+    ASSIGN site.y PID.y ;
+    ASSIGN site.z PID.z ;
+    ASSIGN chest.x PID.x - 2 ;
+    ASSIGN chest.y PID.y ;
+    ASSIGN chest.z PID.z ;
+    CALL c0de_paint/cpaint/RENDER_CANVAS
+        PARAMETER canvas shed ;
+        PARAMETER position site ;
+        PARAMETER input chest ;
+END FUNCTION
+NOOP
+FUNCTION materials
+    PARAMETER width INTEGER 5
+    PARAMETER depth INTEGER 4
+    PARAMETER height INTEGER 4
+BEGIN
+    VARIABLE shed TYPE c0de_paint/cpaint/CANVAS
+    VARIABLE list HASH INTEGER
+    VARIABLE voxels INTEGER
+    CALL draw
+        PARAMETER width width ;
+        PARAMETER depth depth ;
+        PARAMETER height height ;
+        RESULT result shed
+    CALL c0de_paint/cpaint/CANVAS_MATERIALS
+        PARAMETER canvas shed ;
+        RESULT result list
+    CALL c0de_paint/cpaint/CANVAS_COUNT
+        PARAMETER canvas shed ;
+        RESULT result voxels
+    CALL CLS
+    CALL PRINT
+        PARAMETER value "The shed needs:" ;
+    EACH id list
+    BEGIN
+        CALL PRINT
+            PARAMETER value list[id] ⊕ " " ⊕ id ;
+    END EACH
+    CALL PRINT
+        PARAMETER value voxels ⊕ " voxels in all" ;
+END FUNCTION
+```
+
+## Shapes in any plane
+
+`site/tutorials/libraries/c0de_paint/cpaint/shapes.md`
+
+### [ ] shapes-window
+
+the wall of stone bricks, 13 × 13 blocks, with the round window of light blue glass in its middle, framed by polished andesite and divided by a cross of dark oak planks, the trigger block with its button in front of its west end
+
+- Program **roundwindow**, function `window` (`site/tutorials/programs/libraries/paint/shapes-window.c0de`)
+- Sheet 106, x = 3392 – not built yet: `/function c0de_screenshots:build_new`
+
+```c0de
+PROGRAM roundwindow
+NOOP
+INCLUDE c0de/minecraft
+INCLUDE c0de_paint/cpaint
+NOOP
+FUNCTION solid
+    PARAMETER id STRING
+    RESULT result TYPE c0de_paint/cpaint/STYLE
+BEGIN
+    VARIABLE block STRUCT c0de_paint/cpaint/BLOCK
+    ASSIGN block.id id ;
+    CALL c0de_paint/cpaint/STYLE_SOLID
+        PARAMETER block block ;
+        RESULT result result
+END FUNCTION
+NOOP
+FUNCTION window
+    PARAMETER r INTEGER 4
+BEGIN
+    VARIABLE c TYPE c0de_paint/cpaint/CANVAS
+    VARIABLE a STRUCT c0de_paint/cpaint/POINT
+    VARIABLE b STRUCT c0de_paint/cpaint/POINT
+    VARIABLE m STRUCT c0de_paint/cpaint/POINT
+    VARIABLE wall TYPE c0de_paint/cpaint/STYLE
+    VARIABLE rim TYPE c0de_paint/cpaint/STYLE
+    VARIABLE glass TYPE c0de_paint/cpaint/STYLE
+    VARIABLE frame TYPE c0de_paint/cpaint/STYLE
+    VARIABLE at STRUCT c0de/minecraft/POSITION
+    CALL solid
+        PARAMETER id "stone_bricks" ;
+        RESULT result wall
+    CALL solid
+        PARAMETER id "polished_andesite" ;
+        RESULT result rim
+    CALL solid
+        PARAMETER id "light_blue_stained_glass" ;
+        RESULT result glass
+    CALL solid
+        PARAMETER id "dark_oak_planks" ;
+        RESULT result frame
+    // the wall: a rectangle standing upright
+    ASSIGN b.x 2 * r + 4 ;
+    ASSIGN m.y 2 * r + 4 ;
+    CALL c0de_paint/cpaint/DRAW_RECTANGLE
+        PARAMETER canvas c ;
+        PARAMETER a a ;
+        PARAMETER b b ;
+        PARAMETER c m ;
+        PARAMETER fill_style wall ;
+    // the window: a circle in the same plane
+    ASSIGN m.x r + 2 ;
+    ASSIGN m.y r + 2 ;
+    ASSIGN a.x 2 * r + 2 ;
+    ASSIGN a.y r + 2 ;
+    ASSIGN b.x r + 2 ;
+    ASSIGN b.y 2 * r + 2 ;
+    CALL c0de_paint/cpaint/DRAW_ELLIPSE
+        PARAMETER canvas c ;
+        PARAMETER center m ;
+        PARAMETER a a ;
+        PARAMETER b b ;
+        PARAMETER line_style rim ;
+        PARAMETER fill_style glass ;
+    // the cross of the window frame
+    ASSIGN a.x 3 ;
+    ASSIGN b.x 2 * r + 1 ;
+    ASSIGN b.y r + 2 ;
+    CALL c0de_paint/cpaint/DRAW_LINE
+        PARAMETER canvas c ;
+        PARAMETER from a ;
+        PARAMETER to b ;
+        PARAMETER style frame ;
+    ASSIGN a.x r + 2 ;
+    ASSIGN a.y 3 ;
+    ASSIGN b.x r + 2 ;
+    ASSIGN b.y 2 * r + 1 ;
+    CALL c0de_paint/cpaint/DRAW_LINE
+        PARAMETER canvas c ;
+        PARAMETER from a ;
+        PARAMETER to b ;
+        PARAMETER style frame ;
+    // build it 2 blocks east of the trigger block
+    ASSIGN at.x PID.x + 2 ;
+    ASSIGN at.y PID.y ;
+    ASSIGN at.z PID.z ;
+    CALL c0de_paint/cpaint/RENDER_CANVAS
+        PARAMETER canvas c ;
+        PARAMETER position at ;
+END FUNCTION
+```
+
+### [ ] shapes-star
+
+the five-pointed star set into the grass, white concrete with a rim of gold blocks and a sea lantern in its middle, seen from above, the trigger block 2 blocks west of its western tip
+
+- Program **floorstar**, function `star` (`site/tutorials/programs/libraries/paint/shapes-star.c0de`)
+- Sheet 108, x = 3456 – not built yet: `/function c0de_screenshots:build_new`
+
+```c0de
+PROGRAM floorstar
+NOOP
+INCLUDE c0de/math
+INCLUDE c0de/minecraft
+INCLUDE c0de_paint/cpaint
+NOOP
+FUNCTION solid
+    PARAMETER id STRING
+    RESULT result TYPE c0de_paint/cpaint/STYLE
+BEGIN
+    VARIABLE block STRUCT c0de_paint/cpaint/BLOCK
+    ASSIGN block.id id ;
+    CALL c0de_paint/cpaint/STYLE_SOLID
+        PARAMETER block block ;
+        RESULT result result
+END FUNCTION
+NOOP
+FUNCTION star
+    PARAMETER r INTEGER 8
+BEGIN
+    VARIABLE c TYPE c0de_paint/cpaint/CANVAS
+    VARIABLE p STRUCT c0de_paint/cpaint/POINT
+    VARIABLE corners ARRAY STRUCT c0de_paint/cpaint/POINT
+    VARIABLE gold TYPE c0de_paint/cpaint/STYLE
+    VARIABLE white TYPE c0de_paint/cpaint/STYLE
+    VARIABLE light TYPE c0de_paint/cpaint/STYLE
+    VARIABLE at STRUCT c0de/minecraft/POSITION
+    VARIABLE angle FLOAT
+    VARIABLE radius FLOAT
+    VARIABLE f FLOAT
+    CALL solid
+        PARAMETER id "gold_block" ;
+        RESULT result gold
+    CALL solid
+        PARAMETER id "white_concrete" ;
+        RESULT result white
+    CALL solid
+        PARAMETER id "sea_lantern" ;
+        RESULT result light
+    // 10 corners: tips and notches take turns
+    FOR i INTEGER 0 ; 9 ;
+    BEGIN
+        ASSIGN radius r ;
+        IF i \ 2 = 1 ;
+        BEGIN
+            ASSIGN radius r * 2 / 5 ;
+        END IF
+        ASSIGN angle ( i / 5 - 0.5 ) * c0de/math/PI ;
+        CALL c0de/math/COS
+            PARAMETER value angle ;
+            RESULT result f
+        CALL c0de/math/ROUND
+            PARAMETER value radius * f ;
+            RESULT result p.x
+        CALL c0de/math/SIN
+            PARAMETER value angle ;
+            RESULT result f
+        CALL c0de/math/ROUND
+            PARAMETER value radius * f ;
+            RESULT result p.z
+        ASSIGN corners[i] p ;
+    END FOR
+    CALL c0de_paint/cpaint/DRAW_POLYGON
+        PARAMETER canvas c ;
+        PARAMETER points corners ;
+        PARAMETER line_style gold ;
+        PARAMETER fill_style white ;
+    // a lamp in the middle
+    ASSIGN p.x 0 ;
+    ASSIGN p.z 0 ;
+    CALL c0de_paint/cpaint/DRAW_BLOCK
+        PARAMETER canvas c ;
+        PARAMETER point p ;
+        PARAMETER style light ;
+    // into the floor, its middle r + 2 blocks east
+    ASSIGN at.x PID.x + r + 2 ;
+    ASSIGN at.y PID.y - 1 ;
+    ASSIGN at.z PID.z ;
+    CALL c0de_paint/cpaint/RENDER_CANVAS
+        PARAMETER canvas c ;
+        PARAMETER position at ;
+END FUNCTION
+```
+
+### [ ] shapes-staircase
+
+the spiral staircase of oak planks with an edge of spruce planks, 12 blocks high, winding clockwise around its central column, a player on one of its upper steps
+
+- Program **spiralstairs**, function `stairs` (`site/tutorials/programs/libraries/paint/shapes-staircase.c0de`)
+- Sheet 110, x = 3520 – not built yet: `/function c0de_screenshots:build_new`
+
+```c0de
+PROGRAM spiralstairs
+NOOP
+INCLUDE c0de/minecraft
+INCLUDE c0de_paint/cpaint
+NOOP
+FUNCTION solid
+    PARAMETER id STRING
+    RESULT result TYPE c0de_paint/cpaint/STYLE
+BEGIN
+    VARIABLE block STRUCT c0de_paint/cpaint/BLOCK
+    ASSIGN block.id id ;
+    CALL c0de_paint/cpaint/STYLE_SOLID
+        PARAMETER block block ;
+        RESULT result result
+END FUNCTION
+NOOP
+FUNCTION stairs
+    PARAMETER r INTEGER 3
+    PARAMETER h INTEGER 12
+    PARAMETER elevation FLOAT 0.5
+BEGIN
+    VARIABLE c TYPE c0de_paint/cpaint/CANVAS
+    VARIABLE m STRUCT c0de_paint/cpaint/POINT
+    VARIABLE east STRUCT c0de_paint/cpaint/POINT
+    VARIABLE south STRUCT c0de_paint/cpaint/POINT
+    VARIABLE edge TYPE c0de_paint/cpaint/STYLE
+    VARIABLE steps TYPE c0de_paint/cpaint/STYLE
+    VARIABLE at STRUCT c0de/minecraft/POSITION
+    CALL solid
+        PARAMETER id "spruce_planks" ;
+        RESULT result edge
+    CALL solid
+        PARAMETER id "oak_planks" ;
+        RESULT result steps
+    ASSIGN east.x r ;
+    ASSIGN south.z r ;
+    CALL c0de_paint/cpaint/DRAW_SPIRAL
+        PARAMETER canvas c ;
+        PARAMETER center m ;
+        PARAMETER a east ;
+        PARAMETER b south ;
+        PARAMETER direction "+y" ;
+        PARAMETER elevation elevation ;
+        PARAMETER h h ;
+        PARAMETER line_style edge ;
+        PARAMETER fill_style steps ;
+    // the axis r + 2 blocks east of the trigger block
+    ASSIGN at.x PID.x + r + 2 ;
+    ASSIGN at.y PID.y ;
+    ASSIGN at.z PID.z ;
+    CALL c0de_paint/cpaint/RENDER_CANVAS
+        PARAMETER canvas c ;
+        PARAMETER position at ;
+END FUNCTION
+```
+
+## Styles
+
+`site/tutorials/libraries/c0de_paint/cpaint/styles.md`
+
+### [ ] styles-wall
+
+the city wall of stone bricks with mossy and cracked bricks in random places and the gate in its middle, seen from the trigger block, with the wool sunset in its frame of logs rising behind the wall
+
+- Program **stonewall**, function `build` (`site/tutorials/programs/libraries/paint/styles-wall.c0de`)
+- Sheet 112, x = 3584 – not built yet: `/function c0de_screenshots:build_new`
+
+```c0de
+PROGRAM stonewall
+NOOP
+INCLUDE c0de/minecraft
+INCLUDE c0de_paint/cpaint
+NOOP
+FUNCTION build
+    PARAMETER half INTEGER 6
+    PARAMETER height INTEGER 5
+BEGIN
+    VARIABLE c TYPE c0de_paint/cpaint/CANVAS
+    VARIABLE a STRUCT c0de_paint/cpaint/POINT
+    VARIABLE b STRUCT c0de_paint/cpaint/POINT
+    VARIABLE stone STRUCT c0de_paint/cpaint/BLOCK
+    VARIABLE stones ARRAY STRUCT c0de_paint/cpaint/BLOCK
+    VARIABLE mixed TYPE c0de_paint/cpaint/STYLE
+    VARIABLE air TYPE c0de_paint/cpaint/STYLE
+    VARIABLE site STRUCT c0de/minecraft/POSITION
+    ASSIGN stone.id "stone_bricks" ;
+    ASSIGN stone.weight 6 ;
+    ASSIGN stones[0] stone ;
+    ASSIGN stone.id "mossy_stone_bricks" ;
+    ASSIGN stone.weight 3 ;
+    ASSIGN stones[1] stone ;
+    ASSIGN stone.id "cracked_stone_bricks" ;
+    ASSIGN stone.weight 1 ;
+    ASSIGN stones[2] stone ;
+    CALL c0de_paint/cpaint/STYLE_RANDOM
+        PARAMETER blocks stones ;
+        RESULT result mixed
+    CALL c0de_paint/cpaint/STYLE_EMPTY
+        RESULT result air
+    ASSIGN a.x - half ;
+    ASSIGN b.x half ;
+    ASSIGN b.y height - 1 ;
+    CALL c0de_paint/cpaint/DRAW_BOX
+        PARAMETER canvas c ;
+        PARAMETER from a ;
+        PARAMETER to b ;
+        PARAMETER fill_style mixed ;
+    ASSIGN a.x -1 ;
+    ASSIGN b.x 1 ;
+    ASSIGN b.y 2 ;
+    CALL c0de_paint/cpaint/DRAW_BOX
+        PARAMETER canvas c ;
+        PARAMETER from a ;
+        PARAMETER to b ;
+        PARAMETER fill_style air ;
+    ASSIGN site.x PID.x ;
+    ASSIGN site.y PID.y ;
+    ASSIGN site.z PID.z - 3 ;
+    CALL c0de_paint/cpaint/RENDER_CANVAS
+        PARAMETER canvas c ;
+        PARAMETER position site ;
+END FUNCTION
+```
+
+### [ ] styles-floor
+
+the chequered floor of black and white concrete, 8 × 8 blocks, with its border of dark oak planks, set into the grass east of the trigger block, seen from above
+
+- Program **floor**, function `lay` (`site/tutorials/programs/libraries/paint/styles-floor.c0de`)
+- Sheet 114, x = 3648 – not built yet: `/function c0de_screenshots:build_new`
+
+```c0de
+PROGRAM floor
+NOOP
+INCLUDE c0de/minecraft
+INCLUDE c0de_paint/cpaint
+NOOP
+FUNCTION lay
+    PARAMETER width INTEGER 8
+    PARAMETER depth INTEGER 8
+    PARAMETER border BOOLEAN TRUE
+BEGIN
+    VARIABLE tile TYPE c0de_paint/cpaint/CANVAS
+    VARIABLE c TYPE c0de_paint/cpaint/CANVAS
+    VARIABLE a STRUCT c0de_paint/cpaint/POINT
+    VARIABLE b STRUCT c0de_paint/cpaint/POINT
+    VARIABLE block STRUCT c0de_paint/cpaint/BLOCK
+    VARIABLE black TYPE c0de_paint/cpaint/STYLE
+    VARIABLE white TYPE c0de_paint/cpaint/STYLE
+    VARIABLE checks TYPE c0de_paint/cpaint/STYLE
+    VARIABLE edge TYPE c0de_paint/cpaint/STYLE
+    VARIABLE site STRUCT c0de/minecraft/POSITION
+    ASSIGN block.id "black_concrete" ;
+    CALL c0de_paint/cpaint/STYLE_SOLID
+        PARAMETER block block ;
+        RESULT result black
+    ASSIGN block.id "white_concrete" ;
+    CALL c0de_paint/cpaint/STYLE_SOLID
+        PARAMETER block block ;
+        RESULT result white
+    ASSIGN b.x 1 ;
+    ASSIGN b.z 1 ;
+    CALL c0de_paint/cpaint/DRAW_BOX
+        PARAMETER canvas tile ;
+        PARAMETER from a ;
+        PARAMETER to b ;
+        PARAMETER fill_style black ;
+    CALL c0de_paint/cpaint/DRAW_BLOCK
+        PARAMETER canvas tile ;
+        PARAMETER point a ;
+        PARAMETER style white ;
+    CALL c0de_paint/cpaint/DRAW_BLOCK
+        PARAMETER canvas tile ;
+        PARAMETER point b ;
+        PARAMETER style white ;
+    CALL c0de_paint/cpaint/STYLE_PATTERN
+        PARAMETER pattern tile ;
+        RESULT result checks
+    NOOP
+    IF border ;
+    BEGIN
+        ASSIGN block.id "dark_oak_planks" ;
+        CALL c0de_paint/cpaint/STYLE_SOLID
+            PARAMETER block block ;
+            RESULT result edge
+    END
+    ELSE
+    BEGIN
+        CALL c0de_paint/cpaint/STYLE_NONE
+            RESULT result edge
+    END IF
+    ASSIGN b.x width - 1 ;
+    ASSIGN b.z depth - 1 ;
+    CALL c0de_paint/cpaint/DRAW_BOX
+        PARAMETER canvas c ;
+        PARAMETER from a ;
+        PARAMETER to b ;
+        PARAMETER line_style edge ;
+        PARAMETER fill_style checks ;
+    ASSIGN site.x PID.x + 2 ;
+    ASSIGN site.y PID.y - 1 ;
+    ASSIGN site.z PID.z ;
+    CALL c0de_paint/cpaint/RENDER_CANVAS
+        PARAMETER canvas c ;
+        PARAMETER position site ;
+END FUNCTION
+```
+
+### [ ] styles-palette
+
+the open chest with sandstone, smooth sandstone and terracotta in its first three slots, and the striped wall 16 blocks long beside it, sandstone fading to smooth sandstone and terracotta from west to east
+
+- Program **palette**, function `show` (`site/tutorials/programs/libraries/paint/styles-palette.c0de`)
+- Sheet 116, x = 3712 – not built yet: `/function c0de_screenshots:build_new`
+
+```c0de
+PROGRAM palette
+NOOP
+INCLUDE c0de/minecraft
+INCLUDE c0de_paint/cpaint
+NOOP
+FUNCTION show
+    PARAMETER palette ARRAY STRUCT c0de_paint/cpaint/BLOCK
+    PARAMETER length INTEGER 16
+    PARAMETER height INTEGER 4
+BEGIN
+    VARIABLE c TYPE c0de_paint/cpaint/CANVAS
+    VARIABLE a STRUCT c0de_paint/cpaint/POINT
+    VARIABLE b STRUCT c0de_paint/cpaint/POINT
+    VARIABLE stripes TYPE c0de_paint/cpaint/STYLE
+    VARIABLE site STRUCT c0de/minecraft/POSITION
+    CALL c0de_paint/cpaint/STYLE_GRADIENT
+        PARAMETER blocks palette ;
+        PARAMETER from a ;
+        PARAMETER axes "x" ;
+        PARAMETER fuzzy 1 ;
+        RESULT result stripes
+    ASSIGN b.x length - 1 ;
+    ASSIGN b.y height - 1 ;
+    CALL c0de_paint/cpaint/DRAW_BOX
+        PARAMETER canvas c ;
+        PARAMETER from a ;
+        PARAMETER to b ;
+        PARAMETER fill_style stripes ;
+    ASSIGN site.x PID.x + 2 ;
+    ASSIGN site.y PID.y ;
+    ASSIGN site.z PID.z ;
+    CALL c0de_paint/cpaint/RENDER_CANVAS
+        PARAMETER canvas c ;
+        PARAMETER position site ;
+END FUNCTION
+NOOP
+FUNCTION build
+    PARAMETER length INTEGER 16
+    PARAMETER height INTEGER 4
+BEGIN
+    VARIABLE chest STRUCT c0de/minecraft/POSITION
+    VARIABLE blocks ARRAY STRUCT c0de_paint/cpaint/BLOCK
+    ASSIGN chest.x PID.x - 2 ;
+    ASSIGN chest.y PID.y ;
+    ASSIGN chest.z PID.z ;
+    CALL c0de_paint/cpaint/INVENTORY_BLOCKS
+        PARAMETER position chest ;
+        RESULT result blocks
+    CALL show
+        PARAMETER palette blocks ;
+        PARAMETER length length ;
+        PARAMETER height height ;
+END FUNCTION
+```
+
+## Bodies
+
+`site/tutorials/libraries/c0de_paint/cpaint/bodies.md`
+
+### [ ] bodies-lighthouse
+
+the white lighthouse, 23 blocks high, with red rings at its foot and its top, the glass lantern room with the sea lantern shining inside and the copper dome on top, seen from the side at dusk, the trigger block in front of it
+
+- Program **lighthouse**, function `build` (`site/tutorials/programs/libraries/paint/bodies-lighthouse.c0de`)
+- Sheet 118, x = 3776 – not built yet: `/function c0de_screenshots:build_new`
+
+```c0de
+PROGRAM lighthouse
+NOOP
+INCLUDE c0de/minecraft
+INCLUDE c0de_paint/cpaint
+NOOP
+FUNCTION solid
+    PARAMETER id STRING
+    RESULT result TYPE c0de_paint/cpaint/STYLE
+BEGIN
+    VARIABLE block STRUCT c0de_paint/cpaint/BLOCK
+    ASSIGN block.id id ;
+    CALL c0de_paint/cpaint/STYLE_SOLID
+        PARAMETER block block ;
+        RESULT result result
+END FUNCTION
+NOOP
+FUNCTION build
+    PARAMETER r INTEGER 4
+    PARAMETER h INTEGER 16
+BEGIN
+    VARIABLE c TYPE c0de_paint/cpaint/CANVAS
+    VARIABLE m STRUCT c0de_paint/cpaint/POINT
+    VARIABLE white TYPE c0de_paint/cpaint/STYLE
+    VARIABLE red TYPE c0de_paint/cpaint/STYLE
+    VARIABLE glass TYPE c0de_paint/cpaint/STYLE
+    VARIABLE copper TYPE c0de_paint/cpaint/STYLE
+    VARIABLE light TYPE c0de_paint/cpaint/STYLE
+    VARIABLE air TYPE c0de_paint/cpaint/STYLE
+    VARIABLE at STRUCT c0de/minecraft/POSITION
+    CALL solid
+        PARAMETER id "white_concrete" ;
+        RESULT result white
+    CALL solid
+        PARAMETER id "red_concrete" ;
+        RESULT result red
+    CALL solid
+        PARAMETER id "glass" ;
+        RESULT result glass
+    CALL solid
+        PARAMETER id "copper_block" ;
+        RESULT result copper
+    CALL solid
+        PARAMETER id "sea_lantern" ;
+        RESULT result light
+    CALL c0de_paint/cpaint/STYLE_EMPTY
+        RESULT result air
+    // the dome: half of it sinks into the lantern room
+    ASSIGN m.y h + 3 ;
+    CALL c0de_paint/cpaint/DRAW_ELLIPSOID
+        PARAMETER canvas c ;
+        PARAMETER center m ;
+        PARAMETER rx r - 1 ;
+        PARAMETER ry r - 1 ;
+        PARAMETER rz r - 1 ;
+        PARAMETER side_style copper ;
+    // the tower: white, with red rims, hollow
+    ASSIGN m.y 0 ;
+    CALL c0de_paint/cpaint/DRAW_CYLINDER
+        PARAMETER canvas c ;
+        PARAMETER center m ;
+        PARAMETER r r ;
+        PARAMETER h h ;
+        PARAMETER direction "+y" ;
+        PARAMETER line_style red ;
+        PARAMETER side_style white ;
+        PARAMETER fill_style air ;
+    // the lantern room on top, made of glass
+    ASSIGN m.y h ;
+    CALL c0de_paint/cpaint/DRAW_CYLINDER
+        PARAMETER canvas c ;
+        PARAMETER center m ;
+        PARAMETER r r - 1 ;
+        PARAMETER h 4 ;
+        PARAMETER direction "+y" ;
+        PARAMETER side_style glass ;
+        PARAMETER fill_style air ;
+    // the light in its middle
+    ASSIGN m.y h + 1 ;
+    CALL c0de_paint/cpaint/DRAW_BLOCK
+        PARAMETER canvas c ;
+        PARAMETER point m ;
+        PARAMETER style light ;
+    // the axis r + 2 blocks east of the trigger block
+    ASSIGN at.x PID.x + r + 2 ;
+    ASSIGN at.y PID.y ;
+    ASSIGN at.z PID.z ;
+    CALL c0de_paint/cpaint/RENDER_CANVAS
+        PARAMETER canvas c ;
+        PARAMETER position at ;
+END FUNCTION
+```
+
+### [ ] bodies-sculptures
+
+the row of five garden sculptures on the grass: the gold frame of the tetrahedron, the glass octahedron, the glass cube with quartz edges, the full moss dodecahedron and the icosahedron with quartz edges and glass faces
+
+- Program **sculptures**, function `garden` (`site/tutorials/programs/libraries/paint/bodies-garden.c0de`)
+- Sheet 120, x = 3840 – not built yet: `/function c0de_screenshots:build_new`
+
+```c0de
+PROGRAM sculptures
+NOOP
+INCLUDE c0de/minecraft
+INCLUDE c0de_paint/cpaint
+NOOP
+FUNCTION solid
+    PARAMETER id STRING
+    RESULT result TYPE c0de_paint/cpaint/STYLE
+BEGIN
+    VARIABLE block STRUCT c0de_paint/cpaint/BLOCK
+    ASSIGN block.id id ;
+    CALL c0de_paint/cpaint/STYLE_SOLID
+        PARAMETER block block ;
+        RESULT result result
+END FUNCTION
+NOOP
+FUNCTION garden
+    PARAMETER r INTEGER 4
+BEGIN
+    VARIABLE c TYPE c0de_paint/cpaint/CANVAS
+    VARIABLE m STRUCT c0de_paint/cpaint/POINT
+    VARIABLE a STRUCT c0de_paint/cpaint/POINT
+    VARIABLE b STRUCT c0de_paint/cpaint/POINT
+    VARIABLE gold TYPE c0de_paint/cpaint/STYLE
+    VARIABLE glass TYPE c0de_paint/cpaint/STYLE
+    VARIABLE quartz TYPE c0de_paint/cpaint/STYLE
+    VARIABLE moss TYPE c0de_paint/cpaint/STYLE
+    VARIABLE at STRUCT c0de/minecraft/POSITION
+    CALL solid
+        PARAMETER id "gold_block" ;
+        RESULT result gold
+    CALL solid
+        PARAMETER id "light_blue_stained_glass" ;
+        RESULT result glass
+    CALL solid
+        PARAMETER id "quartz_block" ;
+        RESULT result quartz
+    CALL solid
+        PARAMETER id "moss_block" ;
+        RESULT result moss
+    // all corners r away from the middle
+    ASSIGN m.y r ;
+    // only lines: a frame of gold
+    CALL c0de_paint/cpaint/DRAW_TETRAHEDRON
+        PARAMETER canvas c ;
+        PARAMETER center m ;
+        PARAMETER r r ;
+        PARAMETER line_style gold ;
+    // only sides: a hollow shell of glass
+    ASSIGN m.x 3 * r ;
+    CALL c0de_paint/cpaint/DRAW_OCTAHEDRON
+        PARAMETER canvas c ;
+        PARAMETER center m ;
+        PARAMETER r r ;
+        PARAMETER side_style glass ;
+    // the cube is a box, with lines and sides
+    ASSIGN a.x 5 * r + 1 ;
+    ASSIGN a.z 1 - r ;
+    ASSIGN b.x 7 * r - 1 ;
+    ASSIGN b.y 2 * r - 2 ;
+    ASSIGN b.z r - 1 ;
+    CALL c0de_paint/cpaint/DRAW_BOX
+        PARAMETER canvas c ;
+        PARAMETER from a ;
+        PARAMETER to b ;
+        PARAMETER line_style quartz ;
+        PARAMETER side_style glass ;
+    // only the inside: full of moss
+    ASSIGN m.x 9 * r ;
+    CALL c0de_paint/cpaint/DRAW_DODECAHEDRON
+        PARAMETER canvas c ;
+        PARAMETER center m ;
+        PARAMETER r r ;
+        PARAMETER fill_style moss ;
+    // lines and sides: quartz edges, glass faces
+    ASSIGN m.x 12 * r ;
+    CALL c0de_paint/cpaint/DRAW_ICOSAHEDRON
+        PARAMETER canvas c ;
+        PARAMETER center m ;
+        PARAMETER r r ;
+        PARAMETER line_style quartz ;
+        PARAMETER side_style glass ;
+    // a row from west to east, r + 2 blocks away
+    ASSIGN at.x PID.x + r + 2 ;
+    ASSIGN at.y PID.y ;
+    ASSIGN at.z PID.z ;
+    CALL c0de_paint/cpaint/RENDER_CANVAS
+        PARAMETER canvas c ;
+        PARAMETER position at ;
+END FUNCTION
+```
+
+## Shaping canvases
+
+`site/tutorials/libraries/c0de_paint/cpaint/shaping-canvases.md`
+
+### [ ] shaping-canvases-street
+
+the whole street seen from above its west end: the trigger block in the middle of the road, south of it the oak house, the brick house, the two-block-high building site, the flat façade and the big hall with its gateway, across the road the mirrored oak house, and the turned house across the east end of the road; dirt paths in front of the doors
+
+- Program **street**, function `build` (`site/tutorials/programs/libraries/paint/shaping-canvases-street.c0de`)
+- Sheet 122, x = 3904 – not built yet: `/function c0de_screenshots:build_new`
+
+```c0de
+PROGRAM street
+NOOP
+INCLUDE c0de/minecraft
+INCLUDE c0de_paint/cpaint
+NOOP
+FUNCTION house
+    PARAMETER width INTEGER
+    PARAMETER depth INTEGER
+    PARAMETER height INTEGER
+    RESULT result TYPE c0de_paint/cpaint/CANVAS
+BEGIN
+    VARIABLE a STRUCT c0de_paint/cpaint/POINT
+    VARIABLE b STRUCT c0de_paint/cpaint/POINT
+    VARIABLE c STRUCT c0de_paint/cpaint/POINT
+    VARIABLE block STRUCT c0de_paint/cpaint/BLOCK
+    VARIABLE planks TYPE c0de_paint/cpaint/STYLE
+    VARIABLE south TYPE c0de_paint/cpaint/STYLE
+    VARIABLE north TYPE c0de_paint/cpaint/STYLE
+    VARIABLE lower TYPE c0de_paint/cpaint/STYLE
+    VARIABLE upper TYPE c0de_paint/cpaint/STYLE
+    ASSIGN block.id "oak_planks" ;
+    CALL c0de_paint/cpaint/STYLE_SOLID
+        PARAMETER block block ;
+        RESULT result planks
+    ASSIGN block.id "oak_stairs" ;
+    ASSIGN block.properties["facing"] "south" ;
+    CALL c0de_paint/cpaint/STYLE_SOLID
+        PARAMETER block block ;
+        RESULT result south
+    ASSIGN block.properties["facing"] "north" ;
+    CALL c0de_paint/cpaint/STYLE_SOLID
+        PARAMETER block block ;
+        RESULT result north
+    ASSIGN block.id "oak_door" ;
+    ASSIGN block.properties["hinge"] "left" ;
+    ASSIGN block.properties["half"] "lower" ;
+    CALL c0de_paint/cpaint/STYLE_SOLID
+        PARAMETER block block ;
+        RESULT result lower
+    ASSIGN block.properties["half"] "upper" ;
+    CALL c0de_paint/cpaint/STYLE_SOLID
+        PARAMETER block block ;
+        RESULT result upper
+    NOOP
+    ASSIGN b.x width - 1 ;
+    ASSIGN b.y height - 1 ;
+    ASSIGN b.z depth - 1 ;
+    CALL c0de_paint/cpaint/DRAW_BOX
+        PARAMETER canvas result ;
+        PARAMETER from a ;
+        PARAMETER to b ;
+        PARAMETER side_style planks ;
+    ASSIGN a.x 1 ;
+    CALL c0de_paint/cpaint/DRAW_BLOCK
+        PARAMETER canvas result ;
+        PARAMETER point a ;
+        PARAMETER style lower ;
+    ASSIGN a.y 1 ;
+    CALL c0de_paint/cpaint/DRAW_BLOCK
+        PARAMETER canvas result ;
+        PARAMETER point a ;
+        PARAMETER style upper ;
+    NOOP
+    ASSIGN a.x 0 ;
+    ASSIGN a.y height ;
+    ASSIGN b.y height ;
+    WHILE a.z ≤ b.z ;
+    BEGIN
+        CALL c0de_paint/cpaint/DRAW_BOX
+            PARAMETER canvas result ;
+            PARAMETER from a ;
+            PARAMETER to b ;
+            PARAMETER fill_style planks ;
+        IF a.z < b.z ;
+        BEGIN
+            ASSIGN c a ;
+            ASSIGN c.x b.x ;
+            CALL c0de_paint/cpaint/DRAW_LINE
+                PARAMETER canvas result ;
+                PARAMETER from a ;
+                PARAMETER to c ;
+                PARAMETER style south ;
+            ASSIGN c b ;
+            ASSIGN c.x 0 ;
+            CALL c0de_paint/cpaint/DRAW_LINE
+                PARAMETER canvas result ;
+                PARAMETER from c ;
+                PARAMETER to b ;
+                PARAMETER style north ;
+        END IF
+        ASSIGN a.y a.y + 1 ;
+        ASSIGN b.y b.y + 1 ;
+        ASSIGN a.z a.z + 1 ;
+        ASSIGN b.z b.z - 1 ;
+    END WHILE
+END FUNCTION
+NOOP
+FUNCTION addHouse
+    PARAMETER street TYPE c0de_paint/cpaint/CANVAS
+    PARAMETER house TYPE c0de_paint/cpaint/CANVAS
+    PARAMETER z INTEGER 0
+    RESULT result TYPE c0de_paint/cpaint/CANVAS
+BEGIN
+    VARIABLE low STRUCT c0de_paint/cpaint/POINT
+    VARIABLE high STRUCT c0de_paint/cpaint/POINT
+    VARIABLE offset STRUCT c0de_paint/cpaint/POINT
+    VARIABLE moved TYPE c0de_paint/cpaint/CANVAS
+    CALL c0de_paint/cpaint/CANVAS_MAX
+        PARAMETER canvas street ;
+        RESULT result high
+    CALL c0de_paint/cpaint/CANVAS_MIN
+        PARAMETER canvas house ;
+        RESULT result low
+    ASSIGN offset.x high.x + 3 - low.x ;
+    ASSIGN offset.y - low.y ;
+    ASSIGN offset.z z - low.z ;
+    ASSIGN moved house ;
+    CALL c0de_paint/cpaint/CANVAS_MOVE
+        PARAMETER canvas moved ;
+        PARAMETER offset offset ;
+    ASSIGN result street ;
+    CALL c0de_paint/cpaint/CANVAS_MERGE
+        PARAMETER target result ;
+        PARAMETER source moved ;
+END FUNCTION
+NOOP
+FUNCTION paths
+    PARAMETER street TYPE c0de_paint/cpaint/CANVAS
+    RESULT result TYPE c0de_paint/cpaint/CANVAS
+BEGIN
+    VARIABLE low STRUCT c0de_paint/cpaint/POINT
+    VARIABLE high STRUCT c0de_paint/cpaint/POINT
+    VARIABLE p STRUCT c0de_paint/cpaint/POINT
+    VARIABLE block STRUCT c0de_paint/cpaint/BLOCK
+    VARIABLE path TYPE c0de_paint/cpaint/STYLE
+    VARIABLE facing STRING
+    VARIABLE dx HASH INTEGER
+    BEGIN
+        east 1
+        west -1
+        north 0
+        south 0
+    END VARIABLE
+    VARIABLE dz HASH INTEGER
+    BEGIN
+        east 0
+        west 0
+        north -1
+        south 1
+    END VARIABLE
+    ASSIGN result street ;
+    ASSIGN block.id "dirt_path" ;
+    CALL c0de_paint/cpaint/STYLE_SOLID
+        PARAMETER block block ;
+        RESULT result path
+    CALL c0de_paint/cpaint/CANVAS_MIN
+        PARAMETER canvas street ;
+        RESULT result low
+    CALL c0de_paint/cpaint/CANVAS_MAX
+        PARAMETER canvas street ;
+        RESULT result high
+    FOR x INTEGER low.x ; high.x ;
+    BEGIN
+        FOR z INTEGER low.z ; high.z ;
+        BEGIN
+            ASSIGN p.x x ;
+            ASSIGN p.y 0 ;
+            ASSIGN p.z z ;
+            CALL c0de_paint/cpaint/CANVAS_GET
+                PARAMETER canvas street ;
+                PARAMETER point p ;
+                RESULT result block
+            IF block.id = "minecraft:oak_door" ;
+            BEGIN
+                ASSIGN facing block.properties["facing"] ;
+                ASSIGN p.x x + dx[facing] ;
+                ASSIGN p.y -1 ;
+                ASSIGN p.z z + dz[facing] ;
+                CALL c0de_paint/cpaint/DRAW_BLOCK
+                    PARAMETER canvas result ;
+                    PARAMETER point p ;
+                    PARAMETER style path ;
+            END IF
+        END FOR
+    END FOR
+END FUNCTION
+NOOP
+FUNCTION build
+    PARAMETER width INTEGER 5
+    PARAMETER depth INTEGER 5
+    PARAMETER height INTEGER 4
+BEGIN
+    VARIABLE home TYPE c0de_paint/cpaint/CANVAS
+    VARIABLE street TYPE c0de_paint/cpaint/CANVAS
+    VARIABLE copy TYPE c0de_paint/cpaint/CANVAS
+    VARIABLE a STRUCT c0de_paint/cpaint/POINT
+    VARIABLE b STRUCT c0de_paint/cpaint/POINT
+    VARIABLE block STRUCT c0de_paint/cpaint/BLOCK
+    VARIABLE bricks TYPE c0de_paint/cpaint/STYLE
+    VARIABLE air TYPE c0de_paint/cpaint/STYLE
+    VARIABLE at STRUCT c0de/minecraft/POSITION
+    CALL house
+        PARAMETER width width ;
+        PARAMETER depth depth ;
+        PARAMETER height height ;
+        RESULT result home
+    ASSIGN street home ;
+    NOOP
+    ASSIGN block.id "bricks" ;
+    CALL c0de_paint/cpaint/STYLE_SOLID
+        PARAMETER block block ;
+        RESULT result bricks
+    ASSIGN copy home ;
+    CALL c0de_paint/cpaint/CANVAS_REPLACE
+        PARAMETER canvas copy ;
+        PARAMETER id "oak_planks" ;
+        PARAMETER style bricks ;
+    CALL addHouse
+        PARAMETER street street ;
+        PARAMETER house copy ;
+        RESULT result street
+    NOOP
+    ASSIGN copy home ;
+    ASSIGN a.y 2 ;
+    CALL c0de_paint/cpaint/CANVAS_MAX
+        PARAMETER canvas copy ;
+        RESULT result b
+    CALL c0de_paint/cpaint/CANVAS_CLEAR
+        PARAMETER canvas copy ;
+        PARAMETER from a ;
+        PARAMETER to b ;
+    CALL addHouse
+        PARAMETER street street ;
+        PARAMETER house copy ;
+        RESULT result street
+    NOOP
+    ASSIGN copy home ;
+    ASSIGN a.y 0 ;
+    ASSIGN b.z 0 ;
+    CALL c0de_paint/cpaint/CANVAS_CROP
+        PARAMETER canvas copy ;
+        PARAMETER from a ;
+        PARAMETER to b ;
+    CALL addHouse
+        PARAMETER street street ;
+        PARAMETER house copy ;
+        RESULT result street
+    NOOP
+    ASSIGN copy home ;
+    CALL c0de_paint/cpaint/CANVAS_SCALE
+        PARAMETER canvas copy ;
+        PARAMETER x 200 ;
+        PARAMETER y 200 ;
+        PARAMETER z 200 ;
+    CALL c0de_paint/cpaint/STYLE_EMPTY
+        RESULT result air
+    CALL c0de_paint/cpaint/CANVAS_REPLACE
+        PARAMETER canvas copy ;
+        PARAMETER id "oak_door" ;
+        PARAMETER style air ;
+    CALL addHouse
+        PARAMETER street street ;
+        PARAMETER house copy ;
+        RESULT result street
+    NOOP
+    ASSIGN copy home ;
+    CALL c0de_paint/cpaint/CANVAS_ROTATE
+        PARAMETER canvas copy ;
+        PARAMETER center a ;
+        PARAMETER axis "y" ;
+        PARAMETER degrees 90 ;
+    CALL addHouse
+        PARAMETER street street ;
+        PARAMETER house copy ;
+        PARAMETER z - width ;
+        RESULT result street
+    NOOP
+    ASSIGN copy home ;
+    CALL c0de_paint/cpaint/CANVAS_MIRROR
+        PARAMETER canvas copy ;
+        PARAMETER axis "z" ;
+        PARAMETER position -2.0 ;
+    CALL c0de_paint/cpaint/CANVAS_MERGE
+        PARAMETER target street ;
+        PARAMETER source copy ;
+    NOOP
+    CALL paths
+        PARAMETER street street ;
+        RESULT result street
+    ASSIGN at.x PID.x + 2 ;
+    ASSIGN at.y PID.y ;
+    ASSIGN at.z PID.z + 2 ;
+    CALL c0de_paint/cpaint/RENDER_CANVAS
+        PARAMETER canvas street ;
+        PARAMETER position at ;
+END FUNCTION
+```
+
+## Copying a building
+
+`site/tutorials/libraries/c0de_paint/cpaint/copying-buildings.md`
+
+### [ ] copying-buildings-copy
+
+a small house with a door and stairs on the left, its copy turned by 90° on the right, the trigger block in front of the original with the three chests around it, the south chest open with grass and dirt in it
+
+- Program **copier**, function `copy` (`site/tutorials/programs/libraries/paint/copying-buildings-copier.c0de`)
+- Sheet 124, x = 3968 – not built yet: `/function c0de_screenshots:build_new`
+- Other sheets also have a program copier: run `/function c0de_screenshots:activate/copying-buildings-copier` first
+
+```c0de
+PROGRAM copier
+NOOP
+INCLUDE c0de/minecraft
+INCLUDE c0de_paint/cpaint
+NOOP
+FUNCTION place
+    PARAMETER building TYPE c0de_paint/cpaint/CANVAS
+    PARAMETER turn INTEGER
+    PARAMETER distance INTEGER
+BEGIN
+    VARIABLE turned TYPE c0de_paint/cpaint/CANVAS
+    VARIABLE center STRUCT c0de_paint/cpaint/POINT
+    VARIABLE low STRUCT c0de_paint/cpaint/POINT
+    VARIABLE at STRUCT c0de/minecraft/POSITION
+    VARIABLE blocks STRUCT c0de/minecraft/POSITION
+    VARIABLE tools STRUCT c0de/minecraft/POSITION
+    VARIABLE rubble STRUCT c0de/minecraft/POSITION
+    ASSIGN turned building ;
+    CALL c0de_paint/cpaint/CANVAS_ROTATE
+        PARAMETER canvas turned ;
+        PARAMETER center center ;
+        PARAMETER axis "y" ;
+        PARAMETER degrees turn ;
+    CALL c0de_paint/cpaint/CANVAS_MIN
+        PARAMETER canvas turned ;
+        RESULT result low
+    ASSIGN at.x PID.x + 2 + distance - low.x ;
+    ASSIGN at.y PID.y - low.y ;
+    ASSIGN at.z PID.z - low.z ;
+    ASSIGN blocks.x PID.x ;
+    ASSIGN blocks.y PID.y ;
+    ASSIGN blocks.z PID.z - 2 ;
+    ASSIGN tools blocks ;
+    ASSIGN tools.x PID.x - 2 ;
+    ASSIGN tools.z PID.z ;
+    ASSIGN rubble blocks ;
+    ASSIGN rubble.z PID.z + 2 ;
+    CALL c0de_paint/cpaint/RENDER_CANVAS
+        PARAMETER canvas turned ;
+        PARAMETER position at ;
+        PARAMETER input blocks ;
+        PARAMETER tools tools ;
+        PARAMETER output rubble ;
+END FUNCTION
+NOOP
+FUNCTION copy
+    PARAMETER width INTEGER 7
+    PARAMETER height INTEGER 6
+    PARAMETER depth INTEGER 7
+    PARAMETER turn INTEGER 0
+    PARAMETER distance INTEGER 12
+BEGIN
+    VARIABLE from STRUCT c0de/minecraft/POSITION
+    VARIABLE to STRUCT c0de/minecraft/POSITION
+    VARIABLE building TYPE c0de_paint/cpaint/CANVAS
+    ASSIGN from.x PID.x + 2 ;
+    ASSIGN from.y PID.y ;
+    ASSIGN from.z PID.z ;
+    ASSIGN to.x from.x + width - 1 ;
+    ASSIGN to.y from.y + height - 1 ;
+    ASSIGN to.z from.z + depth - 1 ;
+    CALL c0de_paint/cpaint/CANVAS_FROM_WORLD
+        PARAMETER from from ;
+        PARAMETER to to ;
+        PARAMETER air TRUE ;
+        RESULT result building
+    CALL place
+        PARAMETER building building ;
+        PARAMETER turn turn ;
+        PARAMETER distance distance ;
+END FUNCTION
+NOOP
+FUNCTION sample
+    PARAMETER turn INTEGER 0
+    PARAMETER distance INTEGER 12
+BEGIN
+    VARIABLE hut TYPE c0de_paint/cpaint/CANVAS
+    VARIABLE a STRUCT c0de_paint/cpaint/POINT
+    VARIABLE b STRUCT c0de_paint/cpaint/POINT
+    VARIABLE block STRUCT c0de_paint/cpaint/BLOCK
+    VARIABLE stone TYPE c0de_paint/cpaint/STYLE
+    VARIABLE step TYPE c0de_paint/cpaint/STYLE
+    VARIABLE air TYPE c0de_paint/cpaint/STYLE
+    ASSIGN block.id "cobblestone" ;
+    CALL c0de_paint/cpaint/STYLE_SOLID
+        PARAMETER block block ;
+        RESULT result stone
+    ASSIGN block.id "cobblestone_stairs" ;
+    ASSIGN block.properties["facing"] "south" ;
+    CALL c0de_paint/cpaint/STYLE_SOLID
+        PARAMETER block block ;
+        RESULT result step
+    CALL c0de_paint/cpaint/STYLE_EMPTY
+        RESULT result air
+    ASSIGN b.x 2 ;
+    ASSIGN b.y 3 ;
+    ASSIGN b.z 3 ;
+    CALL c0de_paint/cpaint/DRAW_BOX
+        PARAMETER canvas hut ;
+        PARAMETER from a ;
+        PARAMETER to b ;
+        PARAMETER side_style stone ;
+        PARAMETER fill_style air ;
+    ASSIGN a.x 1 ;
+    ASSIGN a.y 1 ;
+    ASSIGN b.x 1 ;
+    ASSIGN b.y 2 ;
+    ASSIGN b.z 0 ;
+    CALL c0de_paint/cpaint/DRAW_LINE
+        PARAMETER canvas hut ;
+        PARAMETER from a ;
+        PARAMETER to b ;
+        PARAMETER style air ;
+    ASSIGN a.y 0 ;
+    ASSIGN a.z -1 ;
+    CALL c0de_paint/cpaint/DRAW_BLOCK
+        PARAMETER canvas hut ;
+        PARAMETER point a ;
+        PARAMETER style step ;
+    CALL place
+        PARAMETER building hut ;
+        PARAMETER turn turn ;
+        PARAMETER distance distance ;
 END FUNCTION
 ```
