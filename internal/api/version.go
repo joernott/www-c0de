@@ -24,8 +24,9 @@ const (
 
 // repositories are the mods whose versions /api/version answers, by their key in the answer.
 var repositories = map[string]string{
-	"c0de":     "joernott/minecraft-c0de",
-	"c0de_net": "joernott/minecraft-c0de-net",
+	"c0de":       "joernott/minecraft-c0de",
+	"c0de_net":   "joernott/minecraft-c0de-net",
+	"c0de_paint": "joernott/minecraft-c0de-paint",
 }
 
 // versions knows the latest released versions of the mods (task 9.2).
@@ -41,7 +42,7 @@ type versions struct {
 	refresh time.Time // when to ask GitHub again
 }
 
-// serve answers GET /api/version: {"c0de": "0.4.0", "c0de_net": "0.2.0"}.
+// serve answers GET /api/version: {"c0de": "0.4.0", "c0de_net": "0.2.0", "c0de_paint": "0.1.0"}.
 func (v *versions) serve(w http.ResponseWriter, r *http.Request, now time.Time) {
 	if r.Method != http.MethodGet && r.Method != http.MethodHead {
 		notAllowed(w, r, "GET, HEAD, OPTIONS")

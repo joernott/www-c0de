@@ -19,7 +19,7 @@ Jedes Programm kennt die Versionen, auf denen es läuft: Die Konstante `C0DE_VER
 Die neuesten veröffentlichten Versionen stehen im Web. c0de.at liest sie aus den Releases auf GitHub und beantwortet `https://c0de.at/api/version` mit einem kleinen JSON-Objekt:
 
 ```json
-{ "c0de": "0.7.1", "c0de_net": "0.4.0" }
+{ "c0de": "0.7.1", "c0de_net": "0.4.0", "c0de_paint": "0.1.0" }
 ```
 
 Das Programm braucht also ein GET, ein FROM_JSON und zwei Vergleiche. Die Anfrage kommt vom Computer des Spielers, der den Knopf drückt, und jeder Spieler kann Anfragen für seinen eigenen Computer abschalten. Die installierten Versionen sind dagegen die des Servers: Die Konstanten sagen, worauf das Blatt läuft.

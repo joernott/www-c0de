@@ -108,3 +108,12 @@ chapters:
       - order-desk
       - tidy-mailbox
       - mail-errors
+  - link: /tutorials/libraries/c0de_paint/cpaint/
+    label: { en: c0de_paint/cpaint, de: c0de_paint/cpaint }
+    lessons:
+      - first-canvas
+      - shapes
+      - styles
+      - bodies
+      - shaping-canvases
+      - copying-buildings

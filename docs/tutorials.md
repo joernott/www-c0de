@@ -183,6 +183,17 @@ The services of these recipes: the weather comes from a free public API without 
 | 3.32 | Tidying the mailbox | IMAP_LIST, IMAP_CREATE, IMAP_RENAME, IMAP_DELETE, IMAP_STORE, IMAP_EXPUNGE, IMAP_STATUS | The yearly clean-up of the archive folders and old news |
 | 3.33 | When mail fails | the errors of c0de_net/mail, HAS_SECRET, IMAP_CREATE | A test mail with a friendly message for every error, app passwords and port 25 |
 
+### c0de_paint/cpaint
+
+| # | Recipe | Functions | What it builds |
+|---|---|---|---|
+| 3.34 | A first canvas | CANVAS, POINT, BLOCK, STYLE, STYLE_SOLID, DRAW_BOX, RENDER_CANVAS, CANVAS_COUNT, CANVAS_MATERIALS | A garden shed from a chest of blocks, and the list of blocks it needs |
+| 3.35 | Shapes in any plane | DRAW_BLOCK, DRAW_LINE, DRAW_RECTANGLE, DRAW_POLYGON, DRAW_ELLIPSE, DRAW_ARC, DRAW_SPIRAL | A spiral staircase around a round tower window, with an arched gate and a star on the floor |
+| 3.36 | Styles | STYLE_NONE, STYLE_EMPTY, STYLE_RANDOM, STYLE_GRADIENT, STYLE_PATTERN, INVENTORY_BLOCKS | Walls of mixed stone, a sunset in wool and a chequered floor; the blocks of a chest as a palette |
+| 3.37 | Bodies | DRAW_ELLIPSOID, DRAW_CYLINDER, DRAW_CONE, DRAW_PYRAMID, the Platonic solids | A lighthouse with a dome, and the five Platonic solids as garden sculptures |
+| 3.38 | Shaping canvases | CANVAS_MIN, CANVAS_MAX, CANVAS_GET, CANVAS_CLEAR, CANVAS_CROP, CANVAS_MOVE, CANVAS_REPLACE, CANVAS_MERGE, CANVAS_SCALE, CANVAS_ROTATE, CANVAS_MIRROR | A street of houses from one house: moved, turned, mirrored, scaled and in other colours |
+| 3.39 | Copying a building | CANVAS_FROM_WORLD, RENDER_CANVAS with tools and output | A copy machine for buildings: the world into a canvas and back at another place |
+
 The recipes use example addresses of `example.com`; the reader puts in the server, port and address of their own mail provider. Their tests run against GreenMail (task 13.9). The mail goes out from the computer of the player who runs the program, like the requests of c0de_net/http.
 
 ### Coverage

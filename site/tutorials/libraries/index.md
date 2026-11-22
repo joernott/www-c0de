@@ -15,3 +15,4 @@ Recipes for the library functions: every recipe builds something useful in the g
 - [c0de/security](/tutorials/libraries/c0de/security/): passwords and keys in the vault
 - [c0de_net/http](/tutorials/libraries/c0de_net/http/): the weather, REST services, status checks and home automation
 - [c0de_net/mail](/tutorials/libraries/c0de_net/mail/): reports by mail, an order desk, a tidy mailbox and mail errors
+- [c0de_paint/cpaint](/tutorials/libraries/c0de_paint/cpaint/): a first canvas, shapes in any plane, styles, bodies, shaping canvases and copying buildings

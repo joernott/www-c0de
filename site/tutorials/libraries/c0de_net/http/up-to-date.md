@@ -19,7 +19,7 @@ Every program knows the versions it runs on: the constant `C0DE_VERSION` holds t
 The latest released versions are on the web. c0de.at reads them from the releases on GitHub and answers `https://c0de.at/api/version` with a small JSON object:
 
 ```json
-{ "c0de": "0.7.1", "c0de_net": "0.4.0" }
+{ "c0de": "0.7.1", "c0de_net": "0.4.0", "c0de_paint": "0.1.0" }
 ```
 
 So the program needs one GET, one FROM_JSON and two comparisons. The request comes from the computer of the player who presses the button, and every player can switch requests off for their own computer. The installed versions, though, are those of the server: the constants tell what the sheet runs on.

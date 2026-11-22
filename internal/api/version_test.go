@@ -19,7 +19,8 @@ func fakeGitHub(t *testing.T, fail *atomic.Bool, calls *atomic.Int32) *httptest.
 			{"tag_name": "v0.4.0-rc.1", "draft": false},
 			{"tag_name": "nightly", "draft": false}
 		]`,
-		"/repos/joernott/minecraft-c0de-net/releases": `[{"tag_name": "v0.2.0"}, {"tag_name": "v0.10.0-beta"}]`,
+		"/repos/joernott/minecraft-c0de-net/releases":   `[{"tag_name": "v0.2.0"}, {"tag_name": "v0.10.0-beta"}]`,
+		"/repos/joernott/minecraft-c0de-paint/releases": `[{"tag_name": "v0.1.0"}]`,
 	}
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		calls.Add(1)
@@ -43,7 +44,7 @@ func TestVersion(t *testing.T) {
 	a, clock := newAPI()
 	a.versions.github = fakeGitHub(t, &fail, &calls).URL
 
-	want := `{"c0de":"0.4.0","c0de_net":"0.10.0-beta"}`
+	want := `{"c0de":"0.4.0","c0de_net":"0.10.0-beta","c0de_paint":"0.1.0"}`
 	check := func(when string, status int, body string) {
 		t.Helper()
 		w := do(t, a, http.MethodGet, "/api/version", "")
@@ -53,8 +54,8 @@ func TestVersion(t *testing.T) {
 	}
 	check("first", http.StatusOK, want)
 	check("cached", http.StatusOK, want)
-	if calls.Load() != 2 {
-		t.Errorf("GitHub was asked %d times, want 2 (one per mod)", calls.Load())
+	if calls.Load() != 3 {
+		t.Errorf("GitHub was asked %d times, want 3 (one per mod)", calls.Load())
 	}
 
 	// GitHub fails after an hour: the last known versions, and no new question for 5 minutes.
