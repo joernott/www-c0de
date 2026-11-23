@@ -16002,7 +16002,7 @@ programs:
     function: build
     sheet: 104
     x: 3328
-    built: null
+    built: 2026-11-23
     code: |
       PROGRAM shed
       NOOP
@@ -16418,7 +16418,7 @@ programs:
     function: window
     sheet: 106
     x: 3392
-    built: null
+    built: 2026-11-23
     code: |
       PROGRAM roundwindow
       NOOP
@@ -16775,7 +16775,7 @@ programs:
     function: star
     sheet: 108
     x: 3456
-    built: null
+    built: 2026-11-23
     code: |
       PROGRAM floorstar
       NOOP
@@ -17096,7 +17096,7 @@ programs:
     function: stairs
     sheet: 110
     x: 3520
-    built: null
+    built: 2026-11-23
     code: |
       PROGRAM spiralstairs
       NOOP
@@ -17314,7 +17314,7 @@ programs:
     function: build
     sheet: 112
     x: 3584
-    built: null
+    built: 2026-11-23
     code: |
       PROGRAM stonewall
       NOOP
@@ -17536,7 +17536,7 @@ programs:
     function: lay
     sheet: 114
     x: 3648
-    built: null
+    built: 2026-11-23
     code: |
       PROGRAM floor
       NOOP
@@ -17827,7 +17827,7 @@ programs:
     function: show
     sheet: 116
     x: 3712
-    built: null
+    built: 2026-11-23
     code: |
       PROGRAM palette
       NOOP
@@ -18042,7 +18042,7 @@ programs:
     function: build
     sheet: 118
     x: 3776
-    built: null
+    built: 2026-11-23
     code: |
       PROGRAM lighthouse
       NOOP
@@ -18404,7 +18404,7 @@ programs:
     function: garden
     sheet: 120
     x: 3840
-    built: null
+    built: 2026-11-23
     code: |
       PROGRAM sculptures
       NOOP
@@ -18762,7 +18762,7 @@ programs:
     function: build
     sheet: 122
     x: 3904
-    built: null
+    built: 2026-11-23
     code: |
       PROGRAM street
       NOOP
@@ -19929,7 +19929,7 @@ programs:
     function: copy
     sheet: 124
     x: 3968
-    built: null
+    built: 2026-11-23
     code: |
       PROGRAM copier
       NOOP

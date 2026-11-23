@@ -2,9 +2,9 @@
 
 The screenshots of the tutorials (task 7.1.1), taken as [tutorials.md](tutorials.md#screenshots) describes. Written by `site/scripts/screenshot-world.ts` from the marks of the pages; the same as data is in `screenshots.yaml`, with every program also in the YAML format of the c0de disk.
 
-The world: every program is on its own sheet of the c0de dimension, built by the datapack of `contrib/screenshots/` (see its README). Sheet 0 is empty, and an empty sheet lies between two programs. North of every sheet, at z = -3 from x + 5 on: a trigger block with a stone button, a debug trigger block with a laptop, a timer block with a lever that is on (so it is paused), an I/O block, a disk drive and a gray shulker box with a stack of variable, constant and literal items and a disk; behind them, at z = -6, a display wall of 4 × 3 blocks in a frame of iron blocks. The three trigger blocks are set to the program and the function of its test.
+The world: every program is on its own sheet of the c0de dimension, built by the datapack of `contrib/screenshots/` (see its README). Sheet 0 is empty, and an empty sheet lies between two programs. North of every sheet, at z = -3 from x + 5 on: a trigger block with a stone button, a debug trigger block with a laptop, a timer block with a lever that is on (so it is paused), an I/O block, a disk drive and a gray shulker box with a stack of variable, constant and literal items and a disk; behind them, at z = -6, a display wall of 4 × 3 blocks in a frame of iron blocks. The trigger block and the debug trigger block are set to the program and the function of its test; the timer block is not set to a program.
 
-86 screenshots, 62 programs on the sheets 2 to 124. The sheets of the programs never change; new screenshots are added at the end of this list, and their programs get the next free sheets. Not built yet: the sheets 104, 106, 108, 110, 112, 114, 116, 118, 120, 122, 124; `function c0de_screenshots:build_new` builds them (contrib/screenshots/README.md).
+86 screenshots, 62 programs on the sheets 2 to 124. The sheets of the programs never change; new screenshots are added at the end of this list, and their programs get the next free sheets. All sheets are built.
 
 ## Before you start
 
@@ -4542,7 +4542,7 @@ END FUNCTION
 the finished garden shed, 5 × 4 blocks and 4 high, oak planks with oak logs on all edges, its doorway in the west wall, the trigger block with its button 2 blocks west of it and the chest 2 blocks further west
 
 - Program **shed**, function `build` (`site/tutorials/programs/libraries/paint/first-canvas-shed.c0de`)
-- Sheet 104, x = 3328 – not built yet: `/function c0de_screenshots:build_new`
+- Sheet 104, x = 3328
 
 ```c0de
 PROGRAM shed
@@ -4656,7 +4656,7 @@ END FUNCTION
 the laptop screen with the list "The shed needs:", "36 minecraft:oak_log", "30 minecraft:oak_planks" and "68 voxels in all", the trigger block and the chest next to it
 
 - Program **shed**, function `build` (`site/tutorials/programs/libraries/paint/first-canvas-shed.c0de`)
-- Sheet 104, x = 3328 – not built yet: `/function c0de_screenshots:build_new`
+- Sheet 104, x = 3328
 
 ```c0de
 PROGRAM shed
@@ -4774,7 +4774,7 @@ END FUNCTION
 the wall of stone bricks, 13 × 13 blocks, with the round window of light blue glass in its middle, framed by polished andesite and divided by a cross of dark oak planks, the trigger block with its button in front of its west end
 
 - Program **roundwindow**, function `window` (`site/tutorials/programs/libraries/paint/shapes-window.c0de`)
-- Sheet 106, x = 3392 – not built yet: `/function c0de_screenshots:build_new`
+- Sheet 106, x = 3392
 
 ```c0de
 PROGRAM roundwindow
@@ -4873,7 +4873,7 @@ END FUNCTION
 the five-pointed star set into the grass, white concrete with a rim of gold blocks and a sea lantern in its middle, seen from above, the trigger block 2 blocks west of its western tip
 
 - Program **floorstar**, function `star` (`site/tutorials/programs/libraries/paint/shapes-star.c0de`)
-- Sheet 108, x = 3456 – not built yet: `/function c0de_screenshots:build_new`
+- Sheet 108, x = 3456
 
 ```c0de
 PROGRAM floorstar
@@ -4965,7 +4965,7 @@ END FUNCTION
 the spiral staircase of oak planks with an edge of spruce planks, 12 blocks high, winding clockwise around its central column, a player on one of its upper steps
 
 - Program **spiralstairs**, function `stairs` (`site/tutorials/programs/libraries/paint/shapes-staircase.c0de`)
-- Sheet 110, x = 3520 – not built yet: `/function c0de_screenshots:build_new`
+- Sheet 110, x = 3520
 
 ```c0de
 PROGRAM spiralstairs
@@ -5033,7 +5033,7 @@ END FUNCTION
 the city wall of stone bricks with mossy and cracked bricks in random places and the gate in its middle, seen from the trigger block, with the wool sunset in its frame of logs rising behind the wall
 
 - Program **stonewall**, function `build` (`site/tutorials/programs/libraries/paint/styles-wall.c0de`)
-- Sheet 112, x = 3584 – not built yet: `/function c0de_screenshots:build_new`
+- Sheet 112, x = 3584
 
 ```c0de
 PROGRAM stonewall
@@ -5097,7 +5097,7 @@ END FUNCTION
 the chequered floor of black and white concrete, 8 × 8 blocks, with its border of dark oak planks, set into the grass east of the trigger block, seen from above
 
 - Program **floor**, function `lay` (`site/tutorials/programs/libraries/paint/styles-floor.c0de`)
-- Sheet 114, x = 3648 – not built yet: `/function c0de_screenshots:build_new`
+- Sheet 114, x = 3648
 
 ```c0de
 PROGRAM floor
@@ -5181,7 +5181,7 @@ END FUNCTION
 the open chest with sandstone, smooth sandstone and terracotta in its first three slots, and the striped wall 16 blocks long beside it, sandstone fading to smooth sandstone and terracotta from west to east
 
 - Program **palette**, function `show` (`site/tutorials/programs/libraries/paint/styles-palette.c0de`)
-- Sheet 116, x = 3712 – not built yet: `/function c0de_screenshots:build_new`
+- Sheet 116, x = 3712
 
 ```c0de
 PROGRAM palette
@@ -5248,7 +5248,7 @@ END FUNCTION
 the white lighthouse, 23 blocks high, with red rings at its foot and its top, the glass lantern room with the sea lantern shining inside and the copper dome on top, seen from the side at dusk, the trigger block in front of it
 
 - Program **lighthouse**, function `build` (`site/tutorials/programs/libraries/paint/bodies-lighthouse.c0de`)
-- Sheet 118, x = 3776 – not built yet: `/function c0de_screenshots:build_new`
+- Sheet 118, x = 3776
 
 ```c0de
 PROGRAM lighthouse
@@ -5348,7 +5348,7 @@ END FUNCTION
 the row of five garden sculptures on the grass: the gold frame of the tetrahedron, the glass octahedron, the glass cube with quartz edges, the full moss dodecahedron and the icosahedron with quartz edges and glass faces
 
 - Program **sculptures**, function `garden` (`site/tutorials/programs/libraries/paint/bodies-garden.c0de`)
-- Sheet 120, x = 3840 – not built yet: `/function c0de_screenshots:build_new`
+- Sheet 120, x = 3840
 
 ```c0de
 PROGRAM sculptures
@@ -5452,7 +5452,7 @@ END FUNCTION
 the whole street seen from above its west end: the trigger block in the middle of the road, south of it the oak house, the brick house, the two-block-high building site, the flat façade and the big hall with its gateway, across the road the mirrored oak house, and the turned house across the east end of the road; dirt paths in front of the doors
 
 - Program **street**, function `build` (`site/tutorials/programs/libraries/paint/shaping-canvases-street.c0de`)
-- Sheet 122, x = 3904 – not built yet: `/function c0de_screenshots:build_new`
+- Sheet 122, x = 3904
 
 ```c0de
 PROGRAM street
@@ -5762,7 +5762,7 @@ END FUNCTION
 a small house with a door and stairs on the left, its copy turned by 90° on the right, the trigger block in front of the original with the three chests around it, the south chest open with grass and dirt in it
 
 - Program **copier**, function `copy` (`site/tutorials/programs/libraries/paint/copying-buildings-copier.c0de`)
-- Sheet 124, x = 3968 – not built yet: `/function c0de_screenshots:build_new`
+- Sheet 124, x = 3968
 - Other sheets also have a program copier: run `/function c0de_screenshots:activate/copying-buildings-copier` first
 
 ```c0de

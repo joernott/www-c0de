@@ -215,7 +215,8 @@ function devices(sheet: number, program?: Program): string[] {
     // itself keeps running unpowered, so lever and timer go first (task 13.11.3)
     run(`setblock ${x + 2} ${codeY + 1} -3 minecraft:air`),
     run(`setblock ${x + 2} ${codeY} -3 minecraft:air`),
-    run(`setblock ${x + 2} ${codeY} -3 c0de:timer_block${bound}`),
+    // The timer block isn't set to the program (2026-11-23)
+    run(`setblock ${x + 2} ${codeY} -3 c0de:timer_block`),
     // A lever that is on pauses the timer block
     run(`setblock ${x + 2} ${codeY + 1} -3 minecraft:lever[face=floor,facing=south,powered=true]`),
     run(`setblock ${x + 3} ${codeY} -3 c0de:io_block`),
@@ -365,7 +366,7 @@ function todo(all: Shot[], programs: Program[]): string {
     '',
     'The screenshots of the tutorials (task 7.1.1), taken as [tutorials.md](tutorials.md#screenshots) describes. Written by `site/scripts/screenshot-world.ts` from the marks of the pages; the same as data is in `screenshots.yaml`, with every program also in the YAML format of the c0de disk.',
     '',
-    'The world: every program is on its own sheet of the c0de dimension, built by the datapack of `contrib/screenshots/` (see its README). Sheet 0 is empty, and an empty sheet lies between two programs. North of every sheet, at z = -3 from x + 5 on: a trigger block with a stone button, a debug trigger block with a laptop, a timer block with a lever that is on (so it is paused), an I/O block, a disk drive and a gray shulker box with a stack of variable, constant and literal items and a disk; behind them, at z = -6, a display wall of 4 × 3 blocks in a frame of iron blocks. The three trigger blocks are set to the program and the function of its test.',
+    'The world: every program is on its own sheet of the c0de dimension, built by the datapack of `contrib/screenshots/` (see its README). Sheet 0 is empty, and an empty sheet lies between two programs. North of every sheet, at z = -3 from x + 5 on: a trigger block with a stone button, a debug trigger block with a laptop, a timer block with a lever that is on (so it is paused), an I/O block, a disk drive and a gray shulker box with a stack of variable, constant and literal items and a disk; behind them, at z = -6, a display wall of 4 × 3 blocks in a frame of iron blocks. The trigger block and the debug trigger block are set to the program and the function of its test; the timer block is not set to a program.',
     '',
     `${all.length} screenshots, ${programs.length} programs on the sheets 2 to ${Math.max(0, ...programs.map((p) => p.sheet))}. The sheets of the programs never change; new screenshots are added at the end of this list, and their programs get the next free sheets. ${unbuiltText(programs)}`,
     '',
@@ -469,7 +470,10 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
       throw new Error(`${file}: line ${z} is wider than a sheet; split it into shorter lines`)
     }
     const list = blocks.get(file!) ?? []
-    list.push({ x: Number(x), z: Number(z), block: block! })
+    // The runners of c0de up to 0.7.1 name the block of TYPE c0de:type_type_block; it is
+    // c0de:type_library_block (c0de task 21.2)
+    const name = block!.replace(/^c0de:type_type_block\b/, 'c0de:type_library_block')
+    list.push({ x: Number(x), z: Number(z), block: name })
     blocks.set(file!, list)
   }
   const disks = new Map(

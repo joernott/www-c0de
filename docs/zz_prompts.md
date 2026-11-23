@@ -318,3 +318,5 @@ yes, add tht to the tasks for  sprint 14 but don't start that sprint yet
 Concerning minecraft-c0de-paint, we can go ahead with releasing it and starting the work on the web page
 
 please update docs/screenshots.md as well to show me, which screenshots need to be taken
+
+I have restarted the VM after my windows was in sleep mode for a while. So you need to restart the server. Please create the additional sheets on the fabric server on the VM as you did for the other screenshots as well. sheets spaced out onwith a blank sheet in between them and each sheet with a program has a setup with triggers (the timer should not be associated with the program), disk drive, laptop, display, input block etc.

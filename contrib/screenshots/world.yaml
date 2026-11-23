@@ -159,26 +159,37 @@ programs:
     built: 2026-11-17
   - file: tutorials/programs/libraries/paint/first-canvas-shed.c0de
     sheet: 104
+    built: 2026-11-23
   - file: tutorials/programs/libraries/paint/shapes-window.c0de
     sheet: 106
+    built: 2026-11-23
   - file: tutorials/programs/libraries/paint/shapes-star.c0de
     sheet: 108
+    built: 2026-11-23
   - file: tutorials/programs/libraries/paint/shapes-staircase.c0de
     sheet: 110
+    built: 2026-11-23
   - file: tutorials/programs/libraries/paint/styles-wall.c0de
     sheet: 112
+    built: 2026-11-23
   - file: tutorials/programs/libraries/paint/styles-floor.c0de
     sheet: 114
+    built: 2026-11-23
   - file: tutorials/programs/libraries/paint/styles-palette.c0de
     sheet: 116
+    built: 2026-11-23
   - file: tutorials/programs/libraries/paint/bodies-lighthouse.c0de
     sheet: 118
+    built: 2026-11-23
   - file: tutorials/programs/libraries/paint/bodies-garden.c0de
     sheet: 120
+    built: 2026-11-23
   - file: tutorials/programs/libraries/paint/shaping-canvases-street.c0de
     sheet: 122
+    built: 2026-11-23
   - file: tutorials/programs/libraries/paint/copying-buildings-copier.c0de
     sheet: 124
+    built: 2026-11-23
 shots:
   - before-you-start-new-world
   - before-you-start-creative-tab

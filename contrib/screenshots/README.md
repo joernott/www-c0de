@@ -22,14 +22,15 @@ properties.
   `built` is the day a sheet was built; the to-do list marks the sheets that aren't built yet.
 - North of every sheet, at z = -3 from x + 5 on: a trigger block with a stone button, a debug trigger block with a
   laptop, a timer block with a lever that is on (it pauses the timer), an I/O block, a disk drive and a gray
-  shulker box with a stack of variable, constant and literal items and a disk. The three trigger blocks are set
-  to the program and the function of its test.
+  shulker box with a stack of variable, constant and literal items and a disk. The trigger block and the debug
+  trigger block are set to the program and the function of its test; the timer block is not set to a program
+  (the sheets up to 102 were built with a timer set to the program).
 - Behind them, at z = -6: a display wall of 4 × 3 display blocks facing the sheet, in a frame of iron blocks.
 
 ## Building it
 
 On the Minecraft 1.21.1 Fabric test server of c0de on the VM (`contrib/docker/compose.yaml` of c0de), with the
-released jars of c0de and c0de net in `contrib/docker/mods/1.21.1-fabric/` of that repository, in a new world:
+released jars of c0de, c0de net and c0de paint in `contrib/docker/mods/1.21.1-fabric/` of that repository, in a new world:
 
 ```sh
 # from site/ on Windows
