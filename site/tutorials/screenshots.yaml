@@ -1,7 +1,7 @@
 # The screenshots of the tutorials, written by scripts/screenshots.ts from the marks
 # <!-- screenshot: <id> | <description> --> of the pages. Take them as described in
 # docs/tutorials.md ("Screenshots") and save them as the file; the page shows them then.
-# 86 screenshots, 12 missing.
+# 87 screenshots, 13 missing.
 - id: asking-input
   description: 'the open terminal of the laptop while INPUT waits: "How many
     items?" on the screen and the input line "INPUT items (INTEGER):" with 1000
@@ -645,10 +645,19 @@
     - de/tutorials/libraries/c0de_paint/cpaint/styles.md
   file: public/tutorials/screenshots/styles-palette.webp
   size: missing
+- id: styles-sunset
+  description: "the wool sunset in its frame of oak logs right behind the city
+    wall, seen from the trigger block: the sun sets in the gate, and the circles
+    of yellow, orange, red, magenta, purple and blue rise above the wall (run
+    `stonewall` with the function `build` from the same trigger block first)"
+  pages:
+    - tutorials/libraries/c0de_paint/cpaint/styles.md
+    - de/tutorials/libraries/c0de_paint/cpaint/styles.md
+  file: public/tutorials/screenshots/styles-sunset.webp
+  size: missing
 - id: styles-wall
   description: the city wall of stone bricks with mossy and cracked bricks in
-    random places and the gate in its middle, seen from the trigger block, with
-    the wool sunset in its frame of logs rising behind the wall
+    random places and the gate in its middle, seen from the trigger block
   pages:
     - tutorials/libraries/c0de_paint/cpaint/styles.md
     - de/tutorials/libraries/c0de_paint/cpaint/styles.md

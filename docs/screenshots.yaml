@@ -4889,7 +4889,7 @@ screenshots:
     file: site/public/tutorials/screenshots/styles-wall.webp
     page: site/tutorials/libraries/c0de_paint/cpaint/styles.md
     title: Styles
-    description: the city wall of stone bricks with mossy and cracked bricks in random places and the gate in its middle, seen from the trigger block, with the wool sunset in its frame of logs rising behind the wall
+    description: the city wall of stone bricks with mossy and cracked bricks in random places and the gate in its middle, seen from the trigger block
     program: stonewall
     program_file: site/tutorials/programs/libraries/paint/styles-wall.c0de
     function: build
@@ -5743,6 +5743,108 @@ screenshots:
               PARAMETER building hut ;
               PARAMETER turn turn ;
               PARAMETER distance distance ;
+      END FUNCTION
+  - id: styles-sunset
+    file: site/public/tutorials/screenshots/styles-sunset.webp
+    page: site/tutorials/libraries/c0de_paint/cpaint/styles.md
+    title: Styles
+    description: "the wool sunset in its frame of oak logs right behind the city wall, seen from the trigger block: the sun sets in the gate, and the circles of yellow, orange, red, magenta, purple and blue rise above the wall (run `stonewall` with the function `build` from the same trigger block first)"
+    program: sunset
+    program_file: site/tutorials/programs/libraries/paint/styles-sunset.c0de
+    function: paint
+    sheet: 126
+    x: 4032
+    code: |
+      PROGRAM sunset
+      NOOP
+      INCLUDE c0de/minecraft
+      INCLUDE c0de_paint/cpaint
+      NOOP
+      FUNCTION paint
+          PARAMETER half INTEGER 7
+          PARAMETER height INTEGER 9
+      BEGIN
+          VARIABLE c TYPE c0de_paint/cpaint/CANVAS
+          VARIABLE a STRUCT c0de_paint/cpaint/POINT
+          VARIABLE b STRUCT c0de_paint/cpaint/POINT
+          VARIABLE sun STRUCT c0de_paint/cpaint/POINT
+          VARIABLE wool STRUCT c0de_paint/cpaint/BLOCK
+          VARIABLE sky ARRAY STRUCT c0de_paint/cpaint/BLOCK
+          VARIABLE log STRUCT c0de_paint/cpaint/BLOCK
+          VARIABLE colors TYPE c0de_paint/cpaint/STYLE
+          VARIABLE posts TYPE c0de_paint/cpaint/STYLE
+          VARIABLE beams TYPE c0de_paint/cpaint/STYLE
+          VARIABLE site STRUCT c0de/minecraft/POSITION
+          ASSIGN wool.id "yellow_wool" ;
+          ASSIGN wool.weight 2 ;
+          ASSIGN sky[0] wool ;
+          ASSIGN wool.id "orange_wool" ;
+          ASSIGN sky[1] wool ;
+          ASSIGN wool.id "red_wool" ;
+          ASSIGN sky[2] wool ;
+          ASSIGN wool.id "magenta_wool" ;
+          ASSIGN wool.weight 1 ;
+          ASSIGN sky[3] wool ;
+          ASSIGN wool.id "purple_wool" ;
+          ASSIGN sky[4] wool ;
+          ASSIGN wool.id "blue_wool" ;
+          ASSIGN wool.weight 3 ;
+          ASSIGN sky[5] wool ;
+          ASSIGN sun.y 1 ;
+          CALL c0de_paint/cpaint/STYLE_GRADIENT
+              PARAMETER blocks sky ;
+              PARAMETER from sun ;
+              PARAMETER fuzzy 1 ;
+              RESULT result colors
+          ASSIGN a.x - half ;
+          ASSIGN a.y 1 ;
+          ASSIGN b.x half ;
+          ASSIGN b.y height ;
+          CALL c0de_paint/cpaint/DRAW_BOX
+              PARAMETER canvas c ;
+              PARAMETER from a ;
+              PARAMETER to b ;
+              PARAMETER fill_style colors ;
+          NOOP
+          ASSIGN log.id "oak_log" ;
+          CALL c0de_paint/cpaint/STYLE_SOLID
+              PARAMETER block log ;
+              RESULT result posts
+          ASSIGN log.properties["axis"] "x" ;
+          CALL c0de_paint/cpaint/STYLE_SOLID
+              PARAMETER block log ;
+              RESULT result beams
+          ASSIGN a.x - half - 1 ;
+          ASSIGN a.y 0 ;
+          ASSIGN b.x half + 1 ;
+          ASSIGN b.y height + 1 ;
+          CALL c0de_paint/cpaint/DRAW_BOX
+              PARAMETER canvas c ;
+              PARAMETER from a ;
+              PARAMETER to b ;
+              PARAMETER line_style posts ;
+          ASSIGN a.x - half ;
+          ASSIGN b.x half ;
+          ASSIGN b.y 0 ;
+          CALL c0de_paint/cpaint/DRAW_BOX
+              PARAMETER canvas c ;
+              PARAMETER from a ;
+              PARAMETER to b ;
+              PARAMETER fill_style beams ;
+          ASSIGN a.y height + 1 ;
+          ASSIGN b.y height + 1 ;
+          CALL c0de_paint/cpaint/DRAW_BOX
+              PARAMETER canvas c ;
+              PARAMETER from a ;
+              PARAMETER to b ;
+              PARAMETER fill_style beams ;
+          NOOP
+          ASSIGN site.x PID.x ;
+          ASSIGN site.y PID.y ;
+          ASSIGN site.z PID.z - 4 ;
+          CALL c0de_paint/cpaint/RENDER_CANVAS
+              PARAMETER canvas c ;
+              PARAMETER position site ;
       END FUNCTION
 programs:
   - file: site/tutorials/programs/learning/first-program-sign.c0de
@@ -20429,3 +20531,374 @@ programs:
                 - keyword: PARAMETER
                   name: distance
                   expression: distance
+  - file: site/tutorials/programs/libraries/paint/styles-sunset.c0de
+    name: sunset
+    function: paint
+    sheet: 126
+    x: 4032
+    built: 2026-11-23
+    code: |
+      PROGRAM sunset
+      NOOP
+      INCLUDE c0de/minecraft
+      INCLUDE c0de_paint/cpaint
+      NOOP
+      FUNCTION paint
+          PARAMETER half INTEGER 7
+          PARAMETER height INTEGER 9
+      BEGIN
+          VARIABLE c TYPE c0de_paint/cpaint/CANVAS
+          VARIABLE a STRUCT c0de_paint/cpaint/POINT
+          VARIABLE b STRUCT c0de_paint/cpaint/POINT
+          VARIABLE sun STRUCT c0de_paint/cpaint/POINT
+          VARIABLE wool STRUCT c0de_paint/cpaint/BLOCK
+          VARIABLE sky ARRAY STRUCT c0de_paint/cpaint/BLOCK
+          VARIABLE log STRUCT c0de_paint/cpaint/BLOCK
+          VARIABLE colors TYPE c0de_paint/cpaint/STYLE
+          VARIABLE posts TYPE c0de_paint/cpaint/STYLE
+          VARIABLE beams TYPE c0de_paint/cpaint/STYLE
+          VARIABLE site STRUCT c0de/minecraft/POSITION
+          ASSIGN wool.id "yellow_wool" ;
+          ASSIGN wool.weight 2 ;
+          ASSIGN sky[0] wool ;
+          ASSIGN wool.id "orange_wool" ;
+          ASSIGN sky[1] wool ;
+          ASSIGN wool.id "red_wool" ;
+          ASSIGN sky[2] wool ;
+          ASSIGN wool.id "magenta_wool" ;
+          ASSIGN wool.weight 1 ;
+          ASSIGN sky[3] wool ;
+          ASSIGN wool.id "purple_wool" ;
+          ASSIGN sky[4] wool ;
+          ASSIGN wool.id "blue_wool" ;
+          ASSIGN wool.weight 3 ;
+          ASSIGN sky[5] wool ;
+          ASSIGN sun.y 1 ;
+          CALL c0de_paint/cpaint/STYLE_GRADIENT
+              PARAMETER blocks sky ;
+              PARAMETER from sun ;
+              PARAMETER fuzzy 1 ;
+              RESULT result colors
+          ASSIGN a.x - half ;
+          ASSIGN a.y 1 ;
+          ASSIGN b.x half ;
+          ASSIGN b.y height ;
+          CALL c0de_paint/cpaint/DRAW_BOX
+              PARAMETER canvas c ;
+              PARAMETER from a ;
+              PARAMETER to b ;
+              PARAMETER fill_style colors ;
+          NOOP
+          ASSIGN log.id "oak_log" ;
+          CALL c0de_paint/cpaint/STYLE_SOLID
+              PARAMETER block log ;
+              RESULT result posts
+          ASSIGN log.properties["axis"] "x" ;
+          CALL c0de_paint/cpaint/STYLE_SOLID
+              PARAMETER block log ;
+              RESULT result beams
+          ASSIGN a.x - half - 1 ;
+          ASSIGN a.y 0 ;
+          ASSIGN b.x half + 1 ;
+          ASSIGN b.y height + 1 ;
+          CALL c0de_paint/cpaint/DRAW_BOX
+              PARAMETER canvas c ;
+              PARAMETER from a ;
+              PARAMETER to b ;
+              PARAMETER line_style posts ;
+          ASSIGN a.x - half ;
+          ASSIGN b.x half ;
+          ASSIGN b.y 0 ;
+          CALL c0de_paint/cpaint/DRAW_BOX
+              PARAMETER canvas c ;
+              PARAMETER from a ;
+              PARAMETER to b ;
+              PARAMETER fill_style beams ;
+          ASSIGN a.y height + 1 ;
+          ASSIGN b.y height + 1 ;
+          CALL c0de_paint/cpaint/DRAW_BOX
+              PARAMETER canvas c ;
+              PARAMETER from a ;
+              PARAMETER to b ;
+              PARAMETER fill_style beams ;
+          NOOP
+          ASSIGN site.x PID.x ;
+          ASSIGN site.y PID.y ;
+          ASSIGN site.z PID.z - 4 ;
+          CALL c0de_paint/cpaint/RENDER_CANVAS
+              PARAMETER canvas c ;
+              PARAMETER position site ;
+      END FUNCTION
+    disk: |
+      PROGRAM: sunset
+      INCLUDE:
+        - c0de/minecraft
+        - c0de_paint/cpaint
+      code:
+        - keyword: NOOP
+        - keyword: FUNCTION
+          name: paint
+          parameters:
+            - keyword: PARAMETER
+              name: half
+              type: INTEGER
+              value: 7
+            - keyword: PARAMETER
+              name: height
+              type: INTEGER
+              value: 9
+          code:
+            - keyword: VARIABLE
+              name: c
+              type: TYPE
+              typename: c0de_paint/cpaint/CANVAS
+            - keyword: VARIABLE
+              name: a
+              type: STRUCT
+              struct: c0de_paint/cpaint/POINT
+            - keyword: VARIABLE
+              name: b
+              type: STRUCT
+              struct: c0de_paint/cpaint/POINT
+            - keyword: VARIABLE
+              name: sun
+              type: STRUCT
+              struct: c0de_paint/cpaint/POINT
+            - keyword: VARIABLE
+              name: wool
+              type: STRUCT
+              struct: c0de_paint/cpaint/BLOCK
+            - keyword: VARIABLE
+              name: sky
+              type: ARRAY
+              subtype: STRUCT
+              struct: c0de_paint/cpaint/BLOCK
+            - keyword: VARIABLE
+              name: log
+              type: STRUCT
+              struct: c0de_paint/cpaint/BLOCK
+            - keyword: VARIABLE
+              name: colors
+              type: TYPE
+              typename: c0de_paint/cpaint/STYLE
+            - keyword: VARIABLE
+              name: posts
+              type: TYPE
+              typename: c0de_paint/cpaint/STYLE
+            - keyword: VARIABLE
+              name: beams
+              type: TYPE
+              typename: c0de_paint/cpaint/STYLE
+            - keyword: VARIABLE
+              name: site
+              type: STRUCT
+              struct: c0de/minecraft/POSITION
+            - keyword: ASSIGN
+              name: wool.id
+              expression: '"yellow_wool"'
+            - keyword: ASSIGN
+              name: wool.weight
+              expression: '2'
+            - keyword: ASSIGN
+              name: sky[0]
+              expression: wool
+            - keyword: ASSIGN
+              name: wool.id
+              expression: '"orange_wool"'
+            - keyword: ASSIGN
+              name: sky[1]
+              expression: wool
+            - keyword: ASSIGN
+              name: wool.id
+              expression: '"red_wool"'
+            - keyword: ASSIGN
+              name: sky[2]
+              expression: wool
+            - keyword: ASSIGN
+              name: wool.id
+              expression: '"magenta_wool"'
+            - keyword: ASSIGN
+              name: wool.weight
+              expression: '1'
+            - keyword: ASSIGN
+              name: sky[3]
+              expression: wool
+            - keyword: ASSIGN
+              name: wool.id
+              expression: '"purple_wool"'
+            - keyword: ASSIGN
+              name: sky[4]
+              expression: wool
+            - keyword: ASSIGN
+              name: wool.id
+              expression: '"blue_wool"'
+            - keyword: ASSIGN
+              name: wool.weight
+              expression: '3'
+            - keyword: ASSIGN
+              name: sky[5]
+              expression: wool
+            - keyword: ASSIGN
+              name: sun.y
+              expression: '1'
+            - keyword: CALL
+              name: c0de_paint/cpaint/STYLE_GRADIENT
+              parameters:
+                - keyword: PARAMETER
+                  name: blocks
+                  expression: sky
+                - keyword: PARAMETER
+                  name: from
+                  expression: sun
+                - keyword: PARAMETER
+                  name: fuzzy
+                  expression: '1'
+              results:
+                - keyword: RESULT
+                  name: result
+                  target: colors
+            - keyword: ASSIGN
+              name: a.x
+              expression: '- half'
+            - keyword: ASSIGN
+              name: a.y
+              expression: '1'
+            - keyword: ASSIGN
+              name: b.x
+              expression: half
+            - keyword: ASSIGN
+              name: b.y
+              expression: height
+            - keyword: CALL
+              name: c0de_paint/cpaint/DRAW_BOX
+              parameters:
+                - keyword: PARAMETER
+                  name: canvas
+                  expression: c
+                - keyword: PARAMETER
+                  name: from
+                  expression: a
+                - keyword: PARAMETER
+                  name: to
+                  expression: b
+                - keyword: PARAMETER
+                  name: fill_style
+                  expression: colors
+            - keyword: NOOP
+            - keyword: ASSIGN
+              name: log.id
+              expression: '"oak_log"'
+            - keyword: CALL
+              name: c0de_paint/cpaint/STYLE_SOLID
+              parameters:
+                - keyword: PARAMETER
+                  name: block
+                  expression: log
+              results:
+                - keyword: RESULT
+                  name: result
+                  target: posts
+            - keyword: ASSIGN
+              name: log.properties["axis"]
+              expression: '"x"'
+            - keyword: CALL
+              name: c0de_paint/cpaint/STYLE_SOLID
+              parameters:
+                - keyword: PARAMETER
+                  name: block
+                  expression: log
+              results:
+                - keyword: RESULT
+                  name: result
+                  target: beams
+            - keyword: ASSIGN
+              name: a.x
+              expression: '- half - 1'
+            - keyword: ASSIGN
+              name: a.y
+              expression: '0'
+            - keyword: ASSIGN
+              name: b.x
+              expression: half + 1
+            - keyword: ASSIGN
+              name: b.y
+              expression: height + 1
+            - keyword: CALL
+              name: c0de_paint/cpaint/DRAW_BOX
+              parameters:
+                - keyword: PARAMETER
+                  name: canvas
+                  expression: c
+                - keyword: PARAMETER
+                  name: from
+                  expression: a
+                - keyword: PARAMETER
+                  name: to
+                  expression: b
+                - keyword: PARAMETER
+                  name: line_style
+                  expression: posts
+            - keyword: ASSIGN
+              name: a.x
+              expression: '- half'
+            - keyword: ASSIGN
+              name: b.x
+              expression: half
+            - keyword: ASSIGN
+              name: b.y
+              expression: '0'
+            - keyword: CALL
+              name: c0de_paint/cpaint/DRAW_BOX
+              parameters:
+                - keyword: PARAMETER
+                  name: canvas
+                  expression: c
+                - keyword: PARAMETER
+                  name: from
+                  expression: a
+                - keyword: PARAMETER
+                  name: to
+                  expression: b
+                - keyword: PARAMETER
+                  name: fill_style
+                  expression: beams
+            - keyword: ASSIGN
+              name: a.y
+              expression: height + 1
+            - keyword: ASSIGN
+              name: b.y
+              expression: height + 1
+            - keyword: CALL
+              name: c0de_paint/cpaint/DRAW_BOX
+              parameters:
+                - keyword: PARAMETER
+                  name: canvas
+                  expression: c
+                - keyword: PARAMETER
+                  name: from
+                  expression: a
+                - keyword: PARAMETER
+                  name: to
+                  expression: b
+                - keyword: PARAMETER
+                  name: fill_style
+                  expression: beams
+            - keyword: NOOP
+            - keyword: ASSIGN
+              name: site.x
+              expression: PID.x
+            - keyword: ASSIGN
+              name: site.y
+              expression: PID.y
+            - keyword: ASSIGN
+              name: site.z
+              expression: PID.z - 4
+            - keyword: CALL
+              name: c0de_paint/cpaint/RENDER_CANVAS
+              parameters:
+                - keyword: PARAMETER
+                  name: canvas
+                  expression: c
+                - keyword: PARAMETER
+                  name: position
+                  expression: site

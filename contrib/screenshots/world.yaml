@@ -190,6 +190,9 @@ programs:
   - file: tutorials/programs/libraries/paint/copying-buildings-copier.c0de
     sheet: 124
     built: 2026-11-23
+  - file: tutorials/programs/libraries/paint/styles-sunset.c0de
+    sheet: 126
+    built: 2026-11-23
 shots:
   - before-you-start-new-world
   - before-you-start-creative-tab
@@ -277,3 +280,4 @@ shots:
   - bodies-sculptures
   - shaping-canvases-street
   - copying-buildings-copy
+  - styles-sunset

@@ -43,7 +43,7 @@ Stand behind the trigger block and look north. Set it to `stonewall` and `build`
 
 Press the button again: the wall gets new moss and new cracks every time.
 
-<!-- screenshot: styles-wall | the city wall of stone bricks with mossy and cracked bricks in random places and the gate in its middle, seen from the trigger block, with the wool sunset in its frame of logs rising behind the wall -->
+<!-- screenshot: styles-wall | the city wall of stone bricks with mossy and cracked bricks in random places and the gate in its middle, seen from the trigger block -->
 
 ## How it works
 
@@ -61,6 +61,8 @@ The second program paints a picture: a sunset in wool, 15 blocks wide and 9 high
 <<< @/tutorials/programs/libraries/paint/styles-sunset.c0de
 
 Leave the trigger block where it is, set it to `sunset` and `paint`, and press the button. The picture stands 4 blocks north of the trigger block, right behind the wall, so the sun sets in the gate and the sky rises above the wall.
+
+<!-- screenshot: styles-sunset | the wool sunset in its frame of oak logs right behind the city wall, seen from the trigger block: the sun sets in the gate, and the circles of yellow, orange, red, magenta, purple and blue rise above the wall (run `stonewall` with the function `build` from the same trigger block first) -->
 
 - **A gradient.** [STYLE_GRADIENT](/c0de_paint/cpaint/style_gradient) draws the blocks of the list one after the other, by the distance from `from`. `from` is the sun, in the middle of the lowest row of the picture. Without `axes`, the distance is measured in all directions, so on a flat wall the colours form circles around the sun: yellow, orange, red, magenta, purple and blue.
 - **The weights** give the share of each colour. Yellow, orange and red have 2, magenta and purple 1, the blue sky 3. Without `to`, the gradient ends at the voxel farthest from the sun, the upper corners.

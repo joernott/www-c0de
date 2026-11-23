@@ -4,7 +4,7 @@ The screenshots of the tutorials (task 7.1.1), taken as [tutorials.md](tutorials
 
 The world: every program is on its own sheet of the c0de dimension, built by the datapack of `contrib/screenshots/` (see its README). Sheet 0 is empty, and an empty sheet lies between two programs. North of every sheet, at z = -3 from x + 5 on: a trigger block with a stone button, a debug trigger block with a laptop, a timer block with a lever that is on (so it is paused), an I/O block, a disk drive and a gray shulker box with a stack of variable, constant and literal items and a disk; behind them, at z = -6, a display wall of 4 × 3 blocks in a frame of iron blocks. The trigger block and the debug trigger block are set to the program and the function of its test; the timer block is not set to a program.
 
-86 screenshots, 62 programs on the sheets 2 to 124. The sheets of the programs never change; new screenshots are added at the end of this list, and their programs get the next free sheets. All sheets are built.
+87 screenshots, 63 programs on the sheets 2 to 126. The sheets of the programs never change; new screenshots are added at the end of this list, and their programs get the next free sheets. All sheets are built.
 
 ## Before you start
 
@@ -5030,7 +5030,7 @@ END FUNCTION
 
 ### [ ] styles-wall
 
-the city wall of stone bricks with mossy and cracked bricks in random places and the gate in its middle, seen from the trigger block, with the wool sunset in its frame of logs rising behind the wall
+the city wall of stone bricks with mossy and cracked bricks in random places and the gate in its middle, seen from the trigger block
 
 - Program **stonewall**, function `build` (`site/tutorials/programs/libraries/paint/styles-wall.c0de`)
 - Sheet 112, x = 3584
@@ -5889,5 +5889,110 @@ BEGIN
         PARAMETER building hut ;
         PARAMETER turn turn ;
         PARAMETER distance distance ;
+END FUNCTION
+```
+
+## Styles
+
+`site/tutorials/libraries/c0de_paint/cpaint/styles.md`
+
+### [ ] styles-sunset
+
+the wool sunset in its frame of oak logs right behind the city wall, seen from the trigger block: the sun sets in the gate, and the circles of yellow, orange, red, magenta, purple and blue rise above the wall (run `stonewall` with the function `build` from the same trigger block first)
+
+- Program **sunset**, function `paint` (`site/tutorials/programs/libraries/paint/styles-sunset.c0de`)
+- Sheet 126, x = 4032
+
+```c0de
+PROGRAM sunset
+NOOP
+INCLUDE c0de/minecraft
+INCLUDE c0de_paint/cpaint
+NOOP
+FUNCTION paint
+    PARAMETER half INTEGER 7
+    PARAMETER height INTEGER 9
+BEGIN
+    VARIABLE c TYPE c0de_paint/cpaint/CANVAS
+    VARIABLE a STRUCT c0de_paint/cpaint/POINT
+    VARIABLE b STRUCT c0de_paint/cpaint/POINT
+    VARIABLE sun STRUCT c0de_paint/cpaint/POINT
+    VARIABLE wool STRUCT c0de_paint/cpaint/BLOCK
+    VARIABLE sky ARRAY STRUCT c0de_paint/cpaint/BLOCK
+    VARIABLE log STRUCT c0de_paint/cpaint/BLOCK
+    VARIABLE colors TYPE c0de_paint/cpaint/STYLE
+    VARIABLE posts TYPE c0de_paint/cpaint/STYLE
+    VARIABLE beams TYPE c0de_paint/cpaint/STYLE
+    VARIABLE site STRUCT c0de/minecraft/POSITION
+    ASSIGN wool.id "yellow_wool" ;
+    ASSIGN wool.weight 2 ;
+    ASSIGN sky[0] wool ;
+    ASSIGN wool.id "orange_wool" ;
+    ASSIGN sky[1] wool ;
+    ASSIGN wool.id "red_wool" ;
+    ASSIGN sky[2] wool ;
+    ASSIGN wool.id "magenta_wool" ;
+    ASSIGN wool.weight 1 ;
+    ASSIGN sky[3] wool ;
+    ASSIGN wool.id "purple_wool" ;
+    ASSIGN sky[4] wool ;
+    ASSIGN wool.id "blue_wool" ;
+    ASSIGN wool.weight 3 ;
+    ASSIGN sky[5] wool ;
+    ASSIGN sun.y 1 ;
+    CALL c0de_paint/cpaint/STYLE_GRADIENT
+        PARAMETER blocks sky ;
+        PARAMETER from sun ;
+        PARAMETER fuzzy 1 ;
+        RESULT result colors
+    ASSIGN a.x - half ;
+    ASSIGN a.y 1 ;
+    ASSIGN b.x half ;
+    ASSIGN b.y height ;
+    CALL c0de_paint/cpaint/DRAW_BOX
+        PARAMETER canvas c ;
+        PARAMETER from a ;
+        PARAMETER to b ;
+        PARAMETER fill_style colors ;
+    NOOP
+    ASSIGN log.id "oak_log" ;
+    CALL c0de_paint/cpaint/STYLE_SOLID
+        PARAMETER block log ;
+        RESULT result posts
+    ASSIGN log.properties["axis"] "x" ;
+    CALL c0de_paint/cpaint/STYLE_SOLID
+        PARAMETER block log ;
+        RESULT result beams
+    ASSIGN a.x - half - 1 ;
+    ASSIGN a.y 0 ;
+    ASSIGN b.x half + 1 ;
+    ASSIGN b.y height + 1 ;
+    CALL c0de_paint/cpaint/DRAW_BOX
+        PARAMETER canvas c ;
+        PARAMETER from a ;
+        PARAMETER to b ;
+        PARAMETER line_style posts ;
+    ASSIGN a.x - half ;
+    ASSIGN b.x half ;
+    ASSIGN b.y 0 ;
+    CALL c0de_paint/cpaint/DRAW_BOX
+        PARAMETER canvas c ;
+        PARAMETER from a ;
+        PARAMETER to b ;
+        PARAMETER fill_style beams ;
+    ASSIGN a.y height + 1 ;
+    ASSIGN b.y height + 1 ;
+    CALL c0de_paint/cpaint/DRAW_BOX
+        PARAMETER canvas c ;
+        PARAMETER from a ;
+        PARAMETER to b ;
+        PARAMETER fill_style beams ;
+    NOOP
+    ASSIGN site.x PID.x ;
+    ASSIGN site.y PID.y ;
+    ASSIGN site.z PID.z - 4 ;
+    CALL c0de_paint/cpaint/RENDER_CANVAS
+        PARAMETER canvas c ;
+        PARAMETER position site ;
 END FUNCTION
 ```

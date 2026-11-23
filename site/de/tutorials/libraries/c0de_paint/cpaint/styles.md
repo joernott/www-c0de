@@ -43,7 +43,7 @@ Stell dich hinter den Auslöserblock und schau nach Norden. Stelle ihn auf `ston
 
 Drück den Knopf noch einmal: Die Mauer bekommt jedes Mal neues Moos und neue Risse.
 
-<!-- screenshot: styles-wall | the city wall of stone bricks with mossy and cracked bricks in random places and the gate in its middle, seen from the trigger block, with the wool sunset in its frame of logs rising behind the wall -->
+<!-- screenshot: styles-wall | the city wall of stone bricks with mossy and cracked bricks in random places and the gate in its middle, seen from the trigger block -->
 
 ## So funktioniert es
 
@@ -61,6 +61,8 @@ Das zweite Programm malt ein Bild: einen Sonnenuntergang aus Wolle, 15 Blöcke b
 <<< @/tutorials/programs/libraries/paint/styles-sunset.c0de
 
 Lass den Auslöserblock, wo er ist, stelle ihn auf `sunset` und `paint` ein und drück den Knopf. Das Bild steht 4 Blöcke nördlich des Auslöserblocks, direkt hinter der Mauer: Die Sonne geht im Tor unter, und der Himmel steigt über der Mauer auf.
+
+<!-- screenshot: styles-sunset | the wool sunset in its frame of oak logs right behind the city wall, seen from the trigger block: the sun sets in the gate, and the circles of yellow, orange, red, magenta, purple and blue rise above the wall (run `stonewall` with the function `build` from the same trigger block first) -->
 
 - **Ein Verlauf.** [STYLE_GRADIENT](/de/c0de_paint/cpaint/style_gradient) zeichnet die Blöcke der Liste nacheinander, nach dem Abstand von `from`. `from` ist die Sonne, in der Mitte der untersten Reihe des Bilds. Ohne `axes` zählt der Abstand in alle Richtungen, also bilden die Farben auf einer flachen Wand Kreise um die Sonne: gelb, orange, rot, magenta, violett und blau.
 - **Die Gewichte** geben den Anteil jeder Farbe. Gelb, orange und rot haben 2, magenta und violett 1, der blaue Himmel 3. Ohne `to` endet der Verlauf am Voxel, das am weitesten von der Sonne entfernt ist, in den oberen Ecken.
