@@ -34,6 +34,8 @@ export interface Texts {
   program3dHelp: string
   program3dLoading: string
   program3dFailed: string
+  programDownload: string
+  programDownloadTitle: (file: string) => string
   programLine: (line: number) => string
 }
 
@@ -72,6 +74,9 @@ export const texts: Record<Language, Texts> = {
       'Drag to turn the sheet, scroll or pinch to zoom; point at a block to read its text. With the keyboard: the arrow keys turn it.',
     program3dLoading: 'Loading the 3D model …',
     program3dFailed: 'The 3D model could not be loaded.',
+    programDownload: 'Download',
+    programDownloadTitle: (file) =>
+      `${file}: put it into the folder c0de of your Minecraft and load it onto a c0de disk with the disk drive`,
     programLine: (line) => `Line ${line}`,
   },
   de: {
@@ -108,6 +113,9 @@ export const texts: Record<Language, Texts> = {
       'Ziehen dreht das Blatt, Scrollen oder Zwei-Finger-Zoom vergrößert; zeig auf einen Block, um seinen Text zu lesen. Mit der Tastatur: Die Pfeiltasten drehen es.',
     program3dLoading: 'Das 3D-Modell wird geladen …',
     program3dFailed: 'Das 3D-Modell konnte nicht geladen werden.',
+    programDownload: 'Herunterladen',
+    programDownloadTitle: (file) =>
+      `${file}: Leg die Datei in den Ordner c0de deines Minecraft und lade sie mit dem Diskettenlaufwerk auf eine c0de-Diskette`,
     programLine: (line) => `Zeile ${line}`,
   },
 }

@@ -69,6 +69,20 @@ test('a program shows its text first and loads the 3D model on request', async (
   await expect(view.locator('model-viewer')).toHaveCount(0)
 })
 
+test('a program can be downloaded as the YAML file of the disk drive', async ({ page }) => {
+  await page.goto('/tutorials/learning/first-program')
+  const link = page.locator('.program-view').first().getByRole('link', { name: 'Download' })
+  await expect(link).toHaveAttribute('download', 'sign.yaml')
+  const download = page.waitForEvent('download')
+  await link.click()
+  const file = await download
+  expect(file.suggestedFilename()).toBe('sign.yaml')
+  const stream = await file.createReadStream()
+  let text = ''
+  for await (const chunk of stream) text += String(chunk)
+  expect(text).toMatch(/^PROGRAM: sign$/m)
+})
+
 test('pointing at a block shows its text', async ({ page }) => {
   await page.goto('/tutorials/learning/first-program')
   test.skip(!(await hasWebGL(page)), 'no WebGL in this browser')

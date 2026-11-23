@@ -128,6 +128,16 @@ describe('programView', () => {
     )
   })
 
+  it('offers the YAML file of the program as download, named like the disk drive saves it', () => {
+    expect(programView(html, program, undefined, publicFolder(), manifest)).not.toContain(
+      'download=',
+    )
+    write(`public/models/1.0.0/programs/${programHash(program)}.yaml`, 'PROGRAM: sign\n')
+    expect(programView(html, program, undefined, publicFolder(), manifest)).toBe(
+      `<ProgramView scene="/models/1.0.0/programs/${programHash(program)}" download="sign.yaml">\n${html}</ProgramView>\n`,
+    )
+  })
+
   it('leaves fragments, programs without scene and sites without models alone', () => {
     expect(programView(html, 'CALL CLS\n', undefined, publicFolder(), manifest)).toBe(html)
     expect(programView(html, 'PROGRAM new\n', undefined, publicFolder(), manifest)).toBe(html)

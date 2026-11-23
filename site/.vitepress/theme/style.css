@@ -497,14 +497,19 @@ body {
 
 /* A program as text or as 3D model of its sheet (task 8.4): the switch sits on the code block. */
 .program-view-switch {
-  @apply mt-4 flex justify-end gap-1 text-sm;
+  @apply mt-4 flex items-end justify-end gap-1 text-sm;
+}
+
+.program-view-tabs {
+  @apply flex gap-1;
 }
 
 .program-view-switch + div > :first-child {
   @apply mt-0;
 }
 
-.program-view-switch button {
+.program-view-switch button,
+.program-view-download {
   @apply cursor-pointer rounded-t-md border border-b-0 px-3 py-0.5;
   border-color: var(--color-rule);
   color: var(--color-ink-muted);
@@ -517,7 +522,16 @@ body {
   background: var(--color-code-bg);
 }
 
+.program-view-download {
+  @apply no-underline;
+}
+
+.program-view-download:hover {
+  color: var(--color-ink);
+}
+
 .program-view-switch button:focus-visible,
+.program-view-download:focus-visible,
 .program-view-3d model-viewer:focus-visible {
   outline: 2px solid var(--color-focus);
   outline-offset: 2px;

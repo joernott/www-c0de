@@ -2,7 +2,8 @@
 // scene of every complete program of the site: the files of the tutorials and the ```c0de blocks
 // of all pages that start with PROGRAM. It names the scene after a hash of the program text and
 // writes it to public/models/<version>/programs/<hash>.glb, with the texts of its blocks in
-// <hash>.json. The Markdown renderer puts every code block that has a scene into ProgramView,
+// <hash>.json, and the program in the YAML format of the c0de disk in <hash>.yaml (the download
+// for the folder c0de of the game). The Markdown renderer puts every code block that has a scene into ProgramView,
 // which switches between the text and the 3D view.
 import { createHash } from 'node:crypto'
 import { existsSync, readFileSync } from 'node:fs'
@@ -41,7 +42,8 @@ const escape = (text: string) =>
   text.replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll('<', '&lt;')
 
 // programView wraps the HTML of a code block in ProgramView if the program has a scene. The
-// poster is the screenshot of the program, if a tutorial has one with the name of its file.
+// poster is the screenshot of the program, if a tutorial has one with the name of its file; the
+// download is the YAML file of the program, saved as <name>.yaml like the disk drive does.
 export function programView(
   html: string,
   program: string,
@@ -58,5 +60,10 @@ export function programView(
     name && existsSync(join(publicFolder, 'tutorials', 'screenshots', `${name}.webp`))
       ? ` poster="/tutorials/screenshots/${escape(name)}.webp"`
       : ''
-  return `<ProgramView scene="${escape(scene)}"${poster}>\n${html}</ProgramView>\n`
+  const programName = /^PROGRAM\s+(\w+)/.exec(normalize(program))?.[1]
+  const download =
+    programName && existsSync(join(publicFolder, `${scene}.yaml`))
+      ? ` download="${escape(programName)}.yaml"`
+      : ''
+  return `<ProgramView scene="${escape(scene)}"${poster}${download}>\n${html}</ProgramView>\n`
 }

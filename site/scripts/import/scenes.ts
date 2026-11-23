@@ -15,6 +15,7 @@ import {
 } from 'node:fs'
 import { availableParallelism, tmpdir } from 'node:os'
 import { basename, dirname, join, relative } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { parse } from 'yaml'
 import {
   isProgram,
@@ -166,6 +167,42 @@ async function inParallel<T>(items: T[], limit: number, task: (item: T) => Promi
   await Promise.all(Array.from({ length: Math.min(limit, items.length) }, worker))
 }
 
+// programFiles writes every program in the YAML format of the c0de disk to <hash>.yaml in folder:
+// the file that the disk drive of the game saves, the download of the 3D views (ProgramFiles.java
+// with the classes of the runner). A program that can't be exported gets no file.
+async function programFiles(programs: [string, string][], runner: Runner, folder: string) {
+  const work = mkdtempSync(join(tmpdir(), 'c0de-files-'))
+  try {
+    for (const [hash, program] of programs) writeFileSync(join(work, `${hash}.c0de`), program)
+    const classpath = [runner.jar, ...Object.values(runner.libraries).filter((jar) => !!jar)]
+    const helper = fileURLToPath(new URL('ProgramFiles.java', import.meta.url))
+    await new Promise<void>((resolve, reject) => {
+      const java = spawn('java', [
+        '-cp',
+        classpath.join(process.platform === 'win32' ? ';' : ':'),
+        helper,
+        work,
+      ])
+      let stderr = ''
+      java.stderr.on('data', (data: Buffer) => (stderr += data.toString('utf-8')))
+      java.on('error', reject)
+      java.on('close', (code) =>
+        code === 0 ? resolve() : reject(new Error(`ProgramFiles: exit ${code}: ${stderr}`)),
+      )
+    })
+    let written = 0
+    for (const [hash] of programs) {
+      const file = join(work, `${hash}.yaml`)
+      if (!existsSync(file)) continue
+      cpSync(file, join(folder, `${hash}.yaml`))
+      written++
+    }
+    return written
+  } finally {
+    rmSync(work, { recursive: true, force: true })
+  }
+}
+
 // scenes builds the scenes of all programs of the site into public/models/<version>/ and
 // writes the manifest for the Markdown renderer.
 export async function scenes(site: string, config: Config, local: Map<string, string>) {
@@ -198,11 +235,12 @@ export async function scenes(site: string, config: Config, local: Map<string, st
       failed.push(`${name}: ${error instanceof Error ? error.message : String(error)}`.trim())
     }
   })
+  const files = await programFiles(programs, runner, join(output, 'programs'))
   const manifest: ModelsManifest = { base }
   writeFileSync(manifestFile(join(site, '.vitepress')), JSON.stringify(manifest, null, 2) + '\n')
   for (const failure of failed) console.warn(`no 3D view of ${failure}`)
   console.log(
-    `built ${programs.length - failed.length} scenes of programs (${Math.round(size / 1024)} KiB, models ${models.index.version} from ${local.get('c0de') ? folder : basename(folder)})`,
+    `built ${programs.length - failed.length} scenes of programs and ${files} program files (${Math.round(size / 1024)} KiB, models ${models.index.version} from ${local.get('c0de') ? folder : basename(folder)})`,
   )
   return { programs: programs.length, failed: failed.length }
 }

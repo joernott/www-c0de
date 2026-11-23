@@ -6,7 +6,9 @@ import { useBinder } from './binder'
 // A program as text and as a 3D model of its sheet (task 8.4); see .vitepress/programs.ts. The
 // text is the default and all there is without JavaScript or WebGL. The 3D view loads
 // <model-viewer> only when the reader switches to it; the choice is kept for the next pages.
-const props = defineProps<{ scene: string; poster?: string }>()
+// download is the name of the YAML file of the program (<scene>.yaml) for the folder c0de of the
+// game; the link works without JavaScript, too.
+const props = defineProps<{ scene: string; poster?: string; download?: string }>()
 const { t } = useBinder()
 
 interface Labels {
@@ -109,13 +111,23 @@ function point(event: PointerEvent) {
 
 <template>
   <div class="program-view">
-    <div v-if="available" class="program-view-switch" role="group" :aria-label="t.programView">
-      <button type="button" :aria-pressed="view === 'text'" @click="show('text')">
-        {{ t.programText }}
-      </button>
-      <button type="button" :aria-pressed="view === '3d'" @click="show('3d')">
-        {{ t.program3d }}
-      </button>
+    <div v-if="available || download" class="program-view-switch">
+      <div v-if="available" class="program-view-tabs" role="group" :aria-label="t.programView">
+        <button type="button" :aria-pressed="view === 'text'" @click="show('text')">
+          {{ t.programText }}
+        </button>
+        <button type="button" :aria-pressed="view === '3d'" @click="show('3d')">
+          {{ t.program3d }}
+        </button>
+      </div>
+      <a
+        v-if="download"
+        class="program-view-download"
+        :href="`${scene}.yaml`"
+        :download="download"
+        :title="t.programDownloadTitle(download)"
+        >{{ t.programDownload }}</a
+      >
     </div>
     <div v-show="view === 'text'">
       <slot />
