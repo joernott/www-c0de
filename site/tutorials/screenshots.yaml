@@ -1,7 +1,7 @@
 # The screenshots of the tutorials, written by scripts/screenshots.ts from the marks
 # <!-- screenshot: <id> | <description> --> of the pages. Take them as described in
 # docs/tutorials.md ("Screenshots") and save them as the file; the page shows them then.
-# 87 screenshots, 13 missing.
+# 87 screenshots, 0 missing.
 - id: asking-input
   description: 'the open terminal of the laptop while INPUT waits: "How many
     items?" on the screen and the input line "INPUT items (INTEGER):" with 1000
@@ -63,7 +63,7 @@
     - tutorials/libraries/c0de_paint/cpaint/bodies.md
     - de/tutorials/libraries/c0de_paint/cpaint/bodies.md
   file: public/tutorials/screenshots/bodies-lighthouse.webp
-  size: missing
+  size: 1280x673
 - id: bodies-sculptures
   description: "the row of five garden sculptures on the grass: the gold frame of
     the tetrahedron, the glass octahedron, the glass cube with quartz edges, the
@@ -73,7 +73,7 @@
     - tutorials/libraries/c0de_paint/cpaint/bodies.md
     - de/tutorials/libraries/c0de_paint/cpaint/bodies.md
   file: public/tutorials/screenshots/bodies-sculptures.webp
-  size: missing
+  size: 1280x673
 - id: building-tower
   description: the hollow cobblestone tower, 6 blocks high, half pulled down from
     the top, cobblestone items lying around it, the trigger block and the chest
@@ -199,7 +199,7 @@
     - tutorials/libraries/c0de_paint/cpaint/copying-buildings.md
     - de/tutorials/libraries/c0de_paint/cpaint/copying-buildings.md
   file: public/tutorials/screenshots/copying-buildings-copy.webp
-  size: missing
+  size: 1280x673
 - id: copying-signs-copy
   description: the trigger block with its button between a written sign and its
     copy, the chat showing the copied data
@@ -301,7 +301,7 @@
     - tutorials/libraries/c0de_paint/cpaint/first-canvas.md
     - de/tutorials/libraries/c0de_paint/cpaint/first-canvas.md
   file: public/tutorials/screenshots/first-canvas-list.webp
-  size: missing
+  size: 1280x673
 - id: first-canvas-shed
   description: the finished garden shed, 5 × 4 blocks and 4 high, oak planks with
     oak logs on all edges, its doorway in the west wall, the trigger block with
@@ -310,7 +310,7 @@
     - tutorials/libraries/c0de_paint/cpaint/first-canvas.md
     - de/tutorials/libraries/c0de_paint/cpaint/first-canvas.md
   file: public/tutorials/screenshots/first-canvas-shed.webp
-  size: missing
+  size: 1280x673
 - id: first-program-result
   description: the display wall of 2 x 1 display blocks at the entrance of the
     base, showing "Welcome to my base!", with the trigger block and button next
@@ -578,7 +578,7 @@
     - tutorials/libraries/c0de_paint/cpaint/shapes.md
     - de/tutorials/libraries/c0de_paint/cpaint/shapes.md
   file: public/tutorials/screenshots/shapes-staircase.webp
-  size: missing
+  size: 1280x673
 - id: shapes-star
   description: the five-pointed star set into the grass, white concrete with a rim
     of gold blocks and a sea lantern in its middle, seen from above, the trigger
@@ -587,7 +587,7 @@
     - tutorials/libraries/c0de_paint/cpaint/shapes.md
     - de/tutorials/libraries/c0de_paint/cpaint/shapes.md
   file: public/tutorials/screenshots/shapes-star.webp
-  size: missing
+  size: 1280x673
 - id: shapes-window
   description: the wall of stone bricks, 13 × 13 blocks, with the round window of
     light blue glass in its middle, framed by polished andesite and divided by a
@@ -597,7 +597,7 @@
     - tutorials/libraries/c0de_paint/cpaint/shapes.md
     - de/tutorials/libraries/c0de_paint/cpaint/shapes.md
   file: public/tutorials/screenshots/shapes-window.webp
-  size: missing
+  size: 1280x673
 - id: shaping-canvases-street
   description: "the whole street seen from above its west end: the trigger block
     in the middle of the road, south of it the oak house, the brick house, the
@@ -608,7 +608,7 @@
     - tutorials/libraries/c0de_paint/cpaint/shaping-canvases.md
     - de/tutorials/libraries/c0de_paint/cpaint/shaping-canvases.md
   file: public/tutorials/screenshots/shaping-canvases-street.webp
-  size: missing
+  size: 1280x673
 - id: sorting-chests
   description: the row of chests seen from the side, the hopper on the input
     chest, the timer block to the west, and the open food chest with bread and
@@ -635,7 +635,7 @@
     - tutorials/libraries/c0de_paint/cpaint/styles.md
     - de/tutorials/libraries/c0de_paint/cpaint/styles.md
   file: public/tutorials/screenshots/styles-floor.webp
-  size: missing
+  size: 1280x673
 - id: styles-palette
   description: the open chest with sandstone, smooth sandstone and terracotta in
     its first three slots, and the striped wall 16 blocks long beside it,
@@ -644,7 +644,7 @@
     - tutorials/libraries/c0de_paint/cpaint/styles.md
     - de/tutorials/libraries/c0de_paint/cpaint/styles.md
   file: public/tutorials/screenshots/styles-palette.webp
-  size: missing
+  size: 1280x673
 - id: styles-sunset
   description: "the wool sunset in its frame of oak logs right behind the city
     wall, seen from the trigger block: the sun sets in the gate, and the circles
@@ -654,7 +654,7 @@
     - tutorials/libraries/c0de_paint/cpaint/styles.md
     - de/tutorials/libraries/c0de_paint/cpaint/styles.md
   file: public/tutorials/screenshots/styles-sunset.webp
-  size: missing
+  size: 1280x673
 - id: styles-wall
   description: the city wall of stone bricks with mossy and cracked bricks in
     random places and the gate in its middle, seen from the trigger block
@@ -662,7 +662,7 @@
     - tutorials/libraries/c0de_paint/cpaint/styles.md
     - de/tutorials/libraries/c0de_paint/cpaint/styles.md
   file: public/tutorials/screenshots/styles-wall.webp
-  size: missing
+  size: 1280x673
 - id: tables-shop-laptop
   description: the laptop terminal showing the offer of the day, the question, the
     typed word saddle and the answer "saddle costs 12 emeralds."

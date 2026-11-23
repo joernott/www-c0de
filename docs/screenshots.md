@@ -4537,7 +4537,7 @@ END FUNCTION
 
 `site/tutorials/libraries/c0de_paint/cpaint/first-canvas.md`
 
-### [ ] first-canvas-shed
+### [x] first-canvas-shed
 
 the finished garden shed, 5 × 4 blocks and 4 high, oak planks with oak logs on all edges, its doorway in the west wall, the trigger block with its button 2 blocks west of it and the chest 2 blocks further west
 
@@ -4651,7 +4651,7 @@ BEGIN
 END FUNCTION
 ```
 
-### [ ] first-canvas-list
+### [x] first-canvas-list
 
 the laptop screen with the list "The shed needs:", "36 minecraft:oak_log", "30 minecraft:oak_planks" and "68 voxels in all", the trigger block and the chest next to it
 
@@ -4769,7 +4769,7 @@ END FUNCTION
 
 `site/tutorials/libraries/c0de_paint/cpaint/shapes.md`
 
-### [ ] shapes-window
+### [x] shapes-window
 
 the wall of stone bricks, 13 × 13 blocks, with the round window of light blue glass in its middle, framed by polished andesite and divided by a cross of dark oak planks, the trigger block with its button in front of its west end
 
@@ -4868,7 +4868,7 @@ BEGIN
 END FUNCTION
 ```
 
-### [ ] shapes-star
+### [x] shapes-star
 
 the five-pointed star set into the grass, white concrete with a rim of gold blocks and a sea lantern in its middle, seen from above, the trigger block 2 blocks west of its western tip
 
@@ -4960,7 +4960,7 @@ BEGIN
 END FUNCTION
 ```
 
-### [ ] shapes-staircase
+### [x] shapes-staircase
 
 the spiral staircase of oak planks with an edge of spruce planks, 12 blocks high, winding clockwise around its central column, a player on one of its upper steps
 
@@ -5028,7 +5028,7 @@ END FUNCTION
 
 `site/tutorials/libraries/c0de_paint/cpaint/styles.md`
 
-### [ ] styles-wall
+### [x] styles-wall
 
 the city wall of stone bricks with mossy and cracked bricks in random places and the gate in its middle, seen from the trigger block
 
@@ -5092,7 +5092,7 @@ BEGIN
 END FUNCTION
 ```
 
-### [ ] styles-floor
+### [x] styles-floor
 
 the chequered floor of black and white concrete, 8 × 8 blocks, with its border of dark oak planks, set into the grass east of the trigger block, seen from above
 
@@ -5176,7 +5176,7 @@ BEGIN
 END FUNCTION
 ```
 
-### [ ] styles-palette
+### [x] styles-palette
 
 the open chest with sandstone, smooth sandstone and terracotta in its first three slots, and the striped wall 16 blocks long beside it, sandstone fading to smooth sandstone and terracotta from west to east
 
@@ -5243,7 +5243,7 @@ END FUNCTION
 
 `site/tutorials/libraries/c0de_paint/cpaint/bodies.md`
 
-### [ ] bodies-lighthouse
+### [x] bodies-lighthouse
 
 the white lighthouse, 23 blocks high, with red rings at its foot and its top, the glass lantern room with the sea lantern shining inside and the copper dome on top, seen from the side at dusk, the trigger block in front of it
 
@@ -5343,7 +5343,7 @@ BEGIN
 END FUNCTION
 ```
 
-### [ ] bodies-sculptures
+### [x] bodies-sculptures
 
 the row of five garden sculptures on the grass: the gold frame of the tetrahedron, the glass octahedron, the glass cube with quartz edges, the full moss dodecahedron and the icosahedron with quartz edges and glass faces
 
@@ -5447,7 +5447,7 @@ END FUNCTION
 
 `site/tutorials/libraries/c0de_paint/cpaint/shaping-canvases.md`
 
-### [ ] shaping-canvases-street
+### [x] shaping-canvases-street
 
 the whole street seen from above its west end: the trigger block in the middle of the road, south of it the oak house, the brick house, the two-block-high building site, the flat façade and the big hall with its gateway, across the road the mirrored oak house, and the turned house across the east end of the road; dirt paths in front of the doors
 
@@ -5757,7 +5757,7 @@ END FUNCTION
 
 `site/tutorials/libraries/c0de_paint/cpaint/copying-buildings.md`
 
-### [ ] copying-buildings-copy
+### [x] copying-buildings-copy
 
 a small house with a door and stairs on the left, its copy turned by 90° on the right, the trigger block in front of the original with the three chests around it, the south chest open with grass and dirt in it
 
@@ -5896,7 +5896,7 @@ END FUNCTION
 
 `site/tutorials/libraries/c0de_paint/cpaint/styles.md`
 
-### [ ] styles-sunset
+### [x] styles-sunset
 
 the wool sunset in its frame of oak logs right behind the city wall, seen from the trigger block: the sun sets in the gate, and the circles of yellow, orange, red, magenta, purple and blue rise above the wall (run `stonewall` with the function `build` from the same trigger block first)
 
