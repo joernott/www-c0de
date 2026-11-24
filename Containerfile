@@ -3,9 +3,9 @@
 # Build: podman build -f Containerfile --build-arg VERSION=<version> -t www-c0de .
 # Run:   podman run -p 80:8080 -p 443:8443 -p 443:8443/udp -v www-c0de-data:/data www-c0de
 
-# The Java runtime for the program runner of c0de, which lays out the programs for their 3D
-# views when the site is built.
-FROM docker.io/library/eclipse-temurin:21.0.12.1_1-jre AS java
+# The Java of the program runner of c0de, which lays out the programs for their 3D views when the
+# site is built; a JDK, because scripts/import/ProgramFiles.java runs from source (task 15.8).
+FROM docker.io/library/eclipse-temurin:21.0.12.1_1-jdk AS java
 
 FROM docker.io/library/node:26.13.0-trixie-slim AS site
 COPY --from=java /opt/java/openjdk /opt/java/openjdk
