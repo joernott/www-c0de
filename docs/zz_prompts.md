@@ -326,3 +326,5 @@ I can't find the program called sunset on the server. Did you not build it?
 I made the screenshots and marked them as done in screenshots.md, you can find them in the screenshots folder of the client in the minecraft-c0de-paint repository. They are named after the titles in the document.
 
 There is one other detail I want to add to the website in this release: Whenever we have a code example, there is also a 3d model for it. Please add a download button next to the 3d tab that will download the yaml file containing the code.
+
+Go ahead with the release once the tests are green
